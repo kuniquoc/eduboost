@@ -1,0 +1,23 @@
+model:
+  base_model: "unsloth/Qwen2.5-7B-Instruct"
+  max_seq_length: 2048
+  load_in_4bit: true
+  lora_r: 16
+  lora_alpha: 32
+  target_modules: ["q_proj", "k_proj", "v_proj", "o_proj", "gate_proj", "up_proj", "down_proj"]
+
+training:
+  data_file: "data/processed/quiz_chat.jsonl"
+  output_dir: "outputs/adapters/quiz"
+  checkpoint_dir: "outputs/checkpoints/quiz"
+  epochs: 3
+  batch_size: 2
+  grad_accum: 4
+  learning_rate: 0.0002
+  val_split: 0.2
+  logging_steps: 1
+  eval_steps: 10
+  save_steps: 10
+  save_total_limit: 2
+
+system_prompt: "You are an expert English quiz generator. Always output in valid JSON format."

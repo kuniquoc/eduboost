@@ -1,0 +1,31 @@
+# --- Core LLM & Training (Unsloth dependencies) ---
+# Lưu ý: Unsloth nên được cài theo hướng dẫn riêng (xem README), 
+# nhưng các thư viện bổ trợ dưới đây là bắt buộc.
+torch
+xformers
+trl
+peft
+accelerate
+transformers
+bitsandbytes
+datasets
+
+# --- API & Serving ---
+fastapi
+uvicorn
+python-dotenv
+
+# --- Data & Config ---
+pyyaml
+pandas
+numpy
+
+# --- Visualization ---
+matplotlib
+seaborn
+
+# --- External APIs ---
+openai
+
+faiss-cpu 
+numpy
