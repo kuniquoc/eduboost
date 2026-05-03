@@ -1,0 +1,88 @@
+# ===== .NET =====
+**/bin/
+**/obj/
+*.user
+*.suo
+.vs/
+**/*.DotSettings.user
+
+# EF Core migrations SQLite snapshots (keep .cs migrations)
+*.db
+*.db-shm
+*.db-wal
+
+# ===== Node / Expo =====
+**/node_modules/
+**/.expo/
+**/.expo-shared/
+**/dist/
+**/.next/
+**/.cache/
+
+# ===== Environment & Secrets =====
+**/.env
+**/.env.local
+**/.env.*.local
+**/appsettings.Production.json
+**/appsettings.*.Secret.json
+
+# ===== Docker volumes =====
+docker-volumes/
+
+# ===== OS =====
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ===== Editors =====
+.idea/
+*.swp
+*.swo
+
+# Data files
+/data/raw/
+/data/processed/
+/data/finetuning/*.jsonl
+/results/
+
+# Environment variables
+.env
+.env.local
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+ENV/
+.venv
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# ML models
+*.pkl
+*.joblib
+*.model
+
+# Vector DB files
+.faiss_*
+
+
+# Custom ignore rules
+data/
+outputs/
