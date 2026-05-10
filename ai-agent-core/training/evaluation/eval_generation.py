@@ -3,15 +3,24 @@
 import json
 import os
 import time
+from pathlib import Path
+from datetime import datetime
+from dotenv import load_dotenv
 from openai import OpenAI  # Sử dụng thư viện chính thức của OpenAI
 from src.rag.vector_db import VectorDB
 from src.rag.retriever import KnowledgeRetriever
 from src.adapters.llm_manager import LLMManager
 
 # ==============================================================================
+# PATH & ENV SETUP
+# ==============================================================================
+ROOT_DIR = Path(__file__).resolve().parent.parent.parent
+load_dotenv(dotenv_path=ROOT_DIR / ".env")
+
+# ==============================================================================
 # CẤU HÌNH GIÁM KHẢO (JUDGE LLM)
 # ==============================================================================
-JUDGE_API_KEY = "YOUR_OPENAI_API_KEY" 
+JUDGE_API_KEY = os.getenv("OPENAI_API_KEY")
 JUDGE_MODEL = "gpt-4o"
 
 # Khởi tạo OpenAI Client một lần duy nhất
@@ -68,9 +77,14 @@ def evaluate_generation(gold_dataset_path, base_model_path, adapter_paths):
         context = retriever.get_context(topic="General", query=question)
         
         # Sinh câu trả lời bằng local LLM (Explanation Adapter)
+        # Sử dụng chat template giống training format
         llm.set_adapter("explanation")
-        prompt = f"Context: {context}\n\nQuestion: {question}\n\nAnswer:"
-        ai_answer = llm.generate(prompt)
+        messages = [
+            {"role": "system", "content": "You are a Socratic English tutor. Guide students to find errors themselves instead of giving answers immediately."},
+            {"role": "user", "content": f"Context from textbook:\n{context}\n\nQuestion: {question}"},
+        ]
+        chat_prompt = llm.tokenizer.apply_chat_template(messages, tokenize=False, add_generation_prompt=True)
+        ai_answer = llm.generate(chat_prompt)
         
         # --- BƯỚC 2: Gửi cho Giám khảo chấm điểm ---
         judge_prompt = f"""
@@ -112,13 +126,28 @@ def evaluate_generation(gold_dataset_path, base_model_path, adapter_paths):
     print(f"Average Relevance: {avg_relev:.2f}/5")
     print("="*60 + "\n")
 
+    # Lưu kết quả ra file JSON
+    output = {
+        "timestamp": datetime.now().isoformat(),
+        "judge_model": JUDGE_MODEL,
+        "total_samples": total,
+        "evaluated_samples": len(results),
+        "avg_faithfulness": round(avg_faith, 2),
+        "avg_relevance": round(avg_relev, 2),
+    }
+    results_path = ROOT_DIR / "training" / "evaluation" / "results" / "generation_results.json"
+    results_path.parent.mkdir(parents=True, exist_ok=True)
+    with open(results_path, "w", encoding="utf-8") as f:
+        json.dump(output, f, ensure_ascii=False, indent=2)
+    print(f"💾 Results saved to {results_path}")
+
 if __name__ == "__main__":
     # Cấu hình đường dẫn
-    GOLD_PATH = "data/gold_dataset/rag_eval.json"
-    BASE_MODEL = "unsloth/llama-3-8b-bnb-4bit" 
+    GOLD_PATH = str(ROOT_DIR / "data" / "sample" / "rag_evel.json")
+    BASE_MODEL = "unsloth/Qwen2.5-7B-Instruct"
     ADAPTERS = {
-        "explanation": "models/adapters/explanation_v1",
-        "quiz": "models/adapters/quiz_v1"
+        "explanation": str(ROOT_DIR / "models" / "adapters" / "explanation_v1"),
+        "quiz": str(ROOT_DIR / "models" / "adapters" / "quiz_v1")
     }
     
     evaluate_generation(GOLD_PATH, BASE_MODEL, ADAPTERS)

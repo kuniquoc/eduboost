@@ -1,0 +1,235 @@
+# =============================================================================
+# Cell 1 [Markdown] - Tiêu đề
+# =============================================================================
+# # 📖 Train Explanation Adapter - EduBoost
+# 
+# Fine-tune **Qwen2.5-7B-Instruct** với LoRA (Unsloth) để tạo Socratic tutor giải thích lỗi tiếng Anh.
+# 
+# **Kaggle Setup:**
+# - GPU: T4 x2 hoặc P100
+# - Dataset: Upload file `explanation_chat.jsonl` lên Kaggle Datasets
+
+# =============================================================================
+# Cell 2 [Code] - Cài đặt Unsloth
+# =============================================================================
+%%capture
+!pip install unsloth
+!pip uninstall unsloth -y && pip install --upgrade --no-cache-dir --no-deps git+https://github.com/unslothai/unsloth.git
+
+# =============================================================================
+# Cell 3 [Code] - Import thư viện
+# =============================================================================
+import torch
+import json
+import matplotlib.pyplot as plt
+import seaborn as sns
+from pathlib import Path
+from unsloth import FastLanguageModel, is_bfloat16_supported
+from trl import SFTConfig, SFTTrainer
+from transformers import EarlyStoppingCallback
+from datasets import load_dataset
+
+print(f"PyTorch version: {torch.__version__}")
+print(f"CUDA available: {torch.cuda.is_available()}")
+if torch.cuda.is_available():
+    print(f"GPU: {torch.cuda.get_device_name(0)}")
+
+# =============================================================================
+# Cell 4 [Code] - Cấu hình
+# =============================================================================
+# ==================== CẤU HÌNH ====================
+# Thay đổi DATA_PATH nếu bạn đặt file ở vị trí khác trên Kaggle
+DATA_PATH = "/kaggle/input/eduboost-data/explanation_chat.jsonl"
+OUTPUT_DIR = "/kaggle/working/explanation_adapter"
+
+# Model
+BASE_MODEL = "unsloth/Qwen2.5-7B-Instruct"
+MAX_SEQ_LENGTH = 2048
+LOAD_IN_4BIT = True
+
+# LoRA
+LORA_R = 16
+LORA_ALPHA = 32
+TARGET_MODULES = ["q_proj", "k_proj", "v_proj", "o_proj", "gate_proj", "up_proj", "down_proj"]
+
+# Training
+EPOCHS = 3
+BATCH_SIZE = 2
+GRAD_ACCUM = 4
+LEARNING_RATE = 2e-4
+VAL_SPLIT = 0.2
+LOGGING_STEPS = 1
+EVAL_STEPS = 10
+SAVE_STEPS = 10
+EARLY_STOPPING_PATIENCE = 3
+EARLY_STOPPING_THRESHOLD = 0.01
+# ==================================================
+
+# =============================================================================
+# Cell 5 [Code] - Load model + LoRA
+# =============================================================================
+model, tokenizer = FastLanguageModel.from_pretrained(
+    model_name=BASE_MODEL,
+    max_seq_length=MAX_SEQ_LENGTH,
+    load_in_4bit=LOAD_IN_4BIT,
+)
+
+model = FastLanguageModel.get_peft_model(
+    model,
+    r=LORA_R,
+    lora_alpha=LORA_ALPHA,
+    target_modules=TARGET_MODULES,
+    lora_dropout=0,
+    bias="none",
+)
+
+# In số lượng tham số trainable
+model.print_trainable_parameters()
+
+# =============================================================================
+# Cell 6 [Code] - Chuẩn bị dữ liệu
+# =============================================================================
+# Load dataset
+dataset = load_dataset("json", data_files=DATA_PATH, split="train")
+print(f"Total samples: {len(dataset)}")
+print(f"Sample keys: {list(dataset[0].keys())}")
+
+# Train/Val split
+dataset = dataset.train_test_split(test_size=VAL_SPLIT, seed=42)
+
+def formatting_prompts_func(examples):
+    texts = []
+    for messages in examples["messages"]:
+        texts.append(
+            tokenizer.apply_chat_template(
+                messages, tokenize=False, add_generation_prompt=False
+            )
+        )
+    return {"text": texts}
+
+train_ds = dataset["train"].map(formatting_prompts_func, batched=True)
+val_ds = dataset["test"].map(formatting_prompts_func, batched=True)
+
+print(f"Train: {len(train_ds)} | Val: {len(val_ds)}")
+print(f"\n--- Sample formatted text ---\n{train_ds[0]['text'][:500]}...")
+
+# =============================================================================
+# Cell 7 [Code] - Cấu hình Trainer
+# =============================================================================
+sft_config = SFTConfig(
+    output_dir=OUTPUT_DIR,
+    per_device_train_batch_size=BATCH_SIZE,
+    gradient_accumulation_steps=GRAD_ACCUM,
+    learning_rate=LEARNING_RATE,
+    num_train_epochs=EPOCHS,
+    eval_strategy="steps",
+    eval_steps=EVAL_STEPS,
+    save_steps=SAVE_STEPS,
+    logging_steps=LOGGING_STEPS,
+    load_best_model_at_end=True,
+    metric_for_best_model="eval_loss",
+    bf16=is_bfloat16_supported(),
+    fp16=not is_bfloat16_supported(),
+    dataset_text_field="text",
+    max_seq_length=MAX_SEQ_LENGTH,
+    packing=True,
+)
+
+trainer = SFTTrainer(
+    model=model,
+    args=sft_config,
+    train_dataset=train_ds,
+    eval_dataset=val_ds,
+    processing_class=tokenizer,
+    callbacks=[EarlyStoppingCallback(
+        early_stopping_patience=EARLY_STOPPING_PATIENCE,
+        early_stopping_threshold=EARLY_STOPPING_THRESHOLD,
+    )],
+)
+
+# =============================================================================
+# Cell 8 [Code] - Train
+# =============================================================================
+print("🚀 Training Explanation Adapter...")
+trainer.train()
+print("✅ Training complete!")
+
+# =============================================================================
+# Cell 9 [Code] - Vẽ biểu đồ Loss
+# =============================================================================
+history = trainer.state.log_history
+
+train_loss, val_loss = [], []
+train_steps, val_steps = [], []
+
+for entry in history:
+    if "loss" in entry:
+        train_loss.append(entry["loss"])
+        train_steps.append(entry["step"])
+    if "eval_loss" in entry:
+        val_loss.append(entry["eval_loss"])
+        val_steps.append(entry["step"])
+
+plt.figure(figsize=(10, 6))
+sns.set_style("whitegrid")
+plt.plot(train_steps, train_loss, label="Training Loss", color="blue", linewidth=2)
+plt.plot(val_steps, val_loss, label="Validation Loss", color="red", marker="o", linewidth=2)
+plt.title("Learning Curve - Explanation Adapter", fontsize=15)
+plt.xlabel("Steps", fontsize=12)
+plt.ylabel("Loss", fontsize=12)
+plt.legend()
+plt.grid(True)
+plt.savefig(f"{OUTPUT_DIR}/loss_curve.png", dpi=150, bbox_inches="tight")
+plt.show()
+print(f"📈 Loss curve saved to {OUTPUT_DIR}/loss_curve.png")
+
+# =============================================================================
+# Cell 10 [Code] - Lưu Adapter
+# =============================================================================
+model.save_pretrained(OUTPUT_DIR)
+tokenizer.save_pretrained(OUTPUT_DIR)
+print(f"✅ Explanation Adapter saved to {OUTPUT_DIR}")
+
+# Xem kích thước adapter
+import os
+total_size = sum(
+    os.path.getsize(os.path.join(OUTPUT_DIR, f))
+    for f in os.listdir(OUTPUT_DIR)
+    if os.path.isfile(os.path.join(OUTPUT_DIR, f))
+)
+print(f"📦 Adapter size: {total_size / 1024 / 1024:.1f} MB")
+
+# =============================================================================
+# Cell 11 [Code] - Test nhanh (Inference)
+# =============================================================================
+FastLanguageModel.for_inference(model)
+
+test_messages = [
+    {"role": "system", "content": "You are a Socratic English tutor. Guide students to find errors themselves instead of giving answers immediately."},
+    {"role": "user", "content": "Student wrote: 'He go to school every day'. The correct answer is: 'He goes to school every day'. Please explain the error."},
+]
+
+inputs = tokenizer.apply_chat_template(
+    test_messages, tokenize=True, add_generation_prompt=True, return_tensors="pt"
+).to("cuda")
+
+outputs = model.generate(input_ids=inputs, max_new_tokens=512, temperature=0.7)
+response = tokenizer.decode(outputs[0], skip_special_tokens=True)
+
+print("--- Explanation Adapter Response ---")
+print(response.split("assistant")[-1] if "assistant" in response else response)
+
+# =============================================================================
+# Cell 12 [Code] - (Tuỳ chọn) Push lên HuggingFace Hub
+# =============================================================================
+# Uncomment và điền token để push lên HF Hub
+# from huggingface_hub import login
+# login(token="hf_YOUR_TOKEN")
+# model.push_to_hub("your-username/eduboost-explanation-adapter")
+# tokenizer.push_to_hub("your-username/eduboost-explanation-adapter")
+
+# =============================================================================
+# Cell 13 [Code] - (Tuỳ chọn) Zip adapter để download
+# =============================================================================
+!cd /kaggle/working && zip -r explanation_adapter.zip explanation_adapter/
+print("📥 Download explanation_adapter.zip từ Output tab")

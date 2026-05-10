@@ -5,6 +5,7 @@ import openai
 import gc
 import yaml
 from pathlib import Path
+from datetime import datetime
 from dotenv import load_dotenv
 from unsloth import FastLanguageModel
 
@@ -61,34 +62,60 @@ class ModelEvaluator:
 # 3. EVALUATION FUNCTIONS
 # ==============================================================================
 
-def evaluate_quiz_adapter(config_path, test_file):
+def evaluate_quiz_adapter(config_path, test_file, base_model_path):
     """
-    Đánh giá Quiz Adapter dựa trên JSON Pass Rate.
+    Đánh giá Quiz Adapter dựa trên JSON Pass Rate + Schema Validation.
+    So sánh kết quả giữa Base Model và Fine-tuned Adapter.
     """
+    REQUIRED_KEYS = {"question", "options", "correct_answer", "explanation"}
+
     # Load config từ YAML để lấy đường dẫn adapter
     cfg = load_yaml_config(config_path)
     adapter_path = cfg["training"]["output_dir"]
     
-    evaluator = ModelEvaluator(adapter_path)
-    
     with open(test_file, "r", encoding="utf-8") as f:
         test_data = [json.loads(line) for line in f]
 
-    pass_count = 0
-    print(f"Evaluating JSON Pass Rate for Quiz Adapter...")
-    
-    for item in test_data:
-        response = evaluator.generate_response(item["messages"])
-        try:
-            json.loads(response)
-            pass_count += 1
-        except:
-            pass
-    
-    pass_rate = (pass_count / len(test_data)) * 100
-    evaluator.unload() # Giải phóng VRAM
-    
-    return pass_rate
+    def _eval_json_responses(evaluator, label):
+        """Sinh phản hồi và đo JSON Pass Rate + Schema Pass Rate."""
+        json_pass = 0
+        schema_pass = 0
+        for item in test_data:
+            response = evaluator.generate_response(item["messages"])
+            try:
+                parsed = json.loads(response)
+                json_pass += 1
+                # Kiểm tra schema: có đủ các key bắt buộc không
+                if REQUIRED_KEYS.issubset(parsed.keys()):
+                    schema_pass += 1
+            except (json.JSONDecodeError, TypeError):
+                pass
+        total = len(test_data)
+        json_rate = (json_pass / total) * 100
+        schema_rate = (schema_pass / total) * 100
+        print(f"  [{label}] JSON Pass: {json_pass}/{total} ({json_rate:.1f}%) | Schema Pass: {schema_pass}/{total} ({schema_rate:.1f}%)")
+        return json_rate, schema_rate
+
+    # --- Bước 1: Đánh giá Fine-tuned Adapter ---
+    print("Evaluating Fine-tuned Quiz Adapter...")
+    tuned_evaluator = ModelEvaluator(adapter_path)
+    tuned_json_rate, tuned_schema_rate = _eval_json_responses(tuned_evaluator, "Tuned")
+    tuned_evaluator.unload()
+
+    # --- Bước 2: Đánh giá Base Model (so sánh trước/sau fine-tune) ---
+    print("Evaluating Base Model (baseline)...")
+    base_evaluator = ModelEvaluator(base_model_path)
+    base_json_rate, base_schema_rate = _eval_json_responses(base_evaluator, "Base")
+    base_evaluator.unload()
+
+    return {
+        "tuned_json_rate": tuned_json_rate,
+        "tuned_schema_rate": tuned_schema_rate,
+        "base_json_rate": base_json_rate,
+        "base_schema_rate": base_schema_rate,
+        "json_improvement": tuned_json_rate - base_json_rate,
+        "schema_improvement": tuned_schema_rate - base_schema_rate,
+    }
 
 def evaluate_explanation_adapter(config_path, test_file, base_model_path):
     """
@@ -98,7 +125,7 @@ def evaluate_explanation_adapter(config_path, test_file, base_model_path):
     cfg = load_yaml_config(config_path)
     adapter_path = cfg["training"]["output_dir"]
     
-    with open(test_//_file, "r", encoding="utf-8") as f:
+    with open(test_file, "r", encoding="utf-8") as f:
         test_data = [json.loads(line) for line in f]
 
     # --- Bước 1: Sinh câu trả lời từ Tuned Model ---
@@ -145,20 +172,51 @@ def evaluate_explanation_adapter(config_path, test_file, base_model_path):
         else: ties += 1
 
     win_rate = (wins / len(test_data)) * 100
-    return win_rate, wins, ties, losses
+    return {
+        "win_rate": win_rate,
+        "wins": wins,
+        "ties": ties,
+        "losses": losses,
+        "total": len(test_data),
+    }
+
+# ==============================================================================
+# RESULT SAVING
+# ==============================================================================
+def save_results(results, output_path):
+    """Lưu kết quả eval ra file JSON với timestamp."""
+    output_path = Path(output_path)
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+
+    results["timestamp"] = datetime.now().isoformat()
+    with open(output_path, "w", encoding="utf-8") as f:
+        json.dump(results, f, ensure_ascii=False, indent=2)
+    print(f"💾 Results saved to {output_path}")
 
 # ==============================================================================
 # MAIN EXECUTION
 # ==============================================================================
 if __name__ == "__main__":
+    BASE_MODEL = "unsloth/Qwen2.5-7B-Instruct"
+    RESULTS_DIR = ROOT_DIR / "training" / "evaluation" / "results"
+    all_results = {}
+
     # 1. Đánh giá Quiz Adapter
     try:
-        # Đường dẫn đến file config YAML
         quiz_cfg_path = ROOT_DIR / "training/configs/quiz_config.yaml"
         quiz_test_file = ROOT_DIR / "data/test/quiz_test.jsonl"
         
-        quiz_rate = evaluate_quiz_adapter(str(quiz_cfg_path), str(quiz_test_file))
-        print(f"📊 Final Quiz JSON Pass Rate: {quiz_rate:.2f}%")
+        quiz_results = evaluate_quiz_adapter(
+            config_path = str(quiz_cfg_path),
+            test_file = str(quiz_test_file),
+            base_model_path = BASE_MODEL,
+        )
+        all_results["quiz"] = quiz_results
+
+        print(f"\n📊 Quiz Evaluation Results:")
+        print(f"  Fine-tuned — JSON: {quiz_results['tuned_json_rate']:.1f}%, Schema: {quiz_results['tuned_schema_rate']:.1f}%")
+        print(f"  Base Model — JSON: {quiz_results['base_json_rate']:.1f}%, Schema: {quiz_results['base_schema_rate']:.1f}%")
+        print(f"  Improvement — JSON: {quiz_results['json_improvement']:+.1f}%, Schema: {quiz_results['schema_improvement']:+.1f}%")
     except Exception as e:
         print(f"Error evaluating Quiz: {e}")
 
@@ -166,15 +224,22 @@ if __name__ == "__main__":
 
     # 2. Đánh giá Explanation Adapter
     try:
-        # Đường dẫn đến file config YAML
         exp_cfg_path = ROOT_DIR / "training/configs/explanation_config.yaml"
         exp_test_file = ROOT_DIR / "data/test/explanation_test.jsonl"
         
-        win_rate, w, t, l = evaluate_explanation_adapter(
+        exp_results = evaluate_explanation_adapter(
             config_path = str(exp_cfg_path),
             test_file = str(exp_test_file),
-            base_model_path = "unsloth/Qwen2.5-7B-Instruct"
+            base_model_path = BASE_MODEL,
         )
-        print(f"🏆 Final Explanation Win-rate: {win_rate:.2f}% (W:{w}, T:{t}, L:{l})")
+        all_results["explanation"] = exp_results
+
+        print(f"\n🏆 Explanation Evaluation Results:")
+        print(f"  Win-rate: {exp_results['win_rate']:.1f}%")
+        print(f"  Wins: {exp_results['wins']}, Ties: {exp_results['ties']}, Losses: {exp_results['losses']}")
     except Exception as e:
         print(f"Error evaluating Explanation: {e}")
+
+    # 3. Lưu kết quả
+    if all_results:
+        save_results(all_results, RESULTS_DIR / "eval_results.json")

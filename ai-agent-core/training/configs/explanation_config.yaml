@@ -8,7 +8,7 @@ model:
 
 training:
   data_file: "data/processed/explanation_chat.jsonl"
-  output_dir: "outputs/adapters/explanation"
+  output_dir: "models/adapters/explanation_v1"
   checkpoint_dir: "outputs/checkpoints/explanation"
   epochs: 3
   batch_size: 2
@@ -19,5 +19,7 @@ training:
   eval_steps: 10
   save_steps: 10
   save_total_limit: 2
+  early_stopping_patience: 3
+  early_stopping_threshold: 0.01
 
 system_prompt: "You are a Socratic English tutor. Guide students to find errors themselves instead of giving answers immediately."

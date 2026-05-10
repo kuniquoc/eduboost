@@ -3,6 +3,7 @@ import torch
 from pathlib import Path
 from unsloth import FastLanguageModel, is_bfloat16_supported
 from trl import SFTConfig, SFTTrainer
+from transformers import EarlyStoppingCallback
 from datasets import load_dataset
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -61,12 +62,21 @@ def build_trainer(model, tokenizer, train_ds, val_ds, train_cfg):
         max_seq_length = 2048,
         packing = True,
     )
+
+    callbacks = []
+    if train_cfg.get("early_stopping_patience"):
+        callbacks.append(EarlyStoppingCallback(
+            early_stopping_patience=train_cfg["early_stopping_patience"],
+            early_stopping_threshold=train_cfg.get("early_stopping_threshold", 0.0),
+        ))
+
     return SFTTrainer(
         model = model,
         args = sft_config,
         train_dataset = train_ds,
         eval_dataset = val_ds,
         processing_class = tokenizer,
+        callbacks = callbacks,
     )
 
 def plot_training_loss(trainer, output_dir, adapter_name):
