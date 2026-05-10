@@ -1,0 +1,259 @@
+// Shared TypeScript types — ported from mobile
+
+export type UserRole = 'teacher' | 'student';
+
+export interface User {
+  userId: string;
+  name: string;
+  email: string;
+  role: UserRole;
+  avatar?: string;
+}
+
+export interface AuthTokens {
+  accessToken: string;
+  refreshToken: string;
+  user: User;
+}
+
+// ─── Classes ──────────────────────────────────────────────
+
+export interface ClassDto {
+  id: string;
+  name: string;
+  description: string;
+  coverColor: string;
+  studentCount: number;
+  averageProgress: number;
+  topicCount: number;
+  classCode: string;
+  createdAt: string;
+  teacherId: string;
+}
+
+export interface TopicSummary {
+  id: string;
+  name: string;
+  difficulty: 'easy' | 'medium' | 'hard';
+  aiEvaluated: boolean;
+  questionCount: number;
+  isDocumentVisible: boolean;
+}
+
+export interface ClassDetailDto extends ClassDto {
+  topics: TopicSummary[];
+}
+
+export interface StudentEnrollmentDto {
+  userId: string;
+  name: string;
+  email: string;
+  avatar?: string;
+  joinedAt: string;
+  entryTestCompleted: boolean;
+  completionPercent: number;
+}
+
+// ─── Topics ──────────────────────────────────────────────
+
+export interface TopicDto {
+  id: string;
+  classId: string;
+  name: string;
+  description: string;
+  difficulty: 'easy' | 'medium' | 'hard';
+  aiEvaluated: boolean;
+  questionCount: number;
+  isDocumentVisible: boolean;
+  createdAt: string;
+}
+
+// ─── Documents ────────────────────────────────────────────
+
+export type DocumentStatus = 'uploading' | 'processing' | 'ready' | 'error';
+
+export interface DocumentDto {
+  id: string;
+  ownerId: string;
+  name: string;
+  size: string;
+  status: DocumentStatus;
+  uploadedAt: string;
+  topicId?: string;
+  generatedQuizId?: string;
+  classId?: string;
+}
+
+export interface UploadUrlDto {
+  uploadUrl: string;
+  documentId: string;
+}
+
+export interface DownloadUrlDto {
+  downloadUrl: string;
+  expiresAt: string;
+}
+
+export interface GenerateQuizJobDto {
+  jobId: string;
+  documentId: string;
+  status: 'queued' | 'processing' | 'done' | 'error';
+  message?: string;
+}
+
+// ─── Quizzes ─────────────────────────────────────────────
+
+export type QuestionType = 'mcq' | 'multi_select' | 'fill_blank';
+export type AnswerState = 'unanswered' | 'correct' | 'wrong';
+
+export interface OptionDto {
+  id: string;
+  text: string;
+  isCorrect: boolean;
+}
+
+export interface QuestionDto {
+  id: string;
+  quizId: string;
+  topicId: string;
+  text: string;
+  type: QuestionType;
+  difficulty: 'easy' | 'medium' | 'hard';
+  options: OptionDto[];
+  correctAnswer?: string;
+  explanation?: string;
+  verifiedByTeacher: boolean;
+  orderIndex: number;
+}
+
+export interface QuizAnswer {
+  questionId: string;
+  selectedOptionIds: string[];
+  fillBlankValue?: string;
+  state: AnswerState;
+  timeSpentSeconds: number;
+}
+
+export interface TopicScoreDto {
+  topicId: string;
+  topicName: string;
+  score: number;
+  total: number;
+  percentage: number;
+}
+
+export interface QuizResultDto {
+  quizId: string;
+  score: number;
+  total: number;
+  percentage: number;
+  grade: string;
+  topicScores: TopicScoreDto[];
+  completedAt: string;
+}
+
+export interface EntryTestDto {
+  quizId: string;
+  classId: string;
+  className: string;
+  questions: QuestionDto[];
+}
+
+export interface SubmitQuizRequest {
+  answers: Array<{
+    questionId: string;
+    selectedOptionIds: string[];
+    fillBlankValue?: string;
+    timeSpentSeconds: number;
+  }>;
+}
+
+export interface UpdateQuestionPayload {
+  text?: string;
+  difficulty?: 'easy' | 'medium' | 'hard';
+  explanation?: string;
+  options?: Array<{ id?: string; text: string; isCorrect: boolean }>;
+}
+
+// ─── Students Analytics ───────────────────────────────────
+
+export interface WeakSkillDto {
+  topicId: string;
+  topicName: string;
+  score: number;
+}
+
+export interface StudentAnalyticsDto {
+  studentId: string;
+  studentName: string;
+  email: string;
+  avatar?: string;
+  completionPercent: number;
+  quizzesTaken: number;
+  averageScore: number;
+  weakSkills: WeakSkillDto[];
+  lastActive: string;
+  entryTestCompleted: boolean;
+}
+
+export interface ClassAnalyticsDto {
+  classId: string;
+  className: string;
+  totalStudents: number;
+  avgCompletion: number;
+  avgScore: number;
+  studentsCompleted: number;
+  students: StudentAnalyticsDto[];
+}
+
+export interface StudentProgressDto {
+  studentId: string;
+  overallProgress: number;
+  enrolledClasses: EnrolledClassProgress[];
+}
+
+export interface EnrolledClassProgress {
+  classId: string;
+  className: string;
+  coverColor: string;
+  progress: number;
+  entryTestCompleted: boolean;
+  joinedAt: string;
+}
+
+export interface StudentStatsDto {
+  dayStreak: number;
+  avgQuizScore: number;
+  totalQuizzesTaken: number;
+  weeklyProgress: number;
+}
+
+// ─── Roadmap ─────────────────────────────────────────────
+
+export type RoadmapStepStatus = 'completed' | 'in_progress' | 'recommended' | 'locked';
+
+export interface RoadmapStepDto {
+  id: string;
+  topicId: string;
+  topicName: string;
+  status: RoadmapStepStatus;
+  progress: number;
+  reason?: string;
+  orderIndex: number;
+}
+
+export interface RoadmapDto {
+  classId: string;
+  studentId: string;
+  generatedAt: string;
+  steps: RoadmapStepDto[];
+}
+
+// ─── API Response ────────────────────────────────────────
+
+export interface ApiResponse<T> {
+  success: boolean;
+  data?: T;
+  message?: string;
+  errors?: unknown;
+}
