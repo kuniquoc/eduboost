@@ -2,17 +2,15 @@ import { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { documentsService } from '@/services/documents.service';
-import { quizzesService } from '@/services/quizzes.service';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent } from '@/components/ui/card';
 import {
   Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter,
 } from '@/components/ui/dialog';
-import { Upload, Trash2, Sparkles, FileText, Download, Loader2, BookOpen, PenLine } from 'lucide-react';
+import { Upload, Download, Trash2, Sparkles, FileText, Loader2 } from 'lucide-react';
 import { toast } from 'sonner';
-import { QuizBuilderDialog } from '@/components/shared/quiz-builder-dialog';
-import type { DocumentDto, CreateQuestionPayload } from '@/types';
+import type { DocumentDto } from '@/types';
 
 const statusMap: Record<string, { label: string; variant: 'default' | 'secondary' | 'destructive' | 'outline' }> = {
   uploading: { label: 'Đang tải', variant: 'outline' },
@@ -29,33 +27,32 @@ function formatSize(size: string) {
   return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
 }
 
-export function AILabPage() {
+export function DocumentsTab({ classId }: { classId: string }) {
   const queryClient = useQueryClient();
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const [uploading, setUploading] = useState(false);
   const [deleteDoc, setDeleteDoc] = useState<DocumentDto | null>(null);
-  const [quizBuilderOpen, setQuizBuilderOpen] = useState(false);
+  const [uploading, setUploading] = useState(false);
 
   const { data: documents, isLoading } = useQuery({
-    queryKey: ['my-documents'],
-    queryFn: documentsService.getMyDocuments,
+    queryKey: ['class-documents', classId],
+    queryFn: () => documentsService.getClassDocuments(classId),
   });
 
-  const invalidate = () => queryClient.invalidateQueries({ queryKey: ['my-documents'] });
+  const invalidate = () => queryClient.invalidateQueries({ queryKey: ['class-documents', classId] });
 
   const handleUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
     setUploading(true);
     try {
-      const { uploadUrl, documentId } = await documentsService.requestStudentUploadUrl({
+      const { uploadUrl, documentId } = await documentsService.requestClassUploadUrl(classId, {
         fileName: file.name,
         contentType: file.type || 'application/octet-stream',
       });
       await documentsService.uploadFileToMinio(uploadUrl, file);
-      await documentsService.confirmStudentUpload(documentId);
+      await documentsService.confirmClassUpload(classId, documentId);
       invalidate();
-      toast.success('Tải lên thành công!');
+      toast.success('Tải lên thành công');
     } catch {
       toast.error('Tải lên thất bại');
     } finally {
@@ -65,37 +62,27 @@ export function AILabPage() {
   };
 
   const deleteMutation = useMutation({
-    mutationFn: (docId: string) => documentsService.deleteMyDocument(docId),
+    mutationFn: (docId: string) => documentsService.deleteClassDocument(classId, docId),
     onSuccess: () => {
       invalidate();
-      toast.success('Đã xóa');
+      toast.success('Đã xóa tài liệu');
       setDeleteDoc(null);
     },
     onError: () => toast.error('Xóa thất bại'),
   });
 
-  const generateMutation = useMutation({
-    mutationFn: (docId: string) => documentsService.generateMyQuiz(docId),
-    onSuccess: () => {
+  const generateQuizMutation = useMutation({
+    mutationFn: (docId: string) => documentsService.generateQuizFromDocument(classId, docId),
+    onSuccess: (data) => {
       invalidate();
-      toast.success('Đang tạo quiz...');
-    },
-    onError: () => toast.error('Tạo quiz thất bại'),
-  });
-
-  const createMyQuizMutation = useMutation({
-    mutationFn: (data: { title: string; questions: CreateQuestionPayload[] }) =>
-      quizzesService.createMyQuiz({ title: data.title, questions: data.questions }),
-    onSuccess: () => {
-      toast.success('Tạo quiz cá nhân thành công');
-      setQuizBuilderOpen(false);
+      toast.success(`Đang tạo quiz (Job: ${data.jobId.slice(0, 8)}...)`);
     },
     onError: () => toast.error('Tạo quiz thất bại'),
   });
 
   const handleDownload = async (doc: DocumentDto) => {
     try {
-      const { downloadUrl } = await documentsService.getMyDocumentDownloadUrl(doc.id);
+      const { downloadUrl } = await documentsService.getClassDocumentDownloadUrl(classId, doc.id);
       window.open(downloadUrl, '_blank');
     } catch {
       toast.error('Không thể tải xuống');
@@ -104,15 +91,9 @@ export function AILabPage() {
 
   return (
     <div>
-      <div className="mb-6 flex items-center justify-between">
+      <div className="mb-4 flex items-center justify-between">
+        <p className="text-sm text-muted-foreground">{documents?.length ?? 0} tài liệu</p>
         <div>
-          <h1 className="text-2xl font-bold text-foreground">AI Lab</h1>
-          <p className="mt-1 text-sm text-muted-foreground">Upload tài liệu và tạo quiz với AI</p>
-        </div>
-        <div className="flex gap-2">
-          <Button variant="outline" onClick={() => setQuizBuilderOpen(true)}>
-            <PenLine className="h-4 w-4" /> Tạo quiz thủ công
-          </Button>
           <input
             ref={fileInputRef}
             type="file"
@@ -120,9 +101,9 @@ export function AILabPage() {
             accept=".pdf,.doc,.docx,.txt,.md"
             onChange={handleUpload}
           />
-          <Button onClick={() => fileInputRef.current?.click()} disabled={uploading}>
+          <Button size="sm" onClick={() => fileInputRef.current?.click()} disabled={uploading}>
             {uploading ? <Loader2 className="h-4 w-4 animate-spin" /> : <Upload className="h-4 w-4" />}
-            {uploading ? 'Đang tải...' : 'Tải lên tài liệu'}
+            {uploading ? 'Đang tải...' : 'Tải lên'}
           </Button>
         </div>
       </div>
@@ -134,12 +115,10 @@ export function AILabPage() {
           ))}
         </div>
       ) : !documents?.length ? (
-        <div className="flex flex-col items-center justify-center rounded-xl border border-dashed border-border py-16 text-center">
-          <BookOpen className="mb-4 h-12 w-12 text-muted-foreground/50" />
-          <p className="text-lg font-medium text-foreground">Chưa có tài liệu</p>
-          <p className="mt-1 text-sm text-muted-foreground">
-            Upload tài liệu để AI tạo bài quiz cá nhân
-          </p>
+        <div className="flex flex-col items-center justify-center rounded-xl border border-dashed border-border py-12 text-center">
+          <FileText className="mb-3 h-10 w-10 text-muted-foreground/50" />
+          <p className="font-medium text-foreground">Chưa có tài liệu</p>
+          <p className="mt-1 text-sm text-muted-foreground">Upload tài liệu để AI tạo bài quiz</p>
         </div>
       ) : (
         <div className="space-y-2">
@@ -147,11 +126,11 @@ export function AILabPage() {
             const status = statusMap[doc.status] ?? statusMap.error;
             return (
               <Card key={doc.id} className="border-border">
-                <CardContent className="flex items-center justify-between p-4">
+                <CardContent className="flex items-center justify-between p-3">
                   <div className="flex items-center gap-3 min-w-0">
                     <FileText className="h-5 w-5 shrink-0 text-muted-foreground" />
                     <div className="min-w-0">
-                      <p className="truncate font-medium text-foreground">{doc.name}</p>
+                      <p className="truncate font-medium text-foreground text-sm">{doc.name}</p>
                       <p className="text-xs text-muted-foreground">
                         {formatSize(doc.size)} · {new Date(doc.uploadedAt).toLocaleDateString('vi-VN')}
                       </p>
@@ -159,35 +138,28 @@ export function AILabPage() {
                   </div>
                   <div className="flex items-center gap-2 shrink-0">
                     <Badge variant={status.variant}>{status.label}</Badge>
-
                     {doc.status === 'ready' && !doc.generatedQuizId && (
                       <Button
                         variant="outline"
-                        size="sm"
-                        onClick={() => generateMutation.mutate(doc.id)}
-                        disabled={generateMutation.isPending}
+                        size="icon-sm"
+                        onClick={() => generateQuizMutation.mutate(doc.id)}
+                        disabled={generateQuizMutation.isPending}
+                        title="Tạo quiz từ tài liệu"
                       >
-                        {generateMutation.isPending ? (
-                          <Loader2 className="h-4 w-4 animate-spin" />
-                        ) : (
-                          <Sparkles className="h-4 w-4" />
-                        )}
-                        Tạo Quiz
+                        <Sparkles className="h-3.5 w-3.5" />
                       </Button>
                     )}
-
                     {doc.generatedQuizId && (
-                      <Link to={`/student/ai-lab/${doc.generatedQuizId}`}>
-                        <Badge variant="default" className="cursor-pointer">
+                      <Link to={`/teacher/ai-studio/${doc.generatedQuizId}`}>
+                        <Badge variant="outline" className="cursor-pointer hover:bg-primary/10">
                           <Sparkles className="h-3 w-3 mr-1" />Xem Quiz
                         </Badge>
                       </Link>
                     )}
-
-                    <Button variant="ghost" size="icon-sm" onClick={() => handleDownload(doc)}>
+                    <Button variant="ghost" size="icon-sm" onClick={() => handleDownload(doc)} title="Tải xuống">
                       <Download className="h-3.5 w-3.5" />
                     </Button>
-                    <Button variant="ghost" size="icon-sm" onClick={() => setDeleteDoc(doc)}>
+                    <Button variant="ghost" size="icon-sm" onClick={() => setDeleteDoc(doc)} title="Xóa">
                       <Trash2 className="h-3.5 w-3.5 text-destructive" />
                     </Button>
                   </div>
@@ -203,7 +175,9 @@ export function AILabPage() {
         <DialogContent>
           <DialogHeader>
             <DialogTitle>Xóa tài liệu</DialogTitle>
-            <DialogDescription>Bạn có chắc muốn xóa <strong>{deleteDoc?.name}</strong>?</DialogDescription>
+            <DialogDescription>
+              Bạn có chắc muốn xóa <strong>{deleteDoc?.name}</strong>?
+            </DialogDescription>
           </DialogHeader>
           <DialogFooter>
             <Button variant="outline" onClick={() => setDeleteDoc(null)}>Hủy</Button>
@@ -217,16 +191,6 @@ export function AILabPage() {
           </DialogFooter>
         </DialogContent>
       </Dialog>
-
-      {/* Quiz Builder Dialog */}
-      <QuizBuilderDialog
-        open={quizBuilderOpen}
-        onOpenChange={setQuizBuilderOpen}
-        onSubmit={(title, questions) => createMyQuizMutation.mutate({ title, questions })}
-        isPending={createMyQuizMutation.isPending}
-        dialogTitle="Tạo quiz cá nhân"
-        dialogDescription="Tự tạo quiz để ôn luyện mà không cần upload tài liệu"
-      />
     </div>
   );
 }

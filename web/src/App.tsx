@@ -24,6 +24,7 @@ import { AILabPage } from '@/features/student/ai-lab/ai-lab-page';
 import { EntryTestPage } from '@/features/student/entry-test/entry-test-page';
 import { RoadmapPage } from '@/features/student/roadmap/roadmap-page';
 import { PracticePage } from '@/features/student/practice/practice-page';
+import { AILabQuizPage } from '@/features/student/ai-lab/ai-lab-quiz-page';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -77,6 +78,7 @@ function AppRoutes() {
           <Route path="/student/dashboard" element={<StudentDashboardPage />} />
           <Route path="/student/classes" element={<StudentClassesPage />} />
           <Route path="/student/ai-lab" element={<AILabPage />} />
+          <Route path="/student/ai-lab/:quizId" element={<AILabQuizPage />} />
           <Route path="/student/roadmap/:classId" element={<RoadmapPage />} />
           <Route path="/student/practice/:topicId" element={<PracticePage />} />
           <Route path="/student/profile" element={<ProfilePage />} />

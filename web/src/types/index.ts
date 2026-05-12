@@ -175,6 +175,37 @@ export interface UpdateQuestionPayload {
   options?: Array<{ id?: string; text: string; isCorrect: boolean }>;
 }
 
+// ─── Manual Quiz Creation ─────────────────────────────────
+
+export interface CreateQuestionPayload {
+  text: string;
+  type: QuestionType;
+  difficulty: 'easy' | 'medium' | 'hard';
+  explanation?: string;
+  correctAnswer?: string;
+  options: Array<{ text: string; isCorrect: boolean }>;
+}
+
+export interface CreateQuizRequest {
+  title: string;
+  classId?: string;
+  topicId?: string;
+  type?: 'practice' | 'entry_test';
+  questions: CreateQuestionPayload[];
+}
+
+export interface QuizDto {
+  id: string;
+  classId: string;
+  topicId?: string;
+  documentId?: string;
+  title: string;
+  type: 'entry_test' | 'practice' | 'private';
+  isPublished: boolean;
+  questionCount: number;
+  createdAt: string;
+}
+
 // ─── Students Analytics ───────────────────────────────────
 
 export interface WeakSkillDto {

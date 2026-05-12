@@ -29,19 +29,6 @@ export function LoginPage() {
     }
   };
 
-  const quickLogin = async (email: string) => {
-    setLoading(true);
-    try {
-      const data = await authService.login(email, 'password123');
-      setAuth(data.user);
-      navigate(data.user.role === 'teacher' ? '/teacher/classes' : '/student/dashboard');
-    } catch {
-      toast.error('Đăng nhập thất bại');
-    } finally {
-      setLoading(false);
-    }
-  };
-
   return (
     <Card className="border-border">
       <CardHeader>
@@ -75,33 +62,6 @@ export function LoginPage() {
           <Button type="submit" className="w-full" disabled={loading}>
             {loading ? 'Đang đăng nhập...' : 'Đăng nhập'}
           </Button>
-
-          {/* Demo quick login */}
-          <div className="space-y-2 pt-2">
-            <p className="text-center text-xs text-muted-foreground">Demo nhanh</p>
-            <div className="flex gap-2">
-              <Button
-                type="button"
-                variant="outline"
-                size="sm"
-                className="flex-1"
-                disabled={loading}
-                onClick={() => quickLogin('teacher@eduboost.vn')}
-              >
-                Teacher
-              </Button>
-              <Button
-                type="button"
-                variant="outline"
-                size="sm"
-                className="flex-1"
-                disabled={loading}
-                onClick={() => quickLogin('student@eduboost.vn')}
-              >
-                Student
-              </Button>
-            </div>
-          </div>
         </CardContent>
       </form>
       <CardFooter className="justify-center">

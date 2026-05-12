@@ -90,3 +90,24 @@ public class EntryTestDto
     public string ClassName { get; set; } = "";
     public List<QuestionDto> Questions { get; set; } = [];
 }
+
+// ── Manual Quiz Creation ──────────────────────────────────────────
+
+public class CreateQuizRequest
+{
+    [Required] public string Title { get; set; } = "";
+    public string? ClassId { get; set; }
+    public string? TopicId { get; set; }
+    public string Type { get; set; } = "practice"; // "practice" | "entry_test"
+    [Required] public List<CreateQuestionRequest> Questions { get; set; } = [];
+}
+
+public class CreateQuestionRequest
+{
+    [Required] public string Text { get; set; } = "";
+    public string Type { get; set; } = "mcq"; // "mcq" | "multi_select" | "fill_blank"
+    public string Difficulty { get; set; } = "medium";
+    public string? Explanation { get; set; }
+    public string? CorrectAnswer { get; set; }
+    public List<OptionDto> Options { get; set; } = [];
+}

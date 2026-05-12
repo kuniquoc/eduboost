@@ -19,6 +19,12 @@ public interface IQuizzesRepository
     Task<QuizResultDto> SubmitPracticeQuizAsync(Guid topicId, Guid studentId, SubmitQuizRequest request);
     Task<List<QuestionDto>> GetMyQuizQuestionsAsync(Guid quizId);
     Task<QuestionDto?> UpdateMyQuestionAsync(Guid questionId, UpdateQuestionRequest request);
+    Task<QuizDto> CreateQuizAsync(CreateQuizRequest request, string type);
+    Task<QuizDto> CreatePrivateQuizAsync(Guid ownerId, CreateQuizRequest request);
+    Task<List<QuizDto>> GetClassQuizzesAsync(Guid classId);
+    Task<bool> HasEntryTestAsync(Guid classId);
+    Task<QuizDto> GenerateEntryTestAsync(Guid classId);
+    Task<QuestionDto?> AddQuestionAsync(Guid quizId, CreateQuestionRequest request);
 }
 
 public class QuizzesRepository(AppDbContext db) : IQuizzesRepository
@@ -38,7 +44,7 @@ public class QuizzesRepository(AppDbContext db) : IQuizzesRepository
         var question = await db.Questions.Include(q => q.Options).FirstOrDefaultAsync(q => q.Id == questionId);
         if (question == null) return null;
 
-        if (request.Text        != null) question.Text        = request.Text;
+        if (request.Text != null) question.Text = request.Text;
         if (request.CorrectAnswer != null) question.CorrectAnswer = request.CorrectAnswer;
         if (request.Explanation != null) question.Explanation = request.Explanation;
 
@@ -47,10 +53,10 @@ public class QuizzesRepository(AppDbContext db) : IQuizzesRepository
             db.QuizOptions.RemoveRange(question.Options);
             question.Options = request.Options.Select((o, i) => new QuizOption
             {
-                Id         = Guid.NewGuid(),
+                Id = Guid.NewGuid(),
                 QuestionId = question.Id,
-                Text       = o.Text,
-                IsCorrect  = o.IsCorrect,
+                Text = o.Text,
+                IsCorrect = o.IsCorrect,
                 OrderIndex = i
             }).ToList();
         }
@@ -98,8 +104,8 @@ public class QuizzesRepository(AppDbContext db) : IQuizzesRepository
 
         return new EntryTestDto
         {
-            QuizId    = quiz.Id.ToString(),
-            ClassId   = classId.ToString(),
+            QuizId = quiz.Id.ToString(),
+            ClassId = classId.ToString(),
             ClassName = cls?.Name ?? "",
             Questions = quiz.Questions.OrderBy(q => q.OrderIndex).Select(MapToDto).ToList()
         };
@@ -111,7 +117,18 @@ public class QuizzesRepository(AppDbContext db) : IQuizzesRepository
             .Include(q => q.Questions).ThenInclude(q => q.Options)
             .FirstOrDefaultAsync(q => q.ClassId == classId && q.Type == "entry_test");
 
-        return await ScoreAndSaveAsync(quiz, studentId, request);
+        var result = await ScoreAndSaveAsync(quiz, studentId, request);
+
+        // Mark entry test as completed on the enrollment
+        var enrollment = await db.Enrollments
+            .FirstOrDefaultAsync(e => e.StudentId == studentId && e.ClassId == classId);
+        if (enrollment != null && !enrollment.EntryTestCompleted)
+        {
+            enrollment.EntryTestCompleted = true;
+            await db.SaveChangesAsync();
+        }
+
+        return result;
     }
 
     public async Task<EntryTestDto> GetPracticeQuizAsync(Guid topicId, int limit)
@@ -125,8 +142,8 @@ public class QuizzesRepository(AppDbContext db) : IQuizzesRepository
 
         return new EntryTestDto
         {
-            QuizId    = quiz?.Id.ToString() ?? "",
-            ClassId   = "",
+            QuizId = quiz?.Id.ToString() ?? "",
+            ClassId = "",
             ClassName = "Practice",
             Questions = questions
         };
@@ -154,6 +171,207 @@ public class QuizzesRepository(AppDbContext db) : IQuizzesRepository
     public Task<QuestionDto?> UpdateMyQuestionAsync(Guid questionId, UpdateQuestionRequest request)
         => UpdateQuestionAsync(questionId, request);
 
+    public async Task<QuizDto> CreateQuizAsync(CreateQuizRequest request, string type)
+    {
+        var quiz = new Quiz
+        {
+            Id = Guid.NewGuid(),
+            Title = request.Title,
+            Type = type,
+            ClassId = string.IsNullOrEmpty(request.ClassId) ? null : Guid.Parse(request.ClassId),
+            TopicId = string.IsNullOrEmpty(request.TopicId) ? null : Guid.Parse(request.TopicId),
+            IsPublished = false,
+            CreatedAt = DateTime.UtcNow,
+            Questions = request.Questions.Select((q, idx) => new Question
+            {
+                Id = Guid.NewGuid(),
+                Text = q.Text,
+                Type = q.Type,
+                Difficulty = q.Difficulty,
+                Explanation = q.Explanation,
+                CorrectAnswer = q.CorrectAnswer,
+                VerifiedByTeacher = false,
+                OrderIndex = idx,
+                Options = q.Options.Select((o, oi) => new QuizOption
+                {
+                    Id = Guid.NewGuid(),
+                    Text = o.Text,
+                    IsCorrect = o.IsCorrect,
+                    OrderIndex = oi
+                }).ToList()
+            }).ToList()
+        };
+
+        db.Quizzes.Add(quiz);
+        await db.SaveChangesAsync();
+
+        return new QuizDto
+        {
+            Id = quiz.Id.ToString(),
+            ClassId = quiz.ClassId?.ToString() ?? "",
+            TopicId = quiz.TopicId?.ToString(),
+            Title = quiz.Title,
+            Type = quiz.Type,
+            IsPublished = quiz.IsPublished,
+            QuestionCount = quiz.Questions.Count,
+            CreatedAt = quiz.CreatedAt.ToString("o")
+        };
+    }
+
+    public async Task<QuizDto> CreatePrivateQuizAsync(Guid ownerId, CreateQuizRequest request)
+    {
+        // Private quiz — no ClassId, stored as "private" type
+        request.ClassId = null;
+        request.TopicId = null;
+        return await CreateQuizAsync(request, "private");
+    }
+
+    public async Task<List<QuizDto>> GetClassQuizzesAsync(Guid classId)
+    {
+        return await db.Quizzes
+            .Where(q => q.ClassId == classId)
+            .OrderByDescending(q => q.CreatedAt)
+            .Select(q => new QuizDto
+            {
+                Id = q.Id.ToString(),
+                ClassId = q.ClassId.HasValue ? q.ClassId.Value.ToString() : "",
+                TopicId = q.TopicId.HasValue ? q.TopicId.Value.ToString() : null,
+                DocumentId = q.GeneratedFromDocuments.Any() ? q.GeneratedFromDocuments.First().Id.ToString() : null,
+                Title = q.Title,
+                Type = q.Type,
+                IsPublished = q.IsPublished,
+                QuestionCount = q.Questions.Count,
+                CreatedAt = q.CreatedAt.ToString("o")
+            })
+            .ToListAsync();
+    }
+
+    public async Task<bool> HasEntryTestAsync(Guid classId)
+    {
+        return await db.Quizzes.AnyAsync(q => q.ClassId == classId && q.Type == "entry_test");
+    }
+
+    public async Task<QuizDto> GenerateEntryTestAsync(Guid classId)
+    {
+        var cls = await db.Classes.FindAsync(classId);
+        var topics = await db.Topics
+            .Where(t => t.ClassId == classId)
+            .OrderBy(t => t.Difficulty == "easy" ? 0 : t.Difficulty == "medium" ? 1 : 2)
+            .ThenBy(t => t.CreatedAt)
+            .ToListAsync();
+
+        var questions = new List<Question>();
+        int order = 0;
+
+        foreach (var topic in topics)
+        {
+            // Generate 2-3 questions per topic based on difficulty
+            int count = topic.Difficulty == "easy" ? 2 : topic.Difficulty == "hard" ? 3 : 2;
+
+            for (int i = 0; i < count; i++)
+            {
+                var q = new Question
+                {
+                    Id = Guid.NewGuid(),
+                    Text = $"[AI] Câu hỏi về {topic.Name} ({i + 1})",
+                    Type = "mcq",
+                    Difficulty = topic.Difficulty,
+                    Explanation = $"Đây là câu hỏi đánh giá kiến thức về {topic.Name}.",
+                    VerifiedByTeacher = false,
+                    OrderIndex = order++,
+                    Options =
+                    [
+                        new QuizOption { Id = Guid.NewGuid(), Text = "Đáp án A", IsCorrect = true,  OrderIndex = 0 },
+                        new QuizOption { Id = Guid.NewGuid(), Text = "Đáp án B", IsCorrect = false, OrderIndex = 1 },
+                        new QuizOption { Id = Guid.NewGuid(), Text = "Đáp án C", IsCorrect = false, OrderIndex = 2 },
+                        new QuizOption { Id = Guid.NewGuid(), Text = "Đáp án D", IsCorrect = false, OrderIndex = 3 },
+                    ]
+                };
+                questions.Add(q);
+            }
+        }
+
+        // Fallback if no topics exist
+        if (questions.Count == 0)
+        {
+            questions.Add(new Question
+            {
+                Id = Guid.NewGuid(),
+                Text = "[AI] Câu hỏi đánh giá tổng quan",
+                Type = "mcq",
+                Difficulty = "medium",
+                Explanation = "Câu hỏi tổng quan cho bài test đầu vào.",
+                VerifiedByTeacher = false,
+                OrderIndex = 0,
+                Options =
+                [
+                    new QuizOption { Id = Guid.NewGuid(), Text = "Đáp án A", IsCorrect = true,  OrderIndex = 0 },
+                    new QuizOption { Id = Guid.NewGuid(), Text = "Đáp án B", IsCorrect = false, OrderIndex = 1 },
+                    new QuizOption { Id = Guid.NewGuid(), Text = "Đáp án C", IsCorrect = false, OrderIndex = 2 },
+                    new QuizOption { Id = Guid.NewGuid(), Text = "Đáp án D", IsCorrect = false, OrderIndex = 3 },
+                ]
+            });
+        }
+
+        var quiz = new Quiz
+        {
+            Id = Guid.NewGuid(),
+            Title = $"Bài test đầu vào — {cls?.Name ?? "Lớp học"}",
+            Type = "entry_test",
+            ClassId = classId,
+            IsPublished = false,
+            CreatedAt = DateTime.UtcNow,
+            Questions = questions,
+        };
+
+        db.Quizzes.Add(quiz);
+        await db.SaveChangesAsync();
+
+        return new QuizDto
+        {
+            Id = quiz.Id.ToString(),
+            ClassId = classId.ToString(),
+            Title = quiz.Title,
+            Type = quiz.Type,
+            IsPublished = quiz.IsPublished,
+            QuestionCount = quiz.Questions.Count,
+            CreatedAt = quiz.CreatedAt.ToString("o"),
+        };
+    }
+
+    public async Task<QuestionDto?> AddQuestionAsync(Guid quizId, CreateQuestionRequest request)
+    {
+        var quiz = await db.Quizzes.Include(q => q.Questions).FirstOrDefaultAsync(q => q.Id == quizId);
+        if (quiz == null) return null;
+
+        var maxOrder = quiz.Questions.Count > 0 ? quiz.Questions.Max(q => q.OrderIndex) + 1 : 0;
+
+        var question = new Question
+        {
+            Id = Guid.NewGuid(),
+            QuizId = quizId,
+            Text = request.Text,
+            Type = request.Type,
+            Difficulty = request.Difficulty,
+            Explanation = request.Explanation,
+            CorrectAnswer = request.CorrectAnswer,
+            VerifiedByTeacher = false,
+            OrderIndex = maxOrder,
+            Options = request.Options.Select((o, i) => new QuizOption
+            {
+                Id = Guid.NewGuid(),
+                Text = o.Text,
+                IsCorrect = o.IsCorrect,
+                OrderIndex = i
+            }).ToList()
+        };
+
+        db.Questions.Add(question);
+        await db.SaveChangesAsync();
+
+        return MapToDto(question);
+    }
+
     // ── Helpers ───────────────────────────────────────────────────────────────
     private async Task<QuizResultDto> ScoreAndSaveAsync(Quiz? quiz, Guid studentId, SubmitQuizRequest request)
     {
@@ -170,8 +388,8 @@ public class QuizzesRepository(AppDbContext db) : IQuizzesRepository
 
                 bool correct = question.Type switch
                 {
-                    "fill_blank"   => answer.FillBlankValue?.Trim().Equals(question.CorrectAnswer?.Trim(), StringComparison.OrdinalIgnoreCase) == true,
-                    "mcq"          => question.Options.Any(o => o.IsCorrect && answer.SelectedOptionIds.Contains(o.Id.ToString())),
+                    "fill_blank" => answer.FillBlankValue?.Trim().Equals(question.CorrectAnswer?.Trim(), StringComparison.OrdinalIgnoreCase) == true,
+                    "mcq" => question.Options.Any(o => o.IsCorrect && answer.SelectedOptionIds.Contains(o.Id.ToString())),
                     "multi_select" =>
                         question.Options.Where(o => o.IsCorrect).Select(o => o.Id.ToString()).OrderBy(x => x).SequenceEqual(
                         answer.SelectedOptionIds.OrderBy(x => x)),
@@ -187,15 +405,15 @@ public class QuizzesRepository(AppDbContext db) : IQuizzesRepository
         }
 
         double pct = total > 0 ? score * 100.0 / total : 0;
-        var grade  = pct >= 90 ? "Xuất sắc" : pct >= 70 ? "Tốt" : pct >= 50 ? "Trung bình" : "Cần cải thiện";
+        var grade = pct >= 90 ? "Xuất sắc" : pct >= 70 ? "Tốt" : pct >= 50 ? "Trung bình" : "Cần cải thiện";
 
         var result = new QuizResultDto
         {
-            QuizId      = quiz?.Id.ToString() ?? "",
-            Score       = score,
-            Total       = total,
-            Percentage  = pct,
-            Grade       = grade,
+            QuizId = quiz?.Id.ToString() ?? "",
+            Score = score,
+            Total = total,
+            Percentage = pct,
+            Grade = grade,
             CompletedAt = DateTime.UtcNow.ToString("o"),
             TopicScores = []
         };
@@ -204,15 +422,15 @@ public class QuizzesRepository(AppDbContext db) : IQuizzesRepository
         {
             var submission = new QuizSubmission
             {
-                Id             = Guid.NewGuid(),
-                StudentId      = studentId,
-                QuizId         = quiz.Id,
-                Score          = score,
+                Id = Guid.NewGuid(),
+                StudentId = studentId,
+                QuizId = quiz.Id,
+                Score = score,
                 TotalQuestions = total,
-                Percentage     = pct,
-                Grade          = grade,
-                AnswersJson    = JsonSerializer.Serialize(request.Answers),
-                CompletedAt    = DateTime.UtcNow
+                Percentage = pct,
+                Grade = grade,
+                AnswersJson = JsonSerializer.Serialize(request.Answers),
+                CompletedAt = DateTime.UtcNow
             };
             db.QuizSubmissions.Add(submission);
             await db.SaveChangesAsync();
@@ -223,20 +441,20 @@ public class QuizzesRepository(AppDbContext db) : IQuizzesRepository
 
     private static QuestionDto MapToDto(Question q) => new()
     {
-        Id               = q.Id.ToString(),
-        QuizId           = q.QuizId.ToString(),
-        TopicId          = q.Quiz?.TopicId?.ToString() ?? "",
-        Text             = q.Text,
-        Type             = q.Type,
-        Difficulty       = q.Difficulty,
-        Explanation      = q.Explanation,
-        CorrectAnswer    = q.CorrectAnswer,
+        Id = q.Id.ToString(),
+        QuizId = q.QuizId.ToString(),
+        TopicId = q.Quiz?.TopicId?.ToString() ?? "",
+        Text = q.Text,
+        Type = q.Type,
+        Difficulty = q.Difficulty,
+        Explanation = q.Explanation,
+        CorrectAnswer = q.CorrectAnswer,
         VerifiedByTeacher = q.VerifiedByTeacher,
-        OrderIndex       = q.OrderIndex,
-        Options          = q.Options.OrderBy(o => o.OrderIndex).Select(o => new OptionDto
+        OrderIndex = q.OrderIndex,
+        Options = q.Options.OrderBy(o => o.OrderIndex).Select(o => new OptionDto
         {
-            Id        = o.Id.ToString(),
-            Text      = o.Text,
+            Id = o.Id.ToString(),
+            Text = o.Text,
             IsCorrect = o.IsCorrect
         }).ToList()
     };

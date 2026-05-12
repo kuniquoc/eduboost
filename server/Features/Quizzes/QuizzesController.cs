@@ -31,6 +31,16 @@ public class QuizzesController(IQuizzesRepository repo) : ControllerBase
         return Ok(ApiResponse<QuestionDto>.Ok(q, "Cập nhật câu hỏi thành công"));
     }
 
+    /// <summary>Teacher: Thêm câu hỏi vào quiz</summary>
+    [HttpPost("{quizId:guid}/questions")]
+    public async Task<IActionResult> AddQuestion(Guid quizId, [FromBody] CreateQuestionRequest request)
+    {
+        if (!ModelState.IsValid) return BadRequest(ApiResponse.Fail("Dữ liệu không hợp lệ", ModelState));
+        var q = await repo.AddQuestionAsync(quizId, request);
+        if (q == null) return NotFound(ApiResponse.Fail("Không tìm thấy quiz"));
+        return Ok(ApiResponse<QuestionDto>.Ok(q, "Thêm câu hỏi thành công"));
+    }
+
     /// <summary>Teacher: Xoá câu hỏi</summary>
     [HttpDelete("{quizId:guid}/questions/{qId:guid}")]
     public async Task<IActionResult> DeleteQuestion(Guid quizId, Guid qId)
@@ -56,6 +66,56 @@ public class QuizzesController(IQuizzesRepository repo) : ControllerBase
         var ok = await repo.PublishQuizAsync(quizId);
         if (!ok) return NotFound(ApiResponse.Fail("Không tìm thấy quiz"));
         return Ok(ApiResponse.Ok("Đã publish quiz. Học sinh có thể bắt đầu làm bài."));
+    }
+
+    /// <summary>Teacher: Tạo quiz thủ công cho lớp</summary>
+    [HttpPost("create")]
+    public async Task<IActionResult> CreateQuiz([FromBody] CreateQuizRequest request)
+    {
+        if (!ModelState.IsValid) return BadRequest(ApiResponse.Fail("Dữ liệu không hợp lệ", ModelState));
+        if (request.Questions.Count == 0) return BadRequest(ApiResponse.Fail("Quiz cần ít nhất 1 câu hỏi"));
+
+        var type = request.Type is "entry_test" or "practice" ? request.Type : "practice";
+
+        if (type == "entry_test")
+        {
+            if (string.IsNullOrEmpty(request.ClassId))
+                return BadRequest(ApiResponse.Fail("Entry test phải thuộc một lớp học"));
+            if (await repo.HasEntryTestAsync(Guid.Parse(request.ClassId)))
+                return Conflict(ApiResponse.Fail("Lớp này đã có bài test đầu vào. Vui lòng chỉnh sửa quiz hiện tại."));
+        }
+
+        var quiz = await repo.CreateQuizAsync(request, type);
+        return Ok(ApiResponse<QuizDto>.Ok(quiz, type == "entry_test" ? "Tạo bài test đầu vào thành công" : "Tạo quiz thành công"));
+    }
+
+    /// <summary>Teacher: AI tự động tạo entry test từ các chủ đề của lớp</summary>
+    [HttpPost("generate-entry-test/{classId:guid}")]
+    public async Task<IActionResult> GenerateEntryTest(Guid classId)
+    {
+        if (await repo.HasEntryTestAsync(classId))
+            return Conflict(ApiResponse.Fail("Lớp này đã có bài test đầu vào."));
+
+        var quiz = await repo.GenerateEntryTestAsync(classId);
+        return Ok(ApiResponse<QuizDto>.Ok(quiz, "AI đã tạo bài test đầu vào. Hãy kiểm tra và chỉnh sửa trước khi publish."));
+    }
+
+    /// <summary>Teacher: Lấy danh sách quiz của lớp</summary>
+    [HttpGet("class/{classId:guid}")]
+    public async Task<IActionResult> GetClassQuizzes(Guid classId)
+    {
+        var quizzes = await repo.GetClassQuizzesAsync(classId);
+        return Ok(ApiResponse<List<QuizDto>>.Ok(quizzes));
+    }
+
+    /// <summary>Student: Tạo quiz thủ công cá nhân</summary>
+    [HttpPost("my/create")]
+    public async Task<IActionResult> CreateMyQuiz([FromBody] CreateQuizRequest request)
+    {
+        if (!ModelState.IsValid) return BadRequest(ApiResponse.Fail("Dữ liệu không hợp lệ", ModelState));
+        if (request.Questions.Count == 0) return BadRequest(ApiResponse.Fail("Quiz cần ít nhất 1 câu hỏi"));
+        var quiz = await repo.CreatePrivateQuizAsync(UserId, request);
+        return Ok(ApiResponse<QuizDto>.Ok(quiz, "Tạo quiz cá nhân thành công"));
     }
 
     /// <summary>Student: Lấy bài test đầu vào của lớp</summary>
