@@ -240,8 +240,8 @@ except json.JSONDecodeError as e:
 # Uncomment và điền token để push lên HF Hub
 # from huggingface_hub import login
 # login(token="hf_YOUR_TOKEN")
-# model.push_to_hub("your-username/eduboost-quiz-adapter")
-# tokenizer.push_to_hub("your-username/eduboost-quiz-adapter")
+# model.push_to_hub("KuniQuoc/eduboost-quiz-adapter")
+# tokenizer.push_to_hub("KuniQuoc/eduboost-quiz-adapter")
 
 # =============================================================================
 # Cell 13 [Code] - (Tuỳ chọn) Zip adapter để download

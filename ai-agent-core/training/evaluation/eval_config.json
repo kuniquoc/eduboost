@@ -1,0 +1,28 @@
+{
+  "default_base_url": "http://localhost:8000/v1",
+
+  "evaluations": [
+    {
+      "name": "quiz_tuned_vs_base",
+      "model_a": "models/adapters/quiz_v1",
+      "model_b": "unsloth/Qwen2.5-7B-Instruct",
+      "base_url_a": null,
+      "base_url_b": null,
+      "label_a": "Quiz Fine-tuned",
+      "label_b": "Qwen2.5-7B Base",
+      "task_type": "quiz",
+      "test_file": "data/gold_dataset/quiz_gold.jsonl"
+    },
+    {
+      "name": "explanation_tuned_vs_base",
+      "model_a": "models/adapters/explanation_v1",
+      "model_b": "unsloth/Qwen2.5-7B-Instruct",
+      "base_url_a": null,
+      "base_url_b": null,
+      "label_a": "Explanation Fine-tuned",
+      "label_b": "Qwen2.5-7B Base",
+      "task_type": "explanation",
+      "test_file": "data/gold_dataset/explanation_gold.jsonl"
+    }
+  ]
+}

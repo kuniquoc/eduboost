@@ -225,8 +225,8 @@ print(response.split("assistant")[-1] if "assistant" in response else response)
 # Uncomment và điền token để push lên HF Hub
 # from huggingface_hub import login
 # login(token="hf_YOUR_TOKEN")
-# model.push_to_hub("your-username/eduboost-explanation-adapter")
-# tokenizer.push_to_hub("your-username/eduboost-explanation-adapter")
+# model.push_to_hub("KuniQuoc/eduboost-explanation-adapter")
+# tokenizer.push_to_hub("KuniQuoc/eduboost-explanation-adapter")
 
 # =============================================================================
 # Cell 13 [Code] - (Tuỳ chọn) Zip adapter để download
