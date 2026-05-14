@@ -3,9 +3,10 @@ Report: Các hàm in kết quả evaluation ra console.
 """
 
 
-def bar(value, width=20):
+def bar(value, width=20, max_val=100):
     """Vẽ progress bar text: █░"""
-    filled = int(value / 100 * width)
+    ratio = value / max_val if max_val else 0
+    filled = int(ratio * width)
     return f"{'█' * filled}{'░' * (width - filled)}"
 
 
@@ -15,38 +16,68 @@ def print_header(title):
     print(f"{'━'*60}")
 
 
-def print_judge_results(results):
-    """In kết quả judge (quiz hoặc explanation)."""
-    la = results["label_a"]
-    lb = results["label_b"]
-    task = results["task_type"]
+def print_score_table(all_results):
+    """In bảng so sánh điểm số giữa nhiều models.
 
-    print(f"\n🔍 {la} vs {lb}  (task: {task})")
+    Args:
+        all_results: list of dicts, mỗi dict là kết quả step_judge_score() cho 1 model.
+    """
+    if not all_results:
+        print("  Chưa có kết quả nào.")
+        return
 
-    # Quiz: bảng JSON/Schema
-    if task == "quiz":
-        print(f"  ┌─────────────────────┬──────────────────────────────┬──────────────────────────────┐")
-        print(f"  │                     │  JSON Pass Rate              │  Schema Pass Rate            │")
-        print(f"  ├─────────────────────┼──────────────────────────────┼──────────────────────────────┤")
-        for label in [la, lb]:
-            jr = results.get(f"{label}_json_rate", 0)
-            sr = results.get(f"{label}_schema_rate", 0)
-            name = f"{label[:17]:17s}"
-            print(f"  │  {name}  │  {bar(jr)} {jr:5.1f}%   │  {bar(sr)} {sr:5.1f}%   │")
-        print(f"  └─────────────────────┴──────────────────────────────┴──────────────────────────────┘")
+    task_type = all_results[0]["task_type"]
 
-    # Judge results
-    j = results["judge"]
-    wa, wb, ti = j['wins_a'], j['wins_b'], j['ties']
-    total, wr = j['total'], j['win_rate_a']
+    # Sắp xếp theo overall score giảm dần
+    all_results = sorted(all_results, key=lambda r: r["scores"]["overall"], reverse=True)
 
-    print(f"\n  🤖 LLM-as-a-Judge (GPT-4o Pairwise)")
-    print(f"  ┌────────────────────────┬───────┬────────────────────────┐")
-    print(f"  │  {la[:20]:20s}  wins │  {wa:>3}  │  {bar(wr)} {wr:5.1f}%   │")
-    print(f"  │  {lb[:20]:20s}  wins │  {wb:>3}  │                        │")
-    print(f"  │  Ties                  │  {ti:>3}  │                        │")
-    print(f"  │  Total                 │  {total:>3}  │                        │")
-    print(f"  └────────────────────────┴───────┴────────────────────────┘")
+    # Lấy criteria keys từ result đầu tiên
+    criteria_keys = list(all_results[0]["scores"]["criteria"].keys())
+
+    # === Header ===
+    is_quiz = task_type == "quiz"
+    col_model = 20
+    col_score = 8
+
+    # Build header
+    header_parts = [f"{'Model':<{col_model}}",  f"{'Overall':>{col_score}}"]
+    for key in criteria_keys:
+        header_parts.append(f"{key[:{col_score}]:>{col_score}}")
+    if is_quiz:
+        header_parts.append(f"{'JSON%':>{col_score}}")
+        header_parts.append(f"{'Schema%':>{col_score}}")
+
+    sep = "─" * col_model
+    sep_parts = [sep] + ["─" * col_score] * (len(header_parts) - 1)
+
+    print(f"\n  🤖 LLM-as-a-Judge Scores (GPT-4o, scale 1-10)")
+    print(f"  ┌{'┬'.join(sep_parts)}┐")
+    print(f"  │{'│'.join(header_parts)}│")
+    print(f"  ├{'┼'.join(sep_parts)}┤")
+
+    # === Rows ===
+    for r in all_results:
+        label = r["label"][:col_model].ljust(col_model)
+        overall = r["scores"]["overall"]
+        row_parts = [label, f"{overall:>{col_score}.1f}"]
+
+        for key in criteria_keys:
+            val = r["scores"]["criteria"].get(key, 0)
+            row_parts.append(f"{val:>{col_score}.1f}")
+
+        if is_quiz:
+            jr = r.get(f"{r['label']}_json_rate", 0)
+            sr = r.get(f"{r['label']}_schema_rate", 0)
+            row_parts.append(f"{jr:>{col_score}.1f}")
+            row_parts.append(f"{sr:>{col_score}.1f}")
+
+        print(f"  │{'│'.join(row_parts)}│")
+
+    print(f"  └{'┴'.join(sep_parts)}┘")
+
+    # Số items đánh giá
+    total = all_results[0]["scores"]["total"]
+    print(f"  Evaluated on {total} items\n")
 
 
 def print_status(evaluations, default_base_url, responses_dir, results_dir, config_path):
@@ -57,26 +88,24 @@ def print_status(evaluations, default_base_url, responses_dir, results_dir, conf
 
     for idx, ev in enumerate(evaluations):
         name = ev["name"]
-        resp_a = responses_dir / f"{name}_a.json"
-        resp_b = responses_dir / f"{name}_b.json"
-        result = results_dir / f"{name}_results.json"
-
-        sa = "✅" if resp_a.exists() else "❌"
-        sb = "✅" if resp_b.exists() else "❌"
-        sj = "✅" if result.exists() else "❌"
+        models = ev["models"]
 
         print(f"  [{idx}] {name}  ({ev['task_type']})")
-        print(f"      {ev['label_a']:25s} responses: {sa}")
-        print(f"      {ev['label_b']:25s} responses: {sb}")
-        print(f"      Judge result:                    {sj}")
+        for mi, model in enumerate(models):
+            label = model["label"]
+            task = ev["task_type"]
+            resp_files = sorted(responses_dir.glob(f"{task}_{label}_responses_*.json"))
+            score_files = sorted(results_dir.glob(f"{task}_{label}_scores_*.json"))
+            sr = f"\u2705 {resp_files[-1].name}" if resp_files else "\u274c"
+            ss = f"\u2705 {score_files[-1].name}" if score_files else "\u274c"
+            print(f"      [{mi}] {label:25s}")
+            print(f"           B1 responses: {sr}")
+            print(f"           B2 scores:    {ss}")
         print()
 
     print(f"  Hướng dẫn:")
-    print(f"    1. Khởi động server với model A (vLLM/Ollama)")
-    print(f"    2. generate --eval <idx> --side a   → Sinh responses model A")
-    print(f"    3. Tắt server A, khởi động server với model B")
-    print(f"    4. generate --eval <idx> --side b   → Sinh responses model B")
-    print(f"    5. judge    --eval <idx>            → GPT-4o judge (cần cả a và b)")
-    print(f"    6. report   [--eval <idx>]          → Xem kết quả")
+    print(f"    B1. generate --eval <idx> --model <model_idx>  → Sinh responses")
+    print(f"    B2. judge    --eval <idx>                      → GPT-4.1 chấm điểm")
+    print(f"    B3. report   [--eval <idx>]                    → Bảng so sánh")
     print(f"\n  Server mặc định: {default_base_url}")
     print(f"  Config file:     {config_path}")

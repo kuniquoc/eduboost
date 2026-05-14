@@ -1,5 +1,5 @@
 """
-Step Judge: Đọc 2 file responses → tính metrics + GPT-4o pairwise judge.
+B2 — Chấm điểm: Đọc file responses → tính metrics + GPT-4.1 score-based judge.
 """
 import json
 from .client import create_judge_client, load_json
@@ -30,128 +30,130 @@ def compute_quiz_metrics(responses, label):
 
 
 # ==============================================================================
-# LLM-AS-A-JUDGE
+# LLM-AS-A-JUDGE (Score-based)
 # ==============================================================================
-QUIZ_JUDGE_TEMPLATE = """You are evaluating two quiz outputs for an English learning app.
+QUIZ_SCORE_TEMPLATE = """You are evaluating a quiz output for an English learning app.
 
 Input prompt: {prompt}
 
-Response A ({label_a}):
-{response_a}
+Response:
+{response}
 
-Response B ({label_b}):
-{response_b}
+Score the response on each criterion from 1 (worst) to 10 (best):
+1. json_format: Valid JSON format and complete schema (question, options, correct_answer, explanation)
+2. question_clarity: Question clarity and relevance to the topic
+3. distractor_quality: Distractor quality (plausible but incorrect options)
+4. correct_answer: Correct answer accuracy
+5. explanation: Explanation helpfulness
 
-Evaluate based on:
-1. Valid JSON format and complete schema
-2. Question clarity and relevance to the topic
-3. Distractor quality (plausible but incorrect options)
-4. Correct answer accuracy
-5. Explanation helpfulness
+Then give an overall score from 1-10.
 
-Which response produces a better quiz? Answer only 'A', 'B', or 'Tie'."""
+Respond ONLY with JSON in this exact format:
+{{"overall": <int>, "criteria": {{"json_format": <int>, "question_clarity": <int>, "distractor_quality": <int>, "correct_answer": <int>, "explanation": <int>}}, "justification": "<one sentence>"}}"""
 
-EXPLANATION_JUDGE_TEMPLATE = """Question: {prompt}
+EXPLANATION_SCORE_TEMPLATE = """You are evaluating an English grammar/vocabulary explanation for a student.
 
-Response A ({label_a}): {response_a}
+Question: {prompt}
 
-Response B ({label_b}): {response_b}
+Response:
+{response}
 
-Which one is better for a student in terms of pedagogy and accuracy? Answer only 'A', 'B' or 'Tie'."""
+Score the response on each criterion from 1 (worst) to 10 (best):
+1. accuracy: Factual and grammatical correctness
+2. pedagogy: Clear, student-friendly teaching approach
+3. completeness: Covers the topic sufficiently
+4. relevance: Stays on topic and addresses the question
+
+Then give an overall score from 1-10.
+
+Respond ONLY with JSON in this exact format:
+{{"overall": <int>, "criteria": {{"accuracy": <int>, "pedagogy": <int>, "completeness": <int>, "relevance": <int>}}, "justification": "<one sentence>"}}"""
+
+QUIZ_CRITERIA = ["json_format", "question_clarity", "distractor_quality", "correct_answer", "explanation"]
+EXPLANATION_CRITERIA = ["accuracy", "pedagogy", "completeness", "relevance"]
 
 
-def _judge_pairwise(client, prompt, response_a, response_b, label_a, label_b, task_type):
-    """Gọi GPT-4o judge cho 1 cặp response. Trả về 'A', 'B', hoặc 'Tie'."""
+def _judge_score(client, prompt, response, task_type):
+    """Gọi GPT-4.1 judge chấm điểm 1 response. Trả về dict scores."""
     if task_type == "quiz":
-        content = QUIZ_JUDGE_TEMPLATE.format(
-            prompt=prompt, response_a=response_a, response_b=response_b,
-            label_a=label_a, label_b=label_b,
-        )
+        content = QUIZ_SCORE_TEMPLATE.format(prompt=prompt, response=response)
     else:
-        content = EXPLANATION_JUDGE_TEMPLATE.format(
-            prompt=prompt, response_a=response_a, response_b=response_b,
-            label_a=label_a, label_b=label_b,
-        )
+        content = EXPLANATION_SCORE_TEMPLATE.format(prompt=prompt, response=response)
 
     res = client.chat.completions.create(
-        model="gpt-4o",
+        model="gpt-4.1",
         messages=[{"role": "user", "content": content}],
     )
-    verdict = res.choices[0].message.content.strip().upper()
+    raw = res.choices[0].message.content.strip()
 
-    if 'A' in verdict:
-        return 'A'
-    elif 'B' in verdict:
-        return 'B'
-    return 'Tie'
+    try:
+        parsed = json.loads(raw)
+        overall = int(parsed["overall"])
+        criteria = {k: int(v) for k, v in parsed["criteria"].items()}
+        justification = parsed.get("justification", "")
+        return {"overall": overall, "criteria": criteria, "justification": justification}
+    except (json.JSONDecodeError, KeyError, TypeError, ValueError):
+        return {"overall": 5, "criteria": {}, "justification": f"Parse error: {raw[:100]}"}
 
 
 # ==============================================================================
 # MAIN STEP
 # ==============================================================================
-def step_judge(test_file, responses_a_path, responses_b_path,
-               task_type="quiz", label_a="Model A", label_b="Model B"):
+def step_judge_score(test_file, responses_path, task_type="quiz", label="Model"):
     """
-    Đọc 2 file responses → tính metrics (quiz) + GPT-4o pairwise judge.
+    Đọc file responses → tính metrics (quiz) + GPT-4o score-based judge.
 
     Args:
-        test_file:         Đường dẫn file test (.jsonl)
-        responses_a_path:  File JSON chứa responses model A
-        responses_b_path:  File JSON chứa responses model B
-        task_type:         "quiz" hoặc "explanation"
-        label_a/label_b:   Tên hiển thị
+        test_file:      Đường dẫn file test (.jsonl)
+        responses_path: File JSON chứa responses của model
+        task_type:      "quiz" hoặc "explanation"
+        label:          Tên hiển thị
 
     Returns:
-        dict với keys: label_a, label_b, task_type, judge, và metrics (nếu quiz)
+        dict với keys: label, task_type, scores (avg + per-item), metrics (nếu quiz)
     """
     with open(test_file, "r", encoding="utf-8") as f:
         test_data = [json.loads(line) for line in f]
 
-    responses_a = load_json(responses_a_path)
-    responses_b = load_json(responses_b_path)
+    responses = load_json(responses_path)
 
-    assert len(responses_a) == len(test_data), \
-        f"responses_a ({len(responses_a)}) != test_data ({len(test_data)})"
-    assert len(responses_b) == len(test_data), \
-        f"responses_b ({len(responses_b)}) != test_data ({len(test_data)})"
+    assert len(responses) == len(test_data), \
+        f"responses ({len(responses)}) != test_data ({len(test_data)})"
 
-    results = {"label_a": label_a, "label_b": label_b, "task_type": task_type}
+    results = {"label": label, "task_type": task_type}
 
     # Quiz: tính JSON/Schema metrics
     if task_type == "quiz":
-        results.update(compute_quiz_metrics(responses_a, label_a))
-        results.update(compute_quiz_metrics(responses_b, label_b))
+        results.update(compute_quiz_metrics(responses, label))
 
     # LLM Judge
-    print(f"  Judging with GPT-4o: {label_a} vs {label_b} ({task_type})...")
+    print(f"  Scoring with GPT-4.1: {label} ({task_type})...")
     client = create_judge_client()
-    wins_a, wins_b, ties = 0, 0, 0
     total = len(test_data)
+    item_scores = []
+
+    criteria_keys = QUIZ_CRITERIA if task_type == "quiz" else EXPLANATION_CRITERIA
 
     for i in range(total):
         prompt = test_data[i]["messages"][1]["content"]
-        verdict = _judge_pairwise(
-            client, prompt, responses_a[i], responses_b[i],
-            label_a, label_b, task_type,
-        )
-        if verdict == 'A':
-            wins_a += 1
-        elif verdict == 'B':
-            wins_b += 1
-        else:
-            ties += 1
+        score = _judge_score(client, prompt, responses[i], task_type)
+        item_scores.append(score)
 
         if (i + 1) % 10 == 0:
-            print(f"    Judged: {i+1}/{total}")
+            print(f"    Scored: {i+1}/{total}")
 
-    results["judge"] = {
-        "wins_a": wins_a,
-        "wins_b": wins_b,
-        "ties": ties,
+    # Tính trung bình
+    avg_overall = sum(s["overall"] for s in item_scores) / total
+    avg_criteria = {}
+    for key in criteria_keys:
+        vals = [s["criteria"].get(key, 5) for s in item_scores]
+        avg_criteria[key] = sum(vals) / len(vals)
+
+    results["scores"] = {
+        "overall": round(avg_overall, 2),
+        "criteria": {k: round(v, 2) for k, v in avg_criteria.items()},
         "total": total,
-        "label_a": label_a,
-        "label_b": label_b,
-        "win_rate_a": (wins_a / total) * 100,
+        "item_scores": item_scores,
     }
-    print(f"  Done! {label_a} wins {wins_a}, {label_b} wins {wins_b}, Ties {ties}")
+    print(f"  Done! {label} — Overall: {avg_overall:.2f}/10")
     return results
