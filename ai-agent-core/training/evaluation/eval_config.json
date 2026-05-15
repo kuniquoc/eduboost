@@ -1,24 +1,25 @@
 {
-  "default_base_url": "http://localhost:8000/v1",
+  "default_base_url": "https://obsessed-domain-goal.ngrok-free.dev/v1",
 
-  "evaluations": [
+  "tasks": {
+    "quiz": { "test_file": "data/gold_dataset/quiz_gold.jsonl" },
+    "explanation": { "test_file": "data/gold_dataset/explanation_gold.jsonl" }
+  },
+
+  "models": [
     {
-      "name": "quiz_tuned_vs_base",
-      "task_type": "quiz",
-      "test_file": "data/gold_dataset/quiz_gold.jsonl",
-      "models": [
-        {"name": "models/adapters/quiz_v1", "label": "qwen2.5_7b_quiz_finetuned"},
-        {"name": "unsloth/Qwen2.5-7B-Instruct", "label": "qwen2.5_7b_base"}
-      ]
+      "name": "qwen2.5_7b_base",
+      "base_model": "unsloth/qwen2.5-7b-instruct-unsloth-bnb-4bit"
     },
     {
-      "name": "explanation_tuned_vs_base",
-      "task_type": "explanation",
-      "test_file": "data/gold_dataset/explanation_gold.jsonl",
-      "models": [
-        {"name": "models/adapters/explanation_v1", "label": "qwen2.5_7b_explanation_finetuned"},
-        {"name": "unsloth/Qwen2.5-7B-Instruct", "label": "qwen2.5_7b_base"}
-      ]
+      "name": "qwen2.5_7b_quiz_finetuned",
+      "base_model": "unsloth/qwen2.5-7b-instruct-unsloth-bnb-4bit",
+      "adapter": "KuniQuoc/eduboost-quiz-adapter"
+    },
+    {
+      "name": "qwen2.5_7b_explanation_finetuned",
+      "base_model": "unsloth/qwen2.5-7b-instruct-unsloth-bnb-4bit",
+      "adapter": "KuniQuoc/eduboost-explanation-adapter"
     }
   ]
 }

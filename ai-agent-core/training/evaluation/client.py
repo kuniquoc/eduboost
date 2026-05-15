@@ -21,7 +21,7 @@ CONFIG_PATH = EVAL_DIR / "eval_config.json"
 # ENV
 # ==============================================================================
 load_dotenv(dotenv_path=ROOT_DIR / ".env")
-OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 INFERENCE_API_KEY = os.getenv("INFERENCE_API_KEY", "not-needed")
 
 # ==============================================================================
@@ -39,10 +39,13 @@ def create_inference_client(base_url, api_key=None):
 
 
 def create_judge_client():
-    """Tạo OpenAI client cho GPT-4o judge."""
-    if not OPENAI_API_KEY:
-        raise ValueError("OPENAI_API_KEY not found in .env file!")
-    return openai.OpenAI(api_key=OPENAI_API_KEY)
+    """Tạo Gemini client qua OpenAI-compatible endpoint."""
+    if not GEMINI_API_KEY:
+        raise ValueError("GEMINI_API_KEY not found in .env file!")
+    return openai.OpenAI(
+        api_key=GEMINI_API_KEY,
+        base_url="https://generativelanguage.googleapis.com/v1beta/openai/",
+    )
 
 
 # ==============================================================================
@@ -54,10 +57,14 @@ def load_config():
         return json.load(f)
 
 
-def get_evaluations():
-    """Trả về (evaluations_list, default_base_url) từ config."""
+def get_config():
+    """Trả về (models, tasks, default_base_url) từ config."""
     cfg = load_config()
-    return cfg["evaluations"], cfg.get("default_base_url", "http://localhost:8000/v1")
+    return (
+        cfg["models"],
+        cfg["tasks"],
+        cfg.get("default_base_url", "http://localhost:8000/v1"),
+    )
 
 
 # ==============================================================================
@@ -75,6 +82,17 @@ def load_json(path):
     """Đọc file JSON."""
     with open(path, "r", encoding="utf-8") as f:
         return json.load(f)
+
+
+def load_jsonl(path):
+    """Đọc file JSONL, trả về list of strings (mỗi dòng 1 response)."""
+    lines = []
+    with open(path, "r", encoding="utf-8") as f:
+        for line in f:
+            line = line.strip()
+            if line:
+                lines.append(json.loads(line))
+    return lines
 
 
 def save_results(results, output_path):

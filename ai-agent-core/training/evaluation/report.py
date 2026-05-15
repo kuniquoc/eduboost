@@ -80,32 +80,33 @@ def print_score_table(all_results):
     print(f"  Evaluated on {total} items\n")
 
 
-def print_status(evaluations, default_base_url, responses_dir, results_dir, config_path):
-    """In trạng thái tất cả evaluations."""
+def print_status(models, tasks, default_base_url, responses_dir, results_dir, config_path):
+    """In trạng thái tất cả models × tasks."""
     print(f"\n{'━'*60}")
     print(f"  EVALUATION STATUS")
     print(f"{'━'*60}\n")
 
-    for idx, ev in enumerate(evaluations):
-        name = ev["name"]
-        models = ev["models"]
+    task_names = list(tasks.keys())
 
-        print(f"  [{idx}] {name}  ({ev['task_type']})")
-        for mi, model in enumerate(models):
-            label = model["label"]
-            task = ev["task_type"]
-            resp_files = sorted(responses_dir.glob(f"{task}_{label}_responses_*.json"))
-            score_files = sorted(results_dir.glob(f"{task}_{label}_scores_*.json"))
+    print(f"  Models ({len(models)}):")
+    for mi, model in enumerate(models):
+        name = model["name"]
+        adapter = model.get("adapter", "—")
+        print(f"    [{mi}] {name}")
+        print(f"         base_model: {model['base_model']}")
+        print(f"         adapter:    {adapter}")
+
+        for task in task_names:
+            resp_files = sorted(responses_dir.glob(f"{task}_{name}_responses_*"))
+            score_files = sorted(results_dir.glob(f"{task}_{name}_scores_*"))
             sr = f"\u2705 {resp_files[-1].name}" if resp_files else "\u274c"
             ss = f"\u2705 {score_files[-1].name}" if score_files else "\u274c"
-            print(f"      [{mi}] {label:25s}")
-            print(f"           B1 responses: {sr}")
-            print(f"           B2 scores:    {ss}")
+            print(f"         [{task}] B1: {sr}  |  B2: {ss}")
         print()
 
     print(f"  Hướng dẫn:")
-    print(f"    B1. generate --eval <idx> --model <model_idx>  → Sinh responses")
-    print(f"    B2. judge    --eval <idx>                      → GPT-4.1 chấm điểm")
-    print(f"    B3. report   [--eval <idx>]                    → Bảng so sánh")
+    print(f"    B1. generate --model <idx> --task <task>       → Sinh responses")
+    print(f"    B2. judge    --model <idx> --task <task>       → GPT-4.1 chấm điểm")
+    print(f"    B3. report   --model <i> <j> ... --task <task> → Bảng so sánh")
     print(f"\n  Server mặc định: {default_base_url}")
     print(f"  Config file:     {config_path}")
