@@ -86,3 +86,5 @@ Thumbs.db
 # Custom ignore rules
 data/
 outputs/
+responses/
+results/
