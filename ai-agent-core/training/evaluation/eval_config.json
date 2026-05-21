@@ -20,6 +20,10 @@
       "name": "qwen2.5_7b_explanation_finetuned",
       "base_model": "unsloth/qwen2.5-7b-instruct-unsloth-bnb-4bit",
       "adapter": "KuniQuoc/eduboost-explanation-adapter"
+    },
+    {
+      "name": "llama3.1_8b_base",
+      "base_model": "unsloth/Llama-3.1-8B-Instruct-bnb-4bit"
     }
   ]
 }

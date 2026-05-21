@@ -9,15 +9,17 @@ SYSTEM_PROMPTS = {
     "quiz": (
         "You are an expert English quiz generator for a language learning app.\n"
         "Your task is to create high-quality multiple-choice questions that test English grammar, vocabulary, or usage.\n\n"
-        "Requirements:\n"
-        "- Output MUST be valid JSON with exactly these keys: \"question\", \"options\", \"correct_answer\", \"explanation\"\n"
-        "- \"question\": A clear, natural English sentence with a blank (___) where the answer goes\n"
-        "- \"options\": Exactly 4 choices — 1 correct + 3 plausible distractors\n"
-        "- \"correct_answer\": Must exactly match one of the options\n"
-        "- \"explanation\": A brief explanation in Vietnamese (1-2 sentences) why the correct answer is right\n"
-        "- Match the target difficulty level (IRT Beta scale from -3 to 3): -3 = very easy (beginner), 0 = medium, +3 = very hard (advanced)\n"
-        "- Use the provided context/theme to shape the question scenario\n"
-        "- Do NOT output anything outside the JSON object"
+        "Requirements (STRICT):\n"
+        "- Output MUST be valid JSON (no extra text). Return a single JSON object matching the gold dataset schema:\n"
+        "  {\"topic\": <string>, \"difficulty\": <number>, \"context\": <string>, \"output\": {question, options, correct_answer, explanation}}\n"
+        "- The inner \"output\" object MUST contain EXACT keys: \"question\", \"options\", \"correct_answer\", \"explanation\".\n"
+        "- \"question\": a short, natural English sentence containing a single blank represented as three underscores (___).\n"
+        "- \"options\": an array of EXACTLY 4 strings (one correct, three distractors).\n"
+        "- \"correct_answer\": one of the strings from the \"options\" array (exact match).\n"
+        "- \"explanation\": 1-2 sentences in Vietnamese explaining why the correct answer is right.\n"
+        "- Match the provided Target Difficulty (IRT Beta) and use the provided Context to shape the scenario.\n"
+        "- If you cannot follow the instruction exactly, still return a JSON object; do not output plain text only.\n"
+        "- Do NOT output anything outside the JSON object."
     ),
     "explanation": (
         "You are a Socratic English tutor for Vietnamese students learning English.\n"
@@ -41,9 +43,10 @@ def _build_messages(item, task_type):
         user_content = (
             f"Generate a multiple-choice question about {item['topic']}.\n"
             f"Target Difficulty (IRT Beta): {item['difficulty']}\n"
-            f"Context: {item['context']}\n\n"
-            f"Output format:\n"
-            f'{{"question": "...", "options": ["A", "B", "C", "D"], "correct_answer": "...", "explanation": "..."}}'
+            f"Context: {item.get('context', '')}\n\n"
+            f"Return ONLY a JSON object matching the gold schema: topic, difficulty, context, output (where output contains question, options, correct_answer, explanation).\n"
+            f"Example output:\n"
+            f'{{"topic": "Articles", "difficulty": -1.8, "context": "Vowel sound (u)", "output": {{"question": "He is ___ university.", "options": ["a", "an", "the", "some"], "correct_answer": "a", "explanation": "..."}}}}'
         )
     else:  # explanation
         user_content = (
@@ -113,12 +116,47 @@ def step_generate(base_url, model_name, test_file, output_file, label="model", t
                 temperature=0,
             )
             response = res.choices[0].message.content.strip()
-            # Ghi compact JSON nếu response là JSON hợp lệ, ngược lại ghi quoted string
+
+            # Try to parse the model response as JSON object representing the quiz
+            parsed = None
             try:
                 parsed = json.loads(response)
-                line = json.dumps(parsed, ensure_ascii=False)
             except (json.JSONDecodeError, ValueError):
-                line = json.dumps(response, ensure_ascii=False)
+                # Sometimes model returns a quoted JSON string -> try one more time
+                try:
+                    parsed = json.loads(response.strip('\"'))
+                except Exception:
+                    parsed = None
+
+            # Build final object matching gold dataset structure: accept if model already returned full schema
+            if isinstance(parsed, dict):
+                # If model returned full gold schema (has 'output' key), trust it
+                if "output" in parsed and "topic" in parsed:
+                    final = parsed
+                else:
+                    output_obj = parsed
+                    # basic validation: ensure required keys exist
+                    required = {"question", "options", "correct_answer", "explanation"}
+                    if not required.issubset(set(output_obj.keys())):
+                        # keep as-is but mark missing
+                        output_obj.setdefault("_validation", {"missing_keys": list(required - set(output_obj.keys()))})
+                    final = {
+                        "topic": item.get("topic"),
+                        "difficulty": item.get("difficulty"),
+                        "context": item.get("context"),
+                        "output": output_obj,
+                    }
+                line = json.dumps(final, ensure_ascii=False)
+            else:
+                # Fallback: store raw string under output.raw_response
+                final = {
+                    "topic": item.get("topic"),
+                    "difficulty": item.get("difficulty"),
+                    "context": item.get("context"),
+                    "output": {"raw_response": response},
+                }
+                line = json.dumps(final, ensure_ascii=False)
+
             out.write(line + "\n")
             out.flush()
 
