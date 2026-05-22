@@ -4,14 +4,14 @@ using Microsoft.EntityFrameworkCore;
 namespace EduBoost.API.Infrastructure;
 
 /// <summary>
-/// Seed dữ liệu mẫu vào DB sau khi migration đã chạy xong.
-/// Idempotent: kiểm tra từng bảng trước khi insert để tránh trùng lặp.
+/// Seed sample data into DB after migrations have run.
+/// Idempotent: checks each table before inserting to avoid duplicates.
 /// </summary>
 public static class DatabaseSeeder
 {
     private static readonly DateTime SeedDate = new(2024, 1, 15, 0, 0, 0, DateTimeKind.Utc);
 
-    // BCrypt hash của "password123" (cost=11) — tính sẵn để tránh overhead khi seed
+    // BCrypt hash of "password123" (cost=11) — precomputed to avoid overhead when seeding
     private const string SeedPassword = "password123";
     private static readonly string SeedPasswordHash = BCrypt.Net.BCrypt.HashPassword(SeedPassword, 11);
 
@@ -55,7 +55,7 @@ public static class DatabaseSeeder
     // ── Entry point ───────────────────────────────────────────────────────────
     public static async Task SeedAsync(AppDbContext db, ILogger logger)
     {
-        // Chỉ seed khi DB trống (kiểm tra bảng users)
+        // Only seed when DB is empty (check users table)
         if (await db.Users.AnyAsync())
         {
             logger.LogInformation("Seed data already exists, skipping.");
@@ -69,6 +69,7 @@ public static class DatabaseSeeder
         await SeedEnrollmentsAsync(db);
         await SeedTopicsAsync(db);
         await SeedQuizzesAsync(db);
+        await SeedQuizQuestionsAsync(db);
         await SeedDocumentsAsync(db);
 
         logger.LogInformation("Seed data inserted successfully.");
@@ -91,9 +92,9 @@ public static class DatabaseSeeder
     private static async Task SeedClassesAsync(AppDbContext db)
     {
         db.Classes.AddRange(
-            new Class { Id = Cls1, Name = "Advanced Mathematics",  TeacherId = T1, Description = "Calculus, Linear Algebra & Statistics",           CoverColor = "#6366F1", ClassCode = "MATH2024", CreatedAt = SeedDate },
-            new Class { Id = Cls2, Name = "Physics Fundamentals",  TeacherId = T1, Description = "Mechanics, Thermodynamics & Electromagnetism",      CoverColor = "#06B6D4", ClassCode = "PHY2024",  CreatedAt = SeedDate.AddDays(17) },
-            new Class { Id = Cls3, Name = "Computer Science 101",  TeacherId = T2, Description = "Algorithms, Data Structures & OOP",                CoverColor = "#10B981", ClassCode = "CS2024",   CreatedAt = SeedDate.AddDays(54) }
+            new Class { Id = Cls1, Name = "English Grammar Mastery", TeacherId = T1, Description = "Master English grammar from basics to advanced structures", CoverColor = "#6366F1", ClassCode = "ENG2026",   CreatedAt = SeedDate },
+            new Class { Id = Cls2, Name = "Business English",        TeacherId = T1, Description = "Professional English for the modern workplace",           CoverColor = "#06B6D4", ClassCode = "BIZ2026",   CreatedAt = SeedDate.AddDays(17) },
+            new Class { Id = Cls3, Name = "IELTS Preparation",       TeacherId = T2, Description = "Comprehensive IELTS exam preparation course",             CoverColor = "#10B981", ClassCode = "IELTS2026", CreatedAt = SeedDate.AddDays(54) }
         );
         await db.SaveChangesAsync();
     }
@@ -114,21 +115,21 @@ public static class DatabaseSeeder
     private static async Task SeedTopicsAsync(AppDbContext db)
     {
         db.Topics.AddRange(
-            // Mathematics
-            new Topic { Id = Tp1,  ClassId = Cls1, Name = "Derivatives & Integrals", Description = "Differentiation and integration rules",    Difficulty = "hard",   AiEvaluated = true,  IsDocumentVisible = true,  CreatedAt = SeedDate.AddDays(1) },
-            new Topic { Id = Tp2,  ClassId = Cls1, Name = "Linear Algebra",           Description = "Vectors, matrices, and transformations",   Difficulty = "medium", AiEvaluated = true,  IsDocumentVisible = true,  CreatedAt = SeedDate.AddDays(2) },
-            new Topic { Id = Tp3,  ClassId = Cls1, Name = "Statistics",               Description = "Probability and statistical analysis",      Difficulty = "medium", AiEvaluated = false, IsDocumentVisible = false, CreatedAt = SeedDate.AddDays(3) },
-            new Topic { Id = Tp4,  ClassId = Cls1, Name = "Trigonometry",             Description = "Trigonometric functions and identities",    Difficulty = "easy",   AiEvaluated = true,  IsDocumentVisible = true,  CreatedAt = SeedDate.AddDays(4) },
-            new Topic { Id = Tp5,  ClassId = Cls1, Name = "Number Theory",            Description = "Primes, modular arithmetic",                Difficulty = "hard",   AiEvaluated = false, IsDocumentVisible = false, CreatedAt = SeedDate.AddDays(5) },
-            // Physics
-            new Topic { Id = Tp6,  ClassId = Cls2, Name = "Newton's Laws",            Description = "Classical mechanics fundamentals",          Difficulty = "medium", AiEvaluated = true,  IsDocumentVisible = true,  CreatedAt = SeedDate.AddDays(18) },
-            new Topic { Id = Tp7,  ClassId = Cls2, Name = "Thermodynamics",           Description = "Heat, energy, and entropy",                  Difficulty = "hard",   AiEvaluated = true,  IsDocumentVisible = false, CreatedAt = SeedDate.AddDays(19) },
-            new Topic { Id = Tp8,  ClassId = Cls2, Name = "Electromagnetism",         Description = "Electric and magnetic fields",              Difficulty = "hard",   AiEvaluated = false, IsDocumentVisible = true,  CreatedAt = SeedDate.AddDays(20) },
-            new Topic { Id = Tp9,  ClassId = Cls2, Name = "Wave Optics",              Description = "Light waves and interference",              Difficulty = "medium", AiEvaluated = true,  IsDocumentVisible = true,  CreatedAt = SeedDate.AddDays(21) },
-            // CS
-            new Topic { Id = Tp10, ClassId = Cls3, Name = "Sorting Algorithms",       Description = "Bubble, merge, quick sort and more",        Difficulty = "medium", AiEvaluated = true,  IsDocumentVisible = true,  CreatedAt = SeedDate.AddDays(55) },
-            new Topic { Id = Tp11, ClassId = Cls3, Name = "OOP Principles",           Description = "Classes, inheritance, polymorphism",         Difficulty = "easy",   AiEvaluated = true,  IsDocumentVisible = true,  CreatedAt = SeedDate.AddDays(56) },
-            new Topic { Id = Tp12, ClassId = Cls3, Name = "Graph Theory",             Description = "BFS, DFS, shortest paths",                  Difficulty = "hard",   AiEvaluated = false, IsDocumentVisible = false, CreatedAt = SeedDate.AddDays(57) }
+            // English Grammar Mastery
+            new Topic { Id = Tp1,  ClassId = Cls1, Name = "Present Simple vs Continuous",  Description = "Usage, form, and signal words for present tenses",                        Difficulty = "easy",   AiEvaluated = true,  IsDocumentVisible = true,  CreatedAt = SeedDate.AddDays(1) },
+            new Topic { Id = Tp2,  ClassId = Cls1, Name = "Past Simple vs Present Perfect", Description = "Distinguishing completed past from present relevance",                    Difficulty = "medium", AiEvaluated = true,  IsDocumentVisible = true,  CreatedAt = SeedDate.AddDays(2) },
+            new Topic { Id = Tp3,  ClassId = Cls1, Name = "Conditional Sentences",          Description = "Zero, first, second, and third conditionals",                             Difficulty = "hard",   AiEvaluated = false, IsDocumentVisible = false, CreatedAt = SeedDate.AddDays(3) },
+            new Topic { Id = Tp4,  ClassId = Cls1, Name = "Relative Clauses",               Description = "Defining and non-defining relative clauses with who, which, that",        Difficulty = "medium", AiEvaluated = true,  IsDocumentVisible = true,  CreatedAt = SeedDate.AddDays(4) },
+            new Topic { Id = Tp5,  ClassId = Cls1, Name = "Passive Voice",                  Description = "Active to passive transformation across tenses",                          Difficulty = "medium", AiEvaluated = false, IsDocumentVisible = false, CreatedAt = SeedDate.AddDays(5) },
+            // Business English
+            new Topic { Id = Tp6,  ClassId = Cls2, Name = "Email Writing",                  Description = "Professional email structure and common phrases",                         Difficulty = "easy",   AiEvaluated = true,  IsDocumentVisible = true,  CreatedAt = SeedDate.AddDays(18) },
+            new Topic { Id = Tp7,  ClassId = Cls2, Name = "Meeting Vocabulary",             Description = "Key phrases for participating in business meetings",                      Difficulty = "medium", AiEvaluated = true,  IsDocumentVisible = false, CreatedAt = SeedDate.AddDays(19) },
+            new Topic { Id = Tp8,  ClassId = Cls2, Name = "Presentation Skills",            Description = "Language for delivering effective presentations",                         Difficulty = "hard",   AiEvaluated = false, IsDocumentVisible = true,  CreatedAt = SeedDate.AddDays(20) },
+            new Topic { Id = Tp9,  ClassId = Cls2, Name = "Negotiation Language",           Description = "Persuasive language and negotiation tactics",                             Difficulty = "hard",   AiEvaluated = true,  IsDocumentVisible = true,  CreatedAt = SeedDate.AddDays(21) },
+            // IELTS Preparation
+            new Topic { Id = Tp10, ClassId = Cls3, Name = "IELTS Reading Strategies",       Description = "Skimming, scanning, and keyword techniques",                              Difficulty = "medium", AiEvaluated = true,  IsDocumentVisible = true,  CreatedAt = SeedDate.AddDays(55) },
+            new Topic { Id = Tp11, ClassId = Cls3, Name = "IELTS Writing Task 2",           Description = "Essay structure, cohesion, and argument development",                     Difficulty = "hard",   AiEvaluated = true,  IsDocumentVisible = true,  CreatedAt = SeedDate.AddDays(56) },
+            new Topic { Id = Tp12, ClassId = Cls3, Name = "IELTS Speaking Part 2",          Description = "Cue card responses and extended speaking",                                Difficulty = "medium", AiEvaluated = false, IsDocumentVisible = false, CreatedAt = SeedDate.AddDays(57) }
         );
         await db.SaveChangesAsync();
     }
@@ -137,10 +138,184 @@ public static class DatabaseSeeder
     private static async Task SeedQuizzesAsync(AppDbContext db)
     {
         db.Quizzes.AddRange(
-            new Quiz { Id = Q1, ClassId = Cls1, TopicId = Tp1, Title = "Derivatives & Integrals Quiz", Type = "practice",   IsPublished = true, CreatedAt = SeedDate.AddDays(10) },
-            new Quiz { Id = Q2, ClassId = Cls1, TopicId = Tp2, Title = "Linear Algebra Quiz",           Type = "practice",   IsPublished = true, CreatedAt = SeedDate.AddDays(11) },
-            new Quiz { Id = Q3, ClassId = Cls2, TopicId = Tp6, Title = "Newton's Laws Entry Test",       Type = "entry_test", IsPublished = true, CreatedAt = SeedDate.AddDays(22) }
+            new Quiz { Id = Q1, ClassId = Cls1, TopicId = Tp1,  Title = "Present Simple vs Continuous Quiz", Type = "practice",   IsPublished = true, CreatedAt = SeedDate.AddDays(10) },
+            new Quiz { Id = Q2, ClassId = Cls1, TopicId = Tp2,  Title = "Past Tenses Quiz",                  Type = "practice",   IsPublished = true, CreatedAt = SeedDate.AddDays(11) },
+            new Quiz { Id = Q3, ClassId = Cls1, TopicId = null,  Title = "English Grammar Entry Test",        Type = "entry_test", IsPublished = true, CreatedAt = SeedDate.AddDays(22) }
         );
+        await db.SaveChangesAsync();
+    }
+
+    // ── Quiz Questions ────────────────────────────────────────────────────────
+    private static async Task SeedQuizQuestionsAsync(AppDbContext db)
+    {
+        // ── Q1: Present Simple vs Continuous Quiz — 5 questions ──────────────
+        db.Questions.AddRange(
+            new Question
+            {
+                Id = Guid.NewGuid(), QuizId = Q1, Text = "Which sentence is correct?",
+                Type = "mcq", Difficulty = "easy",
+                Explanation = "'Know' is a stative verb and is not used in the continuous form.",
+                VerifiedByTeacher = true, OrderIndex = 0,
+                Options =
+                [
+                    new QuizOption { Id = Guid.NewGuid(), Text = "She is knowing the answer.",  IsCorrect = false, OrderIndex = 0 },
+                    new QuizOption { Id = Guid.NewGuid(), Text = "She knows the answer.",       IsCorrect = true,  OrderIndex = 1 },
+                    new QuizOption { Id = Guid.NewGuid(), Text = "She know the answer.",        IsCorrect = false, OrderIndex = 2 },
+                    new QuizOption { Id = Guid.NewGuid(), Text = "She are knowing the answer.", IsCorrect = false, OrderIndex = 3 },
+                ]
+            },
+            new Question
+            {
+                Id = Guid.NewGuid(), QuizId = Q1, Text = "Choose the correct form: 'Look! The children _____ in the garden.'",
+                Type = "mcq", Difficulty = "easy",
+                Explanation = "We use the present continuous for actions happening right now, indicated by 'Look!'",
+                VerifiedByTeacher = true, OrderIndex = 1,
+                Options =
+                [
+                    new QuizOption { Id = Guid.NewGuid(), Text = "play",        IsCorrect = false, OrderIndex = 0 },
+                    new QuizOption { Id = Guid.NewGuid(), Text = "plays",       IsCorrect = false, OrderIndex = 1 },
+                    new QuizOption { Id = Guid.NewGuid(), Text = "are playing", IsCorrect = true,  OrderIndex = 2 },
+                    new QuizOption { Id = Guid.NewGuid(), Text = "is playing",  IsCorrect = false, OrderIndex = 3 },
+                ]
+            },
+            new Question
+            {
+                Id = Guid.NewGuid(), QuizId = Q1, Text = "Which signal word indicates Present Simple?",
+                Type = "mcq", Difficulty = "easy",
+                Explanation = "'Every day' indicates a routine/habit, which requires Present Simple.",
+                VerifiedByTeacher = true, OrderIndex = 2,
+                Options =
+                [
+                    new QuizOption { Id = Guid.NewGuid(), Text = "right now",      IsCorrect = false, OrderIndex = 0 },
+                    new QuizOption { Id = Guid.NewGuid(), Text = "at the moment",  IsCorrect = false, OrderIndex = 1 },
+                    new QuizOption { Id = Guid.NewGuid(), Text = "every day",      IsCorrect = true,  OrderIndex = 2 },
+                    new QuizOption { Id = Guid.NewGuid(), Text = "currently",      IsCorrect = false, OrderIndex = 3 },
+                ]
+            },
+            new Question
+            {
+                Id = Guid.NewGuid(), QuizId = Q1, Text = "Select the correct sentence:",
+                Type = "mcq", Difficulty = "medium",
+                Explanation = "Habitual actions with 'usually' require Present Simple, not Present Continuous.",
+                VerifiedByTeacher = true, OrderIndex = 3,
+                Options =
+                [
+                    new QuizOption { Id = Guid.NewGuid(), Text = "I am usually getting up at 7 AM.", IsCorrect = false, OrderIndex = 0 },
+                    new QuizOption { Id = Guid.NewGuid(), Text = "I usually get up at 7 AM.",        IsCorrect = true,  OrderIndex = 1 },
+                    new QuizOption { Id = Guid.NewGuid(), Text = "I usually getting up at 7 AM.",    IsCorrect = false, OrderIndex = 2 },
+                    new QuizOption { Id = Guid.NewGuid(), Text = "I am usually get up at 7 AM.",     IsCorrect = false, OrderIndex = 3 },
+                ]
+            },
+            new Question
+            {
+                Id = Guid.NewGuid(), QuizId = Q1, Text = "'The train _____ at 9:00 tomorrow.' Choose the best answer.",
+                Type = "mcq", Difficulty = "medium",
+                Explanation = "Present Simple is used for scheduled/timetabled events even when referring to the future.",
+                VerifiedByTeacher = true, OrderIndex = 4,
+                Options =
+                [
+                    new QuizOption { Id = Guid.NewGuid(), Text = "is leaving",   IsCorrect = false, OrderIndex = 0 },
+                    new QuizOption { Id = Guid.NewGuid(), Text = "leaves",       IsCorrect = true,  OrderIndex = 1 },
+                    new QuizOption { Id = Guid.NewGuid(), Text = "will leaving", IsCorrect = false, OrderIndex = 2 },
+                    new QuizOption { Id = Guid.NewGuid(), Text = "leave",        IsCorrect = false, OrderIndex = 3 },
+                ]
+            }
+        );
+
+        // ── Q3: English Grammar Entry Test — 6 questions ─────────────────────
+        db.Questions.AddRange(
+            // 1. Present Simple (easy)
+            new Question
+            {
+                Id = Guid.NewGuid(), QuizId = Q3, Text = "She _____ to school every morning.",
+                Type = "mcq", Difficulty = "easy",
+                Explanation = "For routines and habits we use Present Simple. Third person singular requires 'goes'.",
+                VerifiedByTeacher = true, OrderIndex = 0,
+                Options =
+                [
+                    new QuizOption { Id = Guid.NewGuid(), Text = "goes",      IsCorrect = true,  OrderIndex = 0 },
+                    new QuizOption { Id = Guid.NewGuid(), Text = "go",        IsCorrect = false, OrderIndex = 1 },
+                    new QuizOption { Id = Guid.NewGuid(), Text = "is going",  IsCorrect = false, OrderIndex = 2 },
+                    new QuizOption { Id = Guid.NewGuid(), Text = "going",     IsCorrect = false, OrderIndex = 3 },
+                ]
+            },
+            // 2. Present Continuous (easy)
+            new Question
+            {
+                Id = Guid.NewGuid(), QuizId = Q3, Text = "Be quiet! The baby _____ right now.",
+                Type = "mcq", Difficulty = "easy",
+                Explanation = "We use Present Continuous for actions happening at the moment of speaking. 'Right now' is the signal.",
+                VerifiedByTeacher = true, OrderIndex = 1,
+                Options =
+                [
+                    new QuizOption { Id = Guid.NewGuid(), Text = "sleeps",      IsCorrect = false, OrderIndex = 0 },
+                    new QuizOption { Id = Guid.NewGuid(), Text = "is sleeping", IsCorrect = true,  OrderIndex = 1 },
+                    new QuizOption { Id = Guid.NewGuid(), Text = "sleep",       IsCorrect = false, OrderIndex = 2 },
+                    new QuizOption { Id = Guid.NewGuid(), Text = "slept",       IsCorrect = false, OrderIndex = 3 },
+                ]
+            },
+            // 3. Past Simple (medium)
+            new Question
+            {
+                Id = Guid.NewGuid(), QuizId = Q3, Text = "They _____ to Paris last summer.",
+                Type = "mcq", Difficulty = "medium",
+                Explanation = "Past Simple is used for completed actions at a specific time in the past. 'Last summer' signals Past Simple.",
+                VerifiedByTeacher = true, OrderIndex = 2,
+                Options =
+                [
+                    new QuizOption { Id = Guid.NewGuid(), Text = "have traveled", IsCorrect = false, OrderIndex = 0 },
+                    new QuizOption { Id = Guid.NewGuid(), Text = "traveled",      IsCorrect = true,  OrderIndex = 1 },
+                    new QuizOption { Id = Guid.NewGuid(), Text = "are traveling",  IsCorrect = false, OrderIndex = 2 },
+                    new QuizOption { Id = Guid.NewGuid(), Text = "will travel",   IsCorrect = false, OrderIndex = 3 },
+                ]
+            },
+            // 4. Present Perfect (medium)
+            new Question
+            {
+                Id = Guid.NewGuid(), QuizId = Q3, Text = "I _____ this book three times so far.",
+                Type = "mcq", Difficulty = "medium",
+                Explanation = "Present Perfect is used for experiences up to the present. 'So far' signals Present Perfect.",
+                VerifiedByTeacher = true, OrderIndex = 3,
+                Options =
+                [
+                    new QuizOption { Id = Guid.NewGuid(), Text = "read",        IsCorrect = false, OrderIndex = 0 },
+                    new QuizOption { Id = Guid.NewGuid(), Text = "have read",   IsCorrect = true,  OrderIndex = 1 },
+                    new QuizOption { Id = Guid.NewGuid(), Text = "am reading",  IsCorrect = false, OrderIndex = 2 },
+                    new QuizOption { Id = Guid.NewGuid(), Text = "was reading", IsCorrect = false, OrderIndex = 3 },
+                ]
+            },
+            // 5. Conditional Type 1 (medium)
+            new Question
+            {
+                Id = Guid.NewGuid(), QuizId = Q3, Text = "If it _____ tomorrow, we will cancel the picnic.",
+                Type = "mcq", Difficulty = "medium",
+                Explanation = "First conditional uses 'if + Present Simple, will + base form' for real/possible future situations.",
+                VerifiedByTeacher = true, OrderIndex = 4,
+                Options =
+                [
+                    new QuizOption { Id = Guid.NewGuid(), Text = "will rain",  IsCorrect = false, OrderIndex = 0 },
+                    new QuizOption { Id = Guid.NewGuid(), Text = "rains",      IsCorrect = true,  OrderIndex = 1 },
+                    new QuizOption { Id = Guid.NewGuid(), Text = "rained",     IsCorrect = false, OrderIndex = 2 },
+                    new QuizOption { Id = Guid.NewGuid(), Text = "would rain", IsCorrect = false, OrderIndex = 3 },
+                ]
+            },
+            // 6. Passive Voice (hard)
+            new Question
+            {
+                Id = Guid.NewGuid(), QuizId = Q3, Text = "The report _____ by the manager yesterday.",
+                Type = "mcq", Difficulty = "hard",
+                Explanation = "Past Simple Passive is formed with 'was/were + past participle'. Since 'report' is singular, we use 'was approved'.",
+                VerifiedByTeacher = true, OrderIndex = 5,
+                Options =
+                [
+                    new QuizOption { Id = Guid.NewGuid(), Text = "approved",      IsCorrect = false, OrderIndex = 0 },
+                    new QuizOption { Id = Guid.NewGuid(), Text = "was approved",   IsCorrect = true,  OrderIndex = 1 },
+                    new QuizOption { Id = Guid.NewGuid(), Text = "is approved",    IsCorrect = false, OrderIndex = 2 },
+                    new QuizOption { Id = Guid.NewGuid(), Text = "has approved",   IsCorrect = false, OrderIndex = 3 },
+                ]
+            }
+        );
+
         await db.SaveChangesAsync();
     }
 
@@ -148,9 +323,9 @@ public static class DatabaseSeeder
     private static async Task SeedDocumentsAsync(AppDbContext db)
     {
         db.Documents.AddRange(
-            new Document { Id = Doc1, OwnerId = T1, ClassId = Cls1, TopicId = Tp1, GeneratedQuizId = Q1, FileName = "Calculus_Lecture_Notes.pdf",   FileSize = "2.4 MB", StorageKey = "class/cls1/calculus_lecture_notes.pdf",   Status = "ready", Scope = "class", UploadedAt = SeedDate.AddDays(25) },
-            new Document { Id = Doc2, OwnerId = T1, ClassId = Cls1, TopicId = Tp2, GeneratedQuizId = Q2, FileName = "Linear_Algebra_Handbook.pdf",   FileSize = "5.1 MB", StorageKey = "class/cls1/linear_algebra_handbook.pdf",   Status = "ready", Scope = "class", UploadedAt = SeedDate.AddDays(27) },
-            new Document { Id = Doc3, OwnerId = T1, ClassId = Cls2, TopicId = Tp6, GeneratedQuizId = Q3, FileName = "Physics_Part1.pdf",             FileSize = "3.8 MB", StorageKey = "class/cls2/physics_part1.pdf",             Status = "ready", Scope = "class", UploadedAt = SeedDate.AddDays(30) }
+            new Document { Id = Doc1, OwnerId = T1, ClassId = Cls1, TopicId = Tp1, GeneratedQuizId = Q1, FileName = "Present_Tenses_Guide.pdf",     FileSize = "2.4 MB", StorageKey = "class/cls1/present_tenses_guide.pdf",     Status = "ready", Scope = "class", UploadedAt = SeedDate.AddDays(25) },
+            new Document { Id = Doc2, OwnerId = T1, ClassId = Cls1, TopicId = Tp2, GeneratedQuizId = Q2, FileName = "Past_vs_Perfect_Handbook.pdf",  FileSize = "5.1 MB", StorageKey = "class/cls1/past_vs_perfect_handbook.pdf",  Status = "ready", Scope = "class", UploadedAt = SeedDate.AddDays(27) },
+            new Document { Id = Doc3, OwnerId = T1, ClassId = Cls1, TopicId = Tp3, GeneratedQuizId = Q3, FileName = "Conditionals_Guide.pdf",       FileSize = "3.8 MB", StorageKey = "class/cls1/conditionals_guide.pdf",       Status = "ready", Scope = "class", UploadedAt = SeedDate.AddDays(30) }
         );
         await db.SaveChangesAsync();
     }

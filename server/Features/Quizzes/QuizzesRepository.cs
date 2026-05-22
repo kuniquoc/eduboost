@@ -25,6 +25,7 @@ public interface IQuizzesRepository
     Task<bool> HasEntryTestAsync(Guid classId);
     Task<QuizDto> GenerateEntryTestAsync(Guid classId);
     Task<QuestionDto?> AddQuestionAsync(Guid quizId, CreateQuestionRequest request);
+    Task<string?> GetTopicNameAsync(Guid topicId);
 }
 
 public class QuizzesRepository(AppDbContext db) : IQuizzesRepository
@@ -370,6 +371,12 @@ public class QuizzesRepository(AppDbContext db) : IQuizzesRepository
         await db.SaveChangesAsync();
 
         return MapToDto(question);
+    }
+
+    public async Task<string?> GetTopicNameAsync(Guid topicId)
+    {
+        var topic = await db.Topics.FindAsync(topicId);
+        return topic?.Name;
     }
 
     // ── Helpers ───────────────────────────────────────────────────────────────

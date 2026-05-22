@@ -1,5 +1,5 @@
 import { apiClient } from './api';
-import type { ApiResponse, QuestionDto, QuizResultDto, EntryTestDto, SubmitQuizRequest, UpdateQuestionPayload, CreateQuizRequest, CreateQuestionPayload, QuizDto } from '@/types';
+import type { ApiResponse, QuestionDto, QuizResultDto, EntryTestDto, SubmitQuizRequest, UpdateQuestionPayload, CreateQuizRequest, CreateQuestionPayload, QuizDto, TutorNextActionDto, TutorQuestionDto, TutorAnswerRequest, TutorAnswerResult, ExplainErrorRequest } from '@/types';
 
 export const quizzesService = {
   // ── Teacher ─────────────────────────────────────────────
@@ -81,5 +81,31 @@ export const quizzesService = {
   createMyQuiz: async (data: CreateQuizRequest): Promise<QuizDto> => {
     const res = await apiClient.post<ApiResponse<QuizDto>>('/quizzes/my/create', data);
     return res.data.data!;
+  },
+
+  // ── AI Tutor (Adaptive Learning) ────────────────────────────
+  getTutorNextAction: async (topicId: string): Promise<TutorNextActionDto> => {
+    const res = await apiClient.get<ApiResponse<TutorNextActionDto>>(`/quizzes/tutor/next-action`, { params: { topicId } });
+    return res.data.data!;
+  },
+
+  generateAdaptiveQuestion: async (topicId: string): Promise<TutorQuestionDto> => {
+    const res = await apiClient.get<ApiResponse<TutorQuestionDto>>(`/quizzes/tutor/generate-question`, { params: { topicId } });
+    return res.data.data!;
+  },
+
+  submitTutorAnswer: async (request: TutorAnswerRequest): Promise<TutorAnswerResult> => {
+    const res = await apiClient.post<ApiResponse<TutorAnswerResult>>(`/quizzes/tutor/submit-answer`, request);
+    return res.data.data!;
+  },
+
+  getTutorExplanation: async (topicId: string): Promise<string> => {
+    const res = await apiClient.get<ApiResponse<{ explanation: string; offline: boolean }>>(`/quizzes/tutor/explain`, { params: { topicId } });
+    return res.data.data!.explanation;
+  },
+
+  getErrorExplanation: async (request: ExplainErrorRequest): Promise<string> => {
+    const res = await apiClient.post<ApiResponse<{ explanation: string; offline: boolean }>>(`/quizzes/tutor/explain-error`, request);
+    return res.data.data!.explanation;
   },
 };

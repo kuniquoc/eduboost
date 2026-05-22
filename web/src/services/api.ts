@@ -29,7 +29,7 @@ export function setOnLogoutCallback(cb: LogoutListener) {
 // ── Axios instance ────────────────────────────────────────────────────────────
 export const apiClient = axios.create({
   baseURL: import.meta.env.VITE_API_URL || '/api',
-  timeout: 15000,
+  timeout: 120_000, // 120s — LLM calls via AI Agent can be slow
   headers: { 'Content-Type': 'application/json' },
 });
 

@@ -1,127 +1,196 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { useQuery, useMutation } from '@tanstack/react-query';
+import { useMutation } from '@tanstack/react-query';
 import { quizzesService } from '@/services/quizzes.service';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
-import { Input } from '@/components/ui/input';
-import { ArrowLeft, ArrowRight, CheckCircle, Send } from 'lucide-react';
+import {
+  ArrowLeft,
+  CheckCircle,
+  XCircle,
+  Lightbulb,
+  BookOpen,
+  Brain,
+  Trophy,
+  Loader2,
+  ArrowRight,
+  Sparkles,
+  GraduationCap,
+} from 'lucide-react';
 import { toast } from 'sonner';
-import type { QuestionDto, QuizResultDto, SubmitQuizRequest } from '@/types';
+import type { TutorNextActionDto, TutorQuestionDto, TutorAnswerResult } from '@/types';
 
-interface AnswerState {
-  selectedOptionIds: string[];
-  fillBlankValue: string;
-  startTime: number;
-}
+// ── Step states for the AI Tutor flow ──────────────────────
+type TutorStep =
+  | { type: 'loading' }
+  | { type: 'explain'; content: string }
+  | { type: 'quiz'; question: TutorQuestionDto }
+  | { type: 'result'; question: TutorQuestionDto; selectedKey: string; result: TutorAnswerResult }
+  | { type: 'error-explain'; explanation: string }
+  | { type: 'mastered' }
+  | { type: 'error'; message: string };
 
 export function PracticePage() {
   const { topicId } = useParams<{ topicId: string }>();
   const navigate = useNavigate();
-  const [current, setCurrent] = useState(0);
-  const [answers, setAnswers] = useState<Map<string, AnswerState>>(new Map());
-  const [result, setResult] = useState<QuizResultDto | null>(null);
 
-  const { data: quiz, isLoading } = useQuery({
-    queryKey: ['practice-quiz', topicId],
-    queryFn: () => quizzesService.getPracticeQuiz(topicId!),
-    enabled: !!topicId,
+  const [step, setStep] = useState<TutorStep>({ type: 'loading' });
+  const [selectedOption, setSelectedOption] = useState<string | null>(null);
+  const [questionsAnswered, setQuestionsAnswered] = useState(0);
+  const [correctCount, setCorrectCount] = useState(0);
+  const [started, setStarted] = useState(false);
+
+  // ── Mutations ───────────────────────────────────────────
+  const nextActionMutation = useMutation({
+    mutationFn: () => quizzesService.getTutorNextAction(topicId!),
+    onSuccess: (data: TutorNextActionDto) => {
+      if (data.action === 'EXPLAIN' || data.action === 'QUIZ') {
+        // Skip explanation and go directly to question
+        generateQuestionMutation.mutate();
+      } else if (data.action === 'NEXT_SKILL') {
+        setStep({ type: 'mastered' });
+      }
+    },
+    onError: () => {
+      // Fallback: try generating a question directly
+      generateQuestionMutation.mutate();
+    },
   });
 
-  const questions: QuestionDto[] = quiz?.questions ?? [];
+  const explainMutation = useMutation({
+    mutationFn: () => quizzesService.getTutorExplanation(topicId!),
+    onSuccess: (content: string) => {
+      setStep({ type: 'explain', content });
+    },
+    onError: () => {
+      setStep({ type: 'explain', content: 'Let\'s review this topic together! When you feel ready, start practicing with quiz questions.' });
+    },
+  });
 
-  useEffect(() => {
-    if (questions.length && answers.size === 0) {
-      const map = new Map<string, AnswerState>();
-      questions.forEach((q) => {
-        map.set(q.id, { selectedOptionIds: [], fillBlankValue: '', startTime: Date.now() });
-      });
-      setAnswers(map);
-    }
-  }, [questions, answers.size]);
+  const generateQuestionMutation = useMutation({
+    mutationFn: () => quizzesService.generateAdaptiveQuestion(topicId!),
+    onSuccess: (question: TutorQuestionDto) => {
+      setSelectedOption(null);
+      setStep({ type: 'quiz', question });
+    },
+    onError: () => {
+      setStep({ type: 'error', message: 'Không thể tạo câu hỏi. Vui lòng thử lại.' });
+    },
+  });
 
-  const updateAnswer = useCallback((qId: string, partial: Partial<AnswerState>) => {
-    setAnswers((prev) => {
-      const next = new Map(prev);
-      const existing = next.get(qId)!;
-      next.set(qId, { ...existing, ...partial });
-      return next;
-    });
-  }, []);
-
-  const submitMutation = useMutation({
-    mutationFn: (req: SubmitQuizRequest) => quizzesService.submitPracticeQuiz(topicId!, req),
-    onSuccess: (data) => setResult(data),
+  const submitAnswerMutation = useMutation({
+    mutationFn: (vars: { question: TutorQuestionDto; selectedKey: string }) =>
+      quizzesService.submitTutorAnswer({
+        topicId: topicId!,
+        questionText: vars.question.question,
+        correctAnswer: vars.question.correctAnswer,
+        selectedAnswer: vars.selectedKey,
+        difficulty: vars.question.difficultyLevel,
+      }),
+    onSuccess: (result: TutorAnswerResult, vars) => {
+      setQuestionsAnswered((c) => c + 1);
+      if (result.isCorrect) setCorrectCount((c) => c + 1);
+      setStep({ type: 'result', question: vars.question, selectedKey: vars.selectedKey, result });
+    },
     onError: () => toast.error('Nộp bài thất bại'),
   });
 
-  const handleSubmit = () => {
-    const now = Date.now();
-    const submitAnswers = questions.map((q) => {
-      const a = answers.get(q.id)!;
-      return {
-        questionId: q.id,
-        selectedOptionIds: a.selectedOptionIds,
-        fillBlankValue: a.fillBlankValue || undefined,
-        timeSpentSeconds: Math.round((now - a.startTime) / 1000),
-      };
+  const errorExplainMutation = useMutation({
+    mutationFn: (vars: { question: string; correctAnswer: string; studentAnswer: string }) =>
+      quizzesService.getErrorExplanation(vars),
+    onSuccess: (explanation: string) => {
+      setStep({ type: 'error-explain', explanation });
+    },
+    onError: () => toast.error('Không thể tải giải thích'),
+  });
+
+  // ── Handlers ────────────────────────────────────────────
+  const startSession = useCallback(() => {
+    setStarted(true);
+    setStep({ type: 'loading' });
+    nextActionMutation.mutate();
+  }, [nextActionMutation]);
+
+  const handleSubmitAnswer = useCallback(() => {
+    if (!selectedOption || step.type !== 'quiz') return;
+    submitAnswerMutation.mutate({ question: step.question, selectedKey: selectedOption });
+  }, [selectedOption, step, submitAnswerMutation]);
+
+  const handleContinue = useCallback(() => {
+    setStep({ type: 'loading' });
+    nextActionMutation.mutate();
+  }, [nextActionMutation]);
+
+  const handleExplainError = useCallback(() => {
+    if (step.type !== 'result') return;
+    errorExplainMutation.mutate({
+      question: step.question.question,
+      correctAnswer: step.question.options[step.question.correctAnswer] || step.question.correctAnswer,
+      studentAnswer: step.question.options[step.selectedKey] || step.selectedKey,
     });
-    submitMutation.mutate({ answers: submitAnswers });
-  };
+  }, [step, errorExplainMutation]);
 
-  if (isLoading) {
-    return (
-      <div className="flex items-center justify-center py-20">
-        <div className="h-8 w-8 animate-spin rounded-full border-4 border-primary border-t-transparent" />
-      </div>
-    );
-  }
+  const handleStartQuiz = useCallback(() => {
+    setStep({ type: 'loading' });
+    generateQuestionMutation.mutate();
+  }, [generateQuestionMutation]);
 
-  // Result screen
-  if (result) {
-    const gradeColor = result.percentage >= 70 ? 'text-green-400' : result.percentage >= 50 ? 'text-yellow-400' : 'text-red-400';
+  const isLoading =
+    nextActionMutation.isPending ||
+    explainMutation.isPending ||
+    generateQuestionMutation.isPending ||
+    submitAnswerMutation.isPending;
+
+  const accuracy = questionsAnswered > 0 ? Math.round((correctCount / questionsAnswered) * 100) : 0;
+
+  // ── Not started yet ─────────────────────────────────────
+  if (!started) {
     return (
-      <div className="mx-auto max-w-lg space-y-6 text-center py-8">
-        <CheckCircle className="mx-auto h-16 w-16 text-primary" />
-        <h1 className="text-3xl font-bold text-foreground">Kết quả luyện tập</h1>
-        <div className={`text-5xl font-bold ${gradeColor}`}>{result.score}/{result.total}</div>
-        <p className="text-lg text-muted-foreground">{Math.round(result.percentage)}%</p>
-        <div className="flex justify-center gap-3">
-          <Button variant="outline" onClick={() => navigate(-1)}>Quay lại</Button>
-          <Button onClick={() => {
-            setResult(null);
-            setCurrent(0);
-            setAnswers(new Map());
-          }}>Làm lại</Button>
+      <div>
+        <button
+          onClick={() => navigate(-1)}
+          className="mb-6 flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground transition-colors"
+        >
+          <ArrowLeft className="h-4 w-4" /> Quay lại lộ trình
+        </button>
+
+        <div className="mx-auto max-w-lg text-center py-12">
+          <div className="relative mx-auto mb-8 flex h-24 w-24 items-center justify-center">
+            <div className="absolute inset-0 animate-pulse rounded-full bg-gradient-to-br from-primary/20 to-violet-500/20 blur-xl" />
+            <div className="relative flex h-20 w-20 items-center justify-center rounded-2xl bg-gradient-to-br from-primary to-violet-600 shadow-lg shadow-primary/25">
+              <Brain className="h-10 w-10 text-white" />
+            </div>
+          </div>
+          <h1 className="text-3xl font-bold text-foreground">AI Adaptive Tutor</h1>
+          <p className="mt-3 text-muted-foreground leading-relaxed max-w-md mx-auto">
+            AI sẽ tự động đánh giá trình độ của bạn và điều chỉnh độ khó phù hợp.
+            Hãy bắt đầu để trải nghiệm luyện tập thông minh!
+          </p>
+
+          <div className="mt-8 grid grid-cols-3 gap-4 max-w-sm mx-auto">
+            <div className="rounded-xl border border-border p-3 text-center">
+              <BookOpen className="mx-auto mb-1 h-5 w-5 text-blue-400" />
+              <p className="text-xs text-muted-foreground">Học lý thuyết</p>
+            </div>
+            <div className="rounded-xl border border-border p-3 text-center">
+              <Sparkles className="mx-auto mb-1 h-5 w-5 text-amber-400" />
+              <p className="text-xs text-muted-foreground">Luyện tập AI</p>
+            </div>
+            <div className="rounded-xl border border-border p-3 text-center">
+              <Trophy className="mx-auto mb-1 h-5 w-5 text-green-400" />
+              <p className="text-xs text-muted-foreground">Thành thạo</p>
+            </div>
+          </div>
+
+          <Button onClick={startSession} size="lg" className="mt-8 gap-2 px-8 shadow-lg shadow-primary/20">
+            <GraduationCap className="h-5 w-5" /> Bắt đầu luyện tập
+          </Button>
         </div>
       </div>
     );
   }
-
-  const q = questions[current];
-  if (!q) {
-    return (
-      <div className="flex flex-col items-center justify-center py-16 gap-4">
-        <p className="text-muted-foreground">Không có câu hỏi cho chủ đề này</p>
-        <Button variant="outline" onClick={() => navigate(-1)}>Quay lại</Button>
-      </div>
-    );
-  }
-
-  const answer = answers.get(q.id) ?? { selectedOptionIds: [], fillBlankValue: '', startTime: Date.now() };
-
-  const toggleOption = (optId: string) => {
-    if (q.type === 'mcq') {
-      updateAnswer(q.id, { selectedOptionIds: [optId] });
-    } else {
-      const ids = answer.selectedOptionIds.includes(optId)
-        ? answer.selectedOptionIds.filter((id) => id !== optId)
-        : [...answer.selectedOptionIds, optId];
-      updateAnswer(q.id, { selectedOptionIds: ids });
-    }
-  };
 
   return (
     <div>
@@ -132,68 +201,333 @@ export function PracticePage() {
         <ArrowLeft className="h-4 w-4" /> Quay lại lộ trình
       </button>
 
-      {/* Progress bar */}
-      <Progress value={((current + 1) / questions.length) * 100} className="mb-6 h-1" />
-
-      {/* Question */}
-      <Card className="border-border">
-        <CardContent className="p-6">
-          <div className="mb-4 flex items-center justify-between">
-            <Badge variant="outline">Câu {current + 1}/{questions.length}</Badge>
-            <Badge variant="secondary">{q.difficulty}</Badge>
+      {/* Stats bar */}
+      {questionsAnswered > 0 && (
+        <div className="mb-6 flex items-center gap-4 rounded-xl border border-border bg-card/50 px-4 py-3">
+          <div className="flex items-center gap-2">
+            <Badge variant="outline" className="gap-1">
+              <CheckCircle className="h-3 w-3 text-green-400" /> {correctCount}
+            </Badge>
+            <Badge variant="outline" className="gap-1">
+              <XCircle className="h-3 w-3 text-red-400" /> {questionsAnswered - correctCount}
+            </Badge>
           </div>
-          <h2 className="mb-6 text-lg font-medium text-foreground">{q.text}</h2>
+          <div className="flex-1">
+            <Progress value={accuracy} className="h-1.5" />
+          </div>
+          <span className="text-sm font-medium text-muted-foreground">{accuracy}%</span>
+        </div>
+      )}
 
-          {q.type === 'fill_blank' ? (
-            <Input
-              placeholder="Nhập câu trả lời..."
-              value={answer.fillBlankValue}
-              onChange={(e) => updateAnswer(q.id, { fillBlankValue: e.target.value })}
-              className="text-lg"
-            />
-          ) : (
-            <div className="space-y-3">
-              {q.options.map((opt) => {
-                const selected = answer.selectedOptionIds.includes(opt.id);
-                return (
-                  <button
-                    key={opt.id}
-                    onClick={() => toggleOption(opt.id)}
-                    className={`w-full rounded-xl border p-4 text-left transition-all ${
-                      selected
-                        ? 'border-primary bg-primary/10 text-foreground'
-                        : 'border-border text-muted-foreground hover:border-muted-foreground hover:text-foreground'
-                    }`}
-                  >
-                    <span className="text-sm">{opt.text}</span>
-                  </button>
-                );
-              })}
+      {/* ── LOADING ─────────────────────────────────────── */}
+      {step.type === 'loading' && (
+        <div className="flex flex-col items-center justify-center py-20 gap-4">
+          <div className="relative">
+            <div className="absolute inset-0 animate-ping rounded-full bg-primary/20" />
+            <div className="relative flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-primary to-violet-600">
+              <Brain className="h-8 w-8 text-white animate-pulse" />
+            </div>
+          </div>
+          <p className="text-sm text-muted-foreground animate-pulse">AI đang phân tích trình độ của bạn...</p>
+        </div>
+      )}
+
+      {/* ── EXPLAIN ─────────────────────────────────────── */}
+      {step.type === 'explain' && (
+        <div className="mx-auto max-w-2xl space-y-6">
+          <div className="flex items-center gap-3">
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-500/10">
+              <BookOpen className="h-5 w-5 text-blue-400" />
+            </div>
+            <div>
+              <h2 className="text-lg font-semibold text-foreground">Bài giảng từ AI Tutor</h2>
+              <p className="text-xs text-muted-foreground">
+                Hãy đọc kỹ nội dung bên dưới trước khi luyện tập
+              </p>
+            </div>
+          </div>
+
+          <Card className="border-blue-500/20 bg-gradient-to-br from-blue-500/5 to-transparent">
+            <CardContent className="p-6">
+              <div className="prose prose-invert prose-sm max-w-none whitespace-pre-wrap text-foreground/90 leading-relaxed">
+                {step.content}
+              </div>
+            </CardContent>
+          </Card>
+
+          <div className="flex justify-center">
+            <Button onClick={handleStartQuiz} size="lg" className="gap-2 px-8">
+              <Sparkles className="h-4 w-4" /> Tôi đã hiểu, bắt đầu luyện tập
+            </Button>
+          </div>
+        </div>
+      )}
+
+      {/* ── QUIZ ────────────────────────────────────────── */}
+      {step.type === 'quiz' && (
+        <div className="mx-auto max-w-2xl space-y-6">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-amber-500/10">
+                <Sparkles className="h-5 w-5 text-amber-400" />
+              </div>
+              <div>
+                <h2 className="text-lg font-semibold text-foreground">Câu hỏi luyện tập</h2>
+                <p className="text-xs text-muted-foreground">Câu #{questionsAnswered + 1}</p>
+              </div>
+            </div>
+            <Badge variant="outline">
+              Difficulty: {step.question.difficultyLevel > 0 ? '+' : ''}{step.question.difficultyLevel.toFixed(1)}
+            </Badge>
+          </div>
+
+          <Card className="border-border">
+            <CardContent className="p-6">
+              <h3 className="mb-6 text-base font-medium text-foreground leading-relaxed">
+                {step.question.question}
+              </h3>
+
+              <div className="space-y-3">
+                {Object.entries(step.question.options).map(([key, value]) => {
+                  const isSelected = selectedOption === key;
+                  return (
+                    <button
+                      key={key}
+                      onClick={() => setSelectedOption(key)}
+                      className={`w-full rounded-xl border p-4 text-left transition-all duration-200 ${
+                        isSelected
+                          ? 'border-primary bg-primary/10 text-foreground shadow-sm shadow-primary/10'
+                          : 'border-border text-muted-foreground hover:border-muted-foreground hover:text-foreground'
+                      }`}
+                    >
+                      <div className="flex items-center gap-3">
+                        <span
+                          className={`flex h-7 w-7 items-center justify-center rounded-full border text-xs font-medium transition-all ${
+                            isSelected
+                              ? 'border-primary bg-primary text-primary-foreground'
+                              : 'border-border text-muted-foreground'
+                          }`}
+                        >
+                          {key}
+                        </span>
+                        <span className="text-sm">{value}</span>
+                      </div>
+                    </button>
+                  );
+                })}
+              </div>
+            </CardContent>
+          </Card>
+
+          <div className="flex justify-end">
+            <Button
+              onClick={handleSubmitAnswer}
+              disabled={!selectedOption || submitAnswerMutation.isPending}
+              size="lg"
+              className="gap-2 px-8"
+            >
+              {submitAnswerMutation.isPending ? (
+                <><Loader2 className="h-4 w-4 animate-spin" /> Đang chấm...</>
+              ) : (
+                <>Nộp bài</>
+              )}
+            </Button>
+          </div>
+        </div>
+      )}
+
+      {/* ── RESULT ──────────────────────────────────────── */}
+      {step.type === 'result' && (
+        <div className="mx-auto max-w-2xl space-y-6">
+          <Card
+            className={`border-2 ${
+              step.result.isCorrect
+                ? 'border-green-500/30 bg-gradient-to-br from-green-500/5 to-transparent'
+                : 'border-red-500/30 bg-gradient-to-br from-red-500/5 to-transparent'
+            }`}
+          >
+            <CardContent className="p-6">
+              <div className="flex items-center gap-3 mb-4">
+                {step.result.isCorrect ? (
+                  <>
+                    <div className="flex h-12 w-12 items-center justify-center rounded-full bg-green-500/10">
+                      <CheckCircle className="h-7 w-7 text-green-400" />
+                    </div>
+                    <div>
+                      <h3 className="text-lg font-bold text-green-400">Chính xác! 🎉</h3>
+                      <p className="text-xs text-muted-foreground">Tuyệt vời, bạn đã trả lời đúng</p>
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <div className="flex h-12 w-12 items-center justify-center rounded-full bg-red-500/10">
+                      <XCircle className="h-7 w-7 text-red-400" />
+                    </div>
+                    <div>
+                      <h3 className="text-lg font-bold text-red-400">Chưa đúng</h3>
+                      <p className="text-xs text-muted-foreground">Đừng nản, hãy xem giải thích bên dưới</p>
+                    </div>
+                  </>
+                )}
+              </div>
+
+              {/* Question review */}
+              <div className="rounded-xl border border-border bg-background/50 p-4 mb-4">
+                <p className="text-sm font-medium text-foreground mb-3">{step.question.question}</p>
+                <div className="space-y-2">
+                  {Object.entries(step.question.options).map(([key, value]) => {
+                    const isCorrect = key === step.question.correctAnswer;
+                    const isStudentPick = key === step.selectedKey;
+                    let cls = 'border-border text-muted-foreground';
+                    if (isCorrect) cls = 'border-green-500/40 bg-green-500/10 text-green-400';
+                    else if (isStudentPick && !step.result.isCorrect)
+                      cls = 'border-red-500/40 bg-red-500/10 text-red-400 line-through';
+                    return (
+                      <div key={key} className={`flex items-center gap-2 rounded-lg border px-3 py-2 text-sm ${cls}`}>
+                        <span className="font-medium">{key}.</span>
+                        <span>{value}</span>
+                        {isCorrect && <CheckCircle className="ml-auto h-4 w-4 text-green-400" />}
+                        {isStudentPick && !step.result.isCorrect && <XCircle className="ml-auto h-4 w-4 text-red-400" />}
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+
+              {/* Inline explanation from quiz generation */}
+              {step.question.explanation && (
+                <div className="rounded-xl border border-amber-500/20 bg-amber-500/5 p-4 mb-4">
+                  <div className="flex items-center gap-2 mb-2">
+                    <Lightbulb className="h-4 w-4 text-amber-400" />
+                    <span className="text-sm font-medium text-amber-400">Giải thích</span>
+                  </div>
+                  <p className="text-sm text-foreground/80 leading-relaxed">{step.question.explanation}</p>
+                </div>
+              )}
+
+              {/* Mastery info */}
+              <div className="flex items-center gap-4 text-xs text-muted-foreground">
+                <span>
+                  Mastery: <Badge variant="outline" className="ml-1">{step.result.mastery ?? '—'}</Badge>
+                </span>
+                <span>P(L): {step.result.newProbability != null ? (step.result.newProbability * 100).toFixed(0) : '—'}%</span>
+                <span>θ: {step.result.newTheta != null ? step.result.newTheta.toFixed(2) : '—'}</span>
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Action buttons */}
+          <div className="flex items-center justify-between">
+            {!step.result.isCorrect && (
+              <Button
+                variant="outline"
+                onClick={handleExplainError}
+                disabled={errorExplainMutation.isPending}
+                className="gap-2"
+              >
+                {errorExplainMutation.isPending ? (
+                  <><Loader2 className="h-4 w-4 animate-spin" /> Đang phân tích...</>
+                ) : (
+                  <><Lightbulb className="h-4 w-4 text-amber-400" /> Giải thích chi tiết lỗi sai</>
+                )}
+              </Button>
+            )}
+            <div className="ml-auto">
+              <Button onClick={handleContinue} disabled={isLoading} className="gap-2">
+                Tiếp tục <ArrowRight className="h-4 w-4" />
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ── ERROR EXPLAIN ───────────────────────────────── */}
+      {step.type === 'error-explain' && (
+        <div className="mx-auto max-w-2xl space-y-6">
+          <div className="flex items-center gap-3">
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-amber-500/10">
+              <Lightbulb className="h-5 w-5 text-amber-400" />
+            </div>
+            <div>
+              <h2 className="text-lg font-semibold text-foreground">Phân tích lỗi sai</h2>
+              <p className="text-xs text-muted-foreground">AI đã phân tích và giải thích chi tiết</p>
+            </div>
+          </div>
+
+          <Card className="border-amber-500/20 bg-gradient-to-br from-amber-500/5 to-transparent">
+            <CardContent className="p-6">
+              <div className="prose prose-invert prose-sm max-w-none whitespace-pre-wrap text-foreground/90 leading-relaxed">
+                {step.explanation}
+              </div>
+            </CardContent>
+          </Card>
+
+          <div className="flex justify-center">
+            <Button onClick={handleContinue} disabled={isLoading} className="gap-2 px-8">
+              Tiếp tục luyện tập <ArrowRight className="h-4 w-4" />
+            </Button>
+          </div>
+        </div>
+      )}
+
+      {/* ── MASTERED ────────────────────────────────────── */}
+      {step.type === 'mastered' && (
+        <div className="mx-auto max-w-lg text-center py-12">
+          <div className="relative mx-auto mb-8 flex h-28 w-28 items-center justify-center">
+            <div className="absolute inset-0 rounded-full bg-gradient-to-br from-green-400/30 to-emerald-500/20 blur-2xl animate-pulse" />
+            <div className="absolute inset-2 rounded-full bg-gradient-to-br from-green-400/10 to-emerald-500/10 backdrop-blur-sm border border-green-400/20" />
+            <Trophy className="relative h-14 w-14 text-green-400 drop-shadow-lg" />
+          </div>
+
+          <h1 className="text-3xl font-bold bg-gradient-to-r from-green-400 to-emerald-400 bg-clip-text text-transparent">
+            Chủ đề đã thành thạo!
+          </h1>
+          <p className="mt-3 text-muted-foreground max-w-sm mx-auto">
+            Chúc mừng! Bạn đã nắm vững kiến thức của chủ đề này (P ≥ 80%).
+            Hãy chuyển sang chủ đề tiếp theo trong lộ trình học tập.
+          </p>
+
+          {questionsAnswered > 0 && (
+            <div className="mt-6 mx-auto max-w-xs rounded-xl border border-green-500/20 bg-green-500/5 p-4">
+              <div className="grid grid-cols-3 gap-3 text-center">
+                <div>
+                  <p className="text-2xl font-bold text-foreground">{questionsAnswered}</p>
+                  <p className="text-xs text-muted-foreground">Câu hỏi</p>
+                </div>
+                <div>
+                  <p className="text-2xl font-bold text-green-400">{correctCount}</p>
+                  <p className="text-xs text-muted-foreground">Đúng</p>
+                </div>
+                <div>
+                  <p className="text-2xl font-bold text-foreground">{accuracy}%</p>
+                  <p className="text-xs text-muted-foreground">Chính xác</p>
+                </div>
+              </div>
             </div>
           )}
-        </CardContent>
-      </Card>
 
-      {/* Navigation */}
-      <div className="mt-6 flex items-center justify-between">
-        <Button
-          variant="outline"
-          onClick={() => setCurrent((c) => c - 1)}
-          disabled={current === 0}
-        >
-          <ArrowLeft className="h-4 w-4" /> Trước
-        </Button>
+          <div className="mt-8 flex justify-center gap-3">
+            <Button variant="outline" onClick={() => navigate(-1)}>
+              <ArrowLeft className="h-4 w-4" /> Quay lại lộ trình
+            </Button>
+          </div>
+        </div>
+      )}
 
-        {current < questions.length - 1 ? (
-          <Button onClick={() => setCurrent((c) => c + 1)}>
-            Tiếp <ArrowRight className="h-4 w-4" />
-          </Button>
-        ) : (
-          <Button onClick={handleSubmit} disabled={submitMutation.isPending}>
-            {submitMutation.isPending ? 'Đang nộp...' : <><Send className="h-4 w-4" /> Nộp bài</>}
-          </Button>
-        )}
-      </div>
+      {/* ── ERROR ───────────────────────────────────────── */}
+      {step.type === 'error' && (
+        <div className="mx-auto max-w-lg text-center py-12">
+          <XCircle className="mx-auto mb-4 h-12 w-12 text-red-400" />
+          <h2 className="text-xl font-bold text-foreground">Đã xảy ra lỗi</h2>
+          <p className="mt-2 text-muted-foreground">{step.message}</p>
+          <div className="mt-6 flex justify-center gap-3">
+            <Button variant="outline" onClick={() => navigate(-1)}>
+              Quay lại
+            </Button>
+            <Button onClick={startSession}>Thử lại</Button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

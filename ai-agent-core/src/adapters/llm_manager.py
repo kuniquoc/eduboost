@@ -1,75 +1,140 @@
 # src/adapters/llm_manager.py
+#
+# LLM Manager — uses OpenRouter API (OpenAI-compatible) for all LLM calls.
+# Runs entirely on CPU — no local model loading.
 
-import torch
-from unsloth import FastLanguageModel
-from peft import PeftModel
+import os
+import re
+import json
+import logging
+from typing import Optional
+from openai import OpenAI
+from dotenv import load_dotenv
+
+logger = logging.getLogger(__name__)
+
 
 class LLMManager:
-    def __init__(self, base_model_path, adapter_paths, max_seq_length=2048):
-        """
-        base_model_path: Đường dẫn tới mô hình đã được quantize 4-bit (ví dụ: "unsloth/llama-3-8b-bnb-4bit")
-        adapter_paths: Dict chứa đường dẫn các adapter {'explanation': 'path/to/exp', 'quiz': 'path/to/quiz'}
-        """
-        self.base_model_path = base_model_path
-        self.adapter_paths = adapter_paths
-        self.max_seq_length = max_seq_length
-        self.tokenizer = None
-        self.model = None
-        self.current_adapter = None
+    """
+    Manages interactions with the LLM via the OpenRouter API.
 
-        self._load_unsloth_model()
-        self._preload_adapters()
+    Uses the ``openai`` client library pointed at OpenRouter's base URL.
+    The model defaults to ``arcee-ai/trinity-large-thinking:free`` which
+    is a free-tier reasoning model.
+    """
 
-    def _load_unsloth_model(self):
-        print("Loading base model with Unsloth (4-bit)...")
-        # Unsloth load mô hình và tokenizer cực nhanh
-        self.model, self.tokenizer = FastLanguageModel.from_pretrained(
-            model_name = self.base_model_path,
-            max_seq_length = self.max_seq_length,
-            load_in_4bit = True,
-            # dtype = None (tự động chọn bfloat16 nếu GPU hỗ trợ)
-        )
-        
-        # Bật chế độ inference để tăng tốc độ sinh văn bản
-        FastLanguageModel.for_inference(self.model)
-
-    def _preload_adapters(self):
-        """
-        Load tất cả các adapter vào bộ nhớ ngay từ đầu để việc switch 
-        giữa 'quiz' và 'explanation' diễn ra tức thời (miliseconds).
-        """
-        print("Pre-loading adapters into VRAM...")
-        for name, path in self.adapter_paths.items():
-            # Load adapter vào mô hình
-            self.model.load_adapter(path, adapter_name=name)
-            print(f"Loaded adapter: {name}")
-
-    def set_adapter(self, adapter_name):
-        """Switch nhanh giữa các adapter đã load"""
-        if adapter_name not in self.adapter_paths:
-            raise ValueError(f"Adapter {adapter_name} not found in config.")
-        
-        if self.current_adapter == adapter_name:
-            return
-
-        print(f"Switching to adapter: {adapter_name}...")
-        self.model.set_adapter(adapter_name)
-        self.current_adapter = adapter_name
-
-    def generate(self, prompt, max_new_tokens=512, temperature=0.7):
-        # Tokenize input
-        inputs = self.tokenizer([prompt], return_tensors="pt").to("cuda")
-        
-        # Unsloth tối ưu hóa việc generate thông qua FastLanguageModel.for_inference
-        with torch.no_grad():
-            outputs = self.model.generate(
-                **inputs, 
-                max_new_tokens=max_new_tokens, 
-                temperature=temperature,
-                do_sample=True if temperature > 0 else False,
-                pad_token_id=self.tokenizer.eos_token_id
+    def __init__(self):
+        load_dotenv()
+        api_key = os.getenv("OPENROUTER_API_KEY", "")
+        if not api_key:
+            logger.warning(
+                "OPENROUTER_API_KEY is not set. LLM calls will fail. "
+                "Set it in the .env file or as an environment variable."
             )
-        
-        # Giải mã và loại bỏ phần prompt ban đầu
-        decoded = self.tokenizer.batch_decode(outputs, skip_special_tokens=True)[0]
-        return decoded[len(prompt):].strip()
+
+        self.client = OpenAI(
+            base_url="https://openrouter.ai/api/v1",
+            api_key=api_key,
+        )
+        self.model = os.getenv("LLM_MODEL", "arcee-ai/trinity-large-thinking:free")
+
+    # ------------------------------------------------------------------
+    # Public API
+    # ------------------------------------------------------------------
+
+    def generate(
+        self,
+        prompt: str,
+        system_prompt: Optional[str] = None,
+        max_tokens: int = 2048,
+        temperature: float = 0.7,
+    ) -> str:
+        """
+        Send a prompt to the LLM and return the generated text.
+
+        Args:
+            prompt: The user message.
+            system_prompt: Optional system-level instructions.
+            max_tokens: Maximum tokens in the response.
+            temperature: Sampling temperature (0 = deterministic).
+
+        Returns:
+            The assistant's reply as a string.
+        """
+        messages = []
+        if system_prompt:
+            messages.append({"role": "system", "content": system_prompt})
+        messages.append({"role": "user", "content": prompt})
+
+        try:
+            response = self.client.chat.completions.create(
+                model=self.model,
+                messages=messages,
+                max_tokens=max_tokens,
+                temperature=temperature,
+                extra_body={"reasoning": {"enabled": True}},
+            )
+            content = response.choices[0].message.content
+            return content if content else ""
+
+        except Exception as e:
+            logger.error("LLM API call failed: %s", e)
+            raise RuntimeError(f"LLM generation failed: {e}") from e
+
+    def generate_json(
+        self,
+        prompt: str,
+        system_prompt: Optional[str] = None,
+        max_tokens: int = 2048,
+    ) -> dict:
+        """
+        Generate a response and extract JSON from it.
+
+        The LLM often wraps JSON in markdown code-blocks (```json ... ```).
+        This method handles that and falls back to scanning for ``{...}``
+        or ``[...]`` patterns.
+        """
+        raw = self.generate(prompt, system_prompt, max_tokens=max_tokens, temperature=0.3)
+        return self._extract_json(raw)
+
+    # ------------------------------------------------------------------
+    # Internal helpers
+    # ------------------------------------------------------------------
+
+    @staticmethod
+    def _extract_json(text: str) -> dict:
+        """
+        Best-effort extraction of a JSON object from free-form LLM output.
+
+        Tries in order:
+        1. Markdown fenced code block (```json ... ``` or ``` ... ```)
+        2. First ``{ ... }`` substring (greedy)
+        3. Direct ``json.loads`` on the whole text
+        """
+        # 1. Try markdown code block
+        fence_pattern = r"```(?:json)?\s*\n?(.*?)\n?\s*```"
+        match = re.search(fence_pattern, text, re.DOTALL)
+        if match:
+            try:
+                return json.loads(match.group(1).strip())
+            except json.JSONDecodeError:
+                pass
+
+        # 2. Try to find the outermost { ... }
+        brace_start = text.find("{")
+        brace_end = text.rfind("}")
+        if brace_start != -1 and brace_end > brace_start:
+            try:
+                return json.loads(text[brace_start : brace_end + 1])
+            except json.JSONDecodeError:
+                pass
+
+        # 3. Last resort — try the entire text
+        try:
+            return json.loads(text.strip())
+        except json.JSONDecodeError:
+            logger.error("Failed to extract JSON from LLM output:\n%s", text[:500])
+            return {
+                "error": "Failed to parse JSON from LLM response",
+                "raw": text[:500],
+            }

@@ -280,6 +280,48 @@ export interface RoadmapDto {
   steps: RoadmapStepDto[];
 }
 
+// ─── AI Tutor (Adaptive Learning) ─────────────────────────
+
+export type TutorAction = 'EXPLAIN' | 'QUIZ' | 'NEXT_SKILL';
+
+export interface TutorNextActionDto {
+  action: TutorAction;
+  adapter?: string;
+  reason: string;
+  params?: Record<string, unknown>;
+}
+
+export interface TutorQuestionDto {
+  question: string;
+  options: Record<string, string>;
+  correctAnswer: string;
+  explanation: string;
+  difficultyLevel: number;
+}
+
+export interface TutorAnswerRequest {
+  topicId: string;
+  questionText: string;
+  correctAnswer: string;
+  selectedAnswer: string;
+  difficulty: number;
+}
+
+export interface TutorAnswerResult {
+  isCorrect: boolean;
+  mastery?: string;
+  newProbability?: number;
+  newTheta?: number;
+  explanation?: string;
+  nextAction?: string;
+}
+
+export interface ExplainErrorRequest {
+  question: string;
+  correctAnswer: string;
+  studentAnswer: string;
+}
+
 // ─── API Response ────────────────────────────────────────
 
 export interface ApiResponse<T> {

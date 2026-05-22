@@ -7,6 +7,7 @@ using EduBoost.API.Features.Roadmap;
 using EduBoost.API.Features.Students;
 using EduBoost.API.Features.Topics;
 using EduBoost.API.Infrastructure;
+using EduBoost.API.Infrastructure.Services;
 using EduBoost.API.Infrastructure.Storage;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.HttpLogging;
@@ -122,6 +123,9 @@ builder.Services.AddScoped<IDocumentsRepository, DocumentsRepository>();
 builder.Services.AddScoped<IQuizzesRepository, QuizzesRepository>();
 builder.Services.AddScoped<IStudentsRepository, StudentsRepository>();
 builder.Services.AddScoped<IRoadmapRepository, RoadmapRepository>();
+
+// ── DI — AI Agent Service ─────────────────────────────────────────────────────
+builder.Services.AddHttpClient<IAgentService, AgentService>();
 
 // ─────────────────────────────────────────────────────────────────────────────
 var app = builder.Build();

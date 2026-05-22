@@ -16,11 +16,13 @@ import { ArrowLeft, Trash2, Pencil, CheckCircle, Send, Loader2, Plus } from 'luc
 import { toast } from 'sonner';
 import type { QuestionDto, UpdateQuestionPayload, CreateQuestionPayload } from '@/types';
 
-const diffBadge = {
-  easy: { label: 'Dễ', variant: 'secondary' as const },
-  medium: { label: 'TB', variant: 'default' as const },
-  hard: { label: 'Khó', variant: 'destructive' as const },
+const diffBadge: Record<string, { label: string; variant: 'secondary' | 'default' | 'destructive' | 'outline' }> = {
+  easy: { label: 'Dễ', variant: 'secondary' },
+  medium: { label: 'TB', variant: 'default' },
+  hard: { label: 'Khó', variant: 'destructive' },
 };
+
+const getDiffBadge = (difficulty: string) => diffBadge[difficulty] ?? { label: difficulty || '?', variant: 'outline' as const };
 
 export function QuizReviewPage() {
   const { quizId } = useParams<{ quizId: string }>();
@@ -189,7 +191,7 @@ export function QuizReviewPage() {
       {/* Questions list */}
       <div className="space-y-3">
         {questions?.map((q, idx) => {
-          const diff = diffBadge[q.difficulty];
+          const diff = getDiffBadge(q.difficulty);
           return (
             <Card key={q.id} className="border-border">
               <CardContent className="p-4">
@@ -201,7 +203,9 @@ export function QuizReviewPage() {
                     <div className="min-w-0">
                       <p className="text-sm font-medium text-foreground">{q.text}</p>
                       {q.explanation && (
-                        <p className="mt-1 text-xs text-muted-foreground italic">💡 {q.explanation}</p>
+                        <div className="mt-2 rounded-lg border border-amber-500/20 bg-amber-500/5 px-3 py-2">
+                          <p className="text-xs text-amber-400/90">💡 <span className="font-medium">Giải thích:</span> {q.explanation}</p>
+                        </div>
                       )}
                     </div>
                   </div>

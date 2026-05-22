@@ -1,6 +1,7 @@
 using System.Security.Claims;
 using EduBoost.API.Common.Models;
 using EduBoost.API.Features.Quizzes.Models;
+using EduBoost.API.Infrastructure.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,7 +10,7 @@ namespace EduBoost.API.Features.Quizzes;
 [ApiController]
 [Route("api/quizzes")]
 [Authorize]
-public class QuizzesController(IQuizzesRepository repo) : ControllerBase
+public class QuizzesController(IQuizzesRepository repo, IAgentService agent) : ControllerBase
 {
     private Guid UserId => Guid.Parse(
         User.FindFirstValue(ClaimTypes.NameIdentifier) ?? User.FindFirstValue("sub") ?? Guid.Empty.ToString());
@@ -168,5 +169,142 @@ public class QuizzesController(IQuizzesRepository repo) : ControllerBase
         var q = await repo.UpdateMyQuestionAsync(qId, request);
         if (q == null) return NotFound(ApiResponse.Fail($"Không tìm thấy câu hỏi '{qId}'"));
         return Ok(ApiResponse<QuestionDto>.Ok(q, "Cập nhật thành công"));
+    }
+
+    // ── AI Tutor Endpoints ───────────────────────────────────────────────────
+
+    /// <summary>Student: Get AI Tutor next action for a topic</summary>
+    [HttpGet("tutor/next-action")]
+    public async Task<IActionResult> GetTutorNextAction([FromQuery] Guid topicId)
+    {
+        var topic = await repo.GetTopicNameAsync(topicId);
+        if (topic == null) return NotFound(ApiResponse.Fail("Topic not found"));
+
+        var agentResponse = await agent.GetNextActionAsync(UserId.ToString(), topic);
+        if (agentResponse == null)
+        {
+            // Fallback: always return QUIZ action if agent is unavailable
+            return Ok(ApiResponse<object>.Ok(new { action = "QUIZ", reason = "Practice mode (AI agent offline)" }));
+        }
+        return Ok(ApiResponse<AgentNextActionResponse>.Ok(agentResponse));
+    }
+
+    /// <summary>Student: Submit single answer for adaptive quiz</summary>
+    [HttpPost("tutor/submit-answer")]
+    public async Task<IActionResult> SubmitTutorAnswer([FromBody] TutorAnswerRequest request)
+    {
+        if (!ModelState.IsValid) return BadRequest(ApiResponse.Fail("Invalid request data", ModelState));
+
+        if (!Guid.TryParse(request.TopicId, out var topicId))
+            return BadRequest(ApiResponse.Fail("Invalid TopicId format"));
+
+        var topic = await repo.GetTopicNameAsync(topicId);
+        if (topic == null) return NotFound(ApiResponse.Fail("Topic not found"));
+
+        bool isCorrect = request.SelectedAnswer.Trim()
+            .Equals(request.CorrectAnswer.Trim(), StringComparison.OrdinalIgnoreCase);
+
+        // Update AI agent state
+        var stateResponse = await agent.UpdateStateAsync(
+            UserId.ToString(), topic, request.Difficulty, isCorrect);
+
+        // Get explanation for wrong answers
+        string explanation = "";
+        if (!isCorrect)
+        {
+            var agentExplanation = await agent.GetGraderExplanationAsync(
+                request.QuestionText, request.CorrectAnswer, request.SelectedAnswer);
+            explanation = agentExplanation ?? $"The correct answer is '{request.CorrectAnswer}'.";
+        }
+        else
+        {
+            explanation = "Correct! Well done.";
+        }
+
+        var result = new TutorAnswerResult
+        {
+            IsCorrect = isCorrect,
+            Explanation = explanation,
+            Mastery = stateResponse?.Mastery,
+            NewProbability = stateResponse?.NewP,
+            NewTheta = stateResponse?.NewTheta,
+            NextAction = stateResponse != null ? null : "QUIZ" // fallback hint
+        };
+
+        return Ok(ApiResponse<TutorAnswerResult>.Ok(result));
+    }
+
+    /// <summary>Student: Get AI explanation for a topic</summary>
+    [HttpGet("tutor/explain")]
+    public async Task<IActionResult> GetTutorExplanation([FromQuery] Guid topicId)
+    {
+        var topic = await repo.GetTopicNameAsync(topicId);
+        if (topic == null) return NotFound(ApiResponse.Fail("Topic not found"));
+
+        var explanation = await agent.GetExplanationAsync(topic, "needs_review");
+        if (explanation == null)
+        {
+            return Ok(ApiResponse<object>.Ok(new
+            {
+                explanation = $"Review the key concepts of '{topic}'. The AI tutor is currently offline — please try again later.",
+                offline = true
+            }));
+        }
+
+        return Ok(ApiResponse<object>.Ok(new { explanation, offline = false }));
+    }
+
+    /// <summary>Student: Get detailed explanation for wrong answer</summary>
+    [HttpPost("tutor/explain-error")]
+    public async Task<IActionResult> GetErrorExplanation([FromBody] ExplainErrorRequest request)
+    {
+        if (!ModelState.IsValid) return BadRequest(ApiResponse.Fail("Invalid request data", ModelState));
+
+        var explanation = await agent.GetGraderExplanationAsync(
+            request.Question, request.CorrectAnswer, request.StudentAnswer);
+
+        if (explanation == null)
+        {
+            return Ok(ApiResponse<object>.Ok(new
+            {
+                explanation = $"The correct answer is '{request.CorrectAnswer}'. The AI tutor is currently offline for detailed explanations.",
+                offline = true
+            }));
+        }
+
+        return Ok(ApiResponse<object>.Ok(new { explanation, offline = false }));
+    }
+
+    /// <summary>Student: Generate one adaptive quiz question</summary>
+    [HttpGet("tutor/generate-question")]
+    public async Task<IActionResult> GenerateAdaptiveQuestion([FromQuery] Guid topicId, [FromQuery] double difficulty = 0.5)
+    {
+        var topic = await repo.GetTopicNameAsync(topicId);
+        if (topic == null) return NotFound(ApiResponse.Fail("Topic not found"));
+
+        var agentQuestion = await agent.GenerateQuizQuestionAsync(topic, difficulty);
+        if (agentQuestion == null)
+        {
+            return Ok(ApiResponse<object>.Ok(new
+            {
+                question = $"Practice question for '{topic}' is unavailable. The AI agent is offline.",
+                options = new Dictionary<string, string>(),
+                correctAnswer = "",
+                explanation = "",
+                difficultyLevel = difficulty,
+                offline = true
+            }));
+        }
+
+        var dto = new TutorQuestionDto
+        {
+            Question = agentQuestion.Question,
+            Options = agentQuestion.Options,
+            CorrectAnswer = agentQuestion.CorrectAnswer,
+            Explanation = agentQuestion.Explanation,
+            DifficultyLevel = agentQuestion.DifficultyLevel
+        };
+
+        return Ok(ApiResponse<TutorQuestionDto>.Ok(dto));
     }
 }
