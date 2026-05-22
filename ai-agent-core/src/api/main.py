@@ -9,9 +9,13 @@ import logging
 from contextlib import asynccontextmanager
 from typing import Optional
 
+from dotenv import load_dotenv
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
+
+# Load environment variables FIRST
+load_dotenv()
 
 # Ensure project root is on sys.path so relative imports work
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..")))
@@ -32,7 +36,8 @@ logger = logging.getLogger(__name__)
 # ---------------------------------------------------------------------------
 vector_db: Optional[VectorDB] = None
 retriever: Optional[KnowledgeRetriever] = None
-llm: Optional[LLMManager] = None
+llm_quiz: Optional[LLMManager] = None
+llm_explain: Optional[LLMManager] = None
 ingestor: Optional[RAGIngestor] = None
 
 # In-memory agent sessions keyed by student_id
@@ -50,7 +55,7 @@ def get_or_create_agent(student_id: str) -> AgentOrchestrator:
 # ---------------------------------------------------------------------------
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    global vector_db, retriever, llm, ingestor
+    global vector_db, retriever, llm_quiz, llm_explain, ingestor
 
     logger.info("Starting EduBoost AI Agent...")
 
@@ -58,8 +63,16 @@ async def lifespan(app: FastAPI):
     vector_db = VectorDB()
     retriever = KnowledgeRetriever(vector_db)
 
-    # 2. LLM Manager (OpenRouter)
-    llm = LLMManager()
+    # 2. LLM Managers (separate instances for quiz and explanation)
+    quiz_endpoint = os.getenv("QUIZ_LLM_ENDPOINT")
+    quiz_model = os.getenv("QUIZ_LLM_MODEL")
+    llm_quiz = LLMManager(endpoint_url=quiz_endpoint, model=quiz_model)
+    logger.info("Quiz LLM initialized at: %s", quiz_endpoint or "default (OpenRouter)")
+    
+    explain_endpoint = os.getenv("EXPLAIN_LLM_ENDPOINT")
+    explain_model = os.getenv("EXPLAIN_LLM_MODEL")
+    llm_explain = LLMManager(endpoint_url=explain_endpoint, model=explain_model)
+    logger.info("Explanation LLM initialized at: %s", explain_endpoint or "default (OpenRouter)")
 
     # 3. Ingestor (reuses VectorDB's embedding model)
     ingestor = RAGIngestor(vector_db)
@@ -184,8 +197,8 @@ async def update_student_state(request: UpdateStateRequest):
 
 @app.get("/tutor/generate-question")
 async def generate_quiz_question(topic_name: str, difficulty: float = 0.0):
-    """Generates an adaptive quiz question using RAG context + LLM."""
-    if not llm or not retriever:
+    """Generates an adaptive quiz question using RAG context + LLM (Quiz LLM)."""
+    if not llm_quiz or not retriever:
         raise HTTPException(503, "LLM or Retriever not initialized")
 
     # Retrieve relevant context
@@ -198,8 +211,8 @@ async def generate_quiz_question(topic_name: str, difficulty: float = 0.0):
         context=context,
     )
 
-    # Generate quiz question as JSON
-    result = llm.generate_json(prompt)
+    # Generate quiz question as JSON using QUIZ LLM
+    result = llm_quiz.generate_json(prompt)
 
     # Ensure required fields exist
     if "error" in result:
@@ -216,8 +229,8 @@ async def generate_quiz_question(topic_name: str, difficulty: float = 0.0):
 
 @app.get("/tutor/explain")
 async def explain_topic(topic_name: str, student_state: str = "beginning"):
-    """Generates a Socratic explanation using RAG context + LLM."""
-    if not llm or not retriever:
+    """Generates a Socratic explanation using RAG context + LLM (Explanation LLM)."""
+    if not llm_explain or not retriever:
         raise HTTPException(503, "LLM or Retriever not initialized")
 
     context = retriever.get_context(topic_name)
@@ -228,14 +241,14 @@ async def explain_topic(topic_name: str, student_state: str = "beginning"):
         student_state=student_state,
     )
 
-    explanation = llm.generate(prompt)
+    explanation = llm_explain.generate(prompt)
     return {"explanation": explanation}
 
 
 @app.post("/tutor/explain-error")
 async def grade_answer(request: GraderRequest):
-    """Analyzes a wrong answer and explains the knowledge gap."""
-    if not llm:
+    """Analyzes a wrong answer and explains the knowledge gap (Explanation LLM)."""
+    if not llm_explain:
         raise HTTPException(503, "LLM not initialized")
 
     prompt = PromptTemplates.GRADER_TEMPLATE.format(
@@ -244,7 +257,7 @@ async def grade_answer(request: GraderRequest):
         student_answer=request.student_answer,
     )
 
-    explanation = llm.generate(prompt)
+    explanation = llm_explain.generate(prompt)
     return {"explanation": explanation}
 
 

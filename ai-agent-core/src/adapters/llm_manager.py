@@ -16,27 +16,57 @@ logger = logging.getLogger(__name__)
 
 class LLMManager:
     """
-    Manages interactions with the LLM via the OpenRouter API.
+    Manages interactions with an LLM via OpenAI-compatible API.
 
-    Uses the ``openai`` client library pointed at OpenRouter's base URL.
-    The model defaults to ``arcee-ai/trinity-large-thinking:free`` which
-    is a free-tier reasoning model.
+    Can connect to OpenRouter API (default) or any custom endpoint.
+    Supports configurable model, endpoint URL, and API key.
     """
 
-    def __init__(self):
+    def __init__(
+        self,
+        endpoint_url: Optional[str] = None,
+        model: Optional[str] = None,
+        api_key: Optional[str] = None,
+    ):
+        """
+        Initialize LLMManager with optional custom endpoint and model.
+        
+        Args:
+            endpoint_url: Custom endpoint URL (e.g., https://api.openai.com/v1).
+                         Defaults to OpenRouter if not provided.
+            model: Model name/ID to use. Defaults to env var LLM_MODEL or trinity-large-thinking:free.
+            api_key: API key for authentication. Defaults to OPENROUTER_API_KEY env var.
+        """
         load_dotenv()
-        api_key = os.getenv("OPENROUTER_API_KEY", "")
+        
+        # Resolve endpoint URL (treat empty string as None)
+        if not endpoint_url:
+            endpoint_url = os.getenv("LLM_ENDPOINT") or None
+        if not endpoint_url:
+            endpoint_url = "https://openrouter.ai/api/v1"
+        self.endpoint_url = endpoint_url
+        
+        # Resolve model (treat empty string as None)
+        if not model:
+            model = os.getenv("LLM_MODEL") or None
+        if not model:
+            model = "arcee-ai/trinity-large-thinking:free"
+        self.model = model
+        
+        # Resolve API key
+        if api_key is None:
+            api_key = os.getenv("OPENROUTER_API_KEY", "")
+        
         if not api_key:
             logger.warning(
-                "OPENROUTER_API_KEY is not set. LLM calls will fail. "
-                "Set it in the .env file or as an environment variable."
+                "API key not set. LLM calls will fail. "
+                "Set OPENROUTER_API_KEY or pass api_key parameter."
             )
 
         self.client = OpenAI(
-            base_url="https://openrouter.ai/api/v1",
+            base_url=endpoint_url,
             api_key=api_key,
         )
-        self.model = os.getenv("LLM_MODEL", "arcee-ai/trinity-large-thinking:free")
 
     # ------------------------------------------------------------------
     # Public API
