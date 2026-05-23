@@ -25,6 +25,8 @@ import { EntryTestPage } from '@/features/student/entry-test/entry-test-page';
 import { RoadmapPage } from '@/features/student/roadmap/roadmap-page';
 import { PracticePage } from '@/features/student/practice/practice-page';
 import { AILabQuizPage } from '@/features/student/ai-lab/ai-lab-quiz-page';
+import { TeacherPoolDashboard } from '@/features/teacher/quizzes/pool-dashboard';
+import { StudentPoolDashboard } from '@/features/student/ai-lab/pool-dashboard';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -67,6 +69,7 @@ function AppRoutes() {
           <Route path="/teacher/classes" element={<TeacherClassesPage />} />
           <Route path="/teacher/classes/:id" element={<TeacherClassDetailPage />} />
           <Route path="/teacher/ai-studio/:quizId" element={<QuizReviewPage />} />
+          <Route path="/teacher/quiz-pool" element={<TeacherPoolDashboard />} />
           <Route path="/teacher/profile" element={<ProfilePage />} />
         </Route>
       </Route>
@@ -79,6 +82,7 @@ function AppRoutes() {
           <Route path="/student/classes" element={<StudentClassesPage />} />
           <Route path="/student/ai-lab" element={<AILabPage />} />
           <Route path="/student/ai-lab/:quizId" element={<AILabQuizPage />} />
+          <Route path="/student/quiz-pool" element={<StudentPoolDashboard />} />
           <Route path="/student/roadmap/:classId" element={<RoadmapPage />} />
           <Route path="/student/practice/:topicId" element={<PracticePage />} />
           <Route path="/student/profile" element={<ProfilePage />} />

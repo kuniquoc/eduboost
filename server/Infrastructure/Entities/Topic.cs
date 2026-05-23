@@ -11,10 +11,12 @@ public class Topic
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
     // FK
-    public Guid ClassId { get; set; }
+    public Guid? ClassId { get; set; }
+    public Guid? OwnerId { get; set; }
 
     // Navigation
-    public Class Class { get; set; } = null!;
+    public Class? Class { get; set; }
+    public User? Owner { get; set; }
     public ICollection<Quiz> Quizzes { get; set; } = [];
     public ICollection<Document> Documents { get; set; } = [];
 }

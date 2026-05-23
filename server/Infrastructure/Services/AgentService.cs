@@ -10,6 +10,7 @@ public interface IAgentService
     Task<AgentQuizResponse?> GenerateQuizQuestionAsync(string topicName, double difficulty);
     Task<string?> GetExplanationAsync(string topicName, string studentState);
     Task<string?> GetGraderExplanationAsync(string question, string correctAnswer, string studentAnswer);
+    Task<AgentQuizBatchResponse?> GenerateQuizBatchAsync(string topicName, string? userPrompt, string? docUrl, int numQuestions, string difficulty);
 }
 
 public class AgentService : IAgentService
@@ -130,6 +131,32 @@ public class AgentService : IAgentService
             return null;
         }
     }
+
+    public async Task<AgentQuizBatchResponse?> GenerateQuizBatchAsync(
+        string topicName, string? userPrompt, string? docUrl, int numQuestions, string difficulty)
+    {
+        try
+        {
+            var payload = new
+            {
+                topic_name = topicName,
+                user_prompt = userPrompt,
+                doc_url = docUrl,
+                num_questions = numQuestions,
+                difficulty
+            };
+            var content = new StringContent(JsonSerializer.Serialize(payload, JsonOpts), Encoding.UTF8, "application/json");
+            var response = await _http.PostAsync("/tutor/generate-quiz", content);
+            response.EnsureSuccessStatusCode();
+            var json = await response.Content.ReadAsStringAsync();
+            return JsonSerializer.Deserialize<AgentQuizBatchResponse>(json, JsonOpts);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogWarning(ex, "AI Agent unavailable for GenerateQuizBatch (topic={Topic})", topicName);
+            return null;
+        }
+    }
 }
 
 // ── Response DTOs ────────────────────────────────────────────────────────────
@@ -158,4 +185,24 @@ public class AgentQuizResponse
     public string CorrectAnswer { get; set; } = "";
     public string Explanation { get; set; } = "";
     public double DifficultyLevel { get; set; }
+}
+
+public class AgentQuizBatchOption
+{
+    public string Text { get; set; } = "";
+    public bool IsCorrect { get; set; }
+}
+
+public class AgentQuizBatchQuestion
+{
+    public string Question { get; set; } = "";
+    public string Type { get; set; } = "mcq";
+    public string Difficulty { get; set; } = "medium";
+    public string Explanation { get; set; } = "";
+    public List<AgentQuizBatchOption> Options { get; set; } = [];
+}
+
+public class AgentQuizBatchResponse
+{
+    public List<AgentQuizBatchQuestion> Questions { get; set; } = [];
 }

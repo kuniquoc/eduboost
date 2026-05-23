@@ -330,3 +330,46 @@ export interface ApiResponse<T> {
   message?: string;
   errors?: unknown;
 }
+
+// ─── Quiz Pool ───────────────────────────────────────────
+
+export interface GeneratePoolQuizRequest {
+  topicName: string;
+  classId?: string;
+  userSuggestion?: string;
+  documentId?: string;
+  numQuestions?: number;
+  difficulty?: 'easy' | 'medium' | 'hard';
+}
+
+export interface CreateTestFromPoolRequest {
+  title: string;
+  classId: string;
+  poolQuizIds: string[];
+  timeLimitMinutes?: number;
+  totalScore?: number;
+}
+
+export interface CreateRevisionSetFromPoolRequest {
+  title: string;
+  poolQuizIds: string[];
+}
+
+export interface TopicPoolDto {
+  id: string;
+  name: string;
+  description: string;
+  difficulty: 'easy' | 'medium' | 'hard';
+  classId?: string;
+  ownerId?: string;
+  quizCount: number;
+  questionCount: number;
+}
+
+export interface PoolQuizDetailDto {
+  quizId: string;
+  title: string;
+  createdAt: string;
+  questions: QuestionDto[];
+}
+

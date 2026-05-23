@@ -14,10 +14,12 @@ public class Quiz
     // FK
     public Guid? ClassId { get; set; }
     public Guid? TopicId { get; set; }
+    public Guid? OwnerId { get; set; }
 
     // Navigation
     public Class? Class { get; set; }
     public Topic? Topic { get; set; }
+    public User? Owner { get; set; }
     public ICollection<Question> Questions { get; set; } = [];
     public ICollection<Document> GeneratedFromDocuments { get; set; } = [];
     public ICollection<QuizSubmission> Submissions { get; set; } = [];

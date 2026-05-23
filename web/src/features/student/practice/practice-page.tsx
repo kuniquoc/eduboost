@@ -2,6 +2,7 @@ import { useState, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useMutation } from '@tanstack/react-query';
 import { quizzesService } from '@/services/quizzes.service';
+import { normalizeText } from '@/utils/text-normalization';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -38,6 +39,7 @@ export function PracticePage() {
 
   const [step, setStep] = useState<TutorStep>({ type: 'loading' });
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
+  const [showQuizExplanation, setShowQuizExplanation] = useState(false);
   const [questionsAnswered, setQuestionsAnswered] = useState(0);
   const [correctCount, setCorrectCount] = useState(0);
   const [started, setStarted] = useState(false);
@@ -73,6 +75,7 @@ export function PracticePage() {
     mutationFn: () => quizzesService.generateAdaptiveQuestion(topicId!),
     onSuccess: (question: TutorQuestionDto) => {
       setSelectedOption(null);
+      setShowQuizExplanation(false);
       setStep({ type: 'quiz', question });
     },
     onError: () => {
@@ -250,7 +253,7 @@ export function PracticePage() {
           <Card className="border-blue-500/20 bg-gradient-to-br from-blue-500/5 to-transparent">
             <CardContent className="p-6">
               <div className="prose prose-invert prose-sm max-w-none whitespace-pre-wrap text-foreground/90 leading-relaxed">
-                {step.content}
+                {normalizeText(step.content)}
               </div>
             </CardContent>
           </Card>
@@ -284,7 +287,7 @@ export function PracticePage() {
           <Card className="border-border">
             <CardContent className="p-6">
               <h3 className="mb-6 text-base font-medium text-foreground leading-relaxed">
-                {step.question.question}
+                {normalizeText(step.question.question)}
               </h3>
 
               <div className="space-y-3">
@@ -310,7 +313,7 @@ export function PracticePage() {
                         >
                           {key}
                         </span>
-                        <span className="text-sm">{value}</span>
+                        <span className="text-sm">{normalizeText(value)}</span>
                       </div>
                     </button>
                   );
@@ -365,7 +368,7 @@ export function PracticePage() {
                     </div>
                     <div>
                       <h3 className="text-lg font-bold text-red-400">Chưa đúng</h3>
-                      <p className="text-xs text-muted-foreground">Đừng nản, hãy xem giải thích bên dưới</p>
+                      <p className="text-xs text-muted-foreground">Đừng lo lắng, hãy xem giải thích hoặc yêu cầu hỗ trợ</p>
                     </div>
                   </>
                 )}
@@ -373,20 +376,21 @@ export function PracticePage() {
 
               {/* Question review */}
               <div className="rounded-xl border border-border bg-background/50 p-4 mb-4">
-                <p className="text-sm font-medium text-foreground mb-3">{step.question.question}</p>
+                <p className="text-sm font-medium text-foreground mb-3">{normalizeText(step.question.question)}</p>
                 <div className="space-y-2">
                   {Object.entries(step.question.options).map(([key, value]) => {
                     const isCorrect = key === step.question.correctAnswer;
                     const isStudentPick = key === step.selectedKey;
+                    const shouldShowCorrect = step.result.isCorrect || showQuizExplanation;
                     let cls = 'border-border text-muted-foreground';
-                    if (isCorrect) cls = 'border-green-500/40 bg-green-500/10 text-green-400';
+                    if (isCorrect && shouldShowCorrect) cls = 'border-green-500/40 bg-green-500/10 text-green-400';
                     else if (isStudentPick && !step.result.isCorrect)
                       cls = 'border-red-500/40 bg-red-500/10 text-red-400 line-through';
                     return (
                       <div key={key} className={`flex items-center gap-2 rounded-lg border px-3 py-2 text-sm ${cls}`}>
                         <span className="font-medium">{key}.</span>
-                        <span>{value}</span>
-                        {isCorrect && <CheckCircle className="ml-auto h-4 w-4 text-green-400" />}
+                        <span>{normalizeText(value)}</span>
+                        {isCorrect && shouldShowCorrect && <CheckCircle className="ml-auto h-4 w-4 text-green-400" />}
                         {isStudentPick && !step.result.isCorrect && <XCircle className="ml-auto h-4 w-4 text-red-400" />}
                       </div>
                     );
@@ -395,13 +399,13 @@ export function PracticePage() {
               </div>
 
               {/* Inline explanation from quiz generation */}
-              {step.question.explanation && (
-                <div className="rounded-xl border border-amber-500/20 bg-amber-500/5 p-4 mb-4">
+              {showQuizExplanation && step.question.explanation && (
+                <div className="rounded-xl border border-amber-500/20 bg-amber-500/5 p-4 mb-4 animate-in fade-in duration-300">
                   <div className="flex items-center gap-2 mb-2">
                     <Lightbulb className="h-4 w-4 text-amber-400" />
                     <span className="text-sm font-medium text-amber-400">Giải thích</span>
                   </div>
-                  <p className="text-sm text-foreground/80 leading-relaxed">{step.question.explanation}</p>
+                  <p className="text-sm text-foreground/80 leading-relaxed">{normalizeText(step.question.explanation)}</p>
                 </div>
               )}
 
@@ -417,18 +421,28 @@ export function PracticePage() {
           </Card>
 
           {/* Action buttons */}
-          <div className="flex items-center justify-between">
+          <div className="flex flex-wrap items-center gap-3">
+            {step.question.explanation && !showQuizExplanation && (
+              <Button
+                variant="outline"
+                onClick={() => setShowQuizExplanation(true)}
+                className="gap-2"
+              >
+                <BookOpen className="h-4 w-4 text-primary" />
+                Xem giải thích
+              </Button>
+            )}
             {!step.result.isCorrect && (
               <Button
                 variant="outline"
                 onClick={handleExplainError}
                 disabled={errorExplainMutation.isPending}
-                className="gap-2"
+                className="gap-2 border-primary/30 hover:border-primary/60 bg-primary/5"
               >
                 {errorExplainMutation.isPending ? (
                   <><Loader2 className="h-4 w-4 animate-spin" /> Đang phân tích...</>
                 ) : (
-                  <><Lightbulb className="h-4 w-4 text-amber-400" /> Giải thích chi tiết lỗi sai</>
+                  <><Sparkles className="h-4 w-4 text-violet-400 animate-pulse" /> Yêu cầu gia sư AI hỗ trợ</>
                 )}
               </Button>
             )}
@@ -457,7 +471,7 @@ export function PracticePage() {
           <Card className="border-amber-500/20 bg-gradient-to-br from-amber-500/5 to-transparent">
             <CardContent className="p-6">
               <div className="prose prose-invert prose-sm max-w-none whitespace-pre-wrap text-foreground/90 leading-relaxed">
-                {step.explanation}
+                {normalizeText(step.explanation)}
               </div>
             </CardContent>
           </Card>

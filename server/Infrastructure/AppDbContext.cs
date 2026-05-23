@@ -65,7 +65,15 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
             .HasOne(t => t.Class)
             .WithMany(c => c.Topics)
             .HasForeignKey(t => t.ClassId)
-            .OnDelete(DeleteBehavior.Cascade);
+            .OnDelete(DeleteBehavior.Cascade)
+            .IsRequired(false);
+
+        modelBuilder.Entity<Topic>()
+            .HasOne(t => t.Owner)
+            .WithMany()
+            .HasForeignKey(t => t.OwnerId)
+            .OnDelete(DeleteBehavior.Cascade)
+            .IsRequired(false);
 
         modelBuilder.Entity<Document>()
             .HasOne(d => d.Owner)
@@ -102,6 +110,13 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
             .WithMany(t => t.Quizzes)
             .HasForeignKey(q => q.TopicId)
             .OnDelete(DeleteBehavior.SetNull);
+
+        modelBuilder.Entity<Quiz>()
+            .HasOne(q => q.Owner)
+            .WithMany()
+            .HasForeignKey(q => q.OwnerId)
+            .OnDelete(DeleteBehavior.Cascade)
+            .IsRequired(false);
 
         modelBuilder.Entity<Question>()
             .HasOne(q => q.Quiz)

@@ -59,9 +59,10 @@ async def lifespan(app: FastAPI):
 
     logger.info("Starting EduBoost AI Agent...")
 
-    # 1. VectorDB + Retriever
-    vector_db = VectorDB()
-    retriever = KnowledgeRetriever(vector_db)
+    # 1. NOTE: Temporarily disable RAG (VectorDB / Retriever / Ingestor)
+    # Skipping initialization so the processing flow uses LLM-only fallbacks.
+    vector_db = None
+    retriever = None
 
     # 2. LLM Managers (separate instances for quiz and explanation)
     quiz_endpoint = os.getenv("QUIZ_LLM_ENDPOINT")
@@ -74,16 +75,8 @@ async def lifespan(app: FastAPI):
     llm_explain = LLMManager(endpoint_url=explain_endpoint, model=explain_model)
     logger.info("Explanation LLM initialized at: %s", explain_endpoint or "default (OpenRouter)")
 
-    # 3. Ingestor (reuses VectorDB's embedding model)
-    ingestor = RAGIngestor(vector_db)
-
-    # 4. Auto-ingest data/raw/ if the FAISS index is empty
-    if len(vector_db.metadata) == 0:
-        raw_dir = os.path.join(os.path.dirname(__file__), "..", "..", "data", "raw")
-        if os.path.isdir(raw_dir):
-            logger.info("FAISS index is empty — ingesting data/raw/ ...")
-            ingestor.process_directory(raw_dir)
-            logger.info("Ingestion complete. %d chunks stored.", len(vector_db.metadata))
+    # 3. Ingestor + auto-ingest skipped while RAG is disabled
+    ingestor = None
 
     logger.info("EduBoost AI Agent ready.")
     yield
@@ -198,11 +191,13 @@ async def update_student_state(request: UpdateStateRequest):
 @app.get("/tutor/generate-question")
 async def generate_quiz_question(topic_name: str, difficulty: float = 0.0):
     """Generates an adaptive quiz question using RAG context + LLM (Quiz LLM)."""
-    if not llm_quiz or not retriever:
-        raise HTTPException(503, "LLM or Retriever not initialized")
+    if not llm_quiz:
+        raise HTTPException(503, "LLM not initialized")
 
-    # Retrieve relevant context
-    context = retriever.get_context(topic_name)
+    # Retrieve relevant context if Retriever is available, otherwise use empty context
+    context = ""
+    if retriever:
+        context = retriever.get_context(topic_name)
 
     # Build prompt
     prompt = PromptTemplates.QUIZ_TEMPLATE.format(
@@ -230,10 +225,13 @@ async def generate_quiz_question(topic_name: str, difficulty: float = 0.0):
 @app.get("/tutor/explain")
 async def explain_topic(topic_name: str, student_state: str = "beginning"):
     """Generates a Socratic explanation using RAG context + LLM (Explanation LLM)."""
-    if not llm_explain or not retriever:
-        raise HTTPException(503, "LLM or Retriever not initialized")
+    if not llm_explain:
+        raise HTTPException(503, "LLM not initialized")
 
-    context = retriever.get_context(topic_name)
+    # Use retriever when available; otherwise proceed with empty context
+    context = ""
+    if retriever:
+        context = retriever.get_context(topic_name)
 
     prompt = PromptTemplates.EXPLANATION_TEMPLATE.format(
         topic=topic_name,
@@ -259,6 +257,94 @@ async def grade_answer(request: GraderRequest):
 
     explanation = llm_explain.generate(prompt)
     return {"explanation": explanation}
+
+
+class GenerateQuizBatchRequest(BaseModel):
+    topic_name: str
+    user_prompt: Optional[str] = None
+    doc_url: Optional[str] = None
+    num_questions: int = 5
+    difficulty: str = "medium"
+
+
+@app.post("/tutor/generate-quiz")
+async def generate_quiz_batch(request: GenerateQuizBatchRequest):
+    """Generates multiple quiz questions using LLM context or document or user suggestion."""
+    if not llm_quiz:
+        raise HTTPException(503, "LLM not initialized")
+
+    context = ""
+    if request.doc_url:
+        try:
+            import requests
+            import tempfile
+            logger.info("Downloading file from: %s", request.doc_url)
+            response = requests.get(request.doc_url, timeout=30)
+            response.raise_for_status()
+
+            # Extract extension from URL path cleanly
+            parsed_url = request.doc_url.split('?')[0]
+            ext = os.path.splitext(parsed_url)[1].lower() or ".txt"
+
+            with tempfile.NamedTemporaryFile(delete=False, suffix=ext) as tmp:
+                tmp.write(response.content)
+                tmp_path = tmp.name
+
+            try:
+                if ext == ".pdf":
+                    from PyPDF2 import PdfReader
+                    text = ""
+                    reader = PdfReader(tmp_path)
+                    for page in reader.pages:
+                        page_text = page.extract_text()
+                        if page_text:
+                            text += page_text + "\n"
+                    context = text
+                else:
+                    try:
+                        with open(tmp_path, "r", encoding="utf-8") as f:
+                            context = f.read()
+                    except UnicodeDecodeError:
+                        with open(tmp_path, "r", encoding="latin-1") as f:
+                            context = f.read()
+            finally:
+                try:
+                    os.unlink(tmp_path)
+                except Exception:
+                    pass
+
+            # Truncate context to keep LLM calls fast and avoid limit overflow
+            context = context[:10000]
+            logger.info("Extracted %d characters of context from document", len(context))
+        except Exception as e:
+            logger.error("Error downloading or parsing document from URL: %s", e)
+            raise HTTPException(500, f"Failed to download or parse document: {str(e)}")
+
+    # Construct and format the LLM prompt
+    prompt = PromptTemplates.BATCH_QUIZ_TEMPLATE.format(
+        topic=request.topic_name,
+        difficulty=request.difficulty,
+        context=context or "No document context provided.",
+        user_prompt=request.user_prompt or "None.",
+        num_questions=request.num_questions
+    )
+
+    # Call QUIZ LLM and extract parsed JSON
+    result = llm_quiz.generate_json(prompt)
+
+    if "error" in result:
+        raise HTTPException(500, f"LLM failed to generate quiz JSON: {result.get('error')}")
+
+    # Extract the 'questions' list from the root object
+    questions = result.get("questions")
+    if not isinstance(questions, list):
+        # Fallback in case LLM ignored root object structure and returned raw array or list directly
+        if isinstance(result, list):
+            return {"questions": result}
+        raise HTTPException(500, f"LLM did not return a valid list under 'questions' key: {result}")
+
+    return {"questions": questions}
+
 
 
 # ---------------------------------------------------------------------------

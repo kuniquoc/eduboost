@@ -6,6 +6,7 @@ using EduBoost.API.Features.Quizzes;
 using EduBoost.API.Features.Roadmap;
 using EduBoost.API.Features.Students;
 using EduBoost.API.Features.Topics;
+using EduBoost.API.Features.QuizPool;
 using EduBoost.API.Infrastructure;
 using EduBoost.API.Infrastructure.Services;
 using EduBoost.API.Infrastructure.Storage;
@@ -123,6 +124,7 @@ builder.Services.AddScoped<IDocumentsRepository, DocumentsRepository>();
 builder.Services.AddScoped<IQuizzesRepository, QuizzesRepository>();
 builder.Services.AddScoped<IStudentsRepository, StudentsRepository>();
 builder.Services.AddScoped<IRoadmapRepository, RoadmapRepository>();
+builder.Services.AddScoped<IPoolRepository, PoolRepository>();
 
 // ── DI — AI Agent Service ─────────────────────────────────────────────────────
 builder.Services.AddHttpClient<IAgentService, AgentService>();

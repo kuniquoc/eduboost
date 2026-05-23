@@ -3,6 +3,7 @@ import { useAuthStore } from '@/store/auth-store';
 import {
   BookOpen, Bot, User, LayoutDashboard,
   GraduationCap, LogOut, ChevronLeft, Menu,
+  Database,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
@@ -19,6 +20,7 @@ interface NavItem {
 
 const teacherNav: NavItem[] = [
   { label: 'Lớp học', href: '/teacher/classes', icon: BookOpen },
+  { label: 'Quiz Pool', href: '/teacher/quiz-pool', icon: Database },
   { label: 'Hồ sơ', href: '/teacher/profile', icon: User },
 ];
 
@@ -26,6 +28,7 @@ const studentNav: NavItem[] = [
   { label: 'Tổng quan', href: '/student/dashboard', icon: LayoutDashboard },
   { label: 'Lớp học', href: '/student/classes', icon: GraduationCap },
   { label: 'AI Lab', href: '/student/ai-lab', icon: Bot },
+  { label: 'Quiz Pool', href: '/student/quiz-pool', icon: Database },
   { label: 'Hồ sơ', href: '/student/profile', icon: User },
 ];
 

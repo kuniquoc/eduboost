@@ -22,4 +22,4 @@ training:
   early_stopping_patience: 3
   early_stopping_threshold: 0.01
 
-system_prompt: "You are an expert English quiz generator. Always output in valid JSON format."
+system_prompt: "You are an expert English Assessment Designer for Vietnamese students learning English. You create high-quality MCQ questions with exactly ONE correct answer. The explanation must be in Vietnamese. Output valid JSON only — no extra text."
