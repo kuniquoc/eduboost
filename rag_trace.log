@@ -1,0 +1,27 @@
+================== RAG TRACE ==================
+[QUERY] "Explain the difference between Present Simple and Present Continuous."
+
+[STEP 1 - BI-ENCODER RETRIEVAL] Top-20 candidates:
+  Rank 01 | Score: 0.1719 | Chunk #0 (test_conditional_sentences.txt) | "Conditional sentences type 1 are used to express real or possible situations. Th..."
+  Rank 02 | Score: 0.0367 | Chunk #1 (test_conditional_sentences.txt) | "This condition is highly likely to happen in the present or future. Conditional ..."
+
+[STEP 2 - CROSS-ENCODER RERANKING] Scores:
+  Chunk #0 (test_conditional_sentences.txt) → rerank_score: -3.95
+  Chunk #1 (test_conditional_sentences.txt) → rerank_score: -4.94
+
+[STEP 3 - TOP-2 SELECTED]
+  #1 Chunk #0 (test_conditional_sentences.txt) | rerank: -3.95
+    Text Content:
+      Conditional sentences type 1 are used to express real or possible situations. The structure is: If + Present Simple, Will + Verb. For example: If it rains, we will stay at home.
+  #2 Chunk #1 (test_conditional_sentences.txt) | rerank: -4.94
+    Text Content:
+      This condition is highly likely to happen in the present or future. Conditional sentences type 2 are used to express imaginary or impossible situations. The structure is: If + Past Simple, Would + Verb. For example: If I won the lottery, I would buy a big house. This is a hypothetical condition that is unlikely to occur.
+
+[STEP 4 - LLM ANSWER]
+  "Động từ 'Present Simple' (V2) và 'Present Continuous' (V-ing) đều diễn tả hành động đang diễn ra ở thời điểm hiện tại, nhưng chúng có sự khác biệt về tính chất của hành động:
+
+- 'Present Simple': Biểu thị một hành động thường xuyên, lặp đi lặp lại, hay một quy luật chung (thực tế hoặc giả định). Ví dụ: "She drinks coffee every morning" (Cô ấy uống cà phê mỗi sáng).
+
+- 'Present Continuous': Biểu thị một hành động đang diễn ra ngay lúc này (hiện tại). Nó thể hiện sự tiếp diễn của một hành động mà người nghe có thể nhìn thấy hoặc cảm nhận được. Ví dụ: "The children are playing in the park" (Những đứa trẻ đang chơi trong công viên)."
+===============================================
+

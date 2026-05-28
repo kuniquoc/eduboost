@@ -204,31 +204,31 @@ public class QuizzesController(IQuizzesRepository repo, IAgentService agent) : C
         bool isCorrect = request.SelectedAnswer.Trim()
             .Equals(request.CorrectAnswer.Trim(), StringComparison.OrdinalIgnoreCase);
 
-        // Update AI agent state
-        var stateResponse = await agent.UpdateStateAsync(
-            UserId.ToString(), topic, request.Difficulty, isCorrect);
+        // Run BKT & IRT updates asynchronously in the background (fire-and-forget) to keep grading instantaneous.
+        _ = Task.Run(async () =>
+        {
+            try
+            {
+                await agent.UpdateStateAsync(UserId.ToString(), topic, request.Difficulty, isCorrect);
+            }
+            catch (Exception ex)
+            {
+                // Background updates are logged but do not block the active student session
+                Console.WriteLine($"[BACKGROUND-UPDATE] Failed to update BKT/IRT state for student {UserId}: {ex.Message}");
+            }
+        });
 
-        // Get explanation for wrong answers
-        string explanation = "";
-        if (!isCorrect)
-        {
-            var agentExplanation = await agent.GetGraderExplanationAsync(
-                request.QuestionText, request.CorrectAnswer, request.SelectedAnswer);
-            explanation = agentExplanation ?? $"The correct answer is '{request.CorrectAnswer}'.";
-        }
-        else
-        {
-            explanation = "Correct! Well done.";
-        }
+        // Predefined rapid explanation (not displayed on the UI anyway; detail is fetched on-demand asynchronously)
+        string explanation = isCorrect ? "Correct! Well done." : $"The correct answer is '{request.CorrectAnswer}'.";
 
         var result = new TutorAnswerResult
         {
             IsCorrect = isCorrect,
             Explanation = explanation,
-            Mastery = stateResponse?.Mastery,
-            NewProbability = stateResponse?.NewP,
-            NewTheta = stateResponse?.NewTheta,
-            NextAction = stateResponse != null ? null : "QUIZ" // fallback hint
+            Mastery = null,
+            NewProbability = null,
+            NewTheta = null,
+            NextAction = null
         };
 
         return Ok(ApiResponse<TutorAnswerResult>.Ok(result));

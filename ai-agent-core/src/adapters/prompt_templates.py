@@ -90,6 +90,9 @@ Difficulty Guide:
     # Prompt cho việc phân tích lỗi sai (Grader)
     GRADER_TEMPLATE = """Analyze why the student chose the wrong answer and help them understand the correct one.
 
+## Context from textbook (USE THIS as reference if provided):
+{context}
+
 ## Question:
 {question}
 
