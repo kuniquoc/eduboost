@@ -14,8 +14,8 @@ class KnowledgeRetriever:
         """
         search_query = query if query else topic
         
-        # Lấy top 3 đoạn văn bản liên quan nhất
-        docs = self.db.search(search_query, k=3)
+        # Lấy top 3 đoạn văn bản liên quan nhất (legacy string list)
+        docs = self.db.search(search_query, k=3, return_scores=False)
         
         if not docs:
             return "No specific textbook context available for this topic."

@@ -7,8 +7,11 @@
 import os
 import sys
 
-from PyPDF2 import PdfReader
-from src.rag.semantic_chunker import SemanticTextSplitter
+# Ensure project root is in the Python path
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../..")))
+
+from src.rag.document_reader import DocumentReader
+from src.rag.text_splitters import SemanticTextSplitter
 from src.rag.vector_db import VectorDB
 
 
@@ -17,6 +20,7 @@ class RAGIngestor:
 
     def __init__(self, vector_db: VectorDB):
         self.db = vector_db
+        self.reader = DocumentReader()
         # Re-use the same embedding model the VectorDB already loaded so we
         # don't waste memory loading it twice.
         self.text_splitter = SemanticTextSplitter(
@@ -26,59 +30,17 @@ class RAGIngestor:
             max_chunk_size=1500,
         )
 
-    # ------------------------------------------------------------------
-    # File extraction helpers
-    # ------------------------------------------------------------------
-
-    def _extract_text_from_pdf(self, pdf_path: str) -> str:
-        """Extract text from a PDF file."""
-        print(f"Extracting PDF: {pdf_path}...")
-        text = ""
-        try:
-            reader = PdfReader(pdf_path)
-            for page in reader.pages:
-                page_text = page.extract_text()
-                if page_text:
-                    text += page_text + "\n"
-        except Exception as e:
-            print(f"Error reading PDF {pdf_path}: {e}")
-        return text
-
-    def _extract_text_from_txt(self, txt_path: str) -> str:
-        """Extract text from a TXT file with encoding fallback."""
-        print(f"Extracting TXT: {txt_path}...")
-        try:
-            with open(txt_path, "r", encoding="utf-8") as f:
-                return f.read()
-        except UnicodeDecodeError:
-            with open(txt_path, "r", encoding="latin-1") as f:
-                return f.read()
-        except Exception as e:
-            print(f"Error reading TXT {txt_path}: {e}")
-            return ""
-
-    # ------------------------------------------------------------------
-    # Processing
-    # ------------------------------------------------------------------
-
     def process_file(self, file_path: str) -> None:
         """Extract, chunk, and ingest a single file."""
-        ext = os.path.splitext(file_path)[1].lower()
-
-        if ext == ".pdf":
-            full_text = self._extract_text_from_pdf(file_path)
-        elif ext == ".txt":
-            full_text = self._extract_text_from_txt(file_path)
-        else:
-            print(f"Unsupported format {ext}: {file_path}")
-            return
+        print(f"Loading and extracting file: {file_path}...")
+        full_text = self.reader.load_document(file_path)
 
         if not full_text.strip():
             print(f"No content found in {file_path}. Skipping.")
             return
 
         # Semantic chunking
-        chunks = self.text_splitter.split_text(full_text)
+        chunks = self.text_splitter.split_text(full_text, source_file=file_path)
         print(f"Split {os.path.basename(file_path)} into {len(chunks)} semantic chunks.")
 
         # Store in VectorDB
@@ -112,6 +74,6 @@ if __name__ == "__main__":
     ingestor.process_directory(data_dir)
 
     print("=" * 60)
-    total = len(db.metadata)
+    total = len(db.chunks)
     print(f"Ingestion complete. Total chunks in VectorDB: {total}")
     print("=" * 60)

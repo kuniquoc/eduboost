@@ -23,7 +23,8 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..",
 from src.rag.vector_db import VectorDB
 from src.rag.retriever import KnowledgeRetriever
 from src.rag.ingest import RAGIngestor
-from src.rag.semantic_chunker import SemanticTextSplitter
+from src.rag.text_splitters import SemanticTextSplitter
+from src.rag.document_reader import DocumentReader
 from src.core.orchestrator import AgentOrchestrator
 from src.adapters.llm_manager import LLMManager
 from src.adapters.prompt_templates import PromptTemplates
@@ -291,22 +292,8 @@ async def generate_quiz_batch(request: GenerateQuizBatchRequest):
                 tmp_path = tmp.name
 
             try:
-                if ext == ".pdf":
-                    from PyPDF2 import PdfReader
-                    text = ""
-                    reader = PdfReader(tmp_path)
-                    for page in reader.pages:
-                        page_text = page.extract_text()
-                        if page_text:
-                            text += page_text + "\n"
-                    context = text
-                else:
-                    try:
-                        with open(tmp_path, "r", encoding="utf-8") as f:
-                            context = f.read()
-                    except UnicodeDecodeError:
-                        with open(tmp_path, "r", encoding="latin-1") as f:
-                            context = f.read()
+                reader = DocumentReader()
+                context = reader.load_document(tmp_path)
             finally:
                 try:
                     os.unlink(tmp_path)

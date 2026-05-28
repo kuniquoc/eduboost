@@ -1,66 +1,211 @@
 # src/rag/vector_db.py
 
-import faiss
-import numpy as np
-from sentence_transformers import SentenceTransformer
-import pickle
 import os
+import pickle
+import numpy as np
+import faiss
+from sentence_transformers import SentenceTransformer
+from typing import List, Dict, Any, Tuple, Optional, Union
 
 class VectorDB:
-    def __init__(self, model_name='all-MiniLM-L6-v2', index_path='models/vector_db/faiss_index'):
-        """
-        model_name: Mô hình embedding (nhẹ, nhanh, hiệu quả cho tiếng Anh)
-        index_path: Đường dẫn lưu trữ index
-        """
-        self.embed_model = SentenceTransformer(model_name)
-        self.index_path = index_path
-        self.index = None
-        self.metadata = [] # Lưu nội dung text tương ứng với vector
+    """
+    FAISS-backed vector database supporting Cosine Similarity and metadata synchronization.
+    Maintains complete backwards compatibility with list of plain text operations.
+    """
 
-        # Tạo thư mục lưu trữ nếu chưa có
-        os.makedirs(os.path.dirname(index_path), exist_ok=True)
+    def __init__(
+        self,
+        model_name: str = "sentence-transformers/all-MiniLM-L6-v2",
+        index_path: str = "models/vector_db/faiss_index",
+        embed_model: Optional[SentenceTransformer] = None
+    ):
+        """
+        Initialize the vector database.
         
-        # Tự động load index nếu đã tồn tại
+        Args:
+            model_name: The embedding model to load from HuggingFace.
+            index_path: Directory path and prefix where index files are saved.
+            embed_model: Optional preloaded SentenceTransformer instance to avoid double loading.
+        """
+        # Normalize model name for backwards-compatibility
+        if model_name == "all-MiniLM-L6-v2":
+            model_name = "sentence-transformers/all-MiniLM-L6-v2"
+            
+        self.model_name = model_name
+        self.index_path = index_path
+        self.embed_model = embed_model if embed_model is not None else SentenceTransformer(model_name)
+        self.index = None
+        self.chunks: List[Dict[str, Any]] = []
+
+        # Create output directories if needed
+        os.makedirs(os.path.dirname(index_path), exist_ok=True)
+
+        # Autoload if existing index files are present
         if os.path.exists(index_path + ".bin") and os.path.exists(index_path + ".pkl"):
             self.load_index()
 
-    def add_documents(self, texts):
-        """Nhúng văn bản và lưu vào FAISS"""
-        if not texts:
+    @property
+    def metadata(self) -> List[str]:
+        """Backwards compatibility property returning list of raw chunk texts."""
+        return [c["text"] for c in self.chunks]
+
+    def add_documents(self, documents: Union[List[str], List[Dict[str, Any]]]) -> None:
+        """
+        Encode and index a list of documents. Handles both metadata chunks and plain text lists.
+        
+        Args:
+            documents: Either a list of dicts {"text": text, "metadata": metadata} or list of strings.
+        """
+        if not documents:
             return
-            
-        embeddings = self.embed_model.encode(texts)
-        dimension = embeddings.shape[1]
+
+        # Harmonize input documents to list of dicts (chunks)
+        standardized_chunks = []
+        for i, doc in enumerate(documents):
+            if isinstance(doc, str):
+                standardized_chunks.append({
+                    "text": doc,
+                    "metadata": {
+                        "source_file": "unknown",
+                        "chunk_index": len(self.chunks) + i,
+                        "char_start": -1,
+                        "char_end": -1,
+                        "word_count": len(doc.split())
+                    }
+                })
+            else:
+                standardized_chunks.append(doc)
+
+        texts = [chunk["text"] for chunk in standardized_chunks]
+        embeddings = self.embed_model.encode(texts, show_progress_bar=False)
+        
+        # L2-normalize embeddings for Cosine Similarity search (using faiss Inner Product)
+        norms = np.linalg.norm(embeddings, axis=1, keepdims=True)
+        normalized_embeddings = embeddings / np.maximum(norms, 1e-12)
+        
+        dimension = normalized_embeddings.shape[1]
         
         if self.index is None:
-            # IndexFlatL2: Tìm kiếm khoảng cách Euclidean (đơn giản và chính xác cho tập dữ liệu nhỏ/vừa)
-            self.index = faiss.IndexFlatL2(dimension)
-        
-        self.index.add(np.array(embeddings).astype('float32'))
-        self.metadata.extend(texts)
+            # IndexFlatIP calculates Cosine Similarity when L2 normalized
+            self.index = faiss.IndexFlatIP(dimension)
+            
+        self.index.add(np.array(normalized_embeddings).astype("float32"))
+        self.chunks.extend(standardized_chunks)
         self.save_index()
 
-    def search(self, query, k=3):
-        """Tìm kiếm k đoạn văn bản gần nhất với query"""
-        if self.index is None:
-            print("VectorDB index not loaded. Please run ingest.py first.")
-            return []
-        
-        query_vector = self.embed_model.encode([query])
-        distances, indices = self.index.search(np.array(query_vector).astype('float32'), k)
-        
-        # Trả về danh sách các đoạn text tương ứng với index tìm được
-        return [self.metadata[idx] for idx in indices[0] if idx != -1]
+    def delete_source_file_chunks(self, source_file: str) -> None:
+        """
+        Remove all chunks associated with a specific source file and rebuild the index.
+        This provides clean update behavior during ingestion instead of duplicating chunks.
+        """
+        if not self.chunks:
+            return
 
-    def save_index(self):
-        """Lưu index và metadata xuống ổ đĩa"""
+        basename = os.path.basename(source_file)
+        
+        # Filter chunks that are not from this file
+        remaining_chunks = []
+        for chunk in self.chunks:
+            chunk_file = chunk.get("metadata", {}).get("source_file", "")
+            if chunk_file and os.path.basename(chunk_file) == basename:
+                continue
+            remaining_chunks.append(chunk)
+
+        # If nothing was deleted, do nothing
+        if len(remaining_chunks) == len(self.chunks):
+            return
+
+        print(f"Clearing {len(self.chunks) - len(remaining_chunks)} existing chunks for {basename} from index.")
+
+        # Reset the index and rebuild
+        self.chunks = []
+        self.index = None
+        
+        # Re-add remaining documents
+        if remaining_chunks:
+            self.add_documents(remaining_chunks)
+        else:
+            # If no chunks left, clean up physical files
+            for ext in (".bin", ".pkl"):
+                full_path = self.index_path + ext
+                if os.path.exists(full_path):
+                    try:
+                        os.remove(full_path)
+                    except Exception:
+                        pass
+            print("Vector database is now completely empty.")
+
+    def search(
+        self, 
+        query: str, 
+        k: int = 3, 
+        return_scores: bool = True
+    ) -> Union[List[Tuple[float, Dict[str, Any]]], List[str]]:
+        """
+        Retrieve closest documents, applying duplicate filtering to guarantee diverse context.
+        Supports both V2 score/metadata retrieval and legacy string list.
+        
+        Args:
+            query: The user query string.
+            k: Number of closest items to retrieve.
+            return_scores: If True, returns List[Tuple[float, Dict[str, Any]]] sorted descending (new V2 style).
+                           If False, returns List[str] of raw texts (legacy style).
+        """
+        if self.index is None or not self.chunks:
+            print("VectorDB index not loaded or empty.")
+            return []
+
+        # Encode and normalize query vector
+        query_vector = self.embed_model.encode([query], show_progress_bar=False)
+        q_norm = np.linalg.norm(query_vector, axis=1, keepdims=True)
+        normalized_query = query_vector / np.maximum(q_norm, 1e-12)
+
+        # Retrieve extra candidate search results to accommodate deduplication filtering
+        search_k = min(max(k * 3, 20), len(self.chunks))
+        scores, indices = self.index.search(np.array(normalized_query).astype("float32"), search_k)
+
+        results = []
+        seen_texts = set()
+        seen_chunks = set()
+
+        for rank_idx, idx in enumerate(indices[0]):
+            if idx == -1 or idx >= len(self.chunks):
+                continue
+            
+            chunk = self.chunks[idx]
+            # Standardize text for strict text deduplication (normalize whitespace and casing)
+            norm_text = " ".join(chunk["text"].lower().split())
+            
+            # Uniqueness key by file source and chunk index
+            meta = chunk.get("metadata", {})
+            chunk_id = (meta.get("source_file"), meta.get("chunk_index"))
+            
+            if norm_text in seen_texts or chunk_id in seen_chunks:
+                continue
+                
+            seen_texts.add(norm_text)
+            seen_chunks.add(chunk_id)
+            
+            score = float(scores[0][rank_idx])
+            results.append((score, chunk))
+            
+            if len(results) == k:
+                break
+
+        if return_scores:
+            return results
+        else:
+            return [res[1]["text"] for res in results]
+
+    def save_index(self) -> None:
+        """Serialize index and chunks metadata to disk."""
         faiss.write_index(self.index, self.index_path + ".bin")
         with open(self.index_path + ".pkl", "wb") as f:
-            pickle.dump(self.metadata, f)
+            pickle.dump(self.chunks, f)
 
-    def load_index(self):
-        """Load index và metadata từ ổ đĩa"""
+    def load_index(self) -> None:
+        """Load index and chunks metadata from disk."""
         self.index = faiss.read_index(self.index_path + ".bin")
         with open(self.index_path + ".pkl", "rb") as f:
-            self.metadata = pickle.load(f)
-        print("VectorDB index loaded successfully.")
+            self.chunks = pickle.load(f)
+        print(f"VectorDB index loaded. Total indexed chunks: {len(self.chunks)}")

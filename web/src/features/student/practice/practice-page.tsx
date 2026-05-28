@@ -29,7 +29,6 @@ type TutorStep =
   | { type: 'explain'; content: string }
   | { type: 'quiz'; question: TutorQuestionDto }
   | { type: 'result'; question: TutorQuestionDto; selectedKey: string; result: TutorAnswerResult }
-  | { type: 'error-explain'; explanation: string }
   | { type: 'mastered' }
   | { type: 'error'; message: string };
 
@@ -40,6 +39,7 @@ export function PracticePage() {
   const [step, setStep] = useState<TutorStep>({ type: 'loading' });
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
   const [showQuizExplanation, setShowQuizExplanation] = useState(false);
+  const [showAiExplanation, setShowAiExplanation] = useState(false);
   const [questionsAnswered, setQuestionsAnswered] = useState(0);
   const [correctCount, setCorrectCount] = useState(0);
   const [started, setStarted] = useState(false);
@@ -76,6 +76,8 @@ export function PracticePage() {
     onSuccess: (question: TutorQuestionDto) => {
       setSelectedOption(null);
       setShowQuizExplanation(false);
+      setShowAiExplanation(false);
+      errorExplainMutation.reset();
       setStep({ type: 'quiz', question });
     },
     onError: () => {
@@ -96,6 +98,15 @@ export function PracticePage() {
       setQuestionsAnswered((c) => c + 1);
       if (result.isCorrect) setCorrectCount((c) => c + 1);
       setStep({ type: 'result', question: vars.question, selectedKey: vars.selectedKey, result });
+
+      // Pre-fetch explanation immediately on incorrect answer
+      if (!result.isCorrect) {
+        errorExplainMutation.mutate({
+          question: vars.question.question,
+          correctAnswer: vars.question.options[vars.question.correctAnswer] || vars.question.correctAnswer,
+          studentAnswer: vars.question.options[vars.selectedKey] || vars.selectedKey,
+        });
+      }
     },
     onError: () => toast.error('Nộp bài thất bại'),
   });
@@ -103,10 +114,10 @@ export function PracticePage() {
   const errorExplainMutation = useMutation({
     mutationFn: (vars: { question: string; correctAnswer: string; studentAnswer: string }) =>
       quizzesService.getErrorExplanation(vars),
-    onSuccess: (explanation: string) => {
-      setStep({ type: 'error-explain', explanation });
+    onSuccess: () => {
+      // Keep step as 'result' and read directly from errorExplainMutation.data
     },
-    onError: () => toast.error('Không thể tải giải thích'),
+    onError: () => toast.error('Không thể tải giải thích từ Gia sư AI'),
   });
 
   // ── Handlers ────────────────────────────────────────────
@@ -123,8 +134,10 @@ export function PracticePage() {
 
   const handleContinue = useCallback(() => {
     setStep({ type: 'loading' });
+    setShowAiExplanation(false);
+    errorExplainMutation.reset();
     nextActionMutation.mutate();
-  }, [nextActionMutation]);
+  }, [nextActionMutation, errorExplainMutation]);
 
   const handleExplainError = useCallback(() => {
     if (step.type !== 'result') return;
@@ -409,6 +422,38 @@ export function PracticePage() {
                 </div>
               )}
 
+              {/* AI Tutor Explanation */}
+              {showAiExplanation && (
+                <div className="rounded-xl border border-violet-500/20 bg-gradient-to-br from-violet-500/5 to-transparent p-4 mb-4 animate-in fade-in duration-300">
+                  <div className="flex items-center gap-2 mb-2">
+                    <Sparkles className="h-4 w-4 text-violet-400 animate-pulse" />
+                    <span className="text-sm font-medium text-violet-400">Gia sư AI hỗ trợ</span>
+                  </div>
+                  {errorExplainMutation.isPending && (
+                    <div className="flex items-center gap-2 text-sm text-muted-foreground py-2 animate-pulse">
+                      <Loader2 className="h-4 w-4 animate-spin text-violet-400" />
+                      <span>Gia sư AI đang phân tích lỗi sai và chuẩn bị lời giải thích...</span>
+                    </div>
+                  )}
+                  {errorExplainMutation.isError && (
+                    <div className="text-sm text-red-400 py-2">
+                      <span>Không thể tải giải thích từ Gia sư AI. </span>
+                      <button 
+                        onClick={handleExplainError} 
+                        className="underline font-medium text-violet-400 hover:text-violet-300 ml-1"
+                      >
+                        Thử lại
+                      </button>
+                    </div>
+                  )}
+                  {errorExplainMutation.isSuccess && errorExplainMutation.data && (
+                    <div className="prose prose-invert prose-sm max-w-none whitespace-pre-wrap text-foreground/90 leading-relaxed mt-2">
+                      {normalizeText(errorExplainMutation.data)}
+                    </div>
+                  )}
+                </div>
+              )}
+
               {/* Mastery info */}
               <div className="flex items-center gap-4 text-xs text-muted-foreground">
                 <span>
@@ -434,15 +479,22 @@ export function PracticePage() {
             )}
             {!step.result.isCorrect && (
               <Button
-                variant="outline"
-                onClick={handleExplainError}
-                disabled={errorExplainMutation.isPending}
+                variant={showAiExplanation ? "secondary" : "outline"}
+                onClick={() => {
+                  setShowAiExplanation(!showAiExplanation);
+                  if (!showAiExplanation && !errorExplainMutation.isSuccess && !errorExplainMutation.isPending) {
+                    handleExplainError();
+                  }
+                }}
                 className="gap-2 border-primary/30 hover:border-primary/60 bg-primary/5"
               >
-                {errorExplainMutation.isPending ? (
-                  <><Loader2 className="h-4 w-4 animate-spin" /> Đang phân tích...</>
+                {showAiExplanation ? (
+                  <>Ẩn hỗ trợ từ Gia sư AI</>
                 ) : (
-                  <><Sparkles className="h-4 w-4 text-violet-400 animate-pulse" /> Yêu cầu gia sư AI hỗ trợ</>
+                  <>
+                    <Sparkles className="h-4 w-4 text-violet-400" />
+                    {errorExplainMutation.isPending ? 'Đang chuẩn bị hỗ trợ từ AI...' : 'Yêu cầu gia sư AI hỗ trợ'}
+                  </>
                 )}
               </Button>
             )}
@@ -451,35 +503,6 @@ export function PracticePage() {
                 Tiếp tục <ArrowRight className="h-4 w-4" />
               </Button>
             </div>
-          </div>
-        </div>
-      )}
-
-      {/* ── ERROR EXPLAIN ───────────────────────────────── */}
-      {step.type === 'error-explain' && (
-        <div className="mx-auto max-w-2xl space-y-6">
-          <div className="flex items-center gap-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-amber-500/10">
-              <Lightbulb className="h-5 w-5 text-amber-400" />
-            </div>
-            <div>
-              <h2 className="text-lg font-semibold text-foreground">Phân tích lỗi sai</h2>
-              <p className="text-xs text-muted-foreground">AI đã phân tích và giải thích chi tiết</p>
-            </div>
-          </div>
-
-          <Card className="border-amber-500/20 bg-gradient-to-br from-amber-500/5 to-transparent">
-            <CardContent className="p-6">
-              <div className="prose prose-invert prose-sm max-w-none whitespace-pre-wrap text-foreground/90 leading-relaxed">
-                {normalizeText(step.explanation)}
-              </div>
-            </CardContent>
-          </Card>
-
-          <div className="flex justify-center">
-            <Button onClick={handleContinue} disabled={isLoading} className="gap-2 px-8">
-              Tiếp tục luyện tập <ArrowRight className="h-4 w-4" />
-            </Button>
           </div>
         </div>
       )}
