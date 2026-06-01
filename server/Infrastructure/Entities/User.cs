@@ -6,7 +6,7 @@ public class User
     public string Name { get; set; } = "";
     public string Email { get; set; } = "";
     public string PasswordHash { get; set; } = "";
-    public string Role { get; set; } = "student"; // "teacher" | "student"
+    public string Role { get; set; } = "student"; // "teacher" | "student" | "admin"
     public string? AvatarInitials { get; set; }
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
@@ -16,4 +16,11 @@ public class User
     public ICollection<RefreshToken> RefreshTokens { get; set; } = [];
     public ICollection<Document> Documents { get; set; } = [];
     public ICollection<QuizSubmission> QuizSubmissions { get; set; } = [];
+    public UserProfile? Profile { get; set; }
+    public ICollection<LearningSession> LearningSessions { get; set; } = [];
+    public ICollection<PlacementTestResult> PlacementTestResults { get; set; } = [];
+    public ICollection<PersonalizedLearningPath> LearningPaths { get; set; } = [];
+    public ICollection<BktState> BktStates { get; set; } = [];
+    public ICollection<SpacedRepetitionItem> SpacedRepetitionItems { get; set; } = [];
+    public ICollection<ConversationMessage> ConversationMessages { get; set; } = [];
 }

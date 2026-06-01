@@ -99,15 +99,27 @@ web/
     │       │   └── join-class-dialog.tsx
     │       ├── entry-test/
     │       │   └── entry-test-page.tsx
+    │       ├── placement-test/
+    │       │   └── adaptive-placement-test-page.tsx  ← Adaptive test (BKT init)
     │       ├── roadmap/
     │       │   └── roadmap-page.tsx
     │       ├── practice/
     │       │   └── practice-page.tsx
+    │       ├── practice-session/
+    │       │   └── practice-session-page.tsx  ← BKT + Spaced Repetition practice
+    │       ├── ai-chat/
+    │       │   └── ai-chat-page.tsx           ← RAG-based AI chat
+    │       ├── review/
+    │       │   └── review-page.tsx            ← Spaced repetition review
     │       ├── ai-lab/
     │       │   ├── ai-lab-page.tsx
     │       │   └── my-quiz-review-page.tsx
     │       └── profile/
     │           └── profile-page.tsx
+    │
+    ├── features/
+    │   └── admin/
+    │       └── admin-dashboard-page.tsx       ← System stats + user management
     │
     ├── services/
     │   ├── api.ts                ← Axios instance + interceptors
@@ -117,7 +129,14 @@ web/
     │   ├── documents.service.ts
     │   ├── quizzes.service.ts
     │   ├── roadmap.service.ts
-    │   └── students.service.ts
+    │   ├── students.service.ts
+    │   ├── learningState.service.ts     ← BKT states + review schedule
+    │   ├── placementTest.service.ts     ← Adaptive placement test
+    │   ├── learningPath.service.ts      ← Personalized learning paths
+    │   ├── practiceSession.service.ts   ← Practice sessions (BKT+SR)
+    │   ├── aiChat.service.ts            ← AI Q&A with history
+    │   ├── admin.service.ts             ← Admin user mgmt + stats
+    │   └── userProfile.service.ts       ← User profile CRUD
     │
     ├── store/
     │   └── auth-store.ts         ← Zustand auth state
@@ -149,19 +168,26 @@ web/
   /teacher/classes         → ClassesPage
   /teacher/classes/:id     → ClassDetailPage (tabs: topics, docs, students)
   /teacher/ai-studio/:quizId → QuizReviewPage
-  /teacher/students        → (redirect to class selection)
-  /teacher/library         → (documents across classes)
+  /teacher/quiz-pool       → TeacherPoolDashboard
   /teacher/profile         → ProfilePage
 
 /student                   → AppLayout (student guard)
   /student/dashboard       → DashboardPage
   /student/classes         → ClassesPage
-  /student/entry-test/:classId → EntryTestPage
+  /student/entry-test/:classId → EntryTestPage (legacy)
+  /student/placement-test  → AdaptivePlacementTestPage (adaptive, full-page)
   /student/roadmap/:classId → RoadmapPage
-  /student/practice/:topicId → PracticePage
+  /student/practice/:topicId → PracticePage (AI Tutor flow)
+  /student/practice-session → PracticeSessionPage (BKT + SR adaptive)
+  /student/ai-chat         → AiChatPage (RAG-based Q&A)
+  /student/review          → ReviewPage (Spaced Repetition schedule)
   /student/ai-lab          → AILabPage
-  /student/ai-lab/:quizId  → MyQuizReviewPage
+  /student/ai-lab/:quizId  → AILabQuizPage
+  /student/quiz-pool       → StudentPoolDashboard
   /student/profile         → ProfilePage
+
+/admin                     → AppLayout (admin guard)
+  /admin/dashboard         → AdminDashboardPage (stats + user mgmt)
 ```
 
 ### Route Guards
@@ -170,10 +196,17 @@ web/
 // ProtectedRoute component
 // 1. Check isAuthenticated → redirect /login if not
 // 2. Check role matches → redirect to correct role root if mismatch
+//    (teacher → /teacher/classes, student → /student/dashboard, admin → /admin/dashboard)
 // 3. Render children if authorized
 
 <Route element={<ProtectedRoute role="teacher" />}>
   <Route path="/teacher/*" element={<AppLayout role="teacher" />}>
+    ...
+  </Route>
+</Route>
+
+<Route element={<ProtectedRoute role="admin" />}>
+  <Route path="/admin/*" element={<AppLayout role="admin" />}>
     ...
   </Route>
 </Route>

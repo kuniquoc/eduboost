@@ -15,6 +15,13 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
     public DbSet<QuizOption> QuizOptions => Set<QuizOption>();
     public DbSet<QuizSubmission> QuizSubmissions => Set<QuizSubmission>();
     public DbSet<RefreshToken> RefreshTokens => Set<RefreshToken>();
+    public DbSet<UserProfile> UserProfiles => Set<UserProfile>();
+    public DbSet<LearningSession> LearningSessions => Set<LearningSession>();
+    public DbSet<PlacementTestResult> PlacementTestResults => Set<PlacementTestResult>();
+    public DbSet<PersonalizedLearningPath> PersonalizedLearningPaths => Set<PersonalizedLearningPath>();
+    public DbSet<BktState> BktStates => Set<BktState>();
+    public DbSet<SpacedRepetitionItem> SpacedRepetitionItems => Set<SpacedRepetitionItem>();
+    public DbSet<ConversationMessage> ConversationMessages => Set<ConversationMessage>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -31,6 +38,13 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
         modelBuilder.Entity<QuizOption>().ToTable("quiz_options");
         modelBuilder.Entity<QuizSubmission>().ToTable("quiz_submissions");
         modelBuilder.Entity<RefreshToken>().ToTable("refresh_tokens");
+        modelBuilder.Entity<UserProfile>().ToTable("user_profiles");
+        modelBuilder.Entity<LearningSession>().ToTable("learning_sessions");
+        modelBuilder.Entity<PlacementTestResult>().ToTable("placement_test_results");
+        modelBuilder.Entity<PersonalizedLearningPath>().ToTable("personalized_learning_paths");
+        modelBuilder.Entity<BktState>().ToTable("bkt_states");
+        modelBuilder.Entity<SpacedRepetitionItem>().ToTable("spaced_repetition_items");
+        modelBuilder.Entity<ConversationMessage>().ToTable("conversation_messages");
 
         // ── Unique constraints ────────────────────────────────────────────────
         modelBuilder.Entity<User>().HasIndex(u => u.Email).IsUnique();
@@ -147,6 +161,122 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
             .WithMany(u => u.RefreshTokens)
             .HasForeignKey(r => r.UserId)
             .OnDelete(DeleteBehavior.Cascade);
+
+        // ── New entity relationships ──────────────────────────────────────────
+
+        // UserProfile (1:1 with User)
+        modelBuilder.Entity<UserProfile>()
+            .HasOne(p => p.User)
+            .WithOne(u => u.Profile)
+            .HasForeignKey<UserProfile>(p => p.UserId)
+            .OnDelete(DeleteBehavior.Cascade);
+
+        modelBuilder.Entity<UserProfile>()
+            .HasIndex(p => p.UserId)
+            .IsUnique();
+
+        // LearningSession
+        modelBuilder.Entity<LearningSession>()
+            .HasOne(ls => ls.User)
+            .WithMany(u => u.LearningSessions)
+            .HasForeignKey(ls => ls.UserId)
+            .OnDelete(DeleteBehavior.Cascade);
+
+        modelBuilder.Entity<LearningSession>()
+            .HasOne(ls => ls.Topic)
+            .WithMany()
+            .HasForeignKey(ls => ls.TopicId)
+            .OnDelete(DeleteBehavior.Cascade);
+
+        // PlacementTestResult
+        modelBuilder.Entity<PlacementTestResult>()
+            .HasOne(p => p.User)
+            .WithMany(u => u.PlacementTestResults)
+            .HasForeignKey(p => p.UserId)
+            .OnDelete(DeleteBehavior.Cascade);
+
+        // PersonalizedLearningPath
+        modelBuilder.Entity<PersonalizedLearningPath>()
+            .HasOne(lp => lp.User)
+            .WithMany(u => u.LearningPaths)
+            .HasForeignKey(lp => lp.UserId)
+            .OnDelete(DeleteBehavior.Cascade);
+
+        modelBuilder.Entity<PersonalizedLearningPath>()
+            .HasOne(lp => lp.Topic)
+            .WithMany()
+            .HasForeignKey(lp => lp.TopicId)
+            .OnDelete(DeleteBehavior.Cascade);
+
+        modelBuilder.Entity<PersonalizedLearningPath>()
+            .HasIndex(lp => new { lp.UserId, lp.TopicId })
+            .IsUnique();
+
+        // BktState (unique per user+topic)
+        modelBuilder.Entity<BktState>()
+            .HasOne(b => b.User)
+            .WithMany(u => u.BktStates)
+            .HasForeignKey(b => b.UserId)
+            .OnDelete(DeleteBehavior.Cascade);
+
+        modelBuilder.Entity<BktState>()
+            .HasOne(b => b.Topic)
+            .WithMany()
+            .HasForeignKey(b => b.TopicId)
+            .OnDelete(DeleteBehavior.Cascade);
+
+        modelBuilder.Entity<BktState>()
+            .HasIndex(b => new { b.UserId, b.TopicId })
+            .IsUnique();
+
+        // SpacedRepetitionItem
+        modelBuilder.Entity<SpacedRepetitionItem>()
+            .HasOne(sr => sr.User)
+            .WithMany(u => u.SpacedRepetitionItems)
+            .HasForeignKey(sr => sr.UserId)
+            .OnDelete(DeleteBehavior.Cascade);
+
+        modelBuilder.Entity<SpacedRepetitionItem>()
+            .HasOne(sr => sr.Question)
+            .WithMany(q => q.SpacedRepetitionItems)
+            .HasForeignKey(sr => sr.QuestionId)
+            .OnDelete(DeleteBehavior.Cascade);
+
+        modelBuilder.Entity<SpacedRepetitionItem>()
+            .HasOne(sr => sr.Topic)
+            .WithMany()
+            .HasForeignKey(sr => sr.TopicId)
+            .OnDelete(DeleteBehavior.Restrict);
+
+        modelBuilder.Entity<SpacedRepetitionItem>()
+            .HasIndex(sr => new { sr.UserId, sr.QuestionId })
+            .IsUnique();
+
+        modelBuilder.Entity<SpacedRepetitionItem>()
+            .HasIndex(sr => sr.NextReviewDate);
+
+        // ConversationMessage
+        modelBuilder.Entity<ConversationMessage>()
+            .HasOne(cm => cm.User)
+            .WithMany(u => u.ConversationMessages)
+            .HasForeignKey(cm => cm.UserId)
+            .OnDelete(DeleteBehavior.Cascade);
+
+        modelBuilder.Entity<ConversationMessage>()
+            .HasOne(cm => cm.Topic)
+            .WithMany()
+            .HasForeignKey(cm => cm.TopicId)
+            .OnDelete(DeleteBehavior.SetNull);
+
+        modelBuilder.Entity<ConversationMessage>()
+            .HasIndex(cm => new { cm.UserId, cm.TopicId, cm.CreatedAt });
+
+        // Question -> SourceDocument
+        modelBuilder.Entity<Question>()
+            .HasOne(q => q.SourceDocument)
+            .WithMany()
+            .HasForeignKey(q => q.SourceDocumentId)
+            .OnDelete(DeleteBehavior.SetNull);
 
     }
 }

@@ -251,14 +251,155 @@
 
 ---
 
+### UserProfile
+
+| Column              | Type      | Constraints          | Mô tả                          |
+| ------------------- | --------- | -------------------- | ------------------------------ |
+| Id                  | Guid      | PK                   |                                |
+| UserId              | Guid      | FK → User, unique    |                                |
+| CurrentLevel        | string    | default: "beginner"  | beginner/intermediate/advanced |
+| OverallMasteryScore | double    | default: 0.0         |                                |
+| PreferredTopics     | string?   |                      | JSON array of topic IDs        |
+| LearningStreak      | int       | default: 0           | Số ngày liên tục              |
+| LastActiveDate      | DateTime? |                      |                                |
+| CreatedAt           | DateTime  |                      |                                |
+| UpdatedAt           | DateTime  |                      |                                |
+
+**Relationships**:
+- `User`: 1:1 `User` (Cascade)
+
+---
+
+### LearningSession
+
+| Column             | Type      | Constraints    | Mô tả              |
+| ------------------ | --------- | -------------- | ------------------- |
+| Id                 | Guid      | PK             |                     |
+| UserId             | Guid      | FK → User      |                     |
+| TopicId            | Guid      | FK → Topic     |                     |
+| StartTime          | DateTime  |                |                     |
+| EndTime            | DateTime? |                |                     |
+| QuestionsAttempted | int       |                |                     |
+| CorrectAnswers     | int       |                |                     |
+| Score              | double    |                | Phần trăm đúng     |
+
+**Relationships**:
+- `User`: many→1 `User` (Cascade)
+- `Topic`: many→1 `Topic` (Cascade)
+
+---
+
+### PlacementTestResult
+
+| Column         | Type     | Constraints       | Mô tả                     |
+| -------------- | -------- | ----------------- | -------------------------- |
+| Id             | Guid     | PK                |                            |
+| UserId         | Guid     | FK → User         |                            |
+| InitialLevel   | string   | default: beginner | Kết quả xếp loại         |
+| FinalScore     | double   |                   | Điểm phần trăm           |
+| StrengthsJson  | string?  |                   | JSON: topic scores mạnh   |
+| WeaknessesJson | string?  |                   | JSON: topic scores yếu    |
+| CreatedAt      | DateTime |                   |                            |
+
+**Relationships**:
+- `User`: many→1 `User` (Cascade)
+
+---
+
+### PersonalizedLearningPath
+
+| Column                | Type      | Constraints               | Mô tả                    |
+| --------------------- | --------- | ------------------------- | ------------------------- |
+| Id                    | Guid      | PK                        |                           |
+| UserId                | Guid      | FK → User                 |                           |
+| TopicId               | Guid      | FK → Topic                |                           |
+| RecommendedDifficulty | string    | default: "medium"         | easy/medium/hard          |
+| PriorityScore         | double    |                           | Ưu tiên học              |
+| NextReviewDate        | DateTime? |                           | Lịch ôn tập tiếp theo   |
+| IsCompleted           | bool      | default: false            |                           |
+| OrderIndex            | int       |                           | Thứ tự trong lộ trình    |
+| CreatedAt             | DateTime  |                           |                           |
+| UpdatedAt             | DateTime  |                           |                           |
+
+**Relationships**:
+- `User`: many→1 `User` (Cascade)
+- `Topic`: many→1 `Topic` (Cascade)
+- Unique constraint: (UserId, TopicId)
+
+---
+
+### BktState
+
+| Column                | Type     | Constraints               | Mô tả                        |
+| --------------------- | -------- | ------------------------- | ----------------------------- |
+| Id                    | Guid     | PK                        |                               |
+| UserId                | Guid     | FK → User                 |                               |
+| TopicId               | Guid     | FK → Topic                |                               |
+| MasteryProbability    | double   | default: 0.3              | P(L) - xác suất thành thạo   |
+| GuessProbability      | double   | default: 0.25             | P(G) - xác suất đoán đúng    |
+| SlipProbability       | double   | default: 0.1              | P(S) - xác suất nhầm         |
+| TransitionProbability | double   | default: 0.1              | P(T) - xác suất chuyển đổi   |
+| IrtTheta              | double   | default: 0.0              | Năng lực IRT                  |
+| UpdatedAt             | DateTime |                           |                               |
+
+**Relationships**:
+- `User`: many→1 `User` (Cascade)
+- `Topic`: many→1 `Topic` (Cascade)
+- Unique constraint: (UserId, TopicId)
+
+---
+
+### SpacedRepetitionItem
+
+| Column          | Type     | Constraints                  | Mô tả                     |
+| --------------- | -------- | ---------------------------- | -------------------------- |
+| Id              | Guid     | PK                           |                            |
+| UserId          | Guid     | FK → User                    |                            |
+| QuestionId      | Guid     | FK → Question                |                            |
+| TopicId         | Guid     | FK → Topic                   |                            |
+| LastReviewDate  | DateTime |                              | Lần ôn cuối               |
+| NextReviewDate  | DateTime | indexed                      | Lần ôn tiếp theo          |
+| ReviewInterval  | double   | default: 1.0                 | Khoảng cách ôn (ngày)     |
+| EaseFactor      | double   | default: 2.5                 | SM-2 ease factor           |
+| RetentionScore  | double   | default: 0.0                 | Mức nhớ                   |
+| RepetitionCount | int      |                              | Số lần ôn liên tiếp đúng  |
+
+**Relationships**:
+- `User`: many→1 `User` (Cascade)
+- `Question`: many→1 `Question` (Cascade)
+- `Topic`: many→1 `Topic` (Restrict)
+- Unique constraint: (UserId, QuestionId)
+
+---
+
+### ConversationMessage
+
+| Column               | Type      | Constraints    | Mô tả                        |
+| -------------------- | --------- | -------------- | ----------------------------- |
+| Id                   | Guid      | PK             |                               |
+| UserId               | Guid      | FK → User      |                               |
+| TopicId              | Guid?     | FK → Topic     |                               |
+| Role                 | string    | default: "user"| "user" hoặc "assistant"       |
+| Content              | string    | required       | Nội dung tin nhắn             |
+| SourceReferencesJson | string?   |                | JSON: tài liệu tham chiếu    |
+| CreatedAt            | DateTime  |                |                               |
+
+**Relationships**:
+- `User`: many→1 `User` (Cascade)
+- `Topic`: many→1 `Topic` (SetNull)
+- Composite index: (UserId, TopicId, CreatedAt)
+
+---
+
 ## Enums & Constants
 
 ### User Roles
 
-| Value     | Mô tả    |
-| --------- | -------- |
-| `teacher` | Giáo viên |
-| `student` | Học sinh  |
+| Value     | Mô tả         |
+| --------- | ------------- |
+| `teacher` | Giáo viên     |
+| `student` | Học sinh      |
+| `admin`   | Quản trị viên |
 
 ### Question Types
 

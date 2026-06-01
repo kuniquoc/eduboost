@@ -699,6 +699,525 @@ Chỉnh sửa câu hỏi.
 
 ---
 
+## User Profiles
+
+### GET `/api/user-profiles/me`
+
+Lấy profile người dùng hiện tại (tự động tạo nếu chưa có).
+
+**Auth**: `[Authorize]`
+
+**Response** `200`: `ApiResponse<UserProfileDto>`
+
+```json
+{
+  "userId": "guid",
+  "currentLevel": "beginner | intermediate | advanced",
+  "overallMasteryScore": 0.0,
+  "preferredTopics": ["topic-id-1", "topic-id-2"],
+  "learningStreak": 5,
+  "lastActiveDate": "2024-01-15"
+}
+```
+
+---
+
+### PUT `/api/user-profiles/me`
+
+Cập nhật profile (preferences).
+
+**Auth**: `[Authorize]`
+
+**Request Body**:
+
+```json
+{
+  "currentLevel": "string?",
+  "preferredTopics": ["string"]?
+}
+```
+
+**Response** `200`: `ApiResponse<UserProfileDto>`
+
+---
+
+### GET `/api/user-profiles/{userId}`
+
+Admin/GV xem profile học sinh.
+
+**Auth**: `[Authorize]`
+
+**Response** `200`: `ApiResponse<UserProfileDto>`
+
+---
+
+## Learning States (BKT + Spaced Repetition)
+
+### GET `/api/learning-states/me`
+
+Lấy toàn bộ BKT state của học sinh hiện tại.
+
+**Auth**: `[Authorize]`
+
+**Response** `200`: `ApiResponse<List<BktStateDto>>`
+
+```json
+[
+  {
+    "topicId": "guid",
+    "topicName": "Present Simple",
+    "masteryProbability": 0.72,
+    "guessProbability": 0.25,
+    "slipProbability": 0.1,
+    "transitionProbability": 0.1,
+    "irtTheta": 0.5,
+    "updatedAt": "2024-01-15 10:30:00"
+  }
+]
+```
+
+---
+
+### GET `/api/learning-states/me/topic/{topicId}`
+
+Lấy BKT state theo topic.
+
+**Auth**: `[Authorize]`
+
+**Response** `200`: `ApiResponse<BktStateDto>`
+
+---
+
+### POST `/api/learning-states/update`
+
+Cập nhật BKT sau câu trả lời.
+
+**Auth**: `[Authorize]`
+
+**Request Body**:
+
+```json
+{
+  "topicId": "guid (required)",
+  "questionId": "guid (required)",
+  "isCorrect": true,
+  "responseTime": 5.2
+}
+```
+
+**Response** `200`: `ApiResponse<UpdateBktResponse>`
+
+```json
+{
+  "state": { "/* BktStateDto */" : "" },
+  "recommendation": "Bạn đã thành thạo chủ đề này!"
+}
+```
+
+---
+
+### GET `/api/learning-states/me/review-schedule`
+
+Lấy danh sách nội dung cần ôn tập hôm nay.
+
+**Auth**: `[Authorize]`
+
+**Response** `200`: `ApiResponse<ReviewScheduleDto>`
+
+```json
+{
+  "totalDueToday": 5,
+  "items": [
+    {
+      "questionId": "guid",
+      "topicId": "guid",
+      "topicName": "Past Tense",
+      "nextReviewDate": "2024-01-15",
+      "retentionScore": 0.6,
+      "repetitionCount": 3
+    }
+  ]
+}
+```
+
+---
+
+## Placement Tests (Kiểm tra đầu vào thích ứng)
+
+### POST `/api/placement-tests/start`
+
+Bắt đầu bài kiểm tra đầu vào (adaptive).
+
+**Auth**: `[Authorize]`
+
+**Response** `200`: `ApiResponse<StartPlacementTestResponse>`
+
+```json
+{
+  "sessionId": "string",
+  "question": {
+    "questionId": "guid",
+    "text": "Which is correct?",
+    "type": "mcq",
+    "difficulty": "medium",
+    "options": [{ "id": "guid", "text": "Option A" }]
+  },
+  "questionNumber": 1,
+  "totalQuestions": 20
+}
+```
+
+---
+
+### POST `/api/placement-tests/answer`
+
+Gửi câu trả lời, nhận câu tiếp theo (adaptive difficulty).
+
+**Auth**: `[Authorize]`
+
+**Request Body**:
+
+```json
+{
+  "sessionId": "string (required)",
+  "questionId": "guid (required)",
+  "selectedOptionId": "guid?",
+  "textAnswer": "string?"
+}
+```
+
+**Response** `200`: `ApiResponse<AnswerPlacementResponse>`
+
+```json
+{
+  "isCorrect": true,
+  "isComplete": false,
+  "nextQuestion": { "questionId": "guid", "text": "...", "type": "mcq", "difficulty": "hard", "options": [] },
+  "questionNumber": 5,
+  "totalQuestions": 20
+}
+```
+
+---
+
+### POST `/api/placement-tests/complete`
+
+Kết thúc → tính toán level → khởi tạo BKT + learning path.
+
+**Auth**: `[Authorize]`
+
+**Request Body**:
+
+```json
+{
+  "sessionId": "string (required)"
+}
+```
+
+**Response** `200`: `ApiResponse<CompletePlacementResponse>`
+
+```json
+{
+  "resultId": "guid",
+  "initialLevel": "intermediate",
+  "finalScore": 72.5,
+  "strengths": [{ "topicId": "guid", "topicName": "Present Tense", "score": 0.9 }],
+  "weaknesses": [{ "topicId": "guid", "topicName": "Conditionals", "score": 0.3 }]
+}
+```
+
+---
+
+### GET `/api/placement-tests/result`
+
+Xem kết quả kiểm tra đầu vào gần nhất.
+
+**Auth**: `[Authorize]`
+
+**Response** `200`: `ApiResponse<PlacementTestResultDto>`
+
+---
+
+## Learning Paths (Lộ trình cá nhân hóa)
+
+### GET `/api/learning-paths/me`
+
+Lấy lộ trình hiện tại của học sinh.
+
+**Auth**: `[Authorize]`
+
+**Response** `200`: `ApiResponse<LearningPathDto>`
+
+```json
+{
+  "items": [
+    {
+      "id": "guid",
+      "topicId": "guid",
+      "topicName": "Present Simple",
+      "recommendedDifficulty": "easy",
+      "priorityScore": 0.8,
+      "nextReviewDate": "2024-01-16",
+      "isCompleted": false,
+      "orderIndex": 0
+    }
+  ],
+  "totalItems": 10,
+  "completedItems": 3,
+  "overallProgress": 30.0
+}
+```
+
+---
+
+### POST `/api/learning-paths/regenerate`
+
+Tái sinh lộ trình (dựa trên BKT state hiện tại).
+
+**Auth**: `[Authorize]`
+
+**Response** `200`: `ApiResponse<LearningPathDto>`
+
+---
+
+### PUT `/api/learning-paths/{id}/complete`
+
+Đánh dấu hoàn thành một topic trong lộ trình.
+
+**Auth**: `[Authorize]`
+
+**Response** `200`: `ApiResponse<LearningPathItemDto>`
+
+---
+
+## Practice Sessions (Phiên luyện tập)
+
+### POST `/api/practice-sessions/start`
+
+Bắt đầu phiên luyện tập.
+
+**Auth**: `[Authorize]`
+
+**Request Body**:
+
+```json
+{
+  "topicId": "guid (required)",
+  "questionCount": 10
+}
+```
+
+**Response** `200`: `ApiResponse<StartPracticeResponse>`
+
+```json
+{
+  "sessionId": "string",
+  "topicName": "Present Simple",
+  "question": { "questionId": "guid", "text": "...", "type": "mcq", "difficulty": "medium", "options": [] },
+  "questionNumber": 1,
+  "totalQuestions": 10
+}
+```
+
+---
+
+### POST `/api/practice-sessions/answer`
+
+Gửi câu trả lời → cập nhật BKT + SR → trả phản hồi + câu tiếp.
+
+**Auth**: `[Authorize]`
+
+**Request Body**:
+
+```json
+{
+  "sessionId": "string (required)",
+  "questionId": "guid (required)",
+  "selectedOptionId": "guid?",
+  "textAnswer": "string?"
+}
+```
+
+**Response** `200`: `ApiResponse<SubmitAnswerResponse>`
+
+```json
+{
+  "isCorrect": true,
+  "correctAnswer": "went",
+  "explanation": "Past tense of 'go' is 'went'.",
+  "nextQuestion": null,
+  "questionNumber": 5,
+  "isSessionComplete": false
+}
+```
+
+---
+
+### POST `/api/practice-sessions/end`
+
+Kết thúc phiên → cập nhật LearningSession + tiến trình.
+
+**Auth**: `[Authorize]`
+
+**Request Body**:
+
+```json
+{
+  "sessionId": "string (required)"
+}
+```
+
+**Response** `200`: `ApiResponse<PracticeSessionSummary>`
+
+```json
+{
+  "sessionId": "string",
+  "topicName": "Present Simple",
+  "questionsAttempted": 10,
+  "correctAnswers": 7,
+  "score": 70.0,
+  "recommendation": "Xuất sắc! Bạn có thể chuyển sang chủ đề khó hơn."
+}
+```
+
+---
+
+## AI Chat (Hỏi đáp AI)
+
+### POST `/api/ai-chat/ask`
+
+Gửi câu hỏi → AI trả lời (có RAG context + source references).
+
+**Auth**: `[Authorize]`
+
+**Request Body**:
+
+```json
+{
+  "question": "string (required)",
+  "topicId": "guid?"
+}
+```
+
+**Response** `200`: `ApiResponse<AskResponse>`
+
+```json
+{
+  "answer": "Present Simple dùng để diễn tả...",
+  "sources": [
+    {
+      "documentId": "guid",
+      "fileName": "grammar.pdf",
+      "snippet": "The Present Simple tense..."
+    }
+  ],
+  "messageId": "guid"
+}
+```
+
+---
+
+### GET `/api/ai-chat/history`
+
+Lấy lịch sử hội thoại.
+
+**Auth**: `[Authorize]`
+
+**Query params**: `topicId` (optional), `page` (default 1), `pageSize` (default 20)
+
+**Response** `200`: `ApiResponse<ChatHistoryDto>`
+
+```json
+{
+  "total": 25,
+  "messages": [
+    {
+      "id": "guid",
+      "role": "user | assistant",
+      "content": "string",
+      "sources": [],
+      "createdAt": "2024-01-15 10:30:00"
+    }
+  ]
+}
+```
+
+---
+
+## Admin
+
+### GET `/api/admin/users`
+
+Danh sách tài khoản.
+
+**Auth**: `[Authorize(Roles = "admin")]`
+
+**Query params**: `search` (optional), `role` (optional)
+
+**Response** `200`: `ApiResponse<List<AdminUserDto>>`
+
+```json
+[
+  {
+    "id": "guid",
+    "name": "Nguyen Van A",
+    "email": "a@example.com",
+    "role": "student",
+    "createdAt": "2024-01-01 00:00:00"
+  }
+]
+```
+
+---
+
+### PUT `/api/admin/users/{id}/role`
+
+Thay đổi role.
+
+**Auth**: `[Authorize(Roles = "admin")]`
+
+**Request Body**:
+
+```json
+{
+  "role": "teacher | student | admin"
+}
+```
+
+**Response** `200`: `ApiResponse`
+
+---
+
+### DELETE `/api/admin/users/{id}`
+
+Vô hiệu hóa/xóa tài khoản.
+
+**Auth**: `[Authorize(Roles = "admin")]`
+
+**Response** `200`: `ApiResponse`
+
+---
+
+### GET `/api/admin/stats`
+
+Thống kê hệ thống.
+
+**Auth**: `[Authorize(Roles = "admin")]`
+
+**Response** `200`: `ApiResponse<SystemStatsDto>`
+
+```json
+{
+  "totalUsers": 150,
+  "totalStudents": 120,
+  "totalTeachers": 25,
+  "totalClasses": 10,
+  "totalTopics": 50,
+  "totalQuestions": 500,
+  "totalLearningSessions": 1200
+}
+```
+
 #### DELETE `/api/quizzes/{quizId}/questions/{qId}`
 
 Xóa câu hỏi.

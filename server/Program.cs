@@ -1,12 +1,19 @@
 using System.Text;
+using EduBoost.API.Features.Admin;
+using EduBoost.API.Features.AiChat;
 using EduBoost.API.Features.Auth;
 using EduBoost.API.Features.Classes;
 using EduBoost.API.Features.Documents;
+using EduBoost.API.Features.LearningPaths;
+using EduBoost.API.Features.LearningStates;
+using EduBoost.API.Features.PlacementTests;
+using EduBoost.API.Features.PracticeSessions;
 using EduBoost.API.Features.Quizzes;
 using EduBoost.API.Features.Roadmap;
 using EduBoost.API.Features.Students;
 using EduBoost.API.Features.Topics;
 using EduBoost.API.Features.QuizPool;
+using EduBoost.API.Features.UserProfiles;
 using EduBoost.API.Infrastructure;
 using EduBoost.API.Infrastructure.Services;
 using EduBoost.API.Infrastructure.Storage;
@@ -23,7 +30,7 @@ builder.Services.AddControllers()
     .AddJsonOptions(o =>
     {
         // Đảm bảo camelCase nhất quán cả chiều request lẫn response
-        o.JsonSerializerOptions.PropertyNamingPolicy        = System.Text.Json.JsonNamingPolicy.CamelCase;
+        o.JsonSerializerOptions.PropertyNamingPolicy = System.Text.Json.JsonNamingPolicy.CamelCase;
         o.JsonSerializerOptions.PropertyNameCaseInsensitive = true;
     });
 
@@ -83,7 +90,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 // ── JWT Authentication ────────────────────────────────────────────────────────
 var jwtSecret = builder.Configuration["Jwt:Secret"]
     ?? throw new InvalidOperationException("Jwt:Secret is not configured.");
-var jwtIssuer  = builder.Configuration["Jwt:Issuer"]  ?? "EduBoost";
+var jwtIssuer = builder.Configuration["Jwt:Issuer"] ?? "EduBoost";
 var jwtAudience = builder.Configuration["Jwt:Audience"] ?? "EduBoost";
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -91,14 +98,14 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     {
         options.TokenValidationParameters = new TokenValidationParameters
         {
-            ValidateIssuer           = true,
-            ValidateAudience         = true,
-            ValidateLifetime         = true,
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidateLifetime = true,
             ValidateIssuerSigningKey = true,
-            ValidIssuer              = jwtIssuer,
-            ValidAudience            = jwtAudience,
-            IssuerSigningKey         = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSecret)),
-            ClockSkew                = TimeSpan.Zero // no grace period
+            ValidIssuer = jwtIssuer,
+            ValidAudience = jwtAudience,
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSecret)),
+            ClockSkew = TimeSpan.Zero // no grace period
         };
     });
 
@@ -125,6 +132,13 @@ builder.Services.AddScoped<IQuizzesRepository, QuizzesRepository>();
 builder.Services.AddScoped<IStudentsRepository, StudentsRepository>();
 builder.Services.AddScoped<IRoadmapRepository, RoadmapRepository>();
 builder.Services.AddScoped<IPoolRepository, PoolRepository>();
+builder.Services.AddScoped<IUserProfilesRepository, UserProfilesRepository>();
+builder.Services.AddScoped<ILearningStatesRepository, LearningStatesRepository>();
+builder.Services.AddScoped<IPlacementTestsRepository, PlacementTestsRepository>();
+builder.Services.AddScoped<ILearningPathsRepository, LearningPathsRepository>();
+builder.Services.AddScoped<IPracticeSessionsRepository, PracticeSessionsRepository>();
+builder.Services.AddScoped<IAiChatRepository, AiChatRepository>();
+builder.Services.AddScoped<IAdminRepository, AdminRepository>();
 
 // ── DI — AI Agent Service ─────────────────────────────────────────────────────
 builder.Services.AddHttpClient<IAgentService, AgentService>();

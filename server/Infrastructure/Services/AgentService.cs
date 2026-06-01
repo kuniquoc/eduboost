@@ -11,6 +11,7 @@ public interface IAgentService
     Task<string?> GetExplanationAsync(string topicName, string studentState);
     Task<string?> GetGraderExplanationAsync(string question, string correctAnswer, string studentAnswer);
     Task<AgentQuizBatchResponse?> GenerateQuizBatchAsync(string topicName, string? userPrompt, string? docUrl, int numQuestions, string difficulty);
+    Task<AgentChatResponse> AskAsync(string question, string? topicId, string level, List<ChatMessage> history);
 }
 
 public class AgentService : IAgentService
@@ -157,6 +158,30 @@ public class AgentService : IAgentService
             return null;
         }
     }
+
+    public async Task<AgentChatResponse> AskAsync(string question, string? topicId, string level, List<ChatMessage> history)
+    {
+        try
+        {
+            var payload = new
+            {
+                question,
+                topic_id = topicId,
+                level,
+                history = history.Select(m => new { m.Role, m.Content })
+            };
+            var content = new StringContent(JsonSerializer.Serialize(payload, JsonOpts), Encoding.UTF8, "application/json");
+            var response = await _http.PostAsync("/tutor/chat", content);
+            response.EnsureSuccessStatusCode();
+            var json = await response.Content.ReadAsStringAsync();
+            return JsonSerializer.Deserialize<AgentChatResponse>(json, JsonOpts) ?? new AgentChatResponse { Answer = "Không thể kết nối AI" };
+        }
+        catch (Exception ex)
+        {
+            _logger.LogWarning(ex, "AI Agent unavailable for Ask");
+            return new AgentChatResponse { Answer = "AI hiện không khả dụng. Vui lòng thử lại sau." };
+        }
+    }
 }
 
 // ── Response DTOs ────────────────────────────────────────────────────────────
@@ -205,4 +230,23 @@ public class AgentQuizBatchQuestion
 public class AgentQuizBatchResponse
 {
     public List<AgentQuizBatchQuestion> Questions { get; set; } = [];
+}
+
+public class ChatMessage
+{
+    public string Role { get; set; } = "";
+    public string Content { get; set; } = "";
+}
+
+public class AgentChatResponse
+{
+    public string Answer { get; set; } = "";
+    public List<AgentSourceReference> Sources { get; set; } = [];
+}
+
+public class AgentSourceReference
+{
+    public string DocumentId { get; set; } = "";
+    public string FileName { get; set; } = "";
+    public string? Snippet { get; set; }
 }

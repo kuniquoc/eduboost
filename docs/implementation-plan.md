@@ -354,12 +354,13 @@ AI Agent Core hiện giữ state in-memory. Cần:
 
 #### 4.8. Service layer updates
 **File**: `web/src/services/`
-- `learningState.service.ts` — BKT state, review schedule.
-- `placementTest.service.ts` — Adaptive entry test.
-- `learningPath.service.ts` — Learning path CRUD.
-- `practiceSession.service.ts` — Practice session flow.
-- `aiChat.service.ts` — AI Q&A with streaming.
-- `admin.service.ts` — Admin endpoints.
+- `learningState.service.ts` — BKT state, review schedule. ✅
+- `placementTest.service.ts` — Adaptive entry test. ✅
+- `learningPath.service.ts` — Learning path CRUD. ✅
+- `practiceSession.service.ts` — Practice session flow. ✅
+- `aiChat.service.ts` — AI Q&A with streaming. ✅
+- `admin.service.ts` — Admin endpoints. ✅
+- `userProfile.service.ts` — User profile management. ✅
 
 ---
 
@@ -368,6 +369,26 @@ AI Agent Core hiện giữ state in-memory. Cần:
 #### 5.1. Tương tự Web Phase 4 (áp dụng cho mobile)
 - Entry test adaptive flow.
 - Practice session (multiple choice + fill-in-blank).
+
+---
+
+## Tiến độ triển khai
+
+| Phase | Mục | Trạng thái |
+|-------|-----|-----------|
+| 1 | Database Schema (7 entities mới) | ✅ |
+| 2 | Backend APIs (7 feature modules) | ✅ |
+| 3 | AI Agent Core (SM-2, Entry Test, Chat) | ✅ |
+| 4.1 | Adaptive Placement Test page | ✅ |
+| 4.2 | Roadmap / Learning Path cải tiến | ⬜ (chưa cần đổi) |
+| 4.3 | Practice Session page (BKT + SR) | ✅ |
+| 4.4 | AI Chat page | ✅ |
+| 4.5 | Review / Ôn tập page | ✅ |
+| 4.6 | Dashboard cải tiến (review reminder) | ✅ |
+| 4.7 | Admin pages | ✅ |
+| 4.8 | Service layer + Types | ✅ |
+| 5 | Mobile Changes | ⬜ |
+| 6 | Infrastructure (Redis, WebSocket) | ⬜ |
 - AI chat (không cần streaming trên mobile, dùng loading state).
 - Review/Ôn tập schedule.
 - Dashboard cải tiến.
@@ -398,24 +419,24 @@ AI Agent Core hiện giữ state in-memory. Cần:
 
 ## Thứ tự triển khai đề xuất
 
-| Bước | Nội dung | Ưu tiên | Phụ thuộc |
-|------|----------|---------|-----------|
-| 1 | Database entities + migration | P0 | — |
-| 2 | BKT state persistence (stateless agent) | P0 | Bước 1 |
-| 3 | Spaced Repetition module (AI Agent) | P0 | — |
-| 4 | Adaptive Entry Test (AI Agent + Backend API) | P0 | Bước 1, 2 |
-| 5 | Practice Session API (Backend) | P0 | Bước 1, 2, 3 |
-| 6 | Learning Path API (Backend) | P1 | Bước 1, 4 |
-| 7 | AI Chat API + conversation history | P1 | Bước 1 |
-| 8 | Frontend Entry Test revamp | P0 | Bước 4 |
-| 9 | Frontend Practice Session | P0 | Bước 5 |
-| 10 | Frontend AI Chat + streaming | P1 | Bước 7 |
-| 11 | Frontend Review/Ôn tập | P1 | Bước 5 |
-| 12 | Admin role + pages | P2 | Bước 1 |
-| 13 | Redis caching | P2 | — |
-| 14 | Fill-in-blank question type | P2 | Bước 1 |
-| 15 | Mobile updates | P2 | Bước 8-11 |
-| 16 | UserProfile API + Dashboard | P1 | Bước 1 |
+| Bước | Nội dung | Ưu tiên | Phụ thuộc | Trạng thái |
+|------|----------|---------|-----------|------------|
+| 1 | Database entities + migration | P0 | — | ✅ Hoàn thành |
+| 2 | BKT state persistence (stateless agent) | P0 | Bước 1 | ✅ Hoàn thành |
+| 3 | Spaced Repetition module (AI Agent) | P0 | — | ✅ Hoàn thành |
+| 4 | Adaptive Entry Test (AI Agent + Backend API) | P0 | Bước 1, 2 | ✅ Hoàn thành |
+| 5 | Practice Session API (Backend) | P0 | Bước 1, 2, 3 | ✅ Hoàn thành |
+| 6 | Learning Path API (Backend) | P1 | Bước 1, 4 | ✅ Hoàn thành |
+| 7 | AI Chat API + conversation history | P1 | Bước 1 | ✅ Hoàn thành |
+| 8 | Frontend Entry Test revamp | P0 | Bước 4 | ⬜ Chưa triển khai |
+| 9 | Frontend Practice Session | P0 | Bước 5 | ⬜ Chưa triển khai |
+| 10 | Frontend AI Chat + streaming | P1 | Bước 7 | ⬜ Chưa triển khai |
+| 11 | Frontend Review/Ôn tập | P1 | Bước 5 | ⬜ Chưa triển khai |
+| 12 | Admin role + pages | P2 | Bước 1 | ✅ Hoàn thành (Backend) |
+| 13 | Redis caching | P2 | — | ⬜ Chưa triển khai |
+| 14 | Fill-in-blank question type | P2 | Bước 1 | ✅ Hoàn thành (đã hỗ trợ) |
+| 15 | Mobile updates | P2 | Bước 8-11 | ⬜ Chưa triển khai |
+| 16 | UserProfile API + Dashboard | P1 | Bước 1 | ✅ Hoàn thành (Backend) |
 
 ---
 
