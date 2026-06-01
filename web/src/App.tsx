@@ -27,6 +27,11 @@ import { PracticePage } from '@/features/student/practice/practice-page';
 import { AILabQuizPage } from '@/features/student/ai-lab/ai-lab-quiz-page';
 import { TeacherPoolDashboard } from '@/features/teacher/quizzes/pool-dashboard';
 import { StudentPoolDashboard } from '@/features/student/ai-lab/pool-dashboard';
+import { PracticeSessionPage } from '@/features/student/practice-session/practice-session-page';
+import { AiChatPage } from '@/features/student/ai-chat/ai-chat-page';
+import { ReviewPage } from '@/features/student/review/review-page';
+import { AdaptivePlacementTestPage } from '@/features/student/placement-test/adaptive-placement-test-page';
+import { AdminDashboardPage } from '@/features/admin/admin-dashboard-page';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -83,12 +88,24 @@ function AppRoutes() {
           <Route path="/student/ai-lab" element={<AILabPage />} />
           <Route path="/student/ai-lab/:quizId" element={<AILabQuizPage />} />
           <Route path="/student/quiz-pool" element={<StudentPoolDashboard />} />
+          <Route path="/student/ai-chat" element={<AiChatPage />} />
+          <Route path="/student/review" element={<ReviewPage />} />
+          <Route path="/student/practice-session" element={<PracticeSessionPage />} />
           <Route path="/student/roadmap/:classId" element={<RoadmapPage />} />
           <Route path="/student/practice/:topicId" element={<PracticePage />} />
           <Route path="/student/profile" element={<ProfilePage />} />
         </Route>
         {/* Full-page (no sidebar) */}
         <Route path="/student/entry-test/:classId" element={<EntryTestPage />} />
+        <Route path="/student/placement-test" element={<AdaptivePlacementTestPage />} />
+      </Route>
+
+      {/* Admin */}
+      <Route element={<ProtectedRoute role="admin" />}>
+        <Route element={<AppLayout role="admin" />}>
+          <Route path="/admin" element={<Navigate to="/admin/dashboard" replace />} />
+          <Route path="/admin/dashboard" element={<AdminDashboardPage />} />
+        </Route>
       </Route>
 
       {/* Fallback */}

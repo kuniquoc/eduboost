@@ -1,6 +1,6 @@
 // Shared TypeScript types — ported from mobile
 
-export type UserRole = 'teacher' | 'student';
+export type UserRole = 'teacher' | 'student' | 'admin';
 
 export interface User {
   userId: string;
@@ -322,6 +322,194 @@ export interface ExplainErrorRequest {
   studentAnswer: string;
 }
 
+// ─── User Profile ─────────────────────────────────────────
+
+export interface UserProfileDto {
+  userId: string;
+  currentLevel: 'beginner' | 'intermediate' | 'advanced';
+  overallMasteryScore: number;
+  preferredTopics: string[];
+  learningStreak: number;
+  lastActiveDate?: string;
+}
+
+// ─── BKT / Learning States ────────────────────────────────
+
+export interface BktStateDto {
+  topicId: string;
+  topicName: string;
+  masteryProbability: number;
+  guessProbability: number;
+  slipProbability: number;
+  transitionProbability: number;
+  irtTheta: number;
+  updatedAt: string;
+}
+
+export interface UpdateBktResponse {
+  state: BktStateDto;
+  recommendation?: string;
+}
+
+export interface ReviewScheduleDto {
+  totalDueToday: number;
+  items: ReviewItemDto[];
+}
+
+export interface ReviewItemDto {
+  questionId: string;
+  topicId: string;
+  topicName: string;
+  nextReviewDate: string;
+  retentionScore: number;
+  repetitionCount: number;
+}
+
+// ─── Placement Test (Adaptive) ────────────────────────────
+
+export interface PlacementQuestionDto {
+  questionId: string;
+  text: string;
+  type: QuestionType;
+  difficulty: string;
+  options: Array<{ id: string; text: string }>;
+}
+
+export interface StartPlacementTestResponse {
+  sessionId: string;
+  question: PlacementQuestionDto;
+  questionNumber: number;
+  totalQuestions: number;
+}
+
+export interface AnswerPlacementResponse {
+  isCorrect: boolean;
+  isComplete: boolean;
+  nextQuestion?: PlacementQuestionDto;
+  questionNumber: number;
+  totalQuestions: number;
+}
+
+export interface CompletePlacementResponse {
+  resultId: string;
+  initialLevel: string;
+  finalScore: number;
+  strengths: Array<{ topicId: string; topicName: string; score: number }>;
+  weaknesses: Array<{ topicId: string; topicName: string; score: number }>;
+}
+
+export interface PlacementTestResultDto {
+  id: string;
+  initialLevel: string;
+  finalScore: number;
+  strengths: Array<{ topicId: string; topicName: string; score: number }>;
+  weaknesses: Array<{ topicId: string; topicName: string; score: number }>;
+  createdAt: string;
+}
+
+// ─── Learning Paths ───────────────────────────────────────
+
+export interface LearningPathDto {
+  items: LearningPathItemDto[];
+  totalItems: number;
+  completedItems: number;
+  overallProgress: number;
+}
+
+export interface LearningPathItemDto {
+  id: string;
+  topicId: string;
+  topicName: string;
+  recommendedDifficulty: string;
+  priorityScore: number;
+  nextReviewDate?: string;
+  isCompleted: boolean;
+  orderIndex: number;
+}
+
+// ─── Practice Sessions ────────────────────────────────────
+
+export interface PracticeQuestionDto {
+  questionId: string;
+  text: string;
+  type: QuestionType;
+  difficulty: string;
+  options: Array<{ id: string; text: string }>;
+}
+
+export interface StartPracticeResponse {
+  sessionId: string;
+  topicName: string;
+  question: PracticeQuestionDto;
+  questionNumber: number;
+  totalQuestions: number;
+}
+
+export interface SubmitPracticeAnswerResponse {
+  isCorrect: boolean;
+  correctAnswer?: string;
+  explanation?: string;
+  nextQuestion?: PracticeQuestionDto;
+  questionNumber: number;
+  isSessionComplete: boolean;
+}
+
+export interface PracticeSessionSummary {
+  sessionId: string;
+  topicName: string;
+  questionsAttempted: number;
+  correctAnswers: number;
+  score: number;
+  recommendation?: string;
+}
+
+// ─── AI Chat ──────────────────────────────────────────────
+
+export interface AskResponse {
+  answer: string;
+  sources: SourceReferenceDto[];
+  messageId: string;
+}
+
+export interface SourceReferenceDto {
+  documentId: string;
+  fileName: string;
+  snippet?: string;
+}
+
+export interface ChatMessageDto {
+  id: string;
+  role: 'user' | 'assistant';
+  content: string;
+  sources: SourceReferenceDto[];
+  createdAt: string;
+}
+
+export interface ChatHistoryDto {
+  total: number;
+  messages: ChatMessageDto[];
+}
+
+// ─── Admin ────────────────────────────────────────────────
+
+export interface AdminUserDto {
+  id: string;
+  name: string;
+  email: string;
+  role: string;
+  createdAt: string;
+}
+
+export interface SystemStatsDto {
+  totalUsers: number;
+  totalStudents: number;
+  totalTeachers: number;
+  totalClasses: number;
+  totalTopics: number;
+  totalQuestions: number;
+  totalLearningSessions: number;
+}
+
 // ─── API Response ────────────────────────────────────────
 
 export interface ApiResponse<T> {
@@ -372,4 +560,3 @@ export interface PoolQuizDetailDto {
   createdAt: string;
   questions: QuestionDto[];
 }
-

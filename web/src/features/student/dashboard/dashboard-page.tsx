@@ -1,10 +1,11 @@
 import { Link } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { studentsService } from '@/services/students.service';
+import { learningStateService } from '@/services/learningState.service';
 import { Card, CardContent } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
 import { Badge } from '@/components/ui/badge';
-import { Flame, Target, BookOpen, TrendingUp } from 'lucide-react';
+import { Flame, Target, BookOpen, TrendingUp, CalendarClock } from 'lucide-react';
 
 function StatCard({ icon: Icon, label, value, sub }: { icon: React.ComponentType<{ className?: string }>; label: string; value: string | number; sub?: string }) {
   return (
@@ -32,6 +33,11 @@ export function StudentDashboardPage() {
   const { data: stats, isLoading: loadingStats } = useQuery({
     queryKey: ['student-stats'],
     queryFn: studentsService.getMyStats,
+  });
+
+  const { data: reviewSchedule } = useQuery({
+    queryKey: ['review-schedule'],
+    queryFn: learningStateService.getReviewSchedule,
   });
 
   const isLoading = loadingProgress || loadingStats;
@@ -77,6 +83,23 @@ export function StudentDashboardPage() {
             <Progress value={progress.overallProgress} className="h-2" />
           </CardContent>
         </Card>
+      )}
+
+      {/* Review reminder */}
+      {reviewSchedule && reviewSchedule.totalDueToday > 0 && (
+        <Link to="/student/review">
+          <Card className="border-primary/20 bg-primary/5 transition-colors hover:border-primary/40">
+            <CardContent className="flex items-center gap-4 p-4">
+              <CalendarClock className="h-8 w-8 text-primary" />
+              <div className="flex-1">
+                <p className="font-semibold text-foreground">
+                  {reviewSchedule.totalDueToday} câu hỏi cần ôn tập hôm nay
+                </p>
+                <p className="text-sm text-muted-foreground">Ôn tập đúng lúc để ghi nhớ lâu hơn</p>
+              </div>
+            </CardContent>
+          </Card>
+        </Link>
       )}
 
       {/* Enrolled classes */}

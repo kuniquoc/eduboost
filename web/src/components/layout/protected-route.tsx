@@ -22,7 +22,12 @@ export function ProtectedRoute({ role }: Props) {
   }
 
   if (role && user?.role !== role) {
-    const redirectTo = user?.role === 'teacher' ? '/teacher/classes' : '/student/dashboard';
+    const redirectMap: Record<string, string> = {
+      teacher: '/teacher/classes',
+      student: '/student/dashboard',
+      admin: '/admin/dashboard',
+    };
+    const redirectTo = redirectMap[user?.role ?? 'student'] ?? '/student/dashboard';
     return <Navigate to={redirectTo} replace />;
   }
 

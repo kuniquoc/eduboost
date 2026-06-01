@@ -3,7 +3,7 @@ import { useAuthStore } from '@/store/auth-store';
 import {
   BookOpen, Bot, User, LayoutDashboard,
   GraduationCap, LogOut, ChevronLeft, Menu,
-  Database,
+  Database, MessageCircle, CalendarClock, Shield,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
@@ -27,9 +27,15 @@ const teacherNav: NavItem[] = [
 const studentNav: NavItem[] = [
   { label: 'Tổng quan', href: '/student/dashboard', icon: LayoutDashboard },
   { label: 'Lớp học', href: '/student/classes', icon: GraduationCap },
+  { label: 'AI Chat', href: '/student/ai-chat', icon: MessageCircle },
   { label: 'AI Lab', href: '/student/ai-lab', icon: Bot },
+  { label: 'Ôn tập', href: '/student/review', icon: CalendarClock },
   { label: 'Quiz Pool', href: '/student/quiz-pool', icon: Database },
   { label: 'Hồ sơ', href: '/student/profile', icon: User },
+];
+
+const adminNav: NavItem[] = [
+  { label: 'Tổng quan', href: '/admin/dashboard', icon: Shield },
 ];
 
 function SidebarContent({
@@ -84,7 +90,7 @@ export function AppLayout({ role }: { role: UserRole }) {
   const [collapsed, setCollapsed] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
 
-  const navItems = role === 'teacher' ? teacherNav : studentNav;
+  const navItems = role === 'teacher' ? teacherNav : role === 'admin' ? adminNav : studentNav;
 
   const handleLogout = async () => {
     await logout();
