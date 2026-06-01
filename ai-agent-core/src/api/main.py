@@ -28,6 +28,8 @@ from src.rag.document_reader import DocumentReader
 from src.core.orchestrator import AgentOrchestrator
 from src.adapters.llm_manager import LLMManager
 from src.adapters.prompt_templates import PromptTemplates
+from src.core.spaced_repetition import SpacedRepetitionEngine
+from src.core.entry_test import AdaptiveEntryTest, EntryTestState
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -43,6 +45,9 @@ ingestor: Optional[RAGIngestor] = None
 
 # In-memory agent sessions keyed by student_id
 agent_sessions: dict[str, AgentOrchestrator] = {}
+
+# In-memory entry test sessions
+entry_test_sessions: dict[str, EntryTestState] = {}
 
 
 def get_or_create_agent(student_id: str) -> AgentOrchestrator:
@@ -467,6 +472,33 @@ class GenerateQuizBatchRequest(BaseModel):
     difficulty: str = "medium"
 
 
+class ChatRequest(BaseModel):
+    question: str
+    topic_id: Optional[str] = None
+    level: str = "intermediate"
+    history: list = []
+
+
+class ChatHistoryMessage(BaseModel):
+    role: str
+    content: str
+
+
+class SpacedRepetitionUpdateRequest(BaseModel):
+    quality: int  # 0-5
+    ease_factor: float = 2.5
+    interval: float = 1.0
+    repetitions: int = 0
+
+
+class EntryTestAnswerRequest(BaseModel):
+    session_id: str
+    question_id: str
+    is_correct: bool
+    difficulty: str = "medium"
+    topic_id: Optional[str] = None
+
+
 @app.post("/tutor/generate-quiz")
 async def generate_quiz_batch(request: GenerateQuizBatchRequest):
     """Generates multiple quiz questions using LLM context or document or user suggestion."""
@@ -531,6 +563,159 @@ async def generate_quiz_batch(request: GenerateQuizBatchRequest):
 
     return {"questions": questions}
 
+
+# ---------------------------------------------------------------------------
+# Chat endpoint (AI Q&A with RAG)
+# ---------------------------------------------------------------------------
+@app.post("/tutor/chat")
+async def chat(request: ChatRequest):
+    """AI Q&A: answers student questions using RAG context, adjusted for level."""
+    import time
+
+    start_time = time.time()
+    logger.info(f"[CHAT] Received question: '{request.question[:100]}...', level={request.level}, topic_id={request.topic_id}")
+
+    if not llm_explain:
+        raise HTTPException(503, "LLM not initialized")
+
+    # RAG retrieval
+    context = ""
+    sources = []
+    if retriever and vector_db:
+        try:
+            query = request.question
+            if request.topic_id:
+                query = f"{request.topic_id} {request.question}"
+
+            hits = vector_db.search(request.question, k=5, return_scores=True)
+            context_parts = []
+            for score, chunk in hits:
+                context_parts.append(chunk["text"])
+                meta = chunk.get("metadata", {})
+                sources.append({
+                    "document_id": meta.get("source_file", ""),
+                    "file_name": meta.get("source_file", "unknown"),
+                    "snippet": chunk["text"][:200]
+                })
+            context = "\n\n".join(context_parts)
+        except Exception as e:
+            logger.error(f"[CHAT] RAG retrieval error: {e}")
+            context = ""
+
+    # Build conversation context from history
+    conversation_context = ""
+    if request.history:
+        recent = request.history[-5:]  # Last 5 messages
+        conversation_context = "\n".join(
+            f"{msg.get('role', 'user').capitalize()}: {msg.get('content', '')}"
+            for msg in recent
+        )
+
+    # Build prompt
+    level_instruction = {
+        "beginner": "Giải thích bằng ngôn ngữ đơn giản, ngắn gọn, dùng ví dụ dễ hiểu. Dùng tiếng Việt.",
+        "intermediate": "Giải thích rõ ràng với ví dụ minh hoạ. Có thể dùng thuật ngữ chuyên môn cơ bản. Dùng tiếng Việt.",
+        "advanced": "Giải thích chi tiết, chuyên sâu, có ví dụ nâng cao và so sánh. Dùng tiếng Việt."
+    }.get(request.level, "Giải thích rõ ràng, dùng tiếng Việt.")
+
+    prompt = f"""Bạn là gia sư AI hỗ trợ học tiếng Anh. {level_instruction}
+
+Tài liệu tham khảo:
+{context if context else "Không có tài liệu cụ thể."}
+
+{f"Lịch sử hội thoại gần đây:{chr(10)}{conversation_context}" if conversation_context else ""}
+
+Câu hỏi của học sinh: {request.question}
+
+Hãy trả lời chính xác dựa trên tài liệu tham khảo. Nếu không tìm thấy thông tin trong tài liệu, hãy nói rõ và cung cấp kiến thức chung."""
+
+    # Call LLM
+    try:
+        answer = llm_explain.generate(prompt)
+    except Exception as e:
+        logger.error(f"[CHAT] LLM error: {e}")
+        raise HTTPException(500, f"LLM error: {str(e)}")
+
+    total_duration = time.time() - start_time
+    logger.info(f"[CHAT] Response generated in {total_duration:.3f}s")
+
+    return {
+        "answer": answer,
+        "sources": sources[:3]  # Return top 3 sources
+    }
+
+
+# ---------------------------------------------------------------------------
+# Spaced Repetition endpoints
+# ---------------------------------------------------------------------------
+@app.post("/spaced-repetition/update")
+async def update_spaced_repetition(request: SpacedRepetitionUpdateRequest):
+    """Update spaced repetition parameters after a review."""
+    result = SpacedRepetitionEngine.update_after_review(
+        quality=request.quality,
+        ease_factor=request.ease_factor,
+        interval=request.interval,
+        repetitions=request.repetitions
+    )
+    return result
+
+
+# ---------------------------------------------------------------------------
+# Entry Test endpoints
+# ---------------------------------------------------------------------------
+@app.post("/entry-test/start")
+async def start_entry_test():
+    """Start a new adaptive entry test session."""
+    import uuid
+    session_id = str(uuid.uuid4())
+    state = AdaptiveEntryTest.get_initial_state()
+    entry_test_sessions[session_id] = state
+    return {
+        "session_id": session_id,
+        "current_difficulty": state.current_difficulty,
+        "min_questions": AdaptiveEntryTest.MIN_QUESTIONS,
+        "max_questions": AdaptiveEntryTest.MAX_QUESTIONS
+    }
+
+
+@app.post("/entry-test/next-question")
+async def entry_test_next_question(request: EntryTestAnswerRequest):
+    """Record answer and get next question difficulty recommendation."""
+    if request.session_id not in entry_test_sessions:
+        raise HTTPException(404, "Session not found")
+
+    state = entry_test_sessions[request.session_id]
+
+    # Record the answer
+    state = AdaptiveEntryTest.record_answer(
+        state=state,
+        question_id=request.question_id,
+        is_correct=request.is_correct,
+        difficulty=request.difficulty,
+        topic_id=request.topic_id
+    )
+    entry_test_sessions[request.session_id] = state
+
+    # Check if test should end
+    should_end = AdaptiveEntryTest.should_end_test(state)
+
+    return {
+        "should_end": should_end,
+        "next_difficulty": state.current_difficulty,
+        "questions_answered": state.questions_answered,
+        "current_score": state.correct_count / state.questions_answered if state.questions_answered > 0 else 0
+    }
+
+
+@app.post("/entry-test/evaluate")
+async def evaluate_entry_test(session_id: str):
+    """Evaluate final entry test results."""
+    if session_id not in entry_test_sessions:
+        raise HTTPException(404, "Session not found")
+
+    state = entry_test_sessions.pop(session_id)
+    result = AdaptiveEntryTest.evaluate_result(state)
+    return result
 
 
 # ---------------------------------------------------------------------------
