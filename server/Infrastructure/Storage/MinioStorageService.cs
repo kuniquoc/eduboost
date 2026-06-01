@@ -80,4 +80,19 @@ public class MinioStorageService : IStorageService
             _logger.LogInformation("Created MinIO bucket: {Bucket}", bucket);
         }
     }
+
+    public async Task UploadObjectAsync(string bucket, string objectKey, System.IO.Stream dataStream, string contentType)
+    {
+        await EnsureBucketExistsAsync(bucket);
+
+        var args = new PutObjectArgs()
+            .WithBucket(bucket)
+            .WithObject(objectKey)
+            .WithStreamData(dataStream)
+            .WithObjectSize(dataStream.Length)
+            .WithContentType(contentType);
+
+        await _minio.PutObjectAsync(args);
+        _logger.LogInformation("Successfully uploaded direct object {Bucket}/{Key} to MinIO", bucket, objectKey);
+    }
 }

@@ -13,4 +13,7 @@ public interface IStorageService
 
     /// <summary>Đảm bảo bucket tồn tại (tạo nếu chưa có).</summary>
     Task EnsureBucketExistsAsync(string bucket);
+
+    /// <summary>Upload trực tiếp một object từ stream.</summary>
+    Task UploadObjectAsync(string bucket, string objectKey, System.IO.Stream dataStream, string contentType);
 }

@@ -1,5 +1,7 @@
 using EduBoost.API.Infrastructure.Entities;
+using EduBoost.API.Infrastructure.Storage;
 using Microsoft.EntityFrameworkCore;
+using System.IO;
 
 namespace EduBoost.API.Infrastructure;
 
@@ -17,32 +19,21 @@ public static class DatabaseSeeder
 
     // ── Fixed IDs ─────────────────────────────────────────────────────────────
     private static readonly Guid T1  = Guid.Parse("11111111-0000-0000-0000-000000000001");
-    private static readonly Guid T2  = Guid.Parse("11111111-0000-0000-0000-000000000002");
     private static readonly Guid S1  = Guid.Parse("22222222-0000-0000-0000-000000000001");
     private static readonly Guid S2  = Guid.Parse("22222222-0000-0000-0000-000000000002");
     private static readonly Guid S3  = Guid.Parse("22222222-0000-0000-0000-000000000003");
 
     private static readonly Guid Cls1 = Guid.Parse("33333333-0000-0000-0000-000000000001");
-    private static readonly Guid Cls2 = Guid.Parse("33333333-0000-0000-0000-000000000002");
-    private static readonly Guid Cls3 = Guid.Parse("33333333-0000-0000-0000-000000000003");
 
     private static readonly Guid Enr1 = Guid.Parse("77777777-0000-0000-0000-000000000001");
     private static readonly Guid Enr2 = Guid.Parse("77777777-0000-0000-0000-000000000002");
     private static readonly Guid Enr3 = Guid.Parse("77777777-0000-0000-0000-000000000003");
-    private static readonly Guid Enr4 = Guid.Parse("77777777-0000-0000-0000-000000000004");
 
     private static readonly Guid Tp1  = Guid.Parse("44444444-0000-0000-0000-000000000001");
     private static readonly Guid Tp2  = Guid.Parse("44444444-0000-0000-0000-000000000002");
     private static readonly Guid Tp3  = Guid.Parse("44444444-0000-0000-0000-000000000003");
     private static readonly Guid Tp4  = Guid.Parse("44444444-0000-0000-0000-000000000004");
     private static readonly Guid Tp5  = Guid.Parse("44444444-0000-0000-0000-000000000005");
-    private static readonly Guid Tp6  = Guid.Parse("44444444-0000-0000-0000-000000000006");
-    private static readonly Guid Tp7  = Guid.Parse("44444444-0000-0000-0000-000000000007");
-    private static readonly Guid Tp8  = Guid.Parse("44444444-0000-0000-0000-000000000008");
-    private static readonly Guid Tp9  = Guid.Parse("44444444-0000-0000-0000-000000000009");
-    private static readonly Guid Tp10 = Guid.Parse("44444444-0000-0000-0000-000000000010");
-    private static readonly Guid Tp11 = Guid.Parse("44444444-0000-0000-0000-000000000011");
-    private static readonly Guid Tp12 = Guid.Parse("44444444-0000-0000-0000-000000000012");
 
     private static readonly Guid Q1   = Guid.Parse("55555555-0000-0000-0000-000000000001");
     private static readonly Guid Q2   = Guid.Parse("55555555-0000-0000-0000-000000000002");
@@ -51,9 +42,11 @@ public static class DatabaseSeeder
     private static readonly Guid Doc1 = Guid.Parse("66666666-0000-0000-0000-000000000001");
     private static readonly Guid Doc2 = Guid.Parse("66666666-0000-0000-0000-000000000002");
     private static readonly Guid Doc3 = Guid.Parse("66666666-0000-0000-0000-000000000003");
+    private static readonly Guid Doc4 = Guid.Parse("66666666-0000-0000-0000-000000000004");
+    private static readonly Guid Doc5 = Guid.Parse("66666666-0000-0000-0000-000000000005");
 
     // ── Entry point ───────────────────────────────────────────────────────────
-    public static async Task SeedAsync(AppDbContext db, ILogger logger)
+    public static async Task SeedAsync(AppDbContext db, IStorageService storageService, ILogger logger)
     {
         // Only seed when DB is empty (check users table)
         if (await db.Users.AnyAsync())
@@ -70,7 +63,7 @@ public static class DatabaseSeeder
         await SeedTopicsAsync(db);
         await SeedQuizzesAsync(db);
         await SeedQuizQuestionsAsync(db);
-        await SeedDocumentsAsync(db);
+        await SeedDocumentsAsync(db, storageService, logger);
 
         logger.LogInformation("Seed data inserted successfully.");
     }
@@ -80,7 +73,6 @@ public static class DatabaseSeeder
     {
         db.Users.AddRange(
             new User { Id = T1, Name = "Nguyễn Thành An",  Email = "teacher@eduboost.vn", PasswordHash = SeedPasswordHash, Role = "teacher", AvatarInitials = "TA", CreatedAt = SeedDate },
-            new User { Id = T2, Name = "Trần Minh Khoa",   Email = "khoa@eduboost.vn",    PasswordHash = SeedPasswordHash, Role = "teacher", AvatarInitials = "TK", CreatedAt = SeedDate },
             new User { Id = S1, Name = "Lê Thị Bảo",       Email = "student@eduboost.vn", PasswordHash = SeedPasswordHash, Role = "student", AvatarInitials = "LB", CreatedAt = SeedDate },
             new User { Id = S2, Name = "Phạm Quốc Đạt",    Email = "dat@eduboost.vn",     PasswordHash = SeedPasswordHash, Role = "student", AvatarInitials = "PD", CreatedAt = SeedDate },
             new User { Id = S3, Name = "Hoàng Thu Hà",      Email = "ha@eduboost.vn",      PasswordHash = SeedPasswordHash, Role = "student", AvatarInitials = "HH", CreatedAt = SeedDate }
@@ -92,9 +84,7 @@ public static class DatabaseSeeder
     private static async Task SeedClassesAsync(AppDbContext db)
     {
         db.Classes.AddRange(
-            new Class { Id = Cls1, Name = "English Grammar Mastery", TeacherId = T1, Description = "Master English grammar from basics to advanced structures", CoverColor = "#6366F1", ClassCode = "ENG2026",   CreatedAt = SeedDate },
-            new Class { Id = Cls2, Name = "Business English",        TeacherId = T1, Description = "Professional English for the modern workplace",           CoverColor = "#06B6D4", ClassCode = "BIZ2026",   CreatedAt = SeedDate.AddDays(17) },
-            new Class { Id = Cls3, Name = "IELTS Preparation",       TeacherId = T2, Description = "Comprehensive IELTS exam preparation course",             CoverColor = "#10B981", ClassCode = "IELTS2026", CreatedAt = SeedDate.AddDays(54) }
+            new Class { Id = Cls1, Name = "English Grammar Mastery", TeacherId = T1, Description = "Master English grammar from basics to advanced structures", CoverColor = "#6366F1", ClassCode = "ENG2026",   CreatedAt = SeedDate }
         );
         await db.SaveChangesAsync();
     }
@@ -105,8 +95,7 @@ public static class DatabaseSeeder
         db.Enrollments.AddRange(
             new Enrollment { Id = Enr1, StudentId = S1, ClassId = Cls1, EnrolledAt = SeedDate.AddDays(5),  EntryTestCompleted = true,  Progress = 72 },
             new Enrollment { Id = Enr2, StudentId = S2, ClassId = Cls1, EnrolledAt = SeedDate.AddDays(7),  EntryTestCompleted = true,  Progress = 45 },
-            new Enrollment { Id = Enr3, StudentId = S3, ClassId = Cls1, EnrolledAt = SeedDate.AddDays(10), EntryTestCompleted = false, Progress = 10 },
-            new Enrollment { Id = Enr4, StudentId = S1, ClassId = Cls2, EnrolledAt = SeedDate.AddDays(21), EntryTestCompleted = true,  Progress = 38 }
+            new Enrollment { Id = Enr3, StudentId = S3, ClassId = Cls1, EnrolledAt = SeedDate.AddDays(10), EntryTestCompleted = false, Progress = 10 }
         );
         await db.SaveChangesAsync();
     }
@@ -118,18 +107,9 @@ public static class DatabaseSeeder
             // English Grammar Mastery
             new Topic { Id = Tp1,  ClassId = Cls1, Name = "Present Simple vs Continuous",  Description = "Usage, form, and signal words for present tenses",                        Difficulty = "easy",   AiEvaluated = true,  IsDocumentVisible = true,  CreatedAt = SeedDate.AddDays(1) },
             new Topic { Id = Tp2,  ClassId = Cls1, Name = "Past Simple vs Present Perfect", Description = "Distinguishing completed past from present relevance",                    Difficulty = "medium", AiEvaluated = true,  IsDocumentVisible = true,  CreatedAt = SeedDate.AddDays(2) },
-            new Topic { Id = Tp3,  ClassId = Cls1, Name = "Conditional Sentences",          Description = "Zero, first, second, and third conditionals",                             Difficulty = "hard",   AiEvaluated = false, IsDocumentVisible = false, CreatedAt = SeedDate.AddDays(3) },
+            new Topic { Id = Tp3,  ClassId = Cls1, Name = "Conditional Sentences",          Description = "Zero, first, second, and third conditionals",                             Difficulty = "hard",   AiEvaluated = true,  IsDocumentVisible = true,  CreatedAt = SeedDate.AddDays(3) },
             new Topic { Id = Tp4,  ClassId = Cls1, Name = "Relative Clauses",               Description = "Defining and non-defining relative clauses with who, which, that",        Difficulty = "medium", AiEvaluated = true,  IsDocumentVisible = true,  CreatedAt = SeedDate.AddDays(4) },
-            new Topic { Id = Tp5,  ClassId = Cls1, Name = "Passive Voice",                  Description = "Active to passive transformation across tenses",                          Difficulty = "medium", AiEvaluated = false, IsDocumentVisible = false, CreatedAt = SeedDate.AddDays(5) },
-            // Business English
-            new Topic { Id = Tp6,  ClassId = Cls2, Name = "Email Writing",                  Description = "Professional email structure and common phrases",                         Difficulty = "easy",   AiEvaluated = true,  IsDocumentVisible = true,  CreatedAt = SeedDate.AddDays(18) },
-            new Topic { Id = Tp7,  ClassId = Cls2, Name = "Meeting Vocabulary",             Description = "Key phrases for participating in business meetings",                      Difficulty = "medium", AiEvaluated = true,  IsDocumentVisible = false, CreatedAt = SeedDate.AddDays(19) },
-            new Topic { Id = Tp8,  ClassId = Cls2, Name = "Presentation Skills",            Description = "Language for delivering effective presentations",                         Difficulty = "hard",   AiEvaluated = false, IsDocumentVisible = true,  CreatedAt = SeedDate.AddDays(20) },
-            new Topic { Id = Tp9,  ClassId = Cls2, Name = "Negotiation Language",           Description = "Persuasive language and negotiation tactics",                             Difficulty = "hard",   AiEvaluated = true,  IsDocumentVisible = true,  CreatedAt = SeedDate.AddDays(21) },
-            // IELTS Preparation
-            new Topic { Id = Tp10, ClassId = Cls3, Name = "IELTS Reading Strategies",       Description = "Skimming, scanning, and keyword techniques",                              Difficulty = "medium", AiEvaluated = true,  IsDocumentVisible = true,  CreatedAt = SeedDate.AddDays(55) },
-            new Topic { Id = Tp11, ClassId = Cls3, Name = "IELTS Writing Task 2",           Description = "Essay structure, cohesion, and argument development",                     Difficulty = "hard",   AiEvaluated = true,  IsDocumentVisible = true,  CreatedAt = SeedDate.AddDays(56) },
-            new Topic { Id = Tp12, ClassId = Cls3, Name = "IELTS Speaking Part 2",          Description = "Cue card responses and extended speaking",                                Difficulty = "medium", AiEvaluated = false, IsDocumentVisible = false, CreatedAt = SeedDate.AddDays(57) }
+            new Topic { Id = Tp5,  ClassId = Cls1, Name = "Passive Voice",                  Description = "Active to passive transformation across tenses",                          Difficulty = "medium", AiEvaluated = true,  IsDocumentVisible = true,  CreatedAt = SeedDate.AddDays(5) }
         );
         await db.SaveChangesAsync();
     }
@@ -320,13 +300,69 @@ public static class DatabaseSeeder
     }
 
     // ── Documents ─────────────────────────────────────────────────────────────
-    private static async Task SeedDocumentsAsync(AppDbContext db)
+    private static async Task SeedDocumentsAsync(AppDbContext db, IStorageService storage, ILogger logger)
     {
         db.Documents.AddRange(
-            new Document { Id = Doc1, OwnerId = T1, ClassId = Cls1, TopicId = Tp1, GeneratedQuizId = Q1, FileName = "Present_Tenses_Guide.pdf",     FileSize = "2.4 MB", StorageKey = "class/cls1/present_tenses_guide.pdf",     Status = "ready", Scope = "class", UploadedAt = SeedDate.AddDays(25) },
-            new Document { Id = Doc2, OwnerId = T1, ClassId = Cls1, TopicId = Tp2, GeneratedQuizId = Q2, FileName = "Past_vs_Perfect_Handbook.pdf",  FileSize = "5.1 MB", StorageKey = "class/cls1/past_vs_perfect_handbook.pdf",  Status = "ready", Scope = "class", UploadedAt = SeedDate.AddDays(27) },
-            new Document { Id = Doc3, OwnerId = T1, ClassId = Cls1, TopicId = Tp3, GeneratedQuizId = Q3, FileName = "Conditionals_Guide.pdf",       FileSize = "3.8 MB", StorageKey = "class/cls1/conditionals_guide.pdf",       Status = "ready", Scope = "class", UploadedAt = SeedDate.AddDays(30) }
+            new Document { Id = Doc1, OwnerId = T1, ClassId = Cls1, TopicId = Tp1, GeneratedQuizId = Q1, FileName = "present_simple_vs_continuous.txt",     FileSize = "7.5 KB", StorageKey = "class/cls1/present_simple_vs_continuous.txt",     Status = "ready", Scope = "class", UploadedAt = SeedDate.AddDays(25) },
+            new Document { Id = Doc2, OwnerId = T1, ClassId = Cls1, TopicId = Tp2, GeneratedQuizId = Q2, FileName = "past_simple_vs_present_perfect.txt",  FileSize = "8.6 KB", StorageKey = "class/cls1/past_simple_vs_present_perfect.txt",  Status = "ready", Scope = "class", UploadedAt = SeedDate.AddDays(27) },
+            new Document { Id = Doc3, OwnerId = T1, ClassId = Cls1, TopicId = Tp3, GeneratedQuizId = null, FileName = "conditional_sentences.txt",          FileSize = "8.0 KB", StorageKey = "class/cls1/conditional_sentences.txt",          Status = "ready", Scope = "class", UploadedAt = SeedDate.AddDays(30) },
+            new Document { Id = Doc4, OwnerId = T1, ClassId = Cls1, TopicId = Tp4, GeneratedQuizId = null, FileName = "relative_clauses.txt",               FileSize = "8.5 KB", StorageKey = "class/cls1/relative_clauses.txt",               Status = "ready", Scope = "class", UploadedAt = SeedDate.AddDays(32) },
+            new Document { Id = Doc5, OwnerId = T1, ClassId = Cls1, TopicId = Tp5, GeneratedQuizId = null, FileName = "passive_voice.txt",                  FileSize = "9.9 KB", StorageKey = "class/cls1/passive_voice.txt",                  Status = "ready", Scope = "class", UploadedAt = SeedDate.AddDays(35) }
         );
         await db.SaveChangesAsync();
+
+        // Physically upload files to MinIO storage during seed process for 100% correct setup
+        await UploadFileToMinioAsync(storage, "present_simple_vs_continuous.txt", "class/cls1/present_simple_vs_continuous.txt", logger);
+        await UploadFileToMinioAsync(storage, "past_simple_vs_present_perfect.txt", "class/cls1/past_simple_vs_present_perfect.txt", logger);
+        await UploadFileToMinioAsync(storage, "conditional_sentences.txt", "class/cls1/conditional_sentences.txt", logger);
+        await UploadFileToMinioAsync(storage, "relative_clauses.txt", "class/cls1/relative_clauses.txt", logger);
+        await UploadFileToMinioAsync(storage, "passive_voice.txt", "class/cls1/passive_voice.txt", logger);
+    }
+
+    private static async Task UploadFileToMinioAsync(IStorageService storage, string fileName, string storageKey, ILogger logger)
+    {
+        try
+        {
+            // Try to resolve path dynamically relative to AppContext.BaseDirectory or Directory.GetCurrentDirectory()
+            var possiblePaths = new[]
+            {
+                Path.Combine(AppContext.BaseDirectory, "../../../../ai-agent-core/data/raw", fileName),
+                Path.Combine(Directory.GetCurrentDirectory(), "../ai-agent-core/data/raw", fileName),
+                Path.Combine(Directory.GetCurrentDirectory(), "ai-agent-core/data/raw", fileName)
+            };
+
+            string? finalPath = null;
+            foreach (var path in possiblePaths)
+            {
+                if (File.Exists(path))
+                {
+                    finalPath = path;
+                    break;
+                }
+            }
+
+            byte[] fileBytes;
+            if (finalPath != null)
+            {
+                fileBytes = await File.ReadAllBytesAsync(finalPath);
+                logger.LogInformation("Read original textbook data for {FileName} successfully.", fileName);
+            }
+            else
+            {
+                // Resilient fallback with textbook content if directory is unreachable at runtime
+                var fallbackText = $"This is a placeholder textbook content for {fileName}. Original file was not found during seeding.";
+                fileBytes = System.Text.Encoding.UTF8.GetBytes(fallbackText);
+                logger.LogWarning("Original file {FileName} not found, using generic placeholder fallback.", fileName);
+            }
+
+            using var memoryStream = new MemoryStream(fileBytes);
+            // MinioStorageService.Buckets.ClassDocuments is "eduboost-class-docs"
+            await storage.UploadObjectAsync("eduboost-class-docs", storageKey, memoryStream, "text/plain");
+            logger.LogInformation("Physically uploaded seeded document {FileName} into MinIO storage key '{Key}' successfully.", fileName, storageKey);
+        }
+        catch (Exception ex)
+        {
+            logger.LogError(ex, "An error occurred while uploading file {FileName} to MinIO during seeding.", fileName);
+        }
     }
 }

@@ -143,7 +143,8 @@ using (var scope = app.Services.CreateScope())
         await db.Database.MigrateAsync();
         logger.LogInformation("Migrations applied successfully.");
 
-        await DatabaseSeeder.SeedAsync(db, logger);
+        var storage = scope.ServiceProvider.GetRequiredService<IStorageService>();
+        await DatabaseSeeder.SeedAsync(db, storage, logger);
     }
     catch (Exception ex)
     {
