@@ -40,6 +40,13 @@ Difficulty Guide:
 ## Context from textbook (USE THIS as the basis for your question):
 {context}
 
+## Uniqueness rules (CRITICAL):
+- Generate ONE question that tests a different sentence, concept, or vocabulary point than any other question.
+- Do NOT copy sentences verbatim from CONTEXT — transform them (change subject, tense, or vocabulary) while keeping the same grammar focus.
+- Do NOT reuse sentence frames from CONTEXT examples (e.g. "The new ___ will ___", "The company has decided to ___").
+- Each question must test a DIFFERENT vocabulary item or collocation than other questions in the batch.
+- If ADDITIONAL INSTRUCTIONS list questions to avoid, you MUST NOT generate any of those exact sentences.
+
 ## Requirements for each field:
 
 ### "question"
@@ -60,6 +67,8 @@ Difficulty Guide:
 - Must be EXACTLY one of: "A", "B", "C", "D"
 - Must correspond to the option that is grammatically and semantically correct in the sentence
 - VERIFY: mentally substitute the correct option into the blank and confirm it forms a valid sentence
+- WRONG: "correct_answer": "have" (never use the answer text)
+- RIGHT: "correct_answer": "B" (always use the letter key A, B, C, or D)
 
 ### "explanation"
 - Write in VIETNAMESE
@@ -110,6 +119,7 @@ Difficulty Guide:
 - If the student's answer and correct answer are the same, congratulate them instead
 - Use simple Vietnamese appropriate for a language learner"""
 
+    # Legacy single-call batch template — unused; /tutor/generate-quiz uses QUIZ_TEMPLATE per question.
     BATCH_QUIZ_TEMPLATE = """You are a quiz generator. Your ONLY task is to output a valid JSON object. No explanations, no markdown, no preamble.
 
 TOPIC: "{topic}"

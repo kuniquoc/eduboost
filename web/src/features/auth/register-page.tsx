@@ -6,13 +6,14 @@ import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { useAuthStore } from '@/store/auth-store';
 import { authService } from '@/services/auth.service';
+import { getDefaultRouteForRole } from '@/lib/auth-routes';
+import { ROUTES } from '@/lib/constants';
 import { toast } from 'sonner';
 
 export function RegisterPage() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [role, setRole] = useState<'teacher' | 'student'>('student');
   const [loading, setLoading] = useState(false);
   const { setAuth } = useAuthStore();
   const navigate = useNavigate();
@@ -21,10 +22,10 @@ export function RegisterPage() {
     e.preventDefault();
     setLoading(true);
     try {
-      const data = await authService.register(name, email, password, role);
+      const data = await authService.register(name, email, password, 'student');
       setAuth(data.user);
       toast.success('Đăng ký thành công!');
-      navigate(data.user.role === 'teacher' ? '/teacher/classes' : '/student/dashboard');
+      navigate(getDefaultRouteForRole(data.user.role));
     } catch {
       toast.error('Đăng ký thất bại. Email có thể đã tồn tại.');
     } finally {
@@ -72,27 +73,6 @@ export function RegisterPage() {
               minLength={6}
             />
           </div>
-          <div className="space-y-2">
-            <Label>Vai trò</Label>
-            <div className="flex gap-2">
-              <Button
-                type="button"
-                variant={role === 'student' ? 'default' : 'outline'}
-                className="flex-1"
-                onClick={() => setRole('student')}
-              >
-                Học sinh
-              </Button>
-              <Button
-                type="button"
-                variant={role === 'teacher' ? 'default' : 'outline'}
-                className="flex-1"
-                onClick={() => setRole('teacher')}
-              >
-                Giáo viên
-              </Button>
-            </div>
-          </div>
           <Button type="submit" className="w-full" disabled={loading}>
             {loading ? 'Đang đăng ký...' : 'Đăng ký'}
           </Button>
@@ -101,7 +81,7 @@ export function RegisterPage() {
       <CardFooter className="justify-center">
         <p className="text-sm text-muted-foreground">
           Đã có tài khoản?{' '}
-          <Link to="/login" className="text-primary hover:underline">
+          <Link to={ROUTES.LOGIN} className="text-primary hover:underline">
             Đăng nhập
           </Link>
         </p>

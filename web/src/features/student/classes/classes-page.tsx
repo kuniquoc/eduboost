@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { classesService } from '@/services/classes.service';
+import { studentsService } from '@/services/students.service';
+import { ROUTES } from '@/lib/constants';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -13,9 +15,13 @@ import { LogIn, Users, BookOpen } from 'lucide-react';
 import { toast } from 'sonner';
 import type { ClassDto } from '@/types';
 
-function ClassCard({ cls }: { cls: ClassDto }) {
+function ClassCard({ cls, entryTestCompleted }: { cls: ClassDto; entryTestCompleted: boolean }) {
+  const href = entryTestCompleted
+    ? ROUTES.STUDENT_ROADMAP.replace(':classId', cls.id)
+    : ROUTES.STUDENT_ENTRY_TEST.replace(':classId', cls.id);
+
   return (
-    <Link to={`/student/roadmap/${cls.id}`}>
+    <Link to={href}>
       <Card className="group overflow-hidden border-border transition-colors hover:border-primary/40">
         <div className="h-2" style={{ backgroundColor: cls.coverColor }} />
         <CardContent className="p-5">
@@ -48,6 +54,15 @@ export function StudentClassesPage() {
     queryKey: ['enrolled-classes'],
     queryFn: classesService.getEnrolledClasses,
   });
+
+  const { data: progress } = useQuery({
+    queryKey: ['student-progress'],
+    queryFn: studentsService.getMyProgress,
+  });
+
+  const entryTestMap = new Map(
+    progress?.enrolledClasses.map((c) => [c.classId, c.entryTestCompleted]) ?? [],
+  );
 
   const joinMutation = useMutation({
     mutationFn: () => classesService.joinClass(classCode),
@@ -114,7 +129,7 @@ export function StudentClassesPage() {
       ) : (
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {classes.map((cls) => (
-            <ClassCard key={cls.id} cls={cls} />
+            <ClassCard key={cls.id} cls={cls} entryTestCompleted={entryTestMap.get(cls.id) ?? false} />
           ))}
         </div>
       )}

@@ -3,7 +3,7 @@ import type { ApiResponse, LearningPathDto } from '@/types';
 
 export const learningPathService = {
   getPath: async (): Promise<LearningPathDto> => {
-    const res = await apiClient.get<ApiResponse<LearningPathDto>>('/learning-paths');
+    const res = await apiClient.get<ApiResponse<LearningPathDto>>('/learning-paths/me');
     return res.data.data!;
   },
 
@@ -13,6 +13,6 @@ export const learningPathService = {
   },
 
   markItemComplete: async (itemId: string): Promise<void> => {
-    await apiClient.patch(`/learning-paths/items/${itemId}/complete`);
+    await apiClient.put(`/learning-paths/${itemId}/complete`);
   },
 };

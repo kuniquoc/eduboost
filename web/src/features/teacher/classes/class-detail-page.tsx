@@ -16,6 +16,7 @@ import { toast } from 'sonner';
 import { TopicsTab } from './tabs/topics-tab';
 import { DocumentsTab } from './tabs/documents-tab';
 import { StudentsTab } from './tabs/students-tab';
+import { AnalyticsTab } from './tabs/analytics-tab';
 import { QuizzesTab } from './tabs/quizzes-tab';
 import { QuizBuilderDialog } from '@/components/shared/quiz-builder-dialog';
 import type { CreateQuestionPayload } from '@/types';
@@ -182,6 +183,7 @@ export function TeacherClassDetailPage() {
           <TabsTrigger value="quizzes">Quiz</TabsTrigger>
           <TabsTrigger value="documents">Tài liệu</TabsTrigger>
           <TabsTrigger value="students">Học sinh ({cls.studentCount})</TabsTrigger>
+          <TabsTrigger value="analytics">Phân tích</TabsTrigger>
         </TabsList>
         <TabsContent value="topics" className="mt-4">
           <TopicsTab classId={id!} topics={cls.topics ?? []} />
@@ -194,6 +196,9 @@ export function TeacherClassDetailPage() {
         </TabsContent>
         <TabsContent value="students" className="mt-4">
           <StudentsTab classId={id!} />
+        </TabsContent>
+        <TabsContent value="analytics" className="mt-4">
+          <AnalyticsTab classId={id!} />
         </TabsContent>
       </Tabs>
 

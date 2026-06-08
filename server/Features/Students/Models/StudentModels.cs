@@ -24,8 +24,11 @@ public class StudentAnalyticsDto
 public class ClassAnalyticsDto
 {
     public string ClassId { get; set; } = "";
+    public string ClassName { get; set; } = "";
     public int TotalStudents { get; set; }
     public int AvgCompletion { get; set; }
+    public int AvgScore { get; set; }
+    public int StudentsCompleted { get; set; }
     public int NeedAttentionCount { get; set; }
     public List<StudentAnalyticsDto> Students { get; set; } = [];
 }

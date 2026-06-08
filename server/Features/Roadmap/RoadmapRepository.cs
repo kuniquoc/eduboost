@@ -76,9 +76,26 @@ public class RoadmapRepository(AppDbContext db) : IRoadmapRepository
 
     public async Task<RoadmapDto> GenerateAsync(Guid classId, Guid studentId, string entryTestResultId)
     {
+        var weakTopicIds = new HashSet<Guid>();
+        if (Guid.TryParse(entryTestResultId, out var resultId))
+        {
+            var placement = await db.PlacementTestResults.FindAsync(resultId);
+            if (placement?.WeaknessesJson != null)
+            {
+                try
+                {
+                    var weaknesses = System.Text.Json.JsonSerializer.Deserialize<List<PlacementWeakness>>(placement.WeaknessesJson) ?? [];
+                    foreach (var w in weaknesses)
+                        if (Guid.TryParse(w.TopicId, out var tid)) weakTopicIds.Add(tid);
+                }
+                catch { /* ignore malformed json */ }
+            }
+        }
+
         var topics = await db.Topics
             .Where(t => t.ClassId == classId)
-            .OrderBy(t => t.Difficulty == "easy" ? 0 : t.Difficulty == "medium" ? 1 : 2)
+            .OrderBy(t => weakTopicIds.Contains(t.Id) ? 0 : 1)
+            .ThenBy(t => t.Difficulty == "easy" ? 0 : t.Difficulty == "medium" ? 1 : 2)
             .ThenBy(t => t.CreatedAt)
             .ToListAsync();
 
@@ -208,5 +225,10 @@ public class RoadmapRepository(AppDbContext db) : IRoadmapRepository
             Progress = isCompleted ? 100 : Math.Clamp(request.Progress, 0, 99),
             OrderIndex = path.OrderIndex
         };
+    }
+
+    private class PlacementWeakness
+    {
+        public string TopicId { get; set; } = "";
     }
 }

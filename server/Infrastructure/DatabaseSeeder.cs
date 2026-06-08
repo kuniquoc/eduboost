@@ -18,6 +18,7 @@ public static class DatabaseSeeder
     private static readonly string SeedPasswordHash = BCrypt.Net.BCrypt.HashPassword(SeedPassword, 11);
 
     // ── Fixed IDs ─────────────────────────────────────────────────────────────
+    private static readonly Guid A1 = Guid.Parse("00000000-0000-0000-0000-000000000001");
     private static readonly Guid T1 = Guid.Parse("11111111-0000-0000-0000-000000000001");
     private static readonly Guid S1 = Guid.Parse("22222222-0000-0000-0000-000000000001");
     private static readonly Guid S2 = Guid.Parse("22222222-0000-0000-0000-000000000002");
@@ -72,6 +73,7 @@ public static class DatabaseSeeder
     private static async Task SeedUsersAsync(AppDbContext db)
     {
         db.Users.AddRange(
+            new User { Id = A1, Name = "Admin EduBoost", Email = "admin@eduboost.vn", PasswordHash = SeedPasswordHash, Role = "admin", AvatarInitials = "AE", CreatedAt = SeedDate },
             new User { Id = T1, Name = "Nguyễn Thành An", Email = "teacher@eduboost.vn", PasswordHash = SeedPasswordHash, Role = "teacher", AvatarInitials = "TA", CreatedAt = SeedDate },
             new User { Id = S1, Name = "Lê Thị Bảo", Email = "student@eduboost.vn", PasswordHash = SeedPasswordHash, Role = "student", AvatarInitials = "LB", CreatedAt = SeedDate },
             new User { Id = S2, Name = "Phạm Quốc Đạt", Email = "dat@eduboost.vn", PasswordHash = SeedPasswordHash, Role = "student", AvatarInitials = "PD", CreatedAt = SeedDate },

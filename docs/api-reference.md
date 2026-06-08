@@ -1,3 +1,5 @@
+> **DEPRECATED** — Tài liệu đã chuyển sang [04-integration/api-reference.md](04-integration/api-reference.md). File này giữ để tương thích link cũ.
+
 # EduBoost — API Reference
 
 Tất cả endpoints trả về response wrapper:

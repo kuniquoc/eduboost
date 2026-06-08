@@ -1,6 +1,8 @@
+using System.Text.RegularExpressions;
 using EduBoost.API.Features.Topics.Models;
 using EduBoost.API.Infrastructure;
 using EduBoost.API.Infrastructure.Entities;
+using EduBoost.API.Infrastructure.Services;
 using Microsoft.EntityFrameworkCore;
 
 namespace EduBoost.API.Features.Topics;
@@ -17,7 +19,7 @@ public interface ITopicsRepository
     Task<TopicDto?> UpdateVisibilityAsync(Guid topicId, bool isVisible);
 }
 
-public class TopicsRepository(AppDbContext db) : ITopicsRepository
+public class TopicsRepository(AppDbContext db, IAgentService agent, ILogger<TopicsRepository> logger) : ITopicsRepository
 {
     public async Task<List<TopicDto>> GetByClassIdAsync(Guid classId)
     {
@@ -85,14 +87,43 @@ public class TopicsRepository(AppDbContext db) : ITopicsRepository
 
         foreach (var t in topics)
         {
-            var qCount = await db.Questions.CountAsync(q => q.Quiz.TopicId == t.Id);
+            var samples = await db.Questions
+                .Where(q => q.Quiz.TopicId == t.Id)
+                .OrderBy(q => q.OrderIndex)
+                .Select(q => q.Text)
+                .Take(5)
+                .ToListAsync();
+
+            var prompt =
+                $"Đánh giá độ khó chủ đề học tiếng Anh.\n" +
+                $"Tên chủ đề: {t.Name}\n" +
+                $"Mô tả: {t.Description}\n" +
+                $"Mẫu câu hỏi: {(samples.Count > 0 ? string.Join("; ", samples) : "chưa có")}\n" +
+                "Trả lời CHỈ MỘT từ: easy, medium, hoặc hard.";
+
+            var aiResponse = await agent.AskAsync(prompt, t.Id.ToString(), "advanced", []);
+            var difficulty = ParseDifficultyFromAi(aiResponse.Answer);
+
+            if (difficulty == null)
+            {
+                var qCount = samples.Count;
+                difficulty = qCount >= 10 ? "hard" : qCount >= 6 ? "medium" : "easy";
+                logger.LogWarning("AI evaluate fallback for topic {Topic}: using heuristic", t.Name);
+            }
+
             t.AiEvaluated = true;
-            t.Difficulty  = qCount >= 10 ? "hard" : qCount >= 6 ? "medium" : "easy";
+            t.Difficulty = difficulty;
         }
 
         await db.SaveChangesAsync();
-
         return await GetByClassIdAsync(classId);
+    }
+
+    private static string? ParseDifficultyFromAi(string? answer)
+    {
+        if (string.IsNullOrWhiteSpace(answer)) return null;
+        var match = Regex.Match(answer, @"\b(easy|medium|hard)\b", RegexOptions.IgnoreCase);
+        return match.Success ? match.Value.ToLowerInvariant() : null;
     }
 
     public async Task<TopicDto?> UpdateDifficultyAsync(Guid topicId, string difficulty)

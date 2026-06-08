@@ -96,8 +96,10 @@ export interface DownloadUrlDto {
 
 export interface GenerateQuizJobDto {
   jobId: string;
-  documentId: string;
-  status: 'queued' | 'processing' | 'done' | 'error';
+  documentId?: string;
+  quizId?: string;
+  topicName?: string;
+  status: 'queued' | 'processing' | 'done' | 'error' | 'completed';
   message?: string;
 }
 
@@ -235,6 +237,7 @@ export interface ClassAnalyticsDto {
   avgCompletion: number;
   avgScore: number;
   studentsCompleted: number;
+  needAttentionCount?: number;
   students: StudentAnalyticsDto[];
 }
 

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { useAuthStore } from '@/store/auth-store';
+import { authService } from '@/services/auth.service';
 import { userProfileService } from '@/services/userProfile.service';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -61,7 +62,7 @@ function StatCard({
 }
 
 export function ProfilePage() {
-  const { user } = useAuthStore();
+  const { user, updateUser } = useAuthStore();
   const [editingName, setEditingName] = useState(false);
   const [nameInput, setNameInput] = useState(user?.name ?? '');
 
@@ -97,11 +98,38 @@ export function ProfilePage() {
               <CardTitle className="text-base">Thông tin tài khoản</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
-              {/* Avatar placeholder */}
-              <div className="flex justify-center">
-                <div className="flex h-20 w-20 items-center justify-center rounded-full bg-primary/10 text-3xl font-bold text-primary">
-                  {user?.name?.charAt(0)?.toUpperCase() ?? 'U'}
-                </div>
+              {/* Avatar */}
+              <div className="flex flex-col items-center gap-2">
+                {user?.avatar?.startsWith('http') ? (
+                  <img
+                    src={user.avatar}
+                    alt={user.name}
+                    className="h-20 w-20 rounded-full object-cover"
+                  />
+                ) : (
+                  <div className="flex h-20 w-20 items-center justify-center rounded-full bg-primary/10 text-3xl font-bold text-primary">
+                    {user?.name?.charAt(0)?.toUpperCase() ?? 'U'}
+                  </div>
+                )}
+                <label className="cursor-pointer text-xs text-primary hover:underline">
+                  Đổi ảnh đại diện
+                  <input
+                    type="file"
+                    accept="image/*"
+                    className="hidden"
+                    onChange={async (e) => {
+                      const file = e.target.files?.[0];
+                      if (!file) return;
+                      try {
+                        const updated = await authService.uploadAvatar(file);
+                        updateUser(updated);
+                        toast.success('Cập nhật ảnh đại diện thành công');
+                      } catch {
+                        toast.error('Không thể tải ảnh lên');
+                      }
+                    }}
+                  />
+                </label>
               </div>
 
               {/* Name */}
@@ -121,10 +149,20 @@ export function ProfilePage() {
                       size="icon"
                       variant="ghost"
                       className="h-8 w-8 text-green-500"
-                      onClick={() => {
-                        // Name update would require auth service endpoint
-                        setEditingName(false);
-                        toast.info('Cập nhật tên chưa khả dụng');
+                      onClick={async () => {
+                        const trimmed = nameInput.trim();
+                        if (!trimmed) {
+                          toast.error('Tên không được để trống');
+                          return;
+                        }
+                        try {
+                          const updated = await authService.updateName(trimmed);
+                          updateUser(updated);
+                          setEditingName(false);
+                          toast.success('Cập nhật tên thành công');
+                        } catch {
+                          toast.error('Không thể cập nhật tên');
+                        }
                       }}
                     >
                       <Check className="h-4 w-4" />

@@ -12,8 +12,9 @@ public interface IClassesRepository
     Task<List<ClassDto>> GetEnrolledByStudentIdAsync(Guid studentId);
     Task<ClassDetailDto?> GetByIdAsync(Guid classId);
     Task<ClassDto> CreateAsync(Guid teacherId, CreateClassRequest request);
-    Task<ClassDto?> UpdateAsync(Guid classId, UpdateClassRequest request);
-    Task<bool> DeleteAsync(Guid classId);
+    Task<ClassDto?> UpdateAsync(Guid classId, Guid teacherId, UpdateClassRequest request);
+    Task<bool> DeleteAsync(Guid classId, Guid teacherId);
+    Task<bool> IsOwnedByTeacherAsync(Guid classId, Guid teacherId);
     Task<ClassDto?> JoinByCodeAsync(Guid studentId, string classCode);
     Task<List<StudentEnrollmentDto>> GetStudentsAsync(Guid classId, string? search);
     Task<bool> AddStudentAsync(Guid classId, string studentEmail);
@@ -146,10 +147,13 @@ public class ClassesRepository(AppDbContext db) : IClassesRepository
         };
     }
 
-    public async Task<ClassDto?> UpdateAsync(Guid classId, UpdateClassRequest request)
+    public async Task<bool> IsOwnedByTeacherAsync(Guid classId, Guid teacherId) =>
+        await db.Classes.AnyAsync(c => c.Id == classId && c.TeacherId == teacherId);
+
+    public async Task<ClassDto?> UpdateAsync(Guid classId, Guid teacherId, UpdateClassRequest request)
     {
         var cls = await db.Classes.FindAsync(classId);
-        if (cls == null) return null;
+        if (cls == null || cls.TeacherId != teacherId) return null;
 
         if (request.Name        != null) cls.Name        = request.Name;
         if (request.Description != null) cls.Description = request.Description;
@@ -169,10 +173,10 @@ public class ClassesRepository(AppDbContext db) : IClassesRepository
         };
     }
 
-    public async Task<bool> DeleteAsync(Guid classId)
+    public async Task<bool> DeleteAsync(Guid classId, Guid teacherId)
     {
         var cls = await db.Classes.FindAsync(classId);
-        if (cls == null) return false;
+        if (cls == null || cls.TeacherId != teacherId) return false;
         db.Classes.Remove(cls);
         await db.SaveChangesAsync();
         return true;

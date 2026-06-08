@@ -3,8 +3,9 @@ import { useAuthStore } from '@/store/auth-store';
 import {
   BookOpen, Bot, User, LayoutDashboard,
   GraduationCap, LogOut, ChevronLeft, Menu,
-  Database, MessageCircle, CalendarClock, Shield,
+  Database, MessageCircle, CalendarClock, Shield,   Map,
 } from 'lucide-react';
+import { ROUTES } from '@/lib/constants';
 import { Button } from '@/components/ui/button';
 
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
@@ -19,23 +20,24 @@ interface NavItem {
 }
 
 const teacherNav: NavItem[] = [
-  { label: 'Lớp học', href: '/teacher/classes', icon: BookOpen },
-  { label: 'Quiz Pool', href: '/teacher/quiz-pool', icon: Database },
-  { label: 'Hồ sơ', href: '/teacher/profile', icon: User },
+  { label: 'Lớp học', href: ROUTES.TEACHER_CLASSES, icon: BookOpen },
+  { label: 'Quiz Pool', href: ROUTES.TEACHER_QUIZ_POOL, icon: Database },
+  { label: 'Hồ sơ', href: ROUTES.TEACHER_PROFILE, icon: User },
 ];
 
 const studentNav: NavItem[] = [
-  { label: 'Tổng quan', href: '/student/dashboard', icon: LayoutDashboard },
-  { label: 'Lớp học', href: '/student/classes', icon: GraduationCap },
-  { label: 'AI Chat', href: '/student/ai-chat', icon: MessageCircle },
-  { label: 'AI Lab', href: '/student/ai-lab', icon: Bot },
-  { label: 'Ôn tập', href: '/student/review', icon: CalendarClock },
-  { label: 'Quiz Pool', href: '/student/quiz-pool', icon: Database },
-  { label: 'Hồ sơ', href: '/student/profile', icon: User },
+  { label: 'Tổng quan', href: ROUTES.STUDENT_DASHBOARD, icon: LayoutDashboard },
+  { label: 'Lớp học', href: ROUTES.STUDENT_CLASSES, icon: GraduationCap },
+  { label: 'Lộ trình học', href: ROUTES.STUDENT_LEARNING_PATH, icon: Map },
+  { label: 'AI Chat', href: ROUTES.STUDENT_AI_CHAT, icon: MessageCircle },
+  { label: 'AI Lab', href: ROUTES.STUDENT_AI_LAB, icon: Bot },
+  { label: 'Ôn tập', href: ROUTES.STUDENT_REVIEW, icon: CalendarClock },
+  { label: 'Quiz Pool', href: ROUTES.STUDENT_QUIZ_POOL, icon: Database },
+  { label: 'Hồ sơ', href: ROUTES.STUDENT_PROFILE, icon: User },
 ];
 
 const adminNav: NavItem[] = [
-  { label: 'Tổng quan', href: '/admin/dashboard', icon: Shield },
+  { label: 'Tổng quan', href: ROUTES.ADMIN_DASHBOARD, icon: Shield },
 ];
 
 function SidebarContent({

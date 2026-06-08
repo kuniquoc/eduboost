@@ -1,4 +1,4 @@
-using System.Collections.Concurrent;
+using System.Text.Json;
 using EduBoost.API.Features.LearningStates;
 using EduBoost.API.Features.LearningStates.Models;
 using EduBoost.API.Features.PracticeSessions.Models;
@@ -17,14 +17,13 @@ public interface IPracticeSessionsRepository
 
 public class PracticeSessionsRepository(AppDbContext db, ILearningStatesRepository learningStates) : IPracticeSessionsRepository
 {
-    private static readonly ConcurrentDictionary<string, PracticeState> _sessions = new();
+    private static readonly TimeSpan SessionTtl = TimeSpan.FromHours(2);
 
     public async Task<StartPracticeResponse> StartSessionAsync(Guid userId, StartPracticeRequest request)
     {
         var topic = await db.Topics.FindAsync(request.TopicId)
             ?? throw new InvalidOperationException("Topic not found");
 
-        // Get BKT state to determine appropriate difficulty
         var bktState = await db.BktStates
             .FirstOrDefaultAsync(b => b.UserId == userId && b.TopicId == request.TopicId);
 
@@ -35,7 +34,6 @@ public class PracticeSessionsRepository(AppDbContext db, ILearningStatesReposito
             else if (bktState.MasteryProbability > 0.7) targetDifficulty = "hard";
         }
 
-        // Get questions: weighted sampling (prefer target difficulty, include some variety)
         var questions = await db.Questions
             .Include(q => q.Options)
             .Where(q => q.Quiz.TopicId == request.TopicId)
@@ -47,8 +45,8 @@ public class PracticeSessionsRepository(AppDbContext db, ILearningStatesReposito
         if (questions.Count == 0)
             throw new InvalidOperationException("Không có câu hỏi cho chủ đề này");
 
-        var sessionId = Guid.NewGuid().ToString();
-        var state = new PracticeState
+        var sessionId = Guid.NewGuid();
+        var state = new PracticeSessionState
         {
             UserId = userId,
             TopicId = request.TopicId,
@@ -56,13 +54,23 @@ public class PracticeSessionsRepository(AppDbContext db, ILearningStatesReposito
             Questions = questions.Select(q => q.Id).ToList(),
             CurrentIndex = 0,
             CorrectCount = 0,
-            StartTime = DateTime.UtcNow
+            StartTime = DateTime.UtcNow,
+            MasteryBefore = bktState?.MasteryProbability ?? 0.3
         };
-        _sessions[sessionId] = state;
+
+        db.PracticeActiveSessions.Add(new PracticeActiveSession
+        {
+            Id = sessionId,
+            UserId = userId,
+            StateJson = JsonSerializer.Serialize(state),
+            CreatedAt = DateTime.UtcNow,
+            ExpiresAt = DateTime.UtcNow.Add(SessionTtl)
+        });
+        await db.SaveChangesAsync();
 
         return new StartPracticeResponse
         {
-            SessionId = sessionId,
+            SessionId = sessionId.ToString(),
             TopicName = topic.Name,
             Question = MapQuestionDto(questions[0]),
             QuestionNumber = 1,
@@ -72,8 +80,8 @@ public class PracticeSessionsRepository(AppDbContext db, ILearningStatesReposito
 
     public async Task<SubmitAnswerResponse> SubmitAnswerAsync(Guid userId, SubmitAnswerRequest request)
     {
-        if (!_sessions.TryGetValue(request.SessionId, out var state))
-            throw new InvalidOperationException("Session not found");
+        var session = await LoadSessionAsync(userId, request.SessionId);
+        var state = DeserializeState(session);
 
         var questionId = Guid.Parse(request.QuestionId);
         var question = await db.Questions
@@ -81,7 +89,9 @@ public class PracticeSessionsRepository(AppDbContext db, ILearningStatesReposito
             .FirstOrDefaultAsync(q => q.Id == questionId)
             ?? throw new InvalidOperationException("Question not found");
 
-        // Check answer
+        var selectedOptionId = request.SelectedOptionId
+            ?? request.SelectedOptionIds?.FirstOrDefault();
+
         bool isCorrect;
         string? correctAnswer;
         if (question.Type == "fill_blank")
@@ -92,14 +102,13 @@ public class PracticeSessionsRepository(AppDbContext db, ILearningStatesReposito
         else
         {
             var correctOption = question.Options.FirstOrDefault(o => o.IsCorrect);
-            isCorrect = correctOption != null && correctOption.Id.ToString() == request.SelectedOptionId;
+            isCorrect = correctOption != null && correctOption.Id.ToString() == selectedOptionId;
             correctAnswer = correctOption?.Text;
         }
 
         if (isCorrect) state.CorrectCount++;
         state.CurrentIndex++;
 
-        // Update BKT state
         await learningStates.UpdateAfterAnswerAsync(userId, new UpdateBktRequest
         {
             TopicId = state.TopicId,
@@ -107,7 +116,6 @@ public class PracticeSessionsRepository(AppDbContext db, ILearningStatesReposito
             IsCorrect = isCorrect
         });
 
-        // Get next question
         bool isComplete = state.CurrentIndex >= state.Questions.Count;
         PracticeQuestionDto? nextQuestion = null;
 
@@ -119,6 +127,8 @@ public class PracticeSessionsRepository(AppDbContext db, ILearningStatesReposito
             if (nextQ != null) nextQuestion = MapQuestionDto(nextQ);
             else isComplete = true;
         }
+
+        await SaveSessionStateAsync(session, state);
 
         return new SubmitAnswerResponse
         {
@@ -133,13 +143,17 @@ public class PracticeSessionsRepository(AppDbContext db, ILearningStatesReposito
 
     public async Task<PracticeSessionSummary> EndSessionAsync(Guid userId, string sessionId)
     {
-        if (!_sessions.TryRemove(sessionId, out var state))
-            throw new InvalidOperationException("Session not found");
+        var session = await LoadSessionAsync(userId, sessionId);
+        var state = DeserializeState(session);
+        db.PracticeActiveSessions.Remove(session);
 
         var score = state.CurrentIndex > 0 ? (double)state.CorrectCount / state.CurrentIndex * 100 : 0;
 
-        // Persist learning session
-        var session = new LearningSession
+        var bktAfter = await db.BktStates
+            .FirstOrDefaultAsync(b => b.UserId == userId && b.TopicId == state.TopicId);
+        var masteryAfter = bktAfter?.MasteryProbability ?? state.MasteryBefore;
+
+        db.LearningSessions.Add(new LearningSession
         {
             UserId = userId,
             TopicId = state.TopicId,
@@ -148,10 +162,8 @@ public class PracticeSessionsRepository(AppDbContext db, ILearningStatesReposito
             QuestionsAttempted = state.CurrentIndex,
             CorrectAnswers = state.CorrectCount,
             Score = score
-        };
-        db.LearningSessions.Add(session);
+        });
 
-        // Update user profile activity
         var profile = await db.UserProfiles.FirstOrDefaultAsync(p => p.UserId == userId);
         if (profile != null)
         {
@@ -178,8 +190,31 @@ public class PracticeSessionsRepository(AppDbContext db, ILearningStatesReposito
             QuestionsAttempted = state.CurrentIndex,
             CorrectAnswers = state.CorrectCount,
             Score = score,
+            MasteryChange = masteryAfter - state.MasteryBefore,
             Recommendation = recommendation
         };
+    }
+
+    private async Task<PracticeActiveSession> LoadSessionAsync(Guid userId, string sessionId)
+    {
+        if (!Guid.TryParse(sessionId, out var id))
+            throw new InvalidOperationException("Session not found");
+
+        var session = await db.PracticeActiveSessions
+            .FirstOrDefaultAsync(s => s.Id == id && s.UserId == userId && s.ExpiresAt > DateTime.UtcNow);
+
+        return session ?? throw new InvalidOperationException("Session not found");
+    }
+
+    private static PracticeSessionState DeserializeState(PracticeActiveSession session) =>
+        JsonSerializer.Deserialize<PracticeSessionState>(session.StateJson)
+        ?? throw new InvalidOperationException("Invalid session state");
+
+    private async Task SaveSessionStateAsync(PracticeActiveSession session, PracticeSessionState state)
+    {
+        session.StateJson = JsonSerializer.Serialize(state);
+        session.ExpiresAt = DateTime.UtcNow.Add(SessionTtl);
+        await db.SaveChangesAsync();
     }
 
     private static PracticeQuestionDto MapQuestionDto(Question q) => new()
@@ -195,7 +230,7 @@ public class PracticeSessionsRepository(AppDbContext db, ILearningStatesReposito
         }).ToList()
     };
 
-    private class PracticeState
+    private class PracticeSessionState
     {
         public Guid UserId { get; set; }
         public Guid TopicId { get; set; }
@@ -204,5 +239,6 @@ public class PracticeSessionsRepository(AppDbContext db, ILearningStatesReposito
         public int CurrentIndex { get; set; }
         public int CorrectCount { get; set; }
         public DateTime StartTime { get; set; }
+        public double MasteryBefore { get; set; }
     }
 }

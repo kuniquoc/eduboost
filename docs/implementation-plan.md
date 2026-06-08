@@ -1,3 +1,5 @@
+> **DEPRECATED** — Nhiều mục "chưa có" đã được implement. Xem [99-known-issues/index.md](99-known-issues/index.md) và [99-known-issues/cross-layer-inconsistencies.md](99-known-issues/cross-layer-inconsistencies.md).
+
 # Plan triển khai chi tiết - EduBoost
 
 ## Phân tích GAP: Hiện trạng vs Yêu cầu

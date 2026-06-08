@@ -1,3 +1,5 @@
+> **DEPRECATED** — Đã mở rộng thành 18 luồng tại [04-integration/flows/](04-integration/flows/README.md).
+
 # EduBoost — Đặc Tả Luồng Xử Lý Mã Nguồn (Code Flows Specification)
 
 Tài liệu này ánh xạ chi tiết các luồng xử lý cốt lõi của hệ thống EduBoost từ giao diện người dùng (React Web & React Native Mobile) qua tầng Web API .NET Core 9 cho đến nhân AI Agent Core (FastAPI & Python). Việc đặc tả chi tiết này giúp nhà phát triển dễ dàng đối chiếu từ tài liệu sang mã nguồn thực tế để thực hiện chỉnh sửa chính xác khi có thay đổi nghiệp vụ.

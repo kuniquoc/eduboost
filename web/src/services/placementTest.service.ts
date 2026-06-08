@@ -9,7 +9,9 @@ import type {
 
 export const placementTestService = {
   start: async (classId: string): Promise<StartPlacementTestResponse> => {
-    const res = await apiClient.post<ApiResponse<StartPlacementTestResponse>>('/placement-tests/start', { classId });
+    const res = await apiClient.post<ApiResponse<StartPlacementTestResponse>>('/placement-tests/start', {
+      classId: classId || undefined,
+    });
     return res.data.data!;
   },
 
@@ -21,18 +23,23 @@ export const placementTestService = {
     const res = await apiClient.post<ApiResponse<AnswerPlacementResponse>>('/placement-tests/answer', {
       sessionId,
       questionId,
+      selectedOptionId: selectedOptionIds[0],
       selectedOptionIds,
     });
     return res.data.data!;
   },
 
   complete: async (sessionId: string): Promise<CompletePlacementResponse> => {
-    const res = await apiClient.post<ApiResponse<CompletePlacementResponse>>('/placement-tests/complete', { sessionId });
+    const res = await apiClient.post<ApiResponse<CompletePlacementResponse>>('/placement-tests/complete', {
+      sessionId,
+    });
     return res.data.data!;
   },
 
-  getResults: async (): Promise<PlacementTestResultDto[]> => {
-    const res = await apiClient.get<ApiResponse<PlacementTestResultDto[]>>('/placement-tests/results');
+  getResult: async (classId?: string): Promise<PlacementTestResultDto> => {
+    const res = await apiClient.get<ApiResponse<PlacementTestResultDto>>('/placement-tests/result', {
+      params: classId ? { classId } : undefined,
+    });
     return res.data.data!;
   },
 };

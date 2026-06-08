@@ -30,7 +30,7 @@ import { StudentPoolDashboard } from '@/features/student/ai-lab/pool-dashboard';
 import { PracticeSessionPage } from '@/features/student/practice-session/practice-session-page';
 import { AiChatPage } from '@/features/student/ai-chat/ai-chat-page';
 import { ReviewPage } from '@/features/student/review/review-page';
-import { AdaptivePlacementTestPage } from '@/features/student/placement-test/adaptive-placement-test-page';
+import { LearningPathPage } from '@/features/student/learning-path/learning-path-page';
 import { AdminDashboardPage } from '@/features/admin/admin-dashboard-page';
 
 const queryClient = new QueryClient({
@@ -93,11 +93,11 @@ function AppRoutes() {
           <Route path="/student/practice-session" element={<PracticeSessionPage />} />
           <Route path="/student/roadmap/:classId" element={<RoadmapPage />} />
           <Route path="/student/practice/:topicId" element={<PracticePage />} />
+          <Route path="/student/learning-path" element={<LearningPathPage />} />
           <Route path="/student/profile" element={<ProfilePage />} />
         </Route>
         {/* Full-page (no sidebar) */}
         <Route path="/student/entry-test/:classId" element={<EntryTestPage />} />
-        <Route path="/student/placement-test" element={<AdaptivePlacementTestPage />} />
       </Route>
 
       {/* Admin */}

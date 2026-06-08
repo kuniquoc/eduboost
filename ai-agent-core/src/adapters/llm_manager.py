@@ -12,6 +12,8 @@ from typing import Literal, Optional
 from openai import OpenAI
 from dotenv import load_dotenv
 
+from src.core.config import LLM_TIMEOUT_SECONDS
+
 logger = logging.getLogger(__name__)
 
 OPENAI_ENDPOINT = "https://api.openai.com/v1"
@@ -75,6 +77,7 @@ class LLMManager:
         self.client = OpenAI(
             base_url=endpoint_url,
             api_key=self._api_key or "not-needed",
+            timeout=LLM_TIMEOUT_SECONDS,
         )
 
     @classmethod
@@ -130,6 +133,7 @@ class LLMManager:
         system_prompt: Optional[str] = None,
         max_tokens: int = 4096,
         max_retries: int = 2,
+        temperature: float = 0.1,
     ) -> dict:
         if not self.is_available:
             logger.warning("[LLM-JSON] LLM unavailable — skipping generate_json call")
@@ -148,7 +152,7 @@ class LLMManager:
 
             try:
                 raw = self._generate_with_json_format(
-                    current_prompt, system_prompt, max_tokens
+                    current_prompt, system_prompt, max_tokens, temperature
                 )
             except Exception as format_exc:
                 logger.warning(
@@ -157,7 +161,7 @@ class LLMManager:
                 )
                 raw = self.generate(
                     current_prompt, system_prompt,
-                    max_tokens=max_tokens, temperature=0.1,
+                    max_tokens=max_tokens, temperature=temperature,
                 ) or ""
 
             result = self._extract_json(raw)
@@ -176,6 +180,7 @@ class LLMManager:
         prompt: str,
         system_prompt: Optional[str] = None,
         max_tokens: int = 2048,
+        temperature: float = 0.1,
     ) -> str:
         messages = []
         if system_prompt:
@@ -186,7 +191,7 @@ class LLMManager:
             model=self.model,
             messages=messages,
             max_tokens=max_tokens,
-            temperature=0.1,
+            temperature=temperature,
             response_format={"type": "json_object"},
         )
         content = response.choices[0].message.content

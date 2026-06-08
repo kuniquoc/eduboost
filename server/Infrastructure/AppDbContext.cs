@@ -18,6 +18,8 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
     public DbSet<UserProfile> UserProfiles => Set<UserProfile>();
     public DbSet<LearningSession> LearningSessions => Set<LearningSession>();
     public DbSet<PlacementTestResult> PlacementTestResults => Set<PlacementTestResult>();
+    public DbSet<PlacementTestSession> PlacementTestSessions => Set<PlacementTestSession>();
+    public DbSet<PracticeActiveSession> PracticeActiveSessions => Set<PracticeActiveSession>();
     public DbSet<PersonalizedLearningPath> PersonalizedLearningPaths => Set<PersonalizedLearningPath>();
     public DbSet<BktState> BktStates => Set<BktState>();
     public DbSet<SpacedRepetitionItem> SpacedRepetitionItems => Set<SpacedRepetitionItem>();
@@ -41,6 +43,8 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
         modelBuilder.Entity<UserProfile>().ToTable("user_profiles");
         modelBuilder.Entity<LearningSession>().ToTable("learning_sessions");
         modelBuilder.Entity<PlacementTestResult>().ToTable("placement_test_results");
+        modelBuilder.Entity<PlacementTestSession>().ToTable("placement_test_sessions");
+        modelBuilder.Entity<PracticeActiveSession>().ToTable("practice_active_sessions");
         modelBuilder.Entity<PersonalizedLearningPath>().ToTable("personalized_learning_paths");
         modelBuilder.Entity<BktState>().ToTable("bkt_states");
         modelBuilder.Entity<SpacedRepetitionItem>().ToTable("spaced_repetition_items");
@@ -193,6 +197,21 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
             .HasOne(p => p.User)
             .WithMany(u => u.PlacementTestResults)
             .HasForeignKey(p => p.UserId)
+            .OnDelete(DeleteBehavior.Cascade);
+
+        modelBuilder.Entity<PlacementTestSession>()
+            .HasOne(s => s.User)
+            .WithMany()
+            .HasForeignKey(s => s.UserId)
+            .OnDelete(DeleteBehavior.Cascade);
+
+        modelBuilder.Entity<PlacementTestSession>()
+            .HasIndex(s => new { s.UserId, s.ClassId });
+
+        modelBuilder.Entity<PracticeActiveSession>()
+            .HasOne(s => s.User)
+            .WithMany()
+            .HasForeignKey(s => s.UserId)
             .OnDelete(DeleteBehavior.Cascade);
 
         // PersonalizedLearningPath

@@ -6,6 +6,8 @@ import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { useAuthStore } from '@/store/auth-store';
 import { authService } from '@/services/auth.service';
+import { getDefaultRouteForRole } from '@/lib/auth-routes';
+import { ROUTES } from '@/lib/constants';
 import { toast } from 'sonner';
 
 export function LoginPage() {
@@ -21,7 +23,7 @@ export function LoginPage() {
     try {
       const data = await authService.login(email, password);
       setAuth(data.user);
-      navigate(data.user.role === 'teacher' ? '/teacher/classes' : '/student/dashboard');
+      navigate(getDefaultRouteForRole(data.user.role));
     } catch {
       toast.error('Email hoặc mật khẩu không đúng');
     } finally {
@@ -62,12 +64,47 @@ export function LoginPage() {
           <Button type="submit" className="w-full" disabled={loading}>
             {loading ? 'Đang đăng nhập...' : 'Đăng nhập'}
           </Button>
+          <div className="space-y-2 pt-2">
+            <p className="text-center text-xs text-muted-foreground">Tài khoản demo (mật khẩu: password123)</p>
+            <div className="flex flex-wrap gap-2">
+              <Button
+                type="button"
+                variant="outline"
+                size="sm"
+                className="flex-1"
+                disabled={loading}
+                onClick={() => { setEmail('teacher@eduboost.vn'); setPassword('password123'); }}
+              >
+                GV
+              </Button>
+              <Button
+                type="button"
+                variant="outline"
+                size="sm"
+                className="flex-1"
+                disabled={loading}
+                onClick={() => { setEmail('student@eduboost.vn'); setPassword('password123'); }}
+              >
+                HS
+              </Button>
+              <Button
+                type="button"
+                variant="outline"
+                size="sm"
+                className="flex-1"
+                disabled={loading}
+                onClick={() => { setEmail('admin@eduboost.vn'); setPassword('password123'); }}
+              >
+                Admin
+              </Button>
+            </div>
+          </div>
         </CardContent>
       </form>
       <CardFooter className="justify-center">
         <p className="text-sm text-muted-foreground">
           Chưa có tài khoản?{' '}
-          <Link to="/register" className="text-primary hover:underline">
+          <Link to={ROUTES.REGISTER} className="text-primary hover:underline">
             Đăng ký
           </Link>
         </p>

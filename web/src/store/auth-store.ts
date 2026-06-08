@@ -9,6 +9,7 @@ interface AuthStore {
   isLoading: boolean;
   initialize: () => Promise<void>;
   setAuth: (user: User) => void;
+  updateUser: (user: User) => void;
   logout: () => Promise<void>;
   setLoading: (v: boolean) => void;
 }
@@ -52,6 +53,10 @@ export const useAuthStore = create<AuthStore>((set, get) => {
     },
 
     setAuth: (user: User) => {
+      set({ user, isAuthenticated: true });
+    },
+
+    updateUser: (user: User) => {
       set({ user, isAuthenticated: true });
     },
 

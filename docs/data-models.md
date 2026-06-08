@@ -1,3 +1,5 @@
+> **DEPRECATED** — Tài liệu đã chuyển sang [04-integration/data-models.md](04-integration/data-models.md).
+
 # EduBoost — Data Models & Entities
 
 ## Entity Relationship Diagram

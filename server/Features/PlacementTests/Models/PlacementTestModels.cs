@@ -25,11 +25,17 @@ public class PlacementOptionDto
     public string Text { get; set; } = "";
 }
 
+public class StartPlacementTestRequest
+{
+    public string? ClassId { get; set; }
+}
+
 public class AnswerPlacementRequest
 {
     [Required] public string SessionId { get; set; } = "";
     [Required] public string QuestionId { get; set; } = "";
     public string? SelectedOptionId { get; set; }
+    public List<string>? SelectedOptionIds { get; set; }
     public string? TextAnswer { get; set; } // for fill_blank
 }
 
@@ -45,6 +51,7 @@ public class AnswerPlacementResponse
 public class CompletePlacementResponse
 {
     public string ResultId { get; set; } = "";
+    public string? ClassId { get; set; }
     public string InitialLevel { get; set; } = "";
     public double FinalScore { get; set; }
     public List<TopicStrengthDto> Strengths { get; set; } = [];
@@ -61,6 +68,7 @@ public class TopicStrengthDto
 public class PlacementTestResultDto
 {
     public string Id { get; set; } = "";
+    public string? ClassId { get; set; }
     public string InitialLevel { get; set; } = "";
     public double FinalScore { get; set; }
     public List<TopicStrengthDto> Strengths { get; set; } = [];

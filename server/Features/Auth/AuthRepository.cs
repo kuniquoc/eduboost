@@ -5,6 +5,7 @@ using System.Text;
 using EduBoost.API.Features.Auth.Models;
 using EduBoost.API.Infrastructure;
 using EduBoost.API.Infrastructure.Entities;
+using EduBoost.API.Infrastructure.Storage;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 
@@ -15,12 +16,14 @@ public interface IAuthRepository
     /// <summary>Throw UnauthorizedAccessException với message cụ thể nếu thất bại</summary>
     Task<AuthTokensDto> LoginAsync(string email, string password);
     Task<AuthTokensDto> RegisterAsync(RegisterRequest request);
+    Task<UserDto?> UpdateNameAsync(Guid userId, string name);
+    Task<UserDto?> UpdateAvatarAsync(Guid userId, Stream imageStream, string contentType);
     Task<UserDto?> GetByIdAsync(Guid userId);
     Task<AuthTokensDto?> RefreshTokenAsync(string refreshToken);
     Task<bool> RevokeTokenAsync(string refreshToken);
 }
 
-public class AuthRepository(AppDbContext db, IConfiguration config) : IAuthRepository
+public class AuthRepository(AppDbContext db, IConfiguration config, IStorageService storage) : IAuthRepository
 {
     private readonly string _jwtSecret    = config["Jwt:Secret"]    ?? throw new InvalidOperationException("Jwt:Secret missing");
     private readonly string _jwtIssuer    = config["Jwt:Issuer"]    ?? "EduBoost";
@@ -46,6 +49,12 @@ public class AuthRepository(AppDbContext db, IConfiguration config) : IAuthRepos
     // ── Register ──────────────────────────────────────────────────────────────
     public async Task<AuthTokensDto> RegisterAsync(RegisterRequest request)
     {
+        if (!string.Equals(request.Role, "student", StringComparison.OrdinalIgnoreCase))
+            throw new InvalidOperationException("Chỉ có thể tự đăng ký tài khoản học sinh. Liên hệ quản trị viên để tạo tài khoản giáo viên.");
+
+        if (await db.Users.AnyAsync(u => u.Email.ToLower() == request.Email.ToLower()))
+            throw new InvalidOperationException("Email này đã được đăng ký trong hệ thống");
+
         var initials = string.Concat(
             request.Name.Split(' ', StringSplitOptions.RemoveEmptyEntries)
                         .Take(2)
@@ -57,7 +66,7 @@ public class AuthRepository(AppDbContext db, IConfiguration config) : IAuthRepos
             Name         = request.Name,
             Email        = request.Email,
             PasswordHash = BCrypt.Net.BCrypt.HashPassword(request.Password),
-            Role         = request.Role,
+            Role         = "student",
             AvatarInitials = initials,
             CreatedAt    = DateTime.UtcNow
         };
@@ -66,6 +75,37 @@ public class AuthRepository(AppDbContext db, IConfiguration config) : IAuthRepos
         await db.SaveChangesAsync();
 
         return await GenerateTokensAsync(user);
+    }
+
+    public async Task<UserDto?> UpdateAvatarAsync(Guid userId, Stream imageStream, string contentType)
+    {
+        var user = await db.Users.FindAsync(userId);
+        if (user is null) return null;
+
+        const string bucket = MinioStorageService.Buckets.StudentDocuments;
+        await storage.EnsureBucketExistsAsync(bucket);
+
+        var objectKey = $"avatars/{userId}{GetExtensionFromContentType(contentType)}";
+        await storage.UploadObjectAsync(bucket, objectKey, imageStream, contentType);
+
+        var publicUrl = await storage.GetPresignedDownloadUrlAsync(bucket, objectKey, 86400 * 7);
+        user.AvatarUrl = publicUrl;
+        await db.SaveChangesAsync();
+        return MapToDto(user);
+    }
+
+    public async Task<UserDto?> UpdateNameAsync(Guid userId, string name)
+    {
+        var user = await db.Users.FindAsync(userId);
+        if (user is null) return null;
+
+        user.Name = name.Trim();
+        user.AvatarInitials = string.Concat(
+            user.Name.Split(' ', StringSplitOptions.RemoveEmptyEntries)
+                     .Take(2)
+                     .Select(w => char.ToUpper(w[0])));
+        await db.SaveChangesAsync();
+        return MapToDto(user);
     }
 
     // ── Get by ID ─────────────────────────────────────────────────────────────
@@ -187,12 +227,20 @@ public class AuthRepository(AppDbContext db, IConfiguration config) : IAuthRepos
         return Convert.ToBase64String(bytes);
     }
 
+    private static string GetExtensionFromContentType(string contentType) => contentType switch
+    {
+        "image/png" => ".png",
+        "image/webp" => ".webp",
+        "image/gif" => ".gif",
+        _ => ".jpg"
+    };
+
     private static UserDto MapToDto(User u) => new()
     {
         UserId = u.Id.ToString(),
         Name   = u.Name,
         Email  = u.Email,
         Role   = u.Role,
-        Avatar = u.AvatarInitials
+        Avatar = u.AvatarUrl ?? u.AvatarInitials
     };
 }

@@ -57,5 +57,10 @@ export const poolService = {
   createRevisionSetFromPool: async (payload: CreateRevisionSetFromPoolRequest): Promise<QuizDto> => {
     const res = await apiClient.post<ApiResponse<QuizDto>>('/pool/create-revision-set', payload);
     return res.data.data!;
-  }
+  },
+
+  getRevisionSets: async (): Promise<QuizDto[]> => {
+    const res = await apiClient.get<ApiResponse<QuizDto[]>>('/pool/revision-sets');
+    return res.data.data!;
+  },
 };

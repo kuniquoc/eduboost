@@ -100,11 +100,26 @@ public class PoolRepository(AppDbContext db, IStorageService storage, IAgentServ
         }
 
         // 3. Request Batch Quiz Questions from AI agent
+        var existingPoolQuestions = await db.Questions
+            .Where(q => q.Quiz.TopicId == topic.Id && q.Quiz.Type == "pool")
+            .OrderByDescending(q => q.OrderIndex)
+            .Select(q => q.Text)
+            .Where(t => !string.IsNullOrWhiteSpace(t))
+            .Distinct()
+            .Take(150)
+            .ToListAsync();
+
         var aiResponse = await agent.GenerateQuizBatchAsync(
             topic.Name, request.UserSuggestion, downloadUrl, request.NumQuestions, request.Difficulty,
-            documentId: request.DocumentId);
+            documentId: request.DocumentId, existingQuestions: existingPoolQuestions);
 
         if (aiResponse == null || aiResponse.Questions.Count == 0)
+        {
+            return null;
+        }
+
+        var validQuestions = AgentQuizValidation.FilterQuestionsWithSingleCorrectOption(aiResponse.Questions);
+        if (validQuestions.Count == 0)
         {
             return null;
         }
@@ -120,7 +135,7 @@ public class PoolRepository(AppDbContext db, IStorageService storage, IAgentServ
             ClassId = classGuid,
             TopicId = topic.Id,
             OwnerId = userId,
-            Questions = aiResponse.Questions.Select((q, qidx) => new Question
+            Questions = validQuestions.Select((q, qidx) => new Question
             {
                 Id = Guid.NewGuid(),
                 Text = q.Question,

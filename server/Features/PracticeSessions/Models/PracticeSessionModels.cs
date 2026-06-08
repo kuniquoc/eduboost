@@ -37,6 +37,7 @@ public class SubmitAnswerRequest
     [Required] public string SessionId { get; set; } = "";
     [Required] public string QuestionId { get; set; } = "";
     public string? SelectedOptionId { get; set; }
+    public List<string>? SelectedOptionIds { get; set; }
     public string? TextAnswer { get; set; }
 }
 

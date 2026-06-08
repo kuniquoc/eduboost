@@ -33,7 +33,8 @@ public class DocumentsRepository(
     AppDbContext db,
     IStorageService storage,
     IAgentService agent,
-    ILogger<DocumentsRepository> logger) : IDocumentsRepository
+    ILogger<DocumentsRepository> logger,
+    IServiceScopeFactory scopeFactory) : IDocumentsRepository
 {
     private const string ClassBucket = MinioStorageService.Buckets.ClassDocuments;
     private const string StudentBucket = MinioStorageService.Buckets.StudentDocuments;
@@ -94,31 +95,14 @@ public class DocumentsRepository(
 
         if (doc == null) return null;
 
-        doc.Status = "ready";
+        doc.Status = "ingesting";
         await db.SaveChangesAsync();
 
-        // Trigger RAG Ingestion in the background to avoid blocking the main confirm workflow
-        _ = Task.Run(async () =>
-        {
-            try
-            {
-                var downloadUrl = await ResolveDocumentDownloadUrlAsync(doc);
-                if (downloadUrl != null)
-                {
-                    await agent.IngestDocumentAsync(
-                        documentId: doc.Id.ToString(),
-                        fileUrl: downloadUrl,
-                        scope: "class",
-                        classId: doc.ClassId?.ToString(),
-                        topicId: doc.TopicId?.ToString()
-                    );
-                }
-            }
-            catch (Exception ex)
-            {
-                logger.LogError(ex, "Failed to background-ingest class document {DocId}", doc.Id);
-            }
-        });
+        ScheduleBackgroundIngest(
+            doc.Id,
+            documentScope: "class",
+            classId: doc.ClassId?.ToString(),
+            topicId: doc.TopicId?.ToString());
 
         return MapToDto(doc);
     }
@@ -180,6 +164,13 @@ public class DocumentsRepository(
                 var quiz = await db.Quizzes.Include(q => q.Questions).FirstOrDefaultAsync(q => q.Id == doc.GeneratedQuizId);
                 if (quiz != null)
                 {
+                    var existingQuestions = quiz.Questions
+                        .OrderByDescending(q => q.OrderIndex)
+                        .Select(q => q.Text)
+                        .Where(t => !string.IsNullOrWhiteSpace(t))
+                        .Take(150)
+                        .ToList();
+
                     var appendAiQuestions = new List<AgentQuizBatchQuestion>();
                     bool isAdvanced = (request.NumEasyQuestions ?? 0) > 0 || 
                                       (request.NumMediumQuestions ?? 0) > 0 || 
@@ -196,14 +187,19 @@ public class DocumentsRepository(
                             request.NumEasyQuestions ?? 0, 
                             request.NumMediumQuestions ?? 0, 
                             request.NumHardQuestions ?? 0,
-                            documentId: doc.Id.ToString());
+                            documentId: doc.Id.ToString(),
+                            existingQuestions: existingQuestions);
                         if (res?.Questions != null) appendAiQuestions.AddRange(res.Questions);
                     }
                     else
                     {
-                        var res = await agent.GenerateQuizBatchAsync(topicName, null, downloadUrl, request.NumQuestions, difficulty, documentId: doc.Id.ToString());
+                        var res = await agent.GenerateQuizBatchAsync(
+                            topicName, null, downloadUrl, request.NumQuestions, difficulty,
+                            documentId: doc.Id.ToString(), existingQuestions: existingQuestions);
                         if (res?.Questions != null) appendAiQuestions.AddRange(res.Questions);
                     }
+
+                    appendAiQuestions = AgentQuizValidation.FilterQuestionsWithSingleCorrectOption(appendAiQuestions, logger);
 
                     if (appendAiQuestions.Count == 0)
                     {
@@ -213,7 +209,7 @@ public class DocumentsRepository(
                         {
                             JobId = jobId,
                             Status = "error",
-                            Message = "AI không sinh thêm được câu hỏi từ tài liệu lớp."
+                            Message = "AI không sinh thêm được câu hỏi hợp lệ từ tài liệu lớp."
                         };
                     }
 
@@ -293,6 +289,8 @@ public class DocumentsRepository(
                 if (res?.Questions != null) createAiQuestions.AddRange(res.Questions);
             }
 
+            createAiQuestions = AgentQuizValidation.FilterQuestionsWithSingleCorrectOption(createAiQuestions, logger);
+
             if (createAiQuestions.Count == 0)
             {
                 doc.Status = "error";
@@ -302,7 +300,7 @@ public class DocumentsRepository(
                 {
                     JobId = jobId,
                     Status = "error",
-                    Message = "AI không sinh được câu hỏi từ tài liệu lớp."
+                    Message = "AI không sinh được câu hỏi hợp lệ từ tài liệu lớp."
                 };
             }
 
@@ -420,30 +418,13 @@ public class DocumentsRepository(
 
         if (doc == null) return null;
 
-        doc.Status = "ready";
+        doc.Status = "ingesting";
         await db.SaveChangesAsync();
 
-        // Trigger RAG Ingestion in the background
-        _ = Task.Run(async () =>
-        {
-            try
-            {
-                var downloadUrl = await ResolveDocumentDownloadUrlAsync(doc);
-                if (downloadUrl != null)
-                {
-                    await agent.IngestDocumentAsync(
-                        documentId: doc.Id.ToString(),
-                        fileUrl: downloadUrl,
-                        scope: "student",
-                        ownerId: doc.OwnerId.ToString()
-                    );
-                }
-            }
-            catch (Exception ex)
-            {
-                logger.LogError(ex, "Failed to background-ingest student document {DocId}", doc.Id);
-            }
-        });
+        ScheduleBackgroundIngest(
+            doc.Id,
+            documentScope: "student",
+            ownerId: doc.OwnerId.ToString());
 
         return MapToDto(doc);
     }
@@ -468,8 +449,8 @@ public class DocumentsRepository(
             doc.Status = "processing";
             await db.SaveChangesAsync();
 
-            var inferredTopic = Path.GetFileNameWithoutExtension(doc.FileName);
-            var topicName = string.IsNullOrWhiteSpace(inferredTopic) ? "Ôn tập cá nhân" : inferredTopic;
+            var (topicName, topicId) = await ResolveOrCreateStudentTopicFromDocumentAsync(
+                studentId, doc, request.Difficulty);
             var downloadUrl = await ResolveDocumentDownloadUrlAsync(doc);
 
             // Handle Append Mode
@@ -478,6 +459,13 @@ public class DocumentsRepository(
                 var quiz = await db.Quizzes.Include(q => q.Questions).FirstOrDefaultAsync(q => q.Id == doc.GeneratedQuizId);
                 if (quiz != null)
                 {
+                    var existingQuestions = quiz.Questions
+                        .OrderByDescending(q => q.OrderIndex)
+                        .Select(q => q.Text)
+                        .Where(t => !string.IsNullOrWhiteSpace(t))
+                        .Take(150)
+                        .ToList();
+
                     var studentAppendAiQuestions = new List<AgentQuizBatchQuestion>();
                     bool isStudentAppendAdvanced = (request.NumEasyQuestions ?? 0) > 0 || 
                                                  (request.NumMediumQuestions ?? 0) > 0 || 
@@ -494,14 +482,20 @@ public class DocumentsRepository(
                             request.NumEasyQuestions ?? 0, 
                             request.NumMediumQuestions ?? 0, 
                             request.NumHardQuestions ?? 0,
-                            documentId: doc.Id.ToString());
+                            documentId: doc.Id.ToString(),
+                            existingQuestions: existingQuestions);
                         if (res?.Questions != null) studentAppendAiQuestions.AddRange(res.Questions);
                     }
                     else
                     {
-                        var res = await agent.GenerateQuizBatchAsync(topicName, null, downloadUrl, request.NumQuestions, request.Difficulty, documentId: doc.Id.ToString());
+                        var res = await agent.GenerateQuizBatchAsync(
+                            topicName, null, downloadUrl, request.NumQuestions, request.Difficulty,
+                            documentId: doc.Id.ToString(), existingQuestions: existingQuestions);
                         if (res?.Questions != null) studentAppendAiQuestions.AddRange(res.Questions);
                     }
+
+                    studentAppendAiQuestions = AgentQuizValidation.FilterQuestionsWithSingleCorrectOption(
+                        studentAppendAiQuestions, logger);
 
                     if (studentAppendAiQuestions.Count == 0)
                     {
@@ -511,8 +505,14 @@ public class DocumentsRepository(
                         {
                             JobId = jobId,
                             Status = "error",
-                            Message = "AI không sinh thêm được câu hỏi từ tài liệu cá nhân."
+                            Message = "AI không sinh thêm được câu hỏi hợp lệ từ tài liệu cá nhân."
                         };
+                    }
+
+                    if (quiz.TopicId != topicId || quiz.Type != "pool")
+                    {
+                        quiz.TopicId = topicId;
+                        quiz.Type = "pool";
                     }
 
                     var maxOrderIndex = quiz.Questions.Any() ? quiz.Questions.Max(q => q.OrderIndex) : -1;
@@ -549,7 +549,8 @@ public class DocumentsRepository(
                         JobId = jobId,
                         Status = "completed",
                         QuizId = quiz.Id.ToString(),
-                        Message = $"Đã sinh thêm {studentAppendAiQuestions.Count} câu hỏi thành công từ tài liệu cá nhân."
+                        TopicName = topicName,
+                        Message = $"Đã sinh thêm {studentAppendAiQuestions.Count} câu vào Kho Pool — chủ đề: {topicName}."
                     };
                 }
             }
@@ -591,6 +592,9 @@ public class DocumentsRepository(
                 if (res?.Questions != null) studentCreateAiQuestions.AddRange(res.Questions);
             }
 
+            studentCreateAiQuestions = AgentQuizValidation.FilterQuestionsWithSingleCorrectOption(
+                studentCreateAiQuestions, logger);
+
             if (studentCreateAiQuestions.Count == 0)
             {
                 doc.Status = "error";
@@ -600,16 +604,16 @@ public class DocumentsRepository(
                 {
                     JobId = jobId,
                     Status = "error",
-                    Message = "AI không sinh được câu hỏi từ tài liệu cá nhân."
+                    Message = "AI không sinh được câu hỏi hợp lệ từ tài liệu cá nhân."
                 };
             }
 
             var newQuiz = BuildGeneratedQuiz(
                 titlePrefix: topicName,
-                type: "private",
+                type: "pool",
                 ownerId: doc.OwnerId,
                 classId: null,
-                topicId: null,
+                topicId: topicId,
                 sourceDocumentId: doc.Id,
                 aiQuestions: studentCreateAiQuestions);
 
@@ -623,7 +627,8 @@ public class DocumentsRepository(
                 JobId = jobId,
                 Status = "completed",
                 QuizId = newQuiz.Id.ToString(),
-                Message = "Đã tạo mới quiz cá nhân thành công."
+                TopicName = topicName,
+                Message = $"Đã tạo {studentCreateAiQuestions.Count} câu vào Kho Pool — chủ đề: {topicName}."
             };
         }
         catch (Exception ex)
@@ -705,6 +710,104 @@ public class DocumentsRepository(
 
         var bucket = doc.Scope == "student" ? StudentBucket : ClassBucket;
         return await storage.GetInternalPresignedDownloadUrlAsync(bucket, doc.StorageKey, 3600);
+    }
+
+    private void ScheduleBackgroundIngest(
+        Guid documentId,
+        string documentScope,
+        string? classId = null,
+        string? topicId = null,
+        string? ownerId = null)
+    {
+        _ = Task.Run(async () =>
+        {
+            using var serviceScope = scopeFactory.CreateScope();
+            var scopedDb = serviceScope.ServiceProvider.GetRequiredService<AppDbContext>();
+            var scopedAgent = serviceScope.ServiceProvider.GetRequiredService<IAgentService>();
+            var scopedStorage = serviceScope.ServiceProvider.GetRequiredService<IStorageService>();
+            var scopedLogger = serviceScope.ServiceProvider.GetRequiredService<ILogger<DocumentsRepository>>();
+
+            try
+            {
+                var doc = await scopedDb.Documents.FindAsync(documentId);
+                if (doc == null) return;
+
+                var downloadUrl = await ResolveDocumentDownloadUrlAsync(doc, scopedStorage);
+                if (downloadUrl == null)
+                {
+                    doc.Status = "ingest_failed";
+                    await scopedDb.SaveChangesAsync();
+                    return;
+                }
+
+                await scopedAgent.IngestDocumentAsync(
+                    documentId: doc.Id.ToString(),
+                    fileUrl: downloadUrl,
+                    scope: documentScope,
+                    classId: classId,
+                    ownerId: ownerId,
+                    topicId: topicId);
+
+                doc.Status = "ready";
+                await scopedDb.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                scopedLogger.LogError(ex, "Failed to background-ingest document {DocId}", documentId);
+                try
+                {
+                    var doc = await scopedDb.Documents.FindAsync(documentId);
+                    if (doc != null)
+                    {
+                        doc.Status = "ingest_failed";
+                        await scopedDb.SaveChangesAsync();
+                    }
+                }
+                catch (Exception updateEx)
+                {
+                    scopedLogger.LogError(updateEx, "Failed to mark document {DocId} as ingest_failed", documentId);
+                }
+            }
+        });
+    }
+
+    private static async Task<string?> ResolveDocumentDownloadUrlAsync(Document doc, IStorageService scopedStorage)
+    {
+        if (doc.StorageKey == null) return null;
+
+        var bucket = doc.Scope == "student" ? StudentBucket : ClassBucket;
+        return await scopedStorage.GetInternalPresignedDownloadUrlAsync(bucket, doc.StorageKey, 3600);
+    }
+
+    private async Task<(string topicName, Guid topicId)> ResolveOrCreateStudentTopicFromDocumentAsync(
+        Guid studentId, Document doc, string difficulty)
+    {
+        var topicName = Path.GetFileNameWithoutExtension(doc.FileName).Trim();
+        if (string.IsNullOrWhiteSpace(topicName))
+            topicName = "Ôn tập cá nhân";
+
+        var topic = await db.Topics.FirstOrDefaultAsync(t =>
+            t.Name == topicName && t.OwnerId == studentId && t.ClassId == null);
+
+        if (topic == null)
+        {
+            topic = new Topic
+            {
+                Id = Guid.NewGuid(),
+                Name = topicName,
+                Description = $"Chủ đề ôn tập từ tài liệu: {doc.FileName}",
+                Difficulty = difficulty,
+                AiEvaluated = false,
+                IsDocumentVisible = false,
+                OwnerId = studentId,
+                ClassId = null,
+                CreatedAt = DateTime.UtcNow
+            };
+            db.Topics.Add(topic);
+            await db.SaveChangesAsync();
+        }
+
+        return (topicName, topic.Id);
     }
 
     private async Task<(string topicName, string difficulty, Guid? topicId)> ResolveTopicContextAsync(

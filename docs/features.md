@@ -1,3 +1,5 @@
+> **DEPRECATED** — Thay bằng [01-web/features/](01-web/features/README.md). Một số mô tả (demo login, analytics) không khớp code.
+
 # EduBoost — Feature Specifications
 
 ## Roles Overview

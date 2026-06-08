@@ -53,6 +53,19 @@ public class UserProfilesRepository(AppDbContext db) : IUserProfilesRepository
 
     public async Task<UserProfileDto?> GetProfileByUserIdAsync(Guid userId, Guid requesterId)
     {
+        if (userId != requesterId)
+        {
+            var requester = await db.Users.FindAsync(requesterId);
+            if (requester == null) return null;
+
+            var canView = requester.Role == "admin"
+                || (requester.Role == "teacher" && await db.Enrollments.AnyAsync(e =>
+                    e.StudentId == userId
+                    && e.Class.TeacherId == requesterId));
+
+            if (!canView) return null;
+        }
+
         var profile = await db.UserProfiles.FirstOrDefaultAsync(p => p.UserId == userId);
         if (profile == null) return null;
         return MapToDto(profile);

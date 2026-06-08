@@ -54,6 +54,7 @@ public class GenerateQuizJobDto
     public string JobId { get; set; } = "";
     public string Status { get; set; } = "processing";
     public string? QuizId { get; set; }
+    public string? TopicName { get; set; }
     public string Message { get; set; } = "";
 }
 

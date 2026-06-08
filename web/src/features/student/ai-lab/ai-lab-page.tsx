@@ -80,9 +80,13 @@ export function AILabPage() {
   const generateMutation = useMutation({
     mutationFn: (data: { docId: string; options?: { numQuestions?: number; difficulty?: string; mode?: string } }) =>
       documentsService.generateMyQuiz(data.docId, data.options),
-    onSuccess: () => {
+    onSuccess: (job) => {
       invalidate();
-      toast.success('Đang tạo quiz...');
+      if (job.topicName) {
+        toast.success(job.message || `Đã tạo quiz vào Kho Pool — chủ đề: ${job.topicName}`);
+      } else {
+        toast.success(job.message || 'Đã tạo quiz thành công');
+      }
     },
     onError: () => toast.error('Tạo quiz thất bại'),
   });

@@ -26,6 +26,11 @@ public class RevokeTokenRequest
     [Required] public string RefreshToken { get; set; } = "";
 }
 
+public class UpdateNameRequest
+{
+    [Required, MinLength(1)] public string Name { get; set; } = "";
+}
+
 public class UserDto
 {
     public string UserId { get; set; } = "";

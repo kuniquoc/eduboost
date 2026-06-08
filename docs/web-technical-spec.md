@@ -1,3 +1,5 @@
+> **DEPRECATED** — Thay bằng [01-web/architecture.md](01-web/architecture.md), [01-web/routing.md](01-web/routing.md), [99-known-issues/web-gaps.md](99-known-issues/web-gaps.md).
+
 # EduBoost Web — Technical Specification
 
 ## 1. Tech Stack

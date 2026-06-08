@@ -70,7 +70,7 @@ export function PracticeSessionPage() {
   });
 
   const summaryMutation = useMutation({
-    mutationFn: (sessionId: string) => practiceSessionService.getSummary(sessionId),
+    mutationFn: (sessionId: string) => practiceSessionService.endSession(sessionId),
     onSuccess: (data) => setState({ type: 'summary', data }),
     onError: () => toast.error('Không tải được kết quả'),
   });

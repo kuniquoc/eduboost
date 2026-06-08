@@ -1,5 +1,6 @@
 using System.Text;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace EduBoost.API.Infrastructure.Services;
 
@@ -10,7 +11,7 @@ public interface IAgentService
     Task<AgentQuizResponse?> GenerateQuizQuestionAsync(string topicName, double difficulty, List<string>? allowedDocumentIds = null, List<string>? allowedScopes = null);
     Task<string?> GetExplanationAsync(string topicName, string studentState, List<string>? allowedDocumentIds = null, List<string>? allowedScopes = null);
     Task<string?> GetGraderExplanationAsync(string question, string correctAnswer, string studentAnswer, List<string>? allowedDocumentIds = null, List<string>? allowedScopes = null);
-    Task<AgentQuizBatchResponse?> GenerateQuizBatchAsync(string topicName, string? userPrompt, string? docUrl, int numQuestions, string difficulty, int numEasy = 0, int numMedium = 0, int numHard = 0, string? documentId = null);
+    Task<AgentQuizBatchResponse?> GenerateQuizBatchAsync(string topicName, string? userPrompt, string? docUrl, int numQuestions, string difficulty, int numEasy = 0, int numMedium = 0, int numHard = 0, string? documentId = null, IReadOnlyList<string>? existingQuestions = null);
     Task<AgentChatResponse> AskAsync(string question, string? topicId, string level, List<ChatMessage> history, List<string>? allowedDocumentIds = null, List<string>? allowedScopes = null);
     Task IngestDocumentAsync(string documentId, string fileUrl, string scope, string? classId = null, string? ownerId = null, string? topicId = null);
     Task DeleteDocumentAsync(string documentId);
@@ -18,31 +19,27 @@ public interface IAgentService
 
 public class AgentService : IAgentService
 {
+    public const string QuizBatchHttpClientName = "AgentQuizBatch";
+
     private readonly HttpClient _http;
+    private readonly IHttpClientFactory _httpClientFactory;
     private readonly ILogger<AgentService> _logger;
-    private static readonly JsonSerializerOptions JsonOpts = new()
+    private static readonly JsonSerializerOptions SerializeOpts = new()
     {
         PropertyNameCaseInsensitive = true,
         PropertyNamingPolicy = JsonNamingPolicy.SnakeCaseLower
     };
 
-    public AgentService(HttpClient http, ILogger<AgentService> logger, IConfiguration config)
+    private static readonly JsonSerializerOptions DeserializeOpts = new()
+    {
+        PropertyNameCaseInsensitive = true,
+        PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+    };
+
+    public AgentService(HttpClient http, IHttpClientFactory httpClientFactory, ILogger<AgentService> logger)
     {
         _http = http;
-
-        var configuredBaseUrl = config["AIAgent:BaseUrl"];
-        if (string.IsNullOrWhiteSpace(configuredBaseUrl))
-        {
-            configuredBaseUrl = "http://host.docker.internal:8000";
-        }
-        else if (!configuredBaseUrl.StartsWith("http://", StringComparison.OrdinalIgnoreCase)
-              && !configuredBaseUrl.StartsWith("https://", StringComparison.OrdinalIgnoreCase))
-        {
-            configuredBaseUrl = $"http://{configuredBaseUrl}";
-        }
-
-        _http.BaseAddress = new Uri(configuredBaseUrl);
-        _http.Timeout = TimeSpan.FromSeconds(120); // LLM calls can be slow
+        _httpClientFactory = httpClientFactory;
         _logger = logger;
 
         _logger.LogInformation("AI Agent base URL configured: {BaseUrl}", _http.BaseAddress);
@@ -55,7 +52,7 @@ public class AgentService : IAgentService
             var response = await _http.GetAsync($"/tutor/next-action?student_id={Uri.EscapeDataString(studentId)}&topic_name={Uri.EscapeDataString(topicName)}");
             response.EnsureSuccessStatusCode();
             var json = await response.Content.ReadAsStringAsync();
-            return JsonSerializer.Deserialize<AgentNextActionResponse>(json, JsonOpts);
+            return JsonSerializer.Deserialize<AgentNextActionResponse>(json, DeserializeOpts);
         }
         catch (Exception ex)
         {
@@ -75,11 +72,11 @@ public class AgentService : IAgentService
                 difficulty,
                 is_correct = isCorrect
             };
-            var content = new StringContent(JsonSerializer.Serialize(payload, JsonOpts), Encoding.UTF8, "application/json");
+            var content = new StringContent(JsonSerializer.Serialize(payload, SerializeOpts), Encoding.UTF8, "application/json");
             var response = await _http.PostAsync("/tutor/update-state", content);
             response.EnsureSuccessStatusCode();
             var json = await response.Content.ReadAsStringAsync();
-            return JsonSerializer.Deserialize<AgentStateResponse>(json, JsonOpts);
+            return JsonSerializer.Deserialize<AgentStateResponse>(json, DeserializeOpts);
         }
         catch (Exception ex)
         {
@@ -101,7 +98,7 @@ public class AgentService : IAgentService
             var response = await _http.GetAsync(queryParams);
             response.EnsureSuccessStatusCode();
             var json = await response.Content.ReadAsStringAsync();
-            return JsonSerializer.Deserialize<AgentQuizResponse>(json, JsonOpts);
+            return JsonSerializer.Deserialize<AgentQuizResponse>(json, DeserializeOpts);
         }
         catch (Exception ex)
         {
@@ -147,7 +144,7 @@ public class AgentService : IAgentService
                 allowed_document_ids = allowedDocumentIds,
                 allowed_scopes = allowedScopes
             };
-            var content = new StringContent(JsonSerializer.Serialize(payload, JsonOpts), Encoding.UTF8, "application/json");
+            var content = new StringContent(JsonSerializer.Serialize(payload, SerializeOpts), Encoding.UTF8, "application/json");
             var response = await _http.PostAsync("/tutor/explain-error", content);
             response.EnsureSuccessStatusCode();
             var json = await response.Content.ReadAsStringAsync();
@@ -165,7 +162,8 @@ public class AgentService : IAgentService
 
     public async Task<AgentQuizBatchResponse?> GenerateQuizBatchAsync(
         string topicName, string? userPrompt, string? docUrl, int numQuestions, string difficulty,
-        int numEasy = 0, int numMedium = 0, int numHard = 0, string? documentId = null)
+        int numEasy = 0, int numMedium = 0, int numHard = 0, string? documentId = null,
+        IReadOnlyList<string>? existingQuestions = null)
     {
         try
         {
@@ -173,7 +171,7 @@ public class AgentService : IAgentService
             if (totalRequested == 0)
                 totalRequested = numQuestions;
 
-            var timeoutSeconds = Math.Min(600, Math.Max(120, totalRequested * 45));
+            var timeoutSeconds = Math.Min(600, Math.Max(180, totalRequested * 45));
             using var cts = new CancellationTokenSource(TimeSpan.FromSeconds(timeoutSeconds));
 
             var payload = new
@@ -186,10 +184,13 @@ public class AgentService : IAgentService
                 difficulty,
                 num_easy = numEasy,
                 num_medium = numMedium,
-                num_hard = numHard
+                num_hard = numHard,
+                existing_questions = existingQuestions ?? Array.Empty<string>()
             };
-            var content = new StringContent(JsonSerializer.Serialize(payload, JsonOpts), Encoding.UTF8, "application/json");
-            var response = await _http.PostAsync("/tutor/generate-quiz", content, cts.Token);
+            var content = new StringContent(JsonSerializer.Serialize(payload, SerializeOpts), Encoding.UTF8, "application/json");
+
+            var batchClient = _httpClientFactory.CreateClient(QuizBatchHttpClientName);
+            var response = await batchClient.PostAsync("/tutor/generate-quiz", content, cts.Token);
 
             if (!response.IsSuccessStatusCode)
             {
@@ -204,7 +205,7 @@ public class AgentService : IAgentService
             }
 
             var json = await response.Content.ReadAsStringAsync(cts.Token);
-            return JsonSerializer.Deserialize<AgentQuizBatchResponse>(json, JsonOpts);
+            return JsonSerializer.Deserialize<AgentQuizBatchResponse>(json, DeserializeOpts);
         }
         catch (Exception ex)
         {
@@ -226,11 +227,11 @@ public class AgentService : IAgentService
                 allowed_document_ids = allowedDocumentIds,
                 allowed_scopes = allowedScopes
             };
-            var content = new StringContent(JsonSerializer.Serialize(payload, JsonOpts), Encoding.UTF8, "application/json");
+            var content = new StringContent(JsonSerializer.Serialize(payload, SerializeOpts), Encoding.UTF8, "application/json");
             var response = await _http.PostAsync("/tutor/chat", content);
             response.EnsureSuccessStatusCode();
             var json = await response.Content.ReadAsStringAsync();
-            return JsonSerializer.Deserialize<AgentChatResponse>(json, JsonOpts) ?? new AgentChatResponse { Answer = "Không thể kết nối AI" };
+            return JsonSerializer.Deserialize<AgentChatResponse>(json, DeserializeOpts) ?? new AgentChatResponse { Answer = "Không thể kết nối AI" };
         }
         catch (Exception ex)
         {
@@ -252,7 +253,7 @@ public class AgentService : IAgentService
                 owner_id = ownerId,
                 topic_id = topicId
             };
-            var content = new StringContent(JsonSerializer.Serialize(payload, JsonOpts), Encoding.UTF8, "application/json");
+            var content = new StringContent(JsonSerializer.Serialize(payload, SerializeOpts), Encoding.UTF8, "application/json");
             var response = await _http.PostAsync("/rag/ingest", content);
             response.EnsureSuccessStatusCode();
             _logger.LogInformation("Successfully called AI Agent to ingest document {DocId}", documentId);
@@ -268,7 +269,7 @@ public class AgentService : IAgentService
         try
         {
             var payload = new { document_id = documentId };
-            var content = new StringContent(JsonSerializer.Serialize(payload, JsonOpts), Encoding.UTF8, "application/json");
+            var content = new StringContent(JsonSerializer.Serialize(payload, SerializeOpts), Encoding.UTF8, "application/json");
             var response = await _http.PostAsync("/rag/delete", content);
             response.EnsureSuccessStatusCode();
             _logger.LogInformation("Successfully called AI Agent to delete document {DocId}", documentId);
@@ -311,6 +312,7 @@ public class AgentQuizResponse
 public class AgentQuizBatchOption
 {
     public string Text { get; set; } = "";
+    [JsonPropertyName("isCorrect")]
     public bool IsCorrect { get; set; }
 }
 

@@ -2,6 +2,7 @@ using System.Text.Json;
 using EduBoost.API.Features.Quizzes.Models;
 using EduBoost.API.Infrastructure;
 using EduBoost.API.Infrastructure.Entities;
+using EduBoost.API.Infrastructure.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 
@@ -29,7 +30,7 @@ public interface IQuizzesRepository
     Task<string?> GetTopicNameAsync(Guid topicId);
 }
 
-public class QuizzesRepository(AppDbContext db) : IQuizzesRepository
+public class QuizzesRepository(AppDbContext db, IAgentService agent, ILogger<QuizzesRepository> logger) : IQuizzesRepository
 {
     public async Task<List<QuestionDto>> GetQuestionsAsync(Guid quizId)
     {
@@ -343,52 +344,37 @@ public class QuizzesRepository(AppDbContext db) : IQuizzesRepository
 
         foreach (var topic in topics)
         {
-            // Generate 2-3 questions per topic based on difficulty
             int count = topic.Difficulty == "easy" ? 2 : topic.Difficulty == "hard" ? 3 : 2;
+            var aiResponse = await agent.GenerateQuizBatchAsync(
+                topic.Name,
+                userPrompt: $"Generate placement/entry test questions for topic \"{topic.Name}\".",
+                docUrl: null,
+                numQuestions: count,
+                difficulty: topic.Difficulty);
 
+            var aiQuestions = aiResponse?.Questions is { Count: > 0 }
+                ? AgentQuizValidation.FilterQuestionsWithSingleCorrectOption(aiResponse.Questions, logger)
+                : [];
+
+            if (aiQuestions.Count > 0)
+            {
+                foreach (var aiQ in aiQuestions)
+                {
+                    questions.Add(MapAgentQuestionToEntity(aiQ, order++));
+                }
+                continue;
+            }
+
+            logger.LogWarning("AI unavailable for entry test topic {Topic} — using placeholder questions", topic.Name);
             for (int i = 0; i < count; i++)
             {
-                var q = new Question
-                {
-                    Id = Guid.NewGuid(),
-                    Text = $"[AI] Câu hỏi về {topic.Name} ({i + 1})",
-                    Type = "mcq",
-                    Difficulty = topic.Difficulty,
-                    Explanation = $"Đây là câu hỏi đánh giá kiến thức về {topic.Name}.",
-                    VerifiedByTeacher = false,
-                    OrderIndex = order++,
-                    Options =
-                    [
-                        new QuizOption { Id = Guid.NewGuid(), Text = "Đáp án A", IsCorrect = true,  OrderIndex = 0 },
-                        new QuizOption { Id = Guid.NewGuid(), Text = "Đáp án B", IsCorrect = false, OrderIndex = 1 },
-                        new QuizOption { Id = Guid.NewGuid(), Text = "Đáp án C", IsCorrect = false, OrderIndex = 2 },
-                        new QuizOption { Id = Guid.NewGuid(), Text = "Đáp án D", IsCorrect = false, OrderIndex = 3 },
-                    ]
-                };
-                questions.Add(q);
+                questions.Add(CreatePlaceholderQuestion(topic.Name, topic.Difficulty, order++, i + 1));
             }
         }
 
-        // Fallback if no topics exist
         if (questions.Count == 0)
         {
-            questions.Add(new Question
-            {
-                Id = Guid.NewGuid(),
-                Text = "[AI] Câu hỏi đánh giá tổng quan",
-                Type = "mcq",
-                Difficulty = "medium",
-                Explanation = "Câu hỏi tổng quan cho bài test đầu vào.",
-                VerifiedByTeacher = false,
-                OrderIndex = 0,
-                Options =
-                [
-                    new QuizOption { Id = Guid.NewGuid(), Text = "Đáp án A", IsCorrect = true,  OrderIndex = 0 },
-                    new QuizOption { Id = Guid.NewGuid(), Text = "Đáp án B", IsCorrect = false, OrderIndex = 1 },
-                    new QuizOption { Id = Guid.NewGuid(), Text = "Đáp án C", IsCorrect = false, OrderIndex = 2 },
-                    new QuizOption { Id = Guid.NewGuid(), Text = "Đáp án D", IsCorrect = false, OrderIndex = 3 },
-                ]
-            });
+            questions.Add(CreatePlaceholderQuestion(cls?.Name ?? "Lớp học", "medium", 0, 1));
         }
 
         var quiz = new Quiz
@@ -522,6 +508,43 @@ public class QuizzesRepository(AppDbContext db) : IQuizzesRepository
 
         return result;
     }
+
+    private static Question MapAgentQuestionToEntity(AgentQuizBatchQuestion aiQ, int orderIndex) => new()
+    {
+        Id = Guid.NewGuid(),
+        Text = aiQ.Question,
+        Type = string.IsNullOrWhiteSpace(aiQ.Type) ? "mcq" : aiQ.Type,
+        Difficulty = string.IsNullOrWhiteSpace(aiQ.Difficulty) ? "medium" : aiQ.Difficulty,
+        Explanation = aiQ.Explanation,
+        CorrectAnswer = aiQ.Options.FirstOrDefault(o => o.IsCorrect)?.Text ?? "",
+        VerifiedByTeacher = false,
+        OrderIndex = orderIndex,
+        Options = aiQ.Options.Select((o, i) => new QuizOption
+        {
+            Id = Guid.NewGuid(),
+            Text = o.Text,
+            IsCorrect = o.IsCorrect,
+            OrderIndex = i
+        }).ToList()
+    };
+
+    private static Question CreatePlaceholderQuestion(string topicName, string difficulty, int orderIndex, int index) => new()
+    {
+        Id = Guid.NewGuid(),
+        Text = $"[AI] Câu hỏi về {topicName} ({index})",
+        Type = "mcq",
+        Difficulty = difficulty,
+        Explanation = $"Đây là câu hỏi đánh giá kiến thức về {topicName}.",
+        VerifiedByTeacher = false,
+        OrderIndex = orderIndex,
+        Options =
+        [
+            new QuizOption { Id = Guid.NewGuid(), Text = "Đáp án A", IsCorrect = true,  OrderIndex = 0 },
+            new QuizOption { Id = Guid.NewGuid(), Text = "Đáp án B", IsCorrect = false, OrderIndex = 1 },
+            new QuizOption { Id = Guid.NewGuid(), Text = "Đáp án C", IsCorrect = false, OrderIndex = 2 },
+            new QuizOption { Id = Guid.NewGuid(), Text = "Đáp án D", IsCorrect = false, OrderIndex = 3 },
+        ]
+    };
 
     private static QuestionDto MapToDto(Question q) => new()
     {

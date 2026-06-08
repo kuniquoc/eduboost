@@ -1,297 +1,280 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { quizzesService } from '@/services/quizzes.service';
-import { roadmapService } from '@/services/roadmap.service';
+import { useMutation } from '@tanstack/react-query';
+import { placementTestService } from '@/services/placementTest.service';
+import { ROUTES } from '@/lib/constants';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent } from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
-import { Input } from '@/components/ui/input';
-import { ArrowLeft, ArrowRight, CheckCircle, Clock, Send } from 'lucide-react';
+import {
+  ArrowRight,
+  CheckCircle,
+  XCircle,
+  Trophy,
+  Loader2,
+  Target,
+  TrendingUp,
+  TrendingDown,
+  ArrowLeft,
+} from 'lucide-react';
 import { toast } from 'sonner';
-import type { QuestionDto, QuizResultDto, SubmitQuizRequest } from '@/types';
+import type {
+  PlacementQuestionDto,
+  AnswerPlacementResponse,
+  CompletePlacementResponse,
+} from '@/types';
 
-interface AnswerState {
-  selectedOptionIds: string[];
-  fillBlankValue: string;
-  startTime: number;
-}
-
-function QuestionView({
-  question,
-  index,
-  total,
-  answer,
-  onAnswer,
-}: {
-  question: QuestionDto;
-  index: number;
-  total: number;
-  answer: AnswerState;
-  onAnswer: (a: Partial<AnswerState>) => void;
-}) {
-  const toggleOption = (optId: string) => {
-    if (question.type === 'mcq') {
-      onAnswer({ selectedOptionIds: [optId] });
-    } else {
-      const ids = answer.selectedOptionIds.includes(optId)
-        ? answer.selectedOptionIds.filter((id) => id !== optId)
-        : [...answer.selectedOptionIds, optId];
-      onAnswer({ selectedOptionIds: ids });
-    }
-  };
-
-  return (
-    <div>
-      <div className="mb-4 flex items-center justify-between">
-        <Badge variant="outline">Câu {index + 1}/{total}</Badge>
-        <Badge variant="secondary">{question.difficulty}</Badge>
-      </div>
-      <h2 className="mb-6 text-lg font-medium text-foreground">{question.text}</h2>
-
-      {question.type === 'fill_blank' ? (
-        <Input
-          placeholder="Nhập câu trả lời..."
-          value={answer.fillBlankValue}
-          onChange={(e) => onAnswer({ fillBlankValue: e.target.value })}
-          className="text-lg"
-        />
-      ) : (
-        <div className="space-y-3">
-          {question.options.map((opt) => {
-            const selected = answer.selectedOptionIds.includes(opt.id);
-            return (
-              <button
-                key={opt.id}
-                onClick={() => toggleOption(opt.id)}
-                className={`w-full rounded-xl border p-4 text-left transition-all ${
-                  selected
-                    ? 'border-primary bg-primary/10 text-foreground'
-                    : 'border-border text-muted-foreground hover:border-muted-foreground hover:text-foreground'
-                }`}
-              >
-                <span className="text-sm">{opt.text}</span>
-              </button>
-            );
-          })}
-        </div>
-      )}
-    </div>
-  );
-}
-
-function ResultView({ result, onBack }: { result: QuizResultDto; onBack: () => void }) {
-  const gradeColor = result.percentage >= 70 ? 'text-green-400' : result.percentage >= 50 ? 'text-yellow-400' : 'text-red-400';
-
-  return (
-    <div className="mx-auto max-w-lg space-y-6 text-center">
-      <CheckCircle className="mx-auto h-16 w-16 text-primary" />
-      <h1 className="text-3xl font-bold text-foreground">Kết quả bài test</h1>
-      <div className={`text-5xl font-bold ${gradeColor}`}>
-        {result.score}/{result.total}
-      </div>
-      <p className="text-lg text-muted-foreground">{Math.round(result.percentage)}% — {result.grade}</p>
-
-      {result.topicScores?.length > 0 && (
-        <Card className="border-border text-left">
-          <CardContent className="p-4 space-y-3">
-            <h3 className="font-semibold text-foreground">Điểm theo chủ đề</h3>
-            {result.topicScores.map((ts) => (
-              <div key={ts.topicId}>
-                <div className="flex items-center justify-between text-sm">
-                  <span className="text-foreground">{ts.topicName}</span>
-                  <span className="text-muted-foreground">{ts.score}/{ts.total}</span>
-                </div>
-                <Progress value={ts.percentage} className="mt-1 h-1.5" />
-              </div>
-            ))}
-          </CardContent>
-        </Card>
-      )}
-
-      <Button onClick={onBack} className="mt-4">
-        Xem lộ trình học tập
-      </Button>
-    </div>
-  );
-}
+type TestState =
+  | { type: 'idle' }
+  | { type: 'loading' }
+  | { type: 'question'; sessionId: string; question: PlacementQuestionDto; questionNumber: number; total: number }
+  | { type: 'feedback'; sessionId: string; isCorrect: boolean; response: AnswerPlacementResponse }
+  | { type: 'complete'; result: CompletePlacementResponse }
+  | { type: 'error'; message: string };
 
 export function EntryTestPage() {
-  const { classId } = useParams<{ classId: string }>();
+  const { classId = '' } = useParams<{ classId: string }>();
   const navigate = useNavigate();
-  const queryClient = useQueryClient();
-  const [current, setCurrent] = useState(0);
-  const [answers, setAnswers] = useState<Map<string, AnswerState>>(new Map());
-  const [result, setResult] = useState<QuizResultDto | null>(null);
 
-  const { data: test, isLoading } = useQuery({
-    queryKey: ['entry-test', classId],
-    queryFn: () => quizzesService.getEntryTest(classId!),
-    enabled: !!classId,
-  });
+  const [state, setState] = useState<TestState>({ type: 'idle' });
+  const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
+  const [answeredCount, setAnsweredCount] = useState(0);
 
-  const questions = test?.questions ?? [];
-
-  // Initialize answers
-  useEffect(() => {
-    if (questions.length && answers.size === 0) {
-      const map = new Map<string, AnswerState>();
-      questions.forEach((q) => {
-        map.set(q.id, { selectedOptionIds: [], fillBlankValue: '', startTime: Date.now() });
+  const startMutation = useMutation({
+    mutationFn: () => placementTestService.start(classId),
+    onSuccess: (data) => {
+      if (!data.question?.questionId) {
+        setState({ type: 'error', message: 'Chưa có câu hỏi cho bài kiểm tra này. Liên hệ giáo viên.' });
+        return;
+      }
+      setState({
+        type: 'question',
+        sessionId: data.sessionId,
+        question: data.question,
+        questionNumber: data.questionNumber,
+        total: data.totalQuestions,
       });
-      setAnswers(map);
-    }
-  }, [questions, answers.size]);
-
-  const updateAnswer = useCallback((qId: string, partial: Partial<AnswerState>) => {
-    setAnswers((prev) => {
-      const next = new Map(prev);
-      const existing = next.get(qId)!;
-      next.set(qId, { ...existing, ...partial });
-      return next;
-    });
-  }, []);
-
-  const submitMutation = useMutation({
-    mutationFn: (req: SubmitQuizRequest) => quizzesService.submitEntryTest(classId!, req),
-    onSuccess: async (data) => {
-      setResult(data);
-      // Generate roadmap after entry test submission
-      try {
-        await roadmapService.generateRoadmap(classId!, data.quizId);
-        queryClient.invalidateQueries({ queryKey: ['roadmap', classId] });
-        queryClient.invalidateQueries({ queryKey: ['student-progress'] });
-      } catch { /* roadmap generation is best-effort */ }
     },
-    onError: () => toast.error('Nộp bài thất bại'),
+    onError: () => {
+      setState({ type: 'error', message: 'Không thể bắt đầu bài kiểm tra.' });
+      toast.error('Không thể bắt đầu bài kiểm tra');
+    },
   });
 
-  const handleSubmit = () => {
-    const now = Date.now();
-    const submitAnswers = questions.map((q) => {
-      const a = answers.get(q.id)!;
-      return {
-        questionId: q.id,
-        selectedOptionIds: a.selectedOptionIds,
-        fillBlankValue: a.fillBlankValue || undefined,
-        timeSpentSeconds: Math.round((now - a.startTime) / 1000),
-      };
+  const answerMutation = useMutation({
+    mutationFn: (vars: { sessionId: string; questionId: string; selectedOptionIds: string[] }) =>
+      placementTestService.submitAnswer(vars.sessionId, vars.questionId, vars.selectedOptionIds),
+    onSuccess: (data) => {
+      setAnsweredCount((c) => c + 1);
+      if (state.type === 'question') {
+        setState({ type: 'feedback', sessionId: state.sessionId, isCorrect: data.isCorrect, response: data });
+      }
+    },
+    onError: () => toast.error('Lỗi khi gửi câu trả lời'),
+  });
+
+  const completeMutation = useMutation({
+    mutationFn: (sessionId: string) => placementTestService.complete(sessionId),
+    onSuccess: (data) => setState({ type: 'complete', result: data }),
+    onError: () => toast.error('Lỗi khi hoàn thành bài kiểm tra'),
+  });
+
+  const handleStart = useCallback(() => {
+    setState({ type: 'loading' });
+    startMutation.mutate();
+  }, [startMutation]);
+
+  const handleSubmit = useCallback(() => {
+    if (state.type !== 'question' || selectedOptions.length === 0) return;
+    answerMutation.mutate({
+      sessionId: state.sessionId,
+      questionId: state.question.questionId,
+      selectedOptionIds: selectedOptions,
     });
-    submitMutation.mutate({ answers: submitAnswers });
-  };
+  }, [state, selectedOptions, answerMutation]);
 
-  if (isLoading) {
-    return (
-      <div className="flex h-screen items-center justify-center bg-background">
-        <div className="h-8 w-8 animate-spin rounded-full border-4 border-primary border-t-transparent" />
-      </div>
-    );
-  }
+  const handleNext = useCallback(() => {
+    if (state.type !== 'feedback') return;
+    const { response, sessionId } = state;
+    setSelectedOptions([]);
 
-  if (result) {
+    if (response.isComplete || !response.nextQuestion) {
+      completeMutation.mutate(sessionId);
+    } else {
+      setState({
+        type: 'question',
+        sessionId,
+        question: response.nextQuestion,
+        questionNumber: response.questionNumber,
+        total: response.totalQuestions,
+      });
+    }
+  }, [state, completeMutation]);
+
+  if (state.type === 'idle') {
     return (
       <div className="min-h-screen bg-background p-6">
-        <ResultView result={result} onBack={() => navigate(`/student/roadmap/${classId}`)} />
-      </div>
-    );
-  }
-
-  const q = questions[current];
-  if (!q) {
-    return (
-      <div className="flex h-screen flex-col items-center justify-center bg-background gap-4">
-        <p className="text-lg font-medium text-foreground">Chưa có bài test đầu vào</p>
-        <p className="text-sm text-muted-foreground">Giáo viên chưa tạo bài test cho lớp này. Bạn có thể xem lộ trình hoặc quay lại sau.</p>
-        <div className="flex gap-2">
-          <Button variant="outline" onClick={() => navigate('/student/classes')}>Quay lại</Button>
-          <Button onClick={() => navigate(`/student/roadmap/${classId}`)}>Xem lộ trình</Button>
-        </div>
-      </div>
-    );
-  }
-
-  const answeredCount = Array.from(answers.values()).filter(
-    (a) => a.selectedOptionIds.length > 0 || a.fillBlankValue.trim(),
-  ).length;
-
-  return (
-    <div className="min-h-screen bg-background">
-      {/* Top bar */}
-      <div className="sticky top-0 z-10 border-b border-border bg-background/95 backdrop-blur px-6 py-3">
-        <div className="mx-auto flex max-w-2xl items-center justify-between">
-          <div>
-            <h1 className="text-sm font-semibold text-foreground">{test?.className}</h1>
-            <p className="text-xs text-muted-foreground">Bài test đầu vào</p>
-          </div>
-          <div className="flex items-center gap-3">
-            <Badge variant="outline">
-              <Clock className="mr-1 h-3 w-3" />
-              {answeredCount}/{questions.length} đã trả lời
-            </Badge>
-          </div>
-        </div>
-      </div>
-
-      {/* Progress */}
-      <div className="mx-auto max-w-2xl px-6 pt-4">
-        <Progress value={((current + 1) / questions.length) * 100} className="h-1" />
-      </div>
-
-      {/* Question */}
-      <div className="mx-auto max-w-2xl px-6 py-8">
-        <QuestionView
-          question={q}
-          index={current}
-          total={questions.length}
-          answer={answers.get(q.id) ?? { selectedOptionIds: [], fillBlankValue: '', startTime: Date.now() }}
-          onAnswer={(a) => updateAnswer(q.id, a)}
-        />
-      </div>
-
-      {/* Navigation */}
-      <div className="sticky bottom-0 border-t border-border bg-background/95 backdrop-blur px-6 py-3">
-        <div className="mx-auto flex max-w-2xl items-center justify-between">
-          <Button
-            variant="outline"
-            onClick={() => setCurrent((c) => c - 1)}
-            disabled={current === 0}
-          >
-            <ArrowLeft className="h-4 w-4" /> Trước
+        <div className="mx-auto max-w-2xl space-y-6">
+          <Button variant="ghost" size="sm" onClick={() => navigate(ROUTES.STUDENT_DASHBOARD)}>
+            <ArrowLeft className="mr-2 h-4 w-4" /> Quay lại
           </Button>
-
-          {/* Dots navigator */}
-          <div className="hidden sm:flex gap-1">
-            {questions.map((qq, i) => {
-              const a = answers.get(qq.id);
-              const answered = a && (a.selectedOptionIds.length > 0 || a.fillBlankValue.trim());
-              return (
-                <button
-                  key={qq.id}
-                  onClick={() => setCurrent(i)}
-                  className={`h-2.5 w-2.5 rounded-full transition-colors ${
-                    i === current
-                      ? 'bg-primary'
-                      : answered
-                        ? 'bg-primary/40'
-                        : 'bg-muted'
-                  }`}
-                />
-              );
-            })}
-          </div>
-
-          {current < questions.length - 1 ? (
-            <Button onClick={() => setCurrent((c) => c + 1)}>
-              Tiếp <ArrowRight className="h-4 w-4" />
-            </Button>
-          ) : (
-            <Button onClick={handleSubmit} disabled={submitMutation.isPending}>
-              {submitMutation.isPending ? 'Đang nộp...' : <><Send className="h-4 w-4" /> Nộp bài</>}
-            </Button>
-          )}
+          <Card>
+            <CardHeader className="text-center">
+              <Target className="mx-auto h-12 w-12 text-primary" />
+              <CardTitle className="mt-4">Bài kiểm tra đầu vào</CardTitle>
+              <p className="text-muted-foreground">
+                Hệ thống điều chỉnh độ khó theo câu trả lời của bạn để xác định trình độ và tạo lộ trình học phù hợp.
+              </p>
+            </CardHeader>
+            <CardContent className="flex justify-center">
+              <Button size="lg" onClick={handleStart} disabled={!classId}>
+                Bắt đầu kiểm tra
+              </Button>
+            </CardContent>
+          </Card>
         </div>
       </div>
-    </div>
-  );
+    );
+  }
+
+  if (state.type === 'loading') {
+    return (
+      <div className="flex min-h-screen items-center justify-center bg-background">
+        <Loader2 className="h-8 w-8 animate-spin text-primary" />
+      </div>
+    );
+  }
+
+  if (state.type === 'error') {
+    return (
+      <div className="mx-auto max-w-2xl space-y-4 p-6 text-center">
+        <p className="text-destructive">{state.message}</p>
+        <Button onClick={() => setState({ type: 'idle' })}>Thử lại</Button>
+      </div>
+    );
+  }
+
+  if (state.type === 'question') {
+    const { question, questionNumber, total } = state;
+    return (
+      <div className="min-h-screen bg-background p-6">
+        <div className="mx-auto max-w-2xl space-y-6">
+          <div className="flex items-center justify-between">
+            <Badge variant="secondary">Câu {questionNumber}/{total}</Badge>
+            <Badge variant="outline">{question.difficulty}</Badge>
+          </div>
+          <Progress value={(answeredCount / total) * 100} className="h-2" />
+          <Card>
+            <CardContent className="space-y-4 pt-6">
+              <p className="text-lg font-medium">{question.text}</p>
+              <div className="space-y-2">
+                {question.options.map((opt) => (
+                  <button
+                    key={opt.id}
+                    type="button"
+                    onClick={() => setSelectedOptions([opt.id])}
+                    className={`w-full rounded-lg border p-3 text-left transition-colors ${
+                      selectedOptions.includes(opt.id)
+                        ? 'border-primary bg-primary/10'
+                        : 'border-border hover:bg-accent'
+                    }`}
+                  >
+                    {opt.text}
+                  </button>
+                ))}
+              </div>
+              <Button
+                className="w-full"
+                disabled={selectedOptions.length === 0 || answerMutation.isPending}
+                onClick={handleSubmit}
+              >
+                {answerMutation.isPending ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
+                Xác nhận
+              </Button>
+            </CardContent>
+          </Card>
+        </div>
+      </div>
+    );
+  }
+
+  if (state.type === 'feedback') {
+    return (
+      <div className="min-h-screen bg-background p-6">
+        <div className="mx-auto max-w-2xl">
+          <Card>
+            <CardContent className="space-y-4 pt-6 text-center">
+              {state.isCorrect ? (
+                <CheckCircle className="mx-auto h-12 w-12 text-green-500" />
+              ) : (
+                <XCircle className="mx-auto h-12 w-12 text-destructive" />
+              )}
+              <p className="text-lg font-semibold">{state.isCorrect ? 'Chính xác!' : 'Chưa đúng'}</p>
+              <Button className="w-full" onClick={handleNext}>
+                {state.response.isComplete ? 'Xem kết quả' : 'Câu tiếp theo'}
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Button>
+            </CardContent>
+          </Card>
+        </div>
+      </div>
+    );
+  }
+
+  if (state.type === 'complete') {
+    const { result } = state;
+    return (
+      <div className="min-h-screen bg-background p-6">
+        <div className="mx-auto max-w-2xl space-y-6">
+          <Card>
+            <CardHeader className="text-center">
+              <Trophy className="mx-auto h-12 w-12 text-yellow-500" />
+              <CardTitle>Kết quả đánh giá</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-6">
+              <div className="text-center">
+                <Badge className="px-4 py-2 text-lg">{result.initialLevel}</Badge>
+                <p className="mt-2 text-muted-foreground">Điểm: {Math.round(result.finalScore)}%</p>
+              </div>
+              {result.strengths.length > 0 && (
+                <div>
+                  <h3 className="mb-2 flex items-center gap-2 font-medium text-green-600">
+                    <TrendingUp className="h-4 w-4" /> Điểm mạnh
+                  </h3>
+                  {result.strengths.map((s) => (
+                    <div key={s.topicId} className="flex justify-between rounded bg-green-50 px-3 py-2 dark:bg-green-950/20">
+                      <span className="text-sm">{s.topicName}</span>
+                      <span className="text-sm font-medium text-green-600">{Math.round(s.score * 100)}%</span>
+                    </div>
+                  ))}
+                </div>
+              )}
+              {result.weaknesses.length > 0 && (
+                <div>
+                  <h3 className="mb-2 flex items-center gap-2 font-medium text-orange-600">
+                    <TrendingDown className="h-4 w-4" /> Cần cải thiện
+                  </h3>
+                  {result.weaknesses.map((w) => (
+                    <div key={w.topicId} className="flex justify-between rounded bg-orange-50 px-3 py-2 dark:bg-orange-950/20">
+                      <span className="text-sm">{w.topicName}</span>
+                      <span className="text-sm font-medium text-orange-600">{Math.round(w.score * 100)}%</span>
+                    </div>
+                  ))}
+                </div>
+              )}
+              <Button
+                className="w-full"
+                onClick={() => navigate(ROUTES.STUDENT_ROADMAP.replace(':classId', classId))}
+              >
+                Xem lộ trình học
+              </Button>
+            </CardContent>
+          </Card>
+        </div>
+      </div>
+    );
+  }
+
+  return null;
 }

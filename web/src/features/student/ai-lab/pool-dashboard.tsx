@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import { poolService } from '@/services/pool.service';
 import { documentsService } from '@/services/documents.service';
 import { quizzesService } from '@/services/quizzes.service';
-import { apiClient } from '@/services/api';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -23,7 +22,7 @@ import {
 } from 'lucide-react';
 import { toast } from 'sonner';
 import { cn } from '@/lib/utils';
-import type { TopicPoolDto, PoolQuizDetailDto, ApiResponse, QuizDto } from '@/types';
+import type { TopicPoolDto, PoolQuizDetailDto } from '@/types';
 
 type GenerationDifficulty = 'easy' | 'medium' | 'hard';
 
@@ -111,11 +110,7 @@ export function StudentPoolDashboard() {
   // Endpoint: GET /api/pool/revision-sets
   const { data: revisionSets = [], isLoading: isLoadingRevision } = useQuery({
     queryKey: ['student-revision-sets'],
-    queryFn: async () => {
-      // API call: GET /pool/revision-sets
-      const res = await apiClient.get<ApiResponse<QuizDto[]>>('/pool/revision-sets');
-      return res.data.data!;
-    },
+    queryFn: poolService.getRevisionSets,
     enabled: activeTab === 'revision',
   });
 

@@ -31,8 +31,15 @@ public class AuthController(IAuthRepository repo) : ControllerBase
     public async Task<IActionResult> Register([FromBody] RegisterRequest request)
     {
         if (!ModelState.IsValid) return BadRequest(ApiResponse.Fail("Dữ liệu không hợp lệ", ModelState));
-        var result = await repo.RegisterAsync(request);
-        return Ok(ApiResponse<AuthTokensDto>.Ok(result, "Đăng ký thành công"));
+        try
+        {
+            var result = await repo.RegisterAsync(request);
+            return Ok(ApiResponse<AuthTokensDto>.Ok(result, "Đăng ký thành công"));
+        }
+        catch (InvalidOperationException ex)
+        {
+            return BadRequest(ApiResponse.Fail(ex.Message));
+        }
     }
 
     /// <summary>Làm mới Access Token bằng Refresh Token (token rotation)</summary>
@@ -54,6 +61,46 @@ public class AuthController(IAuthRepository repo) : ControllerBase
         var success = await repo.RevokeTokenAsync(request.RefreshToken);
         if (!success) return BadRequest(ApiResponse.Fail("Token không hợp lệ hoặc đã bị thu hồi"));
         return Ok(ApiResponse.Ok("Đăng xuất thành công"));
+    }
+
+    /// <summary>Upload ảnh đại diện</summary>
+    [HttpPost("me/avatar")]
+    [Authorize]
+    [RequestSizeLimit(2_000_000)]
+    public async Task<IActionResult> UploadAvatar(IFormFile file)
+    {
+        if (file == null || file.Length == 0)
+            return BadRequest(ApiResponse.Fail("File không hợp lệ"));
+
+        if (!file.ContentType.StartsWith("image/", StringComparison.OrdinalIgnoreCase))
+            return BadRequest(ApiResponse.Fail("Chỉ chấp nhận file ảnh"));
+
+        var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier)
+            ?? User.FindFirstValue("sub");
+        if (userIdClaim == null || !Guid.TryParse(userIdClaim, out var userId))
+            return Unauthorized(ApiResponse.Fail("Token không hợp lệ"));
+
+        await using var stream = file.OpenReadStream();
+        var user = await repo.UpdateAvatarAsync(userId, stream, file.ContentType);
+        if (user == null) return NotFound(ApiResponse.Fail("Không tìm thấy user"));
+        return Ok(ApiResponse<UserDto>.Ok(user, "Cập nhật ảnh đại diện thành công"));
+    }
+
+    /// <summary>Cập nhật tên hiển thị</summary>
+    [HttpPatch("me/name")]
+    [Authorize]
+    public async Task<IActionResult> UpdateName([FromBody] UpdateNameRequest request)
+    {
+        if (!ModelState.IsValid) return BadRequest(ApiResponse.Fail("Dữ liệu không hợp lệ", ModelState));
+
+        var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier)
+            ?? User.FindFirstValue("sub");
+        if (userIdClaim == null || !Guid.TryParse(userIdClaim, out var userId))
+            return Unauthorized(ApiResponse.Fail("Token không hợp lệ"));
+
+        var user = await repo.UpdateNameAsync(userId, request.Name);
+        if (user == null) return NotFound(ApiResponse.Fail("Không tìm thấy user"));
+        return Ok(ApiResponse<UserDto>.Ok(user, "Cập nhật tên thành công"));
     }
 
     /// <summary>Lấy thông tin user đang đăng nhập</summary>

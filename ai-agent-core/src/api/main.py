@@ -4,6 +4,7 @@
 # Exposes endpoints for RAG, adaptive tutoring, quiz generation, and grading.
 
 import os
+import re
 import sys
 import logging
 from contextlib import asynccontextmanager
@@ -26,10 +27,10 @@ from src.rag.ingest import RAGIngestor
 from src.rag.text_splitters import SemanticTextSplitter, SlidingWindowTextSplitter
 from src.rag.document_reader import DocumentReader
 from src.core.orchestrator import AgentOrchestrator
+from src.core.config import CHAT_MAX_HISTORY, RAG_SIMILARITY_THRESHOLD, RAG_TOP_K_DOCS
 from src.adapters.llm_manager import LLMManager, AI_UNAVAILABLE_MSG
 from src.adapters.prompt_templates import PromptTemplates
-from src.core.spaced_repetition import SpacedRepetitionEngine
-from src.core.entry_test import AdaptiveEntryTest, EntryTestState
+from src.api.session_store import get_or_create_agent as load_or_create_agent, update_agent
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -43,17 +44,8 @@ llm_quiz: Optional[LLMManager] = None
 llm_explain: Optional[LLMManager] = None
 ingestor: Optional[RAGIngestor] = None
 
-# In-memory agent sessions keyed by student_id
-agent_sessions: dict[str, AgentOrchestrator] = {}
-
-# In-memory entry test sessions
-entry_test_sessions: dict[str, EntryTestState] = {}
-
-
 def get_or_create_agent(student_id: str) -> AgentOrchestrator:
-    if student_id not in agent_sessions:
-        agent_sessions[student_id] = AgentOrchestrator(student_id)
-    return agent_sessions[student_id]
+    return load_or_create_agent(student_id, lambda: AgentOrchestrator(student_id))
 
 
 def _validate_runtime_config() -> None:
@@ -148,10 +140,18 @@ app = FastAPI(
     lifespan=lifespan,
 )
 
+def _parse_cors_origins() -> list[str]:
+    raw = os.getenv("CORS_ALLOWED_ORIGINS", "http://localhost:5173,http://localhost:3000,http://127.0.0.1:5173")
+    if raw.strip() == "*":
+        return ["*"]
+    return [origin.strip() for origin in raw.split(",") if origin.strip()]
+
+
+_cors_origins = _parse_cors_origins()
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=True,
+    allow_origins=_cors_origins,
+    allow_credentials="*" not in _cors_origins,
     allow_methods=["*"],
     allow_headers=["*"],
 )
@@ -329,6 +329,7 @@ async def update_student_state(request: UpdateStateRequest):
     result = agent.update_student_state(
         request.topic_name, request.difficulty, request.is_correct
     )
+    update_agent(request.student_id, agent)
     return result
 
 
@@ -625,15 +626,24 @@ class GenerateQuizBatchRequest(BaseModel):
     num_easy: int = 0
     num_medium: int = 0
     num_hard: int = 0
+    existing_questions: list[str] = []
 
 
 _DOC_CONTEXT_MAX_CHARS = 50_000
 
 
-def _load_quiz_context_from_rag(topic_name: str, document_id: str) -> str:
-    """Load document context from FAISS when the document was already ingested."""
+def _split_context_blob(context: str) -> list[str]:
+    """Split a joined context string into chunks for per-question rotation."""
+    if not context.strip():
+        return []
+    parts = [p.strip() for p in context.split("\n\n") if p.strip()]
+    return parts if parts else [context.strip()]
+
+
+def _load_quiz_context_from_rag(topic_name: str, document_id: str) -> list[str]:
+    """Load document context chunks from FAISS when the document was already ingested."""
     if not retriever:
-        return ""
+        return []
     try:
         context = retriever.get_context(
             topic_name,
@@ -641,16 +651,16 @@ def _load_quiz_context_from_rag(topic_name: str, document_id: str) -> str:
         )
         if context and "No specific textbook context available" not in context:
             logger.info("[QUIZ-BATCH] Loaded context from RAG for document_id=%s", document_id)
-            return context
+            return _split_context_blob(context)
     except Exception as e:
         logger.warning("[QUIZ-BATCH] RAG context lookup failed for document_id=%s: %s", document_id, e)
-    return ""
+    return []
 
 
-def _chunk_document_text(full_text: str, source_file: str, topic_name: str) -> str:
-    """Split document text and return top relevant chunks for quiz context."""
+def _rank_document_chunks(full_text: str, source_file: str, topic_name: str) -> list[str]:
+    """Split document text and return top relevant chunk texts for quiz context."""
     if not full_text.strip():
-        return ""
+        return []
 
     if len(full_text) > _DOC_CONTEXT_MAX_CHARS:
         full_text = full_text[:_DOC_CONTEXT_MAX_CHARS]
@@ -675,7 +685,7 @@ def _chunk_document_text(full_text: str, source_file: str, topic_name: str) -> s
         )
 
     if not doc_chunks:
-        return ""
+        return []
 
     if embed_model:
         try:
@@ -689,15 +699,15 @@ def _chunk_document_text(full_text: str, source_file: str, topic_name: str) -> s
             top_k = min(6, len(doc_chunks))
             top_indices = sorted(torch.topk(scores, top_k).indices.tolist())
             logger.info("[QUIZ-BATCH] Selected top-%d relevant chunks for topic '%s'", top_k, topic_name)
-            return "\n\n".join(doc_chunks[i]["text"] for i in top_indices)
+            return [doc_chunks[i]["text"] for i in top_indices]
         except Exception as e:
             logger.warning("[QUIZ-BATCH] Chunk ranking failed, using first 6 chunks: %s", e)
 
-    return "\n\n".join(c["text"] for c in doc_chunks[: min(6, len(doc_chunks))])
+    return [c["text"] for c in doc_chunks[: min(6, len(doc_chunks))]]
 
 
-def _load_quiz_context_from_doc_url(doc_url: str, topic_name: str) -> str:
-    """Download and parse a document URL. Returns empty string on failure (non-fatal)."""
+def _load_quiz_context_from_doc_url(doc_url: str, topic_name: str) -> list[str]:
+    """Download and parse a document URL. Returns empty list on failure (non-fatal)."""
     import requests as _requests
     import tempfile
 
@@ -707,7 +717,7 @@ def _load_quiz_context_from_doc_url(doc_url: str, topic_name: str) -> str:
         response.raise_for_status()
     except Exception as e:
         logger.warning("[QUIZ-BATCH] Document download failed (continuing without doc context): %s", e)
-        return ""
+        return []
 
     parsed_url = doc_url.split("?")[0]
     ext = os.path.splitext(parsed_url)[1].lower() or ".txt"
@@ -722,12 +732,12 @@ def _load_quiz_context_from_doc_url(doc_url: str, topic_name: str) -> str:
         full_text = reader.load_document(tmp_path)
         if not full_text.strip():
             logger.warning("[QUIZ-BATCH] Document parsed but contained no text")
-            return ""
+            return []
 
-        return _chunk_document_text(full_text, parsed_url, topic_name)
+        return _rank_document_chunks(full_text, parsed_url, topic_name)
     except Exception as e:
         logger.warning("[QUIZ-BATCH] Document parse/chunk failed (continuing without doc context): %s", e)
-        return ""
+        return []
     finally:
         if tmp_path:
             try:
@@ -750,21 +760,6 @@ class ChatHistoryMessage(BaseModel):
     content: str
 
 
-class SpacedRepetitionUpdateRequest(BaseModel):
-    quality: int  # 0-5
-    ease_factor: float = 2.5
-    interval: float = 1.0
-    repetitions: int = 0
-
-
-class EntryTestAnswerRequest(BaseModel):
-    session_id: str
-    question_id: str
-    is_correct: bool
-    difficulty: str = "medium"
-    topic_id: Optional[str] = None
-
-
 def _parse_is_correct(val) -> bool:
     """Robustly parse isCorrect field from LLM output.
     
@@ -778,6 +773,183 @@ def _parse_is_correct(val) -> bool:
     if isinstance(val, str):
         return val.strip().lower() in ("true", "1", "yes")
     return False
+
+
+_QUIZ_OPTION_LETTERS = ["A", "B", "C", "D"]
+_QUIZ_PROHIBITED_EXAMPLES = {
+    "thechildrenplayinginthegardenwhenitstartedtorain",
+    "sheisanexpertinthefieldofartificialintelligence",
+}
+
+
+def _normalize_answer_text(text: str) -> str:
+    return re.sub(r"\s+", " ", str(text).strip().lower())
+
+
+def _normalize_question_text(text: str) -> str:
+    return re.sub(r"[^a-zA-Z0-9]", "", text.strip().lower())
+
+
+def _is_exact_duplicate(question_text: str, seen: set[str]) -> bool:
+    return _normalize_question_text(question_text) in seen
+
+
+def _is_duplicate_question(question_text: str, seen: set[str]) -> bool:
+    return _is_exact_duplicate(question_text, seen)
+
+
+_QUIZ_AVOID_LIST_CAP = 40
+_QUIZ_AVOID_COMPLETED_RECENT = 20
+
+
+def _build_avoid_texts(completed: list[dict], rejected: list[str]) -> list[str]:
+    all_texts = [q["question"] for q in completed] + rejected
+    if len(all_texts) <= _QUIZ_AVOID_LIST_CAP:
+        return all_texts
+    recent_completed = [q["question"] for q in completed[-_QUIZ_AVOID_COMPLETED_RECENT:]]
+    merged = recent_completed + rejected
+    seen: set[str] = set()
+    result: list[str] = []
+    for text in merged:
+        if text not in seen:
+            seen.add(text)
+            result.append(text)
+    return result
+
+
+def _extract_forbidden_prefixes(avoid_texts: list[str]) -> list[str]:
+    prefixes: set[str] = set()
+    for text in avoid_texts:
+        lower = text.strip().lower()
+        for starter in ("the new ", "the company ", "the project ", "the law ", "the policy "):
+            if lower.startswith(starter):
+                prefixes.add(starter.strip() + "...")
+    return sorted(prefixes)
+
+
+def _build_retry_hint(attempt: int, avoid_texts: list[str]) -> str:
+    if attempt <= 1:
+        return ""
+    if attempt == 2:
+        return (
+            "\n\nRETRY: Use a DIFFERENT subject and verb pattern "
+            "than every avoid-list sentence."
+        )
+    if attempt == 3:
+        hint = "\n\nRETRY: Generate a COMPLETELY DIFFERENT sentence."
+        banned = _extract_forbidden_prefixes(avoid_texts)
+        if banned:
+            hint += f" Do NOT start with: {', '.join(banned)}"
+        return hint
+    if attempt == 4:
+        return (
+            "\n\nRETRY: Pick vocabulary from a DIFFERENT part of the FOCUS EXCERPT. "
+            "Test a different collocation or phrasal verb."
+        )
+    return (
+        "\n\nRETRY: Use a person/action scene (She/He/They...), "
+        "NOT laws/policies/companies."
+    )
+
+
+_QUIZ_EXISTING_QUESTIONS_CAP = 150
+
+
+def _seed_seen_from_existing(existing: list[str]) -> tuple[set[str], list[dict]]:
+    seen: set[str] = set()
+    placeholders: list[dict] = []
+    for text in existing[:_QUIZ_EXISTING_QUESTIONS_CAP]:
+        text = (text or "").strip()
+        if not text:
+            continue
+        norm = _normalize_question_text(text)
+        if norm and norm not in seen:
+            seen.add(norm)
+            placeholders.append({"question": text})
+    return seen, placeholders
+
+
+_QUIZ_RETRY_TEMPERATURES = [0.35, 0.45, 0.55, 0.60, 0.65]
+
+
+def _resolve_correct_letter(correct_answer: str, options_raw: dict) -> str | None:
+    """Map LLM correct_answer to A–D (letter or option text)."""
+    raw = str(correct_answer or "").strip()
+    if not raw:
+        return None
+
+    upper = raw.upper()
+    if upper in _QUIZ_OPTION_LETTERS:
+        return upper
+
+    letter_match = re.search(r"\b([A-D])\b", upper)
+    if letter_match and len(raw) <= 12:
+        return letter_match.group(1)
+
+    normalized_answer = _normalize_answer_text(raw)
+    matches = [
+        letter
+        for letter in _QUIZ_OPTION_LETTERS
+        if _normalize_answer_text(options_raw.get(letter, "")) == normalized_answer
+    ]
+    if len(matches) == 1:
+        return matches[0]
+    return None
+
+
+def _parse_single_question(raw: dict, difficulty_label: str) -> dict | None:
+    """Parse and validate a single QUIZ_TEMPLATE response into the standard format."""
+    question_text = raw.get("question", "").strip()
+    if not question_text:
+        return None
+
+    norm_text = _normalize_question_text(question_text)
+    if norm_text in _QUIZ_PROHIBITED_EXAMPLES:
+        logger.info("[QUIZ-BATCH] Skipped prohibited example question: %s", question_text)
+        return None
+
+    options_raw = raw.get("options", {})
+    correct_answer_raw = raw.get("correct_answer", "")
+    explanation = raw.get("explanation", "")
+
+    if isinstance(options_raw, dict) and len(options_raw) == 4:
+        correct_letter = _resolve_correct_letter(correct_answer_raw, options_raw)
+        if correct_letter is None:
+            logger.warning(
+                "[QUIZ-BATCH] Invalid correct_answer '%s' (options preview: %s), skipping",
+                correct_answer_raw,
+                str(options_raw)[:100],
+            )
+            return None
+        sanitized_options = [
+            {"text": str(options_raw.get(letter, "")), "isCorrect": (letter == correct_letter)}
+            for letter in _QUIZ_OPTION_LETTERS
+        ]
+    elif isinstance(options_raw, list) and len(options_raw) == 4:
+        sanitized_options = []
+        for opt in options_raw:
+            if not isinstance(opt, dict):
+                return None
+            sanitized_options.append({
+                "text": str(opt.get("text", "")),
+                "isCorrect": _parse_is_correct(opt.get("isCorrect", False)),
+            })
+    else:
+        logger.warning("[QUIZ-BATCH] Unexpected options format: %s", str(options_raw)[:100])
+        return None
+
+    correct_count = sum(1 for o in sanitized_options if o["isCorrect"])
+    if correct_count != 1:
+        logger.warning("[QUIZ-BATCH] Expected exactly 1 correct option, got %d — skipping", correct_count)
+        return None
+
+    return {
+        "question": question_text,
+        "type": "mcq",
+        "difficulty": difficulty_label,
+        "options": sanitized_options,
+        "explanation": explanation,
+    }
 
 
 # Difficulty → IRT Beta mapping for single-question QUIZ_TEMPLATE
@@ -794,15 +966,15 @@ async def generate_quiz_batch(request: GenerateQuizBatchRequest):
     if not _llm_available(llm_quiz):
         _raise_ai_unavailable()
 
-    # ── Step 1: Load document context (RAG first, then doc_url fallback) ─────
-    context = ""
+    # ── Step 1: Load document context chunks (RAG first, then doc_url fallback) ─
+    context_chunks: list[str] = []
     if request.document_id:
-        context = _load_quiz_context_from_rag(request.topic_name, request.document_id)
+        context_chunks = _load_quiz_context_from_rag(request.topic_name, request.document_id)
 
-    if not context and request.doc_url:
-        context = _load_quiz_context_from_doc_url(request.doc_url, request.topic_name)
+    if not context_chunks and request.doc_url:
+        context_chunks = _load_quiz_context_from_doc_url(request.doc_url, request.topic_name)
 
-    if not context and (request.document_id or request.doc_url):
+    if not context_chunks and (request.document_id or request.doc_url):
         logger.warning(
             "[QUIZ-BATCH] No document context available (document_id=%s) — generating from topic only",
             request.document_id,
@@ -834,16 +1006,22 @@ async def generate_quiz_batch(request: GenerateQuizBatchRequest):
     )
 
     # ── Step 3: Per-question generator ───────────────────────────────────────
-    import re
     import asyncio
 
-    seen_questions: set[str] = set()
-    PROHIBITED_EXAMPLES = {
-        "thechildrenplayinginthegardenwhenitstartedtorain",
-        "sheisanexpertinthefieldofartificialintelligence"
-    }
+    seen_questions, completed_questions = _seed_seen_from_existing(request.existing_questions)
+    if completed_questions:
+        logger.info(
+            "[QUIZ-BATCH] Seeded %d existing questions into avoid-list",
+            len(completed_questions),
+        )
+    rejected_duplicates_count = 0
 
-    def _generate_one_sync(difficulty_label: str, avoid_texts: list[str]) -> dict | None:
+    def _generate_one_sync(
+        difficulty_label: str,
+        avoid_texts: list[str],
+        attempt: int,
+        slot_index: int,
+    ) -> dict | None:
         """Synchronous single-question generation (called via asyncio.to_thread)."""
         beta = _DIFFICULTY_TO_BETA.get(difficulty_label, 0.0)
         avoid_block = ""
@@ -852,10 +1030,14 @@ async def generate_quiz_batch(request: GenerateQuizBatchRequest):
                 "\n\nDO NOT generate any of the following questions (already used):\n"
                 + "\n".join(f"- {t}" for t in avoid_texts)
             )
-        user_hint = (request.user_prompt or "") + avoid_block
-        
-        # Build context block
-        ctx = context if context else "No document context provided."
+        retry_suffix = _build_retry_hint(attempt, avoid_texts)
+        user_hint = (request.user_prompt or "") + avoid_block + retry_suffix
+
+        if context_chunks:
+            chunk = context_chunks[slot_index % len(context_chunks)]
+            ctx = f"FOCUS EXCERPT (generate question ONLY from this section):\n{chunk}"
+        else:
+            ctx = "No document context provided."
         if user_hint.strip():
             ctx += f"\n\nADDITIONAL INSTRUCTIONS:\n{user_hint}"
 
@@ -864,66 +1046,16 @@ async def generate_quiz_batch(request: GenerateQuizBatchRequest):
             difficulty=beta,
             context=ctx,
         )
-        result = llm_quiz.generate_json(prompt, max_tokens=1024)
+        temp_idx = min(attempt - 1, len(_QUIZ_RETRY_TEMPERATURES) - 1)
+        temperature = _QUIZ_RETRY_TEMPERATURES[temp_idx]
+        result = llm_quiz.generate_json(prompt, max_tokens=1024, temperature=temperature)
         if "error" in result:
-            logger.warning("[QUIZ-BATCH] LLM error for difficulty=%s: %s", difficulty_label, result.get("error"))
+            logger.warning(
+                "[QUIZ-BATCH] LLM error for difficulty=%s (attempt=%d, temp=%.2f): %s",
+                difficulty_label, attempt, temperature, result.get("error"),
+            )
             return None
         return result
-
-    def _parse_single_question(raw: dict, difficulty_label: str) -> dict | None:
-        """Parse and validate a single QUIZ_TEMPLATE response into the standard format."""
-        question_text = raw.get("question", "").strip()
-        if not question_text:
-            return None
-
-        # Filter out prohibited example questions
-        norm_text = re.sub(r'[^a-zA-Z0-9]', '', question_text.lower())
-        if norm_text in PROHIBITED_EXAMPLES:
-            logger.info("[QUIZ-BATCH] Skipped prohibited example question: %s", question_text)
-            return None
-
-        # QUIZ_TEMPLATE returns options as dict {"A": "...", "B": "...", ...}
-        # and correct_answer as "A", "B", "C", or "D"
-        options_raw = raw.get("options", {})
-        correct_letter = str(raw.get("correct_answer", "")).strip().upper()
-        explanation = raw.get("explanation", "")
-
-        if isinstance(options_raw, dict) and len(options_raw) == 4:
-            # Standard QUIZ_TEMPLATE format: {"A": text, "B": text, ...}
-            letter_order = ["A", "B", "C", "D"]
-            if correct_letter not in letter_order:
-                logger.warning("[QUIZ-BATCH] Invalid correct_answer letter '%s', skipping", correct_letter)
-                return None
-            sanitized_options = [
-                {"text": str(options_raw.get(letter, "")), "isCorrect": (letter == correct_letter)}
-                for letter in letter_order
-            ]
-        elif isinstance(options_raw, list) and len(options_raw) == 4:
-            # Fallback: LLM returned array format with isCorrect booleans
-            sanitized_options = []
-            for opt in options_raw:
-                if not isinstance(opt, dict):
-                    return None
-                sanitized_options.append({
-                    "text": str(opt.get("text", "")),
-                    "isCorrect": _parse_is_correct(opt.get("isCorrect", False))
-                })
-        else:
-            logger.warning("[QUIZ-BATCH] Unexpected options format: %s", str(options_raw)[:100])
-            return None
-
-        correct_count = sum(1 for o in sanitized_options if o["isCorrect"])
-        if correct_count != 1:
-            logger.warning("[QUIZ-BATCH] Expected exactly 1 correct option, got %d — skipping", correct_count)
-            return None
-
-        return {
-            "question": question_text,
-            "type": "mcq",
-            "difficulty": difficulty_label,
-            "options": sanitized_options,
-            "explanation": explanation,
-        }
 
     # ── Step 4: Generate all questions (semaphore-limited), with per-question retry ─
     final_questions: list[dict] = []
@@ -935,48 +1067,98 @@ async def generate_quiz_batch(request: GenerateQuizBatchRequest):
     MAX_CONCURRENT = 1
     semaphore = asyncio.Semaphore(MAX_CONCURRENT)
 
-    async def generate_one_with_retry(difficulty_label: str, max_retries: int = 3) -> dict | None:
+    async def generate_one_with_retry(
+        difficulty_label: str,
+        slot_index: int,
+        max_retries: int = 5,
+    ) -> dict | None:
+        nonlocal rejected_duplicates_count
+        rejected_questions: list[str] = []
+
         async with semaphore:
             for attempt in range(1, max_retries + 1):
-                avoid_texts = [q["question"] for q in final_questions]
-                raw = await asyncio.to_thread(_generate_one_sync, difficulty_label, avoid_texts)
+                avoid_texts = _build_avoid_texts(completed_questions, rejected_questions)
+                raw = await asyncio.to_thread(
+                    _generate_one_sync, difficulty_label, avoid_texts, attempt, slot_index
+                )
                 if raw is None:
-                    logger.warning("[QUIZ-BATCH] Attempt %d/%d: LLM call failed for difficulty=%s", attempt, max_retries, difficulty_label)
+                    logger.warning(
+                        "[QUIZ-BATCH] Attempt %d/%d: LLM call failed for difficulty=%s",
+                        attempt, max_retries, difficulty_label,
+                    )
                     continue
 
                 parsed = _parse_single_question(raw, difficulty_label)
                 if parsed is None:
-                    logger.warning("[QUIZ-BATCH] Attempt %d/%d: Parse/validation failed for difficulty=%s", attempt, max_retries, difficulty_label)
+                    logger.warning(
+                        "[QUIZ-BATCH] Attempt %d/%d: Parse/validation failed for difficulty=%s",
+                        attempt, max_retries, difficulty_label,
+                    )
                     continue
 
-                norm_q = re.sub(r'[^a-zA-Z0-9]', '', parsed["question"].lower())
-                if norm_q in seen_questions:
-                    logger.info("[QUIZ-BATCH] Attempt %d/%d: Duplicate question for difficulty=%s, retrying", attempt, max_retries, difficulty_label)
+                norm_q = _normalize_question_text(parsed["question"])
+                if _is_exact_duplicate(parsed["question"], seen_questions):
+                    rejected_questions.append(parsed["question"])
+                    rejected_duplicates_count += 1
+                    logger.info(
+                        "[QUIZ-BATCH] Attempt %d/%d: Duplicate (norm=%s..., rejected=\"%s\", seen_count=%d) for difficulty=%s",
+                        attempt,
+                        max_retries,
+                        norm_q[:40],
+                        parsed["question"][:80],
+                        len(seen_questions),
+                        difficulty_label,
+                    )
                     continue
 
                 seen_questions.add(norm_q)
-                logger.info("[QUIZ-BATCH] ✓ Generated %s question: \"%s\"", difficulty_label, parsed["question"][:60])
+                completed_questions.append(parsed)
+                logger.info(
+                    "[QUIZ-BATCH] ✓ Generated %s question: \"%s\"",
+                    difficulty_label,
+                    parsed["question"][:60],
+                )
                 return parsed
 
-            logger.error("[QUIZ-BATCH] Failed to generate valid %s question after %d attempts", difficulty_label, max_retries)
+            logger.error(
+                "[QUIZ-BATCH] Failed to generate valid %s question after %d attempts",
+                difficulty_label,
+                max_retries,
+            )
             return None
 
     logger.info("[QUIZ-BATCH] Launching %d question generation tasks (max_concurrent=%d)...", total_questions, MAX_CONCURRENT)
-    tasks = [generate_one_with_retry(diff) for diff in difficulty_list]
+    tasks = [
+        generate_one_with_retry(diff, slot_index)
+        for slot_index, diff in enumerate(difficulty_list)
+    ]
     results = await asyncio.gather(*tasks)
 
     for res in results:
         if res is not None:
             final_questions.append(res)
 
+    easy_count = sum(1 for q in final_questions if q["difficulty"] == "easy")
+    medium_count = sum(1 for q in final_questions if q["difficulty"] == "medium")
+    hard_count = sum(1 for q in final_questions if q["difficulty"] == "hard")
+
     logger.info(
         "[QUIZ-BATCH] Final batch generated: %d questions (Requested total: %d, Easy: %d/%d, Medium: %d/%d, Hard: %d/%d)",
         len(final_questions),
         total_questions,
-        sum(1 for q in final_questions if q["difficulty"] == "easy"), num_easy,
-        sum(1 for q in final_questions if q["difficulty"] == "medium"), num_medium,
-        sum(1 for q in final_questions if q["difficulty"] == "hard"), num_hard
+        easy_count, num_easy,
+        medium_count, num_medium,
+        hard_count, num_hard,
     )
+
+    if len(final_questions) < total_questions:
+        logger.warning(
+            "[QUIZ-BATCH] Shortfall: easy %d/%d, medium %d/%d, hard %d/%d — rejected_duplicates=%d",
+            easy_count, num_easy,
+            medium_count, num_medium,
+            hard_count, num_hard,
+            rejected_duplicates_count,
+        )
 
     if not final_questions:
         _raise_ai_unavailable()
@@ -1012,10 +1194,11 @@ async def chat(request: ChatRequest):
 
             hits = vector_db.search(
                 request.question,
-                k=5,
+                k=RAG_TOP_K_DOCS,
                 return_scores=True,
                 allowed_document_ids=request.allowed_document_ids,
-                allowed_scopes=request.allowed_scopes
+                allowed_scopes=request.allowed_scopes,
+                min_score=RAG_SIMILARITY_THRESHOLD,
             )
             context_parts = []
             for score, chunk in hits:
@@ -1034,7 +1217,7 @@ async def chat(request: ChatRequest):
     # Build conversation context from history
     conversation_context = ""
     if request.history:
-        recent = request.history[-5:]  # Last 5 messages
+        recent = request.history[-CHAT_MAX_HISTORY:]
         conversation_context = "\n".join(
             f"{msg.get('role', 'user').capitalize()}: {msg.get('content', '')}"
             for msg in recent
@@ -1072,79 +1255,6 @@ Hãy trả lời chính xác dựa trên tài liệu tham khảo. Nếu không t
         "answer": answer,
         "sources": sources[:3]  # Return top 3 sources
     }
-
-
-# ---------------------------------------------------------------------------
-# Spaced Repetition endpoints
-# ---------------------------------------------------------------------------
-@app.post("/spaced-repetition/update")
-async def update_spaced_repetition(request: SpacedRepetitionUpdateRequest):
-    """Update spaced repetition parameters after a review."""
-    result = SpacedRepetitionEngine.update_after_review(
-        quality=request.quality,
-        ease_factor=request.ease_factor,
-        interval=request.interval,
-        repetitions=request.repetitions
-    )
-    return result
-
-
-# ---------------------------------------------------------------------------
-# Entry Test endpoints
-# ---------------------------------------------------------------------------
-@app.post("/entry-test/start")
-async def start_entry_test():
-    """Start a new adaptive entry test session."""
-    import uuid
-    session_id = str(uuid.uuid4())
-    state = AdaptiveEntryTest.get_initial_state()
-    entry_test_sessions[session_id] = state
-    return {
-        "session_id": session_id,
-        "current_difficulty": state.current_difficulty,
-        "min_questions": AdaptiveEntryTest.MIN_QUESTIONS,
-        "max_questions": AdaptiveEntryTest.MAX_QUESTIONS
-    }
-
-
-@app.post("/entry-test/next-question")
-async def entry_test_next_question(request: EntryTestAnswerRequest):
-    """Record answer and get next question difficulty recommendation."""
-    if request.session_id not in entry_test_sessions:
-        raise HTTPException(404, "Session not found")
-
-    state = entry_test_sessions[request.session_id]
-
-    # Record the answer
-    state = AdaptiveEntryTest.record_answer(
-        state=state,
-        question_id=request.question_id,
-        is_correct=request.is_correct,
-        difficulty=request.difficulty,
-        topic_id=request.topic_id
-    )
-    entry_test_sessions[request.session_id] = state
-
-    # Check if test should end
-    should_end = AdaptiveEntryTest.should_end_test(state)
-
-    return {
-        "should_end": should_end,
-        "next_difficulty": state.current_difficulty,
-        "questions_answered": state.questions_answered,
-        "current_score": state.correct_count / state.questions_answered if state.questions_answered > 0 else 0
-    }
-
-
-@app.post("/entry-test/evaluate")
-async def evaluate_entry_test(session_id: str):
-    """Evaluate final entry test results."""
-    if session_id not in entry_test_sessions:
-        raise HTTPException(404, "Session not found")
-
-    state = entry_test_sessions.pop(session_id)
-    result = AdaptiveEntryTest.evaluate_result(state)
-    return result
 
 
 # ---------------------------------------------------------------------------

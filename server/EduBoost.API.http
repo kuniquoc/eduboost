@@ -1,6 +1,11 @@
 @EduBoost.API_HostAddress = http://localhost:5199
 
-GET {{EduBoost.API_HostAddress}}/weatherforecast/
+GET {{EduBoost.API_HostAddress}}/health
+Accept: application/json
+
+###
+
+GET {{EduBoost.API_HostAddress}}/swagger/v1/swagger.json
 Accept: application/json
 
 ###

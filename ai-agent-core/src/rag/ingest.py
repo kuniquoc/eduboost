@@ -73,7 +73,7 @@ class RAGIngestor:
             return
 
         print(f"Scanning directory: {directory_path}...")
-        supported = (".pdf", ".txt")
+        supported = (".pdf", ".txt", ".docx")
         for filename in sorted(os.listdir(directory_path)):
             file_path = os.path.join(directory_path, filename)
             if os.path.isfile(file_path) and os.path.splitext(filename)[1].lower() in supported:

@@ -8,6 +8,7 @@ public class User
     public string PasswordHash { get; set; } = "";
     public string Role { get; set; } = "student"; // "teacher" | "student" | "admin"
     public string? AvatarInitials { get; set; }
+    public string? AvatarUrl { get; set; }
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
     // Navigation

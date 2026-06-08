@@ -89,7 +89,16 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 
 // ── JWT Authentication ────────────────────────────────────────────────────────
 var jwtSecret = builder.Configuration["Jwt:Secret"]
-    ?? throw new InvalidOperationException("Jwt:Secret is not configured.");
+    ?? Environment.GetEnvironmentVariable("JWT_SECRET");
+if (string.IsNullOrWhiteSpace(jwtSecret))
+{
+    if (builder.Environment.IsDevelopment())
+        jwtSecret = "dev-only-secret-must-be-at-least-32-characters-long!";
+    else
+        throw new InvalidOperationException("Jwt:Secret or JWT_SECRET environment variable must be configured.");
+}
+if (jwtSecret.Contains("CHANGE_ME", StringComparison.OrdinalIgnoreCase) && !builder.Environment.IsDevelopment())
+    throw new InvalidOperationException("Jwt:Secret placeholder detected — set a strong secret via JWT_SECRET or appsettings.");
 var jwtIssuer = builder.Configuration["Jwt:Issuer"] ?? "EduBoost";
 var jwtAudience = builder.Configuration["Jwt:Audience"] ?? "EduBoost";
 
@@ -115,11 +124,21 @@ builder.Services.AddAuthorization();
 builder.Services.AddSingleton<IStorageService, MinioStorageService>();
 
 // ── CORS ──────────────────────────────────────────────────────────────────────
+var corsOrigins = builder.Configuration.GetSection("Cors:AllowedOrigins").Get<string[]>()
+    ?? (builder.Environment.IsDevelopment()
+        ? ["http://localhost:5173", "http://localhost:3000", "http://127.0.0.1:5173"]
+        : Array.Empty<string>());
+
 builder.Services.AddCors(options =>
 {
     options.AddDefaultPolicy(policy =>
     {
-        policy.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+        if (corsOrigins.Length > 0)
+            policy.WithOrigins(corsOrigins).AllowAnyMethod().AllowAnyHeader().AllowCredentials();
+        else if (builder.Environment.IsDevelopment())
+            policy.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+        else
+            throw new InvalidOperationException("Cors:AllowedOrigins must be configured in production.");
     });
 });
 
@@ -141,7 +160,25 @@ builder.Services.AddScoped<IAiChatRepository, AiChatRepository>();
 builder.Services.AddScoped<IAdminRepository, AdminRepository>();
 
 // ── DI — AI Agent Service ─────────────────────────────────────────────────────
-builder.Services.AddHttpClient<IAgentService, AgentService>();
+static void ConfigureAgentClient(IServiceProvider sp, HttpClient client, int timeoutSeconds)
+{
+    var config = sp.GetRequiredService<IConfiguration>();
+    var configuredBaseUrl = config["AIAgent:BaseUrl"];
+    if (string.IsNullOrWhiteSpace(configuredBaseUrl))
+        configuredBaseUrl = "http://host.docker.internal:8000";
+    else if (!configuredBaseUrl.StartsWith("http://", StringComparison.OrdinalIgnoreCase)
+          && !configuredBaseUrl.StartsWith("https://", StringComparison.OrdinalIgnoreCase))
+        configuredBaseUrl = $"http://{configuredBaseUrl}";
+
+    client.BaseAddress = new Uri(configuredBaseUrl);
+    client.Timeout = TimeSpan.FromSeconds(timeoutSeconds);
+}
+
+builder.Services.AddHttpClient<IAgentService, AgentService>((sp, client) =>
+    ConfigureAgentClient(sp, client, timeoutSeconds: 120));
+
+builder.Services.AddHttpClient("AgentQuizBatch", (sp, client) =>
+    ConfigureAgentClient(sp, client, timeoutSeconds: 600));
 
 // ─────────────────────────────────────────────────────────────────────────────
 var app = builder.Build();
@@ -158,7 +195,8 @@ using (var scope = app.Services.CreateScope())
         logger.LogInformation("Migrations applied successfully.");
 
         var storage = scope.ServiceProvider.GetRequiredService<IStorageService>();
-        // await DatabaseSeeder.SeedAsync(db, storage, logger);
+        if (app.Environment.IsDevelopment())
+            await DatabaseSeeder.SeedAsync(db, storage, logger);
     }
     catch (Exception ex)
     {

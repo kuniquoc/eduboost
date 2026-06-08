@@ -192,7 +192,8 @@ class VectorDB:
         k: int = 3, 
         return_scores: bool = True,
         allowed_document_ids: Optional[List[str]] = None,
-        allowed_scopes: Optional[List[str]] = None
+        allowed_scopes: Optional[List[str]] = None,
+        min_score: Optional[float] = None,
     ) -> Union[List[Tuple[float, Dict[str, Any]]], List[str]]:
         """
         Retrieve closest documents, applying duplicate filtering and permission filters.
@@ -261,6 +262,8 @@ class VectorDB:
             seen_chunks.add(chunk_id)
             
             score = float(scores[0][rank_idx])
+            if min_score is not None and score < min_score:
+                continue
             results.append((score, chunk))
             
             if len(results) == k:

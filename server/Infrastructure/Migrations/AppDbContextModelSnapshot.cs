@@ -305,6 +305,9 @@ namespace EduBoost.API.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
+                    b.Property<Guid?>("ClassId")
+                        .HasColumnType("uuid");
+
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
@@ -329,6 +332,61 @@ namespace EduBoost.API.Infrastructure.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("placement_test_results", (string)null);
+                });
+
+            modelBuilder.Entity("EduBoost.API.Infrastructure.Entities.PlacementTestSession", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid?>("ClassId")
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<DateTime>("ExpiresAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("StateJson")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId", "ClassId");
+
+                    b.ToTable("placement_test_sessions", (string)null);
+                });
+
+            modelBuilder.Entity("EduBoost.API.Infrastructure.Entities.PracticeActiveSession", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<DateTime>("ExpiresAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("StateJson")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("practice_active_sessions", (string)null);
                 });
 
             modelBuilder.Entity("EduBoost.API.Infrastructure.Entities.Question", b =>
@@ -615,6 +673,9 @@ namespace EduBoost.API.Infrastructure.Migrations
                     b.Property<string>("AvatarInitials")
                         .HasColumnType("text");
 
+                    b.Property<string>("AvatarUrl")
+                        .HasColumnType("text");
+
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
@@ -822,6 +883,28 @@ namespace EduBoost.API.Infrastructure.Migrations
                 {
                     b.HasOne("EduBoost.API.Infrastructure.Entities.User", "User")
                         .WithMany("PlacementTestResults")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("EduBoost.API.Infrastructure.Entities.PlacementTestSession", b =>
+                {
+                    b.HasOne("EduBoost.API.Infrastructure.Entities.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("EduBoost.API.Infrastructure.Entities.PracticeActiveSession", b =>
+                {
+                    b.HasOne("EduBoost.API.Infrastructure.Entities.User", "User")
+                        .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

@@ -23,13 +23,16 @@ export const practiceSessionService = {
     const res = await apiClient.post<ApiResponse<SubmitPracticeAnswerResponse>>('/practice-sessions/answer', {
       sessionId,
       questionId,
+      selectedOptionId: selectedOptionIds[0],
       selectedOptionIds,
     });
     return res.data.data!;
   },
 
-  getSummary: async (sessionId: string): Promise<PracticeSessionSummary> => {
-    const res = await apiClient.get<ApiResponse<PracticeSessionSummary>>(`/practice-sessions/${sessionId}/summary`);
+  endSession: async (sessionId: string): Promise<PracticeSessionSummary> => {
+    const res = await apiClient.post<ApiResponse<PracticeSessionSummary>>('/practice-sessions/end', {
+      sessionId,
+    });
     return res.data.data!;
   },
 };

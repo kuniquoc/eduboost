@@ -21,6 +21,20 @@ export const authService = {
     return res.data.data!;
   },
 
+  updateName: async (name: string): Promise<User> => {
+    const res = await apiClient.patch<ApiResponse<User>>('/auth/me/name', { name });
+    return res.data.data!;
+  },
+
+  uploadAvatar: async (file: File): Promise<User> => {
+    const form = new FormData();
+    form.append('file', file);
+    const res = await apiClient.post<ApiResponse<User>>('/auth/me/avatar', form, {
+      headers: { 'Content-Type': 'multipart/form-data' },
+    });
+    return res.data.data!;
+  },
+
   logout: async (): Promise<void> => {
     try {
       const refreshToken = tokenManager.getRefreshToken();
