@@ -11,8 +11,10 @@ import {
 import { Upload, Download, Trash2, Sparkles, FileText, Loader2 } from 'lucide-react';
 import { toast } from 'sonner';
 import type { DocumentDto } from '@/types';
+import { QuizGenerationDialog } from '@/components/shared/quiz-generation-dialog';
 
 const statusMap: Record<string, { label: string; variant: 'default' | 'secondary' | 'destructive' | 'outline' }> = {
+  pending: { label: 'Chờ tải lên', variant: 'outline' },
   uploading: { label: 'Đang tải', variant: 'outline' },
   processing: { label: 'Đang xử lý', variant: 'secondary' },
   ready: { label: 'Sẵn sàng', variant: 'default' },
@@ -32,6 +34,7 @@ export function DocumentsTab({ classId }: { classId: string }) {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [deleteDoc, setDeleteDoc] = useState<DocumentDto | null>(null);
   const [uploading, setUploading] = useState(false);
+  const [quizDoc, setQuizDoc] = useState<DocumentDto | null>(null);
 
   const { data: documents, isLoading } = useQuery({
     queryKey: ['class-documents', classId],
@@ -47,7 +50,7 @@ export function DocumentsTab({ classId }: { classId: string }) {
     try {
       const { uploadUrl, documentId } = await documentsService.requestClassUploadUrl(classId, {
         fileName: file.name,
-        contentType: file.type || 'application/octet-stream',
+        fileSize: file.size.toString(),
       });
       await documentsService.uploadFileToMinio(uploadUrl, file);
       await documentsService.confirmClassUpload(classId, documentId);
@@ -72,7 +75,8 @@ export function DocumentsTab({ classId }: { classId: string }) {
   });
 
   const generateQuizMutation = useMutation({
-    mutationFn: (docId: string) => documentsService.generateQuizFromDocument(classId, docId),
+    mutationFn: (data: { docId: string; options?: { topicId?: string; numQuestions?: number; difficulty?: string; mode?: string } }) =>
+      documentsService.generateQuizFromDocument(classId, data.docId, data.options),
     onSuccess: (data) => {
       invalidate();
       toast.success(`Đang tạo quiz (Job: ${data.jobId.slice(0, 8)}...)`);
@@ -138,18 +142,18 @@ export function DocumentsTab({ classId }: { classId: string }) {
                   </div>
                   <div className="flex items-center gap-2 shrink-0">
                     <Badge variant={status.variant}>{status.label}</Badge>
-                    {doc.status === 'ready' && !doc.generatedQuizId && (
+                    {(doc.status === 'ready' || doc.status === 'error') && (
                       <Button
                         variant="outline"
                         size="icon-sm"
-                        onClick={() => generateQuizMutation.mutate(doc.id)}
+                        onClick={() => setQuizDoc(doc)}
                         disabled={generateQuizMutation.isPending}
-                        title="Tạo quiz từ tài liệu"
+                        title={doc.status === 'error' ? 'Thử sinh lại quiz' : doc.generatedQuizId ? 'Sinh thêm hoặc tạo lại quiz' : 'Tạo quiz từ tài liệu'}
                       >
                         <Sparkles className="h-3.5 w-3.5" />
                       </Button>
                     )}
-                    {doc.generatedQuizId && (
+                    {doc.generatedQuizId && doc.status !== 'error' && (
                       <Link to={`/teacher/ai-studio/${doc.generatedQuizId}`}>
                         <Badge variant="outline" className="cursor-pointer hover:bg-primary/10">
                           <Sparkles className="h-3 w-3 mr-1" />Xem Quiz
@@ -169,6 +173,20 @@ export function DocumentsTab({ classId }: { classId: string }) {
           })}
         </div>
       )}
+
+      <QuizGenerationDialog
+        open={!!quizDoc}
+        onOpenChange={(open) => !open && setQuizDoc(null)}
+        doc={quizDoc}
+        onSubmit={(options) => {
+          if (quizDoc) {
+            generateQuizMutation.mutate({ docId: quizDoc.id, options });
+            setQuizDoc(null);
+          }
+        }}
+        isPending={generateQuizMutation.isPending}
+        classId={classId}
+      />
 
       {/* Delete confirm */}
       <Dialog open={!!deleteDoc} onOpenChange={() => setDeleteDoc(null)}>

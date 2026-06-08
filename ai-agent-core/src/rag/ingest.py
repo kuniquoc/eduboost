@@ -43,9 +43,28 @@ class RAGIngestor:
         chunks = self.text_splitter.split_text(full_text, source_file=file_path)
         print(f"Split {os.path.basename(file_path)} into {len(chunks)} semantic chunks.")
 
+        # Ensure default scope is 'system'
+        for chunk in chunks:
+            if "metadata" not in chunk:
+                chunk["metadata"] = {}
+            chunk["metadata"]["scope"] = "system"
+
         # Store in VectorDB
         self.db.add_documents(chunks)
         print(f"Successfully ingested {file_path}.")
+
+    def ingest_text_with_metadata(self, text: str, source_file: str, metadata: dict) -> int:
+        """Split text and ingest into VectorDB with custom metadata fields."""
+        chunks = self.text_splitter.split_text(text, source_file=source_file)
+        
+        # Merge custom metadata fields into each chunk's metadata
+        for chunk in chunks:
+            if "metadata" not in chunk:
+                chunk["metadata"] = {}
+            chunk["metadata"].update(metadata)
+            
+        self.db.add_documents(chunks)
+        return len(chunks)
 
     def process_directory(self, directory_path: str) -> None:
         """Scan a directory and ingest all supported files."""

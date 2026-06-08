@@ -3,7 +3,7 @@ import type { ApiResponse, DocumentDto, UploadUrlDto, DownloadUrlDto, GenerateQu
 
 interface RequestUploadUrlPayload {
   fileName: string;
-  contentType: string;
+  fileSize: string;
   topicId?: string;
 }
 
@@ -33,8 +33,8 @@ export const documentsService = {
     await apiClient.delete(`/classes/${classId}/documents/${documentId}`);
   },
 
-  generateQuizFromDocument: async (classId: string, documentId: string, topicId?: string): Promise<GenerateQuizJobDto> => {
-    const res = await apiClient.post<ApiResponse<GenerateQuizJobDto>>(`/classes/${classId}/documents/${documentId}/generate-quiz`, { topicId });
+  generateQuizFromDocument: async (classId: string, documentId: string, options?: { topicId?: string; numQuestions?: number; difficulty?: string; mode?: string; numEasyQuestions?: number; numMediumQuestions?: number; numHardQuestions?: number }): Promise<GenerateQuizJobDto> => {
+    const res = await apiClient.post<ApiResponse<GenerateQuizJobDto>>(`/classes/${classId}/documents/${documentId}/generate-quiz`, options || {});
     return res.data.data!;
   },
 
@@ -59,8 +59,8 @@ export const documentsService = {
     return res.data.data!;
   },
 
-  generateMyQuiz: async (documentId: string): Promise<GenerateQuizJobDto> => {
-    const res = await apiClient.post<ApiResponse<GenerateQuizJobDto>>(`/documents/my/${documentId}/generate-quiz`);
+  generateMyQuiz: async (documentId: string, options?: { numQuestions?: number; difficulty?: string; mode?: string; numEasyQuestions?: number; numMediumQuestions?: number; numHardQuestions?: number }): Promise<GenerateQuizJobDto> => {
+    const res = await apiClient.post<ApiResponse<GenerateQuizJobDto>>(`/documents/my/${documentId}/generate-quiz`, options || {});
     return res.data.data!;
   },
 

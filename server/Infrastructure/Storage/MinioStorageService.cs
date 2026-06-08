@@ -6,6 +6,7 @@ namespace EduBoost.API.Infrastructure.Storage;
 public class MinioStorageService : IStorageService
 {
     private readonly IMinioClient _minio;
+    private readonly IMinioClient _presignClient;
     private readonly ILogger<MinioStorageService> _logger;
 
     public static class Buckets
@@ -28,6 +29,28 @@ public class MinioStorageService : IStorageService
             .WithCredentials(accessKey, secretKey)
             .WithSSL(useSSL)
             .Build();
+
+        var publicEndpoint = config["MinIO:PublicEndpoint"];
+        var publicUseSSL = bool.TryParse(config["MinIO:PublicUseSSL"], out var pssl) ? pssl : useSSL;
+
+        if (!string.IsNullOrWhiteSpace(publicEndpoint))
+        {
+            _presignClient = new MinioClient()
+                .WithEndpoint(publicEndpoint)
+                .WithCredentials(accessKey, secretKey)
+                .WithSSL(publicUseSSL)
+                .Build();
+
+            _logger.LogInformation(
+                "MinIO presign endpoint configured: internal={InternalEndpoint}, public={PublicEndpoint}",
+                endpoint,
+                publicEndpoint
+            );
+        }
+        else
+        {
+            _presignClient = _minio;
+        }
     }
 
     public async Task<string> GetPresignedUploadUrlAsync(
@@ -40,7 +63,7 @@ public class MinioStorageService : IStorageService
             .WithObject(objectKey)
             .WithExpiry(expirySeconds);
 
-        var url = await _minio.PresignedPutObjectAsync(args);
+        var url = await _presignClient.PresignedPutObjectAsync(args);
         _logger.LogDebug("Generated upload presigned URL for {Bucket}/{Key}", bucket, objectKey);
         return url;
     }
@@ -53,7 +76,7 @@ public class MinioStorageService : IStorageService
             .WithObject(objectKey)
             .WithExpiry(expirySeconds);
 
-        var url = await _minio.PresignedGetObjectAsync(args);
+        var url = await _presignClient.PresignedGetObjectAsync(args);
         _logger.LogDebug("Generated download presigned URL for {Bucket}/{Key}", bucket, objectKey);
         return url;
     }

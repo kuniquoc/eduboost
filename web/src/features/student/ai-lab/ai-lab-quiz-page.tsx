@@ -11,7 +11,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import {
   Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter,
 } from '@/components/ui/dialog';
-import { ArrowLeft, Pencil } from 'lucide-react';
+import { ArrowLeft, Pencil, Trash2 } from 'lucide-react';
 import { toast } from 'sonner';
 import type { QuestionDto, UpdateQuestionPayload } from '@/types';
 
@@ -30,6 +30,8 @@ export function AILabQuizPage() {
   const [editText, setEditText] = useState('');
   const [editExplanation, setEditExplanation] = useState('');
   const [editOptions, setEditOptions] = useState<Array<{ id?: string; text: string; isCorrect: boolean }>>([]);
+  const [editCorrectAnswer, setEditCorrectAnswer] = useState('');
+  const [deleteQ, setDeleteQ] = useState<QuestionDto | null>(null);
 
   const { data: questions, isLoading } = useQuery({
     queryKey: ['my-quiz-questions', quizId],
@@ -50,11 +52,22 @@ export function AILabQuizPage() {
     onError: () => toast.error('Cập nhật thất bại'),
   });
 
+  const deleteMutation = useMutation({
+    mutationFn: (qId: string) => quizzesService.deleteQuestion(quizId!, qId),
+    onSuccess: () => {
+      invalidate();
+      toast.success('Đã xóa câu hỏi');
+      setDeleteQ(null);
+    },
+    onError: () => toast.error('Xóa thất bại'),
+  });
+
   const openEdit = (q: QuestionDto) => {
     setEditQ(q);
     setEditText(q.text);
     setEditExplanation(q.explanation ?? '');
     setEditOptions(q.options.map((o) => ({ id: o.id, text: o.text, isCorrect: o.isCorrect })));
+    setEditCorrectAnswer(q.correctAnswer ?? '');
   };
 
   if (isLoading) {
@@ -98,22 +111,44 @@ export function AILabQuizPage() {
                     <Button variant="ghost" size="icon-sm" onClick={() => openEdit(q)}>
                       <Pencil className="h-3.5 w-3.5" />
                     </Button>
+                    <Button variant="ghost" size="icon-sm" onClick={() => setDeleteQ(q)}>
+                      <Trash2 className="h-3.5 w-3.5 text-destructive" />
+                    </Button>
                   </div>
                 </div>
-                <div className="ml-9 space-y-1">
-                  {q.options.map((opt) => (
-                    <div
-                      key={opt.id}
-                      className={`rounded px-2 py-1 text-xs ${
-                        opt.isCorrect
-                          ? 'bg-green-500/10 text-green-400 font-medium'
-                          : 'text-muted-foreground'
-                      }`}
-                    >
-                      {opt.isCorrect ? '✓' : '○'} {opt.text}
+                {q.type === 'fill_blank' ? (
+                  <div className="ml-9 mt-3 max-w-md">
+                    <div className="flex items-center gap-2.5 rounded-lg border border-emerald-500 bg-emerald-50 dark:bg-emerald-950/40 p-2.5 text-xs text-emerald-800 dark:text-emerald-300 font-semibold shadow-sm ring-1 ring-emerald-500/20">
+                      <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-emerald-600 text-white text-[10px] font-bold">✓</span>
+                      <div className="flex-1 text-left">
+                        <span className="font-normal text-muted-foreground dark:text-muted-foreground/80 mr-1.5">Đáp án đúng:</span>
+                        <span>{q.correctAnswer}</span>
+                      </div>
                     </div>
-                  ))}
-                </div>
+                  </div>
+                ) : (
+                  <div className="ml-9 mt-3 grid grid-cols-1 sm:grid-cols-2 gap-2">
+                    {q.options.map((opt) => (
+                      <div
+                        key={opt.id}
+                        className={`flex items-center gap-2.5 rounded-lg border p-2.5 text-xs transition-all shadow-sm ${
+                          opt.isCorrect
+                            ? 'bg-emerald-50 dark:bg-emerald-950/40 border-emerald-500 text-emerald-800 dark:text-emerald-300 font-semibold ring-1 ring-emerald-500/20'
+                            : 'bg-muted/30 border-border/60 text-muted-foreground'
+                        }`}
+                      >
+                        <span className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-full text-[10px] font-bold ${
+                          opt.isCorrect
+                            ? 'bg-emerald-600 text-white'
+                            : 'bg-muted border border-border text-muted-foreground'
+                        }`}>
+                          {opt.isCorrect ? '✓' : '○'}
+                        </span>
+                        <span className="flex-1 font-medium text-left">{opt.text}</span>
+                      </div>
+                    ))}
+                  </div>
+                )}
                 {q.explanation && (
                   <p className="ml-9 mt-2 text-xs text-muted-foreground italic">💡 {q.explanation}</p>
                 )}
@@ -139,43 +174,94 @@ export function AILabQuizPage() {
               <Label>Giải thích</Label>
               <Textarea value={editExplanation} onChange={(e) => setEditExplanation(e.target.value)} rows={2} />
             </div>
-            <div className="space-y-2">
-              <Label>Đáp án</Label>
-              {editOptions.map((opt, i) => (
-                <div key={i} className="flex items-center gap-2">
-                  <input
-                    type="checkbox"
-                    checked={opt.isCorrect}
-                    onChange={(e) => {
-                      const updated = [...editOptions];
-                      updated[i] = { ...opt, isCorrect: e.target.checked };
-                      setEditOptions(updated);
-                    }}
-                    className="accent-primary"
-                  />
-                  <Input
-                    value={opt.text}
-                    onChange={(e) => {
-                      const updated = [...editOptions];
-                      updated[i] = { ...opt, text: e.target.value };
-                      setEditOptions(updated);
-                    }}
-                    className="flex-1"
-                  />
-                </div>
-              ))}
-            </div>
+            {editQ?.type === 'fill_blank' ? (
+              <div className="space-y-2">
+                <Label>Đáp án đúng</Label>
+                <Input
+                  value={editCorrectAnswer}
+                  onChange={(e) => setEditCorrectAnswer(e.target.value)}
+                  placeholder="Nhập đáp án đúng..."
+                />
+              </div>
+            ) : (
+              <div className="space-y-2.5">
+                <Label className="text-sm font-semibold">Đáp án (Chọn checkbox bên cạnh đáp án đúng)</Label>
+                {editOptions.map((opt, i) => (
+                  <div 
+                    key={i} 
+                    className={`flex items-center gap-3 rounded-lg border p-2 transition-all ${
+                      opt.isCorrect 
+                        ? 'bg-emerald-500/5 border-emerald-500/40 dark:bg-emerald-500/10' 
+                        : 'border-border bg-card'
+                    }`}
+                  >
+                    <input
+                      type="checkbox"
+                      checked={opt.isCorrect}
+                      onChange={(e) => {
+                        const updated = [...editOptions];
+                        updated[i] = { ...opt, isCorrect: e.target.checked };
+                        setEditOptions(updated);
+                      }}
+                      className="h-4 w-4 rounded border-gray-300 text-emerald-600 focus:ring-emerald-500 accent-emerald-600 cursor-pointer"
+                    />
+                    <Input
+                      value={opt.text}
+                      onChange={(e) => {
+                        const updated = [...editOptions];
+                        updated[i] = { ...opt, text: e.target.value };
+                        setEditOptions(updated);
+                      }}
+                      className="flex-1 bg-transparent border-none focus-visible:ring-0 focus-visible:ring-offset-0 p-0 text-sm h-8"
+                      placeholder={`Đáp án ${String.fromCharCode(65 + i)}`}
+                    />
+                    {opt.isCorrect && (
+                      <span className="text-[10px] font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-500/10 dark:bg-emerald-500/20 px-2 py-0.5 rounded-full select-none shrink-0">
+                        Đúng
+                      </span>
+                    )}
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
           <DialogFooter>
             <Button variant="outline" onClick={() => setEditQ(null)}>Hủy</Button>
             <Button
               onClick={() => editQ && updateMutation.mutate({
                 qId: editQ.id,
-                data: { text: editText, explanation: editExplanation, options: editOptions },
+                data: {
+                  text: editText,
+                  explanation: editExplanation,
+                  options: editQ.type === 'fill_blank' ? [] : editOptions,
+                  correctAnswer: editQ.type === 'fill_blank' ? editCorrectAnswer : undefined
+                },
               })}
               disabled={updateMutation.isPending}
             >
               {updateMutation.isPending ? 'Đang lưu...' : 'Lưu'}
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      {/* Delete confirm dialog */}
+      <Dialog open={!!deleteQ} onOpenChange={() => setDeleteQ(null)}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Xóa câu hỏi</DialogTitle>
+            <DialogDescription>
+              Bạn có chắc muốn xóa câu hỏi này? Hành động này không thể hoàn tác.
+            </DialogDescription>
+          </DialogHeader>
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setDeleteQ(null)}>Hủy</Button>
+            <Button
+              variant="destructive"
+              onClick={() => deleteQ && deleteMutation.mutate(deleteQ.id)}
+              disabled={deleteMutation.isPending}
+            >
+              {deleteMutation.isPending ? 'Đang xóa...' : 'Xóa'}
             </Button>
           </DialogFooter>
         </DialogContent>

@@ -216,17 +216,24 @@ export function QuizReviewPage() {
                 </div>
 
                 {/* Options */}
-                <div className="ml-9 mb-3 space-y-1">
+                <div className="ml-9 mt-3 mb-4 grid grid-cols-1 sm:grid-cols-2 gap-2">
                   {q.options.map((opt) => (
                     <div
                       key={opt.id}
-                      className={`rounded px-2 py-1 text-xs ${
+                      className={`flex items-center gap-2.5 rounded-lg border p-2.5 text-xs transition-all shadow-sm ${
                         opt.isCorrect
-                          ? 'bg-green-500/10 text-green-400 font-medium'
-                          : 'text-muted-foreground'
+                          ? 'bg-emerald-50 dark:bg-emerald-950/40 border-emerald-500 text-emerald-800 dark:text-emerald-300 font-semibold ring-1 ring-emerald-500/20'
+                          : 'bg-muted/30 border-border/60 text-muted-foreground'
                       }`}
                     >
-                      {opt.isCorrect ? '✓' : '○'} {opt.text}
+                      <span className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-full text-[10px] font-bold ${
+                        opt.isCorrect
+                          ? 'bg-emerald-600 text-white'
+                          : 'bg-muted border border-border text-muted-foreground'
+                      }`}>
+                        {opt.isCorrect ? '✓' : '○'}
+                      </span>
+                      <span className="flex-1 font-medium text-left">{opt.text}</span>
                     </div>
                   ))}
                 </div>
@@ -274,10 +281,17 @@ export function QuizReviewPage() {
               <Label>Giải thích</Label>
               <Textarea value={editExplanation} onChange={(e) => setEditExplanation(e.target.value)} rows={2} />
             </div>
-            <div className="space-y-2">
-              <Label>Đáp án</Label>
+            <div className="space-y-2.5">
+              <Label className="text-sm font-semibold">Đáp án (Chọn checkbox bên cạnh đáp án đúng)</Label>
               {editOptions.map((opt, i) => (
-                <div key={i} className="flex items-center gap-2">
+                <div 
+                  key={i} 
+                  className={`flex items-center gap-3 rounded-lg border p-2 transition-all ${
+                    opt.isCorrect 
+                      ? 'bg-emerald-500/5 border-emerald-500/40 dark:bg-emerald-500/10' 
+                      : 'border-border bg-card'
+                  }`}
+                >
                   <input
                     type="checkbox"
                     checked={opt.isCorrect}
@@ -286,7 +300,7 @@ export function QuizReviewPage() {
                       updated[i] = { ...opt, isCorrect: e.target.checked };
                       setEditOptions(updated);
                     }}
-                    className="accent-primary"
+                    className="h-4 w-4 rounded border-gray-300 text-emerald-600 focus:ring-emerald-500 accent-emerald-600 cursor-pointer"
                   />
                   <Input
                     value={opt.text}
@@ -295,8 +309,14 @@ export function QuizReviewPage() {
                       updated[i] = { ...opt, text: e.target.value };
                       setEditOptions(updated);
                     }}
-                    className="flex-1"
+                    className="flex-1 bg-transparent border-none focus-visible:ring-0 focus-visible:ring-offset-0 p-0 text-sm h-8"
+                    placeholder={`Đáp án ${String.fromCharCode(65 + i)}`}
                   />
+                  {opt.isCorrect && (
+                    <span className="text-[10px] font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-500/10 dark:bg-emerald-500/20 px-2 py-0.5 rounded-full select-none shrink-0">
+                      Đúng
+                    </span>
+                  )}
                 </div>
               ))}
             </div>

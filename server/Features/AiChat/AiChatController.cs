@@ -29,4 +29,12 @@ public class AiChatController(IAiChatRepository repo) : ControllerBase
         var history = await repo.GetHistoryAsync(UserId, topicId, page, pageSize);
         return Ok(ApiResponse<ChatHistoryDto>.Ok(history));
     }
+
+    /// <summary>Xóa toàn bộ lịch sử hội thoại</summary>
+    [HttpDelete("history")]
+    public async Task<IActionResult> ClearHistory()
+    {
+        await repo.ClearHistoryAsync(UserId);
+        return Ok(ApiResponse.Ok("Đã xóa lịch sử trò chuyện"));
+    }
 }

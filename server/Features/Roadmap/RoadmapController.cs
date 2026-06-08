@@ -36,7 +36,7 @@ public class RoadmapController(IRoadmapRepository repo) : ControllerBase
     [HttpPatch("{classId:guid}/steps/{stepId}")]
     public async Task<IActionResult> UpdateStep(Guid classId, string stepId, [FromBody] UpdateStepRequest request)
     {
-        var step = await repo.UpdateStepAsync(classId, stepId, request);
+        var step = await repo.UpdateStepAsync(classId, UserId, stepId, request);
         if (step == null) return NotFound(ApiResponse.Fail("Không tìm thấy bước trong lộ trình"));
         return Ok(ApiResponse<RoadmapStepDto>.Ok(step, "Cập nhật tiến độ thành công"));
     }

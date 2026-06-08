@@ -41,6 +41,12 @@ public class ConfirmUploadRequest
 public class GenerateQuizRequest
 {
     public string? TopicId { get; set; }
+    public int NumQuestions { get; set; } = 10;
+    public string Difficulty { get; set; } = "medium";
+    public string Mode { get; set; } = "create"; // "create" | "append" | "retry"
+    public int? NumEasyQuestions { get; set; }
+    public int? NumMediumQuestions { get; set; }
+    public int? NumHardQuestions { get; set; }
 }
 
 public class GenerateQuizJobDto

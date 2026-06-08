@@ -173,6 +173,7 @@ export interface UpdateQuestionPayload {
   difficulty?: 'easy' | 'medium' | 'hard';
   explanation?: string;
   options?: Array<{ id?: string; text: string; isCorrect: boolean }>;
+  correctAnswer?: string;
 }
 
 // ─── Manual Quiz Creation ─────────────────────────────────
@@ -452,6 +453,7 @@ export interface SubmitPracticeAnswerResponse {
   nextQuestion?: PracticeQuestionDto;
   questionNumber: number;
   isSessionComplete: boolean;
+  totalQuestions?: number;
 }
 
 export interface PracticeSessionSummary {

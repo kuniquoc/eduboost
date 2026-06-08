@@ -6,16 +6,22 @@ class KnowledgeRetriever:
     def __init__(self, vector_db: VectorDB):
         self.db = vector_db
 
-    def get_context(self, topic, query=None):
+    def get_context(self, topic, query=None, allowed_document_ids=None, allowed_scopes=None):
         """
-        Truy xuất kiến thức. 
+        Truy xuất kiến thức với cơ chế phân quyền (allowed_document_ids, allowed_scopes).
         Nếu có query (câu hỏi học sinh), dùng query để tìm. 
         Nếu không, dùng topic để tìm kiến thức tổng quát.
         """
         search_query = query if query else topic
         
         # Lấy top 3 đoạn văn bản liên quan nhất (legacy string list)
-        docs = self.db.search(search_query, k=3, return_scores=False)
+        docs = self.db.search(
+            search_query, 
+            k=3, 
+            return_scores=False,
+            allowed_document_ids=allowed_document_ids,
+            allowed_scopes=allowed_scopes
+        )
         
         if not docs:
             return "No specific textbook context available for this topic."

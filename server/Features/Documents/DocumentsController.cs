@@ -69,7 +69,15 @@ public class DocumentsController(IDocumentsRepository repo) : ControllerBase
     [HttpPost("api/classes/{classId:guid}/documents/{id:guid}/generate-quiz")]
     public async Task<IActionResult> GenerateQuizFromDocument(Guid classId, Guid id, [FromBody] GenerateQuizRequest request)
     {
-        var job = await repo.GenerateQuizFromDocumentAsync(classId, id, request.TopicId);
+        var job = await repo.GenerateQuizFromDocumentAsync(classId, id, request);
+        if (job.Status == "error")
+        {
+            if ((job.Message ?? string.Empty).Contains("Không tìm thấy", StringComparison.OrdinalIgnoreCase))
+                return NotFound(ApiResponse.Fail(job.Message ?? "Không tìm thấy tài liệu"));
+
+            return StatusCode(502, ApiResponse.Fail(job.Message ?? "Không thể tạo quiz từ tài liệu"));
+        }
+
         return Ok(ApiResponse<GenerateQuizJobDto>.Ok(job, "Đã bắt đầu tạo quiz. AI đang xử lý..."));
     }
 
@@ -113,9 +121,17 @@ public class DocumentsController(IDocumentsRepository repo) : ControllerBase
 
     /// <summary>Student: AI tạo quiz từ tài liệu riêng</summary>
     [HttpPost("api/documents/my/{id:guid}/generate-quiz")]
-    public async Task<IActionResult> GenerateMyQuiz(Guid id)
+    public async Task<IActionResult> GenerateMyQuiz(Guid id, [FromBody] GenerateQuizRequest request)
     {
-        var job = await repo.GenerateMyQuizAsync(id);
+        var job = await repo.GenerateMyQuizAsync(UserId, id, request);
+        if (job.Status == "error")
+        {
+            if ((job.Message ?? string.Empty).Contains("Không tìm thấy", StringComparison.OrdinalIgnoreCase))
+                return NotFound(ApiResponse.Fail(job.Message ?? "Không tìm thấy tài liệu"));
+
+            return StatusCode(502, ApiResponse.Fail(job.Message ?? "Không thể tạo quiz cá nhân"));
+        }
+
         return Ok(ApiResponse<GenerateQuizJobDto>.Ok(job, "AI đang tạo quiz riêng cho bạn..."));
     }
 

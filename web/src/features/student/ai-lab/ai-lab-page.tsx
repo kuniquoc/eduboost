@@ -12,9 +12,11 @@ import {
 import { Upload, Trash2, Sparkles, FileText, Download, Loader2, BookOpen, PenLine } from 'lucide-react';
 import { toast } from 'sonner';
 import { QuizBuilderDialog } from '@/components/shared/quiz-builder-dialog';
+import { QuizGenerationDialog } from '@/components/shared/quiz-generation-dialog';
 import type { DocumentDto, CreateQuestionPayload } from '@/types';
 
 const statusMap: Record<string, { label: string; variant: 'default' | 'secondary' | 'destructive' | 'outline' }> = {
+  pending: { label: 'Chờ tải lên', variant: 'outline' },
   uploading: { label: 'Đang tải', variant: 'outline' },
   processing: { label: 'Đang xử lý', variant: 'secondary' },
   ready: { label: 'Sẵn sàng', variant: 'default' },
@@ -35,6 +37,7 @@ export function AILabPage() {
   const [uploading, setUploading] = useState(false);
   const [deleteDoc, setDeleteDoc] = useState<DocumentDto | null>(null);
   const [quizBuilderOpen, setQuizBuilderOpen] = useState(false);
+  const [quizDoc, setQuizDoc] = useState<DocumentDto | null>(null);
 
   const { data: documents, isLoading } = useQuery({
     queryKey: ['my-documents'],
@@ -50,7 +53,7 @@ export function AILabPage() {
     try {
       const { uploadUrl, documentId } = await documentsService.requestStudentUploadUrl({
         fileName: file.name,
-        contentType: file.type || 'application/octet-stream',
+        fileSize: file.size.toString(),
       });
       await documentsService.uploadFileToMinio(uploadUrl, file);
       await documentsService.confirmStudentUpload(documentId);
@@ -75,7 +78,8 @@ export function AILabPage() {
   });
 
   const generateMutation = useMutation({
-    mutationFn: (docId: string) => documentsService.generateMyQuiz(docId),
+    mutationFn: (data: { docId: string; options?: { numQuestions?: number; difficulty?: string; mode?: string } }) =>
+      documentsService.generateMyQuiz(data.docId, data.options),
     onSuccess: () => {
       invalidate();
       toast.success('Đang tạo quiz...');
@@ -160,23 +164,23 @@ export function AILabPage() {
                   <div className="flex items-center gap-2 shrink-0">
                     <Badge variant={status.variant}>{status.label}</Badge>
 
-                    {doc.status === 'ready' && !doc.generatedQuizId && (
+                    {(doc.status === 'ready' || doc.status === 'error') && (
                       <Button
                         variant="outline"
                         size="sm"
-                        onClick={() => generateMutation.mutate(doc.id)}
+                        onClick={() => setQuizDoc(doc)}
                         disabled={generateMutation.isPending}
                       >
                         {generateMutation.isPending ? (
-                          <Loader2 className="h-4 w-4 animate-spin" />
+                          <Loader2 className="h-4 w-4 animate-spin mr-1" />
                         ) : (
-                          <Sparkles className="h-4 w-4" />
+                          <Sparkles className="h-4 w-4 mr-1" />
                         )}
-                        Tạo Quiz
+                        {doc.status === 'error' ? 'Thử lại' : doc.generatedQuizId ? 'Sinh thêm' : 'Tạo Quiz'}
                       </Button>
                     )}
 
-                    {doc.generatedQuizId && (
+                    {doc.generatedQuizId && doc.status !== 'error' && (
                       <Link to={`/student/ai-lab/${doc.generatedQuizId}`}>
                         <Badge variant="default" className="cursor-pointer">
                           <Sparkles className="h-3 w-3 mr-1" />Xem Quiz
@@ -217,6 +221,20 @@ export function AILabPage() {
           </DialogFooter>
         </DialogContent>
       </Dialog>
+
+      {/* Quiz Generation Settings Dialog */}
+      <QuizGenerationDialog
+        open={!!quizDoc}
+        onOpenChange={(open) => !open && setQuizDoc(null)}
+        doc={quizDoc}
+        onSubmit={(options) => {
+          if (quizDoc) {
+            generateMutation.mutate({ docId: quizDoc.id, options });
+            setQuizDoc(null);
+          }
+        }}
+        isPending={generateMutation.isPending}
+      />
 
       {/* Quiz Builder Dialog */}
       <QuizBuilderDialog

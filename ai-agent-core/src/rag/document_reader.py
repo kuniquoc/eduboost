@@ -12,7 +12,7 @@ class DocumentReader:
     """
 
     def __init__(self):
-        pass
+        ...
 
     def read_txt(self, file_path: str) -> str:
         """Read plain text files with UTF-8 and Latin-1 fallback."""

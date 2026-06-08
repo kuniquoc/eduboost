@@ -3,12 +3,12 @@ import type { ApiResponse, BktStateDto, UpdateBktResponse, ReviewScheduleDto } f
 
 export const learningStateService = {
   getStates: async (): Promise<BktStateDto[]> => {
-    const res = await apiClient.get<ApiResponse<BktStateDto[]>>('/learning-states');
+    const res = await apiClient.get<ApiResponse<BktStateDto[]>>('/learning-states/me');
     return res.data.data!;
   },
 
   getState: async (topicId: string): Promise<BktStateDto> => {
-    const res = await apiClient.get<ApiResponse<BktStateDto>>(`/learning-states/${topicId}`);
+    const res = await apiClient.get<ApiResponse<BktStateDto>>(`/learning-states/me/topic/${topicId}`);
     return res.data.data!;
   },
 
@@ -22,7 +22,7 @@ export const learningStateService = {
   },
 
   getReviewSchedule: async (): Promise<ReviewScheduleDto> => {
-    const res = await apiClient.get<ApiResponse<ReviewScheduleDto>>('/learning-states/review-schedule');
+    const res = await apiClient.get<ApiResponse<ReviewScheduleDto>>('/learning-states/me/review-schedule');
     return res.data.data!;
   },
 };

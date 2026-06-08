@@ -1,5 +1,6 @@
 using System.Text.Json;
 using EduBoost.API.Features.AiChat.Models;
+using EduBoost.API.Features.Documents;
 using EduBoost.API.Infrastructure;
 using EduBoost.API.Infrastructure.Entities;
 using EduBoost.API.Infrastructure.Services;
@@ -11,9 +12,10 @@ public interface IAiChatRepository
 {
     Task<AskResponse> AskAsync(Guid userId, AskRequest request);
     Task<ChatHistoryDto> GetHistoryAsync(Guid userId, Guid? topicId, int page, int pageSize);
+    Task ClearHistoryAsync(Guid userId);
 }
 
-public class AiChatRepository(AppDbContext db, IAgentService agentService) : IAiChatRepository
+public class AiChatRepository(AppDbContext db, IAgentService agentService, IDocumentsRepository docRepo) : IAiChatRepository
 {
     public async Task<AskResponse> AskAsync(Guid userId, AskRequest request)
     {
@@ -40,12 +42,18 @@ public class AiChatRepository(AppDbContext db, IAgentService agentService) : IAi
             .Select(m => new { m.Role, m.Content })
             .ToListAsync();
 
+        // Calculate allowed document IDs for security-filtered RAG
+        var allowedDocIds = await docRepo.GetAllowedDocumentIdsAsync(userId);
+        var allowedScopes = new List<string> { "system" };
+
         // Call AI Agent Service
         var agentResponse = await agentService.AskAsync(
             request.Question,
             request.TopicId?.ToString(),
             level,
-            recentMessages.Select(m => new ChatMessage { Role = m.Role, Content = m.Content }).ToList()
+            recentMessages.Select(m => new ChatMessage { Role = m.Role, Content = m.Content }).ToList(),
+            allowedDocIds,
+            allowedScopes
         );
 
         // Save assistant response
@@ -106,5 +114,12 @@ public class AiChatRepository(AppDbContext db, IAgentService agentService) : IAi
                 CreatedAt = m.CreatedAt.ToString("yyyy-MM-dd HH:mm:ss")
             }).ToList()
         };
+    }
+
+    public async Task ClearHistoryAsync(Guid userId)
+    {
+        await db.ConversationMessages
+            .Where(m => m.UserId == userId)
+            .ExecuteDeleteAsync();
     }
 }

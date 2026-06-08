@@ -163,5 +163,51 @@ class TestRAGComponents(unittest.TestCase):
         # Verify trace log file was created
         self.assertTrue(os.path.exists(pipeline.log_file_path))
 
+    def test_vector_db_delete_and_permissions(self):
+        """Test VectorDB document deletion and dynamic metadata permission filtering."""
+        db = VectorDB(index_path=self.db_path)
+        
+        test_chunks = [
+            {
+                "text": "This is a system textbook document.",
+                "metadata": {"source_file": "textbook.txt", "chunk_index": 0, "scope": "system"}
+            },
+            {
+                "text": "This is student Alice private document.",
+                "metadata": {"source_file": "alice.txt", "chunk_index": 0, "scope": "student", "document_id": "doc-alice-123"}
+            },
+            {
+                "text": "This is student Bob private document.",
+                "metadata": {"source_file": "bob.txt", "chunk_index": 0, "scope": "student", "document_id": "doc-bob-456"}
+            }
+        ]
+        
+        db.add_documents(test_chunks)
+        self.assertEqual(len(db.chunks), 3)
+
+        # 1. Search with no filter (should return everything matching query)
+        results = db.search("document", k=3, return_scores=False)
+        self.assertEqual(len(results), 3)
+
+        # 2. Search filtered by allowed_scopes=["system"]
+        results_system = db.search("document", k=3, return_scores=False, allowed_scopes=["system"], allowed_document_ids=[])
+        self.assertEqual(len(results_system), 1)
+        self.assertIn("This is a system textbook document.", results_system)
+
+        # 3. Search filtered by Alice's allowed document IDs
+        results_alice = db.search("document", k=3, return_scores=False, allowed_scopes=["system"], allowed_document_ids=["doc-alice-123"])
+        self.assertEqual(len(results_alice), 2)
+        self.assertIn("This is student Alice private document.", results_alice)
+        self.assertNotIn("This is student Bob private document.", results_alice)
+
+        # 4. Delete Alice's document
+        db.delete_document_chunks("doc-alice-123")
+        self.assertEqual(len(db.chunks), 2)
+
+        # 5. Search again with Alice's permissions (Alice doc should be gone)
+        results_alice_post_delete = db.search("document", k=3, return_scores=False, allowed_scopes=["system"], allowed_document_ids=["doc-alice-123"])
+        self.assertEqual(len(results_alice_post_delete), 1)
+        self.assertNotIn("This is student Alice private document.", results_alice_post_delete)
+
 if __name__ == "__main__":
     unittest.main()

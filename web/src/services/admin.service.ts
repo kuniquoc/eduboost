@@ -2,15 +2,19 @@ import { apiClient } from './api';
 import type { ApiResponse, AdminUserDto, SystemStatsDto } from '@/types';
 
 export const adminService = {
-  getUsers: async (page = 1, pageSize = 20): Promise<{ users: AdminUserDto[]; total: number }> => {
-    const res = await apiClient.get<ApiResponse<{ users: AdminUserDto[]; total: number }>>('/admin/users', {
-      params: { page, pageSize },
+  getUsers: async (search?: string, role?: string): Promise<AdminUserDto[]> => {
+    const res = await apiClient.get<ApiResponse<AdminUserDto[]>>('/admin/users', {
+      params: { search, role },
     });
     return res.data.data!;
   },
 
   updateRole: async (userId: string, role: string): Promise<void> => {
-    await apiClient.patch(`/admin/users/${userId}/role`, { role });
+    await apiClient.put(`/admin/users/${userId}/role`, { role });
+  },
+
+  deleteUser: async (userId: string): Promise<void> => {
+    await apiClient.delete(`/admin/users/${userId}`);
   },
 
   getStats: async (): Promise<SystemStatsDto> => {

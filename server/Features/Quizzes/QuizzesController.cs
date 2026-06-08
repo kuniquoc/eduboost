@@ -1,5 +1,6 @@
 using System.Security.Claims;
 using EduBoost.API.Common.Models;
+using EduBoost.API.Features.Documents;
 using EduBoost.API.Features.Quizzes.Models;
 using EduBoost.API.Infrastructure.Services;
 using Microsoft.AspNetCore.Authorization;
@@ -10,7 +11,7 @@ namespace EduBoost.API.Features.Quizzes;
 [ApiController]
 [Route("api/quizzes")]
 [Authorize]
-public class QuizzesController(IQuizzesRepository repo, IAgentService agent) : ControllerBase
+public class QuizzesController(IQuizzesRepository repo, IAgentService agent, IDocumentsRepository docRepo) : ControllerBase
 {
     private Guid UserId => Guid.Parse(
         User.FindFirstValue(ClaimTypes.NameIdentifier) ?? User.FindFirstValue("sub") ?? Guid.Empty.ToString());
@@ -241,7 +242,10 @@ public class QuizzesController(IQuizzesRepository repo, IAgentService agent) : C
         var topic = await repo.GetTopicNameAsync(topicId);
         if (topic == null) return NotFound(ApiResponse.Fail("Topic not found"));
 
-        var explanation = await agent.GetExplanationAsync(topic, "needs_review");
+        var allowedDocIds = await docRepo.GetAllowedDocumentIdsAsync(UserId);
+        var allowedScopes = new List<string> { "system" };
+
+        var explanation = await agent.GetExplanationAsync(topic, "needs_review", allowedDocIds, allowedScopes);
         if (explanation == null)
         {
             return Ok(ApiResponse<object>.Ok(new
@@ -260,8 +264,11 @@ public class QuizzesController(IQuizzesRepository repo, IAgentService agent) : C
     {
         if (!ModelState.IsValid) return BadRequest(ApiResponse.Fail("Invalid request data", ModelState));
 
+        var allowedDocIds = await docRepo.GetAllowedDocumentIdsAsync(UserId);
+        var allowedScopes = new List<string> { "system" };
+
         var explanation = await agent.GetGraderExplanationAsync(
-            request.Question, request.CorrectAnswer, request.StudentAnswer);
+            request.Question, request.CorrectAnswer, request.StudentAnswer, allowedDocIds, allowedScopes);
 
         if (explanation == null)
         {
@@ -282,7 +289,10 @@ public class QuizzesController(IQuizzesRepository repo, IAgentService agent) : C
         var topic = await repo.GetTopicNameAsync(topicId);
         if (topic == null) return NotFound(ApiResponse.Fail("Topic not found"));
 
-        var agentQuestion = await agent.GenerateQuizQuestionAsync(topic, difficulty);
+        var allowedDocIds = await docRepo.GetAllowedDocumentIdsAsync(UserId);
+        var allowedScopes = new List<string> { "system" };
+
+        var agentQuestion = await agent.GenerateQuizQuestionAsync(topic, difficulty, allowedDocIds, allowedScopes);
         if (agentQuestion == null)
         {
             return Ok(ApiResponse<object>.Ok(new

@@ -39,7 +39,6 @@ export function AdaptivePlacementTestPage() {
   const [state, setState] = useState<TestState>({ type: 'idle' });
   const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
   const [answeredCount, setAnsweredCount] = useState(0);
-  const [correctCount, setCorrectCount] = useState(0);
 
   const startMutation = useMutation({
     mutationFn: () => placementTestService.start(classId),
@@ -63,7 +62,6 @@ export function AdaptivePlacementTestPage() {
       placementTestService.submitAnswer(vars.sessionId, vars.questionId, vars.selectedOptionIds),
     onSuccess: (data) => {
       setAnsweredCount((c) => c + 1);
-      if (data.isCorrect) setCorrectCount((c) => c + 1);
       if (state.type === 'question') {
         setState({ type: 'feedback', sessionId: state.sessionId, isCorrect: data.isCorrect, response: data });
       }

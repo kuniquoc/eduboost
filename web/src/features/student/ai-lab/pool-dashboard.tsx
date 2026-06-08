@@ -25,6 +25,28 @@ import { toast } from 'sonner';
 import { cn } from '@/lib/utils';
 import type { TopicPoolDto, PoolQuizDetailDto, ApiResponse, QuizDto } from '@/types';
 
+type GenerationDifficulty = 'easy' | 'medium' | 'hard';
+
+interface GenerateQuizPayload {
+  topicName: string;
+  userSuggestion?: string;
+  documentId?: string;
+  numQuestions: number;
+  difficulty: GenerationDifficulty;
+}
+
+interface CreateRevisionPayload {
+  title: string;
+  poolQuizIds: string[];
+}
+
+function parseGenerationDifficulty(value: string): GenerationDifficulty {
+  if (value === 'easy' || value === 'medium' || value === 'hard') {
+    return value;
+  }
+  return 'medium';
+}
+
 export function StudentPoolDashboard() {
   const queryClient = useQueryClient();
   const [activeTab, setActiveTab] = useState<'pool' | 'revision' | 'generate'>('pool');
@@ -45,7 +67,7 @@ export function StudentPoolDashboard() {
   const [userSuggestion, setUserSuggestion] = useState('');
   const [selectedDocId, setSelectedDocId] = useState<string>('');
   const [numQuestions, setNumQuestions] = useState(5);
-  const [difficulty, setDifficulty] = useState<'easy' | 'medium' | 'hard'>('medium');
+  const [difficulty, setDifficulty] = useState<GenerationDifficulty>('medium');
   const [uploadingFile, setUploadingFile] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -85,48 +107,8 @@ export function StudentPoolDashboard() {
     enabled: !!selectedTopic,
   });
 
-  // Query student's private quizzes / revision sets (Filter: type == "private")
-  // We can fetch this from standard student dashboard or custom fetch.
-  // Wait! Do we have a service to get my private quizzes? Let's check:
-  // C# backend QuizzesController lists class quizzes, but does it list private quizzes?
-  // Let's see: `web/src/features/student/ai-lab/ai-lab-page.tsx` fetches `documentsService.getMyDocuments` which lists documents and their generated quiz IDs.
-  // Wait! Can we query all personal quizzes? Let's check what is in `web/src/services/quizzes.service.ts` or `QuizzesController.cs`.
-  // Wait! In `QuizzesController.cs` there is no direct `/my` endpoint for listing all private quizzes!
-  // Ah! But wait! Can we list them from our `/pool/topics` endpoint or by listing all topics in pool and loading their quizzes?
-  // Yes! The `/pool/topics` returns all topics. The quizzes inside topics have type `"pool"`.
-  // Wait, what about revision sets? A revision set is a `Quiz` of type `"private"`.
-  // Wait, does the backend `QuizzesController` list class quizzes but not private ones?
-  // Ah! In `QuizzesRepository.cs` line 230: `GetClassQuizzesAsync` lists quizzes of class.
-  // Let's check: where are private quizzes stored? They are stored in `quizzes` table with `Type = "private"`.
-  // If we want to load student's revision sets (quizzes of type `"private"` owned by the student), let's check if there is an endpoint.
-  // Wait! In `PoolRepository.cs`:
-  // `CreateRevisionSetFromPoolAsync` creates a `Quiz` of type `"private"` with `OwnerId = userId` and `ClassId = null`.
-  // How can we retrieve these revision sets?
-  // Let's check: in `PoolRepository.cs` `GetTopicsInPoolAsync`:
-  // `query = query.Where(t => t.OwnerId == userId || ...)`
-  // Wait, if a revision set is created, it has type `"private"` and is NOT linked to a specific topic or class.
-  // To load all revision sets for the student, let's write a simple endpoint in `PoolController.cs` or we can just fetch topics in pool where the topic has no class, or we can add a method `GetRevisionSetsAsync` in `PoolRepository.cs` and `PoolController.cs`!
-  // Yes! That is extremely clean and fully functional!
-  // Wait, did we already register such a method? No, but let's check if we can add it to `PoolRepository.cs` and `PoolController.cs` or if we already have it.
-  // Let's look at `PoolRepository.cs`. It doesn't have it yet.
-  // Wait, can we fetch the list of revision sets by adding a simple endpoint `GET /api/pool/revision-sets` to `PoolController.cs`?
-  // Yes! It will return all quizzes of type `"private"` owned by the student!
-  // Let's implement `GET /api/pool/revision-sets` in C# backend:
-  // In `IPoolRepository` and `PoolRepository`:
-  // ```csharp
-  // Task<List<QuizDto>> GetRevisionSetsAsync(Guid userId);
-  // ```
-  // In `PoolController`:
-  // ```csharp
-  // [HttpGet("revision-sets")]
-  // public async Task<IActionResult> GetRevisionSets()
-  // {
-  //     var sets = await repo.GetRevisionSetsAsync(UserId);
-  //     return Ok(ApiResponse<List<QuizDto>>.Ok(sets));
-  // }
-  // ```
-  // This is a beautiful addition that makes the revision tab 100% complete and working! We will implement it next.
-  // Let's query revision sets using react-query:
+  // Query student's revision sets (quizzes of type "private" owned by the student)
+  // Endpoint: GET /api/pool/revision-sets
   const { data: revisionSets = [], isLoading: isLoadingRevision } = useQuery({
     queryKey: ['student-revision-sets'],
     queryFn: async () => {
@@ -173,7 +155,7 @@ export function StudentPoolDashboard() {
 
   // AI Quiz Generation mutation
   const generateMutation = useMutation({
-    mutationFn: (payload: any) => poolService.generatePoolQuiz(payload),
+    mutationFn: (payload: GenerateQuizPayload) => poolService.generatePoolQuiz(payload),
     onSuccess: (quiz) => {
       setShowGenOverlay(false);
       setGeneratingStep(0);
@@ -222,8 +204,8 @@ export function StudentPoolDashboard() {
 
     generateMutation.mutate({
       topicName: topicName.trim(),
-      userSuggestion: generationType === 'manual' ? userSuggestion.trim() : null,
-      documentId: generationType === 'document' ? selectedDocId : null,
+      userSuggestion: generationType === 'manual' ? userSuggestion.trim() : undefined,
+      documentId: generationType === 'document' ? selectedDocId : undefined,
       numQuestions,
       difficulty
     });
@@ -238,7 +220,7 @@ export function StudentPoolDashboard() {
     try {
       const { uploadUrl, documentId } = await documentsService.requestStudentUploadUrl({
         fileName: file.name,
-        contentType: file.type || 'application/octet-stream'
+        fileSize: file.size.toString()
       });
 
       await documentsService.uploadFileToMinio(uploadUrl, file);
@@ -257,7 +239,7 @@ export function StudentPoolDashboard() {
 
   // Create Revision Set mutation
   const createRevisionMutation = useMutation({
-    mutationFn: (payload: any) => poolService.createRevisionSetFromPool(payload),
+    mutationFn: (payload: CreateRevisionPayload) => poolService.createRevisionSetFromPool(payload),
     onSuccess: () => {
       setIsRevisionDialogOpen(false);
       setRevisionTitle('');
@@ -623,13 +605,16 @@ export function StudentPoolDashboard() {
                                         <div
                                           key={opt.id}
                                           className={cn(
-                                            "rounded-lg px-2.5 py-1.5 text-xs border",
+                                            "rounded-lg px-2.5 py-1.5 text-xs border transition-all shadow-sm",
                                             opt.isCorrect
-                                              ? "bg-green-500/10 text-green-400 border-green-500/30 font-semibold"
-                                              : "bg-muted/10 text-muted-foreground border-transparent"
+                                              ? "bg-emerald-50 dark:bg-emerald-950/40 text-emerald-800 dark:text-emerald-300 border-emerald-500 font-semibold ring-1 ring-emerald-500/20"
+                                              : "bg-muted/30 text-muted-foreground border-border/60"
                                           )}
                                         >
-                                          <span className="mr-1">{opt.isCorrect ? '✓' : '○'}</span> {opt.text}
+                                          <span className={cn(
+                                            "mr-1.5 font-bold",
+                                            opt.isCorrect ? "text-emerald-600 dark:text-emerald-400" : "text-muted-foreground/60"
+                                          )}>{opt.isCorrect ? '✓' : '○'}</span> {opt.text}
                                         </div>
                                       ))}
                                     </div>
@@ -851,7 +836,7 @@ export function StudentPoolDashboard() {
                 <Label className="text-sm font-semibold">Mức độ ôn tập</Label>
                 <select
                   value={difficulty}
-                  onChange={(e) => setDifficulty(e.target.value as any)}
+                  onChange={(e) => setDifficulty(parseGenerationDifficulty(e.target.value))}
                   className="flex h-10 w-full rounded-md border border-input bg-muted/30 px-3 py-2 text-sm ring-offset-background focus-visible:ring-indigo-500"
                 >
                   <option value="easy">Cơ bản (Củng cố nền tảng)</option>
@@ -1057,7 +1042,7 @@ export function StudentPoolDashboard() {
                 {(() => {
                   const q = activePlayingQuiz.questions[currentQuestionIdx];
                   if (!q) return null;
-                  
+
                   return (
                     <div className="space-y-4">
                       <div className="flex items-start gap-2">
@@ -1079,7 +1064,7 @@ export function StudentPoolDashboard() {
                               className={cn(
                                 "w-full rounded-xl border p-3.5 text-left transition-all duration-200 flex items-center justify-between gap-3 text-xs md:text-sm font-medium",
                                 showSuccess 
-                                  ? "border-green-500/50 bg-green-500/10 text-green-400" 
+                                  ? "border-emerald-500 bg-emerald-50 dark:bg-emerald-950/40 text-emerald-800 dark:text-emerald-300" 
                                   : showDanger
                                     ? "border-red-500/50 bg-red-500/10 text-red-400 line-through"
                                     : isSelected
@@ -1088,23 +1073,28 @@ export function StudentPoolDashboard() {
                               )}
                             >
                               <div className="flex items-center gap-3">
+                                {(() => {
+                                  const badgeClass = showSuccess
+                                    ? "border-emerald-600 bg-emerald-600 text-white"
+                                    : showDanger
+                                    ? "border-red-500 bg-red-500 text-black"
+                                    : isSelected
+                                    ? "border-indigo-500 bg-indigo-500 text-primary-foreground"
+                                    : "border-border text-muted-foreground";
+                                  return (
                                 <span className={cn(
                                   "flex h-6 w-6 items-center justify-center rounded-full border text-[11px] font-bold transition-all",
-                                  showSuccess
-                                    ? "border-green-500 bg-green-500 text-black"
-                                    : showDanger
-                                      ? "border-red-500 bg-red-500 text-black"
-                                      : isSelected
-                                        ? "border-indigo-500 bg-indigo-500 text-primary-foreground"
-                                        : "border-border text-muted-foreground"
+                                  badgeClass
                                 )}>
                                   {opt.text.startsWith('A') || opt.text.startsWith('B') || opt.text.startsWith('C') || opt.text.startsWith('D') 
                                     ? opt.text[0] 
                                     : '○'}
-                                </span>
+                                 </span>
+                                  );
+                                })()}
                                 <span>{opt.text}</span>
                               </div>
-                              {showSuccess && <CheckCircle2 className="h-4 w-4 text-green-400 shrink-0" />}
+                              {showSuccess && <CheckCircle2 className="h-4 w-4 text-emerald-500 shrink-0" />}
                               {showDanger && <XCircle className="h-4 w-4 text-red-400 shrink-0" />}
                             </button>
                           );

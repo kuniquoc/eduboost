@@ -2,7 +2,6 @@ import { useState, useRef, useEffect, useCallback } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { aiChatService } from '@/services/aiChat.service';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 import {
@@ -15,6 +14,13 @@ import {
 } from 'lucide-react';
 import { toast } from 'sonner';
 import type { ChatMessageDto, AskResponse } from '@/types';
+
+function createOptimisticMessageId() {
+  if (typeof crypto !== 'undefined' && typeof crypto.randomUUID === 'function') {
+    return `optimistic-${crypto.randomUUID()}`;
+  }
+  return `optimistic-${Date.now()}-${Math.random().toString(36).slice(2, 10)}`;
+}
 
 export function AiChatPage() {
   const queryClient = useQueryClient();
@@ -41,7 +47,7 @@ export function AiChatPage() {
     mutationFn: (question: string) => aiChatService.ask(question),
     onMutate: (question) => {
       const userMsg: ChatMessageDto = {
-        id: `temp-${Date.now()}`,
+        id: createOptimisticMessageId(),
         role: 'user',
         content: question,
         sources: [],

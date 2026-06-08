@@ -110,41 +110,76 @@ Difficulty Guide:
 - If the student's answer and correct answer are the same, congratulate them instead
 - Use simple Vietnamese appropriate for a language learner"""
 
-    BATCH_QUIZ_TEMPLATE = """Generate a list of {num_questions} multiple-choice questions (MCQs) in Vietnamese about the topic: "{topic}".
+    BATCH_QUIZ_TEMPLATE = """You are a quiz generator. Your ONLY task is to output a valid JSON object. No explanations, no markdown, no preamble.
 
-## Target Difficulty: {difficulty}
+TOPIC: "{topic}"
+TOTAL QUESTIONS TO GENERATE: {num_questions}
 
-## Context/Materials (Use this as your primary information source if provided):
+DIFFICULTY DISTRIBUTION:
+Generate exactly the following number of questions for each difficulty level:
+- Easy: {num_easy} questions (difficulty value: "easy")
+- Medium: {num_medium} questions (difficulty value: "medium")
+- Hard: {num_hard} questions (difficulty value: "hard")
+
+CONTEXT (use as primary knowledge source if provided):
 {context}
 
-## Additional User Requirements/Instructions (Follow these if provided):
+GENERAL KNOWLEDGE FALLBACK:
+If the provided CONTEXT does not contain enough information, concepts, or sentences to generate the total requested number of questions ({num_questions}), you MUST use your general knowledge of English vocabulary and grammar relevant to the topic "{topic}" to generate the remaining questions. Do not stop short of the requested total.
+
+ADDITIONAL INSTRUCTIONS (follow if provided):
 {user_prompt}
 
-## Requirements for each question:
-1. **question**: A clear, natural question or sentence with blank space in Vietnamese.
-2. **options**: Exactly 4 options. Each option must have a clear text.
-3. **correct_answer**: Must exactly match the text of the single correct option.
-4. **explanation**: A concise explanation in Vietnamese explaining why the correct option is right and others are wrong.
-5. **difficulty**: The difficulty of the question ("easy", "medium", "hard").
+STRICT GENERATION RULES:
+1. DO NOT duplicate questions. Each question must test a different sentence, concept, or word.
+2. DO NOT copy or reuse the example questions in your output (i.e. DO NOT output the question about 'playing in the garden' or 'artificial intelligence').
+3. Every question must be in English with a single blank "___" to be filled.
+4. Options and explanations must be in Vietnamese.
+5. All distractors (wrong answers) must be plausible but grammatically/semantically incorrect.
+6. The correct answer must be marked with "isCorrect": true. Exactly one option must be correct.
+7. CRITICAL RULE: You must generate EXACTLY {num_questions} questions in total. Make sure the 'questions' JSON array has exactly {num_questions} items.
 
-## Output format (JSON only):
-Produce a JSON object matching this exact structure:
+STRICT OUTPUT RULES — VIOLATIONS WILL CAUSE SYSTEM FAILURE:
+- Your response MUST start with the character `{{` and end with `}}`
+- Do NOT write anything before `{{` or after `}}`
+- Do NOT use markdown fences (```json or ```)
+- Do NOT number questions outside the JSON
+- Do NOT include comments or ellipsis (...) inside the JSON
+
+Each question object MUST have:
+- "question": string — the question text in English with a blank "___"
+- "type": "mcq"
+- "difficulty": "easy" | "medium" | "hard" (as specified in the distribution)
+- "options": array of EXACTLY 4 objects, each with "text" (string) and "isCorrect" (boolean)
+- "explanation": string — Vietnamese explanation of why the correct answer is right and why other options are wrong
+
+OUTPUT (start immediately with `{{`):
 {{
   "questions": [
     {{
-      "question": "Nội dung câu hỏi...",
+      "question": "The children ___ playing in the garden when it started to rain.",
       "type": "mcq",
-      "difficulty": "{difficulty}",
+      "difficulty": "medium",
       "options": [
-        {{ "text": "Đáp án A", "isCorrect": true }},
-        {{ "text": "Đáp án B", "isCorrect": false }},
-        {{ "text": "Đáp án C", "isCorrect": false }},
-        {{ "text": "Đáp án D", "isCorrect": false }}
+        {{ "text": "were", "isCorrect": true }},
+        {{ "text": "was", "isCorrect": false }},
+        {{ "text": "are", "isCorrect": false }},
+        {{ "text": "is", "isCorrect": false }}
       ],
-      "explanation": "Giải thích chi tiết bằng tiếng Việt..."
+      "explanation": "Đáp án đúng là 'were' vì chủ ngữ 'The children' là số nhiều và mệnh đề sau dùng thì quá khứ đơn 'started' chỉ hành động xen vào trong quá khứ, do đó ta dùng thì quá khứ tiếp diễn với 'were'."
     }},
-    ...
+    {{
+      "question": "She is an expert ___ the field of artificial intelligence.",
+      "type": "mcq",
+      "difficulty": "easy",
+      "options": [
+        {{ "text": "in", "isCorrect": true }},
+        {{ "text": "at", "isCorrect": false }},
+        {{ "text": "on", "isCorrect": false }},
+        {{ "text": "for", "isCorrect": false }}
+      ],
+      "explanation": "Cụm từ cố định là 'in the field of' chỉ trong lĩnh vực nào đó."
+    }}
   ]
 }}
-Verify that there is EXACTLY one correct option (isCorrect: true) per question. Do NOT include any extra text, markdown code blocks, or preamble outside of the JSON object.
 """

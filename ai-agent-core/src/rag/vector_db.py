@@ -4,8 +4,11 @@ import os
 import pickle
 import numpy as np
 import faiss
+import logging
 from sentence_transformers import SentenceTransformer
 from typing import List, Dict, Any, Tuple, Optional, Union
+
+logger = logging.getLogger(__name__)
 
 class VectorDB:
     """
@@ -115,7 +118,11 @@ class VectorDB:
         if len(remaining_chunks) == len(self.chunks):
             return
 
-        print(f"Clearing {len(self.chunks) - len(remaining_chunks)} existing chunks for {basename} from index.")
+        logger.info(
+            "Clearing %s existing chunks for %s from index.",
+            len(self.chunks) - len(remaining_chunks),
+            basename,
+        )
 
         # Reset the index and rebuild
         self.chunks = []
@@ -131,18 +138,64 @@ class VectorDB:
                 if os.path.exists(full_path):
                     try:
                         os.remove(full_path)
-                    except Exception:
-                        pass
-            print("Vector database is now completely empty.")
+                    except Exception as e:
+                        logger.warning("Failed to remove stale FAISS file %s: %s", full_path, e)
+            logger.info("Vector database is now completely empty.")
+
+    def delete_document_chunks(self, document_id: str) -> None:
+        """
+        Remove all chunks associated with a specific document ID and rebuild the index.
+        This provides clean delete behavior during document removal instead of leaving orphan chunks.
+        """
+        if not self.chunks:
+            return
+
+        # Filter chunks that are not from this document
+        remaining_chunks = []
+        for chunk in self.chunks:
+            doc_id = chunk.get("metadata", {}).get("document_id")
+            if doc_id and str(doc_id) == str(document_id):
+                continue
+            remaining_chunks.append(chunk)
+
+        # If nothing was deleted, do nothing
+        if len(remaining_chunks) == len(self.chunks):
+            return
+
+        logger.info(
+            "Clearing %s existing chunks for document %s from index.",
+            len(self.chunks) - len(remaining_chunks),
+            document_id,
+        )
+
+        # Reset the index and rebuild
+        self.chunks = []
+        self.index = None
+        
+        # Re-add remaining documents
+        if remaining_chunks:
+            self.add_documents(remaining_chunks)
+        else:
+            # If no chunks left, clean up physical files
+            for ext in (".bin", ".pkl"):
+                full_path = self.index_path + ext
+                if os.path.exists(full_path):
+                    try:
+                        os.remove(full_path)
+                    except Exception as e:
+                        logger.warning("Failed to remove stale FAISS file %s: %s", full_path, e)
+            logger.info("Vector database is now completely empty.")
 
     def search(
         self, 
         query: str, 
         k: int = 3, 
-        return_scores: bool = True
+        return_scores: bool = True,
+        allowed_document_ids: Optional[List[str]] = None,
+        allowed_scopes: Optional[List[str]] = None
     ) -> Union[List[Tuple[float, Dict[str, Any]]], List[str]]:
         """
-        Retrieve closest documents, applying duplicate filtering to guarantee diverse context.
+        Retrieve closest documents, applying duplicate filtering and permission filters.
         Supports both V2 score/metadata retrieval and legacy string list.
         
         Args:
@@ -150,9 +203,11 @@ class VectorDB:
             k: Number of closest items to retrieve.
             return_scores: If True, returns List[Tuple[float, Dict[str, Any]]] sorted descending (new V2 style).
                            If False, returns List[str] of raw texts (legacy style).
+            allowed_document_ids: Optional list of document IDs the user is allowed to access.
+            allowed_scopes: Optional list of scopes the user is allowed to access (e.g. ["system"]).
         """
         if self.index is None or not self.chunks:
-            print("VectorDB index not loaded or empty.")
+            logger.warning("VectorDB index not loaded or empty.")
             return []
 
         # Encode and normalize query vector
@@ -160,8 +215,8 @@ class VectorDB:
         q_norm = np.linalg.norm(query_vector, axis=1, keepdims=True)
         normalized_query = query_vector / np.maximum(q_norm, 1e-12)
 
-        # Retrieve extra candidate search results to accommodate deduplication filtering
-        search_k = min(max(k * 3, 20), len(self.chunks))
+        # Retrieve extra candidate search results to accommodate deduplication and permission filtering
+        search_k = min(max(k * 5, 50), len(self.chunks))
         scores, indices = self.index.search(np.array(normalized_query).astype("float32"), search_k)
 
         results = []
@@ -173,11 +228,30 @@ class VectorDB:
                 continue
             
             chunk = self.chunks[idx]
+            meta = chunk.get("metadata", {})
+
+            # Enforce RAG permission controls
+            scope = meta.get("scope", "system")
+            doc_id = meta.get("document_id")
+
+            # Check if allowed
+            is_allowed = False
+            # If both allowed_document_ids and allowed_scopes are None (legacy or background system tasks), allow everything
+            if allowed_document_ids is None and allowed_scopes is None:
+                is_allowed = True
+            else:
+                if allowed_scopes is not None and scope in allowed_scopes:
+                    is_allowed = True
+                elif allowed_document_ids is not None and doc_id is not None and str(doc_id) in [str(x) for x in allowed_document_ids]:
+                    is_allowed = True
+
+            if not is_allowed:
+                continue
+
             # Standardize text for strict text deduplication (normalize whitespace and casing)
             norm_text = " ".join(chunk["text"].lower().split())
             
             # Uniqueness key by file source and chunk index
-            meta = chunk.get("metadata", {})
             chunk_id = (meta.get("source_file"), meta.get("chunk_index"))
             
             if norm_text in seen_texts or chunk_id in seen_chunks:
@@ -208,4 +282,18 @@ class VectorDB:
         self.index = faiss.read_index(self.index_path + ".bin")
         with open(self.index_path + ".pkl", "rb") as f:
             self.chunks = pickle.load(f)
-        print(f"VectorDB index loaded. Total indexed chunks: {len(self.chunks)}")
+        
+        # Ensure backwards compatibility by defaulting scope to 'system'
+        updated = False
+        for chunk in self.chunks:
+            if "metadata" not in chunk:
+                chunk["metadata"] = {}
+                updated = True
+            if "scope" not in chunk["metadata"]:
+                chunk["metadata"]["scope"] = "system"
+                updated = True
+        
+        if updated:
+            self.save_index()
+            
+        logger.info("VectorDB index loaded. Total indexed chunks: %s", len(self.chunks))

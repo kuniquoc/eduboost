@@ -39,7 +39,6 @@ export function PracticeSessionPage() {
 
   const [state, setState] = useState<SessionState>({ type: 'idle' });
   const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
-  const [correctCount, setCorrectCount] = useState(0);
   const [totalAnswered, setTotalAnswered] = useState(0);
 
   const startMutation = useMutation({
@@ -65,7 +64,6 @@ export function PracticeSessionPage() {
       practiceSessionService.submitAnswer(vars.sessionId, vars.questionId, vars.selectedOptionIds),
     onSuccess: (data, vars) => {
       setTotalAnswered((c) => c + 1);
-      if (data.isCorrect) setCorrectCount((c) => c + 1);
       setState({ type: 'feedback', data, sessionId: vars.sessionId });
     },
     onError: () => toast.error('Lỗi khi gửi câu trả lời'),
@@ -104,7 +102,7 @@ export function PracticeSessionPage() {
         question: data.nextQuestion,
         sessionId,
         questionNumber: data.questionNumber,
-        total: totalAnswered + 10, // approximate
+        total: data.totalQuestions ?? totalAnswered + 10,
       });
     }
   }, [state, summaryMutation, totalAnswered]);

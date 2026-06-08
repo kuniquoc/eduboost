@@ -56,6 +56,33 @@ def get_or_create_agent(student_id: str) -> AgentOrchestrator:
     return agent_sessions[student_id]
 
 
+def _validate_runtime_config() -> None:
+    """Validate critical runtime configuration and fail fast on invalid setup."""
+    faiss_index_path = os.getenv("FAISS_INDEX_PATH") or "models/vector_db/faiss_index"
+    faiss_dir = os.path.dirname(faiss_index_path) or "."
+    os.makedirs(faiss_dir, exist_ok=True)
+
+    if not os.path.isdir(faiss_dir):
+        raise RuntimeError(f"Invalid FAISS index directory: {faiss_dir}")
+
+    quiz_endpoint = os.getenv("QUIZ_LLM_ENDPOINT")
+    explain_endpoint = os.getenv("EXPLAIN_LLM_ENDPOINT")
+    openrouter_key = os.getenv("OPENROUTER_API_KEY")
+
+    # If no custom endpoint is provided, OpenRouter key is mandatory.
+    if not quiz_endpoint and not openrouter_key:
+        raise RuntimeError(
+            "Missing OPENROUTER_API_KEY for QUIZ LLM. "
+            "Set QUIZ_LLM_ENDPOINT for custom server or provide OPENROUTER_API_KEY."
+        )
+
+    if not explain_endpoint and not openrouter_key:
+        raise RuntimeError(
+            "Missing OPENROUTER_API_KEY for EXPLAIN LLM. "
+            "Set EXPLAIN_LLM_ENDPOINT for custom server or provide OPENROUTER_API_KEY."
+        )
+
+
 # ---------------------------------------------------------------------------
 # Lifespan (startup / shutdown)
 # ---------------------------------------------------------------------------
@@ -64,6 +91,9 @@ async def lifespan(app: FastAPI):
     global vector_db, retriever, llm_quiz, llm_explain, ingestor
 
     logger.info("Starting EduBoost AI Agent...")
+
+    # 0. Validate startup config
+    _validate_runtime_config()
 
     # 1. Initialize RAG components (VectorDB / Retriever / Ingestor)
     try:
@@ -138,13 +168,24 @@ app.add_middleware(
 # Pydantic models
 # ---------------------------------------------------------------------------
 class IngestRequest(BaseModel):
-    text: str
-    source: str = "api"
+    document_id: str
+    scope: str  # "class" | "student" | "system"
+    text: Optional[str] = None
+    file_url: Optional[str] = None
+    class_id: Optional[str] = None
+    owner_id: Optional[str] = None
+    topic_id: Optional[str] = None
+
+
+class DeleteRequest(BaseModel):
+    document_id: str
 
 
 class RetrieveRequest(BaseModel):
     query: str
     top_k: int = 5
+    allowed_document_ids: Optional[list[str]] = None
+    allowed_scopes: Optional[list[str]] = None
 
 
 class UpdateStateRequest(BaseModel):
@@ -168,6 +209,8 @@ class GraderRequest(BaseModel):
     question: str
     correct_answer: str
     student_answer: str
+    allowed_document_ids: Optional[list[str]] = None
+    allowed_scopes: Optional[list[str]] = None
 
 
 # ---------------------------------------------------------------------------
@@ -183,20 +226,88 @@ async def health():
 # ---------------------------------------------------------------------------
 @app.post("/rag/ingest")
 async def ingest_document(request: IngestRequest):
-    if not ingestor:
-        raise HTTPException(503, "Ingestor not initialized")
+    if not ingestor or not vector_db:
+        raise HTTPException(503, "Ingestor or VectorDB not initialized")
 
-    splitter = SemanticTextSplitter(embed_model=vector_db.embed_model)
-    chunks = splitter.split_text(request.text)
-    vector_db.add_documents(chunks)
-    return {"status": "ok", "chunks_added": len(chunks)}
+    # Clean up existing chunks for this document first to avoid duplication
+    vector_db.delete_document_chunks(request.document_id)
+
+    full_text = ""
+    source_name = request.document_id
+
+    # Extract text from url or use raw text
+    if request.file_url:
+        try:
+            import requests
+            import tempfile
+            logger.info("Downloading file for RAG ingestion: %s", request.file_url)
+            response = requests.get(request.file_url, timeout=30)
+            response.raise_for_status()
+
+            parsed_url = request.file_url.split('?')[0]
+            ext = os.path.splitext(parsed_url)[1].lower() or ".txt"
+            source_name = os.path.basename(parsed_url)
+
+            with tempfile.NamedTemporaryFile(delete=False, suffix=ext) as tmp:
+                tmp.write(response.content)
+                tmp_path = tmp.name
+
+            try:
+                reader = DocumentReader()
+                full_text = reader.load_document(tmp_path)
+            finally:
+                try:
+                    os.unlink(tmp_path)
+                except Exception as cleanup_error:
+                    logger.warning("Failed to delete temporary file %s: %s", tmp_path, cleanup_error)
+        except Exception as e:
+            logger.error("Error downloading or parsing document for RAG: %s", e)
+            raise HTTPException(500, f"Failed to download or parse document: {str(e)}")
+    elif request.text:
+        full_text = request.text
+    else:
+        raise HTTPException(400, "Either text or file_url must be provided")
+
+    if not full_text.strip():
+        return {"status": "ok", "chunks_added": 0, "message": "Document has no content"}
+
+    # Form metadata
+    metadata = {
+        "document_id": request.document_id,
+        "scope": request.scope,
+        "class_id": request.class_id,
+        "owner_id": request.owner_id,
+        "topic_id": request.topic_id,
+    }
+
+    # Chunk & Ingest
+    chunks_added = ingestor.ingest_text_with_metadata(
+        text=full_text,
+        source_file=source_name,
+        metadata=metadata
+    )
+
+    return {"status": "ok", "chunks_added": chunks_added}
+
+
+@app.post("/rag/delete")
+async def delete_document(request: DeleteRequest):
+    if not vector_db:
+        raise HTTPException(503, "VectorDB not initialized")
+    vector_db.delete_document_chunks(request.document_id)
+    return {"status": "ok", "message": f"Successfully deleted chunks for document {request.document_id}"}
 
 
 @app.post("/rag/retrieve")
 async def retrieve_context(request: RetrieveRequest):
     if not vector_db:
         raise HTTPException(503, "VectorDB not initialized")
-    results = vector_db.search(request.query, k=request.top_k)
+    results = vector_db.search(
+        request.query,
+        k=request.top_k,
+        allowed_document_ids=request.allowed_document_ids,
+        allowed_scopes=request.allowed_scopes
+    )
     return {"results": results}
 
 
@@ -222,11 +333,19 @@ async def update_student_state(request: UpdateStateRequest):
 
 
 @app.get("/tutor/generate-question")
-async def generate_quiz_question(topic_name: str, difficulty: float = 0.0):
+async def generate_quiz_question(
+    topic_name: str,
+    difficulty: float = 0.0,
+    allowed_document_ids: Optional[str] = None,
+    allowed_scopes: Optional[str] = None
+):
     """Generates an adaptive quiz question using RAG context + LLM (Quiz LLM)."""
     import time
     
     start_time = time.time()
+    
+    allowed_doc_ids_list = allowed_document_ids.split(",") if allowed_document_ids else None
+    allowed_scopes_list = allowed_scopes.split(",") if allowed_scopes else None
     
     # Step 1: Log receipt of request
     logger.info("=" * 60)
@@ -242,11 +361,21 @@ async def generate_quiz_question(topic_name: str, difficulty: float = 0.0):
     if retriever:
         logger.info(f"[QUIZ-GEN][STEP 2] Launching RAG context retrieval for topic '{topic_name}'...")
         try:
-            context = retriever.get_context(topic_name)
+            context = retriever.get_context(
+                topic_name,
+                allowed_document_ids=allowed_doc_ids_list,
+                allowed_scopes=allowed_scopes_list
+            )
             
             # Log specific retrieved document chunks details by executing a search behind the scenes for rich logs
             if vector_db:
-                hits = vector_db.search(topic_name, k=3, return_scores=True)
+                hits = vector_db.search(
+                    topic_name,
+                    k=3,
+                    return_scores=True,
+                    allowed_document_ids=allowed_doc_ids_list,
+                    allowed_scopes=allowed_scopes_list
+                )
                 logger.info(f"[QUIZ-GEN][STEP 2] RAG Retrieval complete. Found {len(hits)} matching chunks:")
                 for i, (score, chunk) in enumerate(hits, 1):
                     meta = chunk.get("metadata", {})
@@ -311,11 +440,19 @@ async def generate_quiz_question(topic_name: str, difficulty: float = 0.0):
 
 
 @app.get("/tutor/explain")
-async def explain_topic(topic_name: str, student_state: str = "beginning"):
+async def explain_topic(
+    topic_name: str, 
+    student_state: str = "beginning",
+    allowed_document_ids: Optional[str] = None,
+    allowed_scopes: Optional[str] = None
+):
     """Generates a Socratic explanation using RAG context + LLM (Explanation LLM)."""
     import time
     
     start_time = time.time()
+    
+    allowed_doc_ids_list = allowed_document_ids.split(",") if allowed_document_ids else None
+    allowed_scopes_list = allowed_scopes.split(",") if allowed_scopes else None
     
     # Step 1: Log receipt of request
     logger.info("=" * 60)
@@ -331,11 +468,21 @@ async def explain_topic(topic_name: str, student_state: str = "beginning"):
     if retriever:
         logger.info(f"[EXPLAIN][STEP 2] Launching RAG context retrieval for topic '{topic_name}'...")
         try:
-            context = retriever.get_context(topic_name)
+            context = retriever.get_context(
+                topic_name,
+                allowed_document_ids=allowed_doc_ids_list,
+                allowed_scopes=allowed_scopes_list
+            )
             
             # Log specific retrieved document chunks details by executing a search behind the scenes for rich logs
             if vector_db:
-                hits = vector_db.search(topic_name, k=3, return_scores=True)
+                hits = vector_db.search(
+                    topic_name,
+                    k=3,
+                    return_scores=True,
+                    allowed_document_ids=allowed_doc_ids_list,
+                    allowed_scopes=allowed_scopes_list
+                )
                 logger.info(f"[EXPLAIN][STEP 2] RAG Retrieval complete. Found {len(hits)} matching chunks:")
                 for i, (score, chunk) in enumerate(hits, 1):
                     meta = chunk.get("metadata", {})
@@ -408,11 +555,21 @@ async def grade_answer(request: GraderRequest):
         # We query the database using the question text to get relevant grammar concepts
         logger.info(f"[GRADER-RAG][STEP 2] Launching RAG context retrieval using question text as query...")
         try:
-            context = retriever.get_context(request.question)
+            context = retriever.get_context(
+                request.question,
+                allowed_document_ids=request.allowed_document_ids,
+                allowed_scopes=request.allowed_scopes
+            )
             
             # Log specific retrieved document chunks details by executing a search behind the scenes for rich logs
             if vector_db:
-                hits = vector_db.search(request.question, k=3, return_scores=True)
+                hits = vector_db.search(
+                    request.question,
+                    k=3,
+                    return_scores=True,
+                    allowed_document_ids=request.allowed_document_ids,
+                    allowed_scopes=request.allowed_scopes
+                )
                 logger.info(f"[GRADER-RAG][STEP 2] RAG Retrieval complete. Found {len(hits)} matching chunks:")
                 for i, (score, chunk) in enumerate(hits, 1):
                     meta = chunk.get("metadata", {})
@@ -470,6 +627,9 @@ class GenerateQuizBatchRequest(BaseModel):
     doc_url: Optional[str] = None
     num_questions: int = 5
     difficulty: str = "medium"
+    num_easy: int = 0
+    num_medium: int = 0
+    num_hard: int = 0
 
 
 class ChatRequest(BaseModel):
@@ -477,6 +637,8 @@ class ChatRequest(BaseModel):
     topic_id: Optional[str] = None
     level: str = "intermediate"
     history: list = []
+    allowed_document_ids: Optional[list[str]] = None
+    allowed_scopes: Optional[list[str]] = None
 
 
 class ChatHistoryMessage(BaseModel):
@@ -524,44 +686,228 @@ async def generate_quiz_batch(request: GenerateQuizBatchRequest):
 
             try:
                 reader = DocumentReader()
-                context = reader.load_document(tmp_path)
+                full_text = reader.load_document(tmp_path)
             finally:
                 try:
                     os.unlink(tmp_path)
-                except Exception:
-                    pass
+                except Exception as cleanup_error:
+                    logger.warning("Failed to delete temporary file %s: %s", tmp_path, cleanup_error)
 
-            # Truncate context to keep LLM calls fast and avoid limit overflow
-            context = context[:10000]
-            logger.info("Extracted %d characters of context from document", len(context))
+            # Chunk document using SemanticTextSplitter (reuse embed_model from VectorDB if available)
+            embed_model = vector_db.embed_model if vector_db else None
+            splitter = SemanticTextSplitter(
+                embed_model=embed_model,
+                percentile_threshold=75,
+                min_chunk_size=50,
+                max_chunk_size=600,
+            )
+            doc_chunks = splitter.split_text(full_text, source_file=parsed_url)
+            logger.info("Split document into %d semantic chunks", len(doc_chunks))
+
+            # Select top-6 chunks most relevant to the topic via cosine similarity
+            if doc_chunks and embed_model:
+                import torch
+                from sentence_transformers import util as st_util
+                topic_emb = embed_model.encode(request.topic_name, convert_to_tensor=True)
+                chunk_texts = [c["text"] for c in doc_chunks]
+                chunk_embs = embed_model.encode(chunk_texts, convert_to_tensor=True)
+                scores = st_util.cos_sim(topic_emb, chunk_embs)[0]
+                top_k = min(6, len(doc_chunks))
+                top_indices = sorted(torch.topk(scores, top_k).indices.tolist())
+                context = "\n\n".join(doc_chunks[i]["text"] for i in top_indices)
+                logger.info(
+                    "Selected top-%d relevant chunks for topic '%s' (chunk indices: %s)",
+                    top_k, request.topic_name, top_indices,
+                )
+            else:
+                # Fallback: concatenate first 6 chunks when embed_model unavailable
+                context = "\n\n".join(c["text"] for c in doc_chunks[:min(6, len(doc_chunks))])
+                logger.info("Embed model unavailable — using first 6 chunks as context fallback")
         except Exception as e:
             logger.error("Error downloading or parsing document from URL: %s", e)
             raise HTTPException(500, f"Failed to download or parse document: {str(e)}")
 
-    # Construct and format the LLM prompt
-    prompt = PromptTemplates.BATCH_QUIZ_TEMPLATE.format(
-        topic=request.topic_name,
-        difficulty=request.difficulty,
-        context=context or "No document context provided.",
-        user_prompt=request.user_prompt or "None.",
-        num_questions=request.num_questions
+    # Resolve difficulty counts
+    num_easy = request.num_easy
+    num_medium = request.num_medium
+    num_hard = request.num_hard
+
+    # Fallback to defaults if no specific counts are set
+    if num_easy == 0 and num_medium == 0 and num_hard == 0:
+        if request.difficulty == "easy":
+            num_easy = request.num_questions
+        elif request.difficulty == "hard":
+            num_hard = request.num_questions
+        else:
+            num_medium = request.num_questions
+
+    total_questions = num_easy + num_medium + num_hard
+    if total_questions == 0:
+        total_questions = request.num_questions
+        num_medium = total_questions
+
+    import re
+    unique_questions = []
+    seen_questions = set()
+    PROHIBITED_EXAMPLES = {
+        "thechildrenplayinginthegardenwhenitstartedtorain",
+        "sheisanexpertinthefieldofartificialintelligence"
+    }
+    
+    max_attempts = 3
+    attempt = 0
+    
+    while len(unique_questions) < total_questions and attempt < max_attempts:
+        attempt += 1
+        
+        # Calculate how many questions of each difficulty we still need
+        current_easy_count = sum(1 for q in unique_questions if q["difficulty"] == "easy")
+        current_medium_count = sum(1 for q in unique_questions if q["difficulty"] == "medium")
+        current_hard_count = sum(1 for q in unique_questions if q["difficulty"] == "hard")
+        
+        needed_easy = max(0, num_easy - current_easy_count)
+        needed_medium = max(0, num_medium - current_medium_count)
+        needed_hard = max(0, num_hard - current_hard_count)
+        needed_total = needed_easy + needed_medium + needed_hard
+        
+        if needed_total == 0:
+            break
+            
+        logger.info(
+            "[QUIZ-BATCH] Attempt %d/%d: Generating %d questions (Easy: %d, Medium: %d, Hard: %d)",
+            attempt, max_attempts, needed_total, needed_easy, needed_medium, needed_hard
+        )
+        
+        # If we already have some questions, instruct the LLM to avoid them to prevent duplication
+        avoid_instruction = ""
+        if unique_questions:
+            existing_texts = [q["question"] for q in unique_questions]
+            avoid_instruction = (
+                f"\nDO NOT generate any of the following questions that were already created:\n"
+                + "\n".join(f"- {txt}" for txt in existing_texts)
+            )
+            
+        # Format the prompt for this attempt
+        prompt = PromptTemplates.BATCH_QUIZ_TEMPLATE.format(
+            topic=request.topic_name,
+            difficulty=request.difficulty,
+            context=context or "No document context provided.",
+            user_prompt=(request.user_prompt or "None.") + avoid_instruction,
+            num_questions=needed_total,
+            num_easy=needed_easy,
+            num_medium=needed_medium,
+            num_hard=needed_hard
+        )
+        
+        # Call QUIZ LLM and extract parsed JSON
+        result = llm_quiz.generate_json(prompt)
+        
+        if "error" in result:
+            logger.warning("[QUIZ-BATCH] LLM JSON generation error in attempt %d: %s", attempt, result.get("error"))
+            continue
+            
+        # Extract the 'questions' list from the root object
+        questions_raw = result.get("questions")
+        if not isinstance(questions_raw, list):
+            if isinstance(result, list):
+                questions_raw = result
+            else:
+                logger.warning("[QUIZ-BATCH] Unexpected JSON shape in attempt %d: %s", attempt, str(result)[:200])
+                continue
+                
+        # Validate and sanitize each question from this batch
+        for q in questions_raw:
+            if not isinstance(q, dict):
+                continue
+                
+            question_text = q.get("question", "")
+            options = q.get("options", [])
+            explanation = q.get("explanation", "")
+            diff_level = str(q.get("difficulty", request.difficulty)).strip().lower()
+            
+            # Match/normalize difficulty level to easy/medium/hard
+            if diff_level not in ["easy", "medium", "hard"]:
+                # Default to whatever difficulty was targeted in prompt
+                if needed_easy > 0:
+                    diff_level = "easy"
+                elif needed_medium > 0:
+                    diff_level = "medium"
+                else:
+                    diff_level = "hard"
+            
+            if not question_text:
+                continue
+                
+            # Skip example questions copied from the prompt
+            norm_text_check = re.sub(r'[^a-zA-Z0-9]', '', question_text.lower())
+            if norm_text_check in PROHIBITED_EXAMPLES:
+                logger.info("[QUIZ-BATCH] Skipped example question copied from prompt: %s", question_text)
+                continue
+                
+            if not isinstance(options, list) or len(options) != 4:
+                continue
+                
+            sanitized_options = []
+            for opt in options:
+                if not isinstance(opt, dict):
+                    continue
+                sanitized_options.append({
+                    "text": opt.get("text", ""),
+                    "isCorrect": bool(opt.get("isCorrect", False))
+                })
+                
+            correct_count = sum(1 for opt in sanitized_options if opt.get("isCorrect") is True)
+            if correct_count != 1:
+                continue
+                
+            # Deduplicate questions by normalized question text (lowercase, alphanumeric characters only)
+            norm_q = re.sub(r'[^a-zA-Z0-9]', '', question_text.lower())
+            if norm_q not in seen_questions:
+                seen_questions.add(norm_q)
+                unique_questions.append({
+                    "question": question_text,
+                    "type": q.get("type", "mcq"),
+                    "difficulty": diff_level,
+                    "options": sanitized_options,
+                    "explanation": explanation,
+                })
+            else:
+                logger.info("[QUIZ-BATCH] Attempt %d: Filtered duplicate question: %s", attempt, question_text)
+
+    # Post-generation layout balancing/trimming: match the requested counts exactly
+    final_questions = []
+    easy_questions = [q for q in unique_questions if q["difficulty"] == "easy"]
+    medium_questions = [q for q in unique_questions if q["difficulty"] == "medium"]
+    hard_questions = [q for q in unique_questions if q["difficulty"] == "hard"]
+    
+    final_questions.extend(easy_questions[:num_easy])
+    final_questions.extend(medium_questions[:num_medium])
+    final_questions.extend(hard_questions[:num_hard])
+    
+    # If we are still short of total_questions (e.g. LLM mislabeled difficulties), fill in with any remaining unique questions
+    if len(final_questions) < total_questions:
+        used_ids = {id(q) for q in final_questions}
+        for q in unique_questions:
+            if id(q) not in used_ids and len(final_questions) < total_questions:
+                final_questions.append(q)
+                
+    logger.info(
+        "[QUIZ-BATCH] Final batch generated: %d questions (Requested total: %d, Easy: %d/%d, Medium: %d/%d, Hard: %d/%d)",
+        len(final_questions),
+        total_questions,
+        sum(1 for q in final_questions if q["difficulty"] == "easy"), num_easy,
+        sum(1 for q in final_questions if q["difficulty"] == "medium"), num_medium,
+        sum(1 for q in final_questions if q["difficulty"] == "hard"), num_hard
     )
+    
+    if not final_questions:
+        raise HTTPException(
+            500,
+            "LLM failed to generate any questions that passed schema validation. "
+            "Please check context and prompt instructions."
+        )
 
-    # Call QUIZ LLM and extract parsed JSON
-    result = llm_quiz.generate_json(prompt)
-
-    if "error" in result:
-        raise HTTPException(500, f"LLM failed to generate quiz JSON: {result.get('error')}")
-
-    # Extract the 'questions' list from the root object
-    questions = result.get("questions")
-    if not isinstance(questions, list):
-        # Fallback in case LLM ignored root object structure and returned raw array or list directly
-        if isinstance(result, list):
-            return {"questions": result}
-        raise HTTPException(500, f"LLM did not return a valid list under 'questions' key: {result}")
-
-    return {"questions": questions}
+    return {"questions": final_questions}
 
 
 # ---------------------------------------------------------------------------
@@ -587,13 +933,19 @@ async def chat(request: ChatRequest):
             if request.topic_id:
                 query = f"{request.topic_id} {request.question}"
 
-            hits = vector_db.search(request.question, k=5, return_scores=True)
+            hits = vector_db.search(
+                request.question,
+                k=5,
+                return_scores=True,
+                allowed_document_ids=request.allowed_document_ids,
+                allowed_scopes=request.allowed_scopes
+            )
             context_parts = []
             for score, chunk in hits:
                 context_parts.append(chunk["text"])
                 meta = chunk.get("metadata", {})
                 sources.append({
-                    "document_id": meta.get("source_file", ""),
+                    "document_id": str(meta.get("document_id", "")),
                     "file_name": meta.get("source_file", "unknown"),
                     "snippet": chunk["text"][:200]
                 })

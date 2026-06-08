@@ -1,18 +1,276 @@
+import { useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
 import { useAuthStore } from '@/store/auth-store';
+import { userProfileService } from '@/services/userProfile.service';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Badge } from '@/components/ui/badge';
+import { Progress } from '@/components/ui/progress';
+import {
+  User,
+  Mail,
+  ShieldCheck,
+  Flame,
+  TrendingUp,
+  BookOpen,
+  Edit2,
+  Check,
+  X,
+} from 'lucide-react';
+import { toast } from 'sonner';
+
+const levelLabel: Record<string, string> = {
+  beginner: 'Sơ cấp',
+  intermediate: 'Trung cấp',
+  advanced: 'Nâng cao',
+};
+
+const levelColor: Record<string, string> = {
+  beginner: 'bg-green-500/10 text-green-400 border-green-500/30',
+  intermediate: 'bg-blue-500/10 text-blue-400 border-blue-500/30',
+  advanced: 'bg-purple-500/10 text-purple-400 border-purple-500/30',
+};
+
+function StatCard({
+  icon: Icon,
+  label,
+  value,
+  sub,
+}: {
+  icon: React.ComponentType<{ className?: string }>;
+  label: string;
+  value: string | number;
+  sub?: string;
+}) {
+  return (
+    <Card className="border-border">
+      <CardContent className="flex items-center gap-4 p-4">
+        <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10">
+          <Icon className="h-5 w-5 text-primary" />
+        </div>
+        <div>
+          <p className="text-2xl font-bold text-foreground">{value}</p>
+          <p className="text-xs text-muted-foreground">{label}</p>
+          {sub && <p className="text-xs text-muted-foreground">{sub}</p>}
+        </div>
+      </CardContent>
+    </Card>
+  );
+}
 
 export function ProfilePage() {
   const { user } = useAuthStore();
+  const [editingName, setEditingName] = useState(false);
+  const [nameInput, setNameInput] = useState(user?.name ?? '');
+
+  const { data: profile, isLoading } = useQuery({
+    queryKey: ['user-profile'],
+    queryFn: userProfileService.getProfile,
+  });
+
+
+
+  const roleLabel =
+    user?.role === 'teacher'
+      ? 'Giáo viên'
+      : user?.role === 'admin'
+        ? 'Quản trị viên'
+        : 'Học sinh';
+
+  const masteryPercent = profile ? Math.round(profile.overallMasteryScore * 100) : 0;
 
   return (
-    <div>
-      <h1 className="text-2xl font-bold text-foreground">Hồ sơ</h1>
-      {user && (
-        <div className="mt-4 space-y-2 text-muted-foreground">
-          <p>Tên: {user.name}</p>
-          <p>Email: {user.email}</p>
-          <p>Vai trò: {user.role === 'teacher' ? 'Giáo viên' : 'Học sinh'}</p>
+    <div className="space-y-6">
+      {/* Header */}
+      <div>
+        <h1 className="text-2xl font-bold text-foreground">Hồ sơ cá nhân</h1>
+        <p className="mt-1 text-sm text-muted-foreground">Thông tin tài khoản và tiến độ học tập</p>
+      </div>
+
+      <div className="grid gap-6 lg:grid-cols-3">
+        {/* Left: Account info card */}
+        <div className="lg:col-span-1 space-y-4">
+          <Card className="border-border">
+            <CardHeader>
+              <CardTitle className="text-base">Thông tin tài khoản</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              {/* Avatar placeholder */}
+              <div className="flex justify-center">
+                <div className="flex h-20 w-20 items-center justify-center rounded-full bg-primary/10 text-3xl font-bold text-primary">
+                  {user?.name?.charAt(0)?.toUpperCase() ?? 'U'}
+                </div>
+              </div>
+
+              {/* Name */}
+              <div className="space-y-1">
+                <Label className="text-xs text-muted-foreground flex items-center gap-1">
+                  <User className="h-3 w-3" /> Tên hiển thị
+                </Label>
+                {editingName ? (
+                  <div className="flex gap-2">
+                    <Input
+                      value={nameInput}
+                      onChange={(e) => setNameInput(e.target.value)}
+                      className="h-8 text-sm"
+                      autoFocus
+                    />
+                    <Button
+                      size="icon"
+                      variant="ghost"
+                      className="h-8 w-8 text-green-500"
+                      onClick={() => {
+                        // Name update would require auth service endpoint
+                        setEditingName(false);
+                        toast.info('Cập nhật tên chưa khả dụng');
+                      }}
+                    >
+                      <Check className="h-4 w-4" />
+                    </Button>
+                    <Button
+                      size="icon"
+                      variant="ghost"
+                      className="h-8 w-8 text-destructive"
+                      onClick={() => {
+                        setNameInput(user?.name ?? '');
+                        setEditingName(false);
+                      }}
+                    >
+                      <X className="h-4 w-4" />
+                    </Button>
+                  </div>
+                ) : (
+                  <div className="flex items-center justify-between">
+                    <p className="font-medium text-foreground">{user?.name}</p>
+                    <Button
+                      size="icon"
+                      variant="ghost"
+                      className="h-7 w-7 text-muted-foreground"
+                      onClick={() => {
+                        setNameInput(user?.name ?? '');
+                        setEditingName(true);
+                      }}
+                    >
+                      <Edit2 className="h-3.5 w-3.5" />
+                    </Button>
+                  </div>
+                )}
+              </div>
+
+              {/* Email */}
+              <div className="space-y-1">
+                <Label className="text-xs text-muted-foreground flex items-center gap-1">
+                  <Mail className="h-3 w-3" /> Email
+                </Label>
+                <p className="text-sm text-foreground">{user?.email}</p>
+              </div>
+
+              {/* Role */}
+              <div className="space-y-1">
+                <Label className="text-xs text-muted-foreground flex items-center gap-1">
+                  <ShieldCheck className="h-3 w-3" /> Vai trò
+                </Label>
+                <Badge variant="secondary">{roleLabel}</Badge>
+              </div>
+
+              {/* Level */}
+              {profile?.currentLevel && (
+                <div className="space-y-1">
+                  <Label className="text-xs text-muted-foreground">Trình độ hiện tại</Label>
+                  <span
+                    className={`inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold ${
+                      levelColor[profile.currentLevel] ?? 'bg-muted text-muted-foreground border-border'
+                    }`}
+                  >
+                    {levelLabel[profile.currentLevel] ?? profile.currentLevel}
+                  </span>
+                </div>
+              )}
+            </CardContent>
+          </Card>
         </div>
-      )}
+
+        {/* Right: Stats */}
+        <div className="lg:col-span-2 space-y-4">
+          {isLoading ? (
+            <div className="grid gap-4 sm:grid-cols-2">
+              {Array.from({ length: 4 }).map((_, i) => (
+                <Card key={i} className="h-20 animate-pulse border-border bg-card" />
+              ))}
+            </div>
+          ) : (
+            <>
+              {/* Stats grid */}
+              <div className="grid gap-4 sm:grid-cols-2">
+                <StatCard
+                  icon={Flame}
+                  label="Chuỗi ngày học"
+                  value={`${profile?.learningStreak ?? 0} ngày`}
+                />
+                <StatCard
+                  icon={TrendingUp}
+                  label="Điểm thành thạo tổng thể"
+                  value={`${masteryPercent}%`}
+                />
+                <StatCard
+                  icon={BookOpen}
+                  label="Chủ đề yêu thích"
+                  value={profile?.preferredTopics?.length ?? 0}
+                  sub="chủ đề đã đánh dấu"
+                />
+                <StatCard
+                  icon={ShieldCheck}
+                  label="Tham gia từ"
+                  value="—"
+                />
+              </div>
+
+              {/* Mastery progress */}
+              {profile && (
+                <Card className="border-border">
+                  <CardContent className="p-5">
+                    <div className="mb-3 flex items-center justify-between">
+                      <h2 className="font-semibold text-foreground">Mức độ thành thạo</h2>
+                      <span className="text-sm font-medium text-primary">{masteryPercent}%</span>
+                    </div>
+                    <Progress value={masteryPercent} className="h-2" />
+                    <p className="mt-2 text-xs text-muted-foreground">
+                      Điểm thành thạo được tính dựa trên tất cả các chủ đề bạn đã học
+                    </p>
+                  </CardContent>
+                </Card>
+              )}
+
+              {/* Preferred topics */}
+              {profile?.preferredTopics && profile.preferredTopics.length > 0 && (
+                <Card className="border-border">
+                  <CardHeader className="pb-3">
+                    <CardTitle className="text-base">Chủ đề yêu thích</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="flex flex-wrap gap-2">
+                      {profile.preferredTopics.map((topic) => (
+                        <Badge key={topic} variant="secondary">
+                          {topic}
+                        </Badge>
+                      ))}
+                    </div>
+                  </CardContent>
+                </Card>
+              )}
+
+              {/* Last active */}
+              {profile?.lastActiveDate && (
+                <p className="text-xs text-muted-foreground">
+                  Hoạt động lần cuối: {new Date(profile.lastActiveDate).toLocaleDateString('vi-VN')}
+                </p>
+              )}
+            </>
+          )}
+        </div>
+      </div>
     </div>
   );
 }

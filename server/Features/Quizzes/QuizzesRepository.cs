@@ -51,15 +51,61 @@ public class QuizzesRepository(AppDbContext db) : IQuizzesRepository
 
         if (request.Options != null)
         {
-            db.QuizOptions.RemoveRange(question.Options);
-            question.Options = request.Options.Select((o, i) => new QuizOption
+            // 1. Delete options that are not in the request
+            var requestIds = request.Options
+                .Where(o => !string.IsNullOrEmpty(o.Id) && Guid.TryParse(o.Id, out _))
+                .Select(o => Guid.Parse(o.Id))
+                .ToHashSet();
+            
+            var toDelete = question.Options.Where(o => !requestIds.Contains(o.Id)).ToList();
+            foreach (var opt in toDelete)
             {
-                Id = Guid.NewGuid(),
-                QuestionId = question.Id,
-                Text = o.Text,
-                IsCorrect = o.IsCorrect,
-                OrderIndex = i
-            }).ToList();
+                db.QuizOptions.Remove(opt);
+            }
+
+            // 2. Update existing options or add new ones
+            for (int i = 0; i < request.Options.Count; i++)
+            {
+                var reqOpt = request.Options[i];
+                if (!string.IsNullOrEmpty(reqOpt.Id) && Guid.TryParse(reqOpt.Id, out var optId))
+                {
+                    var existingOpt = question.Options.FirstOrDefault(o => o.Id == optId);
+                    if (existingOpt != null)
+                    {
+                        existingOpt.Text = reqOpt.Text;
+                        existingOpt.IsCorrect = reqOpt.IsCorrect;
+                        existingOpt.OrderIndex = i;
+                    }
+                    else
+                    {
+                        question.Options.Add(new QuizOption
+                        {
+                            Id = optId,
+                            QuestionId = question.Id,
+                            Text = reqOpt.Text,
+                            IsCorrect = reqOpt.IsCorrect,
+                            OrderIndex = i
+                        });
+                    }
+                }
+                else
+                {
+                    question.Options.Add(new QuizOption
+                    {
+                        Id = Guid.NewGuid(),
+                        QuestionId = question.Id,
+                        Text = reqOpt.Text,
+                        IsCorrect = reqOpt.IsCorrect,
+                        OrderIndex = i
+                    });
+                }
+            }
+
+            if (request.Options.Count > 0)
+            {
+                // Automatically synchronize the CorrectAnswer property of the question
+                question.CorrectAnswer = request.Options.FirstOrDefault(o => o.IsCorrect)?.Text ?? "";
+            }
         }
 
         await db.SaveChangesAsync();

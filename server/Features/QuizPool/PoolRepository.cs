@@ -96,16 +96,6 @@ public class PoolRepository(AppDbContext db, IStorageService storage, IAgentServ
             {
                 string bucket = doc.Scope == "student" ? MinioStorageService.Buckets.StudentDocuments : MinioStorageService.Buckets.ClassDocuments;
                 downloadUrl = await storage.GetPresignedDownloadUrlAsync(bucket, doc.StorageKey, 3600);
-
-                // Docker container networking resolution: replace localhost with host.docker.internal
-                if (downloadUrl.Contains("localhost:9000"))
-                {
-                    downloadUrl = downloadUrl.Replace("localhost:9000", "host.docker.internal:9000");
-                }
-                else if (downloadUrl.Contains("127.0.0.1:9000"))
-                {
-                    downloadUrl = downloadUrl.Replace("127.0.0.1:9000", "host.docker.internal:9000");
-                }
             }
         }
 

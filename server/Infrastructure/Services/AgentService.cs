@@ -7,11 +7,13 @@ public interface IAgentService
 {
     Task<AgentNextActionResponse?> GetNextActionAsync(string studentId, string topicName);
     Task<AgentStateResponse?> UpdateStateAsync(string studentId, string topicName, double difficulty, bool isCorrect);
-    Task<AgentQuizResponse?> GenerateQuizQuestionAsync(string topicName, double difficulty);
-    Task<string?> GetExplanationAsync(string topicName, string studentState);
-    Task<string?> GetGraderExplanationAsync(string question, string correctAnswer, string studentAnswer);
-    Task<AgentQuizBatchResponse?> GenerateQuizBatchAsync(string topicName, string? userPrompt, string? docUrl, int numQuestions, string difficulty);
-    Task<AgentChatResponse> AskAsync(string question, string? topicId, string level, List<ChatMessage> history);
+    Task<AgentQuizResponse?> GenerateQuizQuestionAsync(string topicName, double difficulty, List<string>? allowedDocumentIds = null, List<string>? allowedScopes = null);
+    Task<string?> GetExplanationAsync(string topicName, string studentState, List<string>? allowedDocumentIds = null, List<string>? allowedScopes = null);
+    Task<string?> GetGraderExplanationAsync(string question, string correctAnswer, string studentAnswer, List<string>? allowedDocumentIds = null, List<string>? allowedScopes = null);
+    Task<AgentQuizBatchResponse?> GenerateQuizBatchAsync(string topicName, string? userPrompt, string? docUrl, int numQuestions, string difficulty, int numEasy = 0, int numMedium = 0, int numHard = 0);
+    Task<AgentChatResponse> AskAsync(string question, string? topicId, string level, List<ChatMessage> history, List<string>? allowedDocumentIds = null, List<string>? allowedScopes = null);
+    Task IngestDocumentAsync(string documentId, string fileUrl, string scope, string? classId = null, string? ownerId = null, string? topicId = null);
+    Task DeleteDocumentAsync(string documentId);
 }
 
 public class AgentService : IAgentService
@@ -24,12 +26,26 @@ public class AgentService : IAgentService
         PropertyNamingPolicy = JsonNamingPolicy.SnakeCaseLower
     };
 
-    public AgentService(HttpClient http, ILogger<AgentService> logger)
+    public AgentService(HttpClient http, ILogger<AgentService> logger, IConfiguration config)
     {
         _http = http;
-        _http.BaseAddress = new Uri("http://host.docker.internal:8000");
+
+        var configuredBaseUrl = config["AIAgent:BaseUrl"];
+        if (string.IsNullOrWhiteSpace(configuredBaseUrl))
+        {
+            configuredBaseUrl = "http://host.docker.internal:8000";
+        }
+        else if (!configuredBaseUrl.StartsWith("http://", StringComparison.OrdinalIgnoreCase)
+              && !configuredBaseUrl.StartsWith("https://", StringComparison.OrdinalIgnoreCase))
+        {
+            configuredBaseUrl = $"http://{configuredBaseUrl}";
+        }
+
+        _http.BaseAddress = new Uri(configuredBaseUrl);
         _http.Timeout = TimeSpan.FromSeconds(120); // LLM calls can be slow
         _logger = logger;
+
+        _logger.LogInformation("AI Agent base URL configured: {BaseUrl}", _http.BaseAddress);
     }
 
     public async Task<AgentNextActionResponse?> GetNextActionAsync(string studentId, string topicName)
@@ -72,11 +88,17 @@ public class AgentService : IAgentService
         }
     }
 
-    public async Task<AgentQuizResponse?> GenerateQuizQuestionAsync(string topicName, double difficulty)
+    public async Task<AgentQuizResponse?> GenerateQuizQuestionAsync(string topicName, double difficulty, List<string>? allowedDocumentIds = null, List<string>? allowedScopes = null)
     {
         try
         {
-            var response = await _http.GetAsync($"/tutor/generate-question?topic_name={Uri.EscapeDataString(topicName)}&difficulty={difficulty}");
+            var queryParams = $"/tutor/generate-question?topic_name={Uri.EscapeDataString(topicName)}&difficulty={difficulty}";
+            if (allowedDocumentIds?.Count > 0)
+                queryParams += $"&allowed_document_ids={Uri.EscapeDataString(string.Join(",", allowedDocumentIds))}";
+            if (allowedScopes?.Count > 0)
+                queryParams += $"&allowed_scopes={Uri.EscapeDataString(string.Join(",", allowedScopes))}";
+
+            var response = await _http.GetAsync(queryParams);
             response.EnsureSuccessStatusCode();
             var json = await response.Content.ReadAsStringAsync();
             return JsonSerializer.Deserialize<AgentQuizResponse>(json, JsonOpts);
@@ -88,11 +110,17 @@ public class AgentService : IAgentService
         }
     }
 
-    public async Task<string?> GetExplanationAsync(string topicName, string studentState)
+    public async Task<string?> GetExplanationAsync(string topicName, string studentState, List<string>? allowedDocumentIds = null, List<string>? allowedScopes = null)
     {
         try
         {
-            var response = await _http.GetAsync($"/tutor/explain?topic_name={Uri.EscapeDataString(topicName)}&student_state={Uri.EscapeDataString(studentState)}");
+            var queryParams = $"/tutor/explain?topic_name={Uri.EscapeDataString(topicName)}&student_state={Uri.EscapeDataString(studentState)}";
+            if (allowedDocumentIds?.Count > 0)
+                queryParams += $"&allowed_document_ids={Uri.EscapeDataString(string.Join(",", allowedDocumentIds))}";
+            if (allowedScopes?.Count > 0)
+                queryParams += $"&allowed_scopes={Uri.EscapeDataString(string.Join(",", allowedScopes))}";
+
+            var response = await _http.GetAsync(queryParams);
             response.EnsureSuccessStatusCode();
             var json = await response.Content.ReadAsStringAsync();
             using var doc = JsonDocument.Parse(json);
@@ -107,7 +135,7 @@ public class AgentService : IAgentService
         }
     }
 
-    public async Task<string?> GetGraderExplanationAsync(string question, string correctAnswer, string studentAnswer)
+    public async Task<string?> GetGraderExplanationAsync(string question, string correctAnswer, string studentAnswer, List<string>? allowedDocumentIds = null, List<string>? allowedScopes = null)
     {
         try
         {
@@ -115,7 +143,9 @@ public class AgentService : IAgentService
             {
                 question,
                 correct_answer = correctAnswer,
-                student_answer = studentAnswer
+                student_answer = studentAnswer,
+                allowed_document_ids = allowedDocumentIds,
+                allowed_scopes = allowedScopes
             };
             var content = new StringContent(JsonSerializer.Serialize(payload, JsonOpts), Encoding.UTF8, "application/json");
             var response = await _http.PostAsync("/tutor/explain-error", content);
@@ -134,7 +164,7 @@ public class AgentService : IAgentService
     }
 
     public async Task<AgentQuizBatchResponse?> GenerateQuizBatchAsync(
-        string topicName, string? userPrompt, string? docUrl, int numQuestions, string difficulty)
+        string topicName, string? userPrompt, string? docUrl, int numQuestions, string difficulty, int numEasy = 0, int numMedium = 0, int numHard = 0)
     {
         try
         {
@@ -144,7 +174,10 @@ public class AgentService : IAgentService
                 user_prompt = userPrompt,
                 doc_url = docUrl,
                 num_questions = numQuestions,
-                difficulty
+                difficulty,
+                num_easy = numEasy,
+                num_medium = numMedium,
+                num_hard = numHard
             };
             var content = new StringContent(JsonSerializer.Serialize(payload, JsonOpts), Encoding.UTF8, "application/json");
             var response = await _http.PostAsync("/tutor/generate-quiz", content);
@@ -159,7 +192,7 @@ public class AgentService : IAgentService
         }
     }
 
-    public async Task<AgentChatResponse> AskAsync(string question, string? topicId, string level, List<ChatMessage> history)
+    public async Task<AgentChatResponse> AskAsync(string question, string? topicId, string level, List<ChatMessage> history, List<string>? allowedDocumentIds = null, List<string>? allowedScopes = null)
     {
         try
         {
@@ -168,7 +201,9 @@ public class AgentService : IAgentService
                 question,
                 topic_id = topicId,
                 level,
-                history = history.Select(m => new { m.Role, m.Content })
+                history = history.Select(m => new { m.Role, m.Content }),
+                allowed_document_ids = allowedDocumentIds,
+                allowed_scopes = allowedScopes
             };
             var content = new StringContent(JsonSerializer.Serialize(payload, JsonOpts), Encoding.UTF8, "application/json");
             var response = await _http.PostAsync("/tutor/chat", content);
@@ -180,6 +215,46 @@ public class AgentService : IAgentService
         {
             _logger.LogWarning(ex, "AI Agent unavailable for Ask");
             return new AgentChatResponse { Answer = "AI hiện không khả dụng. Vui lòng thử lại sau." };
+        }
+    }
+
+    public async Task IngestDocumentAsync(string documentId, string fileUrl, string scope, string? classId = null, string? ownerId = null, string? topicId = null)
+    {
+        try
+        {
+            var payload = new
+            {
+                document_id = documentId,
+                file_url = fileUrl,
+                scope,
+                class_id = classId,
+                owner_id = ownerId,
+                topic_id = topicId
+            };
+            var content = new StringContent(JsonSerializer.Serialize(payload, JsonOpts), Encoding.UTF8, "application/json");
+            var response = await _http.PostAsync("/rag/ingest", content);
+            response.EnsureSuccessStatusCode();
+            _logger.LogInformation("Successfully called AI Agent to ingest document {DocId}", documentId);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Failed to call AI Agent `/rag/ingest` for document {DocId}", documentId);
+        }
+    }
+
+    public async Task DeleteDocumentAsync(string documentId)
+    {
+        try
+        {
+            var payload = new { document_id = documentId };
+            var content = new StringContent(JsonSerializer.Serialize(payload, JsonOpts), Encoding.UTF8, "application/json");
+            var response = await _http.PostAsync("/rag/delete", content);
+            response.EnsureSuccessStatusCode();
+            _logger.LogInformation("Successfully called AI Agent to delete document {DocId}", documentId);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Failed to call AI Agent `/rag/delete` for document {DocId}", documentId);
         }
     }
 }

@@ -185,7 +185,7 @@ export function TeacherPoolDashboard() {
     try {
       const { uploadUrl, documentId } = await documentsService.requestStudentUploadUrl({
         fileName: file.name,
-        contentType: file.type || 'application/octet-stream'
+        fileSize: file.size.toString()
       });
 
       await documentsService.uploadFileToMinio(uploadUrl, file);
