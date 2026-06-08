@@ -195,12 +195,13 @@ public class DocumentsRepository(
                             "mixed", 
                             request.NumEasyQuestions ?? 0, 
                             request.NumMediumQuestions ?? 0, 
-                            request.NumHardQuestions ?? 0);
+                            request.NumHardQuestions ?? 0,
+                            documentId: doc.Id.ToString());
                         if (res?.Questions != null) appendAiQuestions.AddRange(res.Questions);
                     }
                     else
                     {
-                        var res = await agent.GenerateQuizBatchAsync(topicName, null, downloadUrl, request.NumQuestions, difficulty);
+                        var res = await agent.GenerateQuizBatchAsync(topicName, null, downloadUrl, request.NumQuestions, difficulty, documentId: doc.Id.ToString());
                         if (res?.Questions != null) appendAiQuestions.AddRange(res.Questions);
                     }
 
@@ -282,12 +283,13 @@ public class DocumentsRepository(
                     "mixed", 
                     request.NumEasyQuestions ?? 0, 
                     request.NumMediumQuestions ?? 0, 
-                    request.NumHardQuestions ?? 0);
+                    request.NumHardQuestions ?? 0,
+                    documentId: doc.Id.ToString());
                 if (res?.Questions != null) createAiQuestions.AddRange(res.Questions);
             }
             else
             {
-                var res = await agent.GenerateQuizBatchAsync(topicName, null, downloadUrl, request.NumQuestions, difficulty);
+                var res = await agent.GenerateQuizBatchAsync(topicName, null, downloadUrl, request.NumQuestions, difficulty, documentId: doc.Id.ToString());
                 if (res?.Questions != null) createAiQuestions.AddRange(res.Questions);
             }
 
@@ -491,12 +493,13 @@ public class DocumentsRepository(
                             "mixed", 
                             request.NumEasyQuestions ?? 0, 
                             request.NumMediumQuestions ?? 0, 
-                            request.NumHardQuestions ?? 0);
+                            request.NumHardQuestions ?? 0,
+                            documentId: doc.Id.ToString());
                         if (res?.Questions != null) studentAppendAiQuestions.AddRange(res.Questions);
                     }
                     else
                     {
-                        var res = await agent.GenerateQuizBatchAsync(topicName, null, downloadUrl, request.NumQuestions, request.Difficulty);
+                        var res = await agent.GenerateQuizBatchAsync(topicName, null, downloadUrl, request.NumQuestions, request.Difficulty, documentId: doc.Id.ToString());
                         if (res?.Questions != null) studentAppendAiQuestions.AddRange(res.Questions);
                     }
 
@@ -578,12 +581,13 @@ public class DocumentsRepository(
                     "mixed", 
                     request.NumEasyQuestions ?? 0, 
                     request.NumMediumQuestions ?? 0, 
-                    request.NumHardQuestions ?? 0);
+                    request.NumHardQuestions ?? 0,
+                    documentId: doc.Id.ToString());
                 if (res?.Questions != null) studentCreateAiQuestions.AddRange(res.Questions);
             }
             else
             {
-                var res = await agent.GenerateQuizBatchAsync(topicName, null, downloadUrl, request.NumQuestions, request.Difficulty);
+                var res = await agent.GenerateQuizBatchAsync(topicName, null, downloadUrl, request.NumQuestions, request.Difficulty, documentId: doc.Id.ToString());
                 if (res?.Questions != null) studentCreateAiQuestions.AddRange(res.Questions);
             }
 
@@ -700,7 +704,7 @@ public class DocumentsRepository(
         if (doc.StorageKey == null) return null;
 
         var bucket = doc.Scope == "student" ? StudentBucket : ClassBucket;
-        return await storage.GetPresignedDownloadUrlAsync(bucket, doc.StorageKey, 3600);
+        return await storage.GetInternalPresignedDownloadUrlAsync(bucket, doc.StorageKey, 3600);
     }
 
     private async Task<(string topicName, string difficulty, Guid? topicId)> ResolveTopicContextAsync(

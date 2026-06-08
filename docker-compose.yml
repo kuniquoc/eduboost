@@ -14,7 +14,7 @@ services:
     volumes:
       - pgdata:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U eduboost -d eduboost"]
+      test: [ "CMD-SHELL", "pg_isready -U eduboost -d eduboost" ]
       interval: 5s
       timeout: 5s
       retries: 10
@@ -30,21 +30,48 @@ services:
       MINIO_ROOT_USER: minioadmin
       MINIO_ROOT_PASSWORD: minioadmin123
     ports:
-      - "9000:9000"   # S3 API
-      - "9001:9001"   # Web Console UI
+      - "9000:9000" # S3 API
+      - "9001:9001" # Web Console UI
     volumes:
       - miniodata:/data
     healthcheck:
-      test: ["CMD", "mc", "ready", "local"]
+      test: [ "CMD", "mc", "ready", "local" ]
       interval: 10s
       timeout: 5s
       retries: 5
       start_period: 10s
 
+  # ── EduBoost AI Agent (Python FastAPI) ──────────────────────────────────────
+  ai-agent:
+    build:
+      context: ./ai-agent-core
+      dockerfile: Dockerfile
+    container_name: eduboost-ai-agent
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+      QUIZ_LLM_ENDPOINT: ${QUIZ_LLM_ENDPOINT:-}
+      QUIZ_LLM_MODEL: ${QUIZ_LLM_MODEL:-}
+      EXPLAIN_LLM_ENDPOINT: ${EXPLAIN_LLM_ENDPOINT:-}
+      EXPLAIN_LLM_MODEL: ${EXPLAIN_LLM_MODEL:-}
+    volumes:
+      - faissdata:/app/models/vector_db
+    depends_on:
+      minio:
+        condition: service_healthy
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:8000/health" ]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+      start_period: 120s
+
   # ── EduBoost API Server ─────────────────────────────────────────────────────
   server:
     build:
-      context: ./Server
+      context: ./server
       dockerfile: Dockerfile
     container_name: eduboost-server
     restart: unless-stopped
@@ -56,24 +83,30 @@ services:
       # PostgreSQL
       ConnectionStrings__Default: "Host=postgres;Port=5432;Database=eduboost;Username=eduboost;Password=eduboost_pass;Include Error Detail=true"
       # JWT (CHANGE IN PRODUCTION!)
-      Jwt__Secret: "eduboost-super-secret-jwt-key-change-in-production-2024!"
+      Jwt__Secret: ${JWT_SECRET:-}
       Jwt__Issuer: "EduBoost"
       Jwt__Audience: "EduBoost"
       Jwt__AccessTokenExpiryMinutes: "60"
       Jwt__RefreshTokenExpiryDays: "30"
       # MinIO
       MinIO__Endpoint: "minio:9000"
+      MinIO__AgentEndpoint: "minio:9000"
       MinIO__PublicEndpoint: "localhost:9000"
       MinIO__AccessKey: "minioadmin"
       MinIO__SecretKey: "minioadmin123"
       MinIO__UseSSL: "false"
       MinIO__PublicUseSSL: "false"
+      # AI Agent
+      AIAgent__BaseUrl: "http://ai-agent:8000"
     depends_on:
       postgres:
         condition: service_healthy
       minio:
         condition: service_healthy
+      ai-agent:
+        condition: service_healthy
 
 volumes:
   pgdata:
   miniodata:
+  faissdata:

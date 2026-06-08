@@ -8,6 +8,9 @@ public interface IStorageService
     /// <summary>Tạo presigned URL để client download file.</summary>
     Task<string> GetPresignedDownloadUrlAsync(string bucket, string objectKey, int expirySeconds = 3600);
 
+    /// <summary>Tạo presigned URL dùng endpoint nội bộ Docker (cho AI agent tải file).</summary>
+    Task<string> GetInternalPresignedDownloadUrlAsync(string bucket, string objectKey, int expirySeconds = 3600);
+
     /// <summary>Xóa object khỏi MinIO.</summary>
     Task DeleteObjectAsync(string bucket, string objectKey);
 

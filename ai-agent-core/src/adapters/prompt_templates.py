@@ -157,28 +157,16 @@ OUTPUT (start immediately with `{{`):
 {{
   "questions": [
     {{
-      "question": "The children ___ playing in the garden when it started to rain.",
+      "question": "<English sentence with a blank ___>",
       "type": "mcq",
-      "difficulty": "medium",
+      "difficulty": "<easy|medium|hard>",
       "options": [
-        {{ "text": "were", "isCorrect": true }},
-        {{ "text": "was", "isCorrect": false }},
-        {{ "text": "are", "isCorrect": false }},
-        {{ "text": "is", "isCorrect": false }}
+        {{ "text": "<correct answer>", "isCorrect": true }},
+        {{ "text": "<wrong answer 1>", "isCorrect": false }},
+        {{ "text": "<wrong answer 2>", "isCorrect": false }},
+        {{ "text": "<wrong answer 3>", "isCorrect": false }}
       ],
-      "explanation": "Đáp án đúng là 'were' vì chủ ngữ 'The children' là số nhiều và mệnh đề sau dùng thì quá khứ đơn 'started' chỉ hành động xen vào trong quá khứ, do đó ta dùng thì quá khứ tiếp diễn với 'were'."
-    }},
-    {{
-      "question": "She is an expert ___ the field of artificial intelligence.",
-      "type": "mcq",
-      "difficulty": "easy",
-      "options": [
-        {{ "text": "in", "isCorrect": true }},
-        {{ "text": "at", "isCorrect": false }},
-        {{ "text": "on", "isCorrect": false }},
-        {{ "text": "for", "isCorrect": false }}
-      ],
-      "explanation": "Cụm từ cố định là 'in the field of' chỉ trong lĩnh vực nào đó."
+      "explanation": "<Vietnamese explanation>"
     }}
   ]
 }}

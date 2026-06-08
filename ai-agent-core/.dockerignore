@@ -1,0 +1,13 @@
+scripts/
+notebooks/
+tests/
+docs/
+install.bat
+rag_trace.log
+training/
+data/
+.env
+__pycache__/
+*.pyc
+.git/
+src/rag/test_pipeline.py

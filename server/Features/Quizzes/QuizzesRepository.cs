@@ -3,6 +3,7 @@ using EduBoost.API.Features.Quizzes.Models;
 using EduBoost.API.Infrastructure;
 using EduBoost.API.Infrastructure.Entities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace EduBoost.API.Features.Quizzes;
 
@@ -51,16 +52,33 @@ public class QuizzesRepository(AppDbContext db) : IQuizzesRepository
 
         if (request.Options != null)
         {
-            // 1. Delete options that are not in the request
+            // 1. Delete options not in the request using ExecuteDeleteAsync to bypass
+            //    EF's optimistic-concurrency row-count check (avoids DbUpdateConcurrencyException
+            //    when options were deleted by a concurrent request or between loads).
             var requestIds = request.Options
                 .Where(o => !string.IsNullOrEmpty(o.Id) && Guid.TryParse(o.Id, out _))
                 .Select(o => Guid.Parse(o.Id))
                 .ToHashSet();
-            
-            var toDelete = question.Options.Where(o => !requestIds.Contains(o.Id)).ToList();
-            foreach (var opt in toDelete)
+
+            var idsToDelete = question.Options
+                .Where(o => !requestIds.Contains(o.Id))
+                .Select(o => o.Id)
+                .ToList();
+
+            if (idsToDelete.Count > 0)
             {
-                db.QuizOptions.Remove(opt);
+                // Direct SQL DELETE — no optimistic-concurrency check, no stale-tracking issue.
+                await db.QuizOptions
+                    .Where(o => idsToDelete.Contains(o.Id))
+                    .ExecuteDeleteAsync();
+
+                // Remove deleted options from the in-memory collection so subsequent
+                // navigation-property lookups see a consistent state.
+                foreach (var id in idsToDelete)
+                {
+                    var tracked = question.Options.FirstOrDefault(o => o.Id == id);
+                    if (tracked != null) question.Options.Remove(tracked);
+                }
             }
 
             // 2. Update existing options or add new ones
@@ -108,7 +126,20 @@ public class QuizzesRepository(AppDbContext db) : IQuizzesRepository
             }
         }
 
-        await db.SaveChangesAsync();
+        try
+        {
+            await db.SaveChangesAsync();
+        }
+        catch (DbUpdateConcurrencyException ex)
+        {
+            // Another request modified/deleted this question concurrently.
+            // Reload from DB and retry the save so the caller always gets a fresh result.
+            foreach (EntityEntry entry in ex.Entries)
+                await entry.ReloadAsync();
+
+            await db.SaveChangesAsync();
+        }
+
         return MapToDto(question);
     }
 

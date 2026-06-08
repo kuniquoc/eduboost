@@ -118,7 +118,7 @@ public class TopicsRepository(AppDbContext db) : ITopicsRepository
     private static TopicDto MapToDto(Topic t, int questionCount) => new()
     {
         Id               = t.Id.ToString(),
-        ClassId          = t.ClassId.ToString(),
+        ClassId          = t.ClassId?.ToString() ?? "",
         Name             = t.Name,
         Description      = t.Description,
         Difficulty       = t.Difficulty,

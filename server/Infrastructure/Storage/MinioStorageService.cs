@@ -7,6 +7,7 @@ public class MinioStorageService : IStorageService
 {
     private readonly IMinioClient _minio;
     private readonly IMinioClient _presignClient;
+    private readonly IMinioClient _agentClient;
     private readonly ILogger<MinioStorageService> _logger;
 
     public static class Buckets
@@ -51,6 +52,24 @@ public class MinioStorageService : IStorageService
         {
             _presignClient = _minio;
         }
+
+        // Presigned URLs for ai-agent must use a Docker-reachable host (e.g. minio:9000),
+        // not localhost which only resolves inside the host machine.
+        var agentEndpoint = config["MinIO:AgentEndpoint"];
+        if (string.IsNullOrWhiteSpace(agentEndpoint))
+            agentEndpoint = endpoint;
+
+        _agentClient = new MinioClient()
+            .WithEndpoint(agentEndpoint)
+            .WithCredentials(accessKey, secretKey)
+            .WithSSL(useSSL)
+            .Build();
+
+        _logger.LogInformation(
+            "MinIO agent endpoint configured: ops={OpsEndpoint}, agent={AgentEndpoint}",
+            endpoint,
+            agentEndpoint
+        );
     }
 
     public async Task<string> GetPresignedUploadUrlAsync(
@@ -78,6 +97,27 @@ public class MinioStorageService : IStorageService
 
         var url = await _presignClient.PresignedGetObjectAsync(args);
         _logger.LogDebug("Generated download presigned URL for {Bucket}/{Key}", bucket, objectKey);
+        return url;
+    }
+
+    public async Task<string> GetInternalPresignedDownloadUrlAsync(
+        string bucket, string objectKey, int expirySeconds = 3600)
+    {
+        await EnsureBucketExistsAsync(bucket);
+
+        var args = new PresignedGetObjectArgs()
+            .WithBucket(bucket)
+            .WithObject(objectKey)
+            .WithExpiry(expirySeconds);
+
+        var url = await _agentClient.PresignedGetObjectAsync(args);
+        var host = Uri.TryCreate(url, UriKind.Absolute, out var uri) ? uri.Host : "unknown";
+        _logger.LogInformation(
+            "Generated agent download presigned URL for {Bucket}/{Key} (host={Host})",
+            bucket,
+            objectKey,
+            host
+        );
         return url;
     }
 

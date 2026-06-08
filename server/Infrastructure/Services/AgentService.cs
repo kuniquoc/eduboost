@@ -10,7 +10,7 @@ public interface IAgentService
     Task<AgentQuizResponse?> GenerateQuizQuestionAsync(string topicName, double difficulty, List<string>? allowedDocumentIds = null, List<string>? allowedScopes = null);
     Task<string?> GetExplanationAsync(string topicName, string studentState, List<string>? allowedDocumentIds = null, List<string>? allowedScopes = null);
     Task<string?> GetGraderExplanationAsync(string question, string correctAnswer, string studentAnswer, List<string>? allowedDocumentIds = null, List<string>? allowedScopes = null);
-    Task<AgentQuizBatchResponse?> GenerateQuizBatchAsync(string topicName, string? userPrompt, string? docUrl, int numQuestions, string difficulty, int numEasy = 0, int numMedium = 0, int numHard = 0);
+    Task<AgentQuizBatchResponse?> GenerateQuizBatchAsync(string topicName, string? userPrompt, string? docUrl, int numQuestions, string difficulty, int numEasy = 0, int numMedium = 0, int numHard = 0, string? documentId = null);
     Task<AgentChatResponse> AskAsync(string question, string? topicId, string level, List<ChatMessage> history, List<string>? allowedDocumentIds = null, List<string>? allowedScopes = null);
     Task IngestDocumentAsync(string documentId, string fileUrl, string scope, string? classId = null, string? ownerId = null, string? topicId = null);
     Task DeleteDocumentAsync(string documentId);
@@ -164,15 +164,24 @@ public class AgentService : IAgentService
     }
 
     public async Task<AgentQuizBatchResponse?> GenerateQuizBatchAsync(
-        string topicName, string? userPrompt, string? docUrl, int numQuestions, string difficulty, int numEasy = 0, int numMedium = 0, int numHard = 0)
+        string topicName, string? userPrompt, string? docUrl, int numQuestions, string difficulty,
+        int numEasy = 0, int numMedium = 0, int numHard = 0, string? documentId = null)
     {
         try
         {
+            var totalRequested = numEasy + numMedium + numHard;
+            if (totalRequested == 0)
+                totalRequested = numQuestions;
+
+            var timeoutSeconds = Math.Min(600, Math.Max(120, totalRequested * 45));
+            using var cts = new CancellationTokenSource(TimeSpan.FromSeconds(timeoutSeconds));
+
             var payload = new
             {
                 topic_name = topicName,
                 user_prompt = userPrompt,
                 doc_url = docUrl,
+                document_id = documentId,
                 num_questions = numQuestions,
                 difficulty,
                 num_easy = numEasy,
@@ -180,9 +189,21 @@ public class AgentService : IAgentService
                 num_hard = numHard
             };
             var content = new StringContent(JsonSerializer.Serialize(payload, JsonOpts), Encoding.UTF8, "application/json");
-            var response = await _http.PostAsync("/tutor/generate-quiz", content);
-            response.EnsureSuccessStatusCode();
-            var json = await response.Content.ReadAsStringAsync();
+            var response = await _http.PostAsync("/tutor/generate-quiz", content, cts.Token);
+
+            if (!response.IsSuccessStatusCode)
+            {
+                var errorBody = await response.Content.ReadAsStringAsync(cts.Token);
+                _logger.LogWarning(
+                    "GenerateQuizBatch failed: status={Status} topic={Topic} body={Body}",
+                    (int)response.StatusCode,
+                    topicName,
+                    errorBody
+                );
+                return null;
+            }
+
+            var json = await response.Content.ReadAsStringAsync(cts.Token);
             return JsonSerializer.Deserialize<AgentQuizBatchResponse>(json, JsonOpts);
         }
         catch (Exception ex)

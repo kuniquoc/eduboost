@@ -23,10 +23,10 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..",
 from src.rag.vector_db import VectorDB
 from src.rag.retriever import KnowledgeRetriever
 from src.rag.ingest import RAGIngestor
-from src.rag.text_splitters import SemanticTextSplitter
+from src.rag.text_splitters import SemanticTextSplitter, SlidingWindowTextSplitter
 from src.rag.document_reader import DocumentReader
 from src.core.orchestrator import AgentOrchestrator
-from src.adapters.llm_manager import LLMManager
+from src.adapters.llm_manager import LLMManager, AI_UNAVAILABLE_MSG
 from src.adapters.prompt_templates import PromptTemplates
 from src.core.spaced_repetition import SpacedRepetitionEngine
 from src.core.entry_test import AdaptiveEntryTest, EntryTestState
@@ -65,22 +65,13 @@ def _validate_runtime_config() -> None:
     if not os.path.isdir(faiss_dir):
         raise RuntimeError(f"Invalid FAISS index directory: {faiss_dir}")
 
-    quiz_endpoint = os.getenv("QUIZ_LLM_ENDPOINT")
-    explain_endpoint = os.getenv("EXPLAIN_LLM_ENDPOINT")
-    openrouter_key = os.getenv("OPENROUTER_API_KEY")
 
-    # If no custom endpoint is provided, OpenRouter key is mandatory.
-    if not quiz_endpoint and not openrouter_key:
-        raise RuntimeError(
-            "Missing OPENROUTER_API_KEY for QUIZ LLM. "
-            "Set QUIZ_LLM_ENDPOINT for custom server or provide OPENROUTER_API_KEY."
-        )
+def _llm_available(llm: Optional[LLMManager]) -> bool:
+    return llm is not None and llm.is_available
 
-    if not explain_endpoint and not openrouter_key:
-        raise RuntimeError(
-            "Missing OPENROUTER_API_KEY for EXPLAIN LLM. "
-            "Set EXPLAIN_LLM_ENDPOINT for custom server or provide OPENROUTER_API_KEY."
-        )
+
+def _raise_ai_unavailable() -> None:
+    raise HTTPException(503, AI_UNAVAILABLE_MSG)
 
 
 # ---------------------------------------------------------------------------
@@ -130,16 +121,18 @@ async def lifespan(app: FastAPI):
         ingestor = None
         logger.warning("[STARTUP] Falling back to LLM-only mode (RAG disabled).")
 
-    # 2. LLM Managers (separate instances for quiz and explanation)
-    quiz_endpoint = os.getenv("QUIZ_LLM_ENDPOINT")
-    quiz_model = os.getenv("QUIZ_LLM_MODEL")
-    llm_quiz = LLMManager(endpoint_url=quiz_endpoint, model=quiz_model)
-    logger.info("Quiz LLM initialized at: %s", quiz_endpoint or "default (OpenRouter)")
-    
-    explain_endpoint = os.getenv("EXPLAIN_LLM_ENDPOINT")
-    explain_model = os.getenv("EXPLAIN_LLM_MODEL")
-    llm_explain = LLMManager(endpoint_url=explain_endpoint, model=explain_model)
-    logger.info("Explanation LLM initialized at: %s", explain_endpoint or "default (OpenRouter)")
+    # 2. LLM Managers (custom endpoint → OpenAI fallback → unavailable)
+    llm_quiz = LLMManager.from_role("quiz")
+    if _llm_available(llm_quiz):
+        logger.info("Quiz LLM available at: %s (model=%s)", llm_quiz.endpoint_url, llm_quiz.model)
+    else:
+        logger.warning("Quiz LLM unavailable — set QUIZ_LLM_ENDPOINT or OPENAI_API_KEY")
+
+    llm_explain = LLMManager.from_role("explain")
+    if _llm_available(llm_explain):
+        logger.info("Explain LLM available at: %s (model=%s)", llm_explain.endpoint_url, llm_explain.model)
+    else:
+        logger.warning("Explain LLM unavailable — set EXPLAIN_LLM_ENDPOINT or OPENAI_API_KEY")
 
     logger.info("EduBoost AI Agent ready.")
     yield
@@ -218,7 +211,14 @@ class GraderRequest(BaseModel):
 # ---------------------------------------------------------------------------
 @app.get("/health")
 async def health():
-    return {"status": "healthy", "chunks": len(vector_db.metadata) if vector_db else 0}
+    return {
+        "status": "healthy",
+        "chunks": len(vector_db.metadata) if vector_db else 0,
+        "llm": {
+            "quiz": _llm_available(llm_quiz),
+            "explain": _llm_available(llm_explain),
+        },
+    }
 
 
 # ---------------------------------------------------------------------------
@@ -351,9 +351,9 @@ async def generate_quiz_question(
     logger.info("=" * 60)
     logger.info(f"[QUIZ-GEN][STEP 1] Received generate-question request: Topic='{topic_name}', Target Difficulty (Beta)={difficulty}")
 
-    if not llm_quiz:
-        logger.error("[QUIZ-GEN] Error: Quiz LLM manager is not initialized!")
-        raise HTTPException(503, "LLM not initialized")
+    if not _llm_available(llm_quiz):
+        logger.warning("[QUIZ-GEN] Quiz LLM unavailable")
+        _raise_ai_unavailable()
 
     # Step 2: RAG Context Retrieval
     context = ""
@@ -408,19 +408,15 @@ async def generate_quiz_question(
     # Step 4: Call LLM
     logger.info(f"[QUIZ-GEN][STEP 4] Dispatching request to Quiz LLM (Model: '{llm_quiz.model}', Endpoint: '{llm_quiz.endpoint_url}')...")
     llm_start = time.time()
-    try:
-        result = llm_quiz.generate_json(prompt)
-    except Exception as e:
-        logger.error(f"[QUIZ-GEN][STEP 4] LLM call failed with exception: {e}", exc_info=True)
-        raise HTTPException(500, f"Quiz generation LLM error: {str(e)}")
-        
+    result = llm_quiz.generate_json(prompt)
+
     llm_duration = time.time() - llm_start
     logger.info(f"[QUIZ-GEN][STEP 4] Quiz LLM responded in {llm_duration:.3f}s")
 
     # Step 5: Process and Log Output
-    if "error" in result:
-        logger.error(f"[QUIZ-GEN][STEP 5] Extraction error: LLM returned invalid JSON structure or error field: {result.get('error')}")
-        raise HTTPException(500, f"LLM failed to generate quiz: {result.get('error')}")
+    if not result or "error" in result:
+        logger.warning(f"[QUIZ-GEN][STEP 5] LLM unavailable or invalid response: {result.get('error') if result else 'empty'}")
+        _raise_ai_unavailable()
 
     total_duration = time.time() - start_time
     logger.info(f"[QUIZ-GEN][STEP 5] Question generated successfully in {total_duration:.3f}s!")
@@ -458,9 +454,9 @@ async def explain_topic(
     logger.info("=" * 60)
     logger.info(f"[EXPLAIN][STEP 1] Received explain request: Topic='{topic_name}', Student State='{student_state}'")
 
-    if not llm_explain:
-        logger.error("[EXPLAIN] Error: Explanation LLM manager is not initialized!")
-        raise HTTPException(503, "LLM not initialized")
+    if not _llm_available(llm_explain):
+        logger.warning("[EXPLAIN] Explanation LLM unavailable")
+        _raise_ai_unavailable()
 
     # Step 2: RAG Context Retrieval
     context = ""
@@ -515,12 +511,11 @@ async def explain_topic(
     # Step 4: Call LLM
     logger.info(f"[EXPLAIN][STEP 4] Dispatching request to Explanation LLM (Model: '{llm_explain.model}', Endpoint: '{llm_explain.endpoint_url}')...")
     llm_start = time.time()
-    try:
-        explanation = llm_explain.generate(prompt)
-    except Exception as e:
-        logger.error(f"[EXPLAIN][STEP 4] LLM call failed with exception: {e}", exc_info=True)
-        raise HTTPException(500, f"Explanation generation LLM error: {str(e)}")
-        
+    explanation = llm_explain.generate(prompt)
+    if not explanation:
+        logger.warning("[EXPLAIN][STEP 4] LLM call returned no content")
+        _raise_ai_unavailable()
+
     llm_duration = time.time() - llm_start
     logger.info(f"[EXPLAIN][STEP 4] Explanation LLM responded in {llm_duration:.3f}s")
 
@@ -544,9 +539,9 @@ async def grade_answer(request: GraderRequest):
     logger.info("=" * 60)
     logger.info(f"[GRADER-RAG][STEP 1] Received explain-error request: Question='{request.question[:80]}...', Correct='{request.correct_answer}', Student='{request.student_answer}'")
 
-    if not llm_explain:
-        logger.error("[GRADER-RAG] Error: Explanation LLM manager is not initialized!")
-        raise HTTPException(503, "LLM not initialized")
+    if not _llm_available(llm_explain):
+        logger.warning("[GRADER-RAG] Explanation LLM unavailable")
+        _raise_ai_unavailable()
 
     # Step 2: RAG Context Retrieval
     context = ""
@@ -603,12 +598,11 @@ async def grade_answer(request: GraderRequest):
     # Step 4: Call LLM
     logger.info(f"[GRADER-RAG][STEP 4] Dispatching request to Explanation LLM (Model: '{llm_explain.model}', Endpoint: '{llm_explain.endpoint_url}')...")
     llm_start = time.time()
-    try:
-        explanation = llm_explain.generate(prompt)
-    except Exception as e:
-        logger.error(f"[GRADER-RAG][STEP 4] LLM call failed with exception: {e}", exc_info=True)
-        raise HTTPException(500, f"Grader explanation generation LLM error: {str(e)}")
-        
+    explanation = llm_explain.generate(prompt)
+    if not explanation:
+        logger.warning("[GRADER-RAG][STEP 4] LLM call returned no content")
+        _raise_ai_unavailable()
+
     llm_duration = time.time() - llm_start
     logger.info(f"[GRADER-RAG][STEP 4] Grader LLM responded in {llm_duration:.3f}s")
 
@@ -625,11 +619,121 @@ class GenerateQuizBatchRequest(BaseModel):
     topic_name: str
     user_prompt: Optional[str] = None
     doc_url: Optional[str] = None
+    document_id: Optional[str] = None
     num_questions: int = 5
     difficulty: str = "medium"
     num_easy: int = 0
     num_medium: int = 0
     num_hard: int = 0
+
+
+_DOC_CONTEXT_MAX_CHARS = 50_000
+
+
+def _load_quiz_context_from_rag(topic_name: str, document_id: str) -> str:
+    """Load document context from FAISS when the document was already ingested."""
+    if not retriever:
+        return ""
+    try:
+        context = retriever.get_context(
+            topic_name,
+            allowed_document_ids=[document_id],
+        )
+        if context and "No specific textbook context available" not in context:
+            logger.info("[QUIZ-BATCH] Loaded context from RAG for document_id=%s", document_id)
+            return context
+    except Exception as e:
+        logger.warning("[QUIZ-BATCH] RAG context lookup failed for document_id=%s: %s", document_id, e)
+    return ""
+
+
+def _chunk_document_text(full_text: str, source_file: str, topic_name: str) -> str:
+    """Split document text and return top relevant chunks for quiz context."""
+    if not full_text.strip():
+        return ""
+
+    if len(full_text) > _DOC_CONTEXT_MAX_CHARS:
+        full_text = full_text[:_DOC_CONTEXT_MAX_CHARS]
+        logger.info("[QUIZ-BATCH] Truncated document to %d chars", _DOC_CONTEXT_MAX_CHARS)
+
+    embed_model = vector_db.embed_model if vector_db else None
+    doc_chunks: list[dict] = []
+
+    try:
+        splitter = SemanticTextSplitter(
+            embed_model=embed_model,
+            percentile_threshold=75,
+            min_chunk_size=50,
+            max_chunk_size=600,
+        )
+        doc_chunks = splitter.split_text(full_text, source_file=source_file)
+        logger.info("[QUIZ-BATCH] Split document into %d semantic chunks", len(doc_chunks))
+    except Exception as e:
+        logger.warning("[QUIZ-BATCH] Semantic chunking failed, using sliding window fallback: %s", e)
+        doc_chunks = SlidingWindowTextSplitter(chunk_size=200, chunk_overlap=30).split_text(
+            full_text, source_file=source_file
+        )
+
+    if not doc_chunks:
+        return ""
+
+    if embed_model:
+        try:
+            import torch
+            from sentence_transformers import util as st_util
+
+            topic_emb = embed_model.encode(topic_name, convert_to_tensor=True)
+            chunk_texts = [c["text"] for c in doc_chunks]
+            chunk_embs = embed_model.encode(chunk_texts, convert_to_tensor=True)
+            scores = st_util.cos_sim(topic_emb, chunk_embs)[0]
+            top_k = min(6, len(doc_chunks))
+            top_indices = sorted(torch.topk(scores, top_k).indices.tolist())
+            logger.info("[QUIZ-BATCH] Selected top-%d relevant chunks for topic '%s'", top_k, topic_name)
+            return "\n\n".join(doc_chunks[i]["text"] for i in top_indices)
+        except Exception as e:
+            logger.warning("[QUIZ-BATCH] Chunk ranking failed, using first 6 chunks: %s", e)
+
+    return "\n\n".join(c["text"] for c in doc_chunks[: min(6, len(doc_chunks))])
+
+
+def _load_quiz_context_from_doc_url(doc_url: str, topic_name: str) -> str:
+    """Download and parse a document URL. Returns empty string on failure (non-fatal)."""
+    import requests as _requests
+    import tempfile
+
+    try:
+        logger.info("[QUIZ-BATCH] Downloading file from: %s", doc_url)
+        response = _requests.get(doc_url, timeout=30)
+        response.raise_for_status()
+    except Exception as e:
+        logger.warning("[QUIZ-BATCH] Document download failed (continuing without doc context): %s", e)
+        return ""
+
+    parsed_url = doc_url.split("?")[0]
+    ext = os.path.splitext(parsed_url)[1].lower() or ".txt"
+    tmp_path = ""
+
+    try:
+        with tempfile.NamedTemporaryFile(delete=False, suffix=ext) as tmp:
+            tmp.write(response.content)
+            tmp_path = tmp.name
+
+        reader = DocumentReader()
+        full_text = reader.load_document(tmp_path)
+        if not full_text.strip():
+            logger.warning("[QUIZ-BATCH] Document parsed but contained no text")
+            return ""
+
+        return _chunk_document_text(full_text, parsed_url, topic_name)
+    except Exception as e:
+        logger.warning("[QUIZ-BATCH] Document parse/chunk failed (continuing without doc context): %s", e)
+        return ""
+    finally:
+        if tmp_path:
+            try:
+                os.unlink(tmp_path)
+            except Exception as cleanup_error:
+                logger.warning("Failed to delete temporary file %s: %s", tmp_path, cleanup_error)
 
 
 class ChatRequest(BaseModel):
@@ -661,78 +765,54 @@ class EntryTestAnswerRequest(BaseModel):
     topic_id: Optional[str] = None
 
 
+def _parse_is_correct(val) -> bool:
+    """Robustly parse isCorrect field from LLM output.
+    
+    Handles: bool (True/False), int (1/0), str ("true"/"false"/"1"/"0"/"yes"/"no").
+    Avoids the Python pitfall: bool("false") == True (non-empty string is truthy).
+    """
+    if isinstance(val, bool):
+        return val
+    if isinstance(val, int):
+        return val == 1
+    if isinstance(val, str):
+        return val.strip().lower() in ("true", "1", "yes")
+    return False
+
+
+# Difficulty → IRT Beta mapping for single-question QUIZ_TEMPLATE
+_DIFFICULTY_TO_BETA = {
+    "easy": -1.5,
+    "medium": 0.0,
+    "hard": 1.5,
+}
+
+
 @app.post("/tutor/generate-quiz")
 async def generate_quiz_batch(request: GenerateQuizBatchRequest):
-    """Generates multiple quiz questions using LLM context or document or user suggestion."""
-    if not llm_quiz:
-        raise HTTPException(503, "LLM not initialized")
+    """Generates multiple quiz questions — one LLM call per question, run in parallel."""
+    if not _llm_available(llm_quiz):
+        _raise_ai_unavailable()
 
+    # ── Step 1: Load document context (RAG first, then doc_url fallback) ─────
     context = ""
-    if request.doc_url:
-        try:
-            import requests
-            import tempfile
-            logger.info("Downloading file from: %s", request.doc_url)
-            response = requests.get(request.doc_url, timeout=30)
-            response.raise_for_status()
+    if request.document_id:
+        context = _load_quiz_context_from_rag(request.topic_name, request.document_id)
 
-            # Extract extension from URL path cleanly
-            parsed_url = request.doc_url.split('?')[0]
-            ext = os.path.splitext(parsed_url)[1].lower() or ".txt"
+    if not context and request.doc_url:
+        context = _load_quiz_context_from_doc_url(request.doc_url, request.topic_name)
 
-            with tempfile.NamedTemporaryFile(delete=False, suffix=ext) as tmp:
-                tmp.write(response.content)
-                tmp_path = tmp.name
+    if not context and (request.document_id or request.doc_url):
+        logger.warning(
+            "[QUIZ-BATCH] No document context available (document_id=%s) — generating from topic only",
+            request.document_id,
+        )
 
-            try:
-                reader = DocumentReader()
-                full_text = reader.load_document(tmp_path)
-            finally:
-                try:
-                    os.unlink(tmp_path)
-                except Exception as cleanup_error:
-                    logger.warning("Failed to delete temporary file %s: %s", tmp_path, cleanup_error)
-
-            # Chunk document using SemanticTextSplitter (reuse embed_model from VectorDB if available)
-            embed_model = vector_db.embed_model if vector_db else None
-            splitter = SemanticTextSplitter(
-                embed_model=embed_model,
-                percentile_threshold=75,
-                min_chunk_size=50,
-                max_chunk_size=600,
-            )
-            doc_chunks = splitter.split_text(full_text, source_file=parsed_url)
-            logger.info("Split document into %d semantic chunks", len(doc_chunks))
-
-            # Select top-6 chunks most relevant to the topic via cosine similarity
-            if doc_chunks and embed_model:
-                import torch
-                from sentence_transformers import util as st_util
-                topic_emb = embed_model.encode(request.topic_name, convert_to_tensor=True)
-                chunk_texts = [c["text"] for c in doc_chunks]
-                chunk_embs = embed_model.encode(chunk_texts, convert_to_tensor=True)
-                scores = st_util.cos_sim(topic_emb, chunk_embs)[0]
-                top_k = min(6, len(doc_chunks))
-                top_indices = sorted(torch.topk(scores, top_k).indices.tolist())
-                context = "\n\n".join(doc_chunks[i]["text"] for i in top_indices)
-                logger.info(
-                    "Selected top-%d relevant chunks for topic '%s' (chunk indices: %s)",
-                    top_k, request.topic_name, top_indices,
-                )
-            else:
-                # Fallback: concatenate first 6 chunks when embed_model unavailable
-                context = "\n\n".join(c["text"] for c in doc_chunks[:min(6, len(doc_chunks))])
-                logger.info("Embed model unavailable — using first 6 chunks as context fallback")
-        except Exception as e:
-            logger.error("Error downloading or parsing document from URL: %s", e)
-            raise HTTPException(500, f"Failed to download or parse document: {str(e)}")
-
-    # Resolve difficulty counts
+    # ── Step 2: Resolve difficulty counts ────────────────────────────────────
     num_easy = request.num_easy
     num_medium = request.num_medium
     num_hard = request.num_hard
 
-    # Fallback to defaults if no specific counts are set
     if num_easy == 0 and num_medium == 0 and num_hard == 0:
         if request.difficulty == "easy":
             num_easy = request.num_questions
@@ -746,151 +826,149 @@ async def generate_quiz_batch(request: GenerateQuizBatchRequest):
         total_questions = request.num_questions
         num_medium = total_questions
 
+    # Build the flat list of difficulty labels to generate
+    difficulty_list = (["easy"] * num_easy) + (["medium"] * num_medium) + (["hard"] * num_hard)
+    logger.info(
+        "[QUIZ-BATCH] Starting per-question generation: total=%d (Easy=%d, Medium=%d, Hard=%d)",
+        total_questions, num_easy, num_medium, num_hard
+    )
+
+    # ── Step 3: Per-question generator ───────────────────────────────────────
     import re
-    unique_questions = []
-    seen_questions = set()
+    import asyncio
+
+    seen_questions: set[str] = set()
     PROHIBITED_EXAMPLES = {
         "thechildrenplayinginthegardenwhenitstartedtorain",
         "sheisanexpertinthefieldofartificialintelligence"
     }
-    
-    max_attempts = 3
-    attempt = 0
-    
-    while len(unique_questions) < total_questions and attempt < max_attempts:
-        attempt += 1
-        
-        # Calculate how many questions of each difficulty we still need
-        current_easy_count = sum(1 for q in unique_questions if q["difficulty"] == "easy")
-        current_medium_count = sum(1 for q in unique_questions if q["difficulty"] == "medium")
-        current_hard_count = sum(1 for q in unique_questions if q["difficulty"] == "hard")
-        
-        needed_easy = max(0, num_easy - current_easy_count)
-        needed_medium = max(0, num_medium - current_medium_count)
-        needed_hard = max(0, num_hard - current_hard_count)
-        needed_total = needed_easy + needed_medium + needed_hard
-        
-        if needed_total == 0:
-            break
-            
-        logger.info(
-            "[QUIZ-BATCH] Attempt %d/%d: Generating %d questions (Easy: %d, Medium: %d, Hard: %d)",
-            attempt, max_attempts, needed_total, needed_easy, needed_medium, needed_hard
-        )
-        
-        # If we already have some questions, instruct the LLM to avoid them to prevent duplication
-        avoid_instruction = ""
-        if unique_questions:
-            existing_texts = [q["question"] for q in unique_questions]
-            avoid_instruction = (
-                f"\nDO NOT generate any of the following questions that were already created:\n"
-                + "\n".join(f"- {txt}" for txt in existing_texts)
-            )
-            
-        # Format the prompt for this attempt
-        prompt = PromptTemplates.BATCH_QUIZ_TEMPLATE.format(
-            topic=request.topic_name,
-            difficulty=request.difficulty,
-            context=context or "No document context provided.",
-            user_prompt=(request.user_prompt or "None.") + avoid_instruction,
-            num_questions=needed_total,
-            num_easy=needed_easy,
-            num_medium=needed_medium,
-            num_hard=needed_hard
-        )
-        
-        # Call QUIZ LLM and extract parsed JSON
-        result = llm_quiz.generate_json(prompt)
-        
-        if "error" in result:
-            logger.warning("[QUIZ-BATCH] LLM JSON generation error in attempt %d: %s", attempt, result.get("error"))
-            continue
-            
-        # Extract the 'questions' list from the root object
-        questions_raw = result.get("questions")
-        if not isinstance(questions_raw, list):
-            if isinstance(result, list):
-                questions_raw = result
-            else:
-                logger.warning("[QUIZ-BATCH] Unexpected JSON shape in attempt %d: %s", attempt, str(result)[:200])
-                continue
-                
-        # Validate and sanitize each question from this batch
-        for q in questions_raw:
-            if not isinstance(q, dict):
-                continue
-                
-            question_text = q.get("question", "")
-            options = q.get("options", [])
-            explanation = q.get("explanation", "")
-            diff_level = str(q.get("difficulty", request.difficulty)).strip().lower()
-            
-            # Match/normalize difficulty level to easy/medium/hard
-            if diff_level not in ["easy", "medium", "hard"]:
-                # Default to whatever difficulty was targeted in prompt
-                if needed_easy > 0:
-                    diff_level = "easy"
-                elif needed_medium > 0:
-                    diff_level = "medium"
-                else:
-                    diff_level = "hard"
-            
-            if not question_text:
-                continue
-                
-            # Skip example questions copied from the prompt
-            norm_text_check = re.sub(r'[^a-zA-Z0-9]', '', question_text.lower())
-            if norm_text_check in PROHIBITED_EXAMPLES:
-                logger.info("[QUIZ-BATCH] Skipped example question copied from prompt: %s", question_text)
-                continue
-                
-            if not isinstance(options, list) or len(options) != 4:
-                continue
-                
-            sanitized_options = []
-            for opt in options:
-                if not isinstance(opt, dict):
-                    continue
-                sanitized_options.append({
-                    "text": opt.get("text", ""),
-                    "isCorrect": bool(opt.get("isCorrect", False))
-                })
-                
-            correct_count = sum(1 for opt in sanitized_options if opt.get("isCorrect") is True)
-            if correct_count != 1:
-                continue
-                
-            # Deduplicate questions by normalized question text (lowercase, alphanumeric characters only)
-            norm_q = re.sub(r'[^a-zA-Z0-9]', '', question_text.lower())
-            if norm_q not in seen_questions:
-                seen_questions.add(norm_q)
-                unique_questions.append({
-                    "question": question_text,
-                    "type": q.get("type", "mcq"),
-                    "difficulty": diff_level,
-                    "options": sanitized_options,
-                    "explanation": explanation,
-                })
-            else:
-                logger.info("[QUIZ-BATCH] Attempt %d: Filtered duplicate question: %s", attempt, question_text)
 
-    # Post-generation layout balancing/trimming: match the requested counts exactly
-    final_questions = []
-    easy_questions = [q for q in unique_questions if q["difficulty"] == "easy"]
-    medium_questions = [q for q in unique_questions if q["difficulty"] == "medium"]
-    hard_questions = [q for q in unique_questions if q["difficulty"] == "hard"]
-    
-    final_questions.extend(easy_questions[:num_easy])
-    final_questions.extend(medium_questions[:num_medium])
-    final_questions.extend(hard_questions[:num_hard])
-    
-    # If we are still short of total_questions (e.g. LLM mislabeled difficulties), fill in with any remaining unique questions
-    if len(final_questions) < total_questions:
-        used_ids = {id(q) for q in final_questions}
-        for q in unique_questions:
-            if id(q) not in used_ids and len(final_questions) < total_questions:
-                final_questions.append(q)
-                
+    def _generate_one_sync(difficulty_label: str, avoid_texts: list[str]) -> dict | None:
+        """Synchronous single-question generation (called via asyncio.to_thread)."""
+        beta = _DIFFICULTY_TO_BETA.get(difficulty_label, 0.0)
+        avoid_block = ""
+        if avoid_texts:
+            avoid_block = (
+                "\n\nDO NOT generate any of the following questions (already used):\n"
+                + "\n".join(f"- {t}" for t in avoid_texts)
+            )
+        user_hint = (request.user_prompt or "") + avoid_block
+        
+        # Build context block
+        ctx = context if context else "No document context provided."
+        if user_hint.strip():
+            ctx += f"\n\nADDITIONAL INSTRUCTIONS:\n{user_hint}"
+
+        prompt = PromptTemplates.QUIZ_TEMPLATE.format(
+            topic=request.topic_name,
+            difficulty=beta,
+            context=ctx,
+        )
+        result = llm_quiz.generate_json(prompt, max_tokens=1024)
+        if "error" in result:
+            logger.warning("[QUIZ-BATCH] LLM error for difficulty=%s: %s", difficulty_label, result.get("error"))
+            return None
+        return result
+
+    def _parse_single_question(raw: dict, difficulty_label: str) -> dict | None:
+        """Parse and validate a single QUIZ_TEMPLATE response into the standard format."""
+        question_text = raw.get("question", "").strip()
+        if not question_text:
+            return None
+
+        # Filter out prohibited example questions
+        norm_text = re.sub(r'[^a-zA-Z0-9]', '', question_text.lower())
+        if norm_text in PROHIBITED_EXAMPLES:
+            logger.info("[QUIZ-BATCH] Skipped prohibited example question: %s", question_text)
+            return None
+
+        # QUIZ_TEMPLATE returns options as dict {"A": "...", "B": "...", ...}
+        # and correct_answer as "A", "B", "C", or "D"
+        options_raw = raw.get("options", {})
+        correct_letter = str(raw.get("correct_answer", "")).strip().upper()
+        explanation = raw.get("explanation", "")
+
+        if isinstance(options_raw, dict) and len(options_raw) == 4:
+            # Standard QUIZ_TEMPLATE format: {"A": text, "B": text, ...}
+            letter_order = ["A", "B", "C", "D"]
+            if correct_letter not in letter_order:
+                logger.warning("[QUIZ-BATCH] Invalid correct_answer letter '%s', skipping", correct_letter)
+                return None
+            sanitized_options = [
+                {"text": str(options_raw.get(letter, "")), "isCorrect": (letter == correct_letter)}
+                for letter in letter_order
+            ]
+        elif isinstance(options_raw, list) and len(options_raw) == 4:
+            # Fallback: LLM returned array format with isCorrect booleans
+            sanitized_options = []
+            for opt in options_raw:
+                if not isinstance(opt, dict):
+                    return None
+                sanitized_options.append({
+                    "text": str(opt.get("text", "")),
+                    "isCorrect": _parse_is_correct(opt.get("isCorrect", False))
+                })
+        else:
+            logger.warning("[QUIZ-BATCH] Unexpected options format: %s", str(options_raw)[:100])
+            return None
+
+        correct_count = sum(1 for o in sanitized_options if o["isCorrect"])
+        if correct_count != 1:
+            logger.warning("[QUIZ-BATCH] Expected exactly 1 correct option, got %d — skipping", correct_count)
+            return None
+
+        return {
+            "question": question_text,
+            "type": "mcq",
+            "difficulty": difficulty_label,
+            "options": sanitized_options,
+            "explanation": explanation,
+        }
+
+    # ── Step 4: Generate all questions (semaphore-limited), with per-question retry ─
+    final_questions: list[dict] = []
+
+    # Run all question generations sequentially (single-GPU server cannot handle
+    # concurrent inference — requests would collide on GPU and cause 500 errors).
+    # asyncio.Semaphore(1) = one at a time, but written in a way that's easy to
+    # increase if the backend is ever upgraded to a batching server (e.g. vLLM).
+    MAX_CONCURRENT = 1
+    semaphore = asyncio.Semaphore(MAX_CONCURRENT)
+
+    async def generate_one_with_retry(difficulty_label: str, max_retries: int = 3) -> dict | None:
+        async with semaphore:
+            for attempt in range(1, max_retries + 1):
+                avoid_texts = [q["question"] for q in final_questions]
+                raw = await asyncio.to_thread(_generate_one_sync, difficulty_label, avoid_texts)
+                if raw is None:
+                    logger.warning("[QUIZ-BATCH] Attempt %d/%d: LLM call failed for difficulty=%s", attempt, max_retries, difficulty_label)
+                    continue
+
+                parsed = _parse_single_question(raw, difficulty_label)
+                if parsed is None:
+                    logger.warning("[QUIZ-BATCH] Attempt %d/%d: Parse/validation failed for difficulty=%s", attempt, max_retries, difficulty_label)
+                    continue
+
+                norm_q = re.sub(r'[^a-zA-Z0-9]', '', parsed["question"].lower())
+                if norm_q in seen_questions:
+                    logger.info("[QUIZ-BATCH] Attempt %d/%d: Duplicate question for difficulty=%s, retrying", attempt, max_retries, difficulty_label)
+                    continue
+
+                seen_questions.add(norm_q)
+                logger.info("[QUIZ-BATCH] ✓ Generated %s question: \"%s\"", difficulty_label, parsed["question"][:60])
+                return parsed
+
+            logger.error("[QUIZ-BATCH] Failed to generate valid %s question after %d attempts", difficulty_label, max_retries)
+            return None
+
+    logger.info("[QUIZ-BATCH] Launching %d question generation tasks (max_concurrent=%d)...", total_questions, MAX_CONCURRENT)
+    tasks = [generate_one_with_retry(diff) for diff in difficulty_list]
+    results = await asyncio.gather(*tasks)
+
+    for res in results:
+        if res is not None:
+            final_questions.append(res)
+
     logger.info(
         "[QUIZ-BATCH] Final batch generated: %d questions (Requested total: %d, Easy: %d/%d, Medium: %d/%d, Hard: %d/%d)",
         len(final_questions),
@@ -899,13 +977,9 @@ async def generate_quiz_batch(request: GenerateQuizBatchRequest):
         sum(1 for q in final_questions if q["difficulty"] == "medium"), num_medium,
         sum(1 for q in final_questions if q["difficulty"] == "hard"), num_hard
     )
-    
+
     if not final_questions:
-        raise HTTPException(
-            500,
-            "LLM failed to generate any questions that passed schema validation. "
-            "Please check context and prompt instructions."
-        )
+        _raise_ai_unavailable()
 
     return {"questions": final_questions}
 
@@ -921,8 +995,11 @@ async def chat(request: ChatRequest):
     start_time = time.time()
     logger.info(f"[CHAT] Received question: '{request.question[:100]}...', level={request.level}, topic_id={request.topic_id}")
 
-    if not llm_explain:
-        raise HTTPException(503, "LLM not initialized")
+    if not _llm_available(llm_explain):
+        return {
+            "answer": "AI server không khả dụng. Vui lòng thử lại sau.",
+            "sources": [],
+        }
 
     # RAG retrieval
     context = ""
@@ -981,12 +1058,12 @@ Câu hỏi của học sinh: {request.question}
 
 Hãy trả lời chính xác dựa trên tài liệu tham khảo. Nếu không tìm thấy thông tin trong tài liệu, hãy nói rõ và cung cấp kiến thức chung."""
 
-    # Call LLM
-    try:
-        answer = llm_explain.generate(prompt)
-    except Exception as e:
-        logger.error(f"[CHAT] LLM error: {e}")
-        raise HTTPException(500, f"LLM error: {str(e)}")
+    answer = llm_explain.generate(prompt)
+    if not answer:
+        return {
+            "answer": "AI server không khả dụng. Vui lòng thử lại sau.",
+            "sources": sources[:3],
+        }
 
     total_duration = time.time() - start_time
     logger.info(f"[CHAT] Response generated in {total_duration:.3f}s")

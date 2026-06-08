@@ -95,13 +95,14 @@ public class PoolRepository(AppDbContext db, IStorageService storage, IAgentServ
             if (doc != null && doc.StorageKey != null)
             {
                 string bucket = doc.Scope == "student" ? MinioStorageService.Buckets.StudentDocuments : MinioStorageService.Buckets.ClassDocuments;
-                downloadUrl = await storage.GetPresignedDownloadUrlAsync(bucket, doc.StorageKey, 3600);
+                downloadUrl = await storage.GetInternalPresignedDownloadUrlAsync(bucket, doc.StorageKey, 3600);
             }
         }
 
         // 3. Request Batch Quiz Questions from AI agent
         var aiResponse = await agent.GenerateQuizBatchAsync(
-            topic.Name, request.UserSuggestion, downloadUrl, request.NumQuestions, request.Difficulty);
+            topic.Name, request.UserSuggestion, downloadUrl, request.NumQuestions, request.Difficulty,
+            documentId: request.DocumentId);
 
         if (aiResponse == null || aiResponse.Questions.Count == 0)
         {
