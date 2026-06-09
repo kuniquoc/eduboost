@@ -1,6 +1,7 @@
 import { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useMyDocuments } from '@/hooks/use-my-documents';
 import { documentsService } from '@/services/documents.service';
 import { quizzesService } from '@/services/quizzes.service';
 import { Button } from '@/components/ui/button';
@@ -18,8 +19,10 @@ import type { DocumentDto, CreateQuestionPayload } from '@/types';
 const statusMap: Record<string, { label: string; variant: 'default' | 'secondary' | 'destructive' | 'outline' }> = {
   pending: { label: 'Chờ tải lên', variant: 'outline' },
   uploading: { label: 'Đang tải', variant: 'outline' },
+  ingesting: { label: 'Đang index RAG', variant: 'secondary' },
   processing: { label: 'Đang xử lý', variant: 'secondary' },
   ready: { label: 'Sẵn sàng', variant: 'default' },
+  ingest_failed: { label: 'Lỗi index RAG', variant: 'destructive' },
   error: { label: 'Lỗi', variant: 'destructive' },
 };
 
@@ -39,10 +42,7 @@ export function AILabPage() {
   const [quizBuilderOpen, setQuizBuilderOpen] = useState(false);
   const [quizDoc, setQuizDoc] = useState<DocumentDto | null>(null);
 
-  const { data: documents, isLoading } = useQuery({
-    queryKey: ['my-documents'],
-    queryFn: documentsService.getMyDocuments,
-  });
+  const { data: documents, isLoading } = useMyDocuments();
 
   const invalidate = () => queryClient.invalidateQueries({ queryKey: ['my-documents'] });
 
@@ -75,6 +75,15 @@ export function AILabPage() {
       setDeleteDoc(null);
     },
     onError: () => toast.error('Xóa thất bại'),
+  });
+
+  const retryIngestMutation = useMutation({
+    mutationFn: (docId: string) => documentsService.confirmStudentUpload(docId),
+    onSuccess: () => {
+      invalidate();
+      toast.success('Đang thử index RAG lại...');
+    },
+    onError: () => toast.error('Không thể thử lại index RAG'),
   });
 
   const generateMutation = useMutation({
@@ -167,6 +176,16 @@ export function AILabPage() {
                   </div>
                   <div className="flex items-center gap-2 shrink-0">
                     <Badge variant={status.variant}>{status.label}</Badge>
+                    {doc.status === 'ingest_failed' && (
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() => retryIngestMutation.mutate(doc.id)}
+                        disabled={retryIngestMutation.isPending}
+                      >
+                        Thử lại RAG
+                      </Button>
+                    )}
 
                     {(doc.status === 'ready' || doc.status === 'error') && (
                       <Button

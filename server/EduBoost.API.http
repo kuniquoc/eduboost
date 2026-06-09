@@ -1,11 +1,32 @@
-@EduBoost.API_HostAddress = http://localhost:5199
+@EduBoost.API_HostAddress = http://localhost:5000
+@Token = {{login.response.body.data.accessToken}}
 
+### Health
 GET {{EduBoost.API_HostAddress}}/health
 Accept: application/json
 
 ###
 
-GET {{EduBoost.API_HostAddress}}/swagger/v1/swagger.json
+### Login (student)
+# @name login
+POST {{EduBoost.API_HostAddress}}/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "student@eduboost.local",
+  "password": "student123"
+}
+
+###
+
+### My progress
+GET {{EduBoost.API_HostAddress}}/api/students/me/progress
+Authorization: Bearer {{Token}}
 Accept: application/json
 
 ###
+
+### Enrolled classes
+GET {{EduBoost.API_HostAddress}}/api/classes/enrolled
+Authorization: Bearer {{Token}}
+Accept: application/json

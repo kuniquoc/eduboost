@@ -1,52 +1,50 @@
 # Luồng: Topic AI Evaluate
 
-> Trạng thái: 🔧
+> Trạng thái: ✅
 
 ## Trigger
 
-Topics tab AI evaluate
+Teacher bấm "AI đánh giá độ khó" trên tab Topics trong class detail.
 
 ## Sequence diagram
 
 ```mermaid
 sequenceDiagram
-    actor User
+    actor Teacher
     participant Web as web
     participant API as server
     participant Agent as ai-agent-core
     participant DB as PostgreSQL
-    User->>Web: Topics tab AI evaluate
-    Web->>API: REST call
-    API->>DB: Persist / query
-    opt AI required
-        API->>Agent: HTTP tutor/rag
-        Agent-->>API: JSON response
+    Teacher->>Web: AI evaluate topics
+    Web->>API: POST /api/classes/{id}/topics/ai-evaluate
+    API->>DB: Load topics + sample questions
+    loop Each topic
+        API->>Agent: AskAsync (difficulty prompt)
+        Agent-->>API: easy | medium | hard
+        opt Agent offline / bad response
+            API->>API: Heuristic from question count
+        end
     end
-    API-->>Web: ApiResponse
-    Web-->>User: UI update
+    API->>DB: Save difficulty + AiEvaluated
+    API-->>Web: Updated topics
 ```
 
 ## Bảng bước
 
 | Step | Layer | File / Module | API / Endpoint | Ghi chú |
 |------|-------|---------------|----------------|---------|
-| 1 | web | See integration map | — | User action |
-| 2 | web | Service layer | REST | JWT attached |
-| 3 | server | TopicsRepository.AiEvaluateAsync | POST topics/ai-evaluate | Repository logic |
-| 4 | server | AgentService (if any) | Agent HTTP | Graceful degradation |
-| 5 | web | React Query invalidate | — | UI refresh |
+| 1 | web | `topics.service.ts` | POST `topics/ai-evaluate` | Teacher only |
+| 2 | server | `TopicsController.AiEvaluate` | RBAC teacher owns class | |
+| 3 | server | `TopicsRepository.AiEvaluateAsync` | `AgentService.AskAsync` | Fallback heuristic |
+| 4 | server | `TopicDifficultyParser` | — | Parse AI + heuristic bands |
 
 ## Error paths & fallback
 
-- **401:** Axios refresh queue → retry hoặc logout
-- **Agent offline:** Tutor/chat trả placeholder; quiz generation fail message
-- **Upload fail:** Toast error, document status `pending` không confirm
-
-## Trạng thái & hạn chế
-
-Heuristic không gọi agent
+- **Agent offline:** Heuristic theo số câu hỏi (≥10 hard, ≥6 medium, else easy)
+- **Unparseable AI text:** Cùng heuristic
+- **401/403:** JWT / teacher ownership
 
 ## Liên kết
 
 - [web-server-agent-map.md](../web-server-agent-map.md)
-- [../../99-known-issues/index.md](../../99-known-issues/index.md)
+- [../../99-known-issues/server-gaps.md](../../99-known-issues/server-gaps.md)

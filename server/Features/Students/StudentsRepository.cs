@@ -1,5 +1,6 @@
 using EduBoost.API.Features.Students.Models;
 using EduBoost.API.Infrastructure;
+using EduBoost.API.Infrastructure.Services;
 using Microsoft.EntityFrameworkCore;
 
 namespace EduBoost.API.Features.Students;
@@ -12,7 +13,7 @@ public interface IStudentsRepository
     Task<StudentStatsDto> GetMyStatsAsync(Guid studentId);
 }
 
-public class StudentsRepository(AppDbContext db) : IStudentsRepository
+public class StudentsRepository(AppDbContext db, IStudentStatsCalculator statsCalculator) : IStudentsRepository
 {
     public async Task<ClassAnalyticsDto> GetClassAnalyticsAsync(Guid classId)
     {
@@ -63,40 +64,47 @@ public class StudentsRepository(AppDbContext db) : IStudentsRepository
             .Include(e => e.Class)
             .ToListAsync();
 
-        var overallProgress = enrollments.Any()
-            ? (int)enrollments.Average(e => e.Progress)
+        var classProgress = new List<int>();
+        var enrolledClasses = new List<EnrolledClassProgressDto>();
+
+        foreach (var e in enrollments)
+        {
+            var progress = await statsCalculator.CalculateClassProgressAsync(studentId, e.ClassId);
+            classProgress.Add(progress);
+            enrolledClasses.Add(new EnrolledClassProgressDto
+            {
+                ClassId = e.ClassId.ToString(),
+                ClassName = e.Class.Name,
+                CoverColor = e.Class.CoverColor,
+                Progress = progress,
+                EntryTestCompleted = e.EntryTestCompleted,
+                JoinedAt = e.EnrolledAt.ToString("dd MMM yyyy")
+            });
+        }
+
+        var overallProgress = classProgress.Any()
+            ? (int)classProgress.Average()
             : 0;
 
         return new StudentProgressDto
         {
             StudentId = studentId.ToString(),
             OverallProgress = overallProgress,
-            EnrolledClasses = enrollments.Select(e => new EnrolledClassProgressDto
-            {
-                ClassId = e.ClassId.ToString(),
-                ClassName = e.Class.Name,
-                CoverColor = e.Class.CoverColor,
-                Progress = e.Progress,
-                EntryTestCompleted = e.EntryTestCompleted,
-                JoinedAt = e.EnrolledAt.ToString("dd MMM yyyy")
-            }).ToList()
+            EnrolledClasses = enrolledClasses
         };
     }
 
     public async Task<StudentStatsDto> GetMyStatsAsync(Guid studentId)
     {
-        var submissions = await db.QuizSubmissions
-            .Where(s => s.StudentId == studentId)
-            .ToListAsync();
-
-        var dayStreak = await CalculateDayStreakAsync(studentId);
+        var activity = await statsCalculator.CalculateActivityStatsAsync(studentId);
+        var dayStreak = await statsCalculator.CalculateDayStreakAsync(studentId);
 
         return new StudentStatsDto
         {
             DayStreak = dayStreak,
-            AvgQuizScore = submissions.Any() ? (int)submissions.Average(s => s.Percentage) : 0,
-            TotalQuizzesTaken = submissions.Count,
-            WeeklyProgress = 0
+            AvgQuizScore = activity.AvgQuizScore,
+            TotalQuizzesTaken = activity.TotalQuizzesTaken,
+            WeeklyProgress = activity.WeeklyProgress
         };
     }
 
@@ -158,37 +166,4 @@ public class StudentsRepository(AppDbContext db) : IStudentsRepository
         };
     }
 
-    private async Task<int> CalculateDayStreakAsync(Guid studentId)
-    {
-        var sessionDates = await db.LearningSessions
-            .Where(s => s.UserId == studentId)
-            .Select(s => s.StartTime.Date)
-            .Distinct()
-            .ToListAsync();
-
-        var submissionDates = await db.QuizSubmissions
-            .Where(s => s.StudentId == studentId)
-            .Select(s => s.CompletedAt.Date)
-            .Distinct()
-            .ToListAsync();
-
-        var activeDates = sessionDates
-            .Concat(submissionDates)
-            .Distinct()
-            .OrderByDescending(d => d)
-            .ToHashSet();
-
-        if (activeDates.Count == 0) return 0;
-
-        var streak = 0;
-        var day = DateTime.UtcNow.Date;
-
-        while (activeDates.Contains(day))
-        {
-            streak++;
-            day = day.AddDays(-1);
-        }
-
-        return streak;
-    }
 }

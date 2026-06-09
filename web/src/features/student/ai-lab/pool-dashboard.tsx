@@ -1,24 +1,27 @@
 import { useState, useEffect, useRef } from 'react';
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { Link } from 'react-router-dom';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { Link, useNavigate } from 'react-router-dom';
 import { poolService } from '@/services/pool.service';
 import { documentsService } from '@/services/documents.service';
 import { quizzesService } from '@/services/quizzes.service';
+import { usePoolTopics } from '@/hooks/use-pool-topics';
+import { useMyDocuments } from '@/hooks/use-my-documents';
+import { useQuizzesInTopic } from '@/hooks/use-quizzes-in-topic';
+import { useRevisionSets } from '@/hooks/use-revision-sets';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Badge } from '@/components/ui/badge';
-import { Progress } from '@/components/ui/progress';
 import { 
   Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter 
 } from '@/components/ui/dialog';
 import { Separator } from '@/components/ui/separator';
 import {
-  Sparkles, Search, Trash2, BookOpen, Clock, Upload, CheckCircle2,
-  ChevronDown, ChevronUp, Loader2, Library, ArrowRight, X,
-  Trophy, HelpCircle, Play, RefreshCw, Eye, XCircle, Lightbulb
+  Sparkles, Search, Trash2, BookOpen, Upload, CheckCircle2,
+  ChevronDown, ChevronUp, Loader2, Library, ArrowRight,
+  Trophy, HelpCircle, Play, Eye
 } from 'lucide-react';
 import { toast } from 'sonner';
 import { cn } from '@/lib/utils';
@@ -48,6 +51,7 @@ function parseGenerationDifficulty(value: string): GenerationDifficulty {
 
 export function StudentPoolDashboard() {
   const queryClient = useQueryClient();
+  const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState<'pool' | 'revision' | 'generate'>('pool');
   
   // Search and selection states
@@ -78,41 +82,11 @@ export function StudentPoolDashboard() {
   const [isRevisionDialogOpen, setIsRevisionDialogOpen] = useState(false);
   const [revisionTitle, setRevisionTitle] = useState('');
 
-  // Active Quiz Player overlay states
-  const [activePlayingQuiz, setActivePlayingQuiz] = useState<PoolQuizDetailDto | null>(null);
-  const [currentQuestionIdx, setCurrentQuestionIdx] = useState(0);
-  const [selectedPlayerOption, setSelectedPlayerOption] = useState<string | null>(null);
-  const [hasSubmittedAnswer, setHasSubmittedAnswer] = useState(false);
-  const [correctCount, setCorrectCount] = useState(0);
-  const [quizTimer, setQuizTimer] = useState(0);
-  const [isQuizFinished, setIsQuizFinished] = useState(false);
-  const timerRef = useRef<any>(null);
-
   // Queries
-  const { data: topics = [], isLoading: isLoadingTopics } = useQuery({
-    queryKey: ['student-pool-topics', search],
-    queryFn: () => poolService.getTopicsInPool(search),
-  });
-
-  const { data: documents = [] } = useQuery({
-    queryKey: ['my-documents-student'],
-    queryFn: documentsService.getMyDocuments,
-  });
-
-  // Query quizzes of selected topic
-  const { data: quizzes = [], isLoading: isLoadingQuizzes } = useQuery({
-    queryKey: ['quizzes-in-topic-student', selectedTopic?.id],
-    queryFn: () => poolService.getQuizzesInTopicPool(selectedTopic!.id),
-    enabled: !!selectedTopic,
-  });
-
-  // Query student's revision sets (quizzes of type "private" owned by the student)
-  // Endpoint: GET /api/pool/revision-sets
-  const { data: revisionSets = [], isLoading: isLoadingRevision } = useQuery({
-    queryKey: ['student-revision-sets'],
-    queryFn: poolService.getRevisionSets,
-    enabled: activeTab === 'revision',
-  });
+  const { data: topics = [], isLoading: isLoadingTopics } = usePoolTopics(search);
+  const { data: documents = [] } = useMyDocuments();
+  const { data: quizzes = [], isLoading: isLoadingQuizzes } = useQuizzesInTopic(selectedTopic?.id);
+  const { data: revisionSets = [], isLoading: isLoadingRevision } = useRevisionSets(activeTab === 'revision');
 
   // Select topic initially
   useEffect(() => {
@@ -157,7 +131,7 @@ export function StudentPoolDashboard() {
       toast.success(`Đã tạo thành công ${quiz.questionCount} câu ôn tập vào Pool cá nhân!`);
       queryClient.invalidateQueries({ queryKey: ['student-pool-topics'] });
       if (selectedTopic) {
-        queryClient.invalidateQueries({ queryKey: ['quizzes-in-topic-student', selectedTopic.id] });
+        queryClient.invalidateQueries({ queryKey: ['quizzes-in-topic', selectedTopic.id] });
       }
       setTopicName('');
       setUserSuggestion('');
@@ -221,7 +195,7 @@ export function StudentPoolDashboard() {
       await documentsService.uploadFileToMinio(uploadUrl, file);
       await documentsService.confirmStudentUpload(documentId);
 
-      queryClient.invalidateQueries({ queryKey: ['my-documents-student'] });
+      queryClient.invalidateQueries({ queryKey: ['my-documents'] });
       setSelectedDocId(documentId);
       toast.success(`Đã tải lên tài liệu ${file.name} thành công!`);
     } catch (err: any) {
@@ -267,7 +241,7 @@ export function StudentPoolDashboard() {
       toast.success('Đã xóa quiz khỏi Pool cá nhân');
       queryClient.invalidateQueries({ queryKey: ['student-pool-topics'] });
       if (selectedTopic) {
-        queryClient.invalidateQueries({ queryKey: ['quizzes-in-topic-student', selectedTopic.id] });
+        queryClient.invalidateQueries({ queryKey: ['quizzes-in-topic', selectedTopic.id] });
       }
       setSelectedPoolQuizIds(prev => prev.filter(id => !quizzes.some(q => q.quizId === id)));
     },
@@ -288,89 +262,43 @@ export function StudentPoolDashboard() {
     }
   });
 
-  // QUIZ PLAYER OVERLAY - FLOW IMPLEMENTATION
-  const startQuizPlaying = async (quiz: any, isFromRevisionTab = false) => {
-    let quizDetails: PoolQuizDetailDto | null = null;
-    
-    if (isFromRevisionTab) {
-      // Revision sets questions need to be loaded from `quizzesService.getMyQuizQuestions`
-      try {
-        toast.info("Đang chuẩn bị câu hỏi ôn tập...");
-        const questions = await quizzesService.getMyQuizQuestions(quiz.id);
-        quizDetails = {
-          quizId: quiz.id,
-          title: quiz.title,
-          createdAt: quiz.createdAt,
-          questions
-        };
-      } catch (err: any) {
-        toast.error("Không thể tải bộ câu hỏi: " + err.message);
-        return;
-      }
-    } else {
-      quizDetails = quiz;
-    }
-
-    if (!quizDetails || !quizDetails.questions.length) {
-      toast.error("Bộ ôn tập này chưa có câu hỏi nào!");
+  // Redirect to server-backed practice session (updates BKT, SR, streak)
+  const navigateToPractice = (
+    title: string,
+    questions: { id: string }[],
+    topicId?: string,
+  ) => {
+    if (!questions.length) {
+      toast.error('Bộ ôn tập này chưa có câu hỏi nào!');
       return;
     }
 
-    // Initialize player states
-    setActivePlayingQuiz(quizDetails);
-    setCurrentQuestionIdx(0);
-    setSelectedPlayerOption(null);
-    setHasSubmittedAnswer(false);
-    setCorrectCount(0);
-    setQuizTimer(0);
-    setIsQuizFinished(false);
-
-    // Start timer
-    if (timerRef.current) clearInterval(timerRef.current);
-    timerRef.current = setInterval(() => {
-      setQuizTimer(prev => prev + 1);
-    }, 1000);
+    const params = new URLSearchParams({
+      mode: 'fixed',
+      topicName: title,
+      questionIds: questions.map((q) => q.id).join(','),
+    });
+    if (topicId) params.set('topicId', topicId);
+    navigate(`/student/practice-session?${params.toString()}`);
   };
 
-  const handlePlayerSubmit = () => {
-    if (!selectedPlayerOption || !activePlayingQuiz) return;
-
-    const currentQ = activePlayingQuiz.questions[currentQuestionIdx];
-    // Find if selected option matches correct answer
-    // For our questions, correct answer is either text or key. Let's find correct option in options array
-    const selectedOpt = currentQ.options.find(o => o.id === selectedPlayerOption);
-    
-    const isCorrect = selectedOpt?.isCorrect ?? false;
-    if (isCorrect) {
-      setCorrectCount(prev => prev + 1);
+  const startPoolQuiz = (quiz: PoolQuizDetailDto) => {
+    if (!selectedTopic?.id) {
+      toast.error('Chọn chủ đề trước khi làm bài');
+      return;
     }
-
-    setHasSubmittedAnswer(true);
+    navigateToPractice(quiz.title, quiz.questions, selectedTopic.id);
   };
 
-  const handlePlayerNext = () => {
-    if (!activePlayingQuiz) return;
-    
-    if (currentQuestionIdx < activePlayingQuiz.questions.length - 1) {
-      setCurrentQuestionIdx(prev => prev + 1);
-      setSelectedPlayerOption(null);
-      setHasSubmittedAnswer(false);
-    } else {
-      // Quiz finished
-      setIsQuizFinished(true);
-      if (timerRef.current) clearInterval(timerRef.current);
+  const startRevisionKit = async (kit: { id: string; title: string }) => {
+    try {
+      toast.info('Đang chuẩn bị câu hỏi ôn tập...');
+      const questions = await quizzesService.getMyQuizQuestions(kit.id);
+      navigateToPractice(kit.title, questions);
+    } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : 'Không thể tải bộ câu hỏi';
+      toast.error(message);
     }
-  };
-
-  const closeQuizPlayer = () => {
-    setActivePlayingQuiz(null);
-    if (timerRef.current) clearInterval(timerRef.current);
-  };
-
-  const formatTimer = (seconds: number) => {
-    const min = Math.floor(seconds / 60);
-    const sec = seconds % 60;
-    return `${min}:${sec < 10 ? '0' : ''}${sec}`;
   };
 
   return (
@@ -560,7 +488,7 @@ export function StudentPoolDashboard() {
                                   variant="outline" 
                                   size="sm" 
                                   className="text-xs h-8 hover:bg-indigo-500/10 hover:text-indigo-400"
-                                  onClick={() => startQuizPlaying(quiz, false)}
+                                  onClick={() => startPoolQuiz(quiz)}
                                 >
                                   <Play className="h-3 w-3 mr-1" /> Làm bài
                                 </Button>
@@ -714,7 +642,7 @@ export function StudentPoolDashboard() {
                       <Button
                         size="sm"
                         className="bg-indigo-600 hover:bg-indigo-700 text-xs font-semibold"
-                        onClick={() => startQuizPlaying(kit, true)}
+                        onClick={() => startRevisionKit(kit)}
                       >
                         <Play className="h-3 w-3 mr-1" /> Ôn luyện
                       </Button>
@@ -994,194 +922,6 @@ export function StudentPoolDashboard() {
                 );
               })}
             </div>
-          </Card>
-        </div>
-      )}
-
-      {/* IN-DASHBOARD HIGH-FIDELITY QUIZ PLAYER OVERLAY */}
-      {activePlayingQuiz && (
-        <div className="fixed inset-0 bg-black/90 backdrop-blur-md z-50 flex items-center justify-center animate-fadeIn p-4 overflow-y-auto">
-          <Card className="max-w-2xl w-full border-indigo-500/30 bg-card/90 shadow-2xl relative">
-            <Button 
-              variant="ghost" 
-              size="icon" 
-              onClick={closeQuizPlayer}
-              className="absolute right-4 top-4 text-muted-foreground hover:text-foreground h-8 w-8 rounded-full"
-            >
-              <X className="h-5 w-5" />
-            </Button>
-
-            {!isQuizFinished ? (
-              <CardContent className="p-6 space-y-6">
-                {/* Timer and Progress bar */}
-                <div className="flex items-center justify-between border-b border-border/40 pb-3 gap-3">
-                  <div>
-                    <h3 className="font-bold text-base text-foreground line-clamp-1">{activePlayingQuiz.title}</h3>
-                    <p className="text-xs text-muted-foreground mt-0.5">Luyện tập cá nhân</p>
-                  </div>
-                  <div className="flex items-center gap-2 text-xs font-semibold text-indigo-400">
-                    <Clock className="h-4 w-4" />
-                    <span>{formatTimer(quizTimer)}</span>
-                  </div>
-                </div>
-
-                <div className="space-y-1">
-                  <div className="flex justify-between text-xs font-semibold">
-                    <span>Tiến trình câu hỏi</span>
-                    <span>{currentQuestionIdx + 1} / {activePlayingQuiz.questions.length}</span>
-                  </div>
-                  <Progress value={((currentQuestionIdx + 1) / activePlayingQuiz.questions.length) * 100} className="h-1.5 bg-muted/40" />
-                </div>
-
-                {/* Question */}
-                {(() => {
-                  const q = activePlayingQuiz.questions[currentQuestionIdx];
-                  if (!q) return null;
-
-                  return (
-                    <div className="space-y-4">
-                      <div className="flex items-start gap-2">
-                        <Badge className="bg-indigo-600 text-white select-none">Câu {currentQuestionIdx + 1}</Badge>
-                        <h4 className="text-base font-semibold leading-relaxed text-foreground">{q.text}</h4>
-                      </div>
-
-                      <div className="space-y-2.5">
-                        {q.options.map((opt) => {
-                          const isSelected = selectedPlayerOption === opt.id;
-                          const showSuccess = hasSubmittedAnswer && opt.isCorrect;
-                          const showDanger = hasSubmittedAnswer && isSelected && !opt.isCorrect;
-
-                          return (
-                            <button
-                              key={opt.id}
-                              disabled={hasSubmittedAnswer}
-                              onClick={() => setSelectedPlayerOption(opt.id)}
-                              className={cn(
-                                "w-full rounded-xl border p-3.5 text-left transition-all duration-200 flex items-center justify-between gap-3 text-xs md:text-sm font-medium",
-                                showSuccess 
-                                  ? "border-emerald-500 bg-emerald-50 dark:bg-emerald-950/40 text-emerald-800 dark:text-emerald-300" 
-                                  : showDanger
-                                    ? "border-red-500/50 bg-red-500/10 text-red-400 line-through"
-                                    : isSelected
-                                      ? "border-indigo-500 bg-indigo-500/10 text-foreground"
-                                      : "border-border/40 hover:border-border hover:bg-muted/20 text-muted-foreground hover:text-foreground"
-                              )}
-                            >
-                              <div className="flex items-center gap-3">
-                                {(() => {
-                                  const badgeClass = showSuccess
-                                    ? "border-emerald-600 bg-emerald-600 text-white"
-                                    : showDanger
-                                    ? "border-red-500 bg-red-500 text-black"
-                                    : isSelected
-                                    ? "border-indigo-500 bg-indigo-500 text-primary-foreground"
-                                    : "border-border text-muted-foreground";
-                                  return (
-                                <span className={cn(
-                                  "flex h-6 w-6 items-center justify-center rounded-full border text-[11px] font-bold transition-all",
-                                  badgeClass
-                                )}>
-                                  {opt.text.startsWith('A') || opt.text.startsWith('B') || opt.text.startsWith('C') || opt.text.startsWith('D') 
-                                    ? opt.text[0] 
-                                    : '○'}
-                                 </span>
-                                  );
-                                })()}
-                                <span>{opt.text}</span>
-                              </div>
-                              {showSuccess && <CheckCircle2 className="h-4 w-4 text-emerald-500 shrink-0" />}
-                              {showDanger && <XCircle className="h-4 w-4 text-red-400 shrink-0" />}
-                            </button>
-                          );
-                        })}
-                      </div>
-
-                      {/* Explanation box */}
-                      {hasSubmittedAnswer && q.explanation && (
-                        <div className="rounded-xl border border-amber-500/25 bg-amber-500/5 p-3.5 animate-fadeIn">
-                          <div className="flex items-center gap-2 text-amber-400 font-semibold mb-1 text-xs md:text-sm">
-                            <Lightbulb className="h-4 w-4" />
-                            <span>Gia sư AI giải thích</span>
-                          </div>
-                          <p className="text-xs md:text-sm text-foreground/80 leading-relaxed">{q.explanation}</p>
-                        </div>
-                      )}
-                    </div>
-                  );
-                })()}
-
-                {/* Footer buttons */}
-                <div className="flex justify-end border-t border-border/30 pt-4 mt-2">
-                  {!hasSubmittedAnswer ? (
-                    <Button
-                      onClick={handlePlayerSubmit}
-                      disabled={!selectedPlayerOption}
-                      className="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-6 rounded-lg"
-                    >
-                      Nộp câu trả lời
-                    </Button>
-                  ) : (
-                    <Button
-                      onClick={handlePlayerNext}
-                      className="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-6 rounded-lg"
-                    >
-                      {currentQuestionIdx < activePlayingQuiz.questions.length - 1 ? 'Tiếp tục' : 'Hoàn thành ôn luyện'}
-                    </Button>
-                  )}
-                </div>
-              </CardContent>
-            ) : (
-              /* QUIZ FINISHED RESULTS SCREEN */
-              <CardContent className="p-6 text-center space-y-6">
-                <div className="relative mx-auto h-24 w-24 flex items-center justify-center">
-                  <div className="absolute inset-0 rounded-full bg-gradient-to-br from-indigo-500/25 to-violet-500/25 blur-xl animate-pulse" />
-                  <div className="absolute inset-2 rounded-full bg-gradient-to-br from-indigo-500/10 to-violet-500/10 border border-indigo-500/20" />
-                  <Trophy className="relative h-12 w-12 text-indigo-400 drop-shadow-lg" />
-                </div>
-
-                <div className="space-y-1.5">
-                  <h3 className="text-2xl font-bold bg-gradient-to-r from-indigo-400 to-violet-400 bg-clip-text text-transparent">
-                    Hoàn thành đợt ôn luyện!
-                  </h3>
-                  <p className="text-xs text-muted-foreground max-w-sm mx-auto">
-                    Chúc mừng bạn đã kết thúc quá trình làm bài luyện tập. Hãy xem lại kết quả phân tích năng lực dưới đây.
-                  </p>
-                </div>
-
-                <div className="max-w-xs mx-auto rounded-xl border border-indigo-500/25 bg-indigo-500/5 p-4 space-y-3">
-                  <div className="grid grid-cols-3 gap-2 text-center border-b border-border/20 pb-3">
-                    <div>
-                      <p className="text-xl font-extrabold">{activePlayingQuiz.questions.length}</p>
-                      <p className="text-[10px] text-muted-foreground">Tổng số câu</p>
-                    </div>
-                    <div>
-                      <p className="text-xl font-extrabold text-green-400">{correctCount}</p>
-                      <p className="text-[10px] text-muted-foreground">Chính xác</p>
-                    </div>
-                    <div>
-                      <p className="text-xl font-extrabold text-indigo-300">
-                        {Math.round((correctCount / activePlayingQuiz.questions.length) * 100)}%
-                      </p>
-                      <p className="text-[10px] text-muted-foreground">Tỷ lệ đúng</p>
-                    </div>
-                  </div>
-
-                  <div className="flex justify-between items-center text-xs text-muted-foreground px-1">
-                    <span>Thời gian làm bài:</span>
-                    <span className="font-semibold text-indigo-400">{formatTimer(quizTimer)}</span>
-                  </div>
-                </div>
-
-                <div className="flex justify-center gap-3 border-t border-border/30 pt-5">
-                  <Button variant="outline" onClick={() => startQuizPlaying(activePlayingQuiz, false)}>
-                    <RefreshCw className="h-4 w-4 mr-1.5" /> Luyện tập lại
-                  </Button>
-                  <Button className="bg-indigo-600 hover:bg-indigo-700" onClick={closeQuizPlayer}>
-                    Quay lại Dashboard
-                  </Button>
-                </div>
-              </CardContent>
-            )}
           </Card>
         </div>
       )}

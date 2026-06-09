@@ -1,4 +1,6 @@
 using System.Text.Json;
+using EduBoost.API.Features.LearningStates;
+using EduBoost.API.Features.LearningStates.Models;
 using EduBoost.API.Features.PlacementTests.Models;
 using EduBoost.API.Features.Roadmap;
 using EduBoost.API.Infrastructure;
@@ -15,7 +17,7 @@ public interface IPlacementTestsRepository
     Task<PlacementTestResultDto?> GetResultAsync(Guid userId, Guid? classId = null);
 }
 
-public class PlacementTestsRepository(AppDbContext db, IRoadmapRepository roadmap) : IPlacementTestsRepository
+public class PlacementTestsRepository(AppDbContext db, IRoadmapRepository roadmap, ILearningStatesRepository learningStates) : IPlacementTestsRepository
 {
     private const int MinQuestions = 10;
     private const int MaxQuestions = 20;
@@ -110,6 +112,16 @@ public class PlacementTestsRepository(AppDbContext db, IRoadmapRepository roadma
             TopicId = question.Quiz?.TopicId
         });
         state.CurrentIndex++;
+
+        if (question.Quiz?.TopicId != null)
+        {
+            await learningStates.UpdateAfterAnswerAsync(userId, new UpdateBktRequest
+            {
+                TopicId = question.Quiz.TopicId.Value,
+                QuestionId = questionId,
+                IsCorrect = isCorrect
+            });
+        }
 
         var recentAnswers = state.Answers.TakeLast(3).ToList();
         var recentCorrect = recentAnswers.Count(a => a.IsCorrect);

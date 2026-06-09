@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useMyQuizQuestions } from '@/hooks/use-my-quiz-questions';
 import { quizzesService } from '@/services/quizzes.service';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -33,11 +34,7 @@ export function AILabQuizPage() {
   const [editCorrectAnswer, setEditCorrectAnswer] = useState('');
   const [deleteQ, setDeleteQ] = useState<QuestionDto | null>(null);
 
-  const { data: questions, isLoading } = useQuery({
-    queryKey: ['my-quiz-questions', quizId],
-    queryFn: () => quizzesService.getMyQuizQuestions(quizId!),
-    enabled: !!quizId,
-  });
+  const { data: questions, isLoading } = useMyQuizQuestions(quizId);
 
   const invalidate = () => queryClient.invalidateQueries({ queryKey: ['my-quiz-questions', quizId] });
 
@@ -53,7 +50,7 @@ export function AILabQuizPage() {
   });
 
   const deleteMutation = useMutation({
-    mutationFn: (qId: string) => quizzesService.deleteQuestion(quizId!, qId),
+    mutationFn: (qId: string) => quizzesService.deleteMyQuestion(quizId!, qId),
     onSuccess: () => {
       invalidate();
       toast.success('Đã xóa câu hỏi');

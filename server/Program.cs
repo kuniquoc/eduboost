@@ -4,7 +4,6 @@ using EduBoost.API.Features.AiChat;
 using EduBoost.API.Features.Auth;
 using EduBoost.API.Features.Classes;
 using EduBoost.API.Features.Documents;
-using EduBoost.API.Features.LearningPaths;
 using EduBoost.API.Features.LearningStates;
 using EduBoost.API.Features.PlacementTests;
 using EduBoost.API.Features.PracticeSessions;
@@ -142,19 +141,29 @@ builder.Services.AddCors(options =>
     });
 });
 
+// ── DI — Infrastructure Services ────────────────────────────────────────────────
+builder.Services.AddSingleton<ISpacedRepetitionService, SpacedRepetitionService>();
+builder.Services.AddSingleton<ITutorDecisionService, TutorDecisionService>();
+builder.Services.AddScoped<IStudentStatsCalculator, StudentStatsCalculator>();
+
+builder.Services.AddSingleton<DocumentIngestQueue>();
+builder.Services.AddSingleton<IDocumentIngestQueue>(sp => sp.GetRequiredService<DocumentIngestQueue>());
+builder.Services.AddHostedService<DocumentIngestBackgroundService>();
+
 // ── DI — Feature Repositories ─────────────────────────────────────────────────
 builder.Services.AddScoped<IAuthRepository, AuthRepository>();
 builder.Services.AddScoped<IClassesRepository, ClassesRepository>();
 builder.Services.AddScoped<ITopicsRepository, TopicsRepository>();
 builder.Services.AddScoped<IDocumentsRepository, DocumentsRepository>();
+builder.Services.AddScoped<IQuizAuthorization, QuizAuthorization>();
 builder.Services.AddScoped<IQuizzesRepository, QuizzesRepository>();
 builder.Services.AddScoped<IStudentsRepository, StudentsRepository>();
 builder.Services.AddScoped<IRoadmapRepository, RoadmapRepository>();
 builder.Services.AddScoped<IPoolRepository, PoolRepository>();
+builder.Services.AddScoped<IPoolAuthorization, PoolAuthorization>();
 builder.Services.AddScoped<IUserProfilesRepository, UserProfilesRepository>();
 builder.Services.AddScoped<ILearningStatesRepository, LearningStatesRepository>();
 builder.Services.AddScoped<IPlacementTestsRepository, PlacementTestsRepository>();
-builder.Services.AddScoped<ILearningPathsRepository, LearningPathsRepository>();
 builder.Services.AddScoped<IPracticeSessionsRepository, PracticeSessionsRepository>();
 builder.Services.AddScoped<IAiChatRepository, AiChatRepository>();
 builder.Services.AddScoped<IAdminRepository, AdminRepository>();
@@ -194,9 +203,12 @@ using (var scope = app.Services.CreateScope())
         await db.Database.MigrateAsync();
         logger.LogInformation("Migrations applied successfully.");
 
+        var config = scope.ServiceProvider.GetRequiredService<IConfiguration>();
+        await AdminBootstrap.EnsureAsync(db, config, logger);
+
         var storage = scope.ServiceProvider.GetRequiredService<IStorageService>();
-        if (app.Environment.IsDevelopment())
-            await DatabaseSeeder.SeedAsync(db, storage, logger);
+        // if (app.Environment.IsDevelopment())
+        //     await DatabaseSeeder.SeedAsync(db, storage, logger);
     }
     catch (Exception ex)
     {

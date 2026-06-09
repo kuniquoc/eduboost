@@ -1,27 +1,32 @@
-using System.Security.Claims;
 using EduBoost.API.Common.Models;
 using EduBoost.API.Features.Quizzes.Models;
 using EduBoost.API.Features.QuizPool.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using EduBoost.API.Common.Http;
+using EduBoost.API.Features.Classes;
 
 namespace EduBoost.API.Features.QuizPool;
 
 [ApiController]
 [Route("api/pool")]
 [Authorize]
-public class PoolController(IPoolRepository repo) : ControllerBase
+public class PoolController(IPoolRepository repo, IPoolAuthorization poolAuth, IClassesRepository classes) : ControllerBase
 {
-    private Guid UserId => Guid.Parse(
-        User.FindFirstValue(ClaimTypes.NameIdentifier) ?? User.FindFirstValue("sub") ?? Guid.Empty.ToString());
-
-    private string UserRole => User.FindFirstValue(ClaimTypes.Role) ?? User.FindFirstValue("role") ?? "student";
+    private Guid UserId => ControllerAuth.GetUserId(User);
+    private string UserRole => ControllerAuth.GetUserRole(User);
 
     /// <summary>AI tự động sinh quiz lưu vào Quiz Pool của Giáo viên hoặc Học sinh theo Chủ đề</summary>
     [HttpPost("generate")]
     public async Task<IActionResult> GeneratePoolQuiz([FromBody] GeneratePoolQuizRequest request)
     {
         if (!ModelState.IsValid) return BadRequest(ApiResponse.Fail("Dữ liệu không hợp lệ", ModelState));
+
+        if (UserRole == "teacher" && !string.IsNullOrEmpty(request.ClassId))
+        {
+            var classId = Guid.Parse(request.ClassId);
+            if (!await classes.IsOwnedByTeacherAsync(classId, UserId)) return Forbid();
+        }
 
         var quiz = await repo.GeneratePoolQuizAsync(UserId, UserRole, request);
         if (quiz == null)
@@ -36,6 +41,9 @@ public class PoolController(IPoolRepository repo) : ControllerBase
     [HttpGet("topics")]
     public async Task<IActionResult> GetTopicsInPool([FromQuery] string? search, [FromQuery] Guid? classId)
     {
+        if (classId.HasValue && UserRole == "teacher" && !await classes.IsOwnedByTeacherAsync(classId.Value, UserId))
+            return Forbid();
+
         var topics = await repo.GetTopicsInPoolAsync(UserId, UserRole, search, classId);
         return Ok(ApiResponse<List<TopicPoolDto>>.Ok(topics));
     }
@@ -44,6 +52,7 @@ public class PoolController(IPoolRepository repo) : ControllerBase
     [HttpGet("topics/{topicId:guid}/quizzes")]
     public async Task<IActionResult> GetQuizzesInTopicPool(Guid topicId)
     {
+        if (!await poolAuth.CanAccessTopicAsync(UserId, UserRole, topicId)) return Forbid();
         var quizzes = await repo.GetQuizzesInTopicPoolAsync(UserId, topicId);
         return Ok(ApiResponse<List<PoolQuizDetailDto>>.Ok(quizzes));
     }
@@ -65,6 +74,12 @@ public class PoolController(IPoolRepository repo) : ControllerBase
         if (UserRole != "teacher") return Forbid();
         if (request.PoolQuizIds.Count == 0) return BadRequest(ApiResponse.Fail("Cần chọn ít nhất một quiz trong pool để tạo bài test"));
 
+        var classId = Guid.Parse(request.ClassId);
+        if (!await classes.IsOwnedByTeacherAsync(classId, UserId)) return Forbid();
+
+        var poolIds = request.PoolQuizIds.Select(Guid.Parse).ToList();
+        if (!await poolAuth.CanAccessPoolQuizzesAsync(UserId, UserRole, poolIds)) return Forbid();
+
         var test = await repo.CreateTestFromPoolAsync(UserId, request);
         return Ok(ApiResponse<QuizDto>.Ok(test, "Tổng hợp bài thi từ Pool thành công. Hãy kiểm duyệt và xuất bản trong AI Studio!"));
     }
@@ -75,6 +90,9 @@ public class PoolController(IPoolRepository repo) : ControllerBase
     {
         if (!ModelState.IsValid) return BadRequest(ApiResponse.Fail("Dữ liệu không hợp lệ", ModelState));
         if (request.PoolQuizIds.Count == 0) return BadRequest(ApiResponse.Fail("Cần chọn ít nhất một quiz trong pool để tạo bộ ôn tập"));
+
+        var poolIds = request.PoolQuizIds.Select(Guid.Parse).ToList();
+        if (!await poolAuth.CanAccessPoolQuizzesAsync(UserId, UserRole, poolIds)) return Forbid();
 
         var revisionSet = await repo.CreateRevisionSetFromPoolAsync(UserId, request);
         return Ok(ApiResponse<QuizDto>.Ok(revisionSet, "Tạo bộ ôn tập cá nhân thành công. Bạn có thể bắt đầu ôn luyện!"));

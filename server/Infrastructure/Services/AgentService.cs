@@ -6,8 +6,6 @@ namespace EduBoost.API.Infrastructure.Services;
 
 public interface IAgentService
 {
-    Task<AgentNextActionResponse?> GetNextActionAsync(string studentId, string topicName);
-    Task<AgentStateResponse?> UpdateStateAsync(string studentId, string topicName, double difficulty, bool isCorrect);
     Task<AgentQuizResponse?> GenerateQuizQuestionAsync(string topicName, double difficulty, List<string>? allowedDocumentIds = null, List<string>? allowedScopes = null);
     Task<string?> GetExplanationAsync(string topicName, string studentState, List<string>? allowedDocumentIds = null, List<string>? allowedScopes = null);
     Task<string?> GetGraderExplanationAsync(string question, string correctAnswer, string studentAnswer, List<string>? allowedDocumentIds = null, List<string>? allowedScopes = null);
@@ -43,46 +41,6 @@ public class AgentService : IAgentService
         _logger = logger;
 
         _logger.LogInformation("AI Agent base URL configured: {BaseUrl}", _http.BaseAddress);
-    }
-
-    public async Task<AgentNextActionResponse?> GetNextActionAsync(string studentId, string topicName)
-    {
-        try
-        {
-            var response = await _http.GetAsync($"/tutor/next-action?student_id={Uri.EscapeDataString(studentId)}&topic_name={Uri.EscapeDataString(topicName)}");
-            response.EnsureSuccessStatusCode();
-            var json = await response.Content.ReadAsStringAsync();
-            return JsonSerializer.Deserialize<AgentNextActionResponse>(json, DeserializeOpts);
-        }
-        catch (Exception ex)
-        {
-            _logger.LogWarning(ex, "AI Agent unavailable for GetNextAction (student={StudentId}, topic={Topic})", studentId, topicName);
-            return null;
-        }
-    }
-
-    public async Task<AgentStateResponse?> UpdateStateAsync(string studentId, string topicName, double difficulty, bool isCorrect)
-    {
-        try
-        {
-            var payload = new
-            {
-                student_id = studentId,
-                topic_name = topicName,
-                difficulty,
-                is_correct = isCorrect
-            };
-            var content = new StringContent(JsonSerializer.Serialize(payload, SerializeOpts), Encoding.UTF8, "application/json");
-            var response = await _http.PostAsync("/tutor/update-state", content);
-            response.EnsureSuccessStatusCode();
-            var json = await response.Content.ReadAsStringAsync();
-            return JsonSerializer.Deserialize<AgentStateResponse>(json, DeserializeOpts);
-        }
-        catch (Exception ex)
-        {
-            _logger.LogWarning(ex, "AI Agent unavailable for UpdateState (student={StudentId}, topic={Topic})", studentId, topicName);
-            return null;
-        }
     }
 
     public async Task<AgentQuizResponse?> GenerateQuizQuestionAsync(string topicName, double difficulty, List<string>? allowedDocumentIds = null, List<string>? allowedScopes = null)

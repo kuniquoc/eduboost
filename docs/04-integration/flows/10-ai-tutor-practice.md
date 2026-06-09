@@ -1,52 +1,59 @@
 # Luồng: AI Tutor Practice
 
-> Trạng thái: ⚠️
+> Trạng thái: ✅
 
 ## Trigger
 
-Practice page
+Practice page (`/student/practice/:topicId`), roadmap, learning path
 
 ## Sequence diagram
 
 ```mermaid
 sequenceDiagram
     actor User
-    participant Web as web
+    participant Web as practice-page
     participant API as server
-    participant Agent as ai-agent-core
     participant DB as PostgreSQL
-    User->>Web: Practice page
-    Web->>API: REST call
-    API->>DB: Persist / query
-    opt AI required
-        API->>Agent: HTTP tutor/rag
-        Agent-->>API: JSON response
-    end
-    API-->>Web: ApiResponse
-    Web-->>User: UI update
+    participant Agent as ai-agent-core
+    User->>Web: Bắt đầu quiz
+    Web->>API: GET tutor/next-action
+    API->>DB: bkt_states
+    API-->>Web: EXPLAIN / QUIZ / NEXT_SKILL
+    Web->>API: GET tutor/generate-question
+    API->>DB: mastery → difficulty
+    API->>Agent: Generate question LLM
+    Agent-->>API: Question JSON
+    API->>DB: Persist tutor question
+    User->>Web: Submit answer
+    Web->>API: POST tutor/submit-answer
+    API->>DB: BKT + SR update
+    Web->>Web: invalidate learning queries
+    User->>Web: Rời trang / NEXT_SKILL
+    Web->>API: POST tutor/complete-practice
+    API->>DB: learning_sessions + streak
+    Web->>Web: invalidate learning queries
 ```
 
-## Bảng bước
+## BKT routing (server)
 
-| Step | Layer | File / Module | API / Endpoint | Ghi chú |
-|------|-------|---------------|----------------|---------|
-| 1 | web | See integration map | — | User action |
-| 2 | web | Service layer | REST | JWT attached |
-| 3 | server | QuizzesController tutor endpoints | /api/quizzes/tutor/* | Repository logic |
-| 4 | server | AgentService (if any) | Agent HTTP | Graceful degradation |
-| 5 | web | React Query invalidate | — | UI refresh |
+[`TutorDecisionService.cs`](../../../server/Infrastructure/Services/TutorDecisionService.cs) — ngưỡng giống agent orchestrator:
 
-## Error paths & fallback
+| Mastery P(L) | Action |
+|--------------|--------|
+| &lt; 0.5 | EXPLAIN |
+| 0.5 – 0.8 | QUIZ |
+| ≥ 0.8 | NEXT_SKILL |
 
-- **401:** Axios refresh queue → retry hoặc logout
-- **Agent offline:** Tutor/chat trả placeholder; quiz generation fail message
-- **Upload fail:** Toast error, document status `pending` không confirm
+Độ khó sinh câu hỏi: `MapMasteryToDifficulty` từ BKT (hoặc `IrtTheta` nếu có).
 
-## Trạng thái & hạn chế
+## Trạng thái
 
-BKT update fire-and-forget; mastery null
+- PostgreSQL là nguồn sự thật duy nhất cho BKT/SR và tutor routing
+- Sau mỗi câu trả lời: web invalidate `review-schedule`, `learning-states`, `student-stats`, `user-profile`, `roadmap`
+- Khi kết thúc phiên: `POST /quizzes/tutor/complete-practice` ghi `learning_sessions` + streak (giống practice-session end)
+- Agent **không** còn fire-and-forget `update-state` từ submit
+- Agent endpoints `/tutor/next-action`, `/tutor/update-state` vẫn tồn tại nhưng .NET **không gọi** cho luồng sản phẩm
 
 ## Liên kết
 
-- [web-server-agent-map.md](../web-server-agent-map.md)
-- [../../99-known-issues/index.md](../../99-known-issues/index.md)
+- [learningstates.md](../../02-server/features/learningstates.md)

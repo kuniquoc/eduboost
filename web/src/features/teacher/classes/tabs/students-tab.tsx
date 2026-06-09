@@ -1,6 +1,7 @@
 import { useState } from 'react';
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { classesService } from '@/services/classes.service';
+import { useClassStudents } from '@/hooks/use-class-students';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -20,10 +21,7 @@ export function StudentsTab({ classId }: { classId: string }) {
   const [email, setEmail] = useState('');
   const [removeId, setRemoveId] = useState<string | null>(null);
 
-  const { data: students, isLoading } = useQuery({
-    queryKey: ['class-students', classId, search],
-    queryFn: () => classesService.getStudents(classId, search || undefined),
-  });
+  const { data: students, isLoading } = useClassStudents(classId, search);
 
   const invalidate = () => queryClient.invalidateQueries({ queryKey: ['class-students', classId] });
 

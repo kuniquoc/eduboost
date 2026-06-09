@@ -1,18 +1,7 @@
-# Module: learningPath.service
+# learningPath.service — DEPRECATED
 
-> File nguồn: [`web/src/services/learningPath.service.ts`](../../../web/src/services/learningPath.service.ts)
+> **Đã gỡ khỏi web và server.** Learning Path API (`/api/learning-paths/*`) không còn tồn tại.
 
-## Vai trò
-API client wrapper cho `learningPath` endpoints.
+Thay thế: **Roadmap theo lớp** — [`roadmap.service.md`](roadmap.service.md), route `/student/roadmap/:classId`.
 
-## Hàm
-
-| Hàm | Endpoint | Trạng thái |
-|-----|----------|------------|
-| `getPath` | `—` | ✅ |
-| `regenerate` | `—` | 🔧 Không có UI consumer |
-| `markItemComplete` | `—` | ✅ |
-
-## Known issues
-
-Xem [web-gaps.md](../../99-known-issues/web-gaps.md).
+Xem [../../99-known-issues/cross-layer-inconsistencies.md](../../99-known-issues/cross-layer-inconsistencies.md).

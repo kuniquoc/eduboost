@@ -1,4 +1,7 @@
 using System.Text.Json;
+using EduBoost.API.Features.LearningStates;
+using EduBoost.API.Features.Roadmap;
+using EduBoost.API.Features.LearningStates.Models;
 using EduBoost.API.Features.Quizzes.Models;
 using EduBoost.API.Infrastructure;
 using EduBoost.API.Infrastructure.Entities;
@@ -28,9 +31,12 @@ public interface IQuizzesRepository
     Task<QuizDto> GenerateEntryTestAsync(Guid classId);
     Task<QuestionDto?> AddQuestionAsync(Guid quizId, CreateQuestionRequest request);
     Task<string?> GetTopicNameAsync(Guid topicId);
+    Task<Guid?> GetTopicClassIdAsync(Guid topicId);
+    Task<Guid> PersistTutorQuestionAsync(Guid topicId, AgentQuizResponse agentQuestion);
+    Task CompleteTutorPracticeAsync(Guid userId, Guid topicId, int questionsAttempted, int correctAnswers);
 }
 
-public class QuizzesRepository(AppDbContext db, IAgentService agent, ILogger<QuizzesRepository> logger) : IQuizzesRepository
+public class QuizzesRepository(AppDbContext db, IAgentService agent, ILearningStatesRepository learningStates, IRoadmapRepository roadmap, ILogger<QuizzesRepository> logger) : IQuizzesRepository
 {
     public async Task<List<QuestionDto>> GetQuestionsAsync(Guid quizId)
     {
@@ -207,6 +213,8 @@ public class QuizzesRepository(AppDbContext db, IAgentService agent, ILogger<Qui
             await db.SaveChangesAsync();
         }
 
+        await roadmap.GenerateAsync(classId, studentId, entryTestResultId: string.Empty);
+
         return result;
     }
 
@@ -299,10 +307,16 @@ public class QuizzesRepository(AppDbContext db, IAgentService agent, ILogger<Qui
 
     public async Task<QuizDto> CreatePrivateQuizAsync(Guid ownerId, CreateQuizRequest request)
     {
-        // Private quiz — no ClassId, stored as "private" type
         request.ClassId = null;
         request.TopicId = null;
-        return await CreateQuizAsync(request, "private");
+        var quizDto = await CreateQuizAsync(request, "private");
+        var quiz = await db.Quizzes.FindAsync(Guid.Parse(quizDto.Id));
+        if (quiz != null)
+        {
+            quiz.OwnerId = ownerId;
+            await db.SaveChangesAsync();
+        }
+        return quizDto;
     }
 
     public async Task<List<QuizDto>> GetClassQuizzesAsync(Guid classId)
@@ -442,6 +456,67 @@ public class QuizzesRepository(AppDbContext db, IAgentService agent, ILogger<Qui
         return topic?.Name;
     }
 
+    public async Task<Guid?> GetTopicClassIdAsync(Guid topicId)
+    {
+        var topic = await db.Topics.FindAsync(topicId);
+        return topic?.ClassId;
+    }
+
+    public async Task<Guid> PersistTutorQuestionAsync(Guid topicId, AgentQuizResponse agentQuestion)
+    {
+        var quizId = await GetOrCreateTutorQuizAsync(topicId);
+        var orderIndex = await db.Questions.CountAsync(q => q.QuizId == quizId);
+
+        var difficulty = agentQuestion.DifficultyLevel switch
+        {
+            < 0.35 => "easy",
+            > 0.65 => "hard",
+            _ => "medium"
+        };
+
+        var question = new Question
+        {
+            Id = Guid.NewGuid(),
+            QuizId = quizId,
+            Text = agentQuestion.Question,
+            Type = "mcq",
+            Difficulty = difficulty,
+            Explanation = agentQuestion.Explanation,
+            CorrectAnswer = agentQuestion.Options.GetValueOrDefault(agentQuestion.CorrectAnswer, agentQuestion.CorrectAnswer),
+            OrderIndex = orderIndex,
+            Options = agentQuestion.Options.Select((kv, i) => new QuizOption
+            {
+                Id = Guid.NewGuid(),
+                Text = kv.Value,
+                IsCorrect = kv.Key == agentQuestion.CorrectAnswer,
+                OrderIndex = i
+            }).ToList()
+        };
+
+        db.Questions.Add(question);
+        await db.SaveChangesAsync();
+        return question.Id;
+    }
+
+    private async Task<Guid> GetOrCreateTutorQuizAsync(Guid topicId)
+    {
+        var quiz = await db.Quizzes.FirstOrDefaultAsync(q => q.TopicId == topicId && q.Type == "tutor");
+        if (quiz != null) return quiz.Id;
+
+        var topic = await db.Topics.FindAsync(topicId);
+        quiz = new Quiz
+        {
+            Id = Guid.NewGuid(),
+            Title = $"Tutor - {topic?.Name ?? topicId.ToString()}",
+            Type = "tutor",
+            TopicId = topicId,
+            IsPublished = false
+        };
+        db.Quizzes.Add(quiz);
+        await db.SaveChangesAsync();
+        return quiz.Id;
+    }
+
     // ── Helpers ───────────────────────────────────────────────────────────────
     private async Task<QuizResultDto> ScoreAndSaveAsync(Quiz? quiz, Guid studentId, SubmitQuizRequest request)
     {
@@ -467,6 +542,16 @@ public class QuizzesRepository(AppDbContext db, IAgentService agent, ILogger<Qui
                 };
 
                 if (correct) score++;
+
+                if (quiz.TopicId.HasValue)
+                {
+                    await learningStates.UpdateAfterAnswerAsync(studentId, new UpdateBktRequest
+                    {
+                        TopicId = quiz.TopicId.Value,
+                        QuestionId = question.Id,
+                        IsCorrect = correct
+                    });
+                }
             }
         }
         else
@@ -565,4 +650,38 @@ public class QuizzesRepository(AppDbContext db, IAgentService agent, ILogger<Qui
             IsCorrect = o.IsCorrect
         }).ToList()
     };
+
+    public async Task CompleteTutorPracticeAsync(Guid userId, Guid topicId, int questionsAttempted, int correctAnswers)
+    {
+        if (questionsAttempted <= 0) return;
+
+        var score = (double)correctAnswers / questionsAttempted * 100;
+        var now = DateTime.UtcNow;
+
+        db.LearningSessions.Add(new LearningSession
+        {
+            UserId = userId,
+            TopicId = topicId,
+            StartTime = now,
+            EndTime = now,
+            QuestionsAttempted = questionsAttempted,
+            CorrectAnswers = correctAnswers,
+            Score = score
+        });
+
+        var profile = await db.UserProfiles.FirstOrDefaultAsync(p => p.UserId == userId);
+        if (profile != null)
+        {
+            var today = now.Date;
+            if (profile.LastActiveDate?.Date == today.AddDays(-1))
+                profile.LearningStreak++;
+            else if (profile.LastActiveDate?.Date != today)
+                profile.LearningStreak = 1;
+
+            profile.LastActiveDate = now;
+            profile.UpdatedAt = now;
+        }
+
+        await db.SaveChangesAsync();
+    }
 }

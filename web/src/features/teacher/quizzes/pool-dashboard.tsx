@@ -1,8 +1,11 @@
 import { useState, useEffect, useRef } from 'react';
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { poolService } from '@/services/pool.service';
-import { classesService } from '@/services/classes.service';
 import { documentsService } from '@/services/documents.service';
+import { usePoolTopics } from '@/hooks/use-pool-topics';
+import { useTeacherClasses } from '@/hooks/use-teacher-classes';
+import { useMyDocuments } from '@/hooks/use-my-documents';
+import { useQuizzesInTopic } from '@/hooks/use-quizzes-in-topic';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -58,27 +61,10 @@ export function TeacherPoolDashboard() {
   const [totalScore, setTotalScore] = useState(10);
 
   // Queries
-  const { data: topics = [], isLoading: isLoadingTopics } = useQuery({
-    queryKey: ['teacher-pool-topics', search],
-    queryFn: () => poolService.getTopicsInPool(search),
-  });
-
-  const { data: classes = [] } = useQuery({
-    queryKey: ['teacher-classes'],
-    queryFn: classesService.getTeacherClasses,
-  });
-
-  const { data: documents = [] } = useQuery({
-    queryKey: ['my-documents-teacher'],
-    queryFn: documentsService.getMyDocuments, // Fetches private doc pool
-  });
-
-  // Query quizzes of selected topic
-  const { data: quizzes = [], isLoading: isLoadingQuizzes } = useQuery({
-    queryKey: ['quizzes-in-topic', selectedTopic?.id],
-    queryFn: () => poolService.getQuizzesInTopicPool(selectedTopic!.id),
-    enabled: !!selectedTopic,
-  });
+  const { data: topics = [], isLoading: isLoadingTopics } = usePoolTopics(search);
+  const { data: classes = [] } = useTeacherClasses();
+  const { data: documents = [] } = useMyDocuments();
+  const { data: quizzes = [], isLoading: isLoadingQuizzes } = useQuizzesInTopic(selectedTopic?.id);
 
   // Select topic initially
   useEffect(() => {
@@ -123,7 +109,7 @@ export function TeacherPoolDashboard() {
       setShowGenOverlay(false);
       setGeneratingStep(0);
       toast.success(`Đã tạo thành công ${quiz.questionCount} câu hỏi vào Quiz Pool!`);
-      queryClient.invalidateQueries({ queryKey: ['teacher-pool-topics'] });
+      queryClient.invalidateQueries({ queryKey: ['pool-topics'] });
       if (selectedTopic) {
         queryClient.invalidateQueries({ queryKey: ['quizzes-in-topic', selectedTopic.id] });
       }
@@ -191,7 +177,7 @@ export function TeacherPoolDashboard() {
       await documentsService.uploadFileToMinio(uploadUrl, file);
       await documentsService.confirmStudentUpload(documentId);
 
-      queryClient.invalidateQueries({ queryKey: ['my-documents-teacher'] });
+      queryClient.invalidateQueries({ queryKey: ['my-documents'] });
       setSelectedDocId(documentId);
       toast.success(`Đã tải lên tài liệu ${file.name} thành công!`);
     } catch (err: any) {
@@ -207,7 +193,7 @@ export function TeacherPoolDashboard() {
     mutationFn: (quizId: string) => poolService.deletePoolQuiz(quizId),
     onSuccess: () => {
       toast.success('Đã xóa quiz khỏi Pool');
-      queryClient.invalidateQueries({ queryKey: ['teacher-pool-topics'] });
+      queryClient.invalidateQueries({ queryKey: ['pool-topics'] });
       if (selectedTopic) {
         queryClient.invalidateQueries({ queryKey: ['quizzes-in-topic', selectedTopic.id] });
       }

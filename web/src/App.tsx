@@ -1,37 +1,75 @@
-import { useEffect } from 'react';
+import { lazy, Suspense, useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Toaster } from '@/components/ui/sonner';
 import { TooltipProvider } from '@/components/ui/tooltip';
 import { useAuthStore } from '@/store/auth-store';
 
-// Layouts
+// Layouts — keep eager (small, needed on every protected route)
 import { AuthLayout } from '@/components/layout/auth-layout';
 import { AppLayout } from '@/components/layout/app-layout';
 import { ProtectedRoute } from '@/components/layout/protected-route';
 
-// Pages
+// Public pages — eager (first paint)
 import { LandingPage } from '@/features/landing/landing-page';
 import { LoginPage } from '@/features/auth/login-page';
 import { RegisterPage } from '@/features/auth/register-page';
-import { TeacherClassesPage } from '@/features/teacher/classes/classes-page';
-import { TeacherClassDetailPage } from '@/features/teacher/classes/class-detail-page';
-import { QuizReviewPage } from '@/features/teacher/quizzes/quiz-review-page';
-import { ProfilePage } from '@/features/shared/profile-page';
-import { StudentDashboardPage } from '@/features/student/dashboard/dashboard-page';
-import { StudentClassesPage } from '@/features/student/classes/classes-page';
-import { AILabPage } from '@/features/student/ai-lab/ai-lab-page';
-import { EntryTestPage } from '@/features/student/entry-test/entry-test-page';
-import { RoadmapPage } from '@/features/student/roadmap/roadmap-page';
-import { PracticePage } from '@/features/student/practice/practice-page';
-import { AILabQuizPage } from '@/features/student/ai-lab/ai-lab-quiz-page';
-import { TeacherPoolDashboard } from '@/features/teacher/quizzes/pool-dashboard';
-import { StudentPoolDashboard } from '@/features/student/ai-lab/pool-dashboard';
-import { PracticeSessionPage } from '@/features/student/practice-session/practice-session-page';
-import { AiChatPage } from '@/features/student/ai-chat/ai-chat-page';
-import { ReviewPage } from '@/features/student/review/review-page';
-import { LearningPathPage } from '@/features/student/learning-path/learning-path-page';
-import { AdminDashboardPage } from '@/features/admin/admin-dashboard-page';
+
+// Heavy / role-specific pages — lazy-loaded
+const TeacherClassesPage = lazy(() =>
+  import('@/features/teacher/classes/classes-page').then((m) => ({ default: m.TeacherClassesPage })),
+);
+const TeacherClassDetailPage = lazy(() =>
+  import('@/features/teacher/classes/class-detail-page').then((m) => ({ default: m.TeacherClassDetailPage })),
+);
+const QuizReviewPage = lazy(() =>
+  import('@/features/teacher/quizzes/quiz-review-page').then((m) => ({ default: m.QuizReviewPage })),
+);
+const TeacherPoolDashboard = lazy(() =>
+  import('@/features/teacher/quizzes/pool-dashboard').then((m) => ({ default: m.TeacherPoolDashboard })),
+);
+const ProfilePage = lazy(() =>
+  import('@/features/shared/profile-page').then((m) => ({ default: m.ProfilePage })),
+);
+const StudentDashboardPage = lazy(() =>
+  import('@/features/student/dashboard/dashboard-page').then((m) => ({ default: m.StudentDashboardPage })),
+);
+const StudentClassesPage = lazy(() =>
+  import('@/features/student/classes/classes-page').then((m) => ({ default: m.StudentClassesPage })),
+);
+const AILabPage = lazy(() =>
+  import('@/features/student/ai-lab/ai-lab-page').then((m) => ({ default: m.AILabPage })),
+);
+const PlacementTestPage = lazy(() =>
+  import('@/features/student/entry-test/entry-test-page').then((m) => ({ default: m.PlacementTestPage })),
+);
+const EntryTestRedirect = lazy(() =>
+  import('@/features/student/entry-test/entry-test-redirect').then((m) => ({ default: m.EntryTestRedirect })),
+);
+const RoadmapPage = lazy(() =>
+  import('@/features/student/roadmap/roadmap-page').then((m) => ({ default: m.RoadmapPage })),
+);
+const PracticePage = lazy(() =>
+  import('@/features/student/practice/practice-page').then((m) => ({ default: m.PracticePage })),
+);
+const AILabQuizPage = lazy(() =>
+  import('@/features/student/ai-lab/ai-lab-quiz-page').then((m) => ({ default: m.AILabQuizPage })),
+);
+const StudentPoolDashboard = lazy(() =>
+  import('@/features/student/ai-lab/pool-dashboard').then((m) => ({ default: m.StudentPoolDashboard })),
+);
+const PracticeSessionPage = lazy(() =>
+  import('@/features/student/practice-session/practice-session-page').then((m) => ({ default: m.PracticeSessionPage })),
+);
+const AiChatPage = lazy(() =>
+  import('@/features/student/ai-chat/ai-chat-page').then((m) => ({ default: m.AiChatPage })),
+);
+const ReviewPage = lazy(() =>
+  import('@/features/student/review/review-page').then((m) => ({ default: m.ReviewPage })),
+);
+const AdminDashboardPage = lazy(() =>
+  import('@/features/admin/admin-dashboard-page').then((m) => ({ default: m.AdminDashboardPage })),
+);
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -42,6 +80,14 @@ const queryClient = new QueryClient({
     },
   },
 });
+
+function PageLoader() {
+  return (
+    <div className="flex h-[50vh] items-center justify-center">
+      <div className="h-8 w-8 animate-spin rounded-full border-4 border-primary border-t-transparent" />
+    </div>
+  );
+}
 
 function AppRoutes() {
   const { initialize, isLoading } = useAuthStore();
@@ -59,58 +105,58 @@ function AppRoutes() {
   }
 
   return (
-    <Routes>
-      {/* Public */}
-      <Route path="/" element={<LandingPage />} />
-      <Route element={<AuthLayout />}>
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/register" element={<RegisterPage />} />
-      </Route>
-
-      {/* Teacher */}
-      <Route element={<ProtectedRoute role="teacher" />}>
-        <Route element={<AppLayout role="teacher" />}>
-          <Route path="/teacher" element={<Navigate to="/teacher/classes" replace />} />
-          <Route path="/teacher/classes" element={<TeacherClassesPage />} />
-          <Route path="/teacher/classes/:id" element={<TeacherClassDetailPage />} />
-          <Route path="/teacher/ai-studio/:quizId" element={<QuizReviewPage />} />
-          <Route path="/teacher/quiz-pool" element={<TeacherPoolDashboard />} />
-          <Route path="/teacher/profile" element={<ProfilePage />} />
+    <Suspense fallback={<PageLoader />}>
+      <Routes>
+        {/* Public */}
+        <Route path="/" element={<LandingPage />} />
+        <Route element={<AuthLayout />}>
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<RegisterPage />} />
         </Route>
-      </Route>
 
-      {/* Student */}
-      <Route element={<ProtectedRoute role="student" />}>
-        <Route element={<AppLayout role="student" />}>
-          <Route path="/student" element={<Navigate to="/student/dashboard" replace />} />
-          <Route path="/student/dashboard" element={<StudentDashboardPage />} />
-          <Route path="/student/classes" element={<StudentClassesPage />} />
-          <Route path="/student/ai-lab" element={<AILabPage />} />
-          <Route path="/student/ai-lab/:quizId" element={<AILabQuizPage />} />
-          <Route path="/student/quiz-pool" element={<StudentPoolDashboard />} />
-          <Route path="/student/ai-chat" element={<AiChatPage />} />
-          <Route path="/student/review" element={<ReviewPage />} />
-          <Route path="/student/practice-session" element={<PracticeSessionPage />} />
-          <Route path="/student/roadmap/:classId" element={<RoadmapPage />} />
-          <Route path="/student/practice/:topicId" element={<PracticePage />} />
-          <Route path="/student/learning-path" element={<LearningPathPage />} />
-          <Route path="/student/profile" element={<ProfilePage />} />
+        {/* Teacher */}
+        <Route element={<ProtectedRoute role="teacher" />}>
+          <Route element={<AppLayout role="teacher" />}>
+            <Route path="/teacher" element={<Navigate to="/teacher/classes" replace />} />
+            <Route path="/teacher/classes" element={<TeacherClassesPage />} />
+            <Route path="/teacher/classes/:id" element={<TeacherClassDetailPage />} />
+            <Route path="/teacher/ai-studio/:quizId" element={<QuizReviewPage />} />
+            <Route path="/teacher/quiz-pool" element={<TeacherPoolDashboard />} />
+            <Route path="/teacher/profile" element={<ProfilePage />} />
+          </Route>
         </Route>
-        {/* Full-page (no sidebar) */}
-        <Route path="/student/entry-test/:classId" element={<EntryTestPage />} />
-      </Route>
 
-      {/* Admin */}
-      <Route element={<ProtectedRoute role="admin" />}>
-        <Route element={<AppLayout role="admin" />}>
-          <Route path="/admin" element={<Navigate to="/admin/dashboard" replace />} />
-          <Route path="/admin/dashboard" element={<AdminDashboardPage />} />
+        {/* Student */}
+        <Route element={<ProtectedRoute role="student" />}>
+          <Route element={<AppLayout role="student" />}>
+            <Route path="/student" element={<Navigate to="/student/dashboard" replace />} />
+            <Route path="/student/dashboard" element={<StudentDashboardPage />} />
+            <Route path="/student/classes" element={<StudentClassesPage />} />
+            <Route path="/student/ai-lab" element={<AILabPage />} />
+            <Route path="/student/ai-lab/:quizId" element={<AILabQuizPage />} />
+            <Route path="/student/quiz-pool" element={<StudentPoolDashboard />} />
+            <Route path="/student/ai-chat" element={<AiChatPage />} />
+            <Route path="/student/review" element={<ReviewPage />} />
+            <Route path="/student/practice-session" element={<PracticeSessionPage />} />
+            <Route path="/student/roadmap/:classId" element={<RoadmapPage />} />
+            <Route path="/student/practice/:topicId" element={<PracticePage />} />
+            <Route path="/student/profile" element={<ProfilePage />} />
+          </Route>
+          <Route path="/student/placement-test/:classId" element={<PlacementTestPage />} />
+          <Route path="/student/entry-test/:classId" element={<EntryTestRedirect />} />
         </Route>
-      </Route>
 
-      {/* Fallback */}
-      <Route path="*" element={<Navigate to="/" replace />} />
-    </Routes>
+        {/* Admin */}
+        <Route element={<ProtectedRoute role="admin" />}>
+          <Route element={<AppLayout role="admin" />}>
+            <Route path="/admin" element={<Navigate to="/admin/dashboard" replace />} />
+            <Route path="/admin/dashboard" element={<AdminDashboardPage />} />
+          </Route>
+        </Route>
+
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
+    </Suspense>
   );
 }
 

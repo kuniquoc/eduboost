@@ -1,52 +1,58 @@
 # Luồng: Practice Session
 
-> Trạng thái: ⚠️
+> Trạng thái: ✅
 
 ## Trigger
 
-Review → practice-session
+Review page, dashboard ("Ôn ngay"), `/student/practice-session`, **Quiz Pool** (mode `fixed`)
 
 ## Sequence diagram
 
 ```mermaid
 sequenceDiagram
     actor User
-    participant Web as web
+    participant Web as practice-session-page
     participant API as server
-    participant Agent as ai-agent-core
     participant DB as PostgreSQL
-    User->>Web: Review → practice-session
-    Web->>API: REST call
-    API->>DB: Persist / query
-    opt AI required
-        API->>Agent: HTTP tutor/rag
-        Agent-->>API: JSON response
+    User->>Web: Bắt đầu (standard, review, hoặc fixed)
+    Web->>API: POST start hoặc start-review
+    API->>DB: practice_active_sessions
+    loop Mỗi câu
+        User->>Web: Trả lời
+        Web->>API: POST answer + responseTimeSeconds
+        API->>DB: BKT + SpacedRepetitionItem
+        API-->>Web: spacedRepetition milestone
     end
-    API-->>Web: ApiResponse
-    Web-->>User: UI update
+    Web->>API: POST end
+    API->>DB: learning_sessions + streak
+    Web->>Web: invalidate review-schedule, learning-states, roadmap, student-stats, user-profile
 ```
+
+## Modes
+
+| Mode | API | Chọn câu |
+|------|-----|----------|
+| `standard` | POST `/start` | Random theo BKT difficulty |
+| `review` | POST `/start-review` | Đúng questionIds due |
+| `fixed` | POST `/start` mode=`fixed` | Đúng questionIds (Quiz Pool, không lọc due) |
 
 ## Bảng bước
 
-| Step | Layer | File / Module | API / Endpoint | Ghi chú |
-|------|-------|---------------|----------------|---------|
-| 1 | web | See integration map | — | User action |
-| 2 | web | Service layer | REST | JWT attached |
-| 3 | server | PracticeSessionsRepository.cs | /api/practice-sessions/* | Repository logic |
-| 4 | server | AgentService (if any) | Agent HTTP | Graceful degradation |
-| 5 | web | React Query invalidate | — | UI refresh |
+| Step | Layer | File | Ghi chú |
+|------|-------|------|---------|
+| 1 | web | `practiceSession.service.ts` | `start`, `startReview`, `startFixed`, `endSession` |
+| 2 | server | `PracticeSessionsRepository` | DB-persisted sessions (TTL 2h) |
+| 3 | server | `LearningStatesRepository` | Mỗi answer → BKT + SR (topic per question) |
 
-## Error paths & fallback
+## Trạng thái
 
-- **401:** Axios refresh queue → retry hoặc logout
-- **Agent offline:** Tutor/chat trả placeholder; quiz generation fail message
-- **Upload fail:** Toast error, document status `pending` không confirm
-
-## Trạng thái & hạn chế
-
-In-memory sessions
+- Sessions lưu `practice_active_sessions` (không còn purely in-memory)
+- Review mode truyền đúng câu due từ schedule
+- Fixed mode: `topicId` optional (revision set resolve từ `SourceTopicId`)
+- Sau `endSession`: invalidate đủ cache cho Ôn tập, Tổng quan, Hồ sơ
 
 ## Liên kết
 
-- [web-server-agent-map.md](../web-server-agent-map.md)
-- [../../99-known-issues/index.md](../../99-known-issues/index.md)
+- [11-bkt-review-schedule.md](11-bkt-review-schedule.md)
+- [05-quiz-pool-student.md](05-quiz-pool-student.md)
+- [practicesessions.md](../../02-server/features/practicesessions.md)

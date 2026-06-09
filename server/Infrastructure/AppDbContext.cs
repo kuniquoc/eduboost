@@ -297,5 +297,11 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
             .HasForeignKey(q => q.SourceDocumentId)
             .OnDelete(DeleteBehavior.SetNull);
 
+        modelBuilder.Entity<Question>()
+            .HasOne(q => q.SourceTopic)
+            .WithMany()
+            .HasForeignKey(q => q.SourceTopicId)
+            .OnDelete(DeleteBehavior.SetNull);
+
     }
 }

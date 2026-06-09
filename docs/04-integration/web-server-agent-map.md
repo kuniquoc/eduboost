@@ -9,6 +9,7 @@ Bảng ánh xạ hành động UI → REST API → AI Agent endpoint (nếu có)
 | Login | `authService.login` | `POST /api/auth/login` | — |
 | Register | `authService.register` | `POST /api/auth/register` | — |
 | Init app | `authStore.initialize` → `getMe` / `refreshToken` | `GET /api/auth/me`, `POST /api/auth/refresh` | — |
+| Update name | `authService.updateName` | `PATCH /api/auth/me/name` | — |
 | Logout | `authService.logout` | `POST /api/auth/revoke` | — |
 
 ## Classes & Topics
@@ -19,7 +20,7 @@ Bảng ánh xạ hành động UI → REST API → AI Agent endpoint (nếu có)
 | Create class | `classesService.createClass` | `POST /api/classes` | — |
 | Join class | `classesService.joinClass` | `POST /api/classes/join` | — |
 | List topics | `topicsService.getTopics` | `GET /api/classes/{id}/topics` | — |
-| AI evaluate topics | `topicsService.aiEvaluate` | `POST /api/classes/{id}/topics/ai-evaluate` | — 🔧 heuristic |
+| AI evaluate topics | `topicsService.aiEvaluate` | `POST /api/classes/{id}/topics/ai-evaluate` | `AskAsync` ✅ |
 
 ## Documents
 
@@ -28,20 +29,22 @@ Bảng ánh xạ hành động UI → REST API → AI Agent endpoint (nếu có)
 | Request upload URL | `documentsService.request*UploadUrl` | `POST .../request-upload` | — |
 | PUT file | `documentsService.uploadFileToMinio` | MinIO presigned | — |
 | Confirm upload | `documentsService.confirm*Upload` | `POST .../confirm` | `POST /rag/ingest` ⚠️ async |
+| Retry ingest | re-confirm upload | `POST .../confirm` | `POST /rag/ingest` |
 | Generate quiz | `documentsService.generateQuiz*` | `POST .../generate-quiz` | `POST /tutor/generate-quiz` |
-| Delete doc | `documentsService.delete*` | `DELETE ...` | `POST /rag/delete` ⚠️ async |
+| Delete doc | `documentsService.delete*` | `DELETE ...` | `POST /rag/delete` |
 
 ## Quizzes & AI Studio
 
 | UI Action | Web Service | Server Endpoint | Agent |
 |-----------|-------------|-----------------|-------|
 | Get/edit questions | `quizzesService.getQuestions` etc. | `/api/quizzes/{id}/questions` | — |
+| Student delete question | `quizzesService.deleteMyQuestion` | `DELETE /api/quizzes/my/{id}/questions/{qId}` | — |
 | Publish | `quizzesService.publishQuiz` | `POST /api/quizzes/{id}/publish` | — |
-| Generate entry test | `quizzesService.generateEntryTest` | `POST /api/quizzes/generate-entry-test/{classId}` | — 🔧 stub |
-| Take entry test | `quizzesService.get/submitEntryTest` | `GET/POST /api/quizzes/entry-test/{classId}` | — |
-| AI Tutor next action | `quizzesService.getTutorNextAction` | `GET /api/quizzes/tutor/next-action` | `GET /tutor/next-action` |
+| Generate entry test | `quizzesService.generateEntryTest` | `POST /api/quizzes/generate-entry-test/{classId}` | `POST /tutor/generate-quiz` |
+| Placement test | `placementTestService` | `/api/placement-tests/*` | — |
+| AI Tutor next action | `quizzesService.getTutorNextAction` | `GET /api/quizzes/tutor/next-action` | — (server `TutorDecisionService`) |
 | Generate question | `quizzesService.generateAdaptiveQuestion` | `GET /api/quizzes/tutor/generate-question` | `GET /tutor/generate-question` |
-| Submit tutor answer | `quizzesService.submitTutorAnswer` | `POST /api/quizzes/tutor/submit-answer` | `POST /tutor/update-state` ⚠️ async |
+| Submit tutor answer | `quizzesService.submitTutorAnswer` | `POST /api/quizzes/tutor/submit-answer` | — (server `LearningStatesRepository`) |
 | Explain | `quizzesService.getTutorExplanation` | `GET /api/quizzes/tutor/explain` | `GET /tutor/explain` |
 | Explain error | `quizzesService.getErrorExplanation` | `POST /api/quizzes/tutor/explain-error` | `POST /tutor/explain-error` |
 
@@ -53,7 +56,7 @@ Bảng ánh xạ hành động UI → REST API → AI Agent endpoint (nếu có)
 | List topics | `poolService.getTopicsInPool` | `GET /api/pool/topics` | — |
 | Create class test | `poolService.createTestFromPool` | `POST /api/pool/create-test` | — |
 | Create revision set | `poolService.createRevisionSetFromPool` | `POST /api/pool/create-revision-set` | — |
-| List revision sets | `apiClient` direct 🔧 | `GET /api/pool/revision-sets` | — |
+| List revision sets | `apiClient` direct | `GET /api/pool/revision-sets` | — |
 
 ## Roadmap & Learning
 
@@ -62,7 +65,6 @@ Bảng ánh xạ hành động UI → REST API → AI Agent endpoint (nếu có)
 | Get roadmap | `roadmapService.getRoadmap` | `GET /api/roadmap/{classId}` | — |
 | Generate roadmap | `roadmapService.generateRoadmap` | `POST /api/roadmap/{classId}/generate` | — |
 | Update step | `roadmapService.updateStep` | `PATCH /api/roadmap/{classId}/steps/{stepId}` | — |
-| Learning paths | `learningPath.service` 🔧 no UI | `/api/learning-paths/*` | — |
 | BKT states | `learningStateService` | `/api/learning-states/*` | — |
 | Review schedule | `learningStateService.getReviewSchedule` | `GET /api/learning-states/me/review-schedule` | — |
 
@@ -70,8 +72,9 @@ Bảng ánh xạ hành động UI → REST API → AI Agent endpoint (nếu có)
 
 | UI Action | Web Service | Server Endpoint | Agent |
 |-----------|-------------|-----------------|-------|
-| Placement test | `placementTestService` | `/api/placement-tests/*` | — ⚠️ in-memory |
-| Practice session | `practiceSessionService` | `/api/practice-sessions/*` | — ⚠️ in-memory |
+| Placement test | `placementTestService` | `/api/placement-tests/*` | — ✅ PostgreSQL |
+| Practice session | `practiceSessionService` | `/api/practice-sessions/*` | — ✅ PostgreSQL |
+| Review session | `practiceSessionService.startReview` | `POST /api/practice-sessions/start-review` | — |
 
 ## AI Chat
 
@@ -79,21 +82,12 @@ Bảng ánh xạ hành động UI → REST API → AI Agent endpoint (nếu có)
 |-----------|-------------|-----------------|-------|
 | Ask question | `aiChatService.ask` | `POST /api/ai-chat/ask` | `POST /tutor/chat` |
 | History | `aiChatService.getHistory` | `GET /api/ai-chat/history` | — |
-
-## Admin & Profile
-
-| UI Action | Web Service | Server Endpoint | Agent |
-|-----------|-------------|-----------------|-------|
-| Admin users/stats | `adminService` | `/api/admin/*` | — |
-| Profile | `userProfileService` | `/api/user-profiles/me` | — |
-| Student progress | `studentsService` | `/api/students/me/*` | — |
+| Clear history | `aiChatService.clearHistory` | `DELETE /api/ai-chat/history` | — |
 
 ## AgentService → Agent endpoint map
 
 | AgentService method | Agent HTTP |
 |---------------------|------------|
-| `GetNextActionAsync` | `GET /tutor/next-action` |
-| `UpdateStateAsync` | `POST /tutor/update-state` |
 | `GenerateQuizQuestionAsync` | `GET /tutor/generate-question` |
 | `GetExplanationAsync` | `GET /tutor/explain` |
 | `GetGraderExplanationAsync` | `POST /tutor/explain-error` |
@@ -102,7 +96,7 @@ Bảng ánh xạ hành động UI → REST API → AI Agent endpoint (nếu có)
 | `IngestDocumentAsync` | `POST /rag/ingest` |
 | `DeleteDocumentAsync` | `POST /rag/delete` |
 
-**Không được .NET gọi:** `/entry-test/*`, `/spaced-repetition/update`, `/rag/retrieve`.
+**Không được .NET gọi:** `/tutor/next-action`, `/tutor/update-state`, `/entry-test/*`, `/spaced-repetition/update`, `/rag/retrieve`.
 
 ## Liên kết
 

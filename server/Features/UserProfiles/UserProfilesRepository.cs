@@ -2,6 +2,7 @@ using System.Text.Json;
 using EduBoost.API.Features.UserProfiles.Models;
 using EduBoost.API.Infrastructure;
 using EduBoost.API.Infrastructure.Entities;
+using EduBoost.API.Infrastructure.Services;
 using Microsoft.EntityFrameworkCore;
 
 namespace EduBoost.API.Features.UserProfiles;
@@ -13,7 +14,7 @@ public interface IUserProfilesRepository
     Task<UserProfileDto?> GetProfileByUserIdAsync(Guid userId, Guid requesterId);
 }
 
-public class UserProfilesRepository(AppDbContext db) : IUserProfilesRepository
+public class UserProfilesRepository(AppDbContext db, IStudentStatsCalculator statsCalculator) : IUserProfilesRepository
 {
     public async Task<UserProfileDto> GetProfileAsync(Guid userId)
     {
@@ -26,7 +27,7 @@ public class UserProfilesRepository(AppDbContext db) : IUserProfilesRepository
             await db.SaveChangesAsync();
         }
 
-        return MapToDto(profile);
+        return await MapToDtoAsync(profile);
     }
 
     public async Task<UserProfileDto> UpdateProfileAsync(Guid userId, UpdateProfileRequest request)
@@ -48,7 +49,7 @@ public class UserProfilesRepository(AppDbContext db) : IUserProfilesRepository
         profile.UpdatedAt = DateTime.UtcNow;
         await db.SaveChangesAsync();
 
-        return MapToDto(profile);
+        return await MapToDtoAsync(profile);
     }
 
     public async Task<UserProfileDto?> GetProfileByUserIdAsync(Guid userId, Guid requesterId)
@@ -68,18 +69,23 @@ public class UserProfilesRepository(AppDbContext db) : IUserProfilesRepository
 
         var profile = await db.UserProfiles.FirstOrDefaultAsync(p => p.UserId == userId);
         if (profile == null) return null;
-        return MapToDto(profile);
+        return await MapToDtoAsync(profile);
     }
 
-    private static UserProfileDto MapToDto(UserProfile profile) => new()
+    private async Task<UserProfileDto> MapToDtoAsync(UserProfile profile)
     {
-        UserId = profile.UserId.ToString(),
-        CurrentLevel = profile.CurrentLevel,
-        OverallMasteryScore = profile.OverallMasteryScore,
-        PreferredTopics = string.IsNullOrEmpty(profile.PreferredTopics)
-            ? []
-            : JsonSerializer.Deserialize<List<string>>(profile.PreferredTopics) ?? [],
-        LearningStreak = profile.LearningStreak,
-        LastActiveDate = profile.LastActiveDate?.ToString("yyyy-MM-dd")
-    };
+        var userId = profile.UserId;
+        return new UserProfileDto
+        {
+            UserId = userId.ToString(),
+            CurrentLevel = profile.CurrentLevel,
+            OverallMasteryScore = await statsCalculator.CalculateOverallMasteryAsync(userId),
+            TopicsStudiedCount = await statsCalculator.CalculateTopicsStudiedCountAsync(userId),
+            PreferredTopics = string.IsNullOrEmpty(profile.PreferredTopics)
+                ? []
+                : JsonSerializer.Deserialize<List<string>>(profile.PreferredTopics) ?? [],
+            LearningStreak = profile.LearningStreak,
+            LastActiveDate = profile.LastActiveDate?.ToString("yyyy-MM-dd")
+        };
+    }
 }

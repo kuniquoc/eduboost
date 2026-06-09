@@ -1,7 +1,8 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { quizzesService } from '@/services/quizzes.service';
+import { invalidateLearningQueries } from '@/lib/invalidate-learning-queries';
 import { normalizeText } from '@/utils/text-normalization';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -35,6 +36,7 @@ type TutorStep =
 export function PracticePage() {
   const { topicId } = useParams<{ topicId: string }>();
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
 
   const [step, setStep] = useState<TutorStep>({ type: 'loading' });
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
@@ -43,15 +45,42 @@ export function PracticePage() {
   const [questionsAnswered, setQuestionsAnswered] = useState(0);
   const [correctCount, setCorrectCount] = useState(0);
   const [started, setStarted] = useState(false);
+  const questionStartRef = useRef<number>(Date.now());
+  const questionsAnsweredRef = useRef(0);
+  const correctCountRef = useRef(0);
+  const sessionRecordedRef = useRef(false);
+
+  const finalizeTutorSession = useCallback(async () => {
+    if (sessionRecordedRef.current || questionsAnsweredRef.current === 0 || !topicId) return;
+    sessionRecordedRef.current = true;
+    try {
+      await quizzesService.completeTutorPractice(
+        topicId,
+        questionsAnsweredRef.current,
+        correctCountRef.current,
+      );
+      invalidateLearningQueries(queryClient);
+    } catch {
+      sessionRecordedRef.current = false;
+    }
+  }, [topicId, queryClient]);
+
+  const handleExit = useCallback(async () => {
+    await finalizeTutorSession();
+    navigate(-1);
+  }, [finalizeTutorSession, navigate]);
 
   // ── Mutations ───────────────────────────────────────────
   const nextActionMutation = useMutation({
     mutationFn: () => quizzesService.getTutorNextAction(topicId!),
     onSuccess: (data: TutorNextActionDto) => {
-      if (data.action === 'EXPLAIN' || data.action === 'QUIZ') {
-        // Skip explanation and go directly to question
+      if (data.action === 'EXPLAIN') {
+        explainMutation.mutate();
+      } else if (data.action === 'QUIZ') {
         generateQuestionMutation.mutate();
       } else if (data.action === 'NEXT_SKILL') {
+        void finalizeTutorSession();
+        invalidateLearningQueries(queryClient);
         setStep({ type: 'mastered' });
       }
     },
@@ -67,7 +96,7 @@ export function PracticePage() {
       setStep({ type: 'explain', content });
     },
     onError: () => {
-      setStep({ type: 'explain', content: 'Let\'s review this topic together! When you feel ready, start practicing with quiz questions.' });
+      setStep({ type: 'explain', content: 'Hãy cùng ôn lại chủ đề này! Khi bạn sẵn sàng, hãy bắt đầu luyện tập với các câu hỏi quiz.' });
     },
   });
 
@@ -78,6 +107,7 @@ export function PracticePage() {
       setShowQuizExplanation(false);
       setShowAiExplanation(false);
       errorExplainMutation.reset();
+      questionStartRef.current = Date.now();
       setStep({ type: 'quiz', question });
     },
     onError: () => {
@@ -89,14 +119,21 @@ export function PracticePage() {
     mutationFn: (vars: { question: TutorQuestionDto; selectedKey: string }) =>
       quizzesService.submitTutorAnswer({
         topicId: topicId!,
+        questionId: vars.question.questionId,
         questionText: vars.question.question,
         correctAnswer: vars.question.correctAnswer,
         selectedAnswer: vars.selectedKey,
         difficulty: vars.question.difficultyLevel,
+        responseTimeSeconds: (Date.now() - questionStartRef.current) / 1000,
       }),
     onSuccess: (result: TutorAnswerResult, vars) => {
       setQuestionsAnswered((c) => c + 1);
-      if (result.isCorrect) setCorrectCount((c) => c + 1);
+      questionsAnsweredRef.current += 1;
+      if (result.isCorrect) {
+        setCorrectCount((c) => c + 1);
+        correctCountRef.current += 1;
+      }
+      invalidateLearningQueries(queryClient);
       setStep({ type: 'result', question: vars.question, selectedKey: vars.selectedKey, result });
 
       // Pre-fetch explanation immediately on incorrect answer
@@ -166,7 +203,7 @@ export function PracticePage() {
     return (
       <div>
         <button
-          onClick={() => navigate(-1)}
+          onClick={() => void handleExit()}
           className="mb-6 flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground transition-colors"
         >
           <ArrowLeft className="h-4 w-4" /> Quay lại lộ trình
@@ -211,7 +248,7 @@ export function PracticePage() {
   return (
     <div>
       <button
-        onClick={() => navigate(-1)}
+        onClick={() => void handleExit()}
         className="mb-4 flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground transition-colors"
       >
         <ArrowLeft className="h-4 w-4" /> Quay lại lộ trình
@@ -544,7 +581,7 @@ export function PracticePage() {
           )}
 
           <div className="mt-8 flex justify-center gap-3">
-            <Button variant="outline" onClick={() => navigate(-1)}>
+            <Button variant="outline" onClick={() => void handleExit()}>
               <ArrowLeft className="h-4 w-4" /> Quay lại lộ trình
             </Button>
           </div>
@@ -558,7 +595,7 @@ export function PracticePage() {
           <h2 className="text-xl font-bold text-foreground">Đã xảy ra lỗi</h2>
           <p className="mt-2 text-muted-foreground">{step.message}</p>
           <div className="mt-6 flex justify-center gap-3">
-            <Button variant="outline" onClick={() => navigate(-1)}>
+            <Button variant="outline" onClick={() => void handleExit()}>
               Quay lại
             </Button>
             <Button onClick={startSession}>Thử lại</Button>

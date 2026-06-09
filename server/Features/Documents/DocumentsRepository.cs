@@ -34,7 +34,7 @@ public class DocumentsRepository(
     IStorageService storage,
     IAgentService agent,
     ILogger<DocumentsRepository> logger,
-    IServiceScopeFactory scopeFactory) : IDocumentsRepository
+    IDocumentIngestQueue ingestQueue) : IDocumentsRepository
 {
     private const string ClassBucket = MinioStorageService.Buckets.ClassDocuments;
     private const string StudentBucket = MinioStorageService.Buckets.StudentDocuments;
@@ -98,7 +98,7 @@ public class DocumentsRepository(
         doc.Status = "ingesting";
         await db.SaveChangesAsync();
 
-        ScheduleBackgroundIngest(
+        await ScheduleBackgroundIngest(
             doc.Id,
             documentScope: "class",
             classId: doc.ClassId?.ToString(),
@@ -114,21 +114,17 @@ public class DocumentsRepository(
 
         if (doc == null) return false;
 
+        try
+        {
+            await agent.DeleteDocumentAsync(docId.ToString());
+        }
+        catch (Exception ex)
+        {
+            logger.LogWarning(ex, "RAG delete failed for class document {DocId}; removing from storage/DB anyway", docId);
+        }
+
         if (doc.StorageKey != null)
             await storage.DeleteObjectAsync(ClassBucket, doc.StorageKey);
-
-        // Call RAG delete
-        _ = Task.Run(async () =>
-        {
-            try
-            {
-                await agent.DeleteDocumentAsync(docId.ToString());
-            }
-            catch (Exception ex)
-            {
-                logger.LogError(ex, "Failed to background-delete class document {DocId} in Python RAG", docId);
-            }
-        });
 
         db.Documents.Remove(doc);
         await db.SaveChangesAsync();
@@ -421,7 +417,7 @@ public class DocumentsRepository(
         doc.Status = "ingesting";
         await db.SaveChangesAsync();
 
-        ScheduleBackgroundIngest(
+        await ScheduleBackgroundIngest(
             doc.Id,
             documentScope: "student",
             ownerId: doc.OwnerId.ToString());
@@ -666,21 +662,17 @@ public class DocumentsRepository(
 
         if (doc == null) return false;
 
+        try
+        {
+            await agent.DeleteDocumentAsync(docId.ToString());
+        }
+        catch (Exception ex)
+        {
+            logger.LogWarning(ex, "RAG delete failed for student document {DocId}; removing from storage/DB anyway", docId);
+        }
+
         if (doc.StorageKey != null)
             await storage.DeleteObjectAsync(StudentBucket, doc.StorageKey);
-
-        // Call RAG delete in background
-        _ = Task.Run(async () =>
-        {
-            try
-            {
-                await agent.DeleteDocumentAsync(docId.ToString());
-            }
-            catch (Exception ex)
-            {
-                logger.LogError(ex, "Failed to background-delete student document {DocId} in Python RAG", docId);
-            }
-        });
 
         db.Documents.Remove(doc);
         await db.SaveChangesAsync();
@@ -712,64 +704,14 @@ public class DocumentsRepository(
         return await storage.GetInternalPresignedDownloadUrlAsync(bucket, doc.StorageKey, 3600);
     }
 
-    private void ScheduleBackgroundIngest(
+    private Task ScheduleBackgroundIngest(
         Guid documentId,
         string documentScope,
         string? classId = null,
         string? topicId = null,
-        string? ownerId = null)
-    {
-        _ = Task.Run(async () =>
-        {
-            using var serviceScope = scopeFactory.CreateScope();
-            var scopedDb = serviceScope.ServiceProvider.GetRequiredService<AppDbContext>();
-            var scopedAgent = serviceScope.ServiceProvider.GetRequiredService<IAgentService>();
-            var scopedStorage = serviceScope.ServiceProvider.GetRequiredService<IStorageService>();
-            var scopedLogger = serviceScope.ServiceProvider.GetRequiredService<ILogger<DocumentsRepository>>();
-
-            try
-            {
-                var doc = await scopedDb.Documents.FindAsync(documentId);
-                if (doc == null) return;
-
-                var downloadUrl = await ResolveDocumentDownloadUrlAsync(doc, scopedStorage);
-                if (downloadUrl == null)
-                {
-                    doc.Status = "ingest_failed";
-                    await scopedDb.SaveChangesAsync();
-                    return;
-                }
-
-                await scopedAgent.IngestDocumentAsync(
-                    documentId: doc.Id.ToString(),
-                    fileUrl: downloadUrl,
-                    scope: documentScope,
-                    classId: classId,
-                    ownerId: ownerId,
-                    topicId: topicId);
-
-                doc.Status = "ready";
-                await scopedDb.SaveChangesAsync();
-            }
-            catch (Exception ex)
-            {
-                scopedLogger.LogError(ex, "Failed to background-ingest document {DocId}", documentId);
-                try
-                {
-                    var doc = await scopedDb.Documents.FindAsync(documentId);
-                    if (doc != null)
-                    {
-                        doc.Status = "ingest_failed";
-                        await scopedDb.SaveChangesAsync();
-                    }
-                }
-                catch (Exception updateEx)
-                {
-                    scopedLogger.LogError(updateEx, "Failed to mark document {DocId} as ingest_failed", documentId);
-                }
-            }
-        });
-    }
+        string? ownerId = null) =>
+        ingestQueue.EnqueueAsync(new DocumentIngestJob(
+            documentId, documentScope, classId, topicId, ownerId)).AsTask();
 
     private static async Task<string?> ResolveDocumentDownloadUrlAsync(Document doc, IStorageService scopedStorage)
     {

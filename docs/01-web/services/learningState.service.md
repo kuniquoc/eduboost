@@ -2,18 +2,15 @@
 
 > File nguồn: [`web/src/services/learningState.service.ts`](../../../web/src/services/learningState.service.ts)
 
-## Vai trò
-API client wrapper cho `learningState` endpoints.
-
 ## Hàm
 
-| Hàm | Endpoint | Trạng thái |
-|-----|----------|------------|
-| `getStates` | `—` | ✅ |
-| `getState` | `—` | ✅ |
-| `updateAfterAnswer` | `—` | ✅ |
-| `getReviewSchedule` | `—` | ✅ |
+| Hàm | Endpoint | Dùng trong UI |
+|-----|----------|---------------|
+| `getStates` | GET `/learning-states/me` | Review page |
+| `getState` | GET `/learning-states/me/topic/:topicId` | — |
+| `updateAfterAnswer` | POST `/learning-states/update` | — (server gọi nội bộ) |
+| `getReviewSchedule` | GET `/learning-states/me/review-schedule` | Dashboard, Review |
 
-## Known issues
+## ReviewItemDto fields
 
-Xem [web-gaps.md](../../99-known-issues/web-gaps.md).
+`questionText`, `reviewInterval`, `easeFactor`, `lastReviewDate`, `overdueHours`, `repetitionCount`, `retentionScore`

@@ -1,7 +1,8 @@
 import { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { documentsService } from '@/services/documents.service';
+import { useClassDocuments } from '@/hooks/use-class-documents';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent } from '@/components/ui/card';
@@ -16,8 +17,10 @@ import { QuizGenerationDialog } from '@/components/shared/quiz-generation-dialog
 const statusMap: Record<string, { label: string; variant: 'default' | 'secondary' | 'destructive' | 'outline' }> = {
   pending: { label: 'Chờ tải lên', variant: 'outline' },
   uploading: { label: 'Đang tải', variant: 'outline' },
+  ingesting: { label: 'Đang index RAG', variant: 'secondary' },
   processing: { label: 'Đang xử lý', variant: 'secondary' },
   ready: { label: 'Sẵn sàng', variant: 'default' },
+  ingest_failed: { label: 'Lỗi index RAG', variant: 'destructive' },
   error: { label: 'Lỗi', variant: 'destructive' },
 };
 
@@ -36,10 +39,7 @@ export function DocumentsTab({ classId }: { classId: string }) {
   const [uploading, setUploading] = useState(false);
   const [quizDoc, setQuizDoc] = useState<DocumentDto | null>(null);
 
-  const { data: documents, isLoading } = useQuery({
-    queryKey: ['class-documents', classId],
-    queryFn: () => documentsService.getClassDocuments(classId),
-  });
+  const { data: documents, isLoading } = useClassDocuments(classId);
 
   const invalidate = () => queryClient.invalidateQueries({ queryKey: ['class-documents', classId] });
 
@@ -72,6 +72,15 @@ export function DocumentsTab({ classId }: { classId: string }) {
       setDeleteDoc(null);
     },
     onError: () => toast.error('Xóa thất bại'),
+  });
+
+  const retryIngestMutation = useMutation({
+    mutationFn: (docId: string) => documentsService.confirmClassUpload(classId, docId),
+    onSuccess: () => {
+      invalidate();
+      toast.success('Đang thử index RAG lại...');
+    },
+    onError: () => toast.error('Không thể thử lại index RAG'),
   });
 
   const generateQuizMutation = useMutation({
@@ -142,6 +151,16 @@ export function DocumentsTab({ classId }: { classId: string }) {
                   </div>
                   <div className="flex items-center gap-2 shrink-0">
                     <Badge variant={status.variant}>{status.label}</Badge>
+                    {doc.status === 'ingest_failed' && (
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() => retryIngestMutation.mutate(doc.id)}
+                        disabled={retryIngestMutation.isPending}
+                      >
+                        Thử lại RAG
+                      </Button>
+                    )}
                     {(doc.status === 'ready' || doc.status === 'error') && (
                       <Button
                         variant="outline"

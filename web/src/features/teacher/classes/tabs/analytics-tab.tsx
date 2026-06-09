@@ -1,15 +1,11 @@
-import { useQuery } from '@tanstack/react-query';
-import { studentsService } from '@/services/students.service';
+import { useClassAnalytics } from '@/hooks/use-class-analytics';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
 import { BarChart3, Users, AlertTriangle, TrendingUp } from 'lucide-react';
 
 export function AnalyticsTab({ classId }: { classId: string }) {
-  const { data: analytics, isLoading } = useQuery({
-    queryKey: ['class-analytics', classId],
-    queryFn: () => studentsService.getClassAnalytics(classId),
-  });
+  const { data: analytics, isLoading } = useClassAnalytics(classId);
 
   if (isLoading) {
     return <div className="h-40 animate-pulse rounded-xl bg-card" />;
@@ -72,7 +68,7 @@ export function AnalyticsTab({ classId }: { classId: string }) {
                 </div>
                 <div className="flex gap-2">
                   {!s.entryTestCompleted && (
-                    <Badge variant="destructive">Chưa làm entry test</Badge>
+                    <Badge variant="destructive">Chưa làm placement test</Badge>
                   )}
                   <Badge variant="outline">Hoạt động: {s.lastActive}</Badge>
                 </div>

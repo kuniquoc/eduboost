@@ -27,7 +27,7 @@ Shared TypeScript interfaces ported từ mobile:
 | Documents | `DocumentDto`, `UploadUrlDto`, `GenerateQuizJobDto` |
 | Quizzes | `QuestionDto`, `QuizDto`, `EntryTestDto`, `TutorNextActionDto` |
 | Pool | `TopicPoolDto`, `PoolQuizDetailDto`, `GeneratePoolQuizRequest` |
-| Learning | `BktStateDto`, `ReviewScheduleDto`, `RoadmapDto`, `LearningPathDto` |
+| Learning | `BktStateDto`, `ReviewScheduleDto`, `RoadmapDto` |
 | Placement | `PlacementTestResultDto`, `StartPlacementTestResponse` |
 | Chat | `ChatMessageDto`, `AskAiRequest` |
 
@@ -36,7 +36,7 @@ Shared TypeScript interfaces ported từ mobile:
 | File | Export | Trạng thái |
 |------|--------|------------|
 | `utils.ts` | `cn()` clsx + tailwind-merge | ✅ |
-| `constants.ts` | Partial `ROUTES` | ⚠️ Thiếu nhiều route |
+| `constants.ts` | `ROUTES` — đầy đủ routes trong App.tsx | ✅ |
 
 ## utils/
 

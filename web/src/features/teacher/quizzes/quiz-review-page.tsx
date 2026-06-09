@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useQuizQuestions } from '@/hooks/use-quiz-questions';
 import { quizzesService } from '@/services/quizzes.service';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -47,11 +48,7 @@ export function QuizReviewPage() {
   ]);
   const [addCorrectAnswer, setAddCorrectAnswer] = useState('');
 
-  const { data: questions, isLoading } = useQuery({
-    queryKey: ['quiz-questions', quizId],
-    queryFn: () => quizzesService.getQuestions(quizId!),
-    enabled: !!quizId,
-  });
+  const { data: questions, isLoading } = useQuizQuestions(quizId);
 
   const invalidate = () => queryClient.invalidateQueries({ queryKey: ['quiz-questions', quizId] });
 

@@ -2,93 +2,65 @@
 
 Mâu thuẫn giữa web, server, và ai-agent-core.
 
-## 1. Entry Test — 3 implementations
+## 1. Entry Test — ✅ Web/server thống nhất placement test
 
 | Layer | Implementation | Status |
 |-------|----------------|--------|
-| server | `GenerateEntryTestAsync` — stub `[AI]` placeholder | 🔧 |
-| server | `PlacementTestsRepository` — adaptive in-memory | ⚠️ |
-| web | `entry-test-page.tsx` — legacy per-class | 🔧 |
-| web | `adaptive-placement-test-page.tsx` — no nav | 🔧 |
-| agent | `/entry-test/*` — adaptive engine | ❌ Orphan, không .NET gọi |
+| server | `PlacementTestsRepository` — adaptive, PostgreSQL | ✅ |
+| web | `PlacementTestPage` tại `/student/placement-test/:classId` | ✅ |
+| mobile | `entry-test/[classId].tsx` → legacy API | 🔧 Migrate |
+| server legacy | `GET/POST /api/quizzes/entry-test/*` | ⚠️ `[Obsolete]` — giữ cho mobile |
 
-**Hậu quả:** Dashboard redirect legacy entry-test; placement test khó discover; agent entry-test không dùng.
+## 2. Roadmap vs Learning Path — ✅ Đã thống nhất
 
-## 2. Roadmap vs Learning Path
+Chỉ còn **Roadmap theo lớp** (`/api/roadmap/{classId}`).
 
-| Concept | API | UI | Scope |
-|---------|-----|-----|-------|
-| Roadmap | `/api/roadmap/{classId}` | `roadmap-page.tsx` ✅ | Per-class |
-| Learning path | `/api/learning-paths/*` | None 🔧 | Global cross-class |
+## 3. BKT State — single source of truth ✅
 
-Cùng entity `PersonalizedLearningPath` nhưng filter khác nhau.
+PostgreSQL `bkt_states`. Agent không còn `/tutor/update-state` từ .NET.
 
-## 3. BKT State — dual storage
+## 4. Tutor next-action — ✅ Server-side
 
-| Location | Persistence | Used when |
-|----------|-------------|-----------|
-| PostgreSQL `bkt_states` | Permanent | Practice session, learning states API |
-| Agent `agent_sessions` | In-memory | Tutor next-action during session |
+`GET /api/quizzes/tutor/next-action` → `TutorDecisionService` (không gọi agent).
 
-Đồng bộ qua `POST /tutor/update-state` — **fire-and-forget** từ `QuizzesController` ⚠️. Tutor submit trả `mastery: null`.
+## 5. Spaced Repetition ✅
 
-## 4. Spaced Repetition
+Server `SpacedRepetitionService` + web review/practice-session.
 
-| Layer | Status |
-|-------|--------|
-| server | `SpacedRepetitionItem` entity + review schedule API ✅ |
-| agent | `/spaced-repetition/update` SM-2 | ❌ Orphan |
-| web | Review page + practice session ✅ |
+## 6. RAG ingest — ✅ Fixed queue worker
 
-Server tự tính SM-2 trong `LearningStatesRepository`, không gọi agent.
+| Step | Behavior | Status |
+|------|----------|--------|
+| confirm upload | → `ingesting` + enqueue | ✅ |
+| background ingest | `DocumentIngestBackgroundService` (channel queue) | ✅ |
+| ingest fail | → `ingest_failed` + web retry | ✅ |
+| shutdown | Hosted service stops gracefully | ✅ |
 
-## 5. RAG ingest status
+## 7. Quiz Pool RBAC — ✅ Fixed 2026-06-10
 
-| Step | Behavior | Issue |
-|------|----------|-------|
-| confirm upload | Document → `ready` | ✅ |
-| background ingest | `Task.Run` → agent | ⚠️ |
-| ingest fail | Doc vẫn `ready` | ❌ |
+`PoolAuthorization` enforce topic/quiz access.
 
-## 6. Quiz generation UX
+## 8. Docs vs code — ✅ Largely synced
 
-| Layer | Message | Reality |
-|-------|---------|---------|
-| server | "AI đang xử lý" | Mostly synchronous in repository |
-| web | Poll/navigate after generate | Blocks until response |
+`api-reference.md` có Pool, Tutor, student delete. `learningPath.service.md` deprecated.
 
-## 7. Role registration
+## 9. Student dashboard/profile stats — ✅ Fixed 2026-06-10
 
-| Layer | Behavior |
-|-------|----------|
-| web | `register-page` gửi `role` user chọn |
-| server | Lưu role trực tiếp — không validate |
+| Issue | Before | After |
+|-------|--------|-------|
+| `weeklyProgress` | Hardcoded `0` | Weighted % correct trong tuần UTC (quiz + sessions) |
+| `overallMasteryScore` | DB field never updated | Computed `AVG(bkt_states.mastery_probability)` |
+| `topicsStudiedCount` | N/A (UI showed favorite count) | `COUNT(DISTINCT bkt_states.topic_id)` |
+| `totalQuizzesTaken` / `avgQuizScore` | Quiz only | Quiz + `learning_sessions` |
+| `dayStreak` vs `learningStreak` | Two algorithms on dashboard vs profile | Profile uses `dayStreak` from stats API |
+| `enrollment.progress` | Stale DB field (always 0) | Derived from roadmap completion % |
 
-❌ Self-register as teacher.
+Mobile UI labels chưa đồng bộ (ngoài phạm vi web fix).
 
-## 8. Docs vs code
+## Khuyến nghị tiếp theo
 
-| Doc | Issue |
-|-----|-------|
-| `implementation-plan.md` | Lists UserProfile, BKT DB as missing — **implemented** |
-| `web-technical-spec.md` | hooks/, analytics pages — **don't exist** |
-| `features.md` | Demo login — **don't exist** |
-| `ai-agent-core/docs/06_ai_server.md` | vLLM orchestrator — **not implemented** |
-
-## 9. API path conventions
-
-| Pattern | Controllers |
-|---------|-------------|
-| `[Route("api/...")]` + relative | Auth, Classes, Quizzes, Pool… |
-| Full path per action | Documents, Students |
-
-## Khuyến nghị thống nhất
-
-1. Chọn **một** entry/placement test flow — deprecate còn lại
-2. Nối learning paths UI hoặc remove API
-3. Persist agent sessions hoặc chỉ dùng PostgreSQL BKT
-4. Track RAG ingest job status trên Document entity
-5. Server-side role validation on register
+1. Migrate mobile off legacy entry-test
+2. Deprecate agent `/tutor/next-action`, `/tutor/update-state` HTTP (orphan)
 
 ## Liên kết
 

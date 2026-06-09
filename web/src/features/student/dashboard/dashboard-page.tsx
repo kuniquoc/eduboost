@@ -1,11 +1,12 @@
 import { Link } from 'react-router-dom';
-import { useQuery } from '@tanstack/react-query';
-import { studentsService } from '@/services/students.service';
-import { learningStateService } from '@/services/learningState.service';
+import { placementTestPath } from '@/lib/constants';
+import { useStudentProgress } from '@/hooks/use-student-progress';
+import { useStudentStats } from '@/hooks/use-student-stats';
+import { useReviewSchedule } from '@/hooks/use-review-schedule';
 import { Card, CardContent } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
 import { Badge } from '@/components/ui/badge';
-import { Flame, Target, BookOpen, TrendingUp, CalendarClock } from 'lucide-react';
+import { Flame, BookOpen, TrendingUp, CalendarClock, Brain } from 'lucide-react';
 
 function StatCard({ icon: Icon, label, value, sub }: { icon: React.ComponentType<{ className?: string }>; label: string; value: string | number; sub?: string }) {
   return (
@@ -25,20 +26,9 @@ function StatCard({ icon: Icon, label, value, sub }: { icon: React.ComponentType
 }
 
 export function StudentDashboardPage() {
-  const { data: progress, isLoading: loadingProgress } = useQuery({
-    queryKey: ['student-progress'],
-    queryFn: studentsService.getMyProgress,
-  });
-
-  const { data: stats, isLoading: loadingStats } = useQuery({
-    queryKey: ['student-stats'],
-    queryFn: studentsService.getMyStats,
-  });
-
-  const { data: reviewSchedule } = useQuery({
-    queryKey: ['review-schedule'],
-    queryFn: learningStateService.getReviewSchedule,
-  });
+  const { data: progress, isLoading: loadingProgress } = useStudentProgress();
+  const { data: stats, isLoading: loadingStats } = useStudentStats();
+  const { data: reviewSchedule } = useReviewSchedule();
 
   const isLoading = loadingProgress || loadingStats;
 
@@ -46,8 +36,8 @@ export function StudentDashboardPage() {
     return (
       <div className="space-y-6">
         <div className="h-8 w-48 animate-pulse rounded bg-muted" />
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {Array.from({ length: 4 }).map((_, i) => (
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {Array.from({ length: 3 }).map((_, i) => (
             <Card key={i} className="h-20 animate-pulse border-border bg-card" />
           ))}
         </div>
@@ -64,42 +54,45 @@ export function StudentDashboardPage() {
 
       {/* Stats cards */}
       {stats && (
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           <StatCard icon={Flame} label="Chuỗi ngày" value={`${stats.dayStreak} ngày`} />
-          <StatCard icon={Target} label="Điểm TB" value={`${Math.round(stats.avgQuizScore)}%`} />
-          <StatCard icon={BookOpen} label="Bài quiz" value={stats.totalQuizzesTaken} />
-          <StatCard icon={TrendingUp} label="Tuần này" value={`${Math.round(stats.weeklyProgress)}%`} />
+          <StatCard icon={BookOpen} label="Bài đã làm" value={stats.totalQuizzesTaken} />
+          <StatCard
+            icon={TrendingUp}
+            label="Tỉ lệ đúng tuần này"
+            value={`${Math.round(stats.weeklyProgress)}%`}
+          />
         </div>
-      )}
-
-      {/* Overall progress */}
-      {progress && (
-        <Card className="border-border">
-          <CardContent className="p-5">
-            <div className="mb-3 flex items-center justify-between">
-              <h2 className="font-semibold text-foreground">Tiến độ tổng thể</h2>
-              <span className="text-sm font-medium text-primary">{Math.round(progress.overallProgress)}%</span>
-            </div>
-            <Progress value={progress.overallProgress} className="h-2" />
-          </CardContent>
-        </Card>
       )}
 
       {/* Review reminder */}
       {reviewSchedule && reviewSchedule.totalDueToday > 0 && (
-        <Link to="/student/review">
-          <Card className="border-primary/20 bg-primary/5 transition-colors hover:border-primary/40">
-            <CardContent className="flex items-center gap-4 p-4">
-              <CalendarClock className="h-8 w-8 text-primary" />
-              <div className="flex-1">
-                <p className="font-semibold text-foreground">
-                  {reviewSchedule.totalDueToday} câu hỏi cần ôn tập hôm nay
-                </p>
-                <p className="text-sm text-muted-foreground">Ôn tập đúng lúc để ghi nhớ lâu hơn</p>
-              </div>
-            </CardContent>
-          </Card>
-        </Link>
+        <div className="grid gap-3 sm:grid-cols-2">
+          <Link to="/student/review">
+            <Card className="border-primary/20 bg-primary/5 transition-colors hover:border-primary/40 h-full">
+              <CardContent className="flex items-center gap-4 p-4">
+                <CalendarClock className="h-8 w-8 text-primary" />
+                <div className="flex-1">
+                  <p className="font-semibold text-foreground">
+                    {reviewSchedule.totalDueToday} câu hỏi cần ôn tập hôm nay
+                  </p>
+                  <p className="text-sm text-muted-foreground">Xem lịch ôn tập</p>
+                </div>
+              </CardContent>
+            </Card>
+          </Link>
+          <Link to="/student/practice-session?mode=review">
+            <Card className="border-primary/20 transition-colors hover:border-primary/40 h-full">
+              <CardContent className="flex items-center gap-4 p-4">
+                <Brain className="h-8 w-8 text-primary" />
+                <div className="flex-1">
+                  <p className="font-semibold text-foreground">Ôn ngay {reviewSchedule.totalDueToday} câu</p>
+                  <p className="text-sm text-muted-foreground">Bắt đầu phiên spaced repetition</p>
+                </div>
+              </CardContent>
+            </Card>
+          </Link>
+        </div>
       )}
 
       {/* Enrolled classes */}
@@ -116,7 +109,7 @@ export function StudentDashboardPage() {
         ) : (
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {progress.enrolledClasses.map((c) => (
-              <Link key={c.classId} to={c.entryTestCompleted ? `/student/roadmap/${c.classId}` : `/student/entry-test/${c.classId}`}>
+              <Link key={c.classId} to={c.entryTestCompleted ? `/student/roadmap/${c.classId}` : placementTestPath(c.classId)}>
                 <Card className="group overflow-hidden border-border transition-colors hover:border-primary/40">
                   <div className="h-2" style={{ backgroundColor: c.coverColor }} />
                   <CardContent className="p-4">

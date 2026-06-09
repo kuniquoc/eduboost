@@ -1,6 +1,7 @@
 using EduBoost.API.Features.LearningStates.Models;
 using EduBoost.API.Infrastructure;
 using EduBoost.API.Infrastructure.Entities;
+using EduBoost.API.Infrastructure.Services;
 using Microsoft.EntityFrameworkCore;
 
 namespace EduBoost.API.Features.LearningStates;
@@ -11,9 +12,10 @@ public interface ILearningStatesRepository
     Task<BktStateDto?> GetStateByTopicAsync(Guid userId, Guid topicId);
     Task<UpdateBktResponse> UpdateAfterAnswerAsync(Guid userId, UpdateBktRequest request);
     Task<ReviewScheduleDto> GetReviewScheduleAsync(Guid userId);
+    Task<List<Guid>> GetDueQuestionIdsAsync(Guid userId, IEnumerable<Guid>? questionIds = null);
 }
 
-public class LearningStatesRepository(AppDbContext db) : ILearningStatesRepository
+public class LearningStatesRepository(AppDbContext db, ISpacedRepetitionService spacedRepetition) : ILearningStatesRepository
 {
     public async Task<List<BktStateDto>> GetAllStatesAsync(Guid userId)
     {
@@ -75,13 +77,11 @@ public class LearningStatesRepository(AppDbContext db) : ILearningStatesReposito
             pLGivenObs = (pL * pS) / pIncorrect;
         }
 
-        // Transition: learning
         double newPL = pLGivenObs + (1 - pLGivenObs) * pT;
         state.MasteryProbability = Math.Clamp(newPL, 0.0, 1.0);
         state.UpdatedAt = DateTime.UtcNow;
 
-        // Update spaced repetition for this question
-        await UpdateSpacedRepetitionAsync(userId, request);
+        var srUpdate = await UpdateSpacedRepetitionAsync(userId, request);
 
         await db.SaveChangesAsync();
 
@@ -94,35 +94,54 @@ public class LearningStatesRepository(AppDbContext db) : ILearningStatesReposito
         return new UpdateBktResponse
         {
             State = MapToDto(state),
-            Recommendation = recommendation
+            Recommendation = recommendation,
+            SpacedRepetition = srUpdate
         };
     }
 
     public async Task<ReviewScheduleDto> GetReviewScheduleAsync(Guid userId)
     {
-        var today = DateTime.UtcNow.Date;
+        var now = DateTime.UtcNow;
         var items = await db.SpacedRepetitionItems
-            .Where(sr => sr.UserId == userId && sr.NextReviewDate <= today.AddDays(1))
+            .Where(sr => sr.UserId == userId)
             .Include(sr => sr.Topic)
+            .Include(sr => sr.Question)
             .OrderBy(sr => sr.NextReviewDate)
             .ToListAsync();
 
+        var dueItems = items
+            .Where(sr => spacedRepetition.IsDueForReview(sr.NextReviewDate, now))
+            .Select(sr => MapReviewItem(sr, now))
+            .ToList();
+
         return new ReviewScheduleDto
         {
-            TotalDueToday = items.Count,
-            Items = items.Select(sr => new ReviewItemDto
-            {
-                QuestionId = sr.QuestionId.ToString(),
-                TopicId = sr.TopicId.ToString(),
-                TopicName = sr.Topic.Name,
-                NextReviewDate = sr.NextReviewDate.ToString("yyyy-MM-dd"),
-                RetentionScore = sr.RetentionScore,
-                RepetitionCount = sr.RepetitionCount
-            }).ToList()
+            TotalDueToday = dueItems.Count,
+            Items = dueItems
         };
     }
 
-    private async Task UpdateSpacedRepetitionAsync(Guid userId, UpdateBktRequest request)
+    public async Task<List<Guid>> GetDueQuestionIdsAsync(Guid userId, IEnumerable<Guid>? questionIds = null)
+    {
+        var now = DateTime.UtcNow;
+        var query = db.SpacedRepetitionItems
+            .Where(sr => sr.UserId == userId);
+
+        if (questionIds != null)
+        {
+            var idSet = questionIds.ToHashSet();
+            query = query.Where(sr => idSet.Contains(sr.QuestionId));
+        }
+
+        var items = await query.ToListAsync();
+        return items
+            .Where(sr => spacedRepetition.IsDueForReview(sr.NextReviewDate, now))
+            .OrderBy(sr => sr.NextReviewDate)
+            .Select(sr => sr.QuestionId)
+            .ToList();
+    }
+
+    private async Task<SrUpdateDto?> UpdateSpacedRepetitionAsync(Guid userId, UpdateBktRequest request)
     {
         var item = await db.SpacedRepetitionItems
             .FirstOrDefaultAsync(sr => sr.UserId == userId && sr.QuestionId == request.QuestionId);
@@ -130,43 +149,54 @@ public class LearningStatesRepository(AppDbContext db) : ILearningStatesReposito
         if (item == null)
         {
             var question = await db.Questions.Include(q => q.Quiz).FirstOrDefaultAsync(q => q.Id == request.QuestionId);
-            if (question == null) return;
+            if (question == null) return null;
 
             item = new SpacedRepetitionItem
             {
                 UserId = userId,
                 QuestionId = request.QuestionId,
                 TopicId = request.TopicId,
-                LastReviewDate = DateTime.UtcNow,
-                NextReviewDate = DateTime.UtcNow.AddDays(1),
             };
             db.SpacedRepetitionItems.Add(item);
         }
 
-        // SM-2 Algorithm
-        int quality = request.IsCorrect ? 4 : 1; // simplified: correct=4, incorrect=1
+        var quality = spacedRepetition.ComputeQuality(request.IsCorrect, request.ResponseTime);
+        var result = spacedRepetition.ApplyReview(item, quality, request.IsCorrect);
 
-        if (quality >= 3)
+        return new SrUpdateDto
         {
-            if (item.RepetitionCount == 0)
-                item.ReviewInterval = 1;
-            else if (item.RepetitionCount == 1)
-                item.ReviewInterval = 6;
-            else
-                item.ReviewInterval = item.ReviewInterval * item.EaseFactor;
+            NextReviewDate = result.NextReviewDate.ToString("yyyy-MM-dd"),
+            ReviewInterval = result.ReviewInterval,
+            RepetitionCount = result.RepetitionCount,
+            IntervalChanged = result.IntervalChanged,
+            PreviousInterval = result.PreviousInterval
+        };
+    }
 
-            item.RepetitionCount++;
-        }
-        else
+    private static ReviewItemDto MapReviewItem(SpacedRepetitionItem sr, DateTime now)
+    {
+        var overdueHours = sr.NextReviewDate <= now
+            ? (now - sr.NextReviewDate).TotalHours
+            : (double?)null;
+
+        var questionText = sr.Question?.Text ?? "";
+        if (questionText.Length > 120)
+            questionText = questionText[..117] + "...";
+
+        return new ReviewItemDto
         {
-            item.RepetitionCount = 0;
-            item.ReviewInterval = 1;
-        }
-
-        item.EaseFactor = Math.Max(1.3, item.EaseFactor + (0.1 - (5 - quality) * (0.08 + (5 - quality) * 0.02)));
-        item.RetentionScore = request.IsCorrect ? Math.Min(1.0, item.RetentionScore + 0.1) : Math.Max(0.0, item.RetentionScore - 0.2);
-        item.LastReviewDate = DateTime.UtcNow;
-        item.NextReviewDate = DateTime.UtcNow.AddDays(item.ReviewInterval);
+            QuestionId = sr.QuestionId.ToString(),
+            TopicId = sr.TopicId.ToString(),
+            TopicName = sr.Topic?.Name ?? "",
+            QuestionText = questionText,
+            NextReviewDate = sr.NextReviewDate.ToString("yyyy-MM-dd"),
+            LastReviewDate = sr.LastReviewDate.ToString("yyyy-MM-dd"),
+            RetentionScore = sr.RetentionScore,
+            RepetitionCount = sr.RepetitionCount,
+            ReviewInterval = sr.ReviewInterval,
+            EaseFactor = sr.EaseFactor,
+            OverdueHours = overdueHours
+        };
     }
 
     private static BktStateDto MapToDto(BktState state) => new()

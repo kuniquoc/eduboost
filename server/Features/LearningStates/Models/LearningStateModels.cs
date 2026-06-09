@@ -24,6 +24,16 @@ public class UpdateBktResponse
 {
     public BktStateDto State { get; set; } = null!;
     public string? Recommendation { get; set; }
+    public SrUpdateDto? SpacedRepetition { get; set; }
+}
+
+public class SrUpdateDto
+{
+    public string NextReviewDate { get; set; } = "";
+    public double ReviewInterval { get; set; }
+    public int RepetitionCount { get; set; }
+    public bool IntervalChanged { get; set; }
+    public double PreviousInterval { get; set; }
 }
 
 public class ReviewScheduleDto
@@ -37,7 +47,12 @@ public class ReviewItemDto
     public string QuestionId { get; set; } = "";
     public string TopicId { get; set; } = "";
     public string TopicName { get; set; } = "";
+    public string QuestionText { get; set; } = "";
     public string NextReviewDate { get; set; } = "";
+    public string? LastReviewDate { get; set; }
     public double RetentionScore { get; set; }
     public int RepetitionCount { get; set; }
+    public double ReviewInterval { get; set; }
+    public double EaseFactor { get; set; }
+    public double? OverdueHours { get; set; }
 }

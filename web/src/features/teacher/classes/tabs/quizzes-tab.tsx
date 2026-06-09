@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom';
-import { useQuery } from '@tanstack/react-query';
-import { quizzesService } from '@/services/quizzes.service';
+import { useClassQuizzes } from '@/hooks/use-class-quizzes';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { FileQuestion, PenLine, Eye, type LucideIcon } from 'lucide-react';
@@ -12,10 +11,7 @@ const typeLabels: Record<string, { label: string; icon: LucideIcon }> = {
 };
 
 export function QuizzesTab({ classId }: { classId: string }) {
-  const { data: quizzes, isLoading } = useQuery({
-    queryKey: ['class-quizzes', classId],
-    queryFn: () => quizzesService.getClassQuizzes(classId),
-  });
+  const { data: quizzes, isLoading } = useClassQuizzes(classId);
 
   if (isLoading) {
     return (

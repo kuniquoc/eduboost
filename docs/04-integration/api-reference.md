@@ -131,6 +131,28 @@ Lấy thông tin user hiện tại.
 
 ---
 
+### PATCH `/api/auth/me/name`
+
+Cập nhật tên hiển thị.
+
+**Auth**: `[Authorize]`
+
+**Request Body**: `{ "name": "string" }`
+
+**Response** `200`: `ApiResponse`
+
+---
+
+### POST `/api/auth/me/avatar`
+
+Upload avatar.
+
+**Auth**: `[Authorize]`
+
+**Response** `200`: `ApiResponse`
+
+---
+
 ## Classes
 
 ### GET `/api/classes`
@@ -701,6 +723,276 @@ Chỉnh sửa câu hỏi.
 
 ---
 
+#### POST `/api/quizzes/{quizId}/questions`
+
+Thêm câu hỏi vào quiz.
+
+**Auth**: `[Authorize]` (teacher)
+
+**Response** `200`: `ApiResponse<QuestionDto>`
+
+---
+
+#### DELETE `/api/quizzes/{quizId}/questions/{qId}`
+
+Xóa câu hỏi.
+
+**Auth**: `[Authorize]` (teacher)
+
+**Response** `200`: `ApiResponse`
+
+---
+
+#### PATCH `/api/quizzes/{quizId}/questions/{qId}/verify`
+
+Đánh dấu đã kiểm duyệt.
+
+**Auth**: `[Authorize]` (teacher)
+
+**Request Body**: `{ "verified": true }`
+
+**Response** `200`: `ApiResponse<QuestionDto>`
+
+---
+
+#### POST `/api/quizzes/{quizId}/publish`
+
+Publish quiz ra lớp.
+
+**Auth**: `[Authorize]` (teacher)
+
+**Response** `200`: `ApiResponse`
+
+---
+
+#### POST `/api/quizzes/create`
+
+Tạo quiz thủ công (teacher).
+
+**Auth**: `[Authorize]` (teacher)
+
+**Response** `200`: `ApiResponse<QuizDto>`
+
+---
+
+#### POST `/api/quizzes/generate-entry-test/{classId}`
+
+AI tạo entry test từ topics lớp.
+
+**Auth**: `[Authorize]` (teacher)
+
+**Response** `200`: `ApiResponse<QuizDto>`
+
+---
+
+#### GET `/api/quizzes/class/{classId}`
+
+Danh sách quiz của lớp.
+
+**Auth**: `[Authorize]` (teacher/student enrolled)
+
+**Response** `200`: `ApiResponse<List<QuizDto>>`
+
+---
+
+### Student Quiz Operations
+
+#### POST `/api/quizzes/my/create`
+
+Tạo quiz cá nhân.
+
+**Auth**: `[Authorize]` (student)
+
+**Response** `200`: `ApiResponse<QuizDto>`
+
+---
+
+#### GET `/api/quizzes/my/{quizId}/questions`
+
+Xem quiz cá nhân.
+
+**Auth**: `[Authorize]` (student)
+
+**Response** `200`: `ApiResponse<List<QuestionDto>>`
+
+---
+
+#### PUT `/api/quizzes/my/{quizId}/questions/{qId}`
+
+Chỉnh sửa câu hỏi quiz cá nhân.
+
+**Auth**: `[Authorize]` (student)
+
+**Response** `200`: `ApiResponse<QuestionDto>`
+
+---
+
+#### DELETE `/api/quizzes/my/{quizId}/questions/{qId}`
+
+Xóa câu hỏi quiz cá nhân.
+
+**Auth**: `[Authorize]` (student)
+
+**Response** `200`: `ApiResponse`
+
+---
+
+#### GET `/api/quizzes/entry-test/{classId}` ⚠️ Deprecated
+
+Legacy static entry test. Dùng `/api/placement-tests/*` thay thế.
+
+**Auth**: `[Authorize]` (student, enrolled)
+
+**Response** `200`: `ApiResponse<EntryTestDto>`
+
+---
+
+#### POST `/api/quizzes/entry-test/{classId}/submit` ⚠️ Deprecated
+
+**Auth**: `[Authorize]` (student, enrolled)
+
+**Response** `200`: `ApiResponse<QuizResultDto>`
+
+---
+
+#### GET `/api/quizzes/practice/{topicId}?limit=10`
+
+Lấy practice quiz cho topic.
+
+**Auth**: `[Authorize]` (student)
+
+**Response** `200`: `ApiResponse<EntryTestDto>`
+
+---
+
+#### POST `/api/quizzes/practice/{topicId}/submit`
+
+Nộp bài practice.
+
+**Auth**: `[Authorize]` (student)
+
+**Response** `200`: `ApiResponse<QuizResultDto>`
+
+---
+
+### AI Tutor (Adaptive Learning)
+
+BKT routing trên server (`TutorDecisionService` + PostgreSQL). Agent chỉ generate/explain.
+
+#### GET `/api/quizzes/tutor/next-action?topicId=`
+
+**Auth**: `[Authorize]` (student, topic access)
+
+**Response** `200`: `ApiResponse<AgentNextActionResponse>` — `action`: `EXPLAIN | QUIZ | NEXT_SKILL`
+
+---
+
+#### GET `/api/quizzes/tutor/explain?topicId=`
+
+**Auth**: `[Authorize]` (student)
+
+**Response** `200`: `{ explanation, offline }`
+
+---
+
+#### GET `/api/quizzes/tutor/generate-question?topicId=&difficulty=`
+
+**Auth**: `[Authorize]` (student)
+
+**Response** `200`: `ApiResponse<TutorQuestionDto>`
+
+---
+
+#### POST `/api/quizzes/tutor/submit-answer`
+
+Cập nhật BKT trên server (`LearningStatesRepository`).
+
+**Auth**: `[Authorize]` (student)
+
+**Response** `200`: `ApiResponse<TutorAnswerResult>`
+
+---
+
+#### POST `/api/quizzes/tutor/explain-error`
+
+**Auth**: `[Authorize]` (student)
+
+**Response** `200`: `{ explanation, offline }`
+
+---
+
+## Quiz Pool
+
+### POST `/api/pool/generate`
+
+AI sinh câu hỏi vào pool (teacher/student).
+
+**Auth**: `[Authorize]`
+
+**Response** `200`: `ApiResponse<QuizDto>`
+
+---
+
+### GET `/api/pool/topics?search=&classId=`
+
+Danh sách topics có pool content.
+
+**Auth**: `[Authorize]`
+
+**Response** `200`: `ApiResponse<List<TopicPoolDto>>`
+
+---
+
+### GET `/api/pool/topics/{topicId}/quizzes`
+
+Chi tiết pool quizzes theo topic.
+
+**Auth**: `[Authorize]` (topic access)
+
+**Response** `200`: `ApiResponse<List<PoolQuizDetailDto>>`
+
+---
+
+### DELETE `/api/pool/quizzes/{quizId}`
+
+Xóa pool quiz batch.
+
+**Auth**: `[Authorize]` (owner)
+
+**Response** `200`: `ApiResponse`
+
+---
+
+### POST `/api/pool/create-test`
+
+Teacher: tạo bài test lớp từ pool.
+
+**Auth**: `[Authorize]` (teacher)
+
+**Response** `200`: `ApiResponse<QuizDto>`
+
+---
+
+### POST `/api/pool/create-revision-set`
+
+Student: tạo bộ ôn tập cá nhân từ pool.
+
+**Auth**: `[Authorize]` (student)
+
+**Response** `200`: `ApiResponse<QuizDto>`
+
+---
+
+### GET `/api/pool/revision-sets`
+
+Student: danh sách bộ ôn tập cá nhân.
+
+**Auth**: `[Authorize]` (student)
+
+**Response** `200`: `ApiResponse<List<QuizDto>>`
+
+---
+
 ## User Profiles
 
 ### GET `/api/user-profiles/me`
@@ -716,11 +1008,21 @@ Lấy profile người dùng hiện tại (tự động tạo nếu chưa có).
   "userId": "guid",
   "currentLevel": "beginner | intermediate | advanced",
   "overallMasteryScore": 0.0,
+  "topicsStudiedCount": 0,
   "preferredTopics": ["topic-id-1", "topic-id-2"],
   "learningStreak": 5,
   "lastActiveDate": "2024-01-15"
 }
 ```
+
+**Computed fields** (read-time, không lưu DB):
+
+| Field | Công thức |
+|-------|-----------|
+| `overallMasteryScore` | `AVG(bkt_states.mastery_probability)` cho user (0 nếu chưa có BKT) |
+| `topicsStudiedCount` | `COUNT(DISTINCT bkt_states.topic_id)` cho user |
+
+`learningStreak` vẫn trả về từ DB (legacy); web profile dùng `dayStreak` từ `/students/me/stats`.
 
 ---
 
@@ -940,58 +1242,6 @@ Xem kết quả kiểm tra đầu vào gần nhất.
 
 ---
 
-## Learning Paths (Lộ trình cá nhân hóa)
-
-### GET `/api/learning-paths/me`
-
-Lấy lộ trình hiện tại của học sinh.
-
-**Auth**: `[Authorize]`
-
-**Response** `200`: `ApiResponse<LearningPathDto>`
-
-```json
-{
-  "items": [
-    {
-      "id": "guid",
-      "topicId": "guid",
-      "topicName": "Present Simple",
-      "recommendedDifficulty": "easy",
-      "priorityScore": 0.8,
-      "nextReviewDate": "2024-01-16",
-      "isCompleted": false,
-      "orderIndex": 0
-    }
-  ],
-  "totalItems": 10,
-  "completedItems": 3,
-  "overallProgress": 30.0
-}
-```
-
----
-
-### POST `/api/learning-paths/regenerate`
-
-Tái sinh lộ trình (dựa trên BKT state hiện tại).
-
-**Auth**: `[Authorize]`
-
-**Response** `200`: `ApiResponse<LearningPathDto>`
-
----
-
-### PUT `/api/learning-paths/{id}/complete`
-
-Đánh dấu hoàn thành một topic trong lộ trình.
-
-**Auth**: `[Authorize]`
-
-**Response** `200`: `ApiResponse<LearningPathItemDto>`
-
----
-
 ## Practice Sessions (Phiên luyện tập)
 
 ### POST `/api/practice-sessions/start`
@@ -1020,6 +1270,18 @@ Bắt đầu phiên luyện tập.
   "totalQuestions": 10
 }
 ```
+
+---
+
+### POST `/api/practice-sessions/start-review`
+
+Bắt đầu phiên ôn tập spaced repetition.
+
+**Auth**: `[Authorize]` (student)
+
+**Request Body**: `{ "questionIds": ["guid"] }` (optional)
+
+**Response** `200`: `ApiResponse<StartPracticeResponse>`
 
 ---
 
@@ -1146,6 +1408,16 @@ Lấy lịch sử hội thoại.
 
 ---
 
+### DELETE `/api/ai-chat/history`
+
+Xóa toàn bộ lịch sử hội thoại.
+
+**Auth**: `[Authorize]` (student)
+
+**Response** `200`: `ApiResponse`
+
+---
+
 ## Admin
 
 ### GET `/api/admin/users`
@@ -1220,154 +1492,6 @@ Thống kê hệ thống.
 }
 ```
 
-#### DELETE `/api/quizzes/{quizId}/questions/{qId}`
-
-Xóa câu hỏi.
-
-**Auth**: `[Authorize]` (teacher)
-
-**Response** `200`: `ApiResponse`
-
----
-
-#### PATCH `/api/quizzes/{quizId}/questions/{qId}/verify`
-
-Đánh dấu đã kiểm duyệt.
-
-**Auth**: `[Authorize]` (teacher)
-
-**Request Body**:
-
-```json
-{
-  "verified": true
-}
-```
-
-**Response** `200`: `ApiResponse<QuestionDto>`
-
----
-
-#### POST `/api/quizzes/{quizId}/publish`
-
-Publish quiz ra lớp.
-
-**Auth**: `[Authorize]` (teacher)
-
-**Response** `200`: `ApiResponse`
-
----
-
-### Student Quiz Operations
-
-#### GET `/api/quizzes/entry-test/{classId}`
-
-Lấy entry test của lớp.
-
-**Auth**: `[Authorize]` (student)
-
-**Response** `200`: `ApiResponse<EntryTestDto>`
-
-```json
-{
-  "quizId": "guid",
-  "classId": "guid",
-  "className": "string",
-  "questions": [ QuestionDto... ]
-}
-```
-
----
-
-#### POST `/api/quizzes/entry-test/{classId}/submit`
-
-Nộp bài entry test.
-
-**Auth**: `[Authorize]` (student)
-
-**Request Body**:
-
-```json
-{
-  "answers": [
-    {
-      "questionId": "guid",
-      "selectedOptionIds": ["guid"],
-      "fillBlankValue": "string?",
-      "timeSpentSeconds": 0
-    }
-  ]
-}
-```
-
-**Response** `200`: `ApiResponse<QuizResultDto>`
-
-```json
-{
-  "quizId": "guid",
-  "score": 8,
-  "total": 10,
-  "percentage": 80.0,
-  "grade": "A",
-  "topicScores": [
-    {
-      "topicId": "guid",
-      "topicName": "string",
-      "score": 3,
-      "total": 4,
-      "percentage": 75.0
-    }
-  ],
-  "completedAt": "ISO 8601"
-}
-```
-
----
-
-#### GET `/api/quizzes/practice/{topicId}?limit=10`
-
-Lấy practice quiz cho topic.
-
-**Auth**: `[Authorize]` (student)
-
-**Query**: `limit` (int, default: 10)
-
-**Response** `200`: `ApiResponse<EntryTestDto>` (cùng cấu trúc)
-
----
-
-#### POST `/api/quizzes/practice/{topicId}/submit`
-
-Nộp bài practice.
-
-**Auth**: `[Authorize]` (student)
-
-**Request Body**: Giống `SubmitQuizRequest`
-
-**Response** `200`: `ApiResponse<QuizResultDto>`
-
----
-
-#### GET `/api/quizzes/my/{quizId}/questions`
-
-Xem quiz cá nhân.
-
-**Auth**: `[Authorize]` (student)
-
-**Response** `200`: `ApiResponse<List<QuestionDto>>`
-
----
-
-#### PUT `/api/quizzes/my/{quizId}/questions/{qId}`
-
-Chỉnh sửa câu hỏi quiz cá nhân.
-
-**Auth**: `[Authorize]` (student)
-
-**Request Body**: Giống `UpdateQuestionRequest`
-
-**Response** `200`: `ApiResponse<QuestionDto>`
-
 ---
 
 ## Students & Analytics
@@ -1440,11 +1564,16 @@ Tiến độ học tập cá nhân.
 }
 ```
 
+**Công thức `progress` / `overallProgress`:**
+
+- Per class: `completed_roadmap_steps / total_roadmap_steps × 100` (`personalized_learning_paths.is_completed`)
+- Overall: `AVG(progress)` across enrolled classes (0 nếu chưa có roadmap)
+
 ---
 
 ### GET `/api/students/me/stats`
 
-Thống kê cá nhân.
+Thống kê cá nhân (quiz + phiên luyện tập/ôn tập).
 
 **Auth**: `[Authorize]` (student)
 
@@ -1458,6 +1587,15 @@ Thống kê cá nhân.
   "weeklyProgress": 0
 }
 ```
+
+**Công thức** (`StudentStatsCalculator`, timezone UTC):
+
+| Field | Công thức |
+|-------|-----------|
+| `dayStreak` | Số ngày UTC liên tiếp (từ hôm nay lùi) có activity trong `learning_sessions` hoặc `quiz_submissions` |
+| `totalQuizzesTaken` | `COUNT(quiz_submissions) + COUNT(learning_sessions)` |
+| `avgQuizScore` | `FLOOR((Σ correct / Σ attempted) × 100)` — correct từ `quiz_submissions.score` + `learning_sessions.correct_answers`; attempted từ `total_questions` + `questions_attempted` |
+| `weeklyProgress` | `% đúng tuần hiện tại` (thứ Hai UTC 00:00): cùng công thức weighted như `avgQuizScore`, chỉ lọc bản ghi trong tuần |
 
 ---
 

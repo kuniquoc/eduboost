@@ -6,16 +6,16 @@
 |---------|-----|-----------------|
 | Admin | [admin.md](admin.md) | ✅ |
 | AiChat | [aichat.md](aichat.md) | ✅ |
-| Auth | [auth.md](auth.md) | ⚠️ role register |
-| Classes | [classes.md](classes.md) | ⚠️ ownership |
-| Documents | [documents.md](documents.md) | ⚠️ async ingest |
-| LearningPaths | [learningpaths.md](learningpaths.md) | 🔧 no web UI |
+| Auth | [auth.md](auth.md) | ✅ student-only register |
+| Classes | [classes.md](classes.md) | ✅ ownership RBAC |
+| Documents | [documents.md](documents.md) | ⚠️ async ingest Task.Run |
+| LearningPaths | [learningpaths.md](learningpaths.md) | ❌ Removed |
 | LearningStates | [learningstates.md](learningstates.md) | ✅ |
-| PlacementTests | [placementtests.md](placementtests.md) | ⚠️ in-memory |
-| PracticeSessions | [practicesessions.md](practicesessions.md) | ⚠️ in-memory |
-| QuizPool | [quizpool.md](quizpool.md) | ✅ |
-| Quizzes | [quizzes.md](quizzes.md) | 🔧 entry test stub |
+| PlacementTests | [placementtests.md](placementtests.md) | ✅ PostgreSQL |
+| PracticeSessions | [practicesessions.md](practicesessions.md) | ✅ PostgreSQL |
+| QuizPool | [quizpool.md](quizpool.md) | ✅ RBAC 2026-06-10 |
+| Quizzes | [quizzes.md](quizzes.md) | ✅ tutor + entry test AI |
 | Roadmap | [roadmap.md](roadmap.md) | ✅ |
-| Students | [students.md](students.md) | 🔧 analytics no UI |
-| Topics | [topics.md](topics.md) | 🔧 AI evaluate heuristic |
+| Students | [students.md](students.md) | ✅ |
+| Topics | [topics.md](topics.md) | ✅ AI evaluate + RBAC |
 | UserProfiles | [userprofiles.md](userprofiles.md) | ✅ |

@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { aiChatService } from '@/services/aiChat.service';
+import { useAiChatHistory } from '@/hooks/use-ai-chat-history';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
@@ -28,10 +29,7 @@ export function AiChatPage() {
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const [localMessages, setLocalMessages] = useState<ChatMessageDto[]>([]);
 
-  const { data: history, isLoading } = useQuery({
-    queryKey: ['ai-chat-history'],
-    queryFn: () => aiChatService.getHistory(1, 50),
-  });
+  const { data: history, isLoading } = useAiChatHistory();
 
   useEffect(() => {
     if (history?.messages) {

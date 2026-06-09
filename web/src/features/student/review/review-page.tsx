@@ -1,24 +1,34 @@
-import { useQuery } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
-import { learningStateService } from '@/services/learningState.service';
+import { useLearningStates } from '@/hooks/use-learning-states';
+import { useReviewSchedule } from '@/hooks/use-review-schedule';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
-import { Calendar, Brain, BookOpen } from 'lucide-react';
+import { Calendar, Brain, BookOpen, Clock } from 'lucide-react';
+
+function milestoneLabel(repetitionCount: number, reviewInterval: number): string {
+  if (repetitionCount === 0) return 'Chưa ôn';
+  if (repetitionCount === 1) return 'Mốc 1 • 1 ngày';
+  if (repetitionCount === 2) return 'Mốc 2 • 6 ngày';
+  return `Mốc ${repetitionCount} • ${Math.round(reviewInterval)} ngày`;
+}
 
 export function ReviewPage() {
   const navigate = useNavigate();
 
-  const { data: schedule, isLoading } = useQuery({
-    queryKey: ['review-schedule'],
-    queryFn: learningStateService.getReviewSchedule,
-  });
+  const { data: schedule, isLoading } = useReviewSchedule();
+  const { data: states } = useLearningStates();
 
-  const { data: states } = useQuery({
-    queryKey: ['learning-states'],
-    queryFn: learningStateService.getStates,
-  });
+  const handleReviewAll = () => {
+    navigate('/student/practice-session?mode=review');
+  };
+
+  const handleReviewOne = (item: { questionId: string; topicId: string; topicName: string }) => {
+    navigate(
+      `/student/practice-session?mode=review&questionIds=${item.questionId}&topicId=${item.topicId}&topicName=${encodeURIComponent(item.topicName)}`,
+    );
+  };
 
   if (isLoading) {
     return (
@@ -35,12 +45,19 @@ export function ReviewPage() {
 
   return (
     <div className="space-y-6 p-6">
-      <div>
-        <h1 className="text-2xl font-bold">Ôn tập</h1>
-        <p className="text-muted-foreground">Spaced Repetition — ôn tập đúng thời điểm để ghi nhớ lâu hơn</p>
+      <div className="flex flex-wrap items-start justify-between gap-4">
+        <div>
+          <h1 className="text-2xl font-bold">Ôn tập</h1>
+          <p className="text-muted-foreground">Spaced Repetition — ôn tập đúng thời điểm để ghi nhớ lâu hơn</p>
+        </div>
+        {schedule && schedule.totalDueToday > 0 && (
+          <Button onClick={handleReviewAll}>
+            <BookOpen className="mr-2 h-4 w-4" />
+            Ôn tất cả hôm nay ({schedule.totalDueToday})
+          </Button>
+        )}
       </div>
 
-      {/* Summary card */}
       <Card className="border-primary/20 bg-primary/5">
         <CardContent className="flex items-center gap-4 p-6">
           <Calendar className="h-10 w-10 text-primary" />
@@ -51,7 +68,6 @@ export function ReviewPage() {
         </CardContent>
       </Card>
 
-      {/* Mastery overview */}
       {states && states.length > 0 && (
         <div>
           <h2 className="mb-3 text-lg font-semibold">Mức độ thành thạo</h2>
@@ -73,29 +89,35 @@ export function ReviewPage() {
         </div>
       )}
 
-      {/* Due items */}
       {schedule && schedule.items.length > 0 ? (
         <div>
           <h2 className="mb-3 text-lg font-semibold">Cần ôn tập</h2>
           <div className="space-y-3">
             {schedule.items.map((item) => (
               <Card key={item.questionId}>
-                <CardContent className="flex items-center justify-between p-4">
-                  <div className="flex items-center gap-3">
-                    <Brain className="h-5 w-5 text-muted-foreground" />
-                    <div>
+                <CardContent className="flex items-center justify-between gap-4 p-4">
+                  <div className="flex min-w-0 flex-1 items-start gap-3">
+                    <Brain className="mt-0.5 h-5 w-5 shrink-0 text-muted-foreground" />
+                    <div className="min-w-0">
                       <p className="text-sm font-medium">{item.topicName}</p>
-                      <p className="text-xs text-muted-foreground">
-                        Lần ôn: {item.repetitionCount} • Retention: {Math.round(item.retentionScore * 100)}%
-                      </p>
+                      {item.questionText && (
+                        <p className="mt-1 truncate text-sm text-muted-foreground">{item.questionText}</p>
+                      )}
+                      <div className="mt-2 flex flex-wrap gap-2">
+                        <Badge variant="outline">{milestoneLabel(item.repetitionCount, item.reviewInterval)}</Badge>
+                        <Badge variant="secondary">
+                          Retention {Math.round(item.retentionScore * 100)}%
+                        </Badge>
+                        {item.overdueHours != null && item.overdueHours > 0 && (
+                          <Badge variant="destructive" className="gap-1">
+                            <Clock className="h-3 w-3" />
+                            Quá hạn {Math.round(item.overdueHours)}h
+                          </Badge>
+                        )}
+                      </div>
                     </div>
                   </div>
-                  <Button
-                    size="sm"
-                    onClick={() =>
-                      navigate(`/student/practice-session?topicId=${item.topicId}&topicName=${encodeURIComponent(item.topicName)}`)
-                    }
-                  >
+                  <Button size="sm" className="shrink-0" onClick={() => handleReviewOne(item)}>
                     <BookOpen className="mr-1 h-4 w-4" /> Ôn tập
                   </Button>
                 </CardContent>

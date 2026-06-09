@@ -17,10 +17,13 @@ public class Question
     // FK
     public Guid QuizId { get; set; }
     public Guid? SourceDocumentId { get; set; }
+    /// <summary>Original topic when copied into a private revision set (Quiz.TopicId is null).</summary>
+    public Guid? SourceTopicId { get; set; }
 
     // Navigation
     public Quiz Quiz { get; set; } = null!;
     public Document? SourceDocument { get; set; }
+    public Topic? SourceTopic { get; set; }
     public ICollection<QuizOption> Options { get; set; } = [];
     public ICollection<SpacedRepetitionItem> SpacedRepetitionItems { get; set; } = [];
 }

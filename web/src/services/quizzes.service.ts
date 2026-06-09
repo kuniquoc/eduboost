@@ -17,6 +17,10 @@ export const quizzesService = {
     await apiClient.delete(`/quizzes/${quizId}/questions/${qId}`);
   },
 
+  deleteMyQuestion: async (quizId: string, qId: string): Promise<void> => {
+    await apiClient.delete(`/quizzes/my/${quizId}/questions/${qId}`);
+  },
+
   addQuestion: async (quizId: string, data: CreateQuestionPayload): Promise<QuestionDto> => {
     const res = await apiClient.post<ApiResponse<QuestionDto>>(`/quizzes/${quizId}/questions`, data);
     return res.data.data!;
@@ -97,6 +101,18 @@ export const quizzesService = {
   submitTutorAnswer: async (request: TutorAnswerRequest): Promise<TutorAnswerResult> => {
     const res = await apiClient.post<ApiResponse<TutorAnswerResult>>(`/quizzes/tutor/submit-answer`, request);
     return res.data.data!;
+  },
+
+  completeTutorPractice: async (
+    topicId: string,
+    questionsAttempted: number,
+    correctAnswers: number,
+  ): Promise<void> => {
+    await apiClient.post('/quizzes/tutor/complete-practice', {
+      topicId,
+      questionsAttempted,
+      correctAnswers,
+    });
   },
 
   getTutorExplanation: async (topicId: string): Promise<string> => {

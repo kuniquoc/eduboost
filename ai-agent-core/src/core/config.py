@@ -1,7 +1,4 @@
-"""
-EduBoost AI Agent Core — Central Configuration
-Tập trung tất cả constants, thresholds và default values vào một nơi.
-"""
+import os
 
 # ── BKT (Bayesian Knowledge Tracing) ─────────────────────────────────────────
 BKT_INITIAL_KNOWLEDGE = 0.3   # p_l0: Xác suất biết ban đầu
@@ -38,6 +35,8 @@ PLACEMENT_TEST_CONFIDENCE_THRESHOLD = 0.8  # Ngưỡng tin cậy để kết th�
 DEFAULT_NUM_QUESTIONS = 5        # Số câu hỏi mặc định mỗi lần generate
 MAX_NUM_QUESTIONS = 20           # Giới hạn tối đa câu hỏi một lần generate
 DEFAULT_DIFFICULTY = "medium"    # Độ khó mặc định
+# Parallel LLM calls per batch (1 = safe for single-GPU; raise with vLLM/batching server)
+QUIZ_BATCH_MAX_CONCURRENT = max(1, int(os.environ.get("QUIZ_BATCH_MAX_CONCURRENT", "1")))
 
 # Chat / RAG
 RAG_TOP_K_DOCS = 5               # Số document chunks lấy từ vector store

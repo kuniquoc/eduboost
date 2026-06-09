@@ -1,4 +1,4 @@
-using System.Text.RegularExpressions;
+using EduBoost.API.Features.Roadmap;
 using EduBoost.API.Features.Topics.Models;
 using EduBoost.API.Infrastructure;
 using EduBoost.API.Infrastructure.Entities;
@@ -17,9 +17,10 @@ public interface ITopicsRepository
     Task<List<TopicDto>> AiEvaluateAsync(Guid classId);
     Task<TopicDto?> UpdateDifficultyAsync(Guid topicId, string difficulty);
     Task<TopicDto?> UpdateVisibilityAsync(Guid topicId, bool isVisible);
+    Task<bool> BelongsToClassAsync(Guid topicId, Guid classId);
 }
 
-public class TopicsRepository(AppDbContext db, IAgentService agent, ILogger<TopicsRepository> logger) : ITopicsRepository
+public class TopicsRepository(AppDbContext db, IAgentService agent, ILogger<TopicsRepository> logger, IRoadmapRepository roadmap) : ITopicsRepository
 {
     public async Task<List<TopicDto>> GetByClassIdAsync(Guid classId)
     {
@@ -54,6 +55,15 @@ public class TopicsRepository(AppDbContext db, IAgentService agent, ILogger<Topi
 
         db.Topics.Add(topic);
         await db.SaveChangesAsync();
+
+        var enrolledStudents = await db.Enrollments
+            .Where(e => e.ClassId == classId && e.EntryTestCompleted)
+            .Select(e => e.StudentId)
+            .ToListAsync();
+
+        foreach (var studentId in enrolledStudents)
+            await roadmap.EnsureClassTopicsSyncedAsync(classId, studentId);
+
         return MapToDto(topic, 0);
     }
 
@@ -101,14 +111,25 @@ public class TopicsRepository(AppDbContext db, IAgentService agent, ILogger<Topi
                 $"Mẫu câu hỏi: {(samples.Count > 0 ? string.Join("; ", samples) : "chưa có")}\n" +
                 "Trả lời CHỈ MỘT từ: easy, medium, hoặc hard.";
 
-            var aiResponse = await agent.AskAsync(prompt, t.Id.ToString(), "advanced", []);
-            var difficulty = ParseDifficultyFromAi(aiResponse.Answer);
-
-            if (difficulty == null)
+            string difficulty;
+            try
             {
-                var qCount = samples.Count;
-                difficulty = qCount >= 10 ? "hard" : qCount >= 6 ? "medium" : "easy";
-                logger.LogWarning("AI evaluate fallback for topic {Topic}: using heuristic", t.Name);
+                var aiResponse = await agent.AskAsync(prompt, t.Id.ToString(), "advanced", []);
+                var parsed = TopicDifficultyParser.ParseFromAiResponse(aiResponse.Answer);
+                if (parsed == null)
+                {
+                    difficulty = TopicDifficultyParser.HeuristicFromQuestionCount(samples.Count);
+                    logger.LogWarning("AI evaluate fallback for topic {Topic}: agent offline or unparseable response", t.Name);
+                }
+                else
+                {
+                    difficulty = parsed;
+                }
+            }
+            catch (Exception ex)
+            {
+                difficulty = TopicDifficultyParser.HeuristicFromQuestionCount(samples.Count);
+                logger.LogWarning(ex, "AI evaluate failed for topic {Topic}: using heuristic", t.Name);
             }
 
             t.AiEvaluated = true;
@@ -117,13 +138,6 @@ public class TopicsRepository(AppDbContext db, IAgentService agent, ILogger<Topi
 
         await db.SaveChangesAsync();
         return await GetByClassIdAsync(classId);
-    }
-
-    private static string? ParseDifficultyFromAi(string? answer)
-    {
-        if (string.IsNullOrWhiteSpace(answer)) return null;
-        var match = Regex.Match(answer, @"\b(easy|medium|hard)\b", RegexOptions.IgnoreCase);
-        return match.Success ? match.Value.ToLowerInvariant() : null;
     }
 
     public async Task<TopicDto?> UpdateDifficultyAsync(Guid topicId, string difficulty)
@@ -144,6 +158,12 @@ public class TopicsRepository(AppDbContext db, IAgentService agent, ILogger<Topi
         await db.SaveChangesAsync();
         var qCount = await db.Questions.CountAsync(q => q.Quiz.TopicId == topic.Id);
         return MapToDto(topic, qCount);
+    }
+
+    public async Task<bool> BelongsToClassAsync(Guid topicId, Guid classId)
+    {
+        var topic = await db.Topics.AsNoTracking().FirstOrDefaultAsync(t => t.Id == topicId);
+        return topic?.ClassId == classId;
     }
 
     private static TopicDto MapToDto(Topic t, int questionCount) => new()

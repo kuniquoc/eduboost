@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { classesService } from '@/services/classes.service';
-import { studentsService } from '@/services/students.service';
-import { ROUTES } from '@/lib/constants';
+import { useEnrolledClasses } from '@/hooks/use-enrolled-classes';
+import { useStudentProgress } from '@/hooks/use-student-progress';
+import { ROUTES, placementTestPath } from '@/lib/constants';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -18,7 +19,7 @@ import type { ClassDto } from '@/types';
 function ClassCard({ cls, entryTestCompleted }: { cls: ClassDto; entryTestCompleted: boolean }) {
   const href = entryTestCompleted
     ? ROUTES.STUDENT_ROADMAP.replace(':classId', cls.id)
-    : ROUTES.STUDENT_ENTRY_TEST.replace(':classId', cls.id);
+    : placementTestPath(cls.id);
 
   return (
     <Link to={href}>
@@ -50,15 +51,8 @@ export function StudentClassesPage() {
   const [joinOpen, setJoinOpen] = useState(false);
   const [classCode, setClassCode] = useState('');
 
-  const { data: classes, isLoading } = useQuery({
-    queryKey: ['enrolled-classes'],
-    queryFn: classesService.getEnrolledClasses,
-  });
-
-  const { data: progress } = useQuery({
-    queryKey: ['student-progress'],
-    queryFn: studentsService.getMyProgress,
-  });
+  const { data: classes, isLoading } = useEnrolledClasses();
+  const { data: progress } = useStudentProgress();
 
   const entryTestMap = new Map(
     progress?.enrolledClasses.map((c) => [c.classId, c.entryTestCompleted]) ?? [],

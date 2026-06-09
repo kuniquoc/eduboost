@@ -1,12 +1,16 @@
 import { useParams, useNavigate, Link } from 'react-router-dom';
-import { useQuery } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { roadmapService } from '@/services/roadmap.service';
-import { classesService } from '@/services/classes.service';
+import { useClassDetail } from '@/hooks/use-class-detail';
+import { useRoadmap } from '@/hooks/use-roadmap';
+import { placementTestService } from '@/services/placementTest.service';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
-import { ArrowLeft, CheckCircle, PlayCircle, Star, Lock, BookOpen, ClipboardList, Users } from 'lucide-react';
+import { ArrowLeft, CheckCircle, PlayCircle, Star, Lock, BookOpen, ClipboardList, Users, RefreshCw } from 'lucide-react';
+import { placementTestPath } from '@/lib/constants';
+import { toast } from 'sonner';
 import type { RoadmapStepStatus } from '@/types';
 
 const statusConfig: Record<RoadmapStepStatus, {
@@ -24,17 +28,25 @@ const statusConfig: Record<RoadmapStepStatus, {
 export function RoadmapPage() {
   const { classId } = useParams<{ classId: string }>();
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
 
-  const { data: classDetail } = useQuery({
-    queryKey: ['class-detail', classId],
-    queryFn: () => classesService.getClass(classId!),
-    enabled: !!classId,
-  });
+  const { data: classDetail } = useClassDetail(classId);
+  const { data: roadmap, isLoading } = useRoadmap(classId);
 
-  const { data: roadmap, isLoading } = useQuery({
-    queryKey: ['roadmap', classId],
-    queryFn: () => roadmapService.getRoadmap(classId!),
-    enabled: !!classId,
+  const refreshMutation = useMutation({
+    mutationFn: async () => {
+      try {
+        const result = await placementTestService.getResult(classId!);
+        return roadmapService.generateRoadmap(classId!, result.id);
+      } catch {
+        return roadmapService.generateRoadmap(classId!, '');
+      }
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['roadmap', classId] });
+      toast.success('Đã cập nhật lộ trình học tập');
+    },
+    onError: () => toast.error('Không thể làm mới lộ trình'),
   });
 
   if (isLoading) {
@@ -75,7 +87,7 @@ export function RoadmapPage() {
           <ClipboardList className="mb-4 h-12 w-12 text-muted-foreground/50" />
           <p className="text-lg font-medium text-foreground">Chưa có lộ trình học tập</p>
           <p className="mt-1 text-sm text-muted-foreground">Hãy làm bài test đầu vào để AI tạo lộ trình phù hợp</p>
-          <Button onClick={() => navigate(`/student/entry-test/${classId}`)} className="mt-4">
+          <Button onClick={() => navigate(placementTestPath(classId!))} className="mt-4">
             Làm bài test đầu vào
           </Button>
         </div>
@@ -95,12 +107,23 @@ export function RoadmapPage() {
         <ArrowLeft className="h-4 w-4" /> Quay lại
       </button>
 
-      <div className="mb-6">
-        <h1 className="text-2xl font-bold text-foreground">Lộ trình học tập</h1>
-        <div className="mt-2 flex items-center gap-3">
-          <Progress value={(completedCount / steps.length) * 100} className="h-2 flex-1 max-w-xs" />
-          <span className="text-sm text-muted-foreground">{completedCount}/{steps.length} hoàn thành</span>
+      <div className="mb-6 flex flex-wrap items-start justify-between gap-4">
+        <div>
+          <h1 className="text-2xl font-bold text-foreground">Lộ trình học tập</h1>
+          <div className="mt-2 flex items-center gap-3">
+            <Progress value={(completedCount / steps.length) * 100} className="h-2 flex-1 max-w-xs" />
+            <span className="text-sm text-muted-foreground">{completedCount}/{steps.length} hoàn thành</span>
+          </div>
         </div>
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={() => refreshMutation.mutate()}
+          disabled={refreshMutation.isPending}
+        >
+          <RefreshCw className={`mr-2 h-4 w-4 ${refreshMutation.isPending ? 'animate-spin' : ''}`} />
+          Làm mới lộ trình
+        </Button>
       </div>
 
       {/* Steps timeline */}

@@ -1,4 +1,4 @@
-using System.Security.Claims;
+using EduBoost.API.Common.Http;
 using EduBoost.API.Common.Models;
 using EduBoost.API.Features.PlacementTests.Models;
 using Microsoft.AspNetCore.Authorization;
@@ -11,13 +11,14 @@ namespace EduBoost.API.Features.PlacementTests;
 [Authorize]
 public class PlacementTestsController(IPlacementTestsRepository repo) : ControllerBase
 {
-    private Guid UserId => Guid.Parse(
-        User.FindFirstValue(ClaimTypes.NameIdentifier) ?? User.FindFirstValue("sub") ?? Guid.Empty.ToString());
+    private Guid UserId => ControllerAuth.GetUserId(User);
+    private string UserRole => ControllerAuth.GetUserRole(User);
 
-    /// <summary>Bắt đầu bài kiểm tra đầu vào thích ứng (theo lớp nếu có classId)</summary>
+    /// <summary>Student: Bắt đầu bài kiểm tra đầu vào thích ứng</summary>
     [HttpPost("start")]
     public async Task<IActionResult> StartTest([FromBody] StartPlacementTestRequest? request)
     {
+        if (UserRole != "student") return Forbid();
         try
         {
             Guid? classId = Guid.TryParse(request?.ClassId, out var parsed) ? parsed : null;
@@ -30,10 +31,11 @@ public class PlacementTestsController(IPlacementTestsRepository repo) : Controll
         }
     }
 
-    /// <summary>Gửi câu trả lời, nhận câu tiếp theo (adaptive difficulty)</summary>
+    /// <summary>Student: Gửi câu trả lời adaptive</summary>
     [HttpPost("answer")]
     public async Task<IActionResult> SubmitAnswer([FromBody] AnswerPlacementRequest request)
     {
+        if (UserRole != "student") return Forbid();
         try
         {
             var result = await repo.SubmitAnswerAsync(UserId, request);
@@ -45,10 +47,11 @@ public class PlacementTestsController(IPlacementTestsRepository repo) : Controll
         }
     }
 
-    /// <summary>Kết thúc → tính toán level → khởi tạo BKT + roadmap</summary>
+    /// <summary>Student: Kết thúc → level + BKT + roadmap</summary>
     [HttpPost("complete")]
     public async Task<IActionResult> CompleteTest([FromBody] CompletePlacementRequest request)
     {
+        if (UserRole != "student") return Forbid();
         try
         {
             var result = await repo.CompleteTestAsync(UserId, request.SessionId);
@@ -60,10 +63,11 @@ public class PlacementTestsController(IPlacementTestsRepository repo) : Controll
         }
     }
 
-    /// <summary>Xem kết quả kiểm tra đầu vào (mới nhất, có thể lọc theo lớp)</summary>
+    /// <summary>Student: Xem kết quả kiểm tra đầu vào</summary>
     [HttpGet("result")]
     public async Task<IActionResult> GetResult([FromQuery] Guid? classId)
     {
+        if (UserRole != "student") return Forbid();
         var result = await repo.GetResultAsync(UserId, classId);
         if (result == null) return NotFound(ApiResponse.Fail("Chưa có kết quả kiểm tra đầu vào"));
         return Ok(ApiResponse<PlacementTestResultDto>.Ok(result));

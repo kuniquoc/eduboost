@@ -1,5 +1,7 @@
 import { useState } from 'react';
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useAdminStats } from '@/hooks/use-admin-stats';
+import { useAdminUsers } from '@/hooks/use-admin-users';
 import { adminService } from '@/services/admin.service';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -104,19 +106,8 @@ export function AdminDashboardPage() {
   const [roleFilter, setRoleFilter] = useState<string>('all');
   const [deleteTarget, setDeleteTarget] = useState<AdminUserDto | null>(null);
 
-  const { data: stats, isLoading: loadingStats } = useQuery({
-    queryKey: ['admin-stats'],
-    queryFn: adminService.getStats,
-  });
-
-  const { data: users = [], isLoading: loadingUsers } = useQuery({
-    queryKey: ['admin-users', search, roleFilter],
-    queryFn: () =>
-      adminService.getUsers(
-        search || undefined,
-        roleFilter !== 'all' ? roleFilter : undefined,
-      ),
-  });
+  const { data: stats, isLoading: loadingStats } = useAdminStats();
+  const { data: users = [], isLoading: loadingUsers } = useAdminUsers(search, roleFilter);
 
   const roleMutation = useMutation({
     mutationFn: (vars: { userId: string; role: string }) =>

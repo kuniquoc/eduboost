@@ -1,7 +1,8 @@
 import { useState, useCallback } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-import { useMutation } from '@tanstack/react-query';
+import { useParams, useNavigate, useSearchParams } from 'react-router-dom';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { placementTestService } from '@/services/placementTest.service';
+import { invalidateLearningQueries } from '@/lib/invalidate-learning-queries';
 import { ROUTES } from '@/lib/constants';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -33,9 +34,12 @@ type TestState =
   | { type: 'complete'; result: CompletePlacementResponse }
   | { type: 'error'; message: string };
 
-export function EntryTestPage() {
-  const { classId = '' } = useParams<{ classId: string }>();
+export function PlacementTestPage() {
+  const { classId: classIdParam = '' } = useParams<{ classId: string }>();
+  const [searchParams] = useSearchParams();
+  const classId = classIdParam || searchParams.get('classId') || '';
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
 
   const [state, setState] = useState<TestState>({ type: 'idle' });
   const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
@@ -76,7 +80,10 @@ export function EntryTestPage() {
 
   const completeMutation = useMutation({
     mutationFn: (sessionId: string) => placementTestService.complete(sessionId),
-    onSuccess: (data) => setState({ type: 'complete', result: data }),
+    onSuccess: (data) => {
+      invalidateLearningQueries(queryClient, data.classId || classId || undefined);
+      setState({ type: 'complete', result: data });
+    },
     onError: () => toast.error('Lỗi khi hoàn thành bài kiểm tra'),
   });
 
@@ -278,3 +285,6 @@ export function EntryTestPage() {
 
   return null;
 }
+
+/** @deprecated Use PlacementTestPage — kept for route alias */
+export const EntryTestPage = PlacementTestPage;

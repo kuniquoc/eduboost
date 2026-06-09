@@ -4,8 +4,15 @@ namespace EduBoost.API.Features.PracticeSessions.Models;
 
 public class StartPracticeRequest
 {
-    [Required] public Guid TopicId { get; set; }
+    public Guid? TopicId { get; set; }
     public int QuestionCount { get; set; } = 10;
+    public string Mode { get; set; } = "standard";
+    public List<Guid>? QuestionIds { get; set; }
+}
+
+public class StartReviewRequest
+{
+    public List<Guid>? QuestionIds { get; set; }
 }
 
 public class StartPracticeResponse
@@ -39,6 +46,7 @@ public class SubmitAnswerRequest
     public string? SelectedOptionId { get; set; }
     public List<string>? SelectedOptionIds { get; set; }
     public string? TextAnswer { get; set; }
+    public double? ResponseTimeSeconds { get; set; }
 }
 
 public class SubmitAnswerResponse
@@ -49,6 +57,16 @@ public class SubmitAnswerResponse
     public PracticeQuestionDto? NextQuestion { get; set; }
     public int QuestionNumber { get; set; }
     public bool IsSessionComplete { get; set; }
+    public SrUpdateDto? SpacedRepetition { get; set; }
+}
+
+public class SrUpdateDto
+{
+    public string NextReviewDate { get; set; } = "";
+    public double ReviewInterval { get; set; }
+    public int RepetitionCount { get; set; }
+    public bool IntervalChanged { get; set; }
+    public double PreviousInterval { get; set; }
 }
 
 public class EndPracticeRequest
@@ -65,4 +83,6 @@ public class PracticeSessionSummary
     public double Score { get; set; }
     public double MasteryChange { get; set; }
     public string? Recommendation { get; set; }
+    public int ItemsReviewed { get; set; }
+    public string? NextReviewSummary { get; set; }
 }

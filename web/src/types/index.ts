@@ -70,7 +70,7 @@ export interface TopicDto {
 
 // ─── Documents ────────────────────────────────────────────
 
-export type DocumentStatus = 'uploading' | 'processing' | 'ready' | 'error';
+export type DocumentStatus = 'pending' | 'uploading' | 'ingesting' | 'processing' | 'ready' | 'ingest_failed' | 'error';
 
 export interface DocumentDto {
   id: string;
@@ -296,6 +296,7 @@ export interface TutorNextActionDto {
 }
 
 export interface TutorQuestionDto {
+  questionId: string;
   question: string;
   options: Record<string, string>;
   correctAnswer: string;
@@ -305,10 +306,12 @@ export interface TutorQuestionDto {
 
 export interface TutorAnswerRequest {
   topicId: string;
+  questionId: string;
   questionText: string;
   correctAnswer: string;
   selectedAnswer: string;
   difficulty: number;
+  responseTimeSeconds?: number;
 }
 
 export interface TutorAnswerResult {
@@ -332,6 +335,7 @@ export interface UserProfileDto {
   userId: string;
   currentLevel: 'beginner' | 'intermediate' | 'advanced';
   overallMasteryScore: number;
+  topicsStudiedCount: number;
   preferredTopics: string[];
   learningStreak: number;
   lastActiveDate?: string;
@@ -364,9 +368,14 @@ export interface ReviewItemDto {
   questionId: string;
   topicId: string;
   topicName: string;
+  questionText: string;
   nextReviewDate: string;
+  lastReviewDate?: string;
   retentionScore: number;
   repetitionCount: number;
+  reviewInterval: number;
+  easeFactor: number;
+  overdueHours?: number;
 }
 
 // ─── Placement Test (Adaptive) ────────────────────────────
@@ -411,26 +420,6 @@ export interface PlacementTestResultDto {
   createdAt: string;
 }
 
-// ─── Learning Paths ───────────────────────────────────────
-
-export interface LearningPathDto {
-  items: LearningPathItemDto[];
-  totalItems: number;
-  completedItems: number;
-  overallProgress: number;
-}
-
-export interface LearningPathItemDto {
-  id: string;
-  topicId: string;
-  topicName: string;
-  recommendedDifficulty: string;
-  priorityScore: number;
-  nextReviewDate?: string;
-  isCompleted: boolean;
-  orderIndex: number;
-}
-
 // ─── Practice Sessions ────────────────────────────────────
 
 export interface PracticeQuestionDto {
@@ -449,6 +438,14 @@ export interface StartPracticeResponse {
   totalQuestions: number;
 }
 
+export interface SrUpdateDto {
+  nextReviewDate: string;
+  reviewInterval: number;
+  repetitionCount: number;
+  intervalChanged: boolean;
+  previousInterval: number;
+}
+
 export interface SubmitPracticeAnswerResponse {
   isCorrect: boolean;
   correctAnswer?: string;
@@ -457,6 +454,7 @@ export interface SubmitPracticeAnswerResponse {
   questionNumber: number;
   isSessionComplete: boolean;
   totalQuestions?: number;
+  spacedRepetition?: SrUpdateDto;
 }
 
 export interface PracticeSessionSummary {
@@ -465,7 +463,10 @@ export interface PracticeSessionSummary {
   questionsAttempted: number;
   correctAnswers: number;
   score: number;
+  masteryChange?: number;
   recommendation?: string;
+  itemsReviewed?: number;
+  nextReviewSummary?: string;
 }
 
 // ─── AI Chat ──────────────────────────────────────────────

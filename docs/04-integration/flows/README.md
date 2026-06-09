@@ -8,7 +8,7 @@ Danh sách 18 luồng end-to-end.
 | 2 | Upload tài liệu + RAG Ingest | ⚠️ | [02-document-upload-rag.md](02-document-upload-rag.md) |
 | 3 | Generate Quiz từ Document | ✅ | [03-generate-quiz-from-document.md](03-generate-quiz-from-document.md) |
 | 4 | Quiz Pool Teacher | ✅ | [04-quiz-pool-teacher.md](04-quiz-pool-teacher.md) |
-| 5 | Quiz Pool Student Revision | ⚠️ | [05-quiz-pool-student.md](05-quiz-pool-student.md) |
+| 5 | Quiz Pool Student Revision | ✅ | [05-quiz-pool-student.md](05-quiz-pool-student.md) |
 | 6 | AI Studio Review + Publish | ✅ | [06-ai-studio-publish.md](06-ai-studio-publish.md) |
 | 7 | Entry Test Legacy | 🔧 | [07-entry-test-legacy.md](07-entry-test-legacy.md) |
 | 8 | Placement Test Adaptive | ⚠️ | [08-placement-test.md](08-placement-test.md) |

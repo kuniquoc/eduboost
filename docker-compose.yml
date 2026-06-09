@@ -56,6 +56,8 @@ services:
       QUIZ_LLM_MODEL: ${QUIZ_LLM_MODEL:-}
       EXPLAIN_LLM_ENDPOINT: ${EXPLAIN_LLM_ENDPOINT:-}
       EXPLAIN_LLM_MODEL: ${EXPLAIN_LLM_MODEL:-}
+      CORS_ALLOWED_ORIGINS: ${CORS_ALLOWED_ORIGINS:-http://localhost:5173,http://localhost:3000,http://127.0.0.1:5173}
+      QUIZ_BATCH_MAX_CONCURRENT: ${QUIZ_BATCH_MAX_CONCURRENT:-1}
     volumes:
       - faissdata:/app/models/vector_db
     depends_on:
@@ -98,6 +100,11 @@ services:
       MinIO__PublicUseSSL: "false"
       # AI Agent
       AIAgent__BaseUrl: "http://ai-agent:8000"
+      # Seed admin (override via .env: SEED_ADMIN_EMAIL, SEED_ADMIN_PASSWORD)
+      SeedAdmin__Email: ${SEED_ADMIN_EMAIL:-admin@eduboost.local}
+      SeedAdmin__Password: ${SEED_ADMIN_PASSWORD:-admin123}
+      Cors__AllowedOrigins__0: ${CORS_ORIGIN_0:-http://localhost:5173}
+      Cors__AllowedOrigins__1: ${CORS_ORIGIN_1:-http://localhost:3000}
     depends_on:
       postgres:
         condition: service_healthy

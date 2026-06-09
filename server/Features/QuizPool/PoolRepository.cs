@@ -329,6 +329,7 @@ public class PoolRepository(AppDbContext db, IStorageService storage, IAgentServ
         var poolQuizGuids = request.PoolQuizIds.Select(Guid.Parse).ToList();
         var poolQuestions = await db.Questions
             .Where(q => poolQuizGuids.Contains(q.QuizId) && q.Quiz.Type == "pool")
+            .Include(q => q.Quiz)
             .Include(q => q.Options)
             .ToListAsync();
 
@@ -351,6 +352,7 @@ public class PoolRepository(AppDbContext db, IStorageService storage, IAgentServ
                 CorrectAnswer = q.CorrectAnswer,
                 VerifiedByTeacher = false,
                 OrderIndex = qidx,
+                SourceTopicId = q.Quiz?.TopicId,
                 Options = q.Options.Select((o, oidx) => new QuizOption
                 {
                     Id = Guid.NewGuid(),

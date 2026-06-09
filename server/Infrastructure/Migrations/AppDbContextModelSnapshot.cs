@@ -414,6 +414,9 @@ namespace EduBoost.API.Infrastructure.Migrations
                     b.Property<Guid?>("SourceDocumentId")
                         .HasColumnType("uuid");
 
+                    b.Property<Guid?>("SourceTopicId")
+                        .HasColumnType("uuid");
+
                     b.Property<string>("Text")
                         .IsRequired()
                         .HasColumnType("text");
@@ -430,6 +433,8 @@ namespace EduBoost.API.Infrastructure.Migrations
                     b.HasIndex("QuizId");
 
                     b.HasIndex("SourceDocumentId");
+
+                    b.HasIndex("SourceTopicId");
 
                     b.ToTable("questions", (string)null);
                 });
@@ -925,9 +930,16 @@ namespace EduBoost.API.Infrastructure.Migrations
                         .HasForeignKey("SourceDocumentId")
                         .OnDelete(DeleteBehavior.SetNull);
 
+                    b.HasOne("EduBoost.API.Infrastructure.Entities.Topic", "SourceTopic")
+                        .WithMany()
+                        .HasForeignKey("SourceTopicId")
+                        .OnDelete(DeleteBehavior.SetNull);
+
                     b.Navigation("Quiz");
 
                     b.Navigation("SourceDocument");
+
+                    b.Navigation("SourceTopic");
                 });
 
             modelBuilder.Entity("EduBoost.API.Infrastructure.Entities.Quiz", b =>

@@ -1,4 +1,4 @@
-using System.Security.Claims;
+using EduBoost.API.Common.Http;
 using EduBoost.API.Common.Models;
 using EduBoost.API.Features.Classes.Models;
 using Microsoft.AspNetCore.Authorization;
@@ -11,10 +11,8 @@ namespace EduBoost.API.Features.Classes;
 [Authorize]
 public class ClassesController(IClassesRepository repo) : ControllerBase
 {
-    private Guid UserId => Guid.Parse(
-        User.FindFirstValue(ClaimTypes.NameIdentifier) ?? User.FindFirstValue("sub") ?? Guid.Empty.ToString());
-
-    private string UserRole => User.FindFirstValue(ClaimTypes.Role) ?? User.FindFirstValue("role") ?? "student";
+    private Guid UserId => ControllerAuth.GetUserId(User);
+    private string UserRole => ControllerAuth.GetUserRole(User);
 
     /// <summary>Teacher: Lấy danh sách lớp học của mình</summary>
     [HttpGet]
@@ -39,6 +37,8 @@ public class ClassesController(IClassesRepository repo) : ControllerBase
     [HttpGet("{id:guid}")]
     public async Task<IActionResult> GetClass(Guid id)
     {
+        if (!await repo.CanUserAccessClassAsync(id, UserId, UserRole))
+            return Forbid();
         var cls = await repo.GetByIdAsync(id);
         if (cls == null) return NotFound(ApiResponse.Fail($"Không tìm thấy lớp học '{id}'"));
         return Ok(ApiResponse<ClassDetailDto>.Ok(cls));

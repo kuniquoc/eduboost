@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { classesService } from '@/services/classes.service';
 import { quizzesService } from '@/services/quizzes.service';
+import { useClassDetail } from '@/hooks/use-class-detail';
+import { useClassQuizzes } from '@/hooks/use-class-quizzes';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -30,17 +32,8 @@ export function TeacherClassDetailPage() {
   const [quizBuilderOpen, setQuizBuilderOpen] = useState(false);
   const [copied, setCopied] = useState(false);
 
-  const { data: cls, isLoading } = useQuery({
-    queryKey: ['class-detail', id],
-    queryFn: () => classesService.getClass(id!),
-    enabled: !!id,
-  });
-
-  const { data: classQuizzes } = useQuery({
-    queryKey: ['class-quizzes', id],
-    queryFn: () => quizzesService.getClassQuizzes(id!),
-    enabled: !!id,
-  });
+  const { data: cls, isLoading } = useClassDetail(id);
+  const { data: classQuizzes } = useClassQuizzes(id);
 
   const hasEntryTest = classQuizzes?.some((q) => q.type === 'entry_test') ?? false;
 

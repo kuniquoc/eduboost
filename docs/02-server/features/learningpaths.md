@@ -1,28 +1,10 @@
-# Feature: LearningPaths
+# Feature: LearningPaths (đã gỡ)
 
-> Thư mục: [`server/Features/LearningPaths/`](../../../server/Features/LearningPaths/)
+> **Đã thống nhất vào [Roadmap](roadmap.md)** — lộ trình học tập theo lớp, đồng bộ BKT qua `SyncAfterLearningAsync`.
 
-## Controller endpoints
-
-| Method | Path | Action |
-|--------|------|--------|
-| GET | `api/learning-paths/me` | `GetMyPath` |
-| POST | `api/learning-paths/regenerate` | `Regenerate` |
-| PUT | `api/learning-paths/{id:guid}/complete` | `MarkComplete` |
-
-## Repository methods
-
-| Method |
-|--------|
-| `GetMyPathAsync` |
-| `RegenerateAsync` |
-| `MarkCompleteAsync` |
-
-## Known issues
-
-Xem [server-gaps.md](../../99-known-issues/server-gaps.md).
+API `/api/learning-paths/*` không còn tồn tại. Dùng `/api/roadmap/{classId}`.
 
 ## Liên kết
 
-- [flows](../../04-integration/flows/)
-- [api-reference](../../04-integration/api-reference.md)
+- [roadmap.md](roadmap.md) (nếu có) hoặc [flows](../../04-integration/flows/16-roadmap-bkt-sync.md)
+- [cross-layer-inconsistencies](../../99-known-issues/cross-layer-inconsistencies.md)

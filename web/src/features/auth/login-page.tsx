@@ -64,41 +64,6 @@ export function LoginPage() {
           <Button type="submit" className="w-full" disabled={loading}>
             {loading ? 'Đang đăng nhập...' : 'Đăng nhập'}
           </Button>
-          <div className="space-y-2 pt-2">
-            <p className="text-center text-xs text-muted-foreground">Tài khoản demo (mật khẩu: password123)</p>
-            <div className="flex flex-wrap gap-2">
-              <Button
-                type="button"
-                variant="outline"
-                size="sm"
-                className="flex-1"
-                disabled={loading}
-                onClick={() => { setEmail('teacher@eduboost.vn'); setPassword('password123'); }}
-              >
-                GV
-              </Button>
-              <Button
-                type="button"
-                variant="outline"
-                size="sm"
-                className="flex-1"
-                disabled={loading}
-                onClick={() => { setEmail('student@eduboost.vn'); setPassword('password123'); }}
-              >
-                HS
-              </Button>
-              <Button
-                type="button"
-                variant="outline"
-                size="sm"
-                className="flex-1"
-                disabled={loading}
-                onClick={() => { setEmail('admin@eduboost.vn'); setPassword('password123'); }}
-              >
-                Admin
-              </Button>
-            </div>
-          </div>
         </CardContent>
       </form>
       <CardFooter className="justify-center">

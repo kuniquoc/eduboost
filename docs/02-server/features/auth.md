@@ -7,8 +7,12 @@
 | Method | Path | Action |
 |--------|------|--------|
 | POST | `api/auth/login` | `Login` |
-| POST | `api/auth/register` | `Register` |
+| POST | `api/auth/register` | `Register` (student only) |
 | POST | `api/auth/refresh` | `Refresh` |
+| POST | `api/auth/revoke` | `Revoke` |
+| GET | `api/auth/me` | `GetMe` |
+| PATCH | `api/auth/me/name` | `UpdateName` |
+| POST | `api/auth/me/avatar` | `UploadAvatar` |
 
 ## Repository methods
 

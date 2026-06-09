@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useQuery } from '@tanstack/react-query';
-import { topicsService } from '@/services/topics.service';
+import { useClassTopics } from '@/hooks/use-class-topics';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import {
@@ -58,11 +57,7 @@ export function QuizGenerationDialog({
   const [hardCount, setHardCount] = useState<number>(0);
 
   // Load topics if classId is provided
-  const { data: topics } = useQuery({
-    queryKey: ['class-topics', classId],
-    queryFn: () => topicsService.getTopics(classId!),
-    enabled: !!classId && open,
-  });
+  const { data: topics } = useClassTopics(classId, open);
 
   useEffect(() => {
     if (open) {

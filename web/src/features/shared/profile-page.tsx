@@ -1,20 +1,17 @@
 import { useState } from 'react';
-import { useQuery } from '@tanstack/react-query';
 import { useAuthStore } from '@/store/auth-store';
 import { authService } from '@/services/auth.service';
-import { userProfileService } from '@/services/userProfile.service';
+import { useUserProfile } from '@/hooks/use-user-profile';
+import { useStudentStats } from '@/hooks/use-student-stats';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Badge } from '@/components/ui/badge';
-import { Progress } from '@/components/ui/progress';
 import {
   User,
   Mail,
   ShieldCheck,
-  Flame,
-  TrendingUp,
   BookOpen,
   Edit2,
   Check,
@@ -66,12 +63,9 @@ export function ProfilePage() {
   const [editingName, setEditingName] = useState(false);
   const [nameInput, setNameInput] = useState(user?.name ?? '');
 
-  const { data: profile, isLoading } = useQuery({
-    queryKey: ['user-profile'],
-    queryFn: userProfileService.getProfile,
-  });
-
-
+  const { data: profile, isLoading: loadingProfile } = useUserProfile();
+  const isStudent = user?.role === 'student';
+  const { data: stats } = useStudentStats();
 
   const roleLabel =
     user?.role === 'teacher'
@@ -79,8 +73,6 @@ export function ProfilePage() {
       : user?.role === 'admin'
         ? 'Quản trị viên'
         : 'Học sinh';
-
-  const masteryPercent = profile ? Math.round(profile.overallMasteryScore * 100) : 0;
 
   return (
     <div className="space-y-6">
@@ -232,53 +224,30 @@ export function ProfilePage() {
 
         {/* Right: Stats */}
         <div className="lg:col-span-2 space-y-4">
-          {isLoading ? (
-            <div className="grid gap-4 sm:grid-cols-2">
-              {Array.from({ length: 4 }).map((_, i) => (
-                <Card key={i} className="h-20 animate-pulse border-border bg-card" />
-              ))}
-            </div>
+          {loadingProfile ? (
+            <Card className="h-20 animate-pulse border-border bg-card" />
           ) : (
             <>
-              {/* Stats grid */}
-              <div className="grid gap-4 sm:grid-cols-2">
-                <StatCard
-                  icon={Flame}
-                  label="Chuỗi ngày học"
-                  value={`${profile?.learningStreak ?? 0} ngày`}
-                />
-                <StatCard
-                  icon={TrendingUp}
-                  label="Điểm thành thạo tổng thể"
-                  value={`${masteryPercent}%`}
-                />
+              {isStudent && (
                 <StatCard
                   icon={BookOpen}
-                  label="Chủ đề yêu thích"
-                  value={profile?.preferredTopics?.length ?? 0}
-                  sub="chủ đề đã đánh dấu"
+                  label="Bài quiz đã làm"
+                  value={stats?.totalQuizzesTaken ?? 0}
                 />
+              )}
+
+              {!isStudent && user?.createdAt && (
                 <StatCard
                   icon={ShieldCheck}
                   label="Tham gia từ"
-                  value="—"
+                  value={new Date(user.createdAt).toLocaleDateString('vi-VN')}
                 />
-              </div>
+              )}
 
-              {/* Mastery progress */}
-              {profile && (
-                <Card className="border-border">
-                  <CardContent className="p-5">
-                    <div className="mb-3 flex items-center justify-between">
-                      <h2 className="font-semibold text-foreground">Mức độ thành thạo</h2>
-                      <span className="text-sm font-medium text-primary">{masteryPercent}%</span>
-                    </div>
-                    <Progress value={masteryPercent} className="h-2" />
-                    <p className="mt-2 text-xs text-muted-foreground">
-                      Điểm thành thạo được tính dựa trên tất cả các chủ đề bạn đã học
-                    </p>
-                  </CardContent>
-                </Card>
+              {isStudent && user?.createdAt && (
+                <p className="text-xs text-muted-foreground">
+                  Tham gia từ: {new Date(user.createdAt).toLocaleDateString('vi-VN')}
+                </p>
               )}
 
               {/* Preferred topics */}

@@ -1,33 +1,34 @@
 # Practice Session
 
-> Trạng thái: ⚠️ | Route: `/student/practice-session` | Role: student
+> Trạng thái: ✅ | Route: `/student/practice-session` | Role: student
 
 ## Mục đích
 
-Trang/feature `Practice Session` trong EduBoost web app.
+Phiên luyện tập BKT + Spaced Repetition — standard hoặc review mode.
 
 ## File nguồn
 
 [`web/src/features/student/practice-session/practice-session-page.tsx`](../../../web/src/features/student/practice-session/practice-session-page.tsx)
 
-## Routes
+## Query params
 
-- `/student/practice-session`
+| Param | Mô tả |
+|-------|--------|
+| `topicId`, `topicName` | Standard mode |
+| `mode=review` | Auto-start review session |
+| `questionIds` | Comma-separated IDs (review một câu) |
+
+## Tính năng
+
+- Đo `responseTimeSeconds` mỗi câu
+- Badge milestone SM-2 sau feedback
+- Summary: mastery change, next review summary
+- Invalidate `review-schedule` + `learning-states` khi kết thúc
 
 ## API / Services
 
-Xem [web-server-agent-map.md](../../04-integration/web-server-agent-map.md) và [services/](../services/).
-
-## State management
-
-- TanStack React Query (`useQuery` / `useMutation`)
-- Zustand `auth-store` cho user/role
-
-## Điểm chưa tối ưu / chưa hoàn thiện
-
-Không sidebar
+- `practiceSessionService.start`, `startReview`, `submitAnswer`, `endSession`
 
 ## Liên kết
 
-- [routing.md](../routing.md)
-- [flows](../../04-integration/flows/)
+- [flows/12-practice-session.md](../../04-integration/flows/12-practice-session.md)

@@ -3,7 +3,7 @@ import { useAuthStore } from '@/store/auth-store';
 import {
   BookOpen, Bot, User, LayoutDashboard,
   GraduationCap, LogOut, ChevronLeft, Menu,
-  Database, MessageCircle, CalendarClock, Shield,   Map,
+  Database, MessageCircle,   CalendarClock, Shield,
 } from 'lucide-react';
 import { ROUTES } from '@/lib/constants';
 import { Button } from '@/components/ui/button';
@@ -28,7 +28,6 @@ const teacherNav: NavItem[] = [
 const studentNav: NavItem[] = [
   { label: 'Tổng quan', href: ROUTES.STUDENT_DASHBOARD, icon: LayoutDashboard },
   { label: 'Lớp học', href: ROUTES.STUDENT_CLASSES, icon: GraduationCap },
-  { label: 'Lộ trình học', href: ROUTES.STUDENT_LEARNING_PATH, icon: Map },
   { label: 'AI Chat', href: ROUTES.STUDENT_AI_CHAT, icon: MessageCircle },
   { label: 'AI Lab', href: ROUTES.STUDENT_AI_LAB, icon: Bot },
   { label: 'Ôn tập', href: ROUTES.STUDENT_REVIEW, icon: CalendarClock },

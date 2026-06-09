@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useTeacherClasses } from '@/hooks/use-teacher-classes';
 import { classesService } from '@/services/classes.service';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -143,10 +144,7 @@ function ClassCard({ cls }: { cls: ClassDto }) {
 }
 
 export function TeacherClassesPage() {
-  const { data: classes, isLoading } = useQuery({
-    queryKey: ['teacher-classes'],
-    queryFn: classesService.getTeacherClasses,
-  });
+  const { data: classes, isLoading } = useTeacherClasses();
 
   return (
     <div>

@@ -34,7 +34,7 @@ flowchart TD
 |--------|----------|
 | `AuthLayout` | `/login`, `/register` |
 | `AppLayout` | Teacher/Student/Admin có sidebar |
-| None | Landing, entry-test, placement-test (full page) |
+| None | Landing, placement-test redirect (full page flow) |
 
 ## Protected routes
 
@@ -51,14 +51,19 @@ flowchart TD
 
 [`vite.config.ts`](../../web/vite.config.ts): `/api` → `http://localhost:5000`.
 
+## Hooks ([`hooks/`](../../web/src/hooks/))
+
+**23 shared React Query hooks** — migration hoàn tất; features không còn inline `useQuery`. `useMutation` vẫn inline trong feature pages (expected).
+
+Ví dụ: `useMyDocuments`, `useClassDocuments`, `useReviewSchedule`, `useEnrolledClasses`, `useMyQuizQuestions`, ...
+
 ## Điểm chưa tối ưu
 
-- Không có `hooks/` folder — logic `useQuery` inline trong pages
 - Chỉ 1 Zustand store (auth)
-- `lib/constants.ts` ROUTES không đầy đủ
+- Vite chunk > 500kB — chưa code-split
 
 ## Liên kết
 
 - [routing.md](routing.md)
 - [store-and-types.md](store-and-types.md)
-- [services/api.service.md](services/api.ts) — xem `api.ts` trực tiếp
+- [services/api.md](services/api.md)

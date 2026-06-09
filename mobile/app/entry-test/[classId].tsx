@@ -9,7 +9,6 @@ import { Ionicons } from '@expo/vector-icons';
 import { useQuery, useMutation } from '@tanstack/react-query';
 import Toast from 'react-native-toast-message';
 import { quizzesService, type SubmitQuizRequest } from '../../services/quizzesService';
-import { roadmapService } from '../../services/roadmapService';
 import { Colors, Spacing, Radius, Typography } from '../../theme';
 import { Button } from '../../components/ui/Button';
 import { ProgressBar } from '../../components/ui/ProgressBar';
@@ -42,13 +41,9 @@ function OptionBtn({
 // ─── Result Screen ────────────────────────────────────────────────────────────
 function ResultScreen({
   result,
-  onGenRoadmap,
-  isGenerating,
   onClose,
 }: {
   result: QuizResultDto;
-  onGenRoadmap: () => void;
-  isGenerating: boolean;
   onClose: () => void;
 }) {
   const gradeColor =
@@ -93,26 +88,18 @@ function ResultScreen({
           </View>
         )}
 
-        {/* Generate roadmap CTA */}
         <View style={styles.roadmapCta}>
           <Ionicons name="map-outline" size={24} color={Colors.primary} />
-          <Text style={styles.roadmapCtaTitle}>AI Lộ trình cá nhân hoá</Text>
+          <Text style={styles.roadmapCtaTitle}>Lộ trình học tập</Text>
           <Text style={styles.muted}>
-            Dựa trên kết quả này, AI sẽ tạo lộ trình học riêng cho bạn
+            Lộ trình cá nhân đã được tạo tự động sau khi nộp bài
           </Text>
           <Button
-            title={isGenerating ? 'Đang tạo...' : '✨ Tạo lộ trình ngay'}
-            loading={isGenerating}
-            onPress={onGenRoadmap}
+            title="Xem lộ trình"
+            onPress={onClose}
             style={{ width: '100%', marginTop: 8 }}
           />
         </View>
-
-        <TouchableOpacity onPress={onClose}>
-          <Text style={[styles.muted, { textAlign: 'center', marginTop: 8 }]}>
-            Về trang lớp học
-          </Text>
-        </TouchableOpacity>
       </ScrollView>
     </SafeAreaView>
   );
@@ -146,23 +133,6 @@ export default function EntryTestScreen() {
     },
     onError: (err: Error) => {
       Toast.show({ type: 'error', text1: 'Lỗi nộp bài', text2: err.message });
-    },
-  });
-
-  // Generate roadmap after result
-  const generateMutation = useMutation({
-    mutationFn: () =>
-      roadmapService.generateRoadmap(classId, result!.quizId),
-    onSuccess: () => {
-      Toast.show({
-        type: 'success',
-        text1: '✨ Lộ trình đã sẵn sàng!',
-        text2: 'AI đã tạo lộ trình học cá nhân cho bạn.',
-      });
-      router.replace('/(student)/classes');
-    },
-    onError: (err: Error) => {
-      Toast.show({ type: 'error', text1: 'Lỗi tạo lộ trình', text2: err.message });
     },
   });
 
@@ -253,8 +223,6 @@ export default function EntryTestScreen() {
     return (
       <ResultScreen
         result={result}
-        onGenRoadmap={() => generateMutation.mutate()}
-        isGenerating={generateMutation.isPending}
         onClose={() => router.replace('/(student)/classes')}
       />
     );

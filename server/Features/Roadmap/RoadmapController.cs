@@ -1,5 +1,6 @@
-using System.Security.Claims;
+using EduBoost.API.Common.Http;
 using EduBoost.API.Common.Models;
+using EduBoost.API.Features.Classes;
 using EduBoost.API.Features.Roadmap.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -9,15 +10,17 @@ namespace EduBoost.API.Features.Roadmap;
 [ApiController]
 [Route("api/roadmap")]
 [Authorize]
-public class RoadmapController(IRoadmapRepository repo) : ControllerBase
+public class RoadmapController(IRoadmapRepository repo, IClassesRepository classes) : ControllerBase
 {
-    private Guid UserId => Guid.Parse(
-        User.FindFirstValue(ClaimTypes.NameIdentifier) ?? User.FindFirstValue("sub") ?? Guid.Empty.ToString());
+    private Guid UserId => ControllerAuth.GetUserId(User);
+    private string UserRole => ControllerAuth.GetUserRole(User);
 
     /// <summary>Student: Lấy lộ trình học tập trong lớp</summary>
     [HttpGet("{classId:guid}")]
     public async Task<IActionResult> GetRoadmap(Guid classId)
     {
+        if (UserRole != "student") return Forbid();
+        if (!await classes.IsStudentEnrolledAsync(classId, UserId)) return Forbid();
         var roadmap = await repo.GetByClassIdAsync(classId, UserId);
         if (roadmap == null) return NotFound(ApiResponse.Fail("Chưa có lộ trình. Hãy hoàn thành bài test đầu vào trước."));
         return Ok(ApiResponse<RoadmapDto>.Ok(roadmap));
@@ -27,6 +30,8 @@ public class RoadmapController(IRoadmapRepository repo) : ControllerBase
     [HttpPost("{classId:guid}/generate")]
     public async Task<IActionResult> GenerateRoadmap(Guid classId, [FromBody] GenerateRoadmapRequest request)
     {
+        if (UserRole != "student") return Forbid();
+        if (!await classes.IsStudentEnrolledAsync(classId, UserId)) return Forbid();
         if (!ModelState.IsValid) return BadRequest(ApiResponse.Fail("Dữ liệu không hợp lệ", ModelState));
         var roadmap = await repo.GenerateAsync(classId, UserId, request.EntryTestResultId);
         return Ok(ApiResponse<RoadmapDto>.Ok(roadmap, "AI đã tạo lộ trình học tập cá nhân hoá cho bạn!"));
@@ -36,6 +41,8 @@ public class RoadmapController(IRoadmapRepository repo) : ControllerBase
     [HttpPatch("{classId:guid}/steps/{stepId}")]
     public async Task<IActionResult> UpdateStep(Guid classId, string stepId, [FromBody] UpdateStepRequest request)
     {
+        if (UserRole != "student") return Forbid();
+        if (!await classes.IsStudentEnrolledAsync(classId, UserId)) return Forbid();
         var step = await repo.UpdateStepAsync(classId, UserId, stepId, request);
         if (step == null) return NotFound(ApiResponse.Fail("Không tìm thấy bước trong lộ trình"));
         return Ok(ApiResponse<RoadmapStepDto>.Ok(step, "Cập nhật tiến độ thành công"));

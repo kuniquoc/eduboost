@@ -27,7 +27,6 @@
 | `IUserProfilesRepository` | `UserProfilesRepository` | Scoped |
 | `ILearningStatesRepository` | `LearningStatesRepository` | Scoped |
 | `IPlacementTestsRepository` | `PlacementTestsRepository` | Scoped |
-| `ILearningPathsRepository` | `LearningPathsRepository` | Scoped |
 | `IPracticeSessionsRepository` | `PracticeSessionsRepository` | Scoped |
 | `IAiChatRepository` | `AiChatRepository` | Scoped |
 | `IAdminRepository` | `AdminRepository` | Scoped |

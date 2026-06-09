@@ -16,7 +16,7 @@
 | State (Server) | TanStack React Query v5                 |
 | HTTP Client    | Axios                                   |
 | Toasts         | Sonner                                  |
-| Charts         | Recharts (analytics)                    |
+| Charts         | _(không dùng — analytics dùng custom UI)_ |
 | Utils          | clsx, tailwind-merge, date-fns          |
 
 ---

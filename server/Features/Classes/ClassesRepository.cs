@@ -15,6 +15,8 @@ public interface IClassesRepository
     Task<ClassDto?> UpdateAsync(Guid classId, Guid teacherId, UpdateClassRequest request);
     Task<bool> DeleteAsync(Guid classId, Guid teacherId);
     Task<bool> IsOwnedByTeacherAsync(Guid classId, Guid teacherId);
+    Task<bool> IsStudentEnrolledAsync(Guid classId, Guid studentId);
+    Task<bool> CanUserAccessClassAsync(Guid classId, Guid userId, string role);
     Task<ClassDto?> JoinByCodeAsync(Guid studentId, string classCode);
     Task<List<StudentEnrollmentDto>> GetStudentsAsync(Guid classId, string? search);
     Task<bool> AddStudentAsync(Guid classId, string studentEmail);
@@ -149,6 +151,17 @@ public class ClassesRepository(AppDbContext db) : IClassesRepository
 
     public async Task<bool> IsOwnedByTeacherAsync(Guid classId, Guid teacherId) =>
         await db.Classes.AnyAsync(c => c.Id == classId && c.TeacherId == teacherId);
+
+    public async Task<bool> IsStudentEnrolledAsync(Guid classId, Guid studentId) =>
+        await db.Enrollments.AnyAsync(e => e.ClassId == classId && e.StudentId == studentId);
+
+    public async Task<bool> CanUserAccessClassAsync(Guid classId, Guid userId, string role)
+    {
+        if (role == "admin") return true;
+        if (role == "teacher") return await IsOwnedByTeacherAsync(classId, userId);
+        if (role == "student") return await IsStudentEnrolledAsync(classId, userId);
+        return false;
+    }
 
     public async Task<ClassDto?> UpdateAsync(Guid classId, Guid teacherId, UpdateClassRequest request)
     {

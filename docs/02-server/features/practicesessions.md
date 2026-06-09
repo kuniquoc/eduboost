@@ -6,23 +6,39 @@
 
 | Method | Path | Action |
 |--------|------|--------|
-| POST | `api/practice-sessions/start` | `StartSession` |
-| POST | `api/practice-sessions/answer` | `SubmitAnswer` |
-| POST | `api/practice-sessions/end` | `EndSession` |
+| POST | `api/practice-sessions/start` | `StartSession` — mode `standard` (default) |
+| POST | `api/practice-sessions/start-review` | `StartReviewSession` — due SR items |
+| POST | `api/practice-sessions/answer` | `SubmitAnswer` — BKT + SR, trả `spacedRepetition` |
+| POST | `api/practice-sessions/end` | `EndSession` — `LearningSession`, streak |
+
+## Request / Response
+
+**Start (standard):** `{ topicId, questionCount?, mode?: "standard" }`
+
+**Start review:** `{ questionIds?: Guid[] }` — nếu null, lấy tất cả due
+
+**Answer:** `{ sessionId, questionId, selectedOptionId?, responseTimeSeconds? }`
+
+**Answer response:** `spacedRepetition` — `nextReviewDate`, `reviewInterval`, `repetitionCount`, `intervalChanged`
+
+**Summary:** `masteryChange`, `itemsReviewed`, `nextReviewSummary` (review mode)
 
 ## Repository methods
 
 | Method |
 |--------|
 | `StartSessionAsync` |
+| `StartReviewSessionAsync` |
 | `SubmitAnswerAsync` |
 | `EndSessionAsync` |
 
-## Known issues
+## Persistence
 
-Xem [server-gaps.md](../../99-known-issues/server-gaps.md).
+Active session: `practice_active_sessions` (JSON state, TTL 2h). Completed: `learning_sessions`.
+
+Review mode load đúng `questionIds` due — không random theo BKT difficulty.
 
 ## Liên kết
 
-- [flows](../../04-integration/flows/)
-- [api-reference](../../04-integration/api-reference.md)
+- [learningstates.md](learningstates.md)
+- [flows/12-practice-session.md](../../04-integration/flows/12-practice-session.md)

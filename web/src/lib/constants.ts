@@ -16,8 +16,9 @@ export const ROUTES = {
   // Student
   STUDENT_DASHBOARD: '/student/dashboard',
   STUDENT_CLASSES: '/student/classes',
+  /** @deprecated Use placementTestPath() — redirects to placement test */
   STUDENT_ENTRY_TEST: '/student/entry-test/:classId',
-  STUDENT_LEARNING_PATH: '/student/learning-path',
+  STUDENT_PLACEMENT_TEST: '/student/placement-test/:classId',
   STUDENT_ROADMAP: '/student/roadmap/:classId',
   STUDENT_PRACTICE: '/student/practice/:topicId',
   STUDENT_PRACTICE_SESSION: '/student/practice-session',
@@ -28,3 +29,8 @@ export const ROUTES = {
   STUDENT_REVIEW: '/student/review',
   STUDENT_PROFILE: '/student/profile',
 } as const;
+
+/** Canonical URL for adaptive placement / entry test for a class */
+export function placementTestPath(classId: string): string {
+  return `/student/placement-test/${classId}`;
+}

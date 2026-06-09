@@ -11,8 +11,11 @@ API client wrapper cho `placementTest` endpoints.
 |-----|----------|------------|
 | `start` | `—` | ✅ |
 | `submitAnswer` | `—` | ✅ |
-| `complete` | `—` | ✅ |
-| `getResults` | `—` | ✅ |
+| `complete` | POST `/placement-tests/complete` | ✅ — sau complete, `entry-test-page` invalidate learning queries |
+
+## Cache invalidation
+
+`PlacementTestPage` gọi `invalidateLearningQueries` sau `complete`: `student-progress`, `roadmap`, `learning-states`, `enrolled-classes`, `user-profile`, `student-stats`.
 
 ## Known issues
 

@@ -40,25 +40,23 @@
 - Hiển thị error nếu sai credentials
 - Lưu accessToken + refreshToken vào localStorage
 
-**Demo Buttons** (development): Quick login với tài khoản có sẵn:
-- `teacher@eduboost.vn` / `password123`
-- `student@eduboost.vn` / `password123`
+> **Lưu ý:** Không có demo login buttons trên UI — dùng tài khoản seed (`AdminBootstrap`) hoặc đăng ký student.
 
 ### 1.2 Register
 
-**Mô tả**: Tạo tài khoản mới, chọn role.
+**Mô tả**: Tạo tài khoản học sinh mới (self-register chỉ role `student`).
 
 **User Flow**:
 1. Nhập name, email, password
-2. Chọn role: Teacher hoặc Student
-3. Nhấn "Đăng ký"
-4. Hệ thống tạo tài khoản → auto login → redirect theo role
+2. Nhấn "Đăng ký"
+3. Hệ thống tạo tài khoản student → auto login → redirect `/student/dashboard`
 
 **Validation**:
 - Name: required
 - Email: required, email format, unique
 - Password: required, min 6 ký tự
-- Role: required (`teacher` hoặc `student`)
+
+> Teacher/admin được tạo qua `AdminBootstrap` hoặc admin dashboard — không self-register.
 
 ### 1.3 Token Management
 

@@ -1,6 +1,6 @@
 import unittest
 
-from src.api.main import (
+from src.api.quiz_batch_service import (
     _build_avoid_texts,
     _build_retry_hint,
     _is_duplicate_question,

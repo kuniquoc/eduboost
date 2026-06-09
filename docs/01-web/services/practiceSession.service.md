@@ -2,17 +2,17 @@
 
 > File nguồn: [`web/src/services/practiceSession.service.ts`](../../../web/src/services/practiceSession.service.ts)
 
-## Vai trò
-API client wrapper cho `practiceSession` endpoints.
-
 ## Hàm
 
-| Hàm | Endpoint | Trạng thái |
-|-----|----------|------------|
-| `start` | `—` | ✅ |
-| `submitAnswer` | `—` | ✅ |
-| `getSummary` | `—` | ✅ |
+| Hàm | Endpoint | Mô tả |
+|-----|----------|--------|
+| `start` | POST `/practice-sessions/start` | Standard mode |
+| `startReview` | POST `/practice-sessions/start-review` | Due SR items |
+| `startFixed` | POST `/practice-sessions/start` mode=`fixed` | Quiz Pool — danh sách câu cố định |
+| `submitAnswer` | POST `/practice-sessions/answer` | + `responseTimeSeconds` |
+| `endSession` | POST `/practice-sessions/end` | Summary + streak |
 
-## Known issues
+## Response types
 
-Xem [web-gaps.md](../../99-known-issues/web-gaps.md).
+- `SubmitPracticeAnswerResponse.spacedRepetition` — milestone feedback
+- `PracticeSessionSummary.masteryChange`, `itemsReviewed`, `nextReviewSummary`

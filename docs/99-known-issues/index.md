@@ -2,14 +2,14 @@
 
 > **Đọc file này trước khi phát triển hoặc QA.** Liệt kê mọi điểm chưa tối ưu, chưa hoàn thiện, hoặc chưa đúng trong hệ thống.
 
-## Tóm tắt theo mức độ
+## Tóm tắt theo mức độ (cập nhật 2026-06-10 — post audit)
 
-| Mức | Số lượng ước tính | Ví dụ |
-|-----|-------------------|-------|
-| ❌ Lỗi / bảo mật | ~8 | Role tự chọn khi register, JWT secret placeholder, CORS `*` |
-| 🔧 Chưa hoàn thiện | ~12 | Entry test stub, learning path UI, profile name edit |
-| ⚠️ Chưa tối ưu | ~15 | In-memory sessions, fire-and-forget, sequential LLM |
-| ✅ Hoàn thiện | Phần lớn CRUD + UI chính | Classes, documents, quiz pool, AI chat |
+| Mức | Số lượng ước tính | Ví dụ còn lại |
+|-----|-------------------|---------------|
+| ❌ Lỗi / bảo mật | ~0 | Pool/Topics/Quizzes IDOR đã fix |
+| 🔧 Chưa hoàn thiện | ~2 | Mobile vẫn dùng legacy entry-test; vLLM orchestrator |
+| ⚠️ Chưa tối ưu | ~1 | vLLM orchestrator (future) |
+| ✅ Đã xử lý gần đây | Nhiều | RBAC pool, student delete, EXPLAIN flow, chat topic_id, docs sync |
 
 ## Chi tiết theo tầng
 
@@ -18,28 +18,21 @@
 - [agent-gaps.md](agent-gaps.md) — AI Agent Python
 - [cross-layer-inconsistencies.md](cross-layer-inconsistencies.md) — Mâu thuẫn giữa các tầng
 
-## Top 10 vấn đề cần ưu tiên sửa
+## Top ưu tiên còn lại
 
 | # | Vấn đề | Tầng | Mức |
 |---|--------|------|-----|
-| 1 | `RegisterRequest.Role` client-controlled — đăng ký teacher tự do | server | ❌ |
-| 2 | Không verify teacher ownership khi update/delete class | server | ❌ |
-| 3 | JWT secret `CHANGE_ME_IN_PRODUCTION` trong appsettings | server | ❌ |
-| 4 | CORS `AllowAnyOrigin` cả 3 tầng | server + agent | ❌ |
-| 5 | `GenerateEntryTestAsync` stub placeholder, không gọi AI | server | 🔧 |
-| 6 | Entry test: 3 implementation song song (legacy UI, placement, agent orphan) | cross-layer | 🔧 |
-| 7 | `learningPath.service.ts` không có UI consumer | web | 🔧 |
-| 8 | Placement test route không có nav link | web | 🔧 |
-| 9 | Placement + Practice sessions in-memory — mất khi restart | server | ⚠️ |
-| 10 | Agent `agent_sessions` in-memory — không multi-instance | agent | ⚠️ |
+| 1 | Mobile entry-test → migrate sang placement-tests | mobile | 🔧 |
+| 2 | vLLM orchestrator (future) | agent | 🔧 |
 
 ## Tài liệu cũ đã lỗi thời
 
 | File | Vấn đề |
 |------|--------|
-| `docs/implementation-plan.md` | Nhiều mục "chưa có" đã implement (UserProfile, BKT DB, Admin, chat history) |
-| `docs/web-technical-spec.md` | Mô tả hooks/, sidebar riêng, analytics pages — không tồn tại |
-| `docs/features.md` | Demo login buttons, teacher analytics UI — không có |
+| `docs/implementation-plan.md` | Nhiều mục "chưa có" đã implement |
+| `docs/web-technical-spec.md` | Mô tả hooks/, sidebar cũ |
+| `docs/features.md` | Demo login — không có (cố ý) |
+| `docs/01-web/services/learningPath.service.md` | Service đã gỡ |
 
 Xem header DEPRECATED trong từng file cũ.
 
