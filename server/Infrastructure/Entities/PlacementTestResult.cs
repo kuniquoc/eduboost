@@ -9,6 +9,7 @@ public class PlacementTestResult
     public double FinalScore { get; set; }
     public string? StrengthsJson { get; set; } // JSON: topic scores
     public string? WeaknessesJson { get; set; } // JSON: topic scores
+    public string? AnswersJson { get; set; } // JSON: per-question review snapshot
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
     // Navigation

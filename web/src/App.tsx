@@ -37,6 +37,9 @@ const StudentDashboardPage = lazy(() =>
 const StudentClassesPage = lazy(() =>
   import('@/features/student/classes/classes-page').then((m) => ({ default: m.StudentClassesPage })),
 );
+const ClassQuizzesPage = lazy(() =>
+  import('@/features/student/classes/class-quizzes-page').then((m) => ({ default: m.ClassQuizzesPage })),
+);
 const AILabPage = lazy(() =>
   import('@/features/student/ai-lab/ai-lab-page').then((m) => ({ default: m.AILabPage })),
 );
@@ -139,6 +142,7 @@ function AppRoutes() {
             <Route path="/student/review" element={<ReviewPage />} />
             <Route path="/student/practice-session" element={<PracticeSessionPage />} />
             <Route path="/student/roadmap/:classId" element={<RoadmapPage />} />
+            <Route path="/student/classes/:classId/quizzes" element={<ClassQuizzesPage />} />
             <Route path="/student/practice/:topicId" element={<PracticePage />} />
             <Route path="/student/profile" element={<ProfilePage />} />
           </Route>

@@ -115,15 +115,23 @@ export function RoadmapPage() {
             <span className="text-sm text-muted-foreground">{completedCount}/{steps.length} hoàn thành</span>
           </div>
         </div>
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={() => refreshMutation.mutate()}
-          disabled={refreshMutation.isPending}
-        >
-          <RefreshCw className={`mr-2 h-4 w-4 ${refreshMutation.isPending ? 'animate-spin' : ''}`} />
-          Làm mới lộ trình
-        </Button>
+        <div className="flex flex-wrap gap-2">
+          <Link
+            to={`/student/classes/${classId}/quizzes`}
+            className="inline-flex h-8 items-center justify-center rounded-md border border-input bg-background px-3 text-sm font-medium hover:bg-accent hover:text-accent-foreground"
+          >
+            Quiz lớp
+          </Link>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => refreshMutation.mutate()}
+            disabled={refreshMutation.isPending}
+          >
+            <RefreshCw className={`mr-2 h-4 w-4 ${refreshMutation.isPending ? 'animate-spin' : ''}`} />
+            Làm mới lộ trình
+          </Button>
+        </div>
       </div>
 
       {/* Steps timeline */}

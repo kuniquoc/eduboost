@@ -10,26 +10,30 @@ import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
 import {
   ArrowLeft,
-  CheckCircle,
-  XCircle,
-  Lightbulb,
   BookOpen,
   Brain,
   Trophy,
   Loader2,
-  ArrowRight,
   Sparkles,
   GraduationCap,
+  CheckCircle,
+  XCircle,
 } from 'lucide-react';
 import { toast } from 'sonner';
+import { QuizAnswerFeedback } from '@/components/quiz/quiz-answer-feedback';
 import type { TutorNextActionDto, TutorQuestionDto, TutorAnswerResult } from '@/types';
 
 // ── Step states for the AI Tutor flow ──────────────────────
 type TutorStep =
   | { type: 'loading' }
   | { type: 'explain'; content: string }
-  | { type: 'quiz'; question: TutorQuestionDto }
-  | { type: 'result'; question: TutorQuestionDto; selectedKey: string; result: TutorAnswerResult }
+  | {
+      type: 'quiz';
+      question: TutorQuestionDto;
+      phase: 'selecting' | 'reviewing';
+      selectedKey?: string;
+      result?: TutorAnswerResult;
+    }
   | { type: 'mastered' }
   | { type: 'error'; message: string };
 
@@ -40,8 +44,9 @@ export function PracticePage() {
 
   const [step, setStep] = useState<TutorStep>({ type: 'loading' });
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
-  const [showQuizExplanation, setShowQuizExplanation] = useState(false);
-  const [showAiExplanation, setShowAiExplanation] = useState(false);
+  const [detailedExplanation, setDetailedExplanation] = useState<string | null>(null);
+  const [loadingDetailed, setLoadingDetailed] = useState(false);
+  const [detailedError, setDetailedError] = useState(false);
   const [questionsAnswered, setQuestionsAnswered] = useState(0);
   const [correctCount, setCorrectCount] = useState(0);
   const [started, setStarted] = useState(false);
@@ -104,11 +109,12 @@ export function PracticePage() {
     mutationFn: () => quizzesService.generateAdaptiveQuestion(topicId!),
     onSuccess: (question: TutorQuestionDto) => {
       setSelectedOption(null);
-      setShowQuizExplanation(false);
-      setShowAiExplanation(false);
-      errorExplainMutation.reset();
+      setDetailedExplanation(null);
+      setDetailedError(false);
       questionStartRef.current = Date.now();
-      setStep({ type: 'quiz', question });
+      setDetailedExplanation(null);
+      setDetailedError(false);
+      setStep({ type: 'quiz', question, phase: 'selecting' });
     },
     onError: () => {
       setStep({ type: 'error', message: 'Không thể tạo câu hỏi. Vui lòng thử lại.' });
@@ -134,27 +140,15 @@ export function PracticePage() {
         correctCountRef.current += 1;
       }
       invalidateLearningQueries(queryClient);
-      setStep({ type: 'result', question: vars.question, selectedKey: vars.selectedKey, result });
-
-      // Pre-fetch explanation immediately on incorrect answer
-      if (!result.isCorrect) {
-        errorExplainMutation.mutate({
-          question: vars.question.question,
-          correctAnswer: vars.question.options[vars.question.correctAnswer] || vars.question.correctAnswer,
-          studentAnswer: vars.question.options[vars.selectedKey] || vars.selectedKey,
-        });
-      }
+      setStep({
+        type: 'quiz',
+        question: vars.question,
+        phase: 'reviewing',
+        selectedKey: vars.selectedKey,
+        result,
+      });
     },
     onError: () => toast.error('Nộp bài thất bại'),
-  });
-
-  const errorExplainMutation = useMutation({
-    mutationFn: (vars: { question: string; correctAnswer: string; studentAnswer: string }) =>
-      quizzesService.getErrorExplanation(vars),
-    onSuccess: () => {
-      // Keep step as 'result' and read directly from errorExplainMutation.data
-    },
-    onError: () => toast.error('Không thể tải giải thích từ Gia sư AI'),
   });
 
   // ── Handlers ────────────────────────────────────────────
@@ -165,36 +159,41 @@ export function PracticePage() {
   }, [nextActionMutation]);
 
   const handleSubmitAnswer = useCallback(() => {
-    if (!selectedOption || step.type !== 'quiz') return;
+    if (!selectedOption || step.type !== 'quiz' || step.phase !== 'selecting') return;
     submitAnswerMutation.mutate({ question: step.question, selectedKey: selectedOption });
   }, [selectedOption, step, submitAnswerMutation]);
 
   const handleContinue = useCallback(() => {
     setStep({ type: 'loading' });
-    setShowAiExplanation(false);
-    errorExplainMutation.reset();
+    setDetailedExplanation(null);
+    setDetailedError(false);
     nextActionMutation.mutate();
-  }, [nextActionMutation, errorExplainMutation]);
+  }, [nextActionMutation]);
 
-  const handleExplainError = useCallback(() => {
-    if (step.type !== 'result') return;
-    errorExplainMutation.mutate({
-      question: step.question.question,
-      correctAnswer: step.question.options[step.question.correctAnswer] || step.question.correctAnswer,
-      studentAnswer: step.question.options[step.selectedKey] || step.selectedKey,
-    });
-  }, [step, errorExplainMutation]);
+  const fetchDetailedExplanation = useCallback(async (question: TutorQuestionDto, selectedKey: string) => {
+    setLoadingDetailed(true);
+    setDetailedError(false);
+    try {
+      const text = await quizzesService.getErrorExplanation({
+        question: question.question,
+        correctAnswer: question.options[question.correctAnswer] || question.correctAnswer,
+        studentAnswer: question.options[selectedKey] || selectedKey,
+      });
+      setDetailedExplanation(text);
+      return text;
+    } catch {
+      setDetailedError(true);
+      toast.error('Không thể tải giải thích chi tiết');
+      throw new Error('Failed');
+    } finally {
+      setLoadingDetailed(false);
+    }
+  }, []);
 
   const handleStartQuiz = useCallback(() => {
     setStep({ type: 'loading' });
     generateQuestionMutation.mutate();
   }, [generateQuestionMutation]);
-
-  const isLoading =
-    nextActionMutation.isPending ||
-    explainMutation.isPending ||
-    generateQuestionMutation.isPending ||
-    submitAnswerMutation.isPending;
 
   const accuracy = questionsAnswered > 0 ? Math.round((correctCount / questionsAnswered) * 100) : 0;
 
@@ -316,7 +315,7 @@ export function PracticePage() {
         </div>
       )}
 
-      {/* ── QUIZ ────────────────────────────────────────── */}
+      {/* ── QUIZ (inline feedback) ──────────────────────── */}
       {step.type === 'quiz' && (
         <div className="mx-auto max-w-2xl space-y-6">
           <div className="flex items-center justify-between">
@@ -326,7 +325,7 @@ export function PracticePage() {
               </div>
               <div>
                 <h2 className="text-lg font-semibold text-foreground">Câu hỏi luyện tập</h2>
-                <p className="text-xs text-muted-foreground">Câu #{questionsAnswered + 1}</p>
+                <p className="text-xs text-muted-foreground">Câu #{questionsAnswered + (step.phase === 'selecting' ? 1 : 0)}</p>
               </div>
             </div>
             <Badge variant="outline">
@@ -335,27 +334,32 @@ export function PracticePage() {
           </div>
 
           <Card className="border-border">
-            <CardContent className="p-6">
-              <h3 className="mb-6 text-base font-medium text-foreground leading-relaxed">
+            <CardContent className="space-y-4 p-6">
+              <h3 className="text-base font-medium leading-relaxed text-foreground">
                 {normalizeText(step.question.question)}
               </h3>
 
               <div className="space-y-3">
                 {Object.entries(step.question.options).map(([key, value]) => {
-                  const isSelected = selectedOption === key;
+                  const isSelected =
+                    step.phase === 'reviewing'
+                      ? key === step.selectedKey
+                      : selectedOption === key;
                   return (
                     <button
                       key={key}
+                      type="button"
+                      disabled={step.phase === 'reviewing'}
                       onClick={() => setSelectedOption(key)}
                       className={`w-full rounded-xl border p-4 text-left transition-all duration-200 ${
                         isSelected
                           ? 'border-primary bg-primary/10 text-foreground shadow-sm shadow-primary/10'
                           : 'border-border text-muted-foreground hover:border-muted-foreground hover:text-foreground'
-                      }`}
+                      } ${step.phase === 'reviewing' ? 'cursor-default opacity-80' : ''}`}
                     >
                       <div className="flex items-center gap-3">
                         <span
-                          className={`flex h-7 w-7 items-center justify-center rounded-full border text-xs font-medium transition-all ${
+                          className={`flex h-7 w-7 items-center justify-center rounded-full border text-xs font-medium ${
                             isSelected
                               ? 'border-primary bg-primary text-primary-foreground'
                               : 'border-border text-muted-foreground'
@@ -369,178 +373,54 @@ export function PracticePage() {
                   );
                 })}
               </div>
-            </CardContent>
-          </Card>
 
-          <div className="flex justify-end">
-            <Button
-              onClick={handleSubmitAnswer}
-              disabled={!selectedOption || submitAnswerMutation.isPending}
-              size="lg"
-              className="gap-2 px-8"
-            >
-              {submitAnswerMutation.isPending ? (
-                <><Loader2 className="h-4 w-4 animate-spin" /> Đang chấm...</>
-              ) : (
-                <>Nộp bài</>
-              )}
-            </Button>
-          </div>
-        </div>
-      )}
-
-      {/* ── RESULT ──────────────────────────────────────── */}
-      {step.type === 'result' && (
-        <div className="mx-auto max-w-2xl space-y-6">
-          <Card
-            className={`border-2 ${
-              step.result.isCorrect
-                ? 'border-green-500/30 bg-gradient-to-br from-green-500/5 to-transparent'
-                : 'border-red-500/30 bg-gradient-to-br from-red-500/5 to-transparent'
-            }`}
-          >
-            <CardContent className="p-6">
-              <div className="flex items-center gap-3 mb-4">
-                {step.result.isCorrect ? (
-                  <>
-                    <div className="flex h-12 w-12 items-center justify-center rounded-full bg-green-500/10">
-                      <CheckCircle className="h-7 w-7 text-green-400" />
-                    </div>
-                    <div>
-                      <h3 className="text-lg font-bold text-green-400">Chính xác! 🎉</h3>
-                      <p className="text-xs text-muted-foreground">Tuyệt vời, bạn đã trả lời đúng</p>
-                    </div>
-                  </>
-                ) : (
-                  <>
-                    <div className="flex h-12 w-12 items-center justify-center rounded-full bg-red-500/10">
-                      <XCircle className="h-7 w-7 text-red-400" />
-                    </div>
-                    <div>
-                      <h3 className="text-lg font-bold text-red-400">Chưa đúng</h3>
-                      <p className="text-xs text-muted-foreground">Đừng lo lắng, hãy xem giải thích hoặc yêu cầu hỗ trợ</p>
-                    </div>
-                  </>
-                )}
-              </div>
-
-              {/* Question review */}
-              <div className="rounded-xl border border-border bg-background/50 p-4 mb-4">
-                <p className="text-sm font-medium text-foreground mb-3">{normalizeText(step.question.question)}</p>
-                <div className="space-y-2">
-                  {Object.entries(step.question.options).map(([key, value]) => {
-                    const isCorrect = key === step.question.correctAnswer;
-                    const isStudentPick = key === step.selectedKey;
-                    const shouldShowCorrect = step.result.isCorrect || showQuizExplanation;
-                    let cls = 'border-border text-muted-foreground';
-                    if (isCorrect && shouldShowCorrect) cls = 'border-green-500/40 bg-green-500/10 text-green-400';
-                    else if (isStudentPick && !step.result.isCorrect)
-                      cls = 'border-red-500/40 bg-red-500/10 text-red-400 line-through';
-                    return (
-                      <div key={key} className={`flex items-center gap-2 rounded-lg border px-3 py-2 text-sm ${cls}`}>
-                        <span className="font-medium">{key}.</span>
-                        <span>{normalizeText(value)}</span>
-                        {isCorrect && shouldShowCorrect && <CheckCircle className="ml-auto h-4 w-4 text-green-400" />}
-                        {isStudentPick && !step.result.isCorrect && <XCircle className="ml-auto h-4 w-4 text-red-400" />}
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
-
-              {/* Inline explanation from quiz generation */}
-              {showQuizExplanation && step.question.explanation && (
-                <div className="rounded-xl border border-amber-500/20 bg-amber-500/5 p-4 mb-4 animate-in fade-in duration-300">
-                  <div className="flex items-center gap-2 mb-2">
-                    <Lightbulb className="h-4 w-4 text-amber-400" />
-                    <span className="text-sm font-medium text-amber-400">Giải thích</span>
-                  </div>
-                  <p className="text-sm text-foreground/80 leading-relaxed">{normalizeText(step.question.explanation)}</p>
-                </div>
+              {step.phase === 'selecting' && (
+                <Button
+                  className="w-full"
+                  onClick={handleSubmitAnswer}
+                  disabled={!selectedOption || submitAnswerMutation.isPending}
+                  size="lg"
+                >
+                  {submitAnswerMutation.isPending ? (
+                    <><Loader2 className="mr-2 h-4 w-4 animate-spin" /> Đang chấm...</>
+                  ) : (
+                    'Nộp bài'
+                  )}
+                </Button>
               )}
 
-              {/* AI Tutor Explanation */}
-              {showAiExplanation && (
-                <div className="rounded-xl border border-violet-500/20 bg-gradient-to-br from-violet-500/5 to-transparent p-4 mb-4 animate-in fade-in duration-300">
-                  <div className="flex items-center gap-2 mb-2">
-                    <Sparkles className="h-4 w-4 text-violet-400 animate-pulse" />
-                    <span className="text-sm font-medium text-violet-400">Gia sư AI hỗ trợ</span>
-                  </div>
-                  {errorExplainMutation.isPending && (
-                    <div className="flex items-center gap-2 text-sm text-muted-foreground py-2 animate-pulse">
-                      <Loader2 className="h-4 w-4 animate-spin text-violet-400" />
-                      <span>Gia sư AI đang phân tích lỗi sai và chuẩn bị lời giải thích...</span>
-                    </div>
-                  )}
-                  {errorExplainMutation.isError && (
-                    <div className="text-sm text-red-400 py-2">
-                      <span>Không thể tải giải thích từ Gia sư AI. </span>
-                      <button 
-                        onClick={handleExplainError} 
-                        className="underline font-medium text-violet-400 hover:text-violet-300 ml-1"
-                      >
-                        Thử lại
-                      </button>
-                    </div>
-                  )}
-                  {errorExplainMutation.isSuccess && errorExplainMutation.data && (
-                    <div className="prose prose-invert prose-sm max-w-none whitespace-pre-wrap text-foreground/90 leading-relaxed mt-2">
-                      {normalizeText(errorExplainMutation.data)}
-                    </div>
-                  )}
-                </div>
-              )}
-
-              {/* Mastery info */}
-              <div className="flex items-center gap-4 text-xs text-muted-foreground">
-                <span>
-                  Mastery: <Badge variant="outline" className="ml-1">{step.result.mastery ?? '—'}</Badge>
-                </span>
-                <span>P(L): {step.result.newProbability != null ? (step.result.newProbability * 100).toFixed(0) : '—'}%</span>
-                <span>θ: {step.result.newTheta != null ? step.result.newTheta.toFixed(2) : '—'}</span>
-              </div>
-            </CardContent>
-          </Card>
-
-          {/* Action buttons */}
-          <div className="flex flex-wrap items-center gap-3">
-            {step.question.explanation && !showQuizExplanation && (
-              <Button
-                variant="outline"
-                onClick={() => setShowQuizExplanation(true)}
-                className="gap-2"
-              >
-                <BookOpen className="h-4 w-4 text-primary" />
-                Xem giải thích
-              </Button>
-            )}
-            {!step.result.isCorrect && (
-              <Button
-                variant={showAiExplanation ? "secondary" : "outline"}
-                onClick={() => {
-                  setShowAiExplanation(!showAiExplanation);
-                  if (!showAiExplanation && !errorExplainMutation.isSuccess && !errorExplainMutation.isPending) {
-                    handleExplainError();
+              {step.phase === 'reviewing' && step.result && step.selectedKey && (
+                <QuizAnswerFeedback
+                  questionText={step.question.question}
+                  options={Object.entries(step.question.options).map(([id, text]) => ({
+                    id,
+                    text,
+                    isCorrect: id === step.question.correctAnswer,
+                  }))}
+                  selectedOptionIds={[step.selectedKey]}
+                  isCorrect={step.result.isCorrect}
+                  correctAnswerText={
+                    step.question.options[step.question.correctAnswer] || step.question.correctAnswer
                   }
-                }}
-                className="gap-2 border-primary/30 hover:border-primary/60 bg-primary/5"
-              >
-                {showAiExplanation ? (
-                  <>Ẩn hỗ trợ từ Gia sư AI</>
-                ) : (
-                  <>
-                    <Sparkles className="h-4 w-4 text-violet-400" />
-                    {errorExplainMutation.isPending ? 'Đang chuẩn bị hỗ trợ từ AI...' : 'Yêu cầu gia sư AI hỗ trợ'}
-                  </>
-                )}
-              </Button>
-            )}
-            <div className="ml-auto">
-              <Button onClick={handleContinue} disabled={isLoading} className="gap-2">
-                Tiếp tục <ArrowRight className="h-4 w-4" />
-              </Button>
-            </div>
-          </div>
+                  correctOptionId={step.question.correctAnswer}
+                  explanation={step.question.explanation}
+                  masteryLabel={step.result.mastery}
+                  variant="live"
+                  continueLabel="Tiếp tục"
+                  onContinue={handleContinue}
+                  detailedExplanation={detailedExplanation ?? undefined}
+                  isLoadingDetailedExplanation={loadingDetailed}
+                  detailedExplanationError={detailedError}
+                  onRequestDetailedExplanation={() =>
+                    fetchDetailedExplanation(step.question, step.selectedKey!)
+                  }
+                  onRetryDetailedExplanation={() =>
+                    fetchDetailedExplanation(step.question, step.selectedKey!)
+                  }
+                />
+              )}
+            </CardContent>
+          </Card>
         </div>
       )}
 

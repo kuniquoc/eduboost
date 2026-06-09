@@ -1,6 +1,7 @@
 using EduBoost.API.Common.Http;
 using EduBoost.API.Common.Models;
 using EduBoost.API.Features.PlacementTests.Models;
+using EduBoost.API.Features.PracticeSessions.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -71,6 +72,16 @@ public class PlacementTestsController(IPlacementTestsRepository repo) : Controll
         var result = await repo.GetResultAsync(UserId, classId);
         if (result == null) return NotFound(ApiResponse.Fail("Chưa có kết quả kiểm tra đầu vào"));
         return Ok(ApiResponse<PlacementTestResultDto>.Ok(result));
+    }
+
+    /// <summary>Student: Xem lại chi tiết từng câu sau khi hoàn thành</summary>
+    [HttpGet("result/{resultId:guid}/review")]
+    public async Task<IActionResult> GetReview(Guid resultId)
+    {
+        if (UserRole != "student") return Forbid();
+        var review = await repo.GetReviewAsync(UserId, resultId);
+        if (review == null) return NotFound(ApiResponse.Fail("Không tìm thấy kết quả kiểm tra"));
+        return Ok(ApiResponse<List<QuizReviewItemDto>>.Ok(review));
     }
 }
 

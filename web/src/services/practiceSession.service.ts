@@ -32,6 +32,22 @@ export const practiceSessionService = {
     return res.data.data!;
   },
 
+  startQuizPractice: async (quizId: string): Promise<StartPracticeResponse> => {
+    const res = await apiClient.post<ApiResponse<StartPracticeResponse>>('/practice-sessions/start', {
+      mode: 'practice',
+      quizId,
+    });
+    return res.data.data!;
+  },
+
+  startQuizTest: async (quizId: string): Promise<StartPracticeResponse> => {
+    const res = await apiClient.post<ApiResponse<StartPracticeResponse>>('/practice-sessions/start', {
+      mode: 'test',
+      quizId,
+    });
+    return res.data.data!;
+  },
+
   submitAnswer: async (
     sessionId: string,
     questionId: string,

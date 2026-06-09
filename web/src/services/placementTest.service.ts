@@ -5,6 +5,7 @@ import type {
   AnswerPlacementResponse,
   CompletePlacementResponse,
   PlacementTestResultDto,
+  QuizReviewItemDto,
 } from '@/types';
 
 export const placementTestService = {
@@ -40,6 +41,11 @@ export const placementTestService = {
     const res = await apiClient.get<ApiResponse<PlacementTestResultDto>>('/placement-tests/result', {
       params: classId ? { classId } : undefined,
     });
+    return res.data.data!;
+  },
+
+  getReview: async (resultId: string): Promise<QuizReviewItemDto[]> => {
+    const res = await apiClient.get<ApiResponse<QuizReviewItemDto[]>>(`/placement-tests/result/${resultId}/review`);
     return res.data.data!;
   },
 };

@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using EduBoost.API.Features.PracticeSessions.Models;
 
 namespace EduBoost.API.Features.PlacementTests.Models;
 
@@ -41,7 +42,7 @@ public class AnswerPlacementRequest
 
 public class AnswerPlacementResponse
 {
-    public bool IsCorrect { get; set; }
+    public bool FeedbackSuppressed { get; set; } = true;
     public bool IsComplete { get; set; }
     public PlacementQuestionDto? NextQuestion { get; set; }
     public int QuestionNumber { get; set; }
@@ -56,6 +57,7 @@ public class CompletePlacementResponse
     public double FinalScore { get; set; }
     public List<TopicStrengthDto> Strengths { get; set; } = [];
     public List<TopicStrengthDto> Weaknesses { get; set; } = [];
+    public List<QuizReviewItemDto>? ReviewItems { get; set; }
 }
 
 public class TopicStrengthDto
@@ -74,4 +76,5 @@ public class PlacementTestResultDto
     public List<TopicStrengthDto> Strengths { get; set; } = [];
     public List<TopicStrengthDto> Weaknesses { get; set; } = [];
     public string CreatedAt { get; set; } = "";
+    public List<QuizReviewItemDto>? ReviewItems { get; set; }
 }

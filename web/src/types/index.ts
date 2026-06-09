@@ -396,7 +396,7 @@ export interface StartPlacementTestResponse {
 }
 
 export interface AnswerPlacementResponse {
-  isCorrect: boolean;
+  feedbackSuppressed?: boolean;
   isComplete: boolean;
   nextQuestion?: PlacementQuestionDto;
   questionNumber: number;
@@ -405,19 +405,23 @@ export interface AnswerPlacementResponse {
 
 export interface CompletePlacementResponse {
   resultId: string;
+  classId?: string;
   initialLevel: string;
   finalScore: number;
   strengths: Array<{ topicId: string; topicName: string; score: number }>;
   weaknesses: Array<{ topicId: string; topicName: string; score: number }>;
+  reviewItems?: QuizReviewItemDto[];
 }
 
 export interface PlacementTestResultDto {
   id: string;
+  classId?: string;
   initialLevel: string;
   finalScore: number;
   strengths: Array<{ topicId: string; topicName: string; score: number }>;
   weaknesses: Array<{ topicId: string; topicName: string; score: number }>;
   createdAt: string;
+  reviewItems?: QuizReviewItemDto[];
 }
 
 // ─── Practice Sessions ────────────────────────────────────
@@ -447,6 +451,7 @@ export interface SrUpdateDto {
 }
 
 export interface SubmitPracticeAnswerResponse {
+  feedbackSuppressed?: boolean;
   isCorrect: boolean;
   correctAnswer?: string;
   explanation?: string;
@@ -455,6 +460,18 @@ export interface SubmitPracticeAnswerResponse {
   isSessionComplete: boolean;
   totalQuestions?: number;
   spacedRepetition?: SrUpdateDto;
+}
+
+export interface QuizReviewItemDto {
+  questionId: string;
+  text: string;
+  type: QuestionType;
+  options: Array<{ id: string; text: string }>;
+  selectedOptionId?: string;
+  correctOptionId?: string;
+  correctAnswer?: string;
+  isCorrect: boolean;
+  explanation?: string;
 }
 
 export interface PracticeSessionSummary {
@@ -467,6 +484,7 @@ export interface PracticeSessionSummary {
   recommendation?: string;
   itemsReviewed?: number;
   nextReviewSummary?: string;
+  reviewItems?: QuizReviewItemDto[];
 }
 
 // ─── AI Chat ──────────────────────────────────────────────

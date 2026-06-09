@@ -30,11 +30,13 @@ sequenceDiagram
 
 ## Modes
 
-| Mode | API | Chọn câu |
-|------|-----|----------|
-| `standard` | POST `/start` | Random theo BKT difficulty |
-| `review` | POST `/start-review` | Đúng questionIds due |
-| `fixed` | POST `/start` mode=`fixed` | Đúng questionIds (Quiz Pool, không lọc due) |
+| Mode | API | Chọn câu | Feedback khi trả lời |
+|------|-----|----------|----------------------|
+| `standard` | POST `/start` | Random theo BKT difficulty | Inline: đúng/sai + giải thích + LLM |
+| `review` | POST `/start-review` | Đúng questionIds due | Inline |
+| `fixed` | POST `/start` mode=`fixed` | Đúng questionIds (Quiz Pool) | Inline |
+| `practice` + `quizId` | POST `/start` | Câu quiz lớp đã publish | Inline (giống pool cá nhân) |
+| `test` + `quizId` | POST `/start` | Câu quiz lớp đã publish | Ẩn — xem lại sau `end` qua `reviewItems` |
 
 ## Bảng bước
 

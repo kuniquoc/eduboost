@@ -5,6 +5,7 @@ namespace EduBoost.API.Features.PracticeSessions.Models;
 public class StartPracticeRequest
 {
     public Guid? TopicId { get; set; }
+    public Guid? QuizId { get; set; }
     public int QuestionCount { get; set; } = 10;
     public string Mode { get; set; } = "standard";
     public List<Guid>? QuestionIds { get; set; }
@@ -51,13 +52,28 @@ public class SubmitAnswerRequest
 
 public class SubmitAnswerResponse
 {
+    public bool FeedbackSuppressed { get; set; }
     public bool IsCorrect { get; set; }
     public string? CorrectAnswer { get; set; }
     public string? Explanation { get; set; }
     public PracticeQuestionDto? NextQuestion { get; set; }
     public int QuestionNumber { get; set; }
+    public int TotalQuestions { get; set; }
     public bool IsSessionComplete { get; set; }
     public SrUpdateDto? SpacedRepetition { get; set; }
+}
+
+public class QuizReviewItemDto
+{
+    public string QuestionId { get; set; } = "";
+    public string Text { get; set; } = "";
+    public string Type { get; set; } = "mcq";
+    public List<PracticeOptionDto> Options { get; set; } = [];
+    public string? SelectedOptionId { get; set; }
+    public string? CorrectOptionId { get; set; }
+    public string? CorrectAnswer { get; set; }
+    public bool IsCorrect { get; set; }
+    public string? Explanation { get; set; }
 }
 
 public class SrUpdateDto
@@ -85,4 +101,5 @@ public class PracticeSessionSummary
     public string? Recommendation { get; set; }
     public int ItemsReviewed { get; set; }
     public string? NextReviewSummary { get; set; }
+    public List<QuizReviewItemDto>? ReviewItems { get; set; }
 }

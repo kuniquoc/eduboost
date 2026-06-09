@@ -20,7 +20,7 @@ Trang hồ sơ cá nhân — thông tin tài khoản và (với học sinh) ch�
 | UI (student) | API | Hook |
 |--------------|-----|------|
 | Thông tin tài khoản | `GET /api/auth/me` | `auth-store` |
-| Trình độ, chủ đề yêu thích | `GET /api/user-profiles/me` | `useUserProfile` |
+| Chủ đề yêu thích | `GET /api/user-profiles/me` | `useUserProfile` |
 | Bài quiz đã làm | `GET /api/students/me/stats` | `useStudentStats` → `totalQuizzesTaken` |
 
 ## Chỉ số học sinh (hồ sơ)

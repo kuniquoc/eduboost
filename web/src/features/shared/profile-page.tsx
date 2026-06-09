@@ -19,18 +19,6 @@ import {
 } from 'lucide-react';
 import { toast } from 'sonner';
 
-const levelLabel: Record<string, string> = {
-  beginner: 'Sơ cấp',
-  intermediate: 'Trung cấp',
-  advanced: 'Nâng cao',
-};
-
-const levelColor: Record<string, string> = {
-  beginner: 'bg-green-500/10 text-green-400 border-green-500/30',
-  intermediate: 'bg-blue-500/10 text-blue-400 border-blue-500/30',
-  advanced: 'bg-purple-500/10 text-purple-400 border-purple-500/30',
-};
-
 function StatCard({
   icon: Icon,
   label,
@@ -204,20 +192,6 @@ export function ProfilePage() {
                 </Label>
                 <Badge variant="secondary">{roleLabel}</Badge>
               </div>
-
-              {/* Level */}
-              {profile?.currentLevel && (
-                <div className="space-y-1">
-                  <Label className="text-xs text-muted-foreground">Trình độ hiện tại</Label>
-                  <span
-                    className={`inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold ${
-                      levelColor[profile.currentLevel] ?? 'bg-muted text-muted-foreground border-border'
-                    }`}
-                  >
-                    {levelLabel[profile.currentLevel] ?? profile.currentLevel}
-                  </span>
-                </div>
-              )}
             </CardContent>
           </Card>
         </div>

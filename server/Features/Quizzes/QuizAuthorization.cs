@@ -11,6 +11,7 @@ public interface IQuizAuthorization
     Task<bool> CanStudentAccessPrivateQuizAsync(Guid quizId, Guid studentId);
     Task<bool> CanStudentAccessTopicAsync(Guid topicId, Guid studentId);
     Task<bool> CanStudentAccessFixedQuestionsAsync(IEnumerable<Guid> questionIds, Guid studentId);
+    Task<bool> CanStudentAccessClassQuizAsync(Guid quizId, Guid studentId);
     Task<bool> QuestionBelongsToQuizAsync(Guid quizId, Guid questionId);
 }
 
@@ -76,6 +77,14 @@ public class QuizAuthorization(AppDbContext db, IClassesRepository classes) : IQ
         }
 
         return true;
+    }
+
+    public async Task<bool> CanStudentAccessClassQuizAsync(Guid quizId, Guid studentId)
+    {
+        var quiz = await db.Quizzes.AsNoTracking().FirstOrDefaultAsync(q => q.Id == quizId);
+        if (quiz == null) return false;
+        if (quiz.Type != "practice" || !quiz.IsPublished || !quiz.ClassId.HasValue) return false;
+        return await classes.IsStudentEnrolledAsync(quiz.ClassId.Value, studentId);
     }
 
     public Task<bool> QuestionBelongsToQuizAsync(Guid quizId, Guid questionId) =>

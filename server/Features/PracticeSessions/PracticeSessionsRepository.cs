@@ -1,389 +1,987 @@
-using System.Text.Json;
-using EduBoost.API.Features.LearningStates;
-using EduBoost.API.Features.LearningStates.Models;
-using EduBoost.API.Features.Roadmap;
-using EduBoost.API.Features.PracticeSessions.Models;
-using EduBoost.API.Infrastructure;
-using EduBoost.API.Infrastructure.Entities;
-using Microsoft.EntityFrameworkCore;
-using PracticeSrUpdateDto = EduBoost.API.Features.PracticeSessions.Models.SrUpdateDto;
-
-namespace EduBoost.API.Features.PracticeSessions;
-
-public interface IPracticeSessionsRepository
-{
-    Task<StartPracticeResponse> StartSessionAsync(Guid userId, StartPracticeRequest request);
-    Task<StartPracticeResponse> StartReviewSessionAsync(Guid userId, StartReviewRequest request);
-    Task<SubmitAnswerResponse> SubmitAnswerAsync(Guid userId, SubmitAnswerRequest request);
-    Task<PracticeSessionSummary> EndSessionAsync(Guid userId, string sessionId);
-}
-
-public class PracticeSessionsRepository(AppDbContext db, ILearningStatesRepository learningStates, IRoadmapRepository roadmap) : IPracticeSessionsRepository
-{
-    private static readonly TimeSpan SessionTtl = TimeSpan.FromHours(2);
-
-    public Task<StartPracticeResponse> StartSessionAsync(Guid userId, StartPracticeRequest request)
-        => StartSessionInternalAsync(userId, request);
-
-    public async Task<StartPracticeResponse> StartReviewSessionAsync(Guid userId, StartReviewRequest request)
-    {
-        var dueQuestionIds = await learningStates.GetDueQuestionIdsAsync(userId, request.QuestionIds);
-        if (dueQuestionIds.Count == 0)
-            throw new InvalidOperationException("Không có câu hỏi nào cần ôn tập");
-
-        var firstQuestion = await db.Questions
-            .Include(q => q.Options)
-            .Include(q => q.Quiz)
-            .FirstOrDefaultAsync(q => q.Id == dueQuestionIds[0])
-            ?? throw new InvalidOperationException("Câu hỏi không tồn tại");
-
-        var topicId = ResolveQuestionTopicId(firstQuestion)
-            ?? throw new InvalidOperationException("Câu hỏi không thuộc chủ đề hợp lệ");
-
-        return await StartSessionInternalAsync(userId, new StartPracticeRequest
-        {
-            TopicId = topicId,
-            Mode = "review",
-            QuestionIds = dueQuestionIds,
-            QuestionCount = dueQuestionIds.Count
-        });
-    }
-
-    private async Task<StartPracticeResponse> StartSessionInternalAsync(Guid userId, StartPracticeRequest request)
-    {
-        List<Question> questions;
-        if (string.Equals(request.Mode, "review", StringComparison.OrdinalIgnoreCase))
-        {
-            if (request.QuestionIds is not { Count: > 0 })
-                throw new InvalidOperationException("Review mode requires questionIds");
-
-            var dueIds = await learningStates.GetDueQuestionIdsAsync(userId, request.QuestionIds);
-            if (dueIds.Count == 0)
-                throw new InvalidOperationException("Không có câu hỏi due trong danh sách đã chọn");
-
-            var dueSet = dueIds.ToHashSet();
-            questions = await db.Questions
-                .Include(q => q.Options)
-                .Include(q => q.Quiz)
-                .Where(q => dueSet.Contains(q.Id))
-                .ToListAsync();
-
-            questions = dueIds
-                .Select(id => questions.FirstOrDefault(q => q.Id == id))
-                .Where(q => q != null)
-                .Cast<Question>()
-                .ToList();
-        }
-        else if (string.Equals(request.Mode, "fixed", StringComparison.OrdinalIgnoreCase))
-        {
-            if (request.QuestionIds is not { Count: > 0 })
-                throw new InvalidOperationException("Fixed mode requires questionIds");
-
-            var idList = request.QuestionIds;
-            var idSet = idList.ToHashSet();
-            var loaded = await db.Questions
-                .Include(q => q.Options)
-                .Include(q => q.Quiz)
-                .Where(q => idSet.Contains(q.Id))
-                .ToListAsync();
-
-            questions = idList
-                .Select(id => loaded.FirstOrDefault(q => q.Id == id))
-                .Where(q => q != null)
-                .Cast<Question>()
-                .ToList();
-
-            if (questions.Count != idList.Count)
-                throw new InvalidOperationException("Một hoặc nhiều câu hỏi không tồn tại");
-        }
-        else
-        {
-            if (!request.TopicId.HasValue || request.TopicId.Value == Guid.Empty)
-                throw new InvalidOperationException("TopicId is required");
-
-            var topicId = request.TopicId.Value;
-            var bktState = await db.BktStates
-                .FirstOrDefaultAsync(b => b.UserId == userId && b.TopicId == topicId);
-
-            string targetDifficulty = "medium";
-            if (bktState != null)
-            {
-                if (bktState.MasteryProbability < 0.3) targetDifficulty = "easy";
-                else if (bktState.MasteryProbability > 0.7) targetDifficulty = "hard";
-            }
-
-            questions = await db.Questions
-                .Include(q => q.Options)
-                .Where(q => q.Quiz.TopicId == topicId)
-                .OrderBy(q => q.Difficulty == targetDifficulty ? 0 : 1)
-                .ThenBy(q => Guid.NewGuid())
-                .Take(request.QuestionCount)
-                .ToListAsync();
-        }
-
-        if (questions.Count == 0)
-            throw new InvalidOperationException("Không có câu hỏi cho chủ đề này");
-
-        var sessionTopicId = ResolveSessionTopicId(request, questions);
-        var topic = await db.Topics.FindAsync(sessionTopicId)
-            ?? throw new InvalidOperationException("Topic not found");
-
-        var bktStateForSession = await db.BktStates
-            .FirstOrDefaultAsync(b => b.UserId == userId && b.TopicId == sessionTopicId);
-
-        var affectedTopicIds = questions
-            .Select(ResolveQuestionTopicId)
-            .Where(id => id.HasValue)
-            .Select(id => id!.Value)
-            .Distinct()
-            .ToList();
-
-        var sessionId = Guid.NewGuid();
-        var state = new PracticeSessionState
-        {
-            UserId = userId,
-            TopicId = sessionTopicId,
-            TopicName = topic.Name,
-            Mode = request.Mode,
-            Questions = questions.Select(q => q.Id).ToList(),
-            AffectedTopicIds = affectedTopicIds,
-            CurrentIndex = 0,
-            CorrectCount = 0,
-            StartTime = DateTime.UtcNow,
-            MasteryBefore = bktStateForSession?.MasteryProbability ?? 0.3
-        };
-
-        db.PracticeActiveSessions.Add(new PracticeActiveSession
-        {
-            Id = sessionId,
-            UserId = userId,
-            StateJson = JsonSerializer.Serialize(state),
-            CreatedAt = DateTime.UtcNow,
-            ExpiresAt = DateTime.UtcNow.Add(SessionTtl)
-        });
-        await db.SaveChangesAsync();
-
-        return new StartPracticeResponse
-        {
-            SessionId = sessionId.ToString(),
-            TopicName = topic.Name,
-            Question = MapQuestionDto(questions[0]),
-            QuestionNumber = 1,
-            TotalQuestions = questions.Count
-        };
-    }
-
-    public async Task<SubmitAnswerResponse> SubmitAnswerAsync(Guid userId, SubmitAnswerRequest request)
-    {
-        var session = await LoadSessionAsync(userId, request.SessionId);
-        var state = DeserializeState(session);
-
-        var questionId = Guid.Parse(request.QuestionId);
-        var question = await db.Questions
-            .Include(q => q.Options)
-            .Include(q => q.Quiz)
-            .FirstOrDefaultAsync(q => q.Id == questionId)
-            ?? throw new InvalidOperationException("Question not found");
-
-        var selectedOptionId = request.SelectedOptionId
-            ?? request.SelectedOptionIds?.FirstOrDefault();
-
-        bool isCorrect;
-        string? correctAnswer;
-        if (question.Type == "fill_blank")
-        {
-            isCorrect = string.Equals(question.CorrectAnswer?.Trim(), request.TextAnswer?.Trim(), StringComparison.OrdinalIgnoreCase);
-            correctAnswer = question.CorrectAnswer;
-        }
-        else
-        {
-            var correctOption = question.Options.FirstOrDefault(o => o.IsCorrect);
-            isCorrect = correctOption != null && correctOption.Id.ToString() == selectedOptionId;
-            correctAnswer = correctOption?.Text;
-        }
-
-        if (isCorrect) state.CorrectCount++;
-        state.CurrentIndex++;
-
-        var topicId = ResolveQuestionTopicId(question) ?? state.TopicId;
-        var updateResult = await learningStates.UpdateAfterAnswerAsync(userId, new UpdateBktRequest
-        {
-            TopicId = topicId,
-            QuestionId = questionId,
-            IsCorrect = isCorrect,
-            ResponseTime = request.ResponseTimeSeconds
-        });
-
-        bool isComplete = state.CurrentIndex >= state.Questions.Count;
-        PracticeQuestionDto? nextQuestion = null;
-
-        if (!isComplete)
-        {
-            var nextQ = await db.Questions
-                .Include(q => q.Options)
-                .FirstOrDefaultAsync(q => q.Id == state.Questions[state.CurrentIndex]);
-            if (nextQ != null) nextQuestion = MapQuestionDto(nextQ);
-            else isComplete = true;
-        }
-
-        await SaveSessionStateAsync(session, state);
-
-        return new SubmitAnswerResponse
-        {
-            IsCorrect = isCorrect,
-            CorrectAnswer = correctAnswer,
-            Explanation = question.Explanation,
-            NextQuestion = nextQuestion,
-            QuestionNumber = state.CurrentIndex + 1,
-            IsSessionComplete = isComplete,
-            SpacedRepetition = MapSrUpdate(updateResult.SpacedRepetition)
-        };
-    }
-
-    public async Task<PracticeSessionSummary> EndSessionAsync(Guid userId, string sessionId)
-    {
-        var session = await LoadSessionAsync(userId, sessionId);
-        var state = DeserializeState(session);
-        db.PracticeActiveSessions.Remove(session);
-
-        var score = state.CurrentIndex > 0 ? (double)state.CorrectCount / state.CurrentIndex * 100 : 0;
-
-        var bktAfter = await db.BktStates
-            .FirstOrDefaultAsync(b => b.UserId == userId && b.TopicId == state.TopicId);
-        var masteryAfter = bktAfter?.MasteryProbability ?? state.MasteryBefore;
-
-        db.LearningSessions.Add(new LearningSession
-        {
-            UserId = userId,
-            TopicId = state.TopicId,
-            StartTime = state.StartTime,
-            EndTime = DateTime.UtcNow,
-            QuestionsAttempted = state.CurrentIndex,
-            CorrectAnswers = state.CorrectCount,
-            Score = score
-        });
-
-        var profile = await db.UserProfiles.FirstOrDefaultAsync(p => p.UserId == userId);
-        if (profile != null)
-        {
-            var today = DateTime.UtcNow.Date;
-            if (profile.LastActiveDate?.Date == today.AddDays(-1))
-                profile.LearningStreak++;
-            else if (profile.LastActiveDate?.Date != today)
-                profile.LearningStreak = 1;
-
-            profile.LastActiveDate = DateTime.UtcNow;
-            profile.UpdatedAt = DateTime.UtcNow;
-        }
-
-        await db.SaveChangesAsync();
-
-        var topicsToSync = state.AffectedTopicIds is { Count: > 0 }
-            ? state.AffectedTopicIds
-            : [state.TopicId];
-
-        foreach (var topicId in topicsToSync.Distinct())
-        {
-            var syncTopic = await db.Topics.FindAsync(topicId);
-            if (syncTopic?.ClassId is Guid classId)
-                await roadmap.SyncAfterLearningAsync(classId, userId, topicId);
-        }
-
-        string? recommendation = null;
-        if (score >= 80) recommendation = "Xuất sắc! Bạn có thể chuyển sang chủ đề khó hơn.";
-        else if (score < 50) recommendation = "Hãy ôn tập lại chủ đề này trước khi tiếp tục.";
-
-        var isReview = string.Equals(state.Mode, "review", StringComparison.OrdinalIgnoreCase);
-        string? nextReviewSummary = null;
-        if (isReview && state.CurrentIndex > 0)
-            nextReviewSummary = $"Đã lên lịch lại {state.CurrentIndex} câu theo SM-2";
-
-        return new PracticeSessionSummary
-        {
-            SessionId = sessionId,
-            TopicName = state.TopicName,
-            QuestionsAttempted = state.CurrentIndex,
-            CorrectAnswers = state.CorrectCount,
-            Score = score,
-            MasteryChange = masteryAfter - state.MasteryBefore,
-            Recommendation = recommendation,
-            ItemsReviewed = isReview ? state.CurrentIndex : 0,
-            NextReviewSummary = nextReviewSummary
-        };
-    }
-
-    private static Guid ResolveSessionTopicId(StartPracticeRequest request, List<Question> questions)
-    {
-        if (request.TopicId.HasValue && request.TopicId.Value != Guid.Empty)
-            return request.TopicId.Value;
-
-        var fromFirst = questions.Select(ResolveQuestionTopicId).FirstOrDefault(id => id.HasValue);
-        if (fromFirst.HasValue)
-            return fromFirst.Value;
-
-        throw new InvalidOperationException("Câu hỏi không thuộc chủ đề hợp lệ");
-    }
-
-    private static Guid? ResolveQuestionTopicId(Question question) =>
-        question.SourceTopicId ?? question.Quiz?.TopicId;
-
-    private static PracticeSrUpdateDto? MapSrUpdate(LearningStates.Models.SrUpdateDto? sr) =>
-        sr == null ? null : new PracticeSrUpdateDto
-        {
-            NextReviewDate = sr.NextReviewDate,
-            ReviewInterval = sr.ReviewInterval,
-            RepetitionCount = sr.RepetitionCount,
-            IntervalChanged = sr.IntervalChanged,
-            PreviousInterval = sr.PreviousInterval
-        };
-
-    private async Task<PracticeActiveSession> LoadSessionAsync(Guid userId, string sessionId)
-    {
-        if (!Guid.TryParse(sessionId, out var id))
-            throw new InvalidOperationException("Session not found");
-
-        var session = await db.PracticeActiveSessions
-            .FirstOrDefaultAsync(s => s.Id == id && s.UserId == userId && s.ExpiresAt > DateTime.UtcNow);
-
-        return session ?? throw new InvalidOperationException("Session not found");
-    }
-
-    private static PracticeSessionState DeserializeState(PracticeActiveSession session) =>
-        JsonSerializer.Deserialize<PracticeSessionState>(session.StateJson)
-        ?? throw new InvalidOperationException("Invalid session state");
-
-    private async Task SaveSessionStateAsync(PracticeActiveSession session, PracticeSessionState state)
-    {
-        session.StateJson = JsonSerializer.Serialize(state);
-        session.ExpiresAt = DateTime.UtcNow.Add(SessionTtl);
-        await db.SaveChangesAsync();
-    }
-
-    private static PracticeQuestionDto MapQuestionDto(Question q) => new()
-    {
-        QuestionId = q.Id.ToString(),
-        Text = q.Text,
-        Type = q.Type,
-        Difficulty = q.Difficulty,
-        Options = q.Options.OrderBy(o => o.OrderIndex).Select(o => new PracticeOptionDto
-        {
-            Id = o.Id.ToString(),
-            Text = o.Text
-        }).ToList()
-    };
-
-    private class PracticeSessionState
-    {
-        public Guid UserId { get; set; }
-        public Guid TopicId { get; set; }
-        public string TopicName { get; set; } = "";
-        public string Mode { get; set; } = "standard";
-        public List<Guid> Questions { get; set; } = [];
-        public List<Guid> AffectedTopicIds { get; set; } = [];
-        public int CurrentIndex { get; set; }
-        public int CorrectCount { get; set; }
-        public DateTime StartTime { get; set; }
-        public double MasteryBefore { get; set; }
-    }
-}
-
+using System.Text.Json;
+
+using EduBoost.API.Features.LearningStates;
+
+using EduBoost.API.Features.LearningStates.Models;
+
+using EduBoost.API.Features.Roadmap;
+
+using EduBoost.API.Features.PracticeSessions.Models;
+
+using EduBoost.API.Infrastructure;
+
+using EduBoost.API.Infrastructure.Entities;
+
+using Microsoft.EntityFrameworkCore;
+
+using PracticeSrUpdateDto = EduBoost.API.Features.PracticeSessions.Models.SrUpdateDto;
+
+
+
+namespace EduBoost.API.Features.PracticeSessions;
+
+
+
+public interface IPracticeSessionsRepository
+
+{
+
+    Task<StartPracticeResponse> StartSessionAsync(Guid userId, StartPracticeRequest request);
+
+    Task<StartPracticeResponse> StartReviewSessionAsync(Guid userId, StartReviewRequest request);
+
+    Task<SubmitAnswerResponse> SubmitAnswerAsync(Guid userId, SubmitAnswerRequest request);
+
+    Task<PracticeSessionSummary> EndSessionAsync(Guid userId, string sessionId);
+
+}
+
+
+
+public class PracticeSessionsRepository(AppDbContext db, ILearningStatesRepository learningStates, IRoadmapRepository roadmap) : IPracticeSessionsRepository
+
+{
+
+    private static readonly TimeSpan SessionTtl = TimeSpan.FromHours(2);
+
+
+
+    public Task<StartPracticeResponse> StartSessionAsync(Guid userId, StartPracticeRequest request)
+
+        => StartSessionInternalAsync(userId, request);
+
+
+
+    public async Task<StartPracticeResponse> StartReviewSessionAsync(Guid userId, StartReviewRequest request)
+
+    {
+
+        var dueQuestionIds = await learningStates.GetDueQuestionIdsAsync(userId, request.QuestionIds);
+
+        if (dueQuestionIds.Count == 0)
+
+            throw new InvalidOperationException("Không có câu hỏi nào cần ôn tập");
+
+
+
+        var firstQuestion = await db.Questions
+
+            .Include(q => q.Options)
+
+            .Include(q => q.Quiz)
+
+            .FirstOrDefaultAsync(q => q.Id == dueQuestionIds[0])
+
+            ?? throw new InvalidOperationException("Câu hỏi không tồn tại");
+
+
+
+        var topicId = ResolveQuestionTopicId(firstQuestion)
+
+            ?? throw new InvalidOperationException("Câu hỏi không thuộc chủ đề hợp lệ");
+
+
+
+        return await StartSessionInternalAsync(userId, new StartPracticeRequest
+
+        {
+
+            TopicId = topicId,
+
+            Mode = "review",
+
+            QuestionIds = dueQuestionIds,
+
+            QuestionCount = dueQuestionIds.Count
+
+        });
+
+    }
+
+
+
+    private async Task<StartPracticeResponse> StartSessionInternalAsync(Guid userId, StartPracticeRequest request)
+
+    {
+
+        List<Question> questions;
+
+        if (string.Equals(request.Mode, "review", StringComparison.OrdinalIgnoreCase))
+
+        {
+
+            if (request.QuestionIds is not { Count: > 0 })
+
+                throw new InvalidOperationException("Review mode requires questionIds");
+
+
+
+            var dueIds = await learningStates.GetDueQuestionIdsAsync(userId, request.QuestionIds);
+
+            if (dueIds.Count == 0)
+
+                throw new InvalidOperationException("Không có câu hỏi due trong danh sách đã chọn");
+
+
+
+            var dueSet = dueIds.ToHashSet();
+
+            questions = await db.Questions
+
+                .Include(q => q.Options)
+
+                .Include(q => q.Quiz)
+
+                .Where(q => dueSet.Contains(q.Id))
+
+                .ToListAsync();
+
+
+
+            questions = dueIds
+
+                .Select(id => questions.FirstOrDefault(q => q.Id == id))
+
+                .Where(q => q != null)
+
+                .Cast<Question>()
+
+                .ToList();
+
+        }
+
+        else if (string.Equals(request.Mode, "fixed", StringComparison.OrdinalIgnoreCase))
+
+        {
+
+            if (request.QuestionIds is not { Count: > 0 })
+
+                throw new InvalidOperationException("Fixed mode requires questionIds");
+
+
+
+            var idList = request.QuestionIds;
+
+            var idSet = idList.ToHashSet();
+
+            var loaded = await db.Questions
+
+                .Include(q => q.Options)
+
+                .Include(q => q.Quiz)
+
+                .Where(q => idSet.Contains(q.Id))
+
+                .ToListAsync();
+
+
+
+            questions = idList
+
+                .Select(id => loaded.FirstOrDefault(q => q.Id == id))
+
+                .Where(q => q != null)
+
+                .Cast<Question>()
+
+                .ToList();
+
+
+
+            if (questions.Count != idList.Count)
+
+                throw new InvalidOperationException("Một hoặc nhiều câu hỏi không tồn tại");
+
+        }
+
+        else if (request.QuizId.HasValue && request.QuizId.Value != Guid.Empty
+
+            && (string.Equals(request.Mode, "test", StringComparison.OrdinalIgnoreCase)
+
+                || string.Equals(request.Mode, "practice", StringComparison.OrdinalIgnoreCase)))
+
+        {
+
+            questions = await db.Questions
+
+                .Include(q => q.Options)
+
+                .Include(q => q.Quiz)
+
+                .Where(q => q.QuizId == request.QuizId.Value)
+
+                .OrderBy(q => q.OrderIndex)
+
+                .ToListAsync();
+
+
+
+            if (questions.Count == 0)
+
+                throw new InvalidOperationException("Quiz không có câu hỏi");
+
+        }
+
+        else
+
+        {
+
+            if (!request.TopicId.HasValue || request.TopicId.Value == Guid.Empty)
+
+                throw new InvalidOperationException("TopicId is required");
+
+
+
+            var topicId = request.TopicId.Value;
+
+            var bktState = await db.BktStates
+
+                .FirstOrDefaultAsync(b => b.UserId == userId && b.TopicId == topicId);
+
+
+
+            string targetDifficulty = "medium";
+
+            if (bktState != null)
+
+            {
+
+                if (bktState.MasteryProbability < 0.3) targetDifficulty = "easy";
+
+                else if (bktState.MasteryProbability > 0.7) targetDifficulty = "hard";
+
+            }
+
+
+
+            questions = await db.Questions
+
+                .Include(q => q.Options)
+
+                .Where(q => q.Quiz.TopicId == topicId)
+
+                .OrderBy(q => q.Difficulty == targetDifficulty ? 0 : 1)
+
+                .ThenBy(q => Guid.NewGuid())
+
+                .Take(request.QuestionCount)
+
+                .ToListAsync();
+
+        }
+
+
+
+        if (questions.Count == 0)
+
+            throw new InvalidOperationException("Không có câu hỏi cho chủ đề này");
+
+
+
+        var sessionTopicId = await ResolveSessionTopicIdAsync(request, questions);
+
+        var topic = await db.Topics.FindAsync(sessionTopicId);
+
+        var topicName = topic?.Name
+
+            ?? (request.QuizId.HasValue
+
+                ? await db.Quizzes.Where(q => q.Id == request.QuizId.Value).Select(q => q.Title).FirstOrDefaultAsync()
+
+                : null)
+
+            ?? throw new InvalidOperationException("Topic not found");
+
+
+
+        var bktStateForSession = await db.BktStates
+
+            .FirstOrDefaultAsync(b => b.UserId == userId && b.TopicId == sessionTopicId);
+
+
+
+        var affectedTopicIds = questions
+
+            .Select(ResolveQuestionTopicId)
+
+            .Where(id => id.HasValue)
+
+            .Select(id => id!.Value)
+
+            .Distinct()
+
+            .ToList();
+
+
+
+        var sessionId = Guid.NewGuid();
+
+        var state = new PracticeSessionState
+
+        {
+
+            UserId = userId,
+
+            TopicId = sessionTopicId,
+
+            TopicName = topicName,
+
+            Mode = request.Mode,
+
+            QuizId = request.QuizId,
+
+            Questions = questions.Select(q => q.Id).ToList(),
+
+            AffectedTopicIds = affectedTopicIds,
+
+            CurrentIndex = 0,
+
+            CorrectCount = 0,
+
+            StartTime = DateTime.UtcNow,
+
+            MasteryBefore = bktStateForSession?.MasteryProbability ?? 0.3,
+
+            Answers = []
+
+        };
+
+
+
+        db.PracticeActiveSessions.Add(new PracticeActiveSession
+
+        {
+
+            Id = sessionId,
+
+            UserId = userId,
+
+            StateJson = JsonSerializer.Serialize(state),
+
+            CreatedAt = DateTime.UtcNow,
+
+            ExpiresAt = DateTime.UtcNow.Add(SessionTtl)
+
+        });
+
+        await db.SaveChangesAsync();
+
+
+
+        return new StartPracticeResponse
+
+        {
+
+            SessionId = sessionId.ToString(),
+
+            TopicName = topicName,
+
+            Question = MapQuestionDto(questions[0]),
+
+            QuestionNumber = 1,
+
+            TotalQuestions = questions.Count
+
+        };
+
+    }
+
+
+
+    public async Task<SubmitAnswerResponse> SubmitAnswerAsync(Guid userId, SubmitAnswerRequest request)
+
+    {
+
+        var session = await LoadSessionAsync(userId, request.SessionId);
+
+        var state = DeserializeState(session);
+
+
+
+        var questionId = Guid.Parse(request.QuestionId);
+
+        var question = await db.Questions
+
+            .Include(q => q.Options)
+
+            .Include(q => q.Quiz)
+
+            .FirstOrDefaultAsync(q => q.Id == questionId)
+
+            ?? throw new InvalidOperationException("Question not found");
+
+
+
+        var selectedOptionId = request.SelectedOptionId
+
+            ?? request.SelectedOptionIds?.FirstOrDefault();
+
+
+
+        bool isCorrect;
+
+        string? correctAnswer;
+
+        if (question.Type == "fill_blank")
+
+        {
+
+            isCorrect = string.Equals(question.CorrectAnswer?.Trim(), request.TextAnswer?.Trim(), StringComparison.OrdinalIgnoreCase);
+
+            correctAnswer = question.CorrectAnswer;
+
+        }
+
+        else
+
+        {
+
+            var correctOption = question.Options.FirstOrDefault(o => o.IsCorrect);
+
+            isCorrect = correctOption != null && correctOption.Id.ToString() == selectedOptionId;
+
+            correctAnswer = correctOption?.Text;
+
+        }
+
+
+
+        if (isCorrect) state.CorrectCount++;
+
+        state.CurrentIndex++;
+
+
+
+        var isTestMode = string.Equals(state.Mode, "test", StringComparison.OrdinalIgnoreCase);
+
+
+
+        state.Answers.Add(new PracticeAnswerState
+
+        {
+
+            QuestionId = questionId,
+
+            SelectedOptionId = selectedOptionId,
+
+            TextAnswer = request.TextAnswer,
+
+            IsCorrect = isCorrect
+
+        });
+
+
+
+        UpdateBktResponse? updateResult = null;
+
+        if (!isTestMode)
+
+        {
+
+            var topicId = ResolveQuestionTopicId(question) ?? state.TopicId;
+
+            updateResult = await learningStates.UpdateAfterAnswerAsync(userId, new UpdateBktRequest
+
+            {
+
+                TopicId = topicId,
+
+                QuestionId = questionId,
+
+                IsCorrect = isCorrect,
+
+                ResponseTime = request.ResponseTimeSeconds
+
+            });
+
+        }
+
+
+
+        bool isComplete = state.CurrentIndex >= state.Questions.Count;
+
+        PracticeQuestionDto? nextQuestion = null;
+
+
+
+        if (!isComplete)
+
+        {
+
+            var nextQ = await db.Questions
+
+                .Include(q => q.Options)
+
+                .FirstOrDefaultAsync(q => q.Id == state.Questions[state.CurrentIndex]);
+
+            if (nextQ != null) nextQuestion = MapQuestionDto(nextQ);
+
+            else isComplete = true;
+
+        }
+
+
+
+        await SaveSessionStateAsync(session, state);
+
+
+
+        if (isTestMode)
+
+        {
+
+            return new SubmitAnswerResponse
+
+            {
+
+                FeedbackSuppressed = true,
+
+                NextQuestion = nextQuestion,
+
+                QuestionNumber = isComplete ? state.CurrentIndex : state.CurrentIndex + 1,
+
+                TotalQuestions = state.Questions.Count,
+
+                IsSessionComplete = isComplete
+
+            };
+
+        }
+
+
+
+        return new SubmitAnswerResponse
+
+        {
+
+            IsCorrect = isCorrect,
+
+            CorrectAnswer = correctAnswer,
+
+            Explanation = question.Explanation,
+
+            NextQuestion = nextQuestion,
+
+            QuestionNumber = state.CurrentIndex + 1,
+
+            TotalQuestions = state.Questions.Count,
+
+            IsSessionComplete = isComplete,
+
+            SpacedRepetition = MapSrUpdate(updateResult?.SpacedRepetition)
+
+        };
+
+    }
+
+
+
+    public async Task<PracticeSessionSummary> EndSessionAsync(Guid userId, string sessionId)
+
+    {
+
+        var session = await LoadSessionAsync(userId, sessionId);
+
+        var state = DeserializeState(session);
+
+        db.PracticeActiveSessions.Remove(session);
+
+
+
+        var score = state.CurrentIndex > 0 ? (double)state.CorrectCount / state.CurrentIndex * 100 : 0;
+
+
+
+        var bktAfter = await db.BktStates
+
+            .FirstOrDefaultAsync(b => b.UserId == userId && b.TopicId == state.TopicId);
+
+        var masteryAfter = bktAfter?.MasteryProbability ?? state.MasteryBefore;
+
+
+
+        db.LearningSessions.Add(new LearningSession
+
+        {
+
+            UserId = userId,
+
+            TopicId = state.TopicId,
+
+            StartTime = state.StartTime,
+
+            EndTime = DateTime.UtcNow,
+
+            QuestionsAttempted = state.CurrentIndex,
+
+            CorrectAnswers = state.CorrectCount,
+
+            Score = score
+
+        });
+
+
+
+        var profile = await db.UserProfiles.FirstOrDefaultAsync(p => p.UserId == userId);
+
+        if (profile != null)
+
+        {
+
+            var today = DateTime.UtcNow.Date;
+
+            if (profile.LastActiveDate?.Date == today.AddDays(-1))
+
+                profile.LearningStreak++;
+
+            else if (profile.LastActiveDate?.Date != today)
+
+                profile.LearningStreak = 1;
+
+
+
+            profile.LastActiveDate = DateTime.UtcNow;
+
+            profile.UpdatedAt = DateTime.UtcNow;
+
+        }
+
+
+
+        await db.SaveChangesAsync();
+
+
+
+        var topicsToSync = state.AffectedTopicIds is { Count: > 0 }
+
+            ? state.AffectedTopicIds
+
+            : [state.TopicId];
+
+
+
+        foreach (var topicId in topicsToSync.Distinct())
+
+        {
+
+            var syncTopic = await db.Topics.FindAsync(topicId);
+
+            if (syncTopic?.ClassId is Guid classId)
+
+                await roadmap.SyncAfterLearningAsync(classId, userId, topicId);
+
+        }
+
+
+
+        string? recommendation = null;
+
+        if (score >= 80) recommendation = "Xuất sắc! Bạn có thể chuyển sang chủ đề khó hơn.";
+
+        else if (score < 50) recommendation = "Hãy ôn tập lại chủ đề này trước khi tiếp tục.";
+
+
+
+        var isReview = string.Equals(state.Mode, "review", StringComparison.OrdinalIgnoreCase);
+
+        string? nextReviewSummary = null;
+
+        if (isReview && state.CurrentIndex > 0)
+
+            nextReviewSummary = $"Đã lên lịch lại {state.CurrentIndex} câu theo SM-2";
+
+
+
+        List<QuizReviewItemDto>? reviewItems = null;
+
+        if (string.Equals(state.Mode, "test", StringComparison.OrdinalIgnoreCase) && state.Answers.Count > 0)
+
+        {
+
+            var answerQuestionIds = state.Answers.Select(a => a.QuestionId).ToList();
+
+            var reviewQuestions = await db.Questions
+
+                .Include(q => q.Options)
+
+                .Where(q => answerQuestionIds.Contains(q.Id))
+
+                .ToListAsync();
+
+
+
+            reviewItems = state.Answers.Select(a =>
+
+            {
+
+                var q = reviewQuestions.First(rq => rq.Id == a.QuestionId);
+
+                var correctOpt = q.Options.FirstOrDefault(o => o.IsCorrect);
+
+                return new QuizReviewItemDto
+
+                {
+
+                    QuestionId = q.Id.ToString(),
+
+                    Text = q.Text,
+
+                    Type = q.Type,
+
+                    Options = q.Options.OrderBy(o => o.OrderIndex).Select(o => new PracticeOptionDto
+
+                    {
+
+                        Id = o.Id.ToString(),
+
+                        Text = o.Text
+
+                    }).ToList(),
+
+                    SelectedOptionId = a.SelectedOptionId,
+
+                    CorrectOptionId = correctOpt?.Id.ToString(),
+
+                    CorrectAnswer = correctOpt?.Text ?? q.CorrectAnswer,
+
+                    IsCorrect = a.IsCorrect,
+
+                    Explanation = q.Explanation
+
+                };
+
+            }).ToList();
+
+        }
+
+
+
+        return new PracticeSessionSummary
+
+        {
+
+            SessionId = sessionId,
+
+            TopicName = state.TopicName,
+
+            QuestionsAttempted = state.CurrentIndex,
+
+            CorrectAnswers = state.CorrectCount,
+
+            Score = score,
+
+            MasteryChange = masteryAfter - state.MasteryBefore,
+
+            Recommendation = recommendation,
+
+            ItemsReviewed = isReview ? state.CurrentIndex : 0,
+
+            NextReviewSummary = nextReviewSummary,
+
+            ReviewItems = reviewItems
+
+        };
+
+    }
+
+
+
+    private async Task<Guid> ResolveSessionTopicIdAsync(StartPracticeRequest request, List<Question> questions)
+
+    {
+
+        if (request.TopicId.HasValue && request.TopicId.Value != Guid.Empty)
+
+            return request.TopicId.Value;
+
+
+
+        var fromFirst = questions.Select(ResolveQuestionTopicId).FirstOrDefault(id => id.HasValue);
+
+        if (fromFirst.HasValue)
+
+            return fromFirst.Value;
+
+
+
+        if (request.QuizId.HasValue)
+
+        {
+
+            var quiz = await db.Quizzes.AsNoTracking().FirstOrDefaultAsync(q => q.Id == request.QuizId.Value);
+
+            if (quiz?.TopicId is Guid quizTopicId) return quizTopicId;
+
+            if (quiz?.ClassId is Guid classId)
+
+            {
+
+                var classTopicId = await db.Topics
+
+                    .Where(t => t.ClassId == classId)
+
+                    .OrderBy(t => t.CreatedAt)
+
+                    .Select(t => t.Id)
+
+                    .FirstOrDefaultAsync();
+
+                if (classTopicId != Guid.Empty) return classTopicId;
+
+            }
+
+        }
+
+
+
+        throw new InvalidOperationException("Câu hỏi không thuộc chủ đề hợp lệ");
+
+    }
+
+
+
+    private static Guid? ResolveQuestionTopicId(Question question) =>
+
+        question.SourceTopicId ?? question.Quiz?.TopicId;
+
+
+
+    private static PracticeSrUpdateDto? MapSrUpdate(LearningStates.Models.SrUpdateDto? sr) =>
+
+        sr == null ? null : new PracticeSrUpdateDto
+
+        {
+
+            NextReviewDate = sr.NextReviewDate,
+
+            ReviewInterval = sr.ReviewInterval,
+
+            RepetitionCount = sr.RepetitionCount,
+
+            IntervalChanged = sr.IntervalChanged,
+
+            PreviousInterval = sr.PreviousInterval
+
+        };
+
+
+
+    private async Task<PracticeActiveSession> LoadSessionAsync(Guid userId, string sessionId)
+
+    {
+
+        if (!Guid.TryParse(sessionId, out var id))
+
+            throw new InvalidOperationException("Session not found");
+
+
+
+        var session = await db.PracticeActiveSessions
+
+            .FirstOrDefaultAsync(s => s.Id == id && s.UserId == userId && s.ExpiresAt > DateTime.UtcNow);
+
+
+
+        return session ?? throw new InvalidOperationException("Session not found");
+
+    }
+
+
+
+    private static PracticeSessionState DeserializeState(PracticeActiveSession session) =>
+
+        JsonSerializer.Deserialize<PracticeSessionState>(session.StateJson)
+
+        ?? throw new InvalidOperationException("Invalid session state");
+
+
+
+    private async Task SaveSessionStateAsync(PracticeActiveSession session, PracticeSessionState state)
+
+    {
+
+        session.StateJson = JsonSerializer.Serialize(state);
+
+        session.ExpiresAt = DateTime.UtcNow.Add(SessionTtl);
+
+        await db.SaveChangesAsync();
+
+    }
+
+
+
+    private static PracticeQuestionDto MapQuestionDto(Question q) => new()
+
+    {
+
+        QuestionId = q.Id.ToString(),
+
+        Text = q.Text,
+
+        Type = q.Type,
+
+        Difficulty = q.Difficulty,
+
+        Options = q.Options.OrderBy(o => o.OrderIndex).Select(o => new PracticeOptionDto
+
+        {
+
+            Id = o.Id.ToString(),
+
+            Text = o.Text
+
+        }).ToList()
+
+    };
+
+
+
+    private class PracticeSessionState
+
+    {
+
+        public Guid UserId { get; set; }
+
+        public Guid TopicId { get; set; }
+
+        public string TopicName { get; set; } = "";
+
+        public string Mode { get; set; } = "standard";
+
+        public Guid? QuizId { get; set; }
+
+        public List<Guid> Questions { get; set; } = [];
+
+        public List<Guid> AffectedTopicIds { get; set; } = [];
+
+        public int CurrentIndex { get; set; }
+
+        public int CorrectCount { get; set; }
+
+        public DateTime StartTime { get; set; }
+
+        public double MasteryBefore { get; set; }
+
+        public List<PracticeAnswerState> Answers { get; set; } = [];
+
+    }
+
+
+
+    private class PracticeAnswerState
+
+    {
+
+        public Guid QuestionId { get; set; }
+
+        public string? SelectedOptionId { get; set; }
+
+        public string? TextAnswer { get; set; }
+
+        public bool IsCorrect { get; set; }
+
+    }
+
+}
+
+

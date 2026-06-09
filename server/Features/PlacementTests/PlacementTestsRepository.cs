@@ -2,6 +2,7 @@ using System.Text.Json;
 using EduBoost.API.Features.LearningStates;
 using EduBoost.API.Features.LearningStates.Models;
 using EduBoost.API.Features.PlacementTests.Models;
+using EduBoost.API.Features.PracticeSessions.Models;
 using EduBoost.API.Features.Roadmap;
 using EduBoost.API.Infrastructure;
 using EduBoost.API.Infrastructure.Entities;
@@ -15,6 +16,7 @@ public interface IPlacementTestsRepository
     Task<AnswerPlacementResponse> SubmitAnswerAsync(Guid userId, AnswerPlacementRequest request);
     Task<CompletePlacementResponse> CompleteTestAsync(Guid userId, string sessionId);
     Task<PlacementTestResultDto?> GetResultAsync(Guid userId, Guid? classId = null);
+    Task<List<QuizReviewItemDto>?> GetReviewAsync(Guid userId, Guid resultId);
 }
 
 public class PlacementTestsRepository(AppDbContext db, IRoadmapRepository roadmap, ILearningStatesRepository learningStates) : IPlacementTestsRepository
@@ -107,6 +109,8 @@ public class PlacementTestsRepository(AppDbContext db, IRoadmapRepository roadma
         state.Answers.Add(new PlacementAnswerState
         {
             QuestionId = questionId,
+            SelectedOptionId = selectedOptionId,
+            TextAnswer = request.TextAnswer,
             IsCorrect = isCorrect,
             Difficulty = question.Difficulty,
             TopicId = question.Quiz?.TopicId
@@ -138,7 +142,7 @@ public class PlacementTestsRepository(AppDbContext db, IRoadmapRepository roadma
             await SaveSessionStateAsync(session, state);
             return new AnswerPlacementResponse
             {
-                IsCorrect = isCorrect,
+                FeedbackSuppressed = true,
                 IsComplete = true,
                 NextQuestion = null,
                 QuestionNumber = state.CurrentIndex,
@@ -154,7 +158,7 @@ public class PlacementTestsRepository(AppDbContext db, IRoadmapRepository roadma
             await SaveSessionStateAsync(session, state);
             return new AnswerPlacementResponse
             {
-                IsCorrect = isCorrect,
+                FeedbackSuppressed = true,
                 IsComplete = true,
                 NextQuestion = null,
                 QuestionNumber = state.CurrentIndex,
@@ -165,7 +169,7 @@ public class PlacementTestsRepository(AppDbContext db, IRoadmapRepository roadma
         await SaveSessionStateAsync(session, state);
         return new AnswerPlacementResponse
         {
-            IsCorrect = isCorrect,
+            FeedbackSuppressed = true,
             IsComplete = false,
             NextQuestion = MapQuestionToDto(nextQuestion),
             QuestionNumber = state.CurrentIndex + 1,
@@ -213,6 +217,8 @@ public class PlacementTestsRepository(AppDbContext db, IRoadmapRepository roadma
             Score = ts.Score
         }).ToList();
 
+        var reviewItems = await BuildReviewItemsAsync(state.Answers);
+
         var result = new PlacementTestResult
         {
             UserId = userId,
@@ -220,7 +226,8 @@ public class PlacementTestsRepository(AppDbContext db, IRoadmapRepository roadma
             InitialLevel = level,
             FinalScore = finalScore,
             StrengthsJson = JsonSerializer.Serialize(strengths),
-            WeaknessesJson = JsonSerializer.Serialize(weaknesses)
+            WeaknessesJson = JsonSerializer.Serialize(weaknesses),
+            AnswersJson = JsonSerializer.Serialize(reviewItems)
         };
         db.PlacementTestResults.Add(result);
 
@@ -270,7 +277,8 @@ public class PlacementTestsRepository(AppDbContext db, IRoadmapRepository roadma
             FinalScore = finalScore,
             Strengths = strengths,
             Weaknesses = weaknesses,
-            ClassId = state.ClassId?.ToString()
+            ClassId = state.ClassId?.ToString(),
+            ReviewItems = reviewItems
         };
     }
 
@@ -283,6 +291,8 @@ public class PlacementTestsRepository(AppDbContext db, IRoadmapRepository roadma
         var result = await query.OrderByDescending(r => r.CreatedAt).FirstOrDefaultAsync();
         if (result == null) return null;
 
+        var reviewItems = DeserializeReviewItems(result.AnswersJson);
+
         return new PlacementTestResultDto
         {
             Id = result.Id.ToString(),
@@ -291,9 +301,54 @@ public class PlacementTestsRepository(AppDbContext db, IRoadmapRepository roadma
             FinalScore = result.FinalScore,
             Strengths = string.IsNullOrEmpty(result.StrengthsJson) ? [] : JsonSerializer.Deserialize<List<TopicStrengthDto>>(result.StrengthsJson) ?? [],
             Weaknesses = string.IsNullOrEmpty(result.WeaknessesJson) ? [] : JsonSerializer.Deserialize<List<TopicStrengthDto>>(result.WeaknessesJson) ?? [],
-            CreatedAt = result.CreatedAt.ToString("yyyy-MM-dd HH:mm:ss")
+            CreatedAt = result.CreatedAt.ToString("yyyy-MM-dd HH:mm:ss"),
+            ReviewItems = reviewItems
         };
     }
+
+    public async Task<List<QuizReviewItemDto>?> GetReviewAsync(Guid userId, Guid resultId)
+    {
+        var result = await db.PlacementTestResults
+            .FirstOrDefaultAsync(r => r.Id == resultId && r.UserId == userId);
+        if (result == null) return null;
+        return DeserializeReviewItems(result.AnswersJson);
+    }
+
+    private async Task<List<QuizReviewItemDto>> BuildReviewItemsAsync(List<PlacementAnswerState> answers)
+    {
+        if (answers.Count == 0) return [];
+
+        var questionIds = answers.Select(a => a.QuestionId).ToList();
+        var questions = await db.Questions
+            .Include(q => q.Options)
+            .Where(q => questionIds.Contains(q.Id))
+            .ToListAsync();
+
+        return answers.Select(a =>
+        {
+            var q = questions.First(rq => rq.Id == a.QuestionId);
+            var correctOpt = q.Options.FirstOrDefault(o => o.IsCorrect);
+            return new QuizReviewItemDto
+            {
+                QuestionId = q.Id.ToString(),
+                Text = q.Text,
+                Type = q.Type,
+                Options = q.Options.OrderBy(o => o.OrderIndex).Select(o => new PracticeOptionDto
+                {
+                    Id = o.Id.ToString(),
+                    Text = o.Text
+                }).ToList(),
+                SelectedOptionId = a.SelectedOptionId,
+                CorrectOptionId = correctOpt?.Id.ToString(),
+                CorrectAnswer = correctOpt?.Text ?? q.CorrectAnswer,
+                IsCorrect = a.IsCorrect,
+                Explanation = q.Explanation
+            };
+        }).ToList();
+    }
+
+    private static List<QuizReviewItemDto>? DeserializeReviewItems(string? json) =>
+        string.IsNullOrEmpty(json) ? null : JsonSerializer.Deserialize<List<QuizReviewItemDto>>(json);
 
     private async Task<List<Question>> LoadQuestionPoolAsync(Guid? classId)
     {
@@ -430,6 +485,8 @@ public class PlacementTestsRepository(AppDbContext db, IRoadmapRepository roadma
     private class PlacementAnswerState
     {
         public Guid QuestionId { get; set; }
+        public string? SelectedOptionId { get; set; }
+        public string? TextAnswer { get; set; }
         public bool IsCorrect { get; set; }
         public string Difficulty { get; set; } = "";
         public Guid? TopicId { get; set; }
