@@ -5,7 +5,8 @@ import type {
   GeneratePoolQuizRequest, 
   TopicPoolDto, 
   PoolQuizDetailDto, 
-  CreateTestFromPoolRequest, 
+  CreateTestFromPoolRequest,
+  CreateEntryTestFromPoolRequest,
   CreateRevisionSetFromPoolRequest 
 } from '@/types';
 
@@ -51,6 +52,11 @@ export const poolService = {
     return res.data.data!;
   },
 
+  createEntryTestFromPool: async (payload: CreateEntryTestFromPoolRequest): Promise<QuizDto> => {
+    const res = await apiClient.post<ApiResponse<QuizDto>>('/pool/create-entry-test', payload);
+    return res.data.data!;
+  },
+
   /**
    * Student: Tạo bộ ôn tập cá nhân bằng cách tổng hợp các câu hỏi trong Pool
    */
@@ -61,6 +67,14 @@ export const poolService = {
 
   getRevisionSets: async (): Promise<QuizDto[]> => {
     const res = await apiClient.get<ApiResponse<QuizDto[]>>('/pool/revision-sets');
+    return res.data.data!;
+  },
+
+  /**
+   * Đổi tên chủ đề trong Pool (chủ sở hữu hoặc giáo viên sở hữu lớp)
+   */
+  renamePoolTopic: async (topicId: string, name: string): Promise<TopicPoolDto> => {
+    const res = await apiClient.patch<ApiResponse<TopicPoolDto>>(`/pool/topics/${topicId}/rename`, { name });
     return res.data.data!;
   },
 };

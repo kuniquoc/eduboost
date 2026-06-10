@@ -27,6 +27,10 @@ export const classesService = {
     await apiClient.delete(`/classes/${id}`);
   },
 
+  setActiveEntryTest: async (classId: string, quizId: string): Promise<void> => {
+    await apiClient.put(`/classes/${classId}/active-entry-test`, { quizId });
+  },
+
   getStudents: async (classId: string, search?: string): Promise<StudentEnrollmentDto[]> => {
     const res = await apiClient.get<ApiResponse<StudentEnrollmentDto[]>>(`/classes/${classId}/students`, { params: { search } });
     return res.data.data!;

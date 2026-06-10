@@ -1,17 +1,53 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useClassQuizzes } from '@/hooks/use-class-quizzes';
+import { classesService } from '@/services/classes.service';
+import { quizzesService } from '@/services/quizzes.service';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { FileQuestion, PenLine, Eye, type LucideIcon } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import {
+  Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter,
+} from '@/components/ui/dialog';
+import { FileQuestion, PenLine, Eye, Trash2, Star, type LucideIcon } from 'lucide-react';
+import { toast } from 'sonner';
 
 const typeLabels: Record<string, { label: string; icon: LucideIcon }> = {
   entry_test: { label: 'Test đầu vào', icon: FileQuestion },
   practice:   { label: 'Luyện tập', icon: PenLine },
 };
 
-export function QuizzesTab({ classId }: { classId: string }) {
+interface QuizzesTabProps {
+  classId: string;
+  activeEntryTestId?: string;
+}
+
+export function QuizzesTab({ classId, activeEntryTestId }: QuizzesTabProps) {
+  const queryClient = useQueryClient();
   const { data: quizzes, isLoading } = useClassQuizzes(classId);
+
+  const [deleteQuizId, setDeleteQuizId] = useState<string | null>(null);
+
+  const setActiveMutation = useMutation({
+    mutationFn: (quizId: string) => classesService.setActiveEntryTest(classId, quizId),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['class-detail', classId] });
+      toast.success('Đã đặt bài test đầu vào active');
+    },
+    onError: () => toast.error('Đặt active thất bại'),
+  });
+
+  const deleteQuizMutation = useMutation({
+    mutationFn: (quizId: string) => quizzesService.deleteQuiz(quizId),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['class-quizzes', classId] });
+      queryClient.invalidateQueries({ queryKey: ['class-detail', classId] });
+      toast.success('Đã xoá bài test');
+      setDeleteQuizId(null);
+    },
+    onError: () => toast.error('Xoá thất bại'),
+  });
 
   if (isLoading) {
     return (
@@ -29,52 +65,89 @@ export function QuizzesTab({ classId }: { classId: string }) {
         <FileQuestion className="mb-4 h-12 w-12 text-muted-foreground/50" />
         <p className="text-lg font-medium text-foreground">Chưa có quiz</p>
         <p className="mt-1 text-sm text-muted-foreground">
-          Tạo quiz thủ công hoặc upload tài liệu để AI tạo quiz
+          Tạo chủ đề + AI sinh câu hỏi, upload tài liệu, hoặc tạo quiz thủ công
         </p>
       </div>
     );
   }
 
-  // Separate entry test from practice quizzes
-  const entryTest = quizzes.find((q) => q.type === 'entry_test');
+  const entryTests = quizzes.filter((q) => q.type === 'entry_test');
   const practiceQuizzes = quizzes.filter((q) => q.type !== 'entry_test');
+  const quizToDelete = quizzes.find((q) => q.id === deleteQuizId);
 
   return (
-    <div className="space-y-4">
-      {/* Entry test section */}
-      {entryTest && (
+    <div className="space-y-6">
+      {/* Entry tests section */}
+      {entryTests.length > 0 && (
         <div>
-          <h3 className="mb-2 text-sm font-semibold text-muted-foreground uppercase tracking-wide">Bài test đầu vào</h3>
-          <Card className="border-primary/30 bg-primary/5">
-            <CardContent className="flex items-center justify-between p-4">
-              <div className="flex items-center gap-3 min-w-0">
-                <FileQuestion className="h-5 w-5 shrink-0 text-primary" />
-                <div className="min-w-0">
-                  <p className="truncate font-medium text-foreground">{entryTest.title}</p>
-                  <p className="text-xs text-muted-foreground">
-                    {entryTest.questionCount} câu hỏi · {new Date(entryTest.createdAt).toLocaleDateString('vi-VN')}
-                  </p>
-                </div>
-              </div>
-              <div className="flex items-center gap-2 shrink-0">
-                <Badge variant={entryTest.isPublished ? 'default' : 'outline'}>
-                  {entryTest.isPublished ? 'Đã publish' : 'Nháp'}
-                </Badge>
-                <Link to={`/teacher/ai-studio/${entryTest.id}`}>
-                  <Button variant="outline" size="sm">
-                    <Eye className="h-3.5 w-3.5" /> Xem & Sửa
-                  </Button>
-                </Link>
-              </div>
-            </CardContent>
-          </Card>
+          <h3 className="mb-2 text-sm font-semibold text-muted-foreground uppercase tracking-wide">
+            Bài test đầu vào ({entryTests.length})
+          </h3>
+          <div className="space-y-2">
+            {entryTests.map((quiz) => {
+              const isActive = quiz.id === activeEntryTestId;
+              return (
+                <Card
+                  key={quiz.id}
+                  className={isActive ? 'border-primary/40 bg-primary/5' : 'border-border'}
+                >
+                  <CardContent className="flex items-center justify-between p-4">
+                    <div className="flex items-center gap-3 min-w-0">
+                      <FileQuestion className={`h-5 w-5 shrink-0 ${isActive ? 'text-primary' : 'text-muted-foreground'}`} />
+                      <div className="min-w-0">
+                        <p className="truncate font-medium text-foreground">{quiz.title}</p>
+                        <p className="text-xs text-muted-foreground">
+                          {quiz.questionCount} câu hỏi · {new Date(quiz.createdAt).toLocaleDateString('vi-VN')}
+                        </p>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-2 shrink-0">
+                      {isActive && (
+                        <Badge className="bg-primary/20 text-primary border-primary/30 gap-1">
+                          <Star className="h-3 w-3 fill-current" /> Active
+                        </Badge>
+                      )}
+                      <Badge variant={quiz.isPublished ? 'default' : 'outline'}>
+                        {quiz.isPublished ? 'Đã publish' : 'Nháp'}
+                      </Badge>
+                      {!isActive && (
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          onClick={() => setActiveMutation.mutate(quiz.id)}
+                          disabled={setActiveMutation.isPending}
+                        >
+                          <Star className="h-3.5 w-3.5" /> Đặt active
+                        </Button>
+                      )}
+                      <Link to={`/teacher/ai-studio/${quiz.id}`}>
+                        <Button variant="outline" size="sm">
+                          <Eye className="h-3.5 w-3.5" /> Xem & Sửa
+                        </Button>
+                      </Link>
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        className="text-destructive hover:bg-destructive/10 hover:text-destructive border-destructive/30"
+                        onClick={() => setDeleteQuizId(quiz.id)}
+                      >
+                        <Trash2 className="h-3.5 w-3.5" />
+                      </Button>
+                    </div>
+                  </CardContent>
+                </Card>
+              );
+            })}
+          </div>
         </div>
       )}
 
       {/* Practice quizzes */}
       {practiceQuizzes.length > 0 && (
         <div>
-          {entryTest && <h3 className="mb-2 text-sm font-semibold text-muted-foreground uppercase tracking-wide">Quiz luyện tập</h3>}
+          {entryTests.length > 0 && (
+            <h3 className="mb-2 text-sm font-semibold text-muted-foreground uppercase tracking-wide">Quiz luyện tập</h3>
+          )}
           <div className="space-y-2">
             {practiceQuizzes.map((quiz) => {
               const typeInfo = typeLabels[quiz.type] ?? typeLabels.practice;
@@ -108,6 +181,33 @@ export function QuizzesTab({ classId }: { classId: string }) {
           </div>
         </div>
       )}
+
+      {/* Delete confirmation dialog */}
+      <Dialog open={!!deleteQuizId} onOpenChange={(open) => { if (!open) setDeleteQuizId(null); }}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Xoá bài test đầu vào?</DialogTitle>
+            <DialogDescription>
+              Bài test <span className="font-medium">"{quizToDelete?.title}"</span> sẽ bị xoá vĩnh viễn cùng tất cả câu hỏi.
+              {quizToDelete?.id === activeEntryTestId && (
+                <span className="block mt-1 text-amber-500 font-medium">
+                  Đây là bài test đang active. Sau khi xoá, lớp học sẽ không có bài test active.
+                </span>
+              )}
+            </DialogDescription>
+          </DialogHeader>
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setDeleteQuizId(null)}>Huỷ</Button>
+            <Button
+              variant="destructive"
+              onClick={() => deleteQuizId && deleteQuizMutation.mutate(deleteQuizId)}
+              disabled={deleteQuizMutation.isPending}
+            >
+              {deleteQuizMutation.isPending ? 'Đang xoá...' : 'Xoá'}
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }

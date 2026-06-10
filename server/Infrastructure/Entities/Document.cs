@@ -18,6 +18,10 @@ public class Document
     public DateTime UploadedAt { get; set; } = DateTime.UtcNow;
 
     // FK
+    /// <summary>Giáo viên publish tài liệu này cho học sinh xem</summary>
+    public bool IsVisible { get; set; } = false;
+
+    // FK
     public Guid OwnerId { get; set; }
     public Guid? ClassId { get; set; }
     public Guid? TopicId { get; set; }

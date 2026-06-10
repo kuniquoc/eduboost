@@ -18,7 +18,13 @@ public class ClassDto
 
 public class ClassDetailDto : ClassDto
 {
+    public string? ActiveEntryTestId { get; set; }
     public List<TopicSummaryDto> Topics { get; set; } = [];
+}
+
+public class SetActiveEntryTestRequest
+{
+    [Required] public string QuizId { get; set; } = "";
 }
 
 public class TopicSummaryDto

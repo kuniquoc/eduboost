@@ -12,11 +12,26 @@ public class PoolRepository(AppDbContext db, IStorageService storage, IAgentServ
 {
     public async Task<QuizDto?> GeneratePoolQuizAsync(Guid userId, string userRole, GeneratePoolQuizRequest request)
     {
-        // 1. Find or create Topic by Name
+        // 1. Resolve Topic — by ID (preferred) or find/create by name
         Topic? topic = null;
         Guid? classGuid = string.IsNullOrEmpty(request.ClassId) ? null : Guid.Parse(request.ClassId);
+        var difficulty = request.Difficulty;
 
-        if (userRole == "student")
+        if (!string.IsNullOrEmpty(request.TopicId))
+        {
+            var topicGuid = Guid.Parse(request.TopicId);
+            topic = await db.Topics.FindAsync(topicGuid);
+            if (topic == null) return null;
+
+            if (!classGuid.HasValue && topic.ClassId.HasValue)
+                classGuid = topic.ClassId;
+
+            request.TopicName = topic.Name;
+            if (string.IsNullOrWhiteSpace(difficulty))
+                difficulty = topic.Difficulty;
+        }
+
+        if (topic == null && userRole == "student")
         {
             // Students can only create private topics
             topic = await db.Topics.FirstOrDefaultAsync(t => t.Name == request.TopicName && t.OwnerId == userId && t.ClassId == null);
@@ -38,7 +53,7 @@ public class PoolRepository(AppDbContext db, IStorageService storage, IAgentServ
                 await db.SaveChangesAsync();
             }
         }
-        else // teacher
+        else if (topic == null) // teacher — find or create by name
         {
             if (classGuid.HasValue)
             {
@@ -100,18 +115,43 @@ public class PoolRepository(AppDbContext db, IStorageService storage, IAgentServ
         }
 
         // 3. Request Batch Quiz Questions from AI agent
-        var existingPoolQuestions = await db.Questions
-            .Where(q => q.Quiz.TopicId == topic.Id && q.Quiz.Type == "pool")
-            .OrderByDescending(q => q.OrderIndex)
-            .Select(q => q.Text)
-            .Where(t => !string.IsNullOrWhiteSpace(t))
-            .Distinct()
-            .Take(150)
-            .ToListAsync();
+        // Replace mode: delete all owner's pool quizzes in this topic first
+        if (request.Mode == "replace")
+        {
+            var oldQuizzes = await db.Quizzes
+                .Where(q => q.TopicId == topic.Id && q.Type == "pool" && q.OwnerId == userId)
+                .ToListAsync();
+            if (oldQuizzes.Count > 0)
+            {
+                db.Quizzes.RemoveRange(oldQuizzes);
+                await db.SaveChangesAsync();
+            }
+        }
+
+        var existingPoolQuestions = new List<string>();
+        if (request.Mode != "replace")
+        {
+            existingPoolQuestions = await db.Questions
+                .Where(q => q.Quiz.TopicId == topic.Id && q.Quiz.Type == "pool")
+                .OrderByDescending(q => q.OrderIndex)
+                .Select(q => q.Text)
+                .Where(t => !string.IsNullOrWhiteSpace(t))
+                .Distinct()
+                .Take(150)
+                .ToListAsync();
+        }
+
+        // When per-difficulty counts are set, use "mixed" difficulty
+        var hasPerDifficultyCounts = (request.NumEasyQuestions ?? 0) + (request.NumMediumQuestions ?? 0) + (request.NumHardQuestions ?? 0) > 0;
+        if (hasPerDifficultyCounts) difficulty = "mixed";
 
         var aiResponse = await agent.GenerateQuizBatchAsync(
-            topic.Name, request.UserSuggestion, downloadUrl, request.NumQuestions, request.Difficulty,
-            documentId: request.DocumentId, existingQuestions: existingPoolQuestions);
+            topic.Name, request.UserSuggestion, downloadUrl, request.NumQuestions, difficulty,
+            numEasy: request.NumEasyQuestions ?? 0,
+            numMedium: request.NumMediumQuestions ?? 0,
+            numHard: request.NumHardQuestions ?? 0,
+            documentId: request.DocumentId,
+            existingQuestions: existingPoolQuestions);
 
         if (aiResponse == null || aiResponse.Questions.Count == 0)
         {
@@ -228,6 +268,18 @@ public class PoolRepository(AppDbContext db, IStorageService storage, IAgentServ
         }).ToList();
     }
 
+    public async Task<List<Guid>> GetPoolQuizIdsForQuestionsAsync(IEnumerable<Guid> questionIds)
+    {
+        var ids = questionIds.ToList();
+        if (ids.Count == 0) return [];
+
+        return await db.Questions
+            .Where(q => ids.Contains(q.Id) && q.Quiz.Type == "pool")
+            .Select(q => q.QuizId)
+            .Distinct()
+            .ToListAsync();
+    }
+
     public async Task<List<PoolQuizDetailDto>> GetQuizzesInTopicPoolAsync(Guid userId, Guid topicId)
     {
         var quizzes = await db.Quizzes
@@ -246,10 +298,10 @@ public class PoolRepository(AppDbContext db, IStorageService storage, IAgentServ
         }).ToList();
     }
 
-    public async Task<bool> DeletePoolQuizAsync(Guid userId, Guid quizId)
+    public async Task<DeletePoolQuizResult> DeletePoolQuizAsync(Guid userId, Guid quizId)
     {
         var quiz = await db.Quizzes.FindAsync(quizId);
-        if (quiz == null) return false;
+        if (quiz == null) return DeletePoolQuizResult.NotFound;
 
         // Check ownership (either OwnerId matches or teacher of the class)
         bool isOwner = quiz.OwnerId == userId;
@@ -259,11 +311,11 @@ public class PoolRepository(AppDbContext db, IStorageService storage, IAgentServ
             isOwner = cls != null && cls.TeacherId == userId;
         }
 
-        if (!isOwner) return false;
+        if (!isOwner) return DeletePoolQuizResult.Forbidden;
 
         db.Quizzes.Remove(quiz);
         await db.SaveChangesAsync();
-        return true;
+        return DeletePoolQuizResult.Success;
     }
 
     public async Task<QuizDto> CreateTestFromPoolAsync(Guid userId, CreateTestFromPoolRequest request)
@@ -275,6 +327,7 @@ public class PoolRepository(AppDbContext db, IStorageService storage, IAgentServ
         var poolQuestions = await db.Questions
             .Where(q => poolQuizGuids.Contains(q.QuizId) && q.Quiz.Type == "pool")
             .Include(q => q.Options)
+            .Include(q => q.Quiz)
             .ToListAsync();
 
         // Create new quiz for the test
@@ -287,24 +340,7 @@ public class PoolRepository(AppDbContext db, IStorageService storage, IAgentServ
             CreatedAt = DateTime.UtcNow,
             ClassId = classGuid,
             OwnerId = userId,
-            Questions = poolQuestions.Select((q, qidx) => new Question
-            {
-                Id = Guid.NewGuid(),
-                Text = q.Text,
-                Type = q.Type,
-                Difficulty = q.Difficulty,
-                Explanation = q.Explanation,
-                CorrectAnswer = q.CorrectAnswer,
-                VerifiedByTeacher = true, // already verified by picking
-                OrderIndex = qidx,
-                Options = q.Options.Select((o, oidx) => new QuizOption
-                {
-                    Id = Guid.NewGuid(),
-                    Text = o.Text,
-                    IsCorrect = o.IsCorrect,
-                    OrderIndex = oidx
-                }).ToList()
-            }).ToList()
+            Questions = poolQuestions.Select((q, qidx) => CopyPoolQuestion(q, qidx, verifiedByTeacher: true)).ToList()
         };
 
         db.Quizzes.Add(quiz);
@@ -315,6 +351,50 @@ public class PoolRepository(AppDbContext db, IStorageService storage, IAgentServ
             Id = quiz.Id.ToString(),
             ClassId = quiz.ClassId?.ToString() ?? "",
             TopicId = quiz.TopicId?.ToString(),
+            Title = quiz.Title,
+            Type = quiz.Type,
+            IsPublished = quiz.IsPublished,
+            QuestionCount = quiz.Questions.Count,
+            CreatedAt = quiz.CreatedAt.ToString("o")
+        };
+    }
+
+    public async Task<QuizDto?> CreateEntryTestFromPoolAsync(Guid userId, CreateEntryTestFromPoolRequest request)
+    {
+        var classGuid = Guid.Parse(request.ClassId);
+
+        var poolQuestions = await LoadPoolQuestionsForSelectionAsync(request);
+        if (poolQuestions.Count == 0)
+            throw new InvalidOperationException("Không có câu hỏi nào được chọn từ pool");
+
+        var cls = await db.Classes.FindAsync(classGuid);
+        var quiz = new Quiz
+        {
+            Id = Guid.NewGuid(),
+            Title = string.IsNullOrWhiteSpace(request.Title)
+                ? $"Bài test đầu vào — {cls?.Name ?? "Lớp học"}"
+                : request.Title.Trim(),
+            Type = "entry_test",
+            IsPublished = false,
+            CreatedAt = DateTime.UtcNow,
+            ClassId = classGuid,
+            OwnerId = userId,
+            Questions = poolQuestions.Select((q, qidx) => CopyPoolQuestion(q, qidx, verifiedByTeacher: true)).ToList()
+        };
+
+        db.Quizzes.Add(quiz);
+
+        // Auto-set as active entry test if the class has none yet
+        if (cls != null && cls.ActiveEntryTestId == null)
+            cls.ActiveEntryTestId = quiz.Id;
+
+        await db.SaveChangesAsync();
+
+        return new QuizDto
+        {
+            Id = quiz.Id.ToString(),
+            ClassId = classGuid.ToString(),
+            TopicId = null,
             Title = quiz.Title,
             Type = quiz.Type,
             IsPublished = quiz.IsPublished,
@@ -342,25 +422,7 @@ public class PoolRepository(AppDbContext db, IStorageService storage, IAgentServ
             IsPublished = true, // instantly ready for practice
             CreatedAt = DateTime.UtcNow,
             OwnerId = userId,
-            Questions = poolQuestions.Select((q, qidx) => new Question
-            {
-                Id = Guid.NewGuid(),
-                Text = q.Text,
-                Type = q.Type,
-                Difficulty = q.Difficulty,
-                Explanation = q.Explanation,
-                CorrectAnswer = q.CorrectAnswer,
-                VerifiedByTeacher = false,
-                OrderIndex = qidx,
-                SourceTopicId = q.Quiz?.TopicId,
-                Options = q.Options.Select((o, oidx) => new QuizOption
-                {
-                    Id = Guid.NewGuid(),
-                    Text = o.Text,
-                    IsCorrect = o.IsCorrect,
-                    OrderIndex = oidx
-                }).ToList()
-            }).ToList()
+            Questions = poolQuestions.Select((q, qidx) => CopyPoolQuestion(q, qidx, verifiedByTeacher: false)).ToList()
         };
 
         db.Quizzes.Add(quiz);
@@ -398,7 +460,102 @@ public class PoolRepository(AppDbContext db, IStorageService storage, IAgentServ
             .ToListAsync();
     }
 
-    // ── Helper ──────────────────────────────────────────────────────────────
+    // ── Helpers ─────────────────────────────────────────────────────────────
+
+    private async Task<List<Question>> LoadPoolQuestionsForSelectionAsync(CreateEntryTestFromPoolRequest request)
+    {
+        var result = new List<Question>();
+        var seen = new HashSet<Guid>();
+
+        if (request.QuestionIds.Count > 0)
+        {
+            var questionGuids = request.QuestionIds.Select(Guid.Parse).ToList();
+            var byId = await db.Questions
+                .Where(q => questionGuids.Contains(q.Id) && q.Quiz.Type == "pool")
+                .Include(q => q.Options)
+                .Include(q => q.Quiz)
+                .ToDictionaryAsync(q => q.Id);
+
+            foreach (var id in questionGuids)
+            {
+                if (byId.TryGetValue(id, out var q) && seen.Add(q.Id))
+                    result.Add(q);
+            }
+        }
+
+        if (request.PoolQuizIds.Count > 0)
+        {
+            var poolQuizGuids = request.PoolQuizIds.Select(Guid.Parse).ToList();
+            var batchQuestions = await db.Questions
+                .Where(q => poolQuizGuids.Contains(q.QuizId) && q.Quiz.Type == "pool")
+                .Include(q => q.Options)
+                .Include(q => q.Quiz)
+                .OrderBy(q => q.OrderIndex)
+                .ToListAsync();
+
+            foreach (var q in batchQuestions)
+            {
+                if (seen.Add(q.Id))
+                    result.Add(q);
+            }
+        }
+
+        return result;
+    }
+
+    private static Question CopyPoolQuestion(Question q, int orderIndex, bool verifiedByTeacher) => new()
+    {
+        Id = Guid.NewGuid(),
+        Text = q.Text,
+        Type = q.Type,
+        Difficulty = q.Difficulty,
+        Explanation = q.Explanation,
+        CorrectAnswer = q.CorrectAnswer,
+        VerifiedByTeacher = verifiedByTeacher,
+        OrderIndex = orderIndex,
+        SourceTopicId = q.Quiz?.TopicId,
+        Options = q.Options.Select((o, oidx) => new QuizOption
+        {
+            Id = Guid.NewGuid(),
+            Text = o.Text,
+            IsCorrect = o.IsCorrect,
+            OrderIndex = oidx
+        }).ToList()
+    };
+
+    public async Task<TopicPoolDto?> RenameTopicAsync(Guid userId, string userRole, Guid topicId, string newName)
+    {
+        var topic = await db.Topics.FindAsync(topicId);
+        if (topic == null) return null;
+
+        // Authorization: private topic — must be owner; class-linked topic — teacher must own the class
+        if (topic.ClassId.HasValue)
+        {
+            if (userRole != "teacher") return null;
+            var classOwned = await db.Classes.AnyAsync(c => c.Id == topic.ClassId.Value && c.TeacherId == userId);
+            if (!classOwned) return null;
+        }
+        else
+        {
+            if (topic.OwnerId != userId) return null;
+        }
+
+        topic.Name = newName.Trim();
+        await db.SaveChangesAsync();
+
+        return new TopicPoolDto
+        {
+            Id = topic.Id.ToString(),
+            Name = topic.Name,
+            Description = topic.Description,
+            Difficulty = topic.Difficulty,
+            ClassId = topic.ClassId?.ToString(),
+            OwnerId = topic.OwnerId?.ToString(),
+            QuizCount = await db.Quizzes.CountAsync(q => q.TopicId == topic.Id && q.Type == "pool"),
+            QuestionCount = await db.Questions.CountAsync(q => q.Quiz.TopicId == topic.Id && q.Quiz.Type == "pool")
+        };
+    }
+
     private static QuestionDto MapToDto(Question q) => new()
     {
         Id = q.Id.ToString(),

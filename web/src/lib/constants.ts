@@ -34,3 +34,16 @@ export const ROUTES = {
 export function placementTestPath(classId: string): string {
   return `/student/placement-test/${classId}`;
 }
+
+/** Deep-link to teacher Quiz Pool AI generation tab */
+export function teacherQuizPoolGeneratePath(params?: {
+  classId?: string;
+  topicId?: string;
+  documentId?: string;
+}): string {
+  const search = new URLSearchParams({ tab: 'generate' });
+  if (params?.classId) search.set('classId', params.classId);
+  if (params?.topicId) search.set('topicId', params.topicId);
+  if (params?.documentId) search.set('documentId', params.documentId);
+  return `${ROUTES.TEACHER_QUIZ_POOL}?${search.toString()}`;
+}

@@ -21,21 +21,13 @@ import { Separator } from '@/components/ui/separator';
 import {
   Sparkles, Search, Trash2, BookOpen, Upload, CheckCircle2,
   ChevronDown, ChevronUp, Loader2, Library, ArrowRight,
-  Trophy, HelpCircle, Play, Eye
+  Trophy, HelpCircle, Play, Eye, Pencil, Check, X
 } from 'lucide-react';
 import { toast } from 'sonner';
 import { cn } from '@/lib/utils';
 import type { TopicPoolDto, PoolQuizDetailDto } from '@/types';
 
 type GenerationDifficulty = 'easy' | 'medium' | 'hard';
-
-interface GenerateQuizPayload {
-  topicName: string;
-  userSuggestion?: string;
-  documentId?: string;
-  numQuestions: number;
-  difficulty: GenerationDifficulty;
-}
 
 interface CreateRevisionPayload {
   title: string;
@@ -66,13 +58,21 @@ export function StudentPoolDashboard() {
 
   // Generate states
   const [topicName, setTopicName] = useState('');
-  const [generationType, setGenerationType] = useState<'manual' | 'document'>('manual');
   const [userSuggestion, setUserSuggestion] = useState('');
   const [selectedDocId, setSelectedDocId] = useState<string>('');
   const [numQuestions, setNumQuestions] = useState(5);
   const [difficulty, setDifficulty] = useState<GenerationDifficulty>('medium');
+  const [isAdvanced, setIsAdvanced] = useState(false);
+  const [easyCount, setEasyCount] = useState(0);
+  const [mediumCount, setMediumCount] = useState(5);
+  const [hardCount, setHardCount] = useState(0);
+  const [genMode, setGenMode] = useState<'append' | 'replace'>('append');
   const [uploadingFile, setUploadingFile] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
+
+  // Inline topic rename states
+  const [renamingTopicId, setRenamingTopicId] = useState<string | null>(null);
+  const [renameValue, setRenameValue] = useState('');
 
   // Progressive steps during AI generation
   const [generatingStep, setGeneratingStep] = useState(0);
@@ -122,9 +122,25 @@ export function StudentPoolDashboard() {
     }
   };
 
+  // Rename topic mutation
+  const renameMutation = useMutation({
+    mutationFn: ({ topicId, name }: { topicId: string; name: string }) =>
+      poolService.renamePoolTopic(topicId, name),
+    onSuccess: (updated) => {
+      queryClient.invalidateQueries({ queryKey: ['student-pool-topics'] });
+      if (selectedTopic?.id === updated.id) setSelectedTopic(updated);
+      setRenamingTopicId(null);
+      toast.success('Đã đổi tên chủ đề thành công');
+    },
+    onError: (err: any) => {
+      toast.error('Đổi tên thất bại: ' + (err.response?.data?.message || err.message));
+    }
+  });
+
   // AI Quiz Generation mutation
   const generateMutation = useMutation({
-    mutationFn: (payload: GenerateQuizPayload) => poolService.generatePoolQuiz(payload),
+    mutationFn: (payload: Parameters<typeof poolService.generatePoolQuiz>[0]) =>
+      poolService.generatePoolQuiz(payload),
     onSuccess: (quiz) => {
       setShowGenOverlay(false);
       setGeneratingStep(0);
@@ -150,12 +166,8 @@ export function StudentPoolDashboard() {
       toast.error('Vui lòng nhập tên chủ đề');
       return;
     }
-    if (generationType === 'manual' && !userSuggestion.trim()) {
-      toast.error('Vui lòng nhập nội dung muốn ôn tập');
-      return;
-    }
-    if (generationType === 'document' && !selectedDocId) {
-      toast.error('Vui lòng chọn tài liệu học tập');
+    if (!userSuggestion.trim() && !selectedDocId) {
+      toast.error('Vui lòng nhập nội dung muốn ôn tập hoặc chọn tài liệu học tập');
       return;
     }
 
@@ -171,12 +183,18 @@ export function StudentPoolDashboard() {
       });
     }, 4500);
 
+    const totalAdvanced = easyCount + mediumCount + hardCount;
+    const trimmedSuggestion = userSuggestion.trim();
     generateMutation.mutate({
       topicName: topicName.trim(),
-      userSuggestion: generationType === 'manual' ? userSuggestion.trim() : undefined,
-      documentId: generationType === 'document' ? selectedDocId : undefined,
-      numQuestions,
-      difficulty
+      userSuggestion: trimmedSuggestion || undefined,
+      documentId: selectedDocId || undefined,
+      numQuestions: isAdvanced ? totalAdvanced : numQuestions,
+      difficulty: isAdvanced ? 'mixed' : difficulty,
+      mode: genMode,
+      numEasyQuestions: isAdvanced ? easyCount : undefined,
+      numMediumQuestions: isAdvanced ? mediumCount : undefined,
+      numHardQuestions: isAdvanced ? hardCount : undefined,
     });
   };
 
@@ -369,34 +387,84 @@ export function StudentPoolDashboard() {
                   </div>
                 ) : (
                   <div className="space-y-1.5 max-h-[55vh] overflow-y-auto pr-1">
-                    {topics.map((t) => (
-                      <div
-                        key={t.id}
-                        onClick={() => setSelectedTopic(t)}
-                        className={cn(
-                          'group cursor-pointer rounded-xl p-3 border transition-all duration-300',
-                          selectedTopic?.id === t.id
-                            ? 'bg-gradient-to-br from-indigo-500/10 via-violet-500/5 to-transparent border-indigo-500/50 shadow-md shadow-indigo-500/5'
-                            : 'border-border/40 hover:bg-muted/40 hover:border-border'
-                        )}
-                      >
-                        <div className="flex justify-between items-start gap-2">
-                          <span className="font-semibold text-sm group-hover:text-indigo-400 transition-colors">
-                            {t.name}
-                          </span>
-                          <Badge variant="outline" className="text-[10px] py-0 px-1 border-indigo-500/20 text-indigo-300">
-                            {t.difficulty === 'easy' ? 'Dễ' : t.difficulty === 'medium' ? 'TB' : 'Khó'}
-                          </Badge>
+                    {topics.map((t) => {
+                      const isRenaming = renamingTopicId === t.id;
+                      const canRename = !t.classId; // private topics only for students
+                      return (
+                        <div
+                          key={t.id}
+                          onClick={() => !isRenaming && setSelectedTopic(t)}
+                          className={cn(
+                            'group rounded-xl p-3 border transition-all duration-300',
+                            isRenaming ? 'border-indigo-500/50 bg-indigo-500/5' :
+                            selectedTopic?.id === t.id
+                              ? 'cursor-pointer bg-gradient-to-br from-indigo-500/10 via-violet-500/5 to-transparent border-indigo-500/50 shadow-md shadow-indigo-500/5'
+                              : 'cursor-pointer border-border/40 hover:bg-muted/40 hover:border-border'
+                          )}
+                        >
+                          <div className="flex justify-between items-start gap-2">
+                            {isRenaming ? (
+                              <div className="flex items-center gap-1.5 flex-1" onClick={(e) => e.stopPropagation()}>
+                                <input
+                                  autoFocus
+                                  value={renameValue}
+                                  onChange={(e) => setRenameValue(e.target.value)}
+                                  onKeyDown={(e) => {
+                                    if (e.key === 'Enter') renameMutation.mutate({ topicId: t.id, name: renameValue });
+                                    if (e.key === 'Escape') setRenamingTopicId(null);
+                                  }}
+                                  className="flex-1 text-sm bg-transparent border-b border-indigo-500 outline-none pb-0.5"
+                                />
+                                <button
+                                  onClick={() => renameMutation.mutate({ topicId: t.id, name: renameValue })}
+                                  disabled={renameMutation.isPending || !renameValue.trim()}
+                                  className="text-indigo-400 hover:text-indigo-300 disabled:opacity-40"
+                                >
+                                  <Check className="h-4 w-4" />
+                                </button>
+                                <button onClick={() => setRenamingTopicId(null)} className="text-muted-foreground hover:text-foreground">
+                                  <X className="h-4 w-4" />
+                                </button>
+                              </div>
+                            ) : (
+                              <div className="flex items-center gap-1.5 flex-1 min-w-0">
+                                <span className="font-semibold text-sm group-hover:text-indigo-400 transition-colors truncate">
+                                  {t.name}
+                                </span>
+                                {canRename && (
+                                  <button
+                                    onClick={(e) => {
+                                      e.stopPropagation();
+                                      setRenamingTopicId(t.id);
+                                      setRenameValue(t.name);
+                                    }}
+                                    className="shrink-0 opacity-0 group-hover:opacity-100 text-muted-foreground hover:text-indigo-400 transition-opacity"
+                                  >
+                                    <Pencil className="h-3 w-3" />
+                                  </button>
+                                )}
+                              </div>
+                            )}
+                            {!isRenaming && (
+                              <Badge variant="outline" className="shrink-0 text-[10px] py-0 px-1 border-indigo-500/20 text-indigo-300">
+                                {t.difficulty === 'easy' ? 'Dễ' : t.difficulty === 'medium' ? 'TB' : 'Khó'}
+                              </Badge>
+                            )}
+                          </div>
+                          {!isRenaming && (
+                            <>
+                              <p className="mt-1 text-xs text-muted-foreground line-clamp-1">
+                                {t.description || 'Không có mô tả.'}
+                              </p>
+                              <div className="mt-2 flex items-center justify-between text-[10px] text-muted-foreground border-t border-border/20 pt-1.5">
+                                <span>{t.quizCount} đợt sinh</span>
+                                <span className="font-medium text-indigo-300/80">{t.questionCount} câu hỏi</span>
+                              </div>
+                            </>
+                          )}
                         </div>
-                        <p className="mt-1 text-xs text-muted-foreground line-clamp-1">
-                          {t.description || 'Không có mô tả.'}
-                        </p>
-                        <div className="mt-2 flex items-center justify-between text-[10px] text-muted-foreground border-t border-border/20 pt-1.5">
-                          <span>{t.quizCount} đợt sinh</span>
-                          <span className="font-medium text-indigo-300/80">{t.questionCount} câu hỏi</span>
-                        </div>
-                      </div>
-                    ))}
+                      );
+                    })}
                   </div>
                 )}
               </CardContent>
@@ -672,115 +740,157 @@ export function StudentPoolDashboard() {
                 className="bg-muted/30 focus-visible:ring-indigo-500"
               />
               <p className="text-[10px] text-muted-foreground italic">
-                * Lưu ý: Nhập trùng tên chủ đề đã có để câu hỏi mới tự động **CỘNG DỒN** vào chủ đề đó!
+                * Nhập trùng tên chủ đề đã có để sinh thêm vào, hoặc chọn chế độ "Thay thế" bên dưới.
               </p>
             </div>
 
-            {/* Generator Type Selector */}
-            <div className="space-y-2">
-              <Label className="text-sm font-semibold">2. Phương thức tạo câu hỏi</Label>
-              <div className="grid grid-cols-2 gap-3">
-                <div
-                  onClick={() => setGenerationType('manual')}
-                  className={cn(
-                    "cursor-pointer rounded-xl p-3 border text-center transition-all duration-300",
-                    generationType === 'manual'
-                      ? "border-indigo-500/50 bg-indigo-500/5 font-semibold text-indigo-300"
-                      : "border-border/40 hover:bg-muted/40"
-                  )}
-                >
-                  Nhập nội dung muốn ôn
-                </div>
-                <div
-                  onClick={() => setGenerationType('document')}
-                  className={cn(
-                    "cursor-pointer rounded-xl p-3 border text-center transition-all duration-300",
-                    generationType === 'document'
-                      ? "border-indigo-500/50 bg-indigo-500/5 font-semibold text-indigo-300"
-                      : "border-border/40 hover:bg-muted/40"
-                  )}
-                >
-                  Upload tài liệu / giáo trình
-                </div>
-              </div>
+            <div className="space-y-2 animate-fadeIn">
+              <Label className="text-sm font-semibold">2. Nhập mô tả những gì bạn muốn ôn tập (Tùy chọn)</Label>
+              <Textarea
+                placeholder="Ví dụ: Tạo 10 câu hỏi trắc nghiệm về phương trình bậc 2 và bất phương trình kèm giải thích dễ hiểu..."
+                value={userSuggestion}
+                onChange={(e) => setUserSuggestion(e.target.value)}
+                rows={4}
+                className="bg-muted/30 focus-visible:ring-indigo-500"
+              />
+              <p className="text-[10px] text-muted-foreground italic">
+                * Có thể để trống nếu đã chọn tài liệu ở bước 3.
+              </p>
             </div>
 
-            {generationType === 'manual' ? (
-              <div className="space-y-2 animate-fadeIn">
-                <Label className="text-sm font-semibold">Nhập mô tả những gì bạn muốn ôn tập</Label>
-                <Textarea
-                  placeholder="Ví dụ: Tạo 10 câu hỏi trắc nghiệm về phương trình bậc 2 và bất phương trình kèm giải thích dễ hiểu..."
-                  value={userSuggestion}
-                  onChange={(e) => setUserSuggestion(e.target.value)}
-                  rows={4}
-                  className="bg-muted/30 focus-visible:ring-indigo-500"
+            <div className="space-y-3 animate-fadeIn">
+              <Label className="text-sm font-semibold">3. Chọn giáo trình / ghi chú đã upload (Tùy chọn)</Label>
+              <div className="flex gap-2">
+                <select
+                  value={selectedDocId}
+                  onChange={(e) => setSelectedDocId(e.target.value)}
+                  className="flex-1 flex h-10 rounded-md border border-input bg-muted/30 px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-indigo-500"
+                >
+                  <option value="">-- Chọn tài liệu riêng --</option>
+                  {documents.map(doc => (
+                    <option key={doc.id} value={doc.id}>{doc.name}</option>
+                  ))}
+                </select>
+                <input
+                  ref={fileInputRef}
+                  type="file"
+                  className="hidden"
+                  accept=".pdf,.doc,.docx,.txt,.md"
+                  onChange={handleUploadFile}
                 />
+                <Button
+                  variant="outline"
+                  type="button"
+                  onClick={() => fileInputRef.current?.click()}
+                  disabled={uploadingFile}
+                >
+                  {uploadingFile ? <Loader2 className="h-4 w-4 animate-spin" /> : <Upload className="h-4 w-4 mr-2" />}
+                  Upload file mới
+                </Button>
               </div>
-            ) : (
-              <div className="space-y-3 animate-fadeIn">
-                <Label className="text-sm font-semibold">Chọn giáo trình / ghi chú đã upload hoặc tải file mới</Label>
-                <div className="flex gap-2">
-                  <select
-                    value={selectedDocId}
-                    onChange={(e) => setSelectedDocId(e.target.value)}
-                    className="flex-1 flex h-10 rounded-md border border-input bg-muted/30 px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-indigo-500"
-                  >
-                    <option value="">-- Chọn tài liệu riêng --</option>
-                    {documents.map(doc => (
-                      <option key={doc.id} value={doc.id}>{doc.name}</option>
-                    ))}
-                  </select>
-                  <input
-                    ref={fileInputRef}
-                    type="file"
-                    className="hidden"
-                    accept=".pdf,.doc,.docx,.txt,.md"
-                    onChange={handleUploadFile}
-                  />
-                  <Button 
-                    variant="outline" 
-                    type="button"
-                    onClick={() => fileInputRef.current?.click()} 
-                    disabled={uploadingFile}
-                  >
-                    {uploadingFile ? <Loader2 className="h-4 w-4 animate-spin" /> : <Upload className="h-4 w-4 mr-2" />}
-                    Upload file mới
-                  </Button>
-                </div>
-                <p className="text-[10px] text-muted-foreground italic">
-                  * Hỗ trợ file PDF, TXT, DOCX. AI gia sư sẽ soạn câu hỏi trắc nghiệm dựa trên nội dung bạn gửi.
-                </p>
-              </div>
-            )}
+              <p className="text-[10px] text-muted-foreground italic">
+                * Có thể chọn đồng thời tài liệu và gợi ý nội dung. Cần tối thiểu một trong hai nguồn.
+              </p>
+            </div>
 
             {/* Difficulty & Number of Questions */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="space-y-2">
-                <Label className="text-sm font-semibold">Mức độ ôn tập</Label>
-                <select
-                  value={difficulty}
-                  onChange={(e) => setDifficulty(parseGenerationDifficulty(e.target.value))}
-                  className="flex h-10 w-full rounded-md border border-input bg-muted/30 px-3 py-2 text-sm ring-offset-background focus-visible:ring-indigo-500"
+            <div className="space-y-3">
+              <div className="flex items-center justify-between">
+                <Label className="text-sm font-semibold">Độ khó & Số lượng câu</Label>
+                <button
+                  type="button"
+                  onClick={() => setIsAdvanced(!isAdvanced)}
+                  className="text-xs text-indigo-400 hover:text-indigo-300 underline underline-offset-2"
                 >
-                  <option value="easy">Cơ bản (Củng cố nền tảng)</option>
-                  <option value="medium">Khá (Tăng tốc học tập)</option>
-                  <option value="hard">Nâng cao (Phục vụ ôn thi học sinh giỏi)</option>
-                </select>
+                  {isAdvanced ? 'Cấu hình nhanh' : 'Tùy chỉnh theo độ khó'}
+                </button>
               </div>
 
-              <div className="space-y-2">
-                <Label className="text-sm font-semibold">Số câu cần tạo</Label>
-                <select
-                  value={numQuestions}
-                  onChange={(e) => setNumQuestions(parseInt(e.target.value))}
-                  className="flex h-10 w-full rounded-md border border-input bg-muted/30 px-3 py-2 text-sm ring-offset-background focus-visible:ring-indigo-500"
+              {isAdvanced ? (
+                <div className="rounded-lg border border-border p-3 bg-muted/20 space-y-3">
+                  <p className="text-xs text-muted-foreground">Nhập số câu mong muốn cho từng mức độ:</p>
+                  <div className="grid grid-cols-3 gap-3">
+                    {([['easy', 'Dễ', easyCount, setEasyCount], ['medium', 'Trung bình', mediumCount, setMediumCount], ['hard', 'Khó', hardCount, setHardCount]] as const).map(([key, label, val, setter]) => (
+                      <div key={key} className="space-y-1.5">
+                        <Label className="text-xs">{label}</Label>
+                        <input
+                          type="number" min={0} max={20} value={val}
+                          onChange={(e) => setter(Math.max(0, parseInt(e.target.value) || 0))}
+                          className="w-full h-9 rounded-md border border-input bg-muted/30 px-3 text-sm text-center focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-indigo-500"
+                        />
+                      </div>
+                    ))}
+                  </div>
+                  <div className="text-right text-xs font-medium">
+                    Tổng: <strong className="text-indigo-400">{easyCount + mediumCount + hardCount}</strong> câu
+                  </div>
+                </div>
+              ) : (
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <Label className="text-xs text-muted-foreground">Mức độ</Label>
+                    <select
+                      value={difficulty}
+                      onChange={(e) => setDifficulty(parseGenerationDifficulty(e.target.value))}
+                      className="flex h-10 w-full rounded-md border border-input bg-muted/30 px-3 py-2 text-sm ring-offset-background focus-visible:ring-indigo-500"
+                    >
+                      <option value="easy">Cơ bản (Củng cố nền tảng)</option>
+                      <option value="medium">Khá (Tăng tốc học tập)</option>
+                      <option value="hard">Nâng cao (Phục vụ ôn thi học sinh giỏi)</option>
+                    </select>
+                  </div>
+                  <div className="space-y-2">
+                    <Label className="text-xs text-muted-foreground">Số câu</Label>
+                    <select
+                      value={numQuestions}
+                      onChange={(e) => setNumQuestions(parseInt(e.target.value))}
+                      className="flex h-10 w-full rounded-md border border-input bg-muted/30 px-3 py-2 text-sm ring-offset-background focus-visible:ring-indigo-500"
+                    >
+                      <option value={3}>3 câu</option>
+                      <option value={5}>5 câu</option>
+                      <option value={10}>10 câu</option>
+                      <option value={15}>15 câu</option>
+                      <option value={20}>20 câu</option>
+                    </select>
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* Append / Replace mode */}
+            <div className="space-y-2">
+              <Label className="text-sm font-semibold">Chế độ sinh câu hỏi</Label>
+              <div className="grid grid-cols-2 gap-3">
+                <div
+                  onClick={() => setGenMode('append')}
+                  className={cn(
+                    'cursor-pointer rounded-xl p-3 border text-center text-xs transition-all duration-300',
+                    genMode === 'append'
+                      ? 'border-indigo-500/50 bg-indigo-500/5 font-semibold text-indigo-300'
+                      : 'border-border/40 hover:bg-muted/40 text-muted-foreground'
+                  )}
                 >
-                  <option value={3}>Tạo 3 câu hỏi</option>
-                  <option value={5}>Tạo 5 câu hỏi</option>
-                  <option value={10}>Tạo 10 câu hỏi</option>
-                  <option value={15}>Tạo 15 câu hỏi</option>
-                </select>
+                  <div className="font-semibold mb-0.5">Sinh thêm</div>
+                  <div className="text-[10px] opacity-70">Giữ câu hỏi cũ, thêm câu mới</div>
+                </div>
+                <div
+                  onClick={() => setGenMode('replace')}
+                  className={cn(
+                    'cursor-pointer rounded-xl p-3 border text-center text-xs transition-all duration-300',
+                    genMode === 'replace'
+                      ? 'border-rose-500/50 bg-rose-500/5 font-semibold text-rose-300'
+                      : 'border-border/40 hover:bg-muted/40 text-muted-foreground'
+                  )}
+                >
+                  <div className="font-semibold mb-0.5">Thay thế</div>
+                  <div className="text-[10px] opacity-70">Xoá câu cũ, sinh câu hỏi mới</div>
+                </div>
               </div>
+              {genMode === 'replace' && (
+                <p className="text-[10px] text-rose-400/80 italic">
+                  ⚠ Chế độ thay thế sẽ xoá toàn bộ câu hỏi cũ trong chủ đề này.
+                </p>
+              )}
             </div>
 
             <Button

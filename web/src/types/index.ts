@@ -41,6 +41,7 @@ export interface TopicSummary {
 }
 
 export interface ClassDetailDto extends ClassDto {
+  activeEntryTestId?: string;
   topics: TopicSummary[];
 }
 
@@ -82,6 +83,7 @@ export interface DocumentDto {
   topicId?: string;
   generatedQuizId?: string;
   classId?: string;
+  isVisible: boolean;
 }
 
 export interface UploadUrlDto {
@@ -308,7 +310,6 @@ export interface TutorAnswerRequest {
   topicId: string;
   questionId: string;
   questionText: string;
-  correctAnswer: string;
   selectedAnswer: string;
   difficulty: number;
   responseTimeSeconds?: number;
@@ -546,12 +547,18 @@ export interface ApiResponse<T> {
 // ─── Quiz Pool ───────────────────────────────────────────
 
 export interface GeneratePoolQuizRequest {
+  topicId?: string;
   topicName: string;
   classId?: string;
   userSuggestion?: string;
   documentId?: string;
   numQuestions?: number;
-  difficulty?: 'easy' | 'medium' | 'hard';
+  difficulty?: 'easy' | 'medium' | 'hard' | 'mixed';
+  /** "append" (default) adds to existing pool; "replace" deletes owner's existing quizzes in the topic first */
+  mode?: 'append' | 'replace';
+  numEasyQuestions?: number;
+  numMediumQuestions?: number;
+  numHardQuestions?: number;
 }
 
 export interface CreateTestFromPoolRequest {
@@ -560,6 +567,13 @@ export interface CreateTestFromPoolRequest {
   poolQuizIds: string[];
   timeLimitMinutes?: number;
   totalScore?: number;
+}
+
+export interface CreateEntryTestFromPoolRequest {
+  classId: string;
+  title?: string;
+  questionIds?: string[];
+  poolQuizIds?: string[];
 }
 
 export interface CreateRevisionSetFromPoolRequest {

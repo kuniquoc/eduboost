@@ -37,6 +37,7 @@ export interface QuizAnswerFeedbackProps {
   detailedExplanation?: string;
   isLoadingDetailedExplanation?: boolean;
   detailedExplanationError?: boolean;
+  detailedExplanationUnavailable?: boolean;
   onRetryDetailedExplanation?: () => void;
 }
 
@@ -63,6 +64,7 @@ export function QuizAnswerFeedback({
   detailedExplanation,
   isLoadingDetailedExplanation,
   detailedExplanationError,
+  detailedExplanationUnavailable,
   onRetryDetailedExplanation,
 }: QuizAnswerFeedbackProps) {
   const [showQuizExplanation, setShowQuizExplanation] = useState(!!explanation && variant === 'review');
@@ -147,10 +149,15 @@ export function QuizAnswerFeedback({
           {isLoadingDetailedExplanation && (
             <div className="flex items-center gap-2 py-2 text-sm text-muted-foreground">
               <Loader2 className="h-4 w-4 animate-spin text-violet-500" />
-              <span>AI đang chuẩn bị giải thích chi tiết...</span>
+              <span>Gia sư AI đang chuẩn bị giải thích chi tiết...</span>
             </div>
           )}
-          {detailedExplanationError && (
+          {detailedExplanationUnavailable && (
+            <div className="py-2 text-sm text-muted-foreground">
+              Gia sư AI hiện không khả dụng.
+            </div>
+          )}
+          {detailedExplanationError && !detailedExplanationUnavailable && (
             <div className="py-2 text-sm text-destructive">
               <span>Không thể tải giải thích chi tiết. </span>
               {onRetryDetailedExplanation && (
@@ -181,7 +188,7 @@ export function QuizAnswerFeedback({
 
       {masteryLabel && (
         <div className="text-xs text-muted-foreground">
-          Mastery: <Badge variant="outline" className="ml-1">{masteryLabel}</Badge>
+          Tiến độ: <Badge variant="outline" className="ml-1">{masteryLabel}</Badge>
         </div>
       )}
 

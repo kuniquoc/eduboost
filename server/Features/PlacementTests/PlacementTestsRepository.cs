@@ -21,7 +21,7 @@ public interface IPlacementTestsRepository
 
 public class PlacementTestsRepository(AppDbContext db, IRoadmapRepository roadmap, ILearningStatesRepository learningStates) : IPlacementTestsRepository
 {
-    private const int MinQuestions = 10;
+    private const int MinQuestions = 1;
     private const int MaxQuestions = 20;
     private static readonly TimeSpan SessionTtl = TimeSpan.FromHours(2);
 
@@ -35,6 +35,19 @@ public class PlacementTestsRepository(AppDbContext db, IRoadmapRepository roadma
         }
 
         await ExpireStaleSessionsAsync(userId);
+
+        // Resolve active entry test quiz ID (if any) before loading pool
+        Guid? activeEntryTestQuizId = null;
+        if (classId.HasValue)
+        {
+            var cls = await db.Classes.FindAsync(classId.Value);
+            if (cls?.ActiveEntryTestId != null)
+            {
+                var activeQuiz = await db.Quizzes.FindAsync(cls.ActiveEntryTestId);
+                if (activeQuiz?.IsPublished == true)
+                    activeEntryTestQuizId = activeQuiz.Id;
+            }
+        }
 
         var questions = await LoadQuestionPoolAsync(classId);
         if (questions.Count == 0)
@@ -53,6 +66,7 @@ public class PlacementTestsRepository(AppDbContext db, IRoadmapRepository roadma
         {
             UserId = userId,
             ClassId = classId,
+            ActiveEntryTestQuizId = activeEntryTestQuizId,
             QuestionPool = questions.Select(q => q.Id).ToList(),
             CurrentDifficulty = "medium",
             CurrentIndex = 0,
@@ -106,6 +120,8 @@ public class PlacementTestsRepository(AppDbContext db, IRoadmapRepository roadma
             isCorrect = correctOption != null && correctOption.Id.ToString() == selectedOptionId;
         }
 
+        var topicId = question.SourceTopicId ?? question.Quiz?.TopicId;
+
         state.Answers.Add(new PlacementAnswerState
         {
             QuestionId = questionId,
@@ -113,15 +129,15 @@ public class PlacementTestsRepository(AppDbContext db, IRoadmapRepository roadma
             TextAnswer = request.TextAnswer,
             IsCorrect = isCorrect,
             Difficulty = question.Difficulty,
-            TopicId = question.Quiz?.TopicId
+            TopicId = topicId
         });
         state.CurrentIndex++;
 
-        if (question.Quiz?.TopicId != null)
+        if (topicId != null)
         {
             await learningStates.UpdateAfterAnswerAsync(userId, new UpdateBktRequest
             {
-                TopicId = question.Quiz.TopicId.Value,
+                TopicId = topicId.Value,
                 QuestionId = questionId,
                 IsCorrect = isCorrect
             });
@@ -352,6 +368,26 @@ public class PlacementTestsRepository(AppDbContext db, IRoadmapRepository roadma
 
     private async Task<List<Question>> LoadQuestionPoolAsync(Guid? classId)
     {
+        // Prefer questions from the active published entry_test quiz
+        if (classId.HasValue)
+        {
+            var cls = await db.Classes.FindAsync(classId.Value);
+            if (cls?.ActiveEntryTestId != null)
+            {
+                var activeQuiz = await db.Quizzes.FindAsync(cls.ActiveEntryTestId);
+                if (activeQuiz?.IsPublished == true)
+                {
+                    return await db.Questions
+                        .Include(q => q.Options)
+                        .Include(q => q.Quiz).ThenInclude(q => q!.Topic)
+                        .Where(q => q.QuizId == cls.ActiveEntryTestId)
+                        .OrderBy(q => q.OrderIndex)
+                        .ToListAsync();
+                }
+            }
+        }
+
+        // Fallback: any class question
         IQueryable<Question> query = db.Questions
             .Include(q => q.Options)
             .Include(q => q.Quiz).ThenInclude(q => q!.Topic)
@@ -385,6 +421,23 @@ public class PlacementTestsRepository(AppDbContext db, IRoadmapRepository roadma
 
     private async Task<Question?> GetNextQuestionAsync(PlacementSessionState state, HashSet<Guid> answeredIds, Guid? classId)
     {
+        // When the session was created from an active entry_test, restrict to that quiz's questions
+        if (state.ActiveEntryTestQuizId.HasValue)
+        {
+            var quizId = state.ActiveEntryTestQuizId.Value;
+            IQueryable<Question> ActiveQuery() =>
+                db.Questions
+                    .Include(q => q.Options)
+                    .Include(q => q.Quiz).ThenInclude(q => q!.Topic)
+                    .Where(q => !answeredIds.Contains(q.Id) && q.QuizId == quizId);
+
+            return await ActiveQuery()
+                .Where(q => q.Difficulty == state.CurrentDifficulty)
+                .OrderBy(q => Guid.NewGuid())
+                .FirstOrDefaultAsync()
+                ?? await ActiveQuery().OrderBy(q => Guid.NewGuid()).FirstOrDefaultAsync();
+        }
+
         IQueryable<Question> BaseQuery() =>
             db.Questions
                 .Include(q => q.Options)
@@ -476,6 +529,8 @@ public class PlacementTestsRepository(AppDbContext db, IRoadmapRepository roadma
     {
         public Guid UserId { get; set; }
         public Guid? ClassId { get; set; }
+        /// <summary>Quiz ID của active entry_test được dùng để giới hạn câu hỏi</summary>
+        public Guid? ActiveEntryTestQuizId { get; set; }
         public List<Guid> QuestionPool { get; set; } = [];
         public string CurrentDifficulty { get; set; } = "medium";
         public int CurrentIndex { get; set; }

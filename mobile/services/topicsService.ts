@@ -38,14 +38,6 @@ export const topicsService = {
     await apiClient.delete(`/classes/${classId}/topics/${topicId}`);
   },
 
-  /** Teacher: AI đánh giá độ khó cho tất cả topic */
-  aiEvaluate: async (classId: string): Promise<TopicDto[]> => {
-    const res = await apiClient.post<ApiResponse<TopicDto[]>>(
-      `/classes/${classId}/topics/ai-evaluate`
-    );
-    return res.data.data!;
-  },
-
   /** Teacher: Chỉnh sửa độ khó thủ công */
   updateDifficulty: async (
     classId: string,

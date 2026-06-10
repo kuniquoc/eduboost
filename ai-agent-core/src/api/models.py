@@ -2,7 +2,7 @@
 
 from typing import Optional
 
-from pydantic import BaseModel
+from pydantic import BaseModel, Field, model_validator
 
 
 class IngestRequest(BaseModel):
@@ -36,6 +36,9 @@ class UpdateStateRequest(BaseModel):
 class GenerateQuizRequest(BaseModel):
     topic_name: str
     difficulty: float = 0.0
+    allowed_document_ids: Optional[list[str]] = None
+    allowed_scopes: Optional[list[str]] = None
+    existing_questions: list[str] = []
 
 
 class ExplainRequest(BaseModel):
@@ -61,7 +64,17 @@ class GenerateQuizBatchRequest(BaseModel):
     num_easy: int = 0
     num_medium: int = 0
     num_hard: int = 0
-    existing_questions: list[str] = []
+    existing_questions: list[str] = Field(default_factory=list)
+
+    @model_validator(mode="after")
+    def validate_source_inputs(self):
+        has_manual_prompt = bool((self.user_prompt or "").strip())
+        has_document_source = bool((self.document_id or "").strip()) or bool((self.doc_url or "").strip())
+        if not has_manual_prompt and not has_document_source:
+            raise ValueError(
+                "At least one source input is required for quiz generation: user_prompt or document_id/doc_url."
+            )
+        return self
 
 
 class ChatRequest(BaseModel):

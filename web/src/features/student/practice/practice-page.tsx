@@ -28,12 +28,12 @@ type TutorStep =
   | { type: 'loading' }
   | { type: 'explain'; content: string }
   | {
-      type: 'quiz';
-      question: TutorQuestionDto;
-      phase: 'selecting' | 'reviewing';
-      selectedKey?: string;
-      result?: TutorAnswerResult;
-    }
+    type: 'quiz';
+    question: TutorQuestionDto;
+    phase: 'selecting' | 'reviewing';
+    selectedKey?: string;
+    result?: TutorAnswerResult;
+  }
   | { type: 'mastered' }
   | { type: 'error'; message: string };
 
@@ -47,6 +47,7 @@ export function PracticePage() {
   const [detailedExplanation, setDetailedExplanation] = useState<string | null>(null);
   const [loadingDetailed, setLoadingDetailed] = useState(false);
   const [detailedError, setDetailedError] = useState(false);
+  const [detailedOffline, setDetailedOffline] = useState(false);
   const [questionsAnswered, setQuestionsAnswered] = useState(0);
   const [correctCount, setCorrectCount] = useState(0);
   const [started, setStarted] = useState(false);
@@ -97,8 +98,13 @@ export function PracticePage() {
 
   const explainMutation = useMutation({
     mutationFn: () => quizzesService.getTutorExplanation(topicId!),
-    onSuccess: (content: string) => {
-      setStep({ type: 'explain', content });
+    onSuccess: ({ content, offline }) => {
+      setStep({
+        type: 'explain',
+        content: offline
+          ? 'Gia sư AI hiện đang ngoại tuyến, bạn có thể tiếp tục luyện tập với các câu hỏi quiz mà không cần giải thích chi tiết nếu cần.'
+          : content,
+      });
     },
     onError: () => {
       setStep({ type: 'explain', content: 'Hãy cùng ôn lại chủ đề này! Khi bạn sẵn sàng, hãy bắt đầu luyện tập với các câu hỏi quiz.' });
@@ -127,7 +133,6 @@ export function PracticePage() {
         topicId: topicId!,
         questionId: vars.question.questionId,
         questionText: vars.question.question,
-        correctAnswer: vars.question.correctAnswer,
         selectedAnswer: vars.selectedKey,
         difficulty: vars.question.difficultyLevel,
         responseTimeSeconds: (Date.now() - questionStartRef.current) / 1000,
@@ -167,20 +172,26 @@ export function PracticePage() {
     setStep({ type: 'loading' });
     setDetailedExplanation(null);
     setDetailedError(false);
+    setDetailedOffline(false);
     nextActionMutation.mutate();
   }, [nextActionMutation]);
 
   const fetchDetailedExplanation = useCallback(async (question: TutorQuestionDto, selectedKey: string) => {
     setLoadingDetailed(true);
     setDetailedError(false);
+    setDetailedOffline(false);
     try {
-      const text = await quizzesService.getErrorExplanation({
+      const { explanation, offline } = await quizzesService.getErrorExplanation({
         question: question.question,
         correctAnswer: question.options[question.correctAnswer] || question.correctAnswer,
         studentAnswer: question.options[selectedKey] || selectedKey,
       });
-      setDetailedExplanation(text);
-      return text;
+      if (offline) {
+        setDetailedOffline(true);
+        return;
+      }
+      setDetailedExplanation(explanation);
+      return explanation;
     } catch {
       setDetailedError(true);
       toast.error('Không thể tải giải thích chi tiết');
@@ -215,26 +226,11 @@ export function PracticePage() {
               <Brain className="h-10 w-10 text-white" />
             </div>
           </div>
-          <h1 className="text-3xl font-bold text-foreground">AI Adaptive Tutor</h1>
+          <h1 className="text-3xl font-bold text-foreground">Gia sư AI</h1>
           <p className="mt-3 text-muted-foreground leading-relaxed max-w-md mx-auto">
             AI sẽ tự động đánh giá trình độ của bạn và điều chỉnh độ khó phù hợp.
             Hãy bắt đầu để trải nghiệm luyện tập thông minh!
           </p>
-
-          <div className="mt-8 grid grid-cols-3 gap-4 max-w-sm mx-auto">
-            <div className="rounded-xl border border-border p-3 text-center">
-              <BookOpen className="mx-auto mb-1 h-5 w-5 text-blue-400" />
-              <p className="text-xs text-muted-foreground">Học lý thuyết</p>
-            </div>
-            <div className="rounded-xl border border-border p-3 text-center">
-              <Sparkles className="mx-auto mb-1 h-5 w-5 text-amber-400" />
-              <p className="text-xs text-muted-foreground">Luyện tập AI</p>
-            </div>
-            <div className="rounded-xl border border-border p-3 text-center">
-              <Trophy className="mx-auto mb-1 h-5 w-5 text-green-400" />
-              <p className="text-xs text-muted-foreground">Thành thạo</p>
-            </div>
-          </div>
 
           <Button onClick={startSession} size="lg" className="mt-8 gap-2 px-8 shadow-lg shadow-primary/20">
             <GraduationCap className="h-5 w-5" /> Bắt đầu luyện tập
@@ -292,7 +288,7 @@ export function PracticePage() {
               <BookOpen className="h-5 w-5 text-blue-400" />
             </div>
             <div>
-              <h2 className="text-lg font-semibold text-foreground">Bài giảng từ AI Tutor</h2>
+              <h2 className="text-lg font-semibold text-foreground">Bài giảng từ Gia sư AI</h2>
               <p className="text-xs text-muted-foreground">
                 Hãy đọc kỹ nội dung bên dưới trước khi luyện tập
               </p>
@@ -329,7 +325,7 @@ export function PracticePage() {
               </div>
             </div>
             <Badge variant="outline">
-              Difficulty: {step.question.difficultyLevel > 0 ? '+' : ''}{step.question.difficultyLevel.toFixed(1)}
+              Độ khó: {step.question.difficultyLevel > 0 ? '+' : ''}{step.question.difficultyLevel.toFixed(1)}
             </Badge>
           </div>
 
@@ -351,19 +347,17 @@ export function PracticePage() {
                       type="button"
                       disabled={step.phase === 'reviewing'}
                       onClick={() => setSelectedOption(key)}
-                      className={`w-full rounded-xl border p-4 text-left transition-all duration-200 ${
-                        isSelected
-                          ? 'border-primary bg-primary/10 text-foreground shadow-sm shadow-primary/10'
-                          : 'border-border text-muted-foreground hover:border-muted-foreground hover:text-foreground'
-                      } ${step.phase === 'reviewing' ? 'cursor-default opacity-80' : ''}`}
+                      className={`w-full rounded-xl border p-4 text-left transition-all duration-200 ${isSelected
+                        ? 'border-primary bg-primary/10 text-foreground shadow-sm shadow-primary/10'
+                        : 'border-border text-muted-foreground hover:border-muted-foreground hover:text-foreground'
+                        } ${step.phase === 'reviewing' ? 'cursor-default opacity-80' : ''}`}
                     >
                       <div className="flex items-center gap-3">
                         <span
-                          className={`flex h-7 w-7 items-center justify-center rounded-full border text-xs font-medium ${
-                            isSelected
-                              ? 'border-primary bg-primary text-primary-foreground'
-                              : 'border-border text-muted-foreground'
-                          }`}
+                          className={`flex h-7 w-7 items-center justify-center rounded-full border text-xs font-medium ${isSelected
+                            ? 'border-primary bg-primary text-primary-foreground'
+                            : 'border-border text-muted-foreground'
+                            }`}
                         >
                           {key}
                         </span>
@@ -411,6 +405,7 @@ export function PracticePage() {
                   detailedExplanation={detailedExplanation ?? undefined}
                   isLoadingDetailedExplanation={loadingDetailed}
                   detailedExplanationError={detailedError}
+                  detailedExplanationUnavailable={detailedOffline}
                   onRequestDetailedExplanation={() =>
                     fetchDetailedExplanation(step.question, step.selectedKey!)
                   }

@@ -111,3 +111,8 @@ public class CreateQuestionRequest
     public string? CorrectAnswer { get; set; }
     public List<OptionDto> Options { get; set; } = [];
 }
+
+public class AddQuestionsFromPoolRequest
+{
+    [Required] public List<string> QuestionIds { get; set; } = [];
+}

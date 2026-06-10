@@ -67,6 +67,13 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
             .HasForeignKey(c => c.TeacherId)
             .OnDelete(DeleteBehavior.Restrict);
 
+        modelBuilder.Entity<Class>()
+            .HasOne(c => c.ActiveEntryTest)
+            .WithMany()
+            .HasForeignKey(c => c.ActiveEntryTestId)
+            .OnDelete(DeleteBehavior.SetNull)
+            .IsRequired(false);
+
         modelBuilder.Entity<Enrollment>()
             .HasOne(e => e.Student)
             .WithMany(u => u.Enrollments)

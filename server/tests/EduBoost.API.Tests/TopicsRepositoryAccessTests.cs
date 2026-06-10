@@ -19,7 +19,7 @@ public class TopicsRepositoryAccessTests
         db.Topics.Add(new Topic { Id = topicId, Name = "T1", ClassId = classA, CreatedAt = DateTime.UtcNow });
         await db.SaveChangesAsync();
 
-        var repo = new TopicsRepository(db, new FakeAgentService(), Microsoft.Extensions.Logging.Abstractions.NullLogger<TopicsRepository>.Instance, new FakeRoadmapRepository());
+        var repo = new TopicsRepository(db, new FakeRoadmapRepository());
 
         Assert.True(await repo.BelongsToClassAsync(topicId, classA));
         Assert.False(await repo.BelongsToClassAsync(topicId, classB));
@@ -31,17 +31,6 @@ public class TopicsRepositoryAccessTests
             .UseInMemoryDatabase(Guid.NewGuid().ToString())
             .Options;
         return new AppDbContext(options);
-    }
-
-    private sealed class FakeAgentService : EduBoost.API.Infrastructure.Services.IAgentService
-    {
-        public Task<EduBoost.API.Infrastructure.Services.AgentQuizResponse?> GenerateQuizQuestionAsync(string topicName, double difficulty, List<string>? allowedDocumentIds = null, List<string>? allowedScopes = null) => Task.FromResult<EduBoost.API.Infrastructure.Services.AgentQuizResponse?>(null);
-        public Task<string?> GetExplanationAsync(string topicName, string studentState, List<string>? allowedDocumentIds = null, List<string>? allowedScopes = null) => Task.FromResult<string?>(null);
-        public Task<string?> GetGraderExplanationAsync(string question, string correctAnswer, string studentAnswer, List<string>? allowedDocumentIds = null, List<string>? allowedScopes = null) => Task.FromResult<string?>(null);
-        public Task<EduBoost.API.Infrastructure.Services.AgentQuizBatchResponse?> GenerateQuizBatchAsync(string topicName, string? userPrompt, string? docUrl, int numQuestions, string difficulty, int numEasy = 0, int numMedium = 0, int numHard = 0, string? documentId = null, IReadOnlyList<string>? existingQuestions = null) => Task.FromResult<EduBoost.API.Infrastructure.Services.AgentQuizBatchResponse?>(null);
-        public Task<EduBoost.API.Infrastructure.Services.AgentChatResponse> AskAsync(string question, string? topicId, string level, List<EduBoost.API.Infrastructure.Services.ChatMessage> history, List<string>? allowedDocumentIds = null, List<string>? allowedScopes = null) => Task.FromResult(new EduBoost.API.Infrastructure.Services.AgentChatResponse());
-        public Task IngestDocumentAsync(string documentId, string fileUrl, string scope, string? classId = null, string? ownerId = null, string? topicId = null) => Task.CompletedTask;
-        public Task DeleteDocumentAsync(string documentId) => Task.CompletedTask;
     }
 
     private sealed class FakeRoadmapRepository : EduBoost.API.Features.Roadmap.IRoadmapRepository

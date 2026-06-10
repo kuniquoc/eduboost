@@ -38,6 +38,16 @@ export const documentsService = {
     return res.data.data!;
   },
 
+  updateDocumentTopic: async (classId: string, documentId: string, topicId: string | null): Promise<DocumentDto> => {
+    const res = await apiClient.patch<ApiResponse<DocumentDto>>(`/classes/${classId}/documents/${documentId}/topic`, { topicId });
+    return res.data.data!;
+  },
+
+  updateDocumentVisibility: async (classId: string, documentId: string, isVisible: boolean): Promise<DocumentDto> => {
+    const res = await apiClient.patch<ApiResponse<DocumentDto>>(`/classes/${classId}/documents/${documentId}/visibility`, { isVisible });
+    return res.data.data!;
+  },
+
   // ── Student private documents ───────────────────────────
   getMyDocuments: async (): Promise<DocumentDto[]> => {
     const res = await apiClient.get<ApiResponse<DocumentDto[]>>('/documents/my');

@@ -4,7 +4,6 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { classesService } from '@/services/classes.service';
 import { quizzesService } from '@/services/quizzes.service';
 import { useClassDetail } from '@/hooks/use-class-detail';
-import { useClassQuizzes } from '@/hooks/use-class-quizzes';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -13,8 +12,9 @@ import {
   Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter,
 } from '@/components/ui/dialog';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { ArrowLeft, Settings, Copy, Check, Trash2, PenLine, Sparkles } from 'lucide-react';
+import { ArrowLeft, Settings, Copy, Check, Trash2, PenLine, FileQuestion } from 'lucide-react';
 import { toast } from 'sonner';
+import { EntryTestPoolPickerDialog } from '@/components/shared/entry-test-pool-picker-dialog';
 import { TopicsTab } from './tabs/topics-tab';
 import { DocumentsTab } from './tabs/documents-tab';
 import { StudentsTab } from './tabs/students-tab';
@@ -30,12 +30,10 @@ export function TeacherClassDetailPage() {
   const [editOpen, setEditOpen] = useState(false);
   const [deleteOpen, setDeleteOpen] = useState(false);
   const [quizBuilderOpen, setQuizBuilderOpen] = useState(false);
+  const [entryTestPickerOpen, setEntryTestPickerOpen] = useState(false);
   const [copied, setCopied] = useState(false);
 
   const { data: cls, isLoading } = useClassDetail(id);
-  const { data: classQuizzes } = useClassQuizzes(id);
-
-  const hasEntryTest = classQuizzes?.some((q) => q.type === 'entry_test') ?? false;
 
   const [editName, setEditName] = useState('');
   const [editDesc, setEditDesc] = useState('');
@@ -71,16 +69,6 @@ export function TeacherClassDetailPage() {
       navigate(`/teacher/ai-studio/${quiz.id}`);
     },
     onError: () => toast.error('Tạo quiz thất bại'),
-  });
-
-  const generateEntryTestMutation = useMutation({
-    mutationFn: () => quizzesService.generateEntryTest(id!),
-    onSuccess: (quiz) => {
-      queryClient.invalidateQueries({ queryKey: ['class-quizzes', id] });
-      toast.success('AI đã tạo bài test đầu vào. Hãy kiểm tra và chỉnh sửa!');
-      navigate(`/teacher/ai-studio/${quiz.id}`);
-    },
-    onError: () => toast.error('Tạo test đầu vào thất bại'),
   });
 
   const openEdit = () => {
@@ -144,18 +132,13 @@ export function TeacherClassDetailPage() {
             </div>
           </div>
           <div className="flex gap-2">
-            {!hasEntryTest && (
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={() => generateEntryTestMutation.mutate()}
-                disabled={generateEntryTestMutation.isPending}
-              >
-                {generateEntryTestMutation.isPending
-                  ? <><span className="h-4 w-4 animate-spin rounded-full border-2 border-primary border-t-transparent" /> Đang tạo...</>
-                  : <><Sparkles className="h-4 w-4" /> AI tạo test đầu vào</>}
-              </Button>
-            )}
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => setEntryTestPickerOpen(true)}
+            >
+              <FileQuestion className="h-4 w-4" /> Tạo test đầu vào từ Pool
+            </Button>
             <Button variant="outline" size="sm" onClick={() => setQuizBuilderOpen(true)}>
               <PenLine className="h-4 w-4" /> Tạo quiz
             </Button>
@@ -182,7 +165,7 @@ export function TeacherClassDetailPage() {
           <TopicsTab classId={id!} topics={cls.topics ?? []} />
         </TabsContent>
         <TabsContent value="quizzes" className="mt-4">
-          <QuizzesTab classId={id!} />
+          <QuizzesTab classId={id!} activeEntryTestId={cls.activeEntryTestId} />
         </TabsContent>
         <TabsContent value="documents" className="mt-4">
           <DocumentsTab classId={id!} />
@@ -250,6 +233,17 @@ export function TeacherClassDetailPage() {
         isPending={createQuizMutation.isPending}
         dialogTitle="Tạo quiz cho lớp"
         dialogDescription="Tạo quiz luyện tập để giao cho học sinh"
+      />
+
+      <EntryTestPoolPickerDialog
+        open={entryTestPickerOpen}
+        onOpenChange={setEntryTestPickerOpen}
+        classId={id!}
+        className={cls.name}
+        onSuccess={(quiz) => {
+          queryClient.invalidateQueries({ queryKey: ['class-quizzes', id] });
+          navigate(`/teacher/ai-studio/${quiz.id}`);
+        }}
       />
     </div>
   );

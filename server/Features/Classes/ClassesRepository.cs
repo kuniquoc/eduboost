@@ -21,6 +21,7 @@ public interface IClassesRepository
     Task<List<StudentEnrollmentDto>> GetStudentsAsync(Guid classId, string? search);
     Task<bool> AddStudentAsync(Guid classId, string studentEmail);
     Task<bool> RemoveStudentAsync(Guid classId, Guid studentId);
+    Task<bool> SetActiveEntryTestAsync(Guid classId, Guid teacherId, Guid quizId);
 }
 
 public class StudentEnrollmentDto
@@ -103,6 +104,7 @@ public class ClassesRepository(AppDbContext db) : IClassesRepository
             AverageProgress = cls.Enrollments.Any()
                 ? (int)cls.Enrollments.Average(e => e.Progress)
                 : 0,
+            ActiveEntryTestId = cls.ActiveEntryTestId?.ToString(),
             Topics = cls.Topics
                 .OrderBy(t => t.CreatedAt)
                 .Select(t => new TopicSummaryDto
@@ -116,6 +118,19 @@ public class ClassesRepository(AppDbContext db) : IClassesRepository
                 })
                 .ToList()
         };
+    }
+
+    public async Task<bool> SetActiveEntryTestAsync(Guid classId, Guid teacherId, Guid quizId)
+    {
+        var cls = await db.Classes.FindAsync(classId);
+        if (cls == null || cls.TeacherId != teacherId) return false;
+
+        var quiz = await db.Quizzes.FindAsync(quizId);
+        if (quiz == null || quiz.ClassId != classId || quiz.Type != "entry_test") return false;
+
+        cls.ActiveEntryTestId = quizId;
+        await db.SaveChangesAsync();
+        return true;
     }
 
     public async Task<ClassDto> CreateAsync(Guid teacherId, CreateClassRequest request)

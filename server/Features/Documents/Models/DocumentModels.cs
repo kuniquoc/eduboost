@@ -14,6 +14,7 @@ public class DocumentDto
     public string? GeneratedQuizId { get; set; }
     public string? ClassId { get; set; }
     public string Scope { get; set; } = "class"; // "class" | "student"
+    public bool IsVisible { get; set; } = false;
 }
 
 /// <summary>Yêu cầu tạo presigned upload URL.</summary>
@@ -36,6 +37,16 @@ public class UploadUrlDto
 public class ConfirmUploadRequest
 {
     [Required] public string DocumentId { get; set; } = "";
+}
+
+public class UpdateDocumentTopicRequest
+{
+    public string? TopicId { get; set; }
+}
+
+public class UpdateDocumentVisibilityRequest
+{
+    [Required] public bool IsVisible { get; set; }
 }
 
 public class GenerateQuizRequest

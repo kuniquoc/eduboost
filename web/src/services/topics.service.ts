@@ -21,11 +21,6 @@ export const topicsService = {
     await apiClient.delete(`/classes/${classId}/topics/${topicId}`);
   },
 
-  aiEvaluate: async (classId: string): Promise<TopicDto[]> => {
-    const res = await apiClient.post<ApiResponse<TopicDto[]>>(`/classes/${classId}/topics/ai-evaluate`);
-    return res.data.data!;
-  },
-
   updateDifficulty: async (classId: string, topicId: string, difficulty: 'easy' | 'medium' | 'hard'): Promise<TopicDto> => {
     const res = await apiClient.put<ApiResponse<TopicDto>>(`/classes/${classId}/topics/${topicId}/difficulty`, { difficulty });
     return res.data.data!;

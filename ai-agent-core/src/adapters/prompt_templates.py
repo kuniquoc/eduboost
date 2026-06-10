@@ -37,15 +37,25 @@ Difficulty Guide:
   - 1.0 < Beta ≤ 2.0: Hard — advanced grammar (subjunctive, inversion), idiomatic expressions
   - Beta > 2.0: Very Hard — subtle distinctions, formal/academic register, rare constructions
 
-## Context from textbook (USE THIS as the basis for your question):
+## Source context (USE THIS as the basis for your question):
 {context}
+
+Context may include:
+- DOCUMENT CONTEXT: content excerpt from uploaded/reference document
+- MANUAL REQUIREMENTS: extra constraints from user input
+- GENERATION CONSTRAINTS: dedup/retry rules from the system
+
+When both DOCUMENT CONTEXT and MANUAL REQUIREMENTS are present:
+- The question must stay grounded in DOCUMENT CONTEXT.
+- The output must satisfy MANUAL REQUIREMENTS at the same time.
+- If a manual requirement conflicts with the document excerpt, prioritize document-grounded correctness.
 
 ## Uniqueness rules (CRITICAL):
 - Generate ONE question that tests a different sentence, concept, or vocabulary point than any other question.
 - Do NOT copy sentences verbatim from CONTEXT — transform them (change subject, tense, or vocabulary) while keeping the same grammar focus.
 - Do NOT reuse sentence frames from CONTEXT examples (e.g. "The new ___ will ___", "The company has decided to ___").
 - Each question must test a DIFFERENT vocabulary item or collocation than other questions in the batch.
-- If ADDITIONAL INSTRUCTIONS list questions to avoid, you MUST NOT generate any of those exact sentences.
+- If GENERATION CONSTRAINTS list questions to avoid, you MUST NOT generate any of those exact sentences.
 
 ## Requirements for each field:
 

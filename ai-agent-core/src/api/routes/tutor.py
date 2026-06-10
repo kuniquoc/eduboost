@@ -8,8 +8,15 @@ from fastapi import APIRouter
 from src.adapters.prompt_templates import PromptTemplates
 from src.api.agent_session import get_or_create_agent, update_agent
 from src.api.app_state import runtime
-from src.api.models import ChatRequest, GenerateQuizBatchRequest, GraderRequest, UpdateStateRequest
-from src.api.quiz_batch_service import generate_quiz_batch
+from src.api.models import ChatRequest, GenerateQuizBatchRequest, GenerateQuizRequest, GraderRequest, UpdateStateRequest
+from src.api.quiz_batch_service import (
+    _build_avoid_texts,
+    _build_retry_hint,
+    _is_exact_duplicate,
+    _QUIZ_RETRY_TEMPERATURES,
+    _seed_seen_from_existing,
+    generate_quiz_batch,
+)
 from src.core.config import CHAT_MAX_HISTORY, RAG_SIMILARITY_THRESHOLD, RAG_TOP_K_DOCS
 
 logger = logging.getLogger(__name__)
@@ -35,21 +42,16 @@ async def update_student_state(request: UpdateStateRequest):
     return result
 
 
-@router.get("/generate-question")
-async def generate_quiz_question(
+async def _generate_quiz_question_response(
     topic_name: str,
-    difficulty: float = 0.0,
-    allowed_document_ids: Optional[str] = None,
-    allowed_scopes: Optional[str] = None
+    difficulty: float,
+    allowed_doc_ids_list: Optional[list[str]] = None,
+    allowed_scopes_list: Optional[list[str]] = None,
+    existing_questions: Optional[list[str]] = None,
 ):
     """Generates an adaptive quiz question using RAG context + LLM (Quiz LLM)."""
-    import time
-    
     start_time = time.time()
-    
-    allowed_doc_ids_list = allowed_document_ids.split(",") if allowed_document_ids else None
-    allowed_scopes_list = allowed_scopes.split(",") if allowed_scopes else None
-    
+
     # Step 1: Log receipt of request
     logger.info("=" * 60)
     logger.info(f"[QUIZ-GEN][STEP 1] Received generate-question request: Topic='{topic_name}', Target Difficulty (Beta)={difficulty}")
@@ -99,26 +101,78 @@ async def generate_quiz_question(
     retrieval_duration = time.time() - retrieval_start
     logger.info(f"[QUIZ-GEN][STEP 2] Retrieval finished in {retrieval_duration:.3f}s")
 
-    # Step 3: Prepare Prompt
-    logger.info("[QUIZ-GEN][STEP 3] Formatting prompt with topic and retrieved context...")
-    prompt = PromptTemplates.QUIZ_TEMPLATE.format(
-        topic=topic_name,
-        difficulty=difficulty,
-        context=context,
-    )
-    logger.info(f"[QUIZ-GEN][STEP 3] Prompt ready. Total characters: {len(prompt)}")
+    # Step 3: Prepare dedupe seed and retry loop
+    seen_questions, completed_questions = _seed_seen_from_existing(existing_questions or [])
+    if completed_questions:
+        logger.info(
+            "[QUIZ-GEN][STEP 3] Seeded %d existing questions into avoid-list",
+            len(completed_questions),
+        )
 
-    # Step 4: Call LLM
-    logger.info(f"[QUIZ-GEN][STEP 4] Dispatching request to Quiz LLM (Model: '{runtime.llm_quiz.model}', Endpoint: '{runtime.llm_quiz.endpoint_url}')...")
-    llm_start = time.time()
-    result = runtime.llm_quiz.generate_json(prompt)
+    result = None
+    rejected_questions: list[str] = []
 
-    llm_duration = time.time() - llm_start
-    logger.info(f"[QUIZ-GEN][STEP 4] Quiz LLM responded in {llm_duration:.3f}s")
+    for attempt in range(1, 6):
+        avoid_texts = _build_avoid_texts(completed_questions, rejected_questions)
+        avoid_block = ""
+        if avoid_texts:
+            avoid_block = (
+                "\n\nDO NOT generate any of the following questions (already used):\n"
+                + "\n".join(f"- {t}" for t in avoid_texts)
+            )
 
-    # Step 5: Process and Log Output
-    if not result or "error" in result:
-        logger.warning(f"[QUIZ-GEN][STEP 5] LLM unavailable or invalid response: {result.get('error') if result else 'empty'}")
+        prompt_context = context
+        retry_suffix = _build_retry_hint(attempt, avoid_texts)
+        if avoid_block or retry_suffix:
+            prompt_context += f"\n\nADDITIONAL INSTRUCTIONS:\n{avoid_block}{retry_suffix}"
+
+        logger.info(
+            "[QUIZ-GEN][STEP 3] Formatting prompt with topic and retrieved context (attempt=%d)...",
+            attempt,
+        )
+        prompt = PromptTemplates.QUIZ_TEMPLATE.format(
+            topic=topic_name,
+            difficulty=difficulty,
+            context=prompt_context,
+        )
+        logger.info(f"[QUIZ-GEN][STEP 3] Prompt ready. Total characters: {len(prompt)}")
+
+        # Step 4: Call LLM
+        temp_idx = min(attempt - 1, len(_QUIZ_RETRY_TEMPERATURES) - 1)
+        temperature = _QUIZ_RETRY_TEMPERATURES[temp_idx]
+        logger.info(
+            "[QUIZ-GEN][STEP 4] Dispatching request to Quiz LLM (Model: '%s', Endpoint: '%s', attempt=%d, temp=%.2f)...",
+            runtime.llm_quiz.model,
+            runtime.llm_quiz.endpoint_url,
+            attempt,
+            temperature,
+        )
+        llm_start = time.time()
+        result = runtime.llm_quiz.generate_json(prompt, temperature=temperature)
+
+        llm_duration = time.time() - llm_start
+        logger.info(f"[QUIZ-GEN][STEP 4] Quiz LLM responded in {llm_duration:.3f}s")
+
+        if not result or "error" in result:
+            logger.warning(f"[QUIZ-GEN][STEP 5] LLM unavailable or invalid response: {result.get('error') if result else 'empty'}")
+            runtime.raise_ai_unavailable()
+
+        question_text = str(result.get("question", "")).strip()
+        if _is_exact_duplicate(question_text, seen_questions):
+            rejected_questions.append(question_text)
+            logger.info(
+                "[QUIZ-GEN][STEP 5] Attempt %d/5 returned duplicate question: \"%s\"",
+                attempt,
+                question_text[:80],
+            )
+            result = None
+            continue
+
+        if question_text:
+            break
+
+    if result is None:
+        logger.warning("[QUIZ-GEN][STEP 5] Failed to generate a non-duplicate question after retries")
         runtime.raise_ai_unavailable()
 
     total_duration = time.time() - start_time
@@ -136,6 +190,34 @@ async def generate_quiz_question(
         "explanation": result.get("explanation", ""),
         "difficulty_level": result.get("difficulty_level", difficulty),
     }
+
+
+@router.get("/generate-question")
+async def generate_quiz_question(
+    topic_name: str,
+    difficulty: float = 0.0,
+    allowed_document_ids: Optional[str] = None,
+    allowed_scopes: Optional[str] = None
+):
+    allowed_doc_ids_list = allowed_document_ids.split(",") if allowed_document_ids else None
+    allowed_scopes_list = allowed_scopes.split(",") if allowed_scopes else None
+    return await _generate_quiz_question_response(
+        topic_name,
+        difficulty,
+        allowed_doc_ids_list,
+        allowed_scopes_list,
+    )
+
+
+@router.post("/generate-question")
+async def generate_quiz_question_post(request: GenerateQuizRequest):
+    return await _generate_quiz_question_response(
+        request.topic_name,
+        request.difficulty,
+        request.allowed_document_ids,
+        request.allowed_scopes,
+        request.existing_questions,
+    )
 
 
 @router.get("/explain")

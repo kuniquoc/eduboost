@@ -28,6 +28,17 @@ public class QuizzesController(
     private Guid UserId => ControllerAuth.GetUserId(User);
     private string UserRole => ControllerAuth.GetUserRole(User);
 
+    /// <summary>Teacher: Lấy thông tin quiz (metadata)</summary>
+    [HttpGet("{quizId:guid}")]
+    public async Task<IActionResult> GetQuiz(Guid quizId)
+    {
+        if (UserRole != "teacher") return Forbid();
+        if (!await quizAuth.CanTeacherManageQuizAsync(quizId, UserId)) return Forbid();
+        var quiz = await repo.GetQuizByIdAsync(quizId);
+        if (quiz == null) return NotFound(ApiResponse.Fail("Không tìm thấy quiz"));
+        return Ok(ApiResponse<QuizDto>.Ok(quiz));
+    }
+
     /// <summary>Teacher: Lấy câu hỏi của quiz để kiểm duyệt</summary>
     [HttpGet("{quizId:guid}/questions")]
     public async Task<IActionResult> GetQuestions(Guid quizId)
@@ -74,6 +85,38 @@ public class QuizzesController(
         return Ok(ApiResponse.Ok("Xoá câu hỏi thành công"));
     }
 
+    /// <summary>Teacher: Xoá toàn bộ quiz (kể cả entry_test)</summary>
+    [HttpDelete("{quizId:guid}")]
+    public async Task<IActionResult> DeleteQuiz(Guid quizId)
+    {
+        if (UserRole != "teacher") return Forbid();
+        if (!await quizAuth.CanTeacherManageQuizAsync(quizId, UserId)) return Forbid();
+        var ok = await repo.DeleteQuizAsync(quizId, UserId);
+        if (!ok) return NotFound(ApiResponse.Fail("Không tìm thấy quiz hoặc bạn không có quyền xoá"));
+        return Ok(ApiResponse.Ok("Đã xoá quiz thành công"));
+    }
+
+    /// <summary>Teacher: Thêm câu hỏi từ Quiz Pool vào quiz hiện tại</summary>
+    [HttpPost("{quizId:guid}/questions/from-pool")]
+    public async Task<IActionResult> AddQuestionsFromPool(Guid quizId, [FromBody] AddQuestionsFromPoolRequest request)
+    {
+        if (UserRole != "teacher") return Forbid();
+        if (!await quizAuth.CanTeacherManageQuizAsync(quizId, UserId)) return Forbid();
+        if (!ModelState.IsValid) return BadRequest(ApiResponse.Fail("Dữ liệu không hợp lệ", ModelState));
+
+        var questionGuids = request.QuestionIds
+            .Select(id => Guid.TryParse(id, out var g) ? g : (Guid?)null)
+            .Where(g => g.HasValue)
+            .Select(g => g!.Value)
+            .ToList();
+
+        if (questionGuids.Count == 0)
+            return BadRequest(ApiResponse.Fail("Không có câu hỏi hợp lệ nào được chọn"));
+
+        var added = await repo.AddQuestionsFromPoolAsync(quizId, questionGuids, UserId);
+        return Ok(ApiResponse<List<QuestionDto>>.Ok(added, $"Đã thêm {added.Count} câu hỏi từ Pool"));
+    }
+
     /// <summary>Teacher: Đánh dấu câu hỏi đã/chưa được kiểm duyệt</summary>
     [HttpPatch("{quizId:guid}/questions/{qId:guid}/verify")]
     public async Task<IActionResult> VerifyQuestion(Guid quizId, Guid qId, [FromBody] VerifyQuestionRequest request)
@@ -113,8 +156,6 @@ public class QuizzesController(
                 return BadRequest(ApiResponse.Fail("Entry test phải thuộc một lớp học"));
             var classId = Guid.Parse(request.ClassId);
             if (!await classes.IsOwnedByTeacherAsync(classId, UserId)) return Forbid();
-            if (await repo.HasEntryTestAsync(classId))
-                return Conflict(ApiResponse.Fail("Lớp này đã có bài test đầu vào. Vui lòng chỉnh sửa quiz hiện tại."));
         }
         else if (!string.IsNullOrEmpty(request.ClassId))
         {
@@ -131,9 +172,6 @@ public class QuizzesController(
     {
         if (UserRole != "teacher") return Forbid();
         if (!await classes.IsOwnedByTeacherAsync(classId, UserId)) return Forbid();
-        if (await repo.HasEntryTestAsync(classId))
-            return Conflict(ApiResponse.Fail("Lớp này đã có bài test đầu vào."));
-
         var quiz = await repo.GenerateEntryTestAsync(classId);
         return Ok(ApiResponse<QuizDto>.Ok(quiz, "AI đã tạo bài test đầu vào. Hãy kiểm tra và chỉnh sửa trước khi publish."));
     }
@@ -274,8 +312,14 @@ public class QuizzesController(
         var topic = await repo.GetTopicNameAsync(topicId);
         if (topic == null) return NotFound(ApiResponse.Fail("Topic not found"));
 
-        bool isCorrect = request.SelectedAnswer.Trim()
-            .Equals(request.CorrectAnswer.Trim(), StringComparison.OrdinalIgnoreCase);
+        var question = await repo.GetTutorQuestionAsync(topicId, questionId);
+        if (question == null) return NotFound(ApiResponse.Fail("Question not found"));
+
+        var correctOption = question.Options.FirstOrDefault(o => o.IsCorrect);
+        if (correctOption == null) return BadRequest(ApiResponse.Fail("Question does not have a correct option"));
+
+        var selectedOption = FindTutorSelectedOption(question, request.SelectedAnswer);
+        bool isCorrect = selectedOption?.IsCorrect == true;
 
         var updateResult = await learningStates.UpdateAfterAnswerAsync(UserId, new UpdateBktRequest
         {
@@ -289,7 +333,7 @@ public class QuizzesController(
         if (classId.HasValue)
             await roadmap.SyncAfterLearningAsync(classId.Value, UserId, topicId);
 
-        string explanation = isCorrect ? "Correct! Well done." : $"The correct answer is '{request.CorrectAnswer}'.";
+        string explanation = isCorrect ? "Correct! Well done." : $"The correct answer is '{correctOption.Text}'.";
 
         var masteryLabel = updateResult.State.MasteryProbability >= 0.95 ? "mastered"
             : updateResult.State.MasteryProbability >= 0.7 ? "proficient"
@@ -346,7 +390,7 @@ public class QuizzesController(
         {
             return Ok(ApiResponse<object>.Ok(new
             {
-                explanation = $"Review the key concepts of '{topic}'. The AI tutor is currently offline — please try again later.",
+                explanation = $"Hãy ôn lại các khái niệm chính của '{topic}'. Gia sư AI hiện đang ngoại tuyến — vui lòng thử lại sau.",
                 offline = true
             }));
         }
@@ -371,7 +415,7 @@ public class QuizzesController(
         {
             return Ok(ApiResponse<object>.Ok(new
             {
-                explanation = $"The correct answer is '{request.CorrectAnswer}'. The AI tutor is currently offline for detailed explanations.",
+                explanation = $"Đáp án đúng là '{request.CorrectAnswer}'. Gia sư AI hiện đang ngoại tuyến.",
                 offline = true
             }));
         }
@@ -394,13 +438,32 @@ public class QuizzesController(
 
         var allowedDocIds = await docRepo.GetAllowedDocumentIdsAsync(UserId);
         var allowedScopes = new List<string> { "system" };
+        var existingTutorQuestions = await repo.GetRecentTutorQuestionTextsAsync(topicId);
 
-        var agentQuestion = await agent.GenerateQuizQuestionAsync(topic, effectiveDifficulty, allowedDocIds, allowedScopes);
-        if (agentQuestion == null)
+        var agentQuestion = await agent.GenerateQuizQuestionAsync(
+            topic,
+            effectiveDifficulty,
+            allowedDocIds,
+            allowedScopes,
+            existingTutorQuestions);
+        if (agentQuestion == null || !TryNormalizeAgentQuestion(agentQuestion))
         {
             return Ok(ApiResponse<object>.Ok(new
             {
-                question = $"Practice question for '{topic}' is unavailable. The AI agent is offline.",
+                question = $"Câu hỏi cho '{topic}' hiện không khả dụng. Gia sư AI đang ngoại tuyến.",
+                options = new Dictionary<string, string>(),
+                correctAnswer = "",
+                explanation = "",
+                difficultyLevel = effectiveDifficulty,
+                offline = true
+            }));
+        }
+
+        if (IsDuplicateTutorQuestion(agentQuestion.Question, existingTutorQuestions))
+        {
+            return Ok(ApiResponse<object>.Ok(new
+            {
+                question = $"AI chưa tạo được câu hỏi mới cho '{topic}'. Vui lòng thử lại sau.",
                 options = new Dictionary<string, string>(),
                 correctAnswer = "",
                 explanation = "",
@@ -422,5 +485,71 @@ public class QuizzesController(
         dto.QuestionId = questionId.ToString();
 
         return Ok(ApiResponse<TutorQuestionDto>.Ok(dto));
+    }
+
+    private static bool TryNormalizeAgentQuestion(AgentQuizResponse question)
+    {
+        if (string.IsNullOrWhiteSpace(question.Question) || question.Options.Count < 2)
+            return false;
+
+        var options = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+        foreach (var (key, value) in question.Options)
+        {
+            if (string.IsNullOrWhiteSpace(key) || string.IsNullOrWhiteSpace(value)) continue;
+            options[key.Trim()] = value.Trim();
+        }
+
+        if (options.Count < 2 || string.IsNullOrWhiteSpace(question.CorrectAnswer))
+            return false;
+
+        var rawCorrectAnswer = question.CorrectAnswer.Trim();
+        var correctKey = options.Keys.FirstOrDefault(k =>
+            string.Equals(k, rawCorrectAnswer, StringComparison.OrdinalIgnoreCase));
+
+        correctKey ??= options.FirstOrDefault(o =>
+            string.Equals(o.Value, rawCorrectAnswer, StringComparison.OrdinalIgnoreCase)).Key;
+
+        if (string.IsNullOrWhiteSpace(correctKey))
+            return false;
+
+        question.Question = question.Question.Trim();
+        question.Options = options;
+        question.CorrectAnswer = correctKey;
+        question.Explanation = question.Explanation?.Trim() ?? "";
+
+        return true;
+    }
+
+    private static bool IsDuplicateTutorQuestion(string question, IEnumerable<string> existingQuestions)
+    {
+        var normalized = NormalizeQuestionText(question);
+        return !string.IsNullOrEmpty(normalized)
+            && existingQuestions.Any(existing => NormalizeQuestionText(existing) == normalized);
+    }
+
+    private static string NormalizeQuestionText(string question)
+    {
+        return new string(question
+            .Where(c => c is >= 'a' and <= 'z' or >= 'A' and <= 'Z' or >= '0' and <= '9')
+            .Select(char.ToLowerInvariant)
+            .ToArray());
+    }
+
+    private static OptionDto? FindTutorSelectedOption(QuestionDto question, string selectedAnswer)
+    {
+        var selected = selectedAnswer.Trim();
+        for (var i = 0; i < question.Options.Count; i++)
+        {
+            var option = question.Options[i];
+            var key = ((char)('A' + i)).ToString();
+            if (string.Equals(selected, key, StringComparison.OrdinalIgnoreCase)
+                || string.Equals(selected, option.Id, StringComparison.OrdinalIgnoreCase)
+                || string.Equals(selected, option.Text, StringComparison.OrdinalIgnoreCase))
+            {
+                return option;
+            }
+        }
+
+        return null;
     }
 }

@@ -88,14 +88,6 @@ export function ClassQuizzesPage() {
           ))}
         </div>
       )}
-
-      <p className="text-center text-sm text-muted-foreground">
-        Bài test đầu vào (placement test) là{' '}
-        <Link to={`/student/placement-test/${classId}`} className="text-primary underline">
-          luồng riêng
-        </Link>
-        .
-      </p>
     </div>
   );
 }

@@ -3,6 +3,7 @@ using System;
 using EduBoost.API.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace EduBoost.API.Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260609210718_AddIsVisibleToDocuments")]
+    partial class AddIsVisibleToDocuments
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -68,9 +71,6 @@ namespace EduBoost.API.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<Guid?>("ActiveEntryTestId")
-                        .HasColumnType("uuid");
-
                     b.Property<string>("ClassCode")
                         .IsRequired()
                         .HasColumnType("text");
@@ -94,8 +94,6 @@ namespace EduBoost.API.Infrastructure.Migrations
                         .HasColumnType("uuid");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ActiveEntryTestId");
 
                     b.HasIndex("ClassCode")
                         .IsUnique();
@@ -779,18 +777,11 @@ namespace EduBoost.API.Infrastructure.Migrations
 
             modelBuilder.Entity("EduBoost.API.Infrastructure.Entities.Class", b =>
                 {
-                    b.HasOne("EduBoost.API.Infrastructure.Entities.Quiz", "ActiveEntryTest")
-                        .WithMany()
-                        .HasForeignKey("ActiveEntryTestId")
-                        .OnDelete(DeleteBehavior.SetNull);
-
                     b.HasOne("EduBoost.API.Infrastructure.Entities.User", "Teacher")
                         .WithMany("TaughtClasses")
                         .HasForeignKey("TeacherId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
-
-                    b.Navigation("ActiveEntryTest");
 
                     b.Navigation("Teacher");
                 });

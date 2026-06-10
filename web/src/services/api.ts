@@ -113,6 +113,14 @@ apiClient.interceptors.response.use(
       }
     }
 
+    // Extract API response message so callers can use err.message directly
+    const apiMessage = error.response?.data?.message;
+    if (apiMessage) {
+      const enhanced = new Error(apiMessage) as Error & { response: typeof error.response; status: number };
+      enhanced.response = error.response;
+      enhanced.status = error.response.status;
+      return Promise.reject(enhanced);
+    }
     return Promise.reject(error);
   },
 );

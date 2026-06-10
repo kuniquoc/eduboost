@@ -1,3 +1,4 @@
+using System.ComponentModel.DataAnnotations;
 using EduBoost.API.Common.Http;
 using EduBoost.API.Common.Models;
 using EduBoost.API.Features.Classes.Models;
@@ -104,6 +105,19 @@ public class ClassesController(IClassesRepository repo) : ControllerBase
         if (UserRole != "student") return Forbid();
         var classes = await repo.GetEnrolledByStudentIdAsync(UserId);
         return Ok(ApiResponse<List<ClassDto>>.Ok(classes));
+    }
+
+    /// <summary>Teacher: Chọn bài test đầu vào active cho lớp học</summary>
+    [HttpPut("{id:guid}/active-entry-test")]
+    public async Task<IActionResult> SetActiveEntryTest(Guid id, [FromBody] SetActiveEntryTestRequest request)
+    {
+        if (UserRole != "teacher") return Forbid();
+        if (!ModelState.IsValid) return BadRequest(ApiResponse.Fail("Dữ liệu không hợp lệ", ModelState));
+        if (!Guid.TryParse(request.QuizId, out var quizId))
+            return BadRequest(ApiResponse.Fail("QuizId không hợp lệ"));
+        var ok = await repo.SetActiveEntryTestAsync(id, UserId, quizId);
+        if (!ok) return NotFound(ApiResponse.Fail("Không tìm thấy lớp hoặc bài test không hợp lệ"));
+        return Ok(ApiResponse.Ok("Đã đặt bài test đầu vào active thành công"));
     }
 
     /// <summary>Student: Tham gia lớp học bằng mã code</summary>

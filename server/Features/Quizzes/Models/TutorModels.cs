@@ -9,7 +9,7 @@ public class TutorAnswerRequest
     [Required] public string QuestionId { get; set; } = "";
     [Required] public string QuestionText { get; set; } = "";
     [Required] public string SelectedAnswer { get; set; } = "";
-    [Required] public string CorrectAnswer { get; set; } = "";
+    public string? CorrectAnswer { get; set; }
     public double Difficulty { get; set; } = 0.5;
     public double? ResponseTimeSeconds { get; set; }
 }

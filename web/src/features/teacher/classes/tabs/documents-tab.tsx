@@ -1,18 +1,23 @@
 import { useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { documentsService } from '@/services/documents.service';
 import { useClassDocuments } from '@/hooks/use-class-documents';
+import { useClassTopics } from '@/hooks/use-class-topics';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent } from '@/components/ui/card';
 import {
   Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter,
 } from '@/components/ui/dialog';
-import { Upload, Download, Trash2, Sparkles, FileText, Loader2 } from 'lucide-react';
+import {
+  Select, SelectContent, SelectItem, SelectTrigger,
+} from '@/components/ui/select';
+import { Switch } from '@/components/ui/switch';
+import { Upload, Download, Trash2, Sparkles, FileText, Loader2, Eye, EyeOff } from 'lucide-react';
 import { toast } from 'sonner';
 import type { DocumentDto } from '@/types';
-import { QuizGenerationDialog } from '@/components/shared/quiz-generation-dialog';
+import { teacherQuizPoolGeneratePath } from '@/lib/constants';
 
 const statusMap: Record<string, { label: string; variant: 'default' | 'secondary' | 'destructive' | 'outline' }> = {
   pending: { label: 'Chờ tải lên', variant: 'outline' },
@@ -33,13 +38,14 @@ function formatSize(size: string) {
 }
 
 export function DocumentsTab({ classId }: { classId: string }) {
+  const navigate = useNavigate();
   const queryClient = useQueryClient();
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [deleteDoc, setDeleteDoc] = useState<DocumentDto | null>(null);
   const [uploading, setUploading] = useState(false);
-  const [quizDoc, setQuizDoc] = useState<DocumentDto | null>(null);
 
   const { data: documents, isLoading } = useClassDocuments(classId);
+  const { data: topics } = useClassTopics(classId);
 
   const invalidate = () => queryClient.invalidateQueries({ queryKey: ['class-documents', classId] });
 
@@ -83,14 +89,21 @@ export function DocumentsTab({ classId }: { classId: string }) {
     onError: () => toast.error('Không thể thử lại index RAG'),
   });
 
-  const generateQuizMutation = useMutation({
-    mutationFn: (data: { docId: string; options?: { topicId?: string; numQuestions?: number; difficulty?: string; mode?: string } }) =>
-      documentsService.generateQuizFromDocument(classId, data.docId, data.options),
-    onSuccess: (data) => {
+  const updateTopicMutation = useMutation({
+    mutationFn: ({ docId, topicId }: { docId: string; topicId: string | null }) =>
+      documentsService.updateDocumentTopic(classId, docId, topicId),
+    onSuccess: () => invalidate(),
+    onError: () => toast.error('Cập nhật chủ đề thất bại'),
+  });
+
+  const updateVisibilityMutation = useMutation({
+    mutationFn: ({ docId, isVisible }: { docId: string; isVisible: boolean }) =>
+      documentsService.updateDocumentVisibility(classId, docId, isVisible),
+    onSuccess: (_, vars) => {
       invalidate();
-      toast.success(`Đang tạo quiz (Job: ${data.jobId.slice(0, 8)}...)`);
+      toast.success(vars.isVisible ? 'Đã publish cho học sinh' : 'Đã ẩn khỏi học sinh');
     },
-    onError: () => toast.error('Tạo quiz thất bại'),
+    onError: () => toast.error('Cập nhật thất bại'),
   });
 
   const handleDownload = async (doc: DocumentDto) => {
@@ -139,52 +152,106 @@ export function DocumentsTab({ classId }: { classId: string }) {
             const status = statusMap[doc.status] ?? statusMap.error;
             return (
               <Card key={doc.id} className="border-border">
-                <CardContent className="flex items-center justify-between p-3">
-                  <div className="flex items-center gap-3 min-w-0">
-                    <FileText className="h-5 w-5 shrink-0 text-muted-foreground" />
-                    <div className="min-w-0">
-                      <p className="truncate font-medium text-foreground text-sm">{doc.name}</p>
-                      <p className="text-xs text-muted-foreground">
-                        {formatSize(doc.size)} · {new Date(doc.uploadedAt).toLocaleDateString('vi-VN')}
-                      </p>
+                <CardContent className="p-3">
+                  <div className="flex items-center justify-between gap-2">
+                    {/* Left: file info */}
+                    <div className="flex items-center gap-3 min-w-0">
+                      <FileText className="h-5 w-5 shrink-0 text-muted-foreground" />
+                      <div className="min-w-0">
+                        <p className="truncate font-medium text-foreground text-sm">{doc.name}</p>
+                        <p className="text-xs text-muted-foreground">
+                          {formatSize(doc.size)} · {new Date(doc.uploadedAt).toLocaleDateString('vi-VN')}
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* Right: actions */}
+                    <div className="flex items-center gap-2 shrink-0">
+                      <Badge variant={status.variant}>{status.label}</Badge>
+                      {doc.status === 'ingest_failed' && (
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          onClick={() => retryIngestMutation.mutate(doc.id)}
+                          disabled={retryIngestMutation.isPending}
+                        >
+                          Thử lại RAG
+                        </Button>
+                      )}
+                      {(doc.status === 'ready' || doc.status === 'error') && (
+                        <Button
+                          variant="outline"
+                          size="icon-sm"
+                          onClick={() => navigate(teacherQuizPoolGeneratePath({
+                            classId,
+                            documentId: doc.id,
+                            topicId: doc.topicId ?? undefined,
+                          }))}
+                          title="Sinh quiz AI trong Quiz Pool"
+                        >
+                          <Sparkles className="h-3.5 w-3.5" />
+                        </Button>
+                      )}
+                      {doc.generatedQuizId && doc.status !== 'error' && (
+                        <Link to={`/teacher/ai-studio/${doc.generatedQuizId}`}>
+                          <Badge variant="outline" className="cursor-pointer hover:bg-primary/10">
+                            <Sparkles className="h-3 w-3 mr-1" />Xem Quiz
+                          </Badge>
+                        </Link>
+                      )}
+                      <Button variant="ghost" size="icon-sm" onClick={() => handleDownload(doc)} title="Tải xuống">
+                        <Download className="h-3.5 w-3.5" />
+                      </Button>
+                      <Button variant="ghost" size="icon-sm" onClick={() => setDeleteDoc(doc)} title="Xóa">
+                        <Trash2 className="h-3.5 w-3.5 text-destructive" />
+                      </Button>
                     </div>
                   </div>
-                  <div className="flex items-center gap-2 shrink-0">
-                    <Badge variant={status.variant}>{status.label}</Badge>
-                    {doc.status === 'ingest_failed' && (
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        onClick={() => retryIngestMutation.mutate(doc.id)}
-                        disabled={retryIngestMutation.isPending}
+
+                  {/* Bottom row: topic selector + publish toggle */}
+                  <div className="mt-2 flex items-center gap-3 border-t border-border/50 pt-2">
+                    {/* Topic selector */}
+                    <div className="flex items-center gap-1.5 min-w-0 flex-1">
+                      <span className="text-xs text-muted-foreground shrink-0">Chủ đề:</span>
+                      <Select
+                        value={doc.topicId ?? 'none'}
+                        onValueChange={(v) =>
+                          updateTopicMutation.mutate({ docId: doc.id, topicId: v === 'none' ? null : v })
+                        }
                       >
-                        Thử lại RAG
-                      </Button>
-                    )}
-                    {(doc.status === 'ready' || doc.status === 'error') && (
-                      <Button
-                        variant="outline"
-                        size="icon-sm"
-                        onClick={() => setQuizDoc(doc)}
-                        disabled={generateQuizMutation.isPending}
-                        title={doc.status === 'error' ? 'Thử sinh lại quiz' : doc.generatedQuizId ? 'Sinh thêm hoặc tạo lại quiz' : 'Tạo quiz từ tài liệu'}
-                      >
-                        <Sparkles className="h-3.5 w-3.5" />
-                      </Button>
-                    )}
-                    {doc.generatedQuizId && doc.status !== 'error' && (
-                      <Link to={`/teacher/ai-studio/${doc.generatedQuizId}`}>
-                        <Badge variant="outline" className="cursor-pointer hover:bg-primary/10">
-                          <Sparkles className="h-3 w-3 mr-1" />Xem Quiz
-                        </Badge>
-                      </Link>
-                    )}
-                    <Button variant="ghost" size="icon-sm" onClick={() => handleDownload(doc)} title="Tải xuống">
-                      <Download className="h-3.5 w-3.5" />
-                    </Button>
-                    <Button variant="ghost" size="icon-sm" onClick={() => setDeleteDoc(doc)} title="Xóa">
-                      <Trash2 className="h-3.5 w-3.5 text-destructive" />
-                    </Button>
+                        <SelectTrigger className="h-6 text-xs min-w-0 max-w-[200px]">
+                          <span className="truncate">
+                            {doc.topicId
+                              ? (topics?.find((t) => t.id === doc.topicId)?.name ?? 'Chưa gán')
+                              : 'Chưa gán chủ đề'}
+                          </span>
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="none">Chưa gán chủ đề</SelectItem>
+                          {topics?.map((t) => (
+                            <SelectItem key={t.id} value={t.id}>
+                              {t.name}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                    </div>
+
+                    {/* Publish toggle */}
+                    <div className="flex items-center gap-1.5 shrink-0" title={doc.isVisible ? 'Đang hiển thị cho học sinh' : 'Học sinh chưa thấy tài liệu này'}>
+                      {doc.isVisible
+                        ? <Eye className="h-3.5 w-3.5 text-green-500" />
+                        : <EyeOff className="h-3.5 w-3.5 text-muted-foreground" />
+                      }
+                      <Switch
+                        checked={doc.isVisible}
+                        onCheckedChange={(v) => updateVisibilityMutation.mutate({ docId: doc.id, isVisible: v })}
+                        disabled={updateVisibilityMutation.isPending}
+                      />
+                      <span className="text-xs text-muted-foreground">
+                        {doc.isVisible ? 'Đã publish' : 'Chưa publish'}
+                      </span>
+                    </div>
                   </div>
                 </CardContent>
               </Card>
@@ -192,20 +259,6 @@ export function DocumentsTab({ classId }: { classId: string }) {
           })}
         </div>
       )}
-
-      <QuizGenerationDialog
-        open={!!quizDoc}
-        onOpenChange={(open) => !open && setQuizDoc(null)}
-        doc={quizDoc}
-        onSubmit={(options) => {
-          if (quizDoc) {
-            generateQuizMutation.mutate({ docId: quizDoc.id, options });
-            setQuizDoc(null);
-          }
-        }}
-        isPending={generateQuizMutation.isPending}
-        classId={classId}
-      />
 
       {/* Delete confirm */}
       <Dialog open={!!deleteDoc} onOpenChange={() => setDeleteDoc(null)}>

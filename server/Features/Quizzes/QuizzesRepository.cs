@@ -13,9 +13,11 @@ namespace EduBoost.API.Features.Quizzes;
 
 public interface IQuizzesRepository
 {
+    Task<QuizDto?> GetQuizByIdAsync(Guid quizId);
     Task<List<QuestionDto>> GetQuestionsAsync(Guid quizId);
     Task<QuestionDto?> UpdateQuestionAsync(Guid questionId, UpdateQuestionRequest request);
     Task<bool> DeleteQuestionAsync(Guid questionId);
+    Task<bool> DeleteQuizAsync(Guid quizId, Guid userId);
     Task<QuestionDto?> VerifyQuestionAsync(Guid questionId, bool verified);
     Task<bool> PublishQuizAsync(Guid quizId);
     Task<EntryTestDto?> GetEntryTestAsync(Guid classId);
@@ -30,14 +32,36 @@ public interface IQuizzesRepository
     Task<bool> HasEntryTestAsync(Guid classId);
     Task<QuizDto> GenerateEntryTestAsync(Guid classId);
     Task<QuestionDto?> AddQuestionAsync(Guid quizId, CreateQuestionRequest request);
+    Task<List<QuestionDto>> AddQuestionsFromPoolAsync(Guid quizId, List<Guid> questionIds, Guid teacherId);
     Task<string?> GetTopicNameAsync(Guid topicId);
     Task<Guid?> GetTopicClassIdAsync(Guid topicId);
+    Task<List<string>> GetRecentTutorQuestionTextsAsync(Guid topicId, int limit = 150);
     Task<Guid> PersistTutorQuestionAsync(Guid topicId, AgentQuizResponse agentQuestion);
+    Task<QuestionDto?> GetTutorQuestionAsync(Guid topicId, Guid questionId);
     Task CompleteTutorPracticeAsync(Guid userId, Guid topicId, int questionsAttempted, int correctAnswers);
 }
 
 public class QuizzesRepository(AppDbContext db, IAgentService agent, ILearningStatesRepository learningStates, IRoadmapRepository roadmap, ILogger<QuizzesRepository> logger) : IQuizzesRepository
 {
+    public async Task<QuizDto?> GetQuizByIdAsync(Guid quizId)
+    {
+        var quiz = await db.Quizzes
+            .Include(q => q.Questions)
+            .FirstOrDefaultAsync(q => q.Id == quizId);
+        if (quiz == null) return null;
+        return new QuizDto
+        {
+            Id = quiz.Id.ToString(),
+            ClassId = quiz.ClassId?.ToString() ?? "",
+            TopicId = quiz.TopicId?.ToString(),
+            Title = quiz.Title,
+            Type = quiz.Type,
+            IsPublished = quiz.IsPublished,
+            QuestionCount = quiz.Questions.Count,
+            CreatedAt = quiz.CreatedAt.ToString("o")
+        };
+    }
+
     public async Task<List<QuestionDto>> GetQuestionsAsync(Guid quizId)
     {
         return await db.Questions
@@ -157,6 +181,81 @@ public class QuizzesRepository(AppDbContext db, IAgentService agent, ILearningSt
         db.Questions.Remove(question);
         await db.SaveChangesAsync();
         return true;
+    }
+
+    public async Task<bool> DeleteQuizAsync(Guid quizId, Guid userId)
+    {
+        var quiz = await db.Quizzes.FindAsync(quizId);
+        if (quiz == null) return false;
+
+        // Only the owner or the class teacher may delete
+        if (quiz.OwnerId.HasValue && quiz.OwnerId != userId) return false;
+        if (quiz.ClassId.HasValue && !quiz.OwnerId.HasValue)
+        {
+            var isTeacher = await db.Classes.AnyAsync(c => c.Id == quiz.ClassId && c.TeacherId == userId);
+            if (!isTeacher) return false;
+        }
+
+        // If this quiz is the active entry test for the class, clear that reference first
+        if (quiz.ClassId.HasValue)
+        {
+            var cls = await db.Classes.FirstOrDefaultAsync(c => c.Id == quiz.ClassId && c.ActiveEntryTestId == quizId);
+            if (cls != null) cls.ActiveEntryTestId = null;
+        }
+
+        db.Quizzes.Remove(quiz);
+        await db.SaveChangesAsync();
+        return true;
+    }
+
+    public async Task<List<QuestionDto>> AddQuestionsFromPoolAsync(Guid quizId, List<Guid> questionIds, Guid teacherId)
+    {
+        var quiz = await db.Quizzes.Include(q => q.Questions).FirstOrDefaultAsync(q => q.Id == quizId);
+        if (quiz == null) return [];
+
+        if (quiz.ClassId.HasValue)
+        {
+            var isTeacher = await db.Classes.AnyAsync(c => c.Id == quiz.ClassId && c.TeacherId == teacherId);
+            if (!isTeacher) return [];
+        }
+
+        var poolQuestions = await db.Questions
+            .Where(q => questionIds.Contains(q.Id) && q.Quiz.Type == "pool")
+            .Include(q => q.Options)
+            .Include(q => q.Quiz)
+            .ToListAsync();
+
+        var maxOrder = quiz.Questions.Count > 0 ? quiz.Questions.Max(q => q.OrderIndex) + 1 : 0;
+        var added = new List<Question>();
+
+        foreach (var (poolQ, idx) in poolQuestions.Select((q, i) => (q, i)))
+        {
+            var copy = new Question
+            {
+                Id = Guid.NewGuid(),
+                QuizId = quizId,
+                Text = poolQ.Text,
+                Type = poolQ.Type,
+                Difficulty = poolQ.Difficulty,
+                Explanation = poolQ.Explanation,
+                CorrectAnswer = poolQ.CorrectAnswer,
+                VerifiedByTeacher = true,
+                OrderIndex = maxOrder + idx,
+                SourceTopicId = poolQ.Quiz?.TopicId,
+                Options = poolQ.Options.Select((o, oi) => new QuizOption
+                {
+                    Id = Guid.NewGuid(),
+                    Text = o.Text,
+                    IsCorrect = o.IsCorrect,
+                    OrderIndex = oi
+                }).ToList()
+            };
+            db.Questions.Add(copy);
+            added.Add(copy);
+        }
+
+        await db.SaveChangesAsync();
+        return added.Select(MapToDto).ToList();
     }
 
     public async Task<QuestionDto?> VerifyQuestionAsync(Guid questionId, bool verified)
@@ -374,7 +473,9 @@ public class QuizzesRepository(AppDbContext db, IAgentService agent, ILearningSt
             {
                 foreach (var aiQ in aiQuestions)
                 {
-                    questions.Add(MapAgentQuestionToEntity(aiQ, order++));
+                    var entity = MapAgentQuestionToEntity(aiQ, order++);
+                    entity.SourceTopicId = topic.Id;
+                    questions.Add(entity);
                 }
                 continue;
             }
@@ -382,7 +483,9 @@ public class QuizzesRepository(AppDbContext db, IAgentService agent, ILearningSt
             logger.LogWarning("AI unavailable for entry test topic {Topic} — using placeholder questions", topic.Name);
             for (int i = 0; i < count; i++)
             {
-                questions.Add(CreatePlaceholderQuestion(topic.Name, topic.Difficulty, order++, i + 1));
+                var placeholder = CreatePlaceholderQuestion(topic.Name, topic.Difficulty, order++, i + 1);
+                placeholder.SourceTopicId = topic.Id;
+                questions.Add(placeholder);
             }
         }
 
@@ -462,10 +565,24 @@ public class QuizzesRepository(AppDbContext db, IAgentService agent, ILearningSt
         return topic?.ClassId;
     }
 
+    public async Task<List<string>> GetRecentTutorQuestionTextsAsync(Guid topicId, int limit = 150)
+    {
+        return await db.Questions
+            .Where(q => q.Quiz.TopicId == topicId && q.Quiz.Type == "tutor")
+            .OrderByDescending(q => q.OrderIndex)
+            .Select(q => q.Text)
+            .Where(t => !string.IsNullOrWhiteSpace(t))
+            .Distinct()
+            .Take(limit)
+            .ToListAsync();
+    }
+
     public async Task<Guid> PersistTutorQuestionAsync(Guid topicId, AgentQuizResponse agentQuestion)
     {
         var quizId = await GetOrCreateTutorQuizAsync(topicId);
         var orderIndex = await db.Questions.CountAsync(q => q.QuizId == quizId);
+        var correctKey = agentQuestion.Options.Keys.FirstOrDefault(k =>
+            string.Equals(k, agentQuestion.CorrectAnswer, StringComparison.OrdinalIgnoreCase)) ?? agentQuestion.CorrectAnswer;
 
         var difficulty = agentQuestion.DifficultyLevel switch
         {
@@ -482,13 +599,13 @@ public class QuizzesRepository(AppDbContext db, IAgentService agent, ILearningSt
             Type = "mcq",
             Difficulty = difficulty,
             Explanation = agentQuestion.Explanation,
-            CorrectAnswer = agentQuestion.Options.GetValueOrDefault(agentQuestion.CorrectAnswer, agentQuestion.CorrectAnswer),
+            CorrectAnswer = agentQuestion.Options.GetValueOrDefault(correctKey, agentQuestion.CorrectAnswer),
             OrderIndex = orderIndex,
             Options = agentQuestion.Options.Select((kv, i) => new QuizOption
             {
                 Id = Guid.NewGuid(),
                 Text = kv.Value,
-                IsCorrect = kv.Key == agentQuestion.CorrectAnswer,
+                IsCorrect = string.Equals(kv.Key, correctKey, StringComparison.OrdinalIgnoreCase),
                 OrderIndex = i
             }).ToList()
         };
@@ -496,6 +613,16 @@ public class QuizzesRepository(AppDbContext db, IAgentService agent, ILearningSt
         db.Questions.Add(question);
         await db.SaveChangesAsync();
         return question.Id;
+    }
+
+    public async Task<QuestionDto?> GetTutorQuestionAsync(Guid topicId, Guid questionId)
+    {
+        var question = await db.Questions
+            .Include(q => q.Options)
+            .Include(q => q.Quiz)
+            .FirstOrDefaultAsync(q => q.Id == questionId && q.Quiz.TopicId == topicId && q.Quiz.Type == "tutor");
+
+        return question == null ? null : MapToDto(question);
     }
 
     private async Task<Guid> GetOrCreateTutorQuizAsync(Guid topicId)

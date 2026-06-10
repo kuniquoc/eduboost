@@ -30,7 +30,7 @@ class AdaptiveEntryTest:
     - After minimum questions, check stability to determine level
     """
 
-    MIN_QUESTIONS = 10
+    MIN_QUESTIONS = 1
     MAX_QUESTIONS = 20
     DIFFICULTY_LEVELS = ["easy", "medium", "hard"]
 

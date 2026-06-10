@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useQuizQuestions } from '@/hooks/use-quiz-questions';
 import { quizzesService } from '@/services/quizzes.service';
 import { Button } from '@/components/ui/button';
@@ -13,8 +13,9 @@ import { Card, CardContent } from '@/components/ui/card';
 import {
   Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter,
 } from '@/components/ui/dialog';
-import { ArrowLeft, Trash2, Pencil, CheckCircle, Send, Loader2, Plus } from 'lucide-react';
+import { ArrowLeft, Trash2, Pencil, CheckCircle, Send, Loader2, Plus, Library } from 'lucide-react';
 import { toast } from 'sonner';
+import { PoolQuestionPicker } from '@/components/shared/pool-question-picker';
 import type { QuestionDto, UpdateQuestionPayload, CreateQuestionPayload } from '@/types';
 
 const diffBadge: Record<string, { label: string; variant: 'secondary' | 'default' | 'destructive' | 'outline' }> = {
@@ -31,6 +32,14 @@ export function QuizReviewPage() {
   const queryClient = useQueryClient();
 
   const [editQ, setEditQ] = useState<QuestionDto | null>(null);
+  const [poolPickerOpen, setPoolPickerOpen] = useState(false);
+  const [selectedPoolQuestionIds, setSelectedPoolQuestionIds] = useState<string[]>([]);
+
+  const { data: quizMeta } = useQuery({
+    queryKey: ['quiz-meta', quizId],
+    queryFn: () => quizzesService.getQuiz(quizId!),
+    enabled: !!quizId,
+  });
   const [editText, setEditText] = useState('');
   const [editExplanation, setEditExplanation] = useState('');
   const [editOptions, setEditOptions] = useState<Array<{ id?: string; text: string; isCorrect: boolean }>>([]);
@@ -87,6 +96,17 @@ export function QuizReviewPage() {
       resetAdd();
     },
     onError: () => toast.error('Thêm câu hỏi thất bại'),
+  });
+
+  const addFromPoolMutation = useMutation({
+    mutationFn: (ids: string[]) => quizzesService.addQuestionsFromPool(quizId!, ids),
+    onSuccess: (added) => {
+      invalidate();
+      toast.success(`Đã thêm ${added.length} câu hỏi từ Pool`);
+      setPoolPickerOpen(false);
+      setSelectedPoolQuestionIds([]);
+    },
+    onError: () => toast.error('Thêm từ Pool thất bại'),
   });
 
   const resetAdd = () => {
@@ -165,12 +185,17 @@ export function QuizReviewPage() {
         </button>
         <div className="flex items-start justify-between">
           <div>
-            <h1 className="text-2xl font-bold text-foreground">AI Studio — Kiểm duyệt Quiz</h1>
+            <h1 className="text-2xl font-bold text-foreground">Kiểm duyệt Quiz</h1>
             <p className="mt-1 text-sm text-muted-foreground">
               {verifiedCount}/{questions?.length ?? 0} câu đã duyệt
             </p>
           </div>
           <div className="flex gap-2">
+            {quizMeta?.classId && (
+              <Button variant="outline" onClick={() => setPoolPickerOpen(true)}>
+                <Library className="h-4 w-4" /> Thêm từ Pool
+              </Button>
+            )}
             <Button variant="outline" onClick={() => setAddOpen(true)}>
               <Plus className="h-4 w-4" /> Thêm câu hỏi
             </Button>
@@ -450,6 +475,48 @@ export function QuizReviewPage() {
           </DialogFooter>
         </DialogContent>
       </Dialog>
+
+      {/* Pool picker dialog */}
+      {quizMeta?.classId && (
+        <Dialog open={poolPickerOpen} onOpenChange={(open) => {
+          if (!open) { setPoolPickerOpen(false); setSelectedPoolQuestionIds([]); }
+        }}>
+          <DialogContent className="sm:max-w-5xl max-h-[90vh] overflow-y-auto">
+            <DialogHeader>
+              <DialogTitle className="flex items-center gap-2">
+                <Library className="h-5 w-5 text-purple-400" />
+                Thêm câu hỏi từ Quiz Pool
+              </DialogTitle>
+              <DialogDescription>
+                Chọn câu hỏi từ kho pool của lớp để thêm vào quiz này.
+              </DialogDescription>
+            </DialogHeader>
+            <PoolQuestionPicker
+              classId={quizMeta.classId}
+              selectionMode="question"
+              selectedQuestionIds={selectedPoolQuestionIds}
+              selectedPoolQuizIds={[]}
+              onSelectionChange={({ questionIds }) => setSelectedPoolQuestionIds(questionIds)}
+              showDifficultyFilter
+              showQuestionSearch
+            />
+            <DialogFooter>
+              <Button variant="outline" onClick={() => { setPoolPickerOpen(false); setSelectedPoolQuestionIds([]); }}>
+                Hủy
+              </Button>
+              <Button
+                onClick={() => addFromPoolMutation.mutate(selectedPoolQuestionIds)}
+                disabled={addFromPoolMutation.isPending || selectedPoolQuestionIds.length === 0}
+                className="bg-purple-600 hover:bg-purple-700"
+              >
+                {addFromPoolMutation.isPending
+                  ? <><Loader2 className="h-4 w-4 animate-spin" /> Đang thêm...</>
+                  : `Thêm ${selectedPoolQuestionIds.length > 0 ? selectedPoolQuestionIds.length + ' câu' : ''}`}
+              </Button>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
+      )}
     </div>
   );
 }

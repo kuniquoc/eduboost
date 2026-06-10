@@ -27,6 +27,10 @@ public interface IDocumentsRepository
 
     Task<DocumentDto?> GetByIdAsync(Guid docId);
     Task<List<string>> GetAllowedDocumentIdsAsync(Guid userId);
+
+    // Topic & visibility management
+    Task<DocumentDto?> UpdateDocumentTopicAsync(Guid classId, Guid docId, string? topicId);
+    Task<DocumentDto?> UpdateDocumentVisibilityAsync(Guid classId, Guid docId, bool isVisible);
 }
 
 public class DocumentsRepository(
@@ -835,8 +839,33 @@ public class DocumentsRepository(
         TopicId = d.TopicId?.ToString(),
         GeneratedQuizId = d.GeneratedQuizId?.ToString(),
         ClassId = d.ClassId?.ToString(),
-        Scope = d.Scope
+        Scope = d.Scope,
+        IsVisible = d.IsVisible
     };
+
+    public async Task<DocumentDto?> UpdateDocumentTopicAsync(Guid classId, Guid docId, string? topicId)
+    {
+        var doc = await db.Documents.FirstOrDefaultAsync(d => d.Id == docId && d.ClassId == classId && d.Scope == "class");
+        if (doc == null) return null;
+
+        if (string.IsNullOrWhiteSpace(topicId))
+            doc.TopicId = null;
+        else if (Guid.TryParse(topicId, out var tid))
+            doc.TopicId = tid;
+
+        await db.SaveChangesAsync();
+        return MapToDto(doc);
+    }
+
+    public async Task<DocumentDto?> UpdateDocumentVisibilityAsync(Guid classId, Guid docId, bool isVisible)
+    {
+        var doc = await db.Documents.FirstOrDefaultAsync(d => d.Id == docId && d.ClassId == classId && d.Scope == "class");
+        if (doc == null) return null;
+
+        doc.IsVisible = isVisible;
+        await db.SaveChangesAsync();
+        return MapToDto(doc);
+    }
 
     public async Task<List<string>> GetAllowedDocumentIdsAsync(Guid userId)
     {
@@ -869,19 +898,14 @@ public class DocumentsRepository(
                 .ToListAsync();
             allowedDocIds.AddRange(privateDocs);
 
-            // 2. Class documents for classes enrolled in and linked to published topics
+            // 2. Class documents for classes enrolled in and explicitly published by teacher
             var enrolledClassIds = await db.Enrollments
                 .Where(e => e.StudentId == userId)
                 .Select(e => e.ClassId)
                 .ToListAsync();
 
-            var visibleTopicIds = await db.Topics
-                .Where(t => t.ClassId != null && enrolledClassIds.Contains(t.ClassId.Value) && t.IsDocumentVisible)
-                .Select(t => t.Id)
-                .ToListAsync();
-
             var classDocs = await db.Documents
-                .Where(d => d.ClassId != null && enrolledClassIds.Contains(d.ClassId.Value) && d.TopicId != null && visibleTopicIds.Contains(d.TopicId.Value) && d.Scope == "class")
+                .Where(d => d.ClassId != null && enrolledClassIds.Contains(d.ClassId.Value) && d.IsVisible && d.Scope == "class")
                 .Select(d => d.Id.ToString())
                 .ToListAsync();
             allowedDocIds.AddRange(classDocs);

@@ -72,6 +72,28 @@ public class DocumentsController(IDocumentsRepository repo, IClassesRepository c
         return Ok(ApiResponse.Ok("Xoá tài liệu thành công"));
     }
 
+    /// <summary>Teacher: Gán hoặc bỏ chủ đề cho tài liệu</summary>
+    [HttpPatch("classes/{classId:guid}/documents/{id:guid}/topic")]
+    public async Task<IActionResult> UpdateDocumentTopic(Guid classId, Guid id, [FromBody] UpdateDocumentTopicRequest request)
+    {
+        if (UserRole != "teacher") return Forbid();
+        if (!await classes.IsOwnedByTeacherAsync(classId, UserId)) return Forbid();
+        var doc = await repo.UpdateDocumentTopicAsync(classId, id, request.TopicId);
+        if (doc == null) return NotFound(ApiResponse.Fail("Không tìm thấy tài liệu"));
+        return Ok(ApiResponse<DocumentDto>.Ok(doc));
+    }
+
+    /// <summary>Teacher: Bật/tắt hiển thị tài liệu cho học sinh</summary>
+    [HttpPatch("classes/{classId:guid}/documents/{id:guid}/visibility")]
+    public async Task<IActionResult> UpdateDocumentVisibility(Guid classId, Guid id, [FromBody] UpdateDocumentVisibilityRequest request)
+    {
+        if (UserRole != "teacher") return Forbid();
+        if (!await classes.IsOwnedByTeacherAsync(classId, UserId)) return Forbid();
+        var doc = await repo.UpdateDocumentVisibilityAsync(classId, id, request.IsVisible);
+        if (doc == null) return NotFound(ApiResponse.Fail("Không tìm thấy tài liệu"));
+        return Ok(ApiResponse<DocumentDto>.Ok(doc));
+    }
+
     /// <summary>Teacher: Yêu cầu AI tạo quiz từ tài liệu</summary>
     [HttpPost("classes/{classId:guid}/documents/{id:guid}/generate-quiz")]
     public async Task<IActionResult> GenerateQuizFromDocument(Guid classId, Guid id, [FromBody] GenerateQuizRequest request)

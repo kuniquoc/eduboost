@@ -2,7 +2,6 @@ using EduBoost.API.Features.Roadmap;
 using EduBoost.API.Features.Topics.Models;
 using EduBoost.API.Infrastructure;
 using EduBoost.API.Infrastructure.Entities;
-using EduBoost.API.Infrastructure.Services;
 using Microsoft.EntityFrameworkCore;
 
 namespace EduBoost.API.Features.Topics;
@@ -14,13 +13,12 @@ public interface ITopicsRepository
     Task<TopicDto> CreateAsync(Guid classId, CreateTopicRequest request);
     Task<TopicDto?> UpdateAsync(Guid topicId, UpdateTopicRequest request);
     Task<bool> DeleteAsync(Guid topicId);
-    Task<List<TopicDto>> AiEvaluateAsync(Guid classId);
     Task<TopicDto?> UpdateDifficultyAsync(Guid topicId, string difficulty);
     Task<TopicDto?> UpdateVisibilityAsync(Guid topicId, bool isVisible);
     Task<bool> BelongsToClassAsync(Guid topicId, Guid classId);
 }
 
-public class TopicsRepository(AppDbContext db, IAgentService agent, ILogger<TopicsRepository> logger, IRoadmapRepository roadmap) : ITopicsRepository
+public class TopicsRepository(AppDbContext db, IRoadmapRepository roadmap) : ITopicsRepository
 {
     public async Task<List<TopicDto>> GetByClassIdAsync(Guid classId)
     {
@@ -43,14 +41,14 @@ public class TopicsRepository(AppDbContext db, IAgentService agent, ILogger<Topi
     {
         var topic = new Topic
         {
-            Id          = Guid.NewGuid(),
-            ClassId     = classId,
-            Name        = request.Name,
+            Id = Guid.NewGuid(),
+            ClassId = classId,
+            Name = request.Name,
             Description = request.Description ?? "",
-            Difficulty  = "medium",
+            Difficulty = "medium",
             AiEvaluated = false,
             IsDocumentVisible = false,
-            CreatedAt   = DateTime.UtcNow
+            CreatedAt = DateTime.UtcNow
         };
 
         db.Topics.Add(topic);
@@ -72,7 +70,7 @@ public class TopicsRepository(AppDbContext db, IAgentService agent, ILogger<Topi
         var topic = await db.Topics.FindAsync(topicId);
         if (topic == null) return null;
 
-        if (request.Name        != null) topic.Name        = request.Name;
+        if (request.Name != null) topic.Name = request.Name;
         if (request.Description != null) topic.Description = request.Description;
 
         await db.SaveChangesAsync();
@@ -87,57 +85,6 @@ public class TopicsRepository(AppDbContext db, IAgentService agent, ILogger<Topi
         db.Topics.Remove(topic);
         await db.SaveChangesAsync();
         return true;
-    }
-
-    public async Task<List<TopicDto>> AiEvaluateAsync(Guid classId)
-    {
-        var topics = await db.Topics
-            .Where(t => t.ClassId == classId)
-            .ToListAsync();
-
-        foreach (var t in topics)
-        {
-            var samples = await db.Questions
-                .Where(q => q.Quiz.TopicId == t.Id)
-                .OrderBy(q => q.OrderIndex)
-                .Select(q => q.Text)
-                .Take(5)
-                .ToListAsync();
-
-            var prompt =
-                $"Đánh giá độ khó chủ đề học tiếng Anh.\n" +
-                $"Tên chủ đề: {t.Name}\n" +
-                $"Mô tả: {t.Description}\n" +
-                $"Mẫu câu hỏi: {(samples.Count > 0 ? string.Join("; ", samples) : "chưa có")}\n" +
-                "Trả lời CHỈ MỘT từ: easy, medium, hoặc hard.";
-
-            string difficulty;
-            try
-            {
-                var aiResponse = await agent.AskAsync(prompt, t.Id.ToString(), "advanced", []);
-                var parsed = TopicDifficultyParser.ParseFromAiResponse(aiResponse.Answer);
-                if (parsed == null)
-                {
-                    difficulty = TopicDifficultyParser.HeuristicFromQuestionCount(samples.Count);
-                    logger.LogWarning("AI evaluate fallback for topic {Topic}: agent offline or unparseable response", t.Name);
-                }
-                else
-                {
-                    difficulty = parsed;
-                }
-            }
-            catch (Exception ex)
-            {
-                difficulty = TopicDifficultyParser.HeuristicFromQuestionCount(samples.Count);
-                logger.LogWarning(ex, "AI evaluate failed for topic {Topic}: using heuristic", t.Name);
-            }
-
-            t.AiEvaluated = true;
-            t.Difficulty = difficulty;
-        }
-
-        await db.SaveChangesAsync();
-        return await GetByClassIdAsync(classId);
     }
 
     public async Task<TopicDto?> UpdateDifficultyAsync(Guid topicId, string difficulty)
@@ -168,14 +115,14 @@ public class TopicsRepository(AppDbContext db, IAgentService agent, ILogger<Topi
 
     private static TopicDto MapToDto(Topic t, int questionCount) => new()
     {
-        Id               = t.Id.ToString(),
-        ClassId          = t.ClassId?.ToString() ?? "",
-        Name             = t.Name,
-        Description      = t.Description,
-        Difficulty       = t.Difficulty,
-        AiEvaluated      = t.AiEvaluated,
-        QuestionCount    = questionCount,
+        Id = t.Id.ToString(),
+        ClassId = t.ClassId?.ToString() ?? "",
+        Name = t.Name,
+        Description = t.Description,
+        Difficulty = t.Difficulty,
+        AiEvaluated = t.AiEvaluated,
+        QuestionCount = questionCount,
         IsDocumentVisible = t.IsDocumentVisible,
-        CreatedAt        = t.CreatedAt.ToString("yyyy-MM-dd")
+        CreatedAt = t.CreatedAt.ToString("yyyy-MM-dd")
     };
 }

@@ -5,7 +5,9 @@ namespace EduBoost.API.Features.QuizPool.Models;
 
 public class GeneratePoolQuizRequest
 {
-    [Required]
+    /// <summary>Existing topic ID — takes priority over TopicName when provided.</summary>
+    public string? TopicId { get; set; }
+
     public string TopicName { get; set; } = "";
     
     public string? ClassId { get; set; }
@@ -13,6 +15,20 @@ public class GeneratePoolQuizRequest
     public string? DocumentId { get; set; }
     public int NumQuestions { get; set; } = 5;
     public string Difficulty { get; set; } = "medium";
+
+    /// <summary>"append" (default) keeps existing questions; "replace" deletes all owner's pool quizzes in the topic first.</summary>
+    public string Mode { get; set; } = "append";
+
+    public int? NumEasyQuestions { get; set; }
+    public int? NumMediumQuestions { get; set; }
+    public int? NumHardQuestions { get; set; }
+}
+
+public class RenamePoolTopicRequest
+{
+    [System.ComponentModel.DataAnnotations.Required]
+    [System.ComponentModel.DataAnnotations.MinLength(1)]
+    public string Name { get; set; } = "";
 }
 
 public class CreateTestFromPoolRequest
@@ -28,6 +44,18 @@ public class CreateTestFromPoolRequest
     
     public int TimeLimitMinutes { get; set; } = 45;
     public int TotalScore { get; set; } = 10;
+}
+
+public class CreateEntryTestFromPoolRequest
+{
+    [Required]
+    public string ClassId { get; set; } = "";
+
+    public string? Title { get; set; }
+
+    public List<string> QuestionIds { get; set; } = [];
+
+    public List<string> PoolQuizIds { get; set; } = [];
 }
 
 public class CreateRevisionSetFromPoolRequest

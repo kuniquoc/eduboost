@@ -53,6 +53,31 @@ public class AgentQuizBatchDeserializationTests
     }
 
     [Fact]
+    public void Deserialize_AgentQuizResponse_MapsTutorSnakeCaseFields()
+    {
+        const string json = """
+            {
+              "question": "She ___ to school every day.",
+              "options": {
+                "A": "go",
+                "B": "goes",
+                "C": "going",
+                "D": "gone"
+              },
+              "correct_answer": "B",
+              "explanation": "Vì chủ ngữ là She...",
+              "difficulty_level": 0.42
+            }
+            """;
+
+        var result = JsonSerializer.Deserialize<AgentQuizResponse>(json, DeserializeOpts);
+
+        Assert.NotNull(result);
+        Assert.Equal("B", result!.CorrectAnswer);
+        Assert.Equal(0.42, result.DifficultyLevel);
+    }
+
+    [Fact]
     public void Serialize_QuizBatchPayload_IncludesExistingQuestionsAsSnakeCase()
     {
         var payload = new
@@ -75,6 +100,27 @@ public class AgentQuizBatchDeserializationTests
         Assert.Contains("She ___ to school.", json);
         Assert.Contains("He ___ to work.", json);
         Assert.DoesNotContain("existingQuestions", json);
+    }
+
+    [Fact]
+    public void Serialize_TutorQuestionPayload_IncludesExistingQuestionsAsSnakeCase()
+    {
+        var payload = new
+        {
+            topic_name = "English Grammar",
+            difficulty = 0.35,
+            allowed_document_ids = new[] { "doc-1" },
+            allowed_scopes = new[] { "system" },
+            existing_questions = new[] { "She ___ to school.", "He ___ to work." }
+        };
+
+        var json = JsonSerializer.Serialize(payload, SerializeOpts);
+
+        Assert.Contains("\"existing_questions\"", json);
+        Assert.Contains("\"allowed_document_ids\"", json);
+        Assert.Contains("She ___ to school.", json);
+        Assert.DoesNotContain("existingQuestions", json);
+        Assert.DoesNotContain("allowedDocumentIds", json);
     }
 
     [Fact]

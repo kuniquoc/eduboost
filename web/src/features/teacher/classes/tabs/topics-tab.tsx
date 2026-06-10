@@ -1,17 +1,20 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { topicsService } from '@/services/topics.service';
+import { documentsService } from '@/services/documents.service';
+import { useClassDocuments } from '@/hooks/use-class-documents';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Badge } from '@/components/ui/badge';
-import { Switch } from '@/components/ui/switch';
 import {
   Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter,
 } from '@/components/ui/dialog';
 import { Card, CardContent } from '@/components/ui/card';
-import { Plus, Sparkles, Pencil, Trash2, FileText, Loader2 } from 'lucide-react';
+import { teacherQuizPoolGeneratePath } from '@/lib/constants';
+import { Plus, Pencil, Trash2, FileText, Sparkles, Loader2 } from 'lucide-react';
 import { toast } from 'sonner';
 import type { TopicSummary } from '@/types';
 
@@ -27,6 +30,7 @@ interface TopicsTabProps {
 }
 
 export function TopicsTab({ classId, topics }: TopicsTabProps) {
+  const navigate = useNavigate();
   const queryClient = useQueryClient();
   const invalidate = () => queryClient.invalidateQueries({ queryKey: ['class-detail', classId] });
 
@@ -36,6 +40,9 @@ export function TopicsTab({ classId, topics }: TopicsTabProps) {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [editingId, setEditingId] = useState('');
+
+  // Document management dialog state
+  const [docManageTopic, setDocManageTopic] = useState<TopicSummary | null>(null);
 
   const createMutation = useMutation({
     mutationFn: () => topicsService.createTopic(classId, { name, description }),
@@ -69,15 +76,6 @@ export function TopicsTab({ classId, topics }: TopicsTabProps) {
     onError: () => toast.error('Xóa thất bại'),
   });
 
-  const aiEvaluateMutation = useMutation({
-    mutationFn: () => topicsService.aiEvaluate(classId),
-    onSuccess: () => {
-      invalidate();
-      toast.success('AI đã đánh giá độ khó');
-    },
-    onError: () => toast.error('AI đánh giá thất bại'),
-  });
-
   const difficultyMutation = useMutation({
     mutationFn: ({ topicId, difficulty }: { topicId: string; difficulty: 'easy' | 'medium' | 'hard' }) =>
       topicsService.updateDifficulty(classId, topicId, difficulty),
@@ -85,12 +83,6 @@ export function TopicsTab({ classId, topics }: TopicsTabProps) {
       invalidate();
       toast.success('Đã cập nhật độ khó');
     },
-  });
-
-  const visibilityMutation = useMutation({
-    mutationFn: ({ topicId, visible }: { topicId: string; visible: boolean }) =>
-      topicsService.updateVisibility(classId, topicId, visible),
-    onSuccess: () => invalidate(),
   });
 
   const openEdit = (t: TopicSummary) => {
@@ -102,16 +94,7 @@ export function TopicsTab({ classId, topics }: TopicsTabProps) {
 
   return (
     <div>
-      <div className="mb-4 flex items-center justify-between">
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={() => aiEvaluateMutation.mutate()}
-          disabled={aiEvaluateMutation.isPending}
-        >
-          {aiEvaluateMutation.isPending ? <Loader2 className="h-4 w-4 animate-spin" /> : <Sparkles className="h-4 w-4" />}
-          AI Đánh giá độ khó
-        </Button>
+      <div className="mb-4 flex justify-end">
         <Button size="sm" onClick={() => { setName(''); setDescription(''); setCreateOpen(true); }}>
           <Plus className="h-4 w-4" /> Thêm chủ đề
         </Button>
@@ -121,7 +104,9 @@ export function TopicsTab({ classId, topics }: TopicsTabProps) {
         <div className="flex flex-col items-center justify-center rounded-xl border border-dashed border-border py-12 text-center">
           <FileText className="mb-3 h-10 w-10 text-muted-foreground/50" />
           <p className="font-medium text-foreground">Chưa có chủ đề</p>
-          <p className="mt-1 text-sm text-muted-foreground">Thêm chủ đề để bắt đầu tổ chức nội dung</p>
+          <p className="mt-1 text-sm text-muted-foreground">
+            Thêm chủ đề rồi dùng AI sinh câu hỏi — không cần upload tài liệu
+          </p>
         </div>
       ) : (
         <div className="space-y-3">
@@ -135,9 +120,6 @@ export function TopicsTab({ classId, topics }: TopicsTabProps) {
                       <div className="flex items-center gap-2">
                         <span className="font-medium text-foreground">{t.name}</span>
                         <Badge variant={diff.variant}>{diff.label}</Badge>
-                        {t.aiEvaluated && (
-                          <Badge variant="outline"><Sparkles className="h-3 w-3 mr-1" />AI</Badge>
-                        )}
                       </div>
                       <p className="mt-1 text-xs text-muted-foreground">
                         {t.questionCount} câu hỏi
@@ -151,24 +133,32 @@ export function TopicsTab({ classId, topics }: TopicsTabProps) {
                         <button
                           key={d}
                           onClick={() => difficultyMutation.mutate({ topicId: t.id, difficulty: d })}
-                          className={`rounded px-2 py-0.5 text-xs transition-colors ${
-                            t.difficulty === d
-                              ? 'bg-primary text-primary-foreground'
-                              : 'bg-muted text-muted-foreground hover:text-foreground'
-                          }`}
+                          className={`rounded px-2 py-0.5 text-xs transition-colors ${t.difficulty === d
+                            ? 'bg-primary text-primary-foreground'
+                            : 'bg-muted text-muted-foreground hover:text-foreground'
+                            }`}
                         >
                           {difficultyMap[d].label}
                         </button>
                       ))}
                     </div>
-                    {/* Doc visibility toggle */}
-                    <div className="flex items-center gap-1.5" title="Hiển thị tài liệu cho học sinh">
+                    {/* Document management button */}
+                    <Button
+                      variant="ghost"
+                      size="icon-sm"
+                      title="Quản lý tài liệu liên kết"
+                      onClick={() => setDocManageTopic(t)}
+                    >
                       <FileText className="h-3.5 w-3.5 text-muted-foreground" />
-                      <Switch
-                        checked={t.isDocumentVisible}
-                        onCheckedChange={(v) => visibilityMutation.mutate({ topicId: t.id, visible: v })}
-                      />
-                    </div>
+                    </Button>
+                    <Button
+                      variant="ghost"
+                      size="icon-sm"
+                      title="AI sinh câu hỏi trong Quiz Pool"
+                      onClick={() => navigate(teacherQuizPoolGeneratePath({ classId, topicId: t.id }))}
+                    >
+                      <Sparkles className="h-3.5 w-3.5 text-indigo-400" />
+                    </Button>
                     <Button variant="ghost" size="icon-sm" onClick={() => openEdit(t)}>
                       <Pencil className="h-3.5 w-3.5" />
                     </Button>
@@ -183,6 +173,15 @@ export function TopicsTab({ classId, topics }: TopicsTabProps) {
         </div>
       )}
 
+      {/* Document management dialog */}
+      {docManageTopic && (
+        <DocumentManageDialog
+          classId={classId}
+          topic={docManageTopic}
+          onClose={() => setDocManageTopic(null)}
+        />
+      )}
+
       {/* Create dialog */}
       <Dialog open={createOpen} onOpenChange={setCreateOpen}>
         <DialogContent>
@@ -193,7 +192,7 @@ export function TopicsTab({ classId, topics }: TopicsTabProps) {
           <form onSubmit={(e) => { e.preventDefault(); createMutation.mutate(); }} className="space-y-4">
             <div className="space-y-2">
               <Label>Tên chủ đề</Label>
-              <Input value={name} onChange={(e) => setName(e.target.value)} placeholder="VD: Giới hạn hàm số" required />
+              <Input value={name} onChange={(e) => setName(e.target.value)} placeholder="VD: Ngữ pháp" required />
             </div>
             <div className="space-y-2">
               <Label>Mô tả</Label>
@@ -253,5 +252,110 @@ export function TopicsTab({ classId, topics }: TopicsTabProps) {
         </DialogContent>
       </Dialog>
     </div>
+  );
+}
+
+// ── Sub-component: Document management dialog ───────────────────────────────
+
+interface DocumentManageDialogProps {
+  classId: string;
+  topic: TopicSummary;
+  onClose: () => void;
+}
+
+function DocumentManageDialog({ classId, topic, onClose }: DocumentManageDialogProps) {
+  const queryClient = useQueryClient();
+  const { data: documents, isLoading } = useClassDocuments(classId);
+  const invalidateDocs = () => queryClient.invalidateQueries({ queryKey: ['class-documents', classId] });
+
+  const updateTopicMutation = useMutation({
+    mutationFn: ({ docId, topicId }: { docId: string; topicId: string | null }) =>
+      documentsService.updateDocumentTopic(classId, docId, topicId),
+    onSuccess: () => invalidateDocs(),
+    onError: () => toast.error('Cập nhật thất bại'),
+  });
+
+  const linkedDocs = documents?.filter((d) => d.topicId === topic.id) ?? [];
+  const unlinkedDocs = documents?.filter((d) => !d.topicId || d.topicId !== topic.id) ?? [];
+
+  const handleToggle = (docId: string, currentlyLinked: boolean) => {
+    updateTopicMutation.mutate({
+      docId,
+      topicId: currentlyLinked ? null : topic.id,
+    });
+  };
+
+  return (
+    <Dialog open onOpenChange={(open) => { if (!open) onClose(); }}>
+      <DialogContent className="max-w-lg">
+        <DialogHeader>
+          <DialogTitle>Tài liệu liên kết — {topic.name}</DialogTitle>
+          <DialogDescription>
+            Chọn tài liệu thuộc chủ đề này. Học sinh sẽ thấy tài liệu nếu bạn publish nó ở tab Tài liệu.
+          </DialogDescription>
+        </DialogHeader>
+
+        {isLoading ? (
+          <div className="flex items-center justify-center py-8">
+            <Loader2 className="h-6 w-6 animate-spin text-muted-foreground" />
+          </div>
+        ) : !documents?.length ? (
+          <p className="py-6 text-center text-sm text-muted-foreground">Lớp chưa có tài liệu nào.</p>
+        ) : (
+          <div className="max-h-80 overflow-y-auto space-y-1 pr-1">
+            {/* Linked docs first */}
+            {linkedDocs.map((doc) => (
+              <DocumentRow
+                key={doc.id}
+                name={doc.name}
+                linked
+                pending={updateTopicMutation.isPending}
+                onToggle={() => handleToggle(doc.id, true)}
+              />
+            ))}
+            {/* Unlinked docs */}
+            {unlinkedDocs.map((doc) => (
+              <DocumentRow
+                key={doc.id}
+                name={doc.name}
+                linked={false}
+                pending={updateTopicMutation.isPending}
+                onToggle={() => handleToggle(doc.id, false)}
+              />
+            ))}
+          </div>
+        )}
+
+        <DialogFooter>
+          <Button variant="outline" onClick={onClose}>Đóng</Button>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
+  );
+}
+
+interface DocumentRowProps {
+  name: string;
+  linked: boolean;
+  pending: boolean;
+  onToggle: () => void;
+}
+
+function DocumentRow({ name, linked, pending, onToggle }: DocumentRowProps) {
+  return (
+    <button
+      type="button"
+      onClick={onToggle}
+      disabled={pending}
+      className={`w-full flex items-center gap-3 rounded-lg border px-3 py-2 text-left text-sm transition-colors hover:bg-muted/50 disabled:opacity-60 ${
+        linked ? 'border-primary/40 bg-primary/5' : 'border-border'
+      }`}
+    >
+      <FileText className={`h-4 w-4 shrink-0 ${linked ? 'text-primary' : 'text-muted-foreground'}`} />
+      <span className="flex-1 truncate">{name}</span>
+      <span className={`text-xs font-medium shrink-0 ${linked ? 'text-primary' : 'text-muted-foreground'}`}>
+        {linked ? 'Đã liên kết' : 'Chưa liên kết'}
+      </span>
+    </button>
   );
 }

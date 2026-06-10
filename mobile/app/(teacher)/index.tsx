@@ -35,14 +35,7 @@ function TopicCard({ topic, classId }: { topic: TopicSummary; classId: string })
         <Text style={styles.topicName}>{topic.name}</Text>
         <Text style={styles.topicMeta}>{topic.questionCount} câu hỏi</Text>
       </View>
-      <View style={{ flexDirection: 'row', alignItems: 'center', gap: 6 }}>
-        {topic.aiEvaluated && (
-          <View style={styles.aiBadge}>
-            <Text style={styles.aiLabel}>AI</Text>
-          </View>
-        )}
-        <DifficultyBadge difficulty={topic.difficulty} />
-      </View>
+      <DifficultyBadge difficulty={topic.difficulty} />
     </View>
   );
 }
@@ -55,14 +48,6 @@ function ClassDetail({ classId, onBack }: { classId: string; onBack: () => void 
   const { data: cls, isLoading } = useQuery({
     queryKey: ['class', classId],
     queryFn: () => classesService.getClass(classId),
-  });
-
-  const aiEvalMut = useMutation({
-    mutationFn: () => topicsService.aiEvaluate(classId),
-    onSuccess: () => {
-      Alert.alert('✅ Xong', 'AI đã đánh giá xong độ khó cho tất cả topic');
-      qc.invalidateQueries({ queryKey: ['class', classId] });
-    },
   });
 
   if (isLoading || !cls) return (
@@ -112,21 +97,11 @@ function ClassDetail({ classId, onBack }: { classId: string; onBack: () => void 
         </View>
       </Card>
 
-      {/* Actions */}
-      <View style={styles.row}>
-        <Button
-          title="+ Thêm Topic"
-          variant="outline"
-          style={{ flex: 1 }}
-          onPress={() => Alert.alert('Coming soon', 'Chức năng thêm topic sẽ có ở phiên bản tiếp theo')}
-        />
-        <Button
-          title="✨ AI Đánh giá"
-          style={{ flex: 1 }}
-          loading={aiEvalMut.isPending}
-          onPress={() => aiEvalMut.mutate()}
-        />
-      </View>
+      <Button
+        title="+ Thêm Topic"
+        variant="outline"
+        onPress={() => Alert.alert('Coming soon', 'Chức năng thêm topic sẽ có ở phiên bản tiếp theo')}
+      />
     </ScrollView>
   );
 }
@@ -260,6 +235,4 @@ const styles = StyleSheet.create({
   },
   topicName: { ...Typography.body, color: Colors.text, fontWeight: '500' },
   topicMeta: { ...Typography.captionSm, color: Colors.textMuted, marginTop: 2 },
-  aiBadge: { backgroundColor: `${Colors.primary}20`, paddingHorizontal: 6, paddingVertical: 2, borderRadius: 6 },
-  aiLabel: { fontSize: 10, color: Colors.primary, fontWeight: '700' },
 });

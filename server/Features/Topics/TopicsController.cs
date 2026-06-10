@@ -60,16 +60,6 @@ public class TopicsController(ITopicsRepository repo, IClassesRepository classes
         return Ok(ApiResponse.Ok("Xoá topic thành công"));
     }
 
-    /// <summary>Teacher: Yêu cầu AI đánh giá độ khó cho tất cả topic trong lớp</summary>
-    [HttpPost("ai-evaluate")]
-    public async Task<IActionResult> AiEvaluate(Guid classId)
-    {
-        if (UserRole != "teacher") return Forbid();
-        if (!await classes.IsOwnedByTeacherAsync(classId, UserId)) return Forbid();
-        var topics = await repo.AiEvaluateAsync(classId);
-        return Ok(ApiResponse<List<TopicDto>>.Ok(topics, "AI đã đánh giá xong độ khó cho tất cả topic"));
-    }
-
     /// <summary>Teacher: Chỉnh sửa độ khó của topic thủ công</summary>
     [HttpPut("{id:guid}/difficulty")]
     public async Task<IActionResult> UpdateDifficulty(Guid classId, Guid id, [FromBody] UpdateDifficultyRequest request)

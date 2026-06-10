@@ -28,7 +28,7 @@ SM2_CORRECT_THRESHOLD = 3      # Điểm chất lượng tối thiểu để tă
 
 # ── Placement / Entry Test ────────────────────────────────────────────────────
 PLACEMENT_TEST_MAX_QUESTIONS = 20   # Tối đa câu hỏi placement test
-PLACEMENT_TEST_MIN_QUESTIONS = 10   # Tối thiểu câu hỏi placement test
+PLACEMENT_TEST_MIN_QUESTIONS = 1    # Tối thiểu câu hỏi placement test
 PLACEMENT_TEST_CONFIDENCE_THRESHOLD = 0.8  # Ngưỡng tin cậy để kết thúc sớm
 
 # ── LLM / Quiz Generation ─────────────────────────────────────────────────────

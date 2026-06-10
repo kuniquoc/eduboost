@@ -3,6 +3,11 @@ import type { ApiResponse, QuestionDto, QuizResultDto, EntryTestDto, SubmitQuizR
 
 export const quizzesService = {
   // ── Teacher ─────────────────────────────────────────────
+  getQuiz: async (quizId: string): Promise<QuizDto> => {
+    const res = await apiClient.get<ApiResponse<QuizDto>>(`/quizzes/${quizId}`);
+    return res.data.data!;
+  },
+
   getQuestions: async (quizId: string): Promise<QuestionDto[]> => {
     const res = await apiClient.get<ApiResponse<QuestionDto[]>>(`/quizzes/${quizId}/questions`);
     return res.data.data!;
@@ -26,6 +31,15 @@ export const quizzesService = {
     return res.data.data!;
   },
 
+  addQuestionsFromPool: async (quizId: string, questionIds: string[]): Promise<QuestionDto[]> => {
+    const res = await apiClient.post<ApiResponse<QuestionDto[]>>(`/quizzes/${quizId}/questions/from-pool`, { questionIds });
+    return res.data.data!;
+  },
+
+  deleteQuiz: async (quizId: string): Promise<void> => {
+    await apiClient.delete(`/quizzes/${quizId}`);
+  },
+
   verifyQuestion: async (quizId: string, qId: string, verified: boolean): Promise<QuestionDto> => {
     const res = await apiClient.patch<ApiResponse<QuestionDto>>(`/quizzes/${quizId}/questions/${qId}/verify`, { verified });
     return res.data.data!;
@@ -37,11 +51,6 @@ export const quizzesService = {
 
   getClassQuizzes: async (classId: string): Promise<QuizDto[]> => {
     const res = await apiClient.get<ApiResponse<QuizDto[]>>(`/quizzes/class/${classId}`);
-    return res.data.data!;
-  },
-
-  generateEntryTest: async (classId: string): Promise<QuizDto> => {
-    const res = await apiClient.post<ApiResponse<QuizDto>>(`/quizzes/generate-entry-test/${classId}`);
     return res.data.data!;
   },
 
@@ -115,13 +124,13 @@ export const quizzesService = {
     });
   },
 
-  getTutorExplanation: async (topicId: string): Promise<string> => {
+  getTutorExplanation: async (topicId: string): Promise<{ content: string; offline: boolean }> => {
     const res = await apiClient.get<ApiResponse<{ explanation: string; offline: boolean }>>(`/quizzes/tutor/explain`, { params: { topicId } });
-    return res.data.data!.explanation;
+    return { content: res.data.data!.explanation, offline: res.data.data!.offline };
   },
 
-  getErrorExplanation: async (request: ExplainErrorRequest): Promise<string> => {
+  getErrorExplanation: async (request: ExplainErrorRequest): Promise<{ explanation: string; offline: boolean }> => {
     const res = await apiClient.post<ApiResponse<{ explanation: string; offline: boolean }>>(`/quizzes/tutor/explain-error`, request);
-    return res.data.data!.explanation;
+    return { explanation: res.data.data!.explanation, offline: res.data.data!.offline };
   },
 };

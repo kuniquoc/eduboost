@@ -6,7 +6,7 @@ namespace EduBoost.API.Infrastructure.Services;
 
 public interface IAgentService
 {
-    Task<AgentQuizResponse?> GenerateQuizQuestionAsync(string topicName, double difficulty, List<string>? allowedDocumentIds = null, List<string>? allowedScopes = null);
+    Task<AgentQuizResponse?> GenerateQuizQuestionAsync(string topicName, double difficulty, List<string>? allowedDocumentIds = null, List<string>? allowedScopes = null, IReadOnlyList<string>? existingQuestions = null);
     Task<string?> GetExplanationAsync(string topicName, string studentState, List<string>? allowedDocumentIds = null, List<string>? allowedScopes = null);
     Task<string?> GetGraderExplanationAsync(string question, string correctAnswer, string studentAnswer, List<string>? allowedDocumentIds = null, List<string>? allowedScopes = null);
     Task<AgentQuizBatchResponse?> GenerateQuizBatchAsync(string topicName, string? userPrompt, string? docUrl, int numQuestions, string difficulty, int numEasy = 0, int numMedium = 0, int numHard = 0, string? documentId = null, IReadOnlyList<string>? existingQuestions = null);
@@ -43,17 +43,21 @@ public class AgentService : IAgentService
         _logger.LogInformation("AI Agent base URL configured: {BaseUrl}", _http.BaseAddress);
     }
 
-    public async Task<AgentQuizResponse?> GenerateQuizQuestionAsync(string topicName, double difficulty, List<string>? allowedDocumentIds = null, List<string>? allowedScopes = null)
+    public async Task<AgentQuizResponse?> GenerateQuizQuestionAsync(string topicName, double difficulty, List<string>? allowedDocumentIds = null, List<string>? allowedScopes = null, IReadOnlyList<string>? existingQuestions = null)
     {
         try
         {
-            var queryParams = $"/tutor/generate-question?topic_name={Uri.EscapeDataString(topicName)}&difficulty={difficulty}";
-            if (allowedDocumentIds?.Count > 0)
-                queryParams += $"&allowed_document_ids={Uri.EscapeDataString(string.Join(",", allowedDocumentIds))}";
-            if (allowedScopes?.Count > 0)
-                queryParams += $"&allowed_scopes={Uri.EscapeDataString(string.Join(",", allowedScopes))}";
+            var payload = new
+            {
+                topic_name = topicName,
+                difficulty,
+                allowed_document_ids = allowedDocumentIds,
+                allowed_scopes = allowedScopes,
+                existing_questions = existingQuestions ?? Array.Empty<string>()
+            };
+            var content = new StringContent(JsonSerializer.Serialize(payload, SerializeOpts), Encoding.UTF8, "application/json");
 
-            var response = await _http.GetAsync(queryParams);
+            var response = await _http.PostAsync("/tutor/generate-question", content);
             response.EnsureSuccessStatusCode();
             var json = await response.Content.ReadAsStringAsync();
             return JsonSerializer.Deserialize<AgentQuizResponse>(json, DeserializeOpts);
@@ -262,8 +266,10 @@ public class AgentQuizResponse
 {
     public string Question { get; set; } = "";
     public Dictionary<string, string> Options { get; set; } = new();
+    [JsonPropertyName("correct_answer")]
     public string CorrectAnswer { get; set; } = "";
     public string Explanation { get; set; } = "";
+    [JsonPropertyName("difficulty_level")]
     public double DifficultyLevel { get; set; }
 }
 

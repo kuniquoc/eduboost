@@ -415,15 +415,27 @@ async def generate_quiz_batch(request: GenerateQuizBatchRequest):
                 + "\n".join(f"- {t}" for t in avoid_texts)
             )
         retry_suffix = _build_retry_hint(attempt, avoid_texts)
-        user_hint = (request.user_prompt or "") + avoid_block + retry_suffix
-
+        manual_requirements = (request.user_prompt or "").strip()
+        runtime_constraints = (avoid_block + retry_suffix).strip()
+        context_sections: list[str] = []
         if context_chunks:
             chunk = context_chunks[slot_index % len(context_chunks)]
-            ctx = f"FOCUS EXCERPT (generate question ONLY from this section):\n{chunk}"
-        else:
-            ctx = "No document context provided."
-        if user_hint.strip():
-            ctx += f"\n\nADDITIONAL INSTRUCTIONS:\n{user_hint}"
+            context_sections.append(
+                "DOCUMENT CONTEXT (generate question ONLY from this section):\n"
+                f"{chunk}"
+            )
+        if manual_requirements:
+            context_sections.append(
+                "MANUAL REQUIREMENTS (must satisfy these constraints):\n"
+                f"{manual_requirements}"
+            )
+        if runtime_constraints:
+            context_sections.append(
+                "GENERATION CONSTRAINTS:\n"
+                f"{runtime_constraints}"
+            )
+
+        ctx = "\n\n".join(context_sections) if context_sections else "No document context or manual requirements provided."
 
         prompt = PromptTemplates.QUIZ_TEMPLATE.format(
             topic=request.topic_name,
