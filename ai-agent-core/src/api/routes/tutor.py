@@ -18,6 +18,7 @@ from src.api.quiz_batch_service import (
     generate_quiz_batch,
 )
 from src.core.config import CHAT_MAX_HISTORY, RAG_SIMILARITY_THRESHOLD, RAG_TOP_K_DOCS
+from src.rag.retriever import format_context_from_hits, log_retrieved_chunks_success
 
 logger = logging.getLogger(__name__)
 
@@ -66,31 +67,14 @@ async def _generate_quiz_question_response(
     if runtime.retriever:
         logger.info(f"[QUIZ-GEN][STEP 2] Launching RAG context retrieval for topic '{topic_name}'...")
         try:
-            context = runtime.retriever.get_context(
+            hits = runtime.retriever.get_context_hits(
                 topic_name,
                 allowed_document_ids=allowed_doc_ids_list,
                 allowed_scopes=allowed_scopes_list
             )
-            
-            # Log specific retrieved document chunks details by executing a search behind the scenes for rich logs
-            if runtime.vector_db:
-                hits = runtime.vector_db.search(
-                    topic_name,
-                    k=3,
-                    return_scores=True,
-                    allowed_document_ids=allowed_doc_ids_list,
-                    allowed_scopes=allowed_scopes_list
-                )
-                logger.info(f"[QUIZ-GEN][STEP 2] RAG Retrieval complete. Found {len(hits)} matching chunks:")
-                for i, (score, chunk) in enumerate(hits, 1):
-                    meta = chunk.get("metadata", {})
-                    src = meta.get("source_file", "unknown")
-                    idx = meta.get("chunk_index", -1)
-                    preview = " ".join(chunk["text"].split())[:80] + "..."
-                    logger.info(f"  -> Rank {i} | Score: {score:.4f} | Chunk #{idx} ({src}) | \"{preview}\"")
-            else:
-                logger.info("[QUIZ-GEN][STEP 2] RAG Retrieval complete (VectorDB metrics unavailable).")
-                
+            context = format_context_from_hits(hits)
+            logger.info(f"[QUIZ-GEN][STEP 2] RAG Retrieval complete. Found {len(hits)} matching chunks.")
+            log_retrieved_chunks_success(logger, "[QUIZ-GEN][STEP 2]", hits, query=topic_name)
         except Exception as e:
             logger.error(f"[QUIZ-GEN][STEP 2] RAG Retrieval encountered an error: {e}", exc_info=True)
             context = "No specific textbook context available."
@@ -249,31 +233,14 @@ async def explain_topic(
     if runtime.retriever:
         logger.info(f"[EXPLAIN][STEP 2] Launching RAG context retrieval for topic '{topic_name}'...")
         try:
-            context = runtime.retriever.get_context(
+            hits = runtime.retriever.get_context_hits(
                 topic_name,
                 allowed_document_ids=allowed_doc_ids_list,
                 allowed_scopes=allowed_scopes_list
             )
-            
-            # Log specific retrieved document chunks details by executing a search behind the scenes for rich logs
-            if runtime.vector_db:
-                hits = runtime.vector_db.search(
-                    topic_name,
-                    k=3,
-                    return_scores=True,
-                    allowed_document_ids=allowed_doc_ids_list,
-                    allowed_scopes=allowed_scopes_list
-                )
-                logger.info(f"[EXPLAIN][STEP 2] RAG Retrieval complete. Found {len(hits)} matching chunks:")
-                for i, (score, chunk) in enumerate(hits, 1):
-                    meta = chunk.get("metadata", {})
-                    src = meta.get("source_file", "unknown")
-                    idx = meta.get("chunk_index", -1)
-                    preview = " ".join(chunk["text"].split())[:80] + "..."
-                    logger.info(f"  -> Rank {i} | Score: {score:.4f} | Chunk #{idx} ({src}) | \"{preview}\"")
-            else:
-                logger.info("[EXPLAIN][STEP 2] RAG Retrieval complete (VectorDB metrics unavailable).")
-                
+            context = format_context_from_hits(hits)
+            logger.info(f"[EXPLAIN][STEP 2] RAG Retrieval complete. Found {len(hits)} matching chunks.")
+            log_retrieved_chunks_success(logger, "[EXPLAIN][STEP 2]", hits, query=topic_name)
         except Exception as e:
             logger.error(f"[EXPLAIN][STEP 2] RAG Retrieval encountered an error: {e}", exc_info=True)
             context = "No specific textbook context available."
@@ -335,31 +302,14 @@ async def grade_answer(request: GraderRequest):
         # We query the database using the question text to get relevant grammar concepts
         logger.info(f"[GRADER-RAG][STEP 2] Launching RAG context retrieval using question text as query...")
         try:
-            context = runtime.retriever.get_context(
+            hits = runtime.retriever.get_context_hits(
                 request.question,
                 allowed_document_ids=request.allowed_document_ids,
                 allowed_scopes=request.allowed_scopes
             )
-            
-            # Log specific retrieved document chunks details by executing a search behind the scenes for rich logs
-            if runtime.vector_db:
-                hits = runtime.vector_db.search(
-                    request.question,
-                    k=3,
-                    return_scores=True,
-                    allowed_document_ids=request.allowed_document_ids,
-                    allowed_scopes=request.allowed_scopes
-                )
-                logger.info(f"[GRADER-RAG][STEP 2] RAG Retrieval complete. Found {len(hits)} matching chunks:")
-                for i, (score, chunk) in enumerate(hits, 1):
-                    meta = chunk.get("metadata", {})
-                    src = meta.get("source_file", "unknown")
-                    idx = meta.get("chunk_index", -1)
-                    preview = " ".join(chunk["text"].split())[:80] + "..."
-                    logger.info(f"  -> Rank {i} | Score: {score:.4f} | Chunk #{idx} ({src}) | \"{preview}\"")
-            else:
-                logger.info("[GRADER-RAG][STEP 2] RAG Retrieval complete (VectorDB metrics unavailable).")
-                
+            context = format_context_from_hits(hits)
+            logger.info(f"[GRADER-RAG][STEP 2] RAG Retrieval complete. Found {len(hits)} matching chunks.")
+            log_retrieved_chunks_success(logger, "[GRADER-RAG][STEP 2]", hits, query=request.question)
         except Exception as e:
             logger.error(f"[GRADER-RAG][STEP 2] RAG Retrieval encountered an error: {e}", exc_info=True)
             context = "No specific textbook context available."
@@ -434,6 +384,8 @@ async def chat(request: ChatRequest):
                 allowed_scopes=request.allowed_scopes,
                 min_score=RAG_SIMILARITY_THRESHOLD,
             )
+            logger.info(f"[CHAT] RAG Retrieval complete. Found {len(hits)} matching chunks.")
+            log_retrieved_chunks_success(logger, "[CHAT]", hits, query=query)
             context_parts = []
             for score, chunk in hits:
                 context_parts.append(chunk["text"])

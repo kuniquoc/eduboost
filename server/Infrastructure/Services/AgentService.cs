@@ -308,7 +308,11 @@ public class AgentChatResponse
 
 public class AgentSourceReference
 {
+    [JsonPropertyName("document_id")]
     public string DocumentId { get; set; } = "";
+
+    [JsonPropertyName("file_name")]
     public string FileName { get; set; } = "";
+
     public string? Snippet { get; set; }
 }

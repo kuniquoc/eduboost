@@ -17,6 +17,12 @@ public interface IAiChatRepository
 
 public class AiChatRepository(AppDbContext db, IAgentService agentService, IDocumentsRepository docRepo) : IAiChatRepository
 {
+    private static readonly JsonSerializerOptions SourceReferenceJsonOptions = new()
+    {
+        PropertyNameCaseInsensitive = true,
+        PropertyNamingPolicy = JsonNamingPolicy.SnakeCaseLower
+    };
+
     public async Task<AskResponse> AskAsync(Guid userId, AskRequest request)
     {
         // Save user message
@@ -64,7 +70,7 @@ public class AiChatRepository(AppDbContext db, IAgentService agentService, IDocu
             Role = "assistant",
             Content = agentResponse.Answer,
             SourceReferencesJson = agentResponse.Sources.Count > 0
-                ? JsonSerializer.Serialize(agentResponse.Sources)
+                ? JsonSerializer.Serialize(agentResponse.Sources, SourceReferenceJsonOptions)
                 : null
         };
         db.ConversationMessages.Add(assistantMessage);
@@ -110,7 +116,10 @@ public class AiChatRepository(AppDbContext db, IAgentService agentService, IDocu
                 Content = m.Content,
                 Sources = string.IsNullOrEmpty(m.SourceReferencesJson)
                     ? []
-                    : JsonSerializer.Deserialize<List<SourceReferenceDto>>(m.SourceReferencesJson) ?? [],
+                    : JsonSerializer.Deserialize<List<SourceReferenceDto>>(
+                        m.SourceReferencesJson,
+                        SourceReferenceJsonOptions
+                    ) ?? [],
                 CreatedAt = m.CreatedAt.ToString("yyyy-MM-dd HH:mm:ss")
             }).ToList()
         };

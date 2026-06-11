@@ -2,9 +2,12 @@ import os
 import shutil
 import tempfile
 import unittest
+import logging
+from unittest.mock import patch
 from typing import List, Dict, Any
 
 from src.rag.document_reader import DocumentReader
+from src.rag.retriever import KnowledgeRetriever, chunk_preview, log_retrieved_chunks_success
 from src.rag.text_splitters import SlidingWindowTextSplitter, SemanticTextSplitter
 from src.rag.vector_db import VectorDB
 from src.rag.pipeline import RAGPipeline
@@ -135,6 +138,68 @@ class TestRAGComponents(unittest.TestCase):
         self.assertEqual(len(results), 2)
         self.assertIsInstance(results[0], str)
         self.assertIn(results[0], legacy_texts)
+
+    def test_chunk_preview_normalizes_and_limits_to_100_chars(self):
+        """Preview logs should expose only the first 100 normalized characters."""
+        self.assertEqual(chunk_preview("  one\n two\tthree  "), "[one two three]")
+
+        long_text = "a" * 101
+        preview = chunk_preview(long_text)
+
+        self.assertEqual(preview, f"[{'a' * 100}] ...")
+
+    def test_retriever_context_uses_scored_hits_once(self):
+        """get_context should format the same scored hits used by production logging."""
+        calls = []
+
+        class FakeDB:
+            def search(self, *args, **kwargs):
+                calls.append((args, kwargs))
+                return [
+                    (0.91, {"text": "First retrieved chunk.", "metadata": {"chunk_index": 1}}),
+                    (0.82, {"text": "Second retrieved chunk.", "metadata": {"chunk_index": 2}}),
+                ]
+
+        retriever = KnowledgeRetriever(FakeDB())
+        context = retriever.get_context(
+            "present simple",
+            allowed_document_ids=["doc-1"],
+            allowed_scopes=["system"],
+        )
+
+        self.assertEqual(len(calls), 1)
+        self.assertTrue(calls[0][1]["return_scores"])
+        self.assertEqual(calls[0][1]["allowed_document_ids"], ["doc-1"])
+        self.assertIn("Source 1: First retrieved chunk.", context)
+        self.assertIn("Source 2: Second retrieved chunk.", context)
+
+    def test_retrieved_chunk_logging_is_product_gated(self):
+        """Detailed chunk previews should only be emitted in product-like envs."""
+        test_logger = logging.getLogger("test.rag.preview")
+        hits = [
+            (
+                0.95,
+                {
+                    "text": "A" * 101,
+                    "metadata": {
+                        "document_id": "doc-1",
+                        "scope": "student",
+                        "source_file": "lesson.pdf",
+                        "chunk_index": 4,
+                    },
+                },
+            )
+        ]
+
+        with patch.dict(os.environ, {"APP_ENV": "production"}):
+            with self.assertLogs(test_logger, level="INFO") as logs:
+                log_retrieved_chunks_success(test_logger, "[TEST]", hits, query="  present\nsimple  ")
+
+        log_text = "\n".join(logs.output)
+        self.assertIn('RAG query="[present simple]"', log_text)
+        self.assertIn("RAG retrieval succeeded", log_text)
+        self.assertIn("document_id=doc-1", log_text)
+        self.assertIn(f"[{'A' * 100}] ...", log_text)
 
     def test_rag_pipeline_integration(self):
         """Test full pipeline loading, indexing, and query trace logs."""

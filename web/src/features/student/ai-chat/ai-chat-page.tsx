@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, useCallback } from 'react';
+import { useState, useRef, useEffect, useCallback, useMemo } from 'react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { aiChatService } from '@/services/aiChat.service';
 import { useAiChatHistory } from '@/hooks/use-ai-chat-history';
@@ -14,7 +14,7 @@ import {
   User,
 } from 'lucide-react';
 import { toast } from 'sonner';
-import type { ChatMessageDto, AskResponse } from '@/types';
+import type { ChatMessageDto, AskResponse, SourceReferenceDto } from '@/types';
 
 function createOptimisticMessageId() {
   if (typeof crypto !== 'undefined' && typeof crypto.randomUUID === 'function') {
@@ -23,23 +23,31 @@ function createOptimisticMessageId() {
   return `optimistic-${Date.now()}-${Math.random().toString(36).slice(2, 10)}`;
 }
 
+function getSourceLabel(source: SourceReferenceDto, index: number) {
+  const fileName = source.fileName?.trim();
+  if (fileName) return fileName;
+
+  const documentId = source.documentId?.trim();
+  if (documentId) return `Tài liệu ${documentId.slice(0, 8)}`;
+
+  return `Nguồn ${index + 1}`;
+}
+
 export function AiChatPage() {
   const queryClient = useQueryClient();
   const [input, setInput] = useState('');
   const messagesEndRef = useRef<HTMLDivElement>(null);
-  const [localMessages, setLocalMessages] = useState<ChatMessageDto[]>([]);
+  const [localMessages, setLocalMessages] = useState<ChatMessageDto[] | null>(null);
 
   const { data: history, isLoading } = useAiChatHistory();
-
-  useEffect(() => {
-    if (history?.messages) {
-      setLocalMessages(history.messages);
-    }
-  }, [history]);
+  const displayedMessages = useMemo(
+    () => localMessages ?? history?.messages ?? [],
+    [localMessages, history?.messages]
+  );
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [localMessages]);
+  }, [displayedMessages]);
 
   const askMutation = useMutation({
     mutationFn: (question: string) => aiChatService.ask(question),
@@ -51,7 +59,7 @@ export function AiChatPage() {
         sources: [],
         createdAt: new Date().toISOString(),
       };
-      setLocalMessages((prev) => [...prev, userMsg]);
+      setLocalMessages((prev) => [...(prev ?? history?.messages ?? []), userMsg]);
     },
     onSuccess: (data: AskResponse) => {
       const assistantMsg: ChatMessageDto = {
@@ -61,12 +69,12 @@ export function AiChatPage() {
         sources: data.sources,
         createdAt: new Date().toISOString(),
       };
-      setLocalMessages((prev) => [...prev, assistantMsg]);
+      setLocalMessages((prev) => [...(prev ?? history?.messages ?? []), assistantMsg]);
       queryClient.invalidateQueries({ queryKey: ['ai-chat-history'] });
     },
     onError: () => {
       toast.error('Không thể gửi câu hỏi. Vui lòng thử lại.');
-      setLocalMessages((prev) => prev.slice(0, -1)); // Remove optimistic user msg
+      setLocalMessages((prev) => (prev ? prev.slice(0, -1) : prev)); // Remove optimistic user msg
     },
   });
 
@@ -105,7 +113,7 @@ export function AiChatPage() {
           variant="ghost"
           size="sm"
           onClick={() => clearMutation.mutate()}
-          disabled={clearMutation.isPending || localMessages.length === 0}
+          disabled={clearMutation.isPending || displayedMessages.length === 0}
         >
           <Trash2 className="mr-1 h-4 w-4" /> Xóa
         </Button>
@@ -117,7 +125,7 @@ export function AiChatPage() {
           <div className="flex justify-center py-10">
             <Loader2 className="h-6 w-6 animate-spin text-muted-foreground" />
           </div>
-        ) : localMessages.length === 0 ? (
+        ) : displayedMessages.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-20 text-center">
             <Bot className="h-16 w-16 text-muted-foreground/50" />
             <p className="mt-4 text-lg font-medium text-muted-foreground">
@@ -128,7 +136,7 @@ export function AiChatPage() {
             </p>
           </div>
         ) : (
-          localMessages.map((msg) => (
+          displayedMessages.map((msg) => (
             <div
               key={msg.id}
               className={`flex gap-3 ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
@@ -149,9 +157,14 @@ export function AiChatPage() {
                 {msg.sources.length > 0 && (
                   <div className="mt-2 flex flex-wrap gap-1">
                     {msg.sources.map((src, i) => (
-                      <Badge key={i} variant="secondary" className="text-xs">
+                      <Badge
+                        key={`${src.documentId || src.fileName || 'source'}-${i}`}
+                        variant="secondary"
+                        className="max-w-full text-xs"
+                        title={src.snippet || getSourceLabel(src, i)}
+                      >
                         <FileText className="mr-1 h-3 w-3" />
-                        {src.fileName}
+                        <span className="max-w-48 truncate">{getSourceLabel(src, i)}</span>
                       </Badge>
                     ))}
                   </div>

@@ -51,6 +51,7 @@ services:
     ports:
       - "8000:8000"
     environment:
+      APP_ENV: ${APP_ENV:-Production}
       OPENAI_API_KEY: ${OPENAI_API_KEY:-}
       QUIZ_LLM_ENDPOINT: ${QUIZ_LLM_ENDPOINT:-}
       QUIZ_LLM_MODEL: ${QUIZ_LLM_MODEL:-}

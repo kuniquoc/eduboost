@@ -63,6 +63,57 @@ class TestTutorGenerateQuestionDedupe(unittest.TestCase):
         self.assertIn("RETRY:", second_prompt)
         self.assertIn(duplicate_question, second_prompt)
 
+    def test_post_generate_question_uses_single_retrieval_for_context_and_logging(self):
+        mock_llm = MagicMock()
+        mock_llm.model = "test-model"
+        mock_llm.endpoint_url = "http://test-llm"
+        mock_llm.generate_json.return_value = {
+            "question": "He ___ to school every day.",
+            "options": {"A": "go", "B": "goes", "C": "going", "D": "gone"},
+            "correct_answer": "B",
+            "explanation": "Present simple explanation",
+            "difficulty_level": 0.35,
+        }
+
+        mock_retriever = MagicMock()
+        mock_retriever.get_context_hits.return_value = [
+            (
+                0.88,
+                {
+                    "text": "Present simple is used for habits.",
+                    "metadata": {"source_file": "grammar.txt", "chunk_index": 1},
+                },
+            )
+        ]
+        mock_vector_db = MagicMock()
+
+        with patch("src.api.routes.tutor.runtime") as mock_runtime:
+            mock_runtime.llm_quiz = mock_llm
+            mock_runtime.retriever = mock_retriever
+            mock_runtime.vector_db = mock_vector_db
+            mock_runtime.llm_available.return_value = True
+
+            with TestClient(app) as client:
+                response = client.post(
+                    "/tutor/generate-question",
+                    json={
+                        "topic_name": "English Grammar",
+                        "difficulty": 0.35,
+                        "allowed_document_ids": ["doc-1"],
+                        "allowed_scopes": ["system"],
+                    },
+                )
+
+        self.assertEqual(response.status_code, 200)
+        mock_retriever.get_context_hits.assert_called_once_with(
+            "English Grammar",
+            allowed_document_ids=["doc-1"],
+            allowed_scopes=["system"],
+        )
+        mock_vector_db.search.assert_not_called()
+        prompt = mock_llm.generate_json.call_args.args[0]
+        self.assertIn("Source 1: Present simple is used for habits.", prompt)
+
 
 if __name__ == "__main__":
     unittest.main()

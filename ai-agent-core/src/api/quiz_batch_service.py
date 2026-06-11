@@ -10,6 +10,7 @@ from src.api.app_state import runtime
 from src.api.models import GenerateQuizBatchRequest
 from src.core.config import MAX_NUM_QUESTIONS, QUIZ_BATCH_MAX_CONCURRENT
 from src.rag.document_reader import DocumentReader
+from src.rag.retriever import chunk_preview, is_product_environment, log_retrieved_chunks_success
 from src.rag.text_splitters import SemanticTextSplitter, SlidingWindowTextSplitter
 
 logger = logging.getLogger(__name__)
@@ -30,13 +31,18 @@ def _load_quiz_context_from_rag(topic_name: str, document_id: str) -> list[str]:
     if not runtime.retriever:
         return []
     try:
-        context = runtime.retriever.get_context(
+        hits = runtime.retriever.get_context_hits(
             topic_name,
             allowed_document_ids=[document_id],
         )
-        if context and "No specific textbook context available" not in context:
-            logger.info("[QUIZ-BATCH] Loaded context from RAG for document_id=%s", document_id)
-            return _split_context_blob(context)
+        if hits:
+            logger.info(
+                "[QUIZ-BATCH] Loaded %d context chunks from RAG for document_id=%s",
+                len(hits),
+                document_id,
+            )
+            log_retrieved_chunks_success(logger, "[QUIZ-BATCH]", hits, query=topic_name)
+            return [chunk.get("text", "") for _score, chunk in hits]
     except Exception as e:
         logger.warning("[QUIZ-BATCH] RAG context lookup failed for document_id=%s: %s", document_id, e)
     return []
@@ -419,7 +425,21 @@ async def generate_quiz_batch(request: GenerateQuizBatchRequest):
         runtime_constraints = (avoid_block + retry_suffix).strip()
         context_sections: list[str] = []
         if context_chunks:
-            chunk = context_chunks[slot_index % len(context_chunks)]
+            chunk_slot = slot_index % len(context_chunks)
+            chunk = context_chunks[chunk_slot]
+            if is_product_environment():
+                logger.info(
+                    (
+                        "[QUIZ-BATCH] Context chunk sent to LLM slot=%d "
+                        "attempt=%d difficulty=%s chunk_slot=%d query=\"%s\" preview=\"%s\""
+                    ),
+                    slot_index,
+                    attempt,
+                    difficulty_label,
+                    chunk_slot,
+                    chunk_preview(request.topic_name, limit=200),
+                    chunk_preview(chunk),
+                )
             context_sections.append(
                 "DOCUMENT CONTEXT (generate question ONLY from this section):\n"
                 f"{chunk}"

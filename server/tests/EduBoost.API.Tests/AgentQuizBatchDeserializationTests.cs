@@ -1,4 +1,5 @@
 using System.Text.Json;
+using EduBoost.API.Features.AiChat.Models;
 using EduBoost.API.Infrastructure.Services;
 using Xunit;
 
@@ -13,6 +14,12 @@ public class AgentQuizBatchDeserializationTests
     };
 
     private static readonly JsonSerializerOptions SerializeOpts = new()
+    {
+        PropertyNameCaseInsensitive = true,
+        PropertyNamingPolicy = JsonNamingPolicy.SnakeCaseLower
+    };
+
+    private static readonly JsonSerializerOptions SourceReferenceJsonOpts = new()
     {
         PropertyNameCaseInsensitive = true,
         PropertyNamingPolicy = JsonNamingPolicy.SnakeCaseLower
@@ -75,6 +82,52 @@ public class AgentQuizBatchDeserializationTests
         Assert.NotNull(result);
         Assert.Equal("B", result!.CorrectAnswer);
         Assert.Equal(0.42, result.DifficultyLevel);
+    }
+
+    [Fact]
+    public void Deserialize_AgentChatResponse_MapsSnakeCaseSourceReferences()
+    {
+        const string json = """
+            {
+              "answer": "Present simple is used for habits.",
+              "sources": [
+                {
+                  "document_id": "doc-chat-1",
+                  "file_name": "grammar.txt",
+                  "snippet": "Present simple is used for habits and repeated actions."
+                }
+              ]
+            }
+            """;
+
+        var result = JsonSerializer.Deserialize<AgentChatResponse>(json, DeserializeOpts);
+
+        Assert.NotNull(result);
+        var source = Assert.Single(result!.Sources);
+        Assert.Equal("doc-chat-1", source.DocumentId);
+        Assert.Equal("grammar.txt", source.FileName);
+        Assert.Equal("Present simple is used for habits and repeated actions.", source.Snippet);
+    }
+
+    [Fact]
+    public void Deserialize_SourceReferenceDtoHistory_MapsSnakeCaseSourceReferences()
+    {
+        const string json = """
+            [
+              {
+                "document_id": "doc-history-1",
+                "file_name": "history-grammar.txt",
+                "snippet": "A source stored in chat history."
+              }
+            ]
+            """;
+
+        var result = JsonSerializer.Deserialize<List<SourceReferenceDto>>(json, SourceReferenceJsonOpts);
+
+        var source = Assert.Single(result!);
+        Assert.Equal("doc-history-1", source.DocumentId);
+        Assert.Equal("history-grammar.txt", source.FileName);
+        Assert.Equal("A source stored in chat history.", source.Snippet);
     }
 
     [Fact]
