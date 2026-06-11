@@ -35,7 +35,7 @@ public class AuthRepositoryTests
     }
 
     [Fact]
-    public async Task RegisterAsync_RejectsNonStudentRole()
+    public async Task RegisterAsync_RejectsInvalidRole()
     {
         await using var db = CreateInMemoryDb();
         var repo = CreateRepo(db);
@@ -43,18 +43,37 @@ public class AuthRepositoryTests
         var ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
             repo.RegisterAsync(new RegisterRequest
             {
-                Name = "Teacher Try",
-                Email = "teacher@example.com",
+                Name = "Admin Try",
+                Email = "admin@example.com",
                 Password = "password123",
-                Role = "teacher",
+                Role = "admin",
             }));
 
-        Assert.Contains("học sinh", ex.Message, StringComparison.OrdinalIgnoreCase);
+        Assert.Contains("Vai trò không hợp lệ", ex.Message, StringComparison.OrdinalIgnoreCase);
         Assert.Equal(0, await db.Users.CountAsync());
     }
 
     [Fact]
-    public async Task RegisterAsync_ForcesStudentRole()
+    public async Task RegisterAsync_RegistersTeacherRole()
+    {
+        await using var db = CreateInMemoryDb();
+        var repo = CreateRepo(db);
+
+        var tokens = await repo.RegisterAsync(new RegisterRequest
+        {
+            Name = "Teacher One",
+            Email = "teacher@example.com",
+            Password = "password123",
+            Role = "teacher",
+        });
+
+        Assert.Equal("teacher", tokens.User.Role);
+        var user = await db.Users.SingleAsync();
+        Assert.Equal("teacher", user.Role);
+    }
+
+    [Fact]
+    public async Task RegisterAsync_RegistersStudentRole()
     {
         await using var db = CreateInMemoryDb();
         var repo = CreateRepo(db);

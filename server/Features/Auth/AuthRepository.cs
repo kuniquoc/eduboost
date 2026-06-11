@@ -49,8 +49,9 @@ public class AuthRepository(AppDbContext db, IConfiguration config, IStorageServ
     // ── Register ──────────────────────────────────────────────────────────────
     public async Task<AuthTokensDto> RegisterAsync(RegisterRequest request)
     {
-        if (!string.Equals(request.Role, "student", StringComparison.OrdinalIgnoreCase))
-            throw new InvalidOperationException("Chỉ có thể tự đăng ký tài khoản học sinh. Liên hệ quản trị viên để tạo tài khoản giáo viên.");
+        var role = request.Role.ToLowerInvariant();
+        if (role is not ("teacher" or "student"))
+            throw new InvalidOperationException("Vai trò không hợp lệ. Chỉ có thể đăng ký tài khoản giáo viên hoặc học sinh.");
 
         if (await db.Users.AnyAsync(u => u.Email.ToLower() == request.Email.ToLower()))
             throw new InvalidOperationException("Email này đã được đăng ký trong hệ thống");
@@ -66,7 +67,7 @@ public class AuthRepository(AppDbContext db, IConfiguration config, IStorageServ
             Name         = request.Name,
             Email        = request.Email,
             PasswordHash = BCrypt.Net.BCrypt.HashPassword(request.Password),
-            Role         = "student",
+            Role         = role,
             AvatarInitials = initials,
             CreatedAt    = DateTime.UtcNow
         };

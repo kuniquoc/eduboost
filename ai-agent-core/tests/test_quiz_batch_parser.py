@@ -1,15 +1,20 @@
 import unittest
+from unittest.mock import MagicMock, patch
 
+from src.api.models import GenerateQuizBatchRequest
 from src.api.quiz_batch_service import (
+    _build_quiz_retrieval_query,
     _build_avoid_texts,
     _build_retry_hint,
     _is_duplicate_question,
     _is_exact_duplicate,
+    _load_quiz_context_from_rag,
     _normalize_question_text,
     _parse_single_question,
     _resolve_correct_letter,
     _seed_seen_from_existing,
     _split_context_blob,
+    generate_quiz_batch,
 )
 
 
@@ -94,6 +99,120 @@ class TestSplitContextBlob(unittest.TestCase):
 
     def test_single_paragraph_returns_one_chunk(self):
         self.assertEqual(_split_context_blob("Only one chunk."), ["Only one chunk."])
+
+
+class TestBuildQuizRetrievalQuery(unittest.TestCase):
+    def test_returns_topic_only_when_user_prompt_empty(self):
+        self.assertEqual(
+            _build_quiz_retrieval_query("English Grammar", "   "),
+            "English Grammar",
+        )
+
+    def test_combines_topic_and_user_prompt_when_provided(self):
+        self.assertEqual(
+            _build_quiz_retrieval_query("English Grammar", "focus on tenses"),
+            "English Grammar\nfocus on tenses",
+        )
+
+    def test_returns_prompt_if_topic_empty(self):
+        self.assertEqual(
+            _build_quiz_retrieval_query("  ", "focus on tenses"),
+            "focus on tenses",
+        )
+
+
+class TestLoadQuizContextFromRag(unittest.TestCase):
+    def test_uses_retrieval_query_for_lookup(self):
+        retrieval_query = "English Grammar\nfocus on present simple"
+        with patch("src.api.quiz_batch_service.runtime") as mock_runtime:
+            mock_runtime.retriever = MagicMock()
+            mock_runtime.retriever.get_context_hits.return_value = [
+                (0.9, {"text": "Present simple is used for habits."})
+            ]
+            chunks = _load_quiz_context_from_rag(retrieval_query, "doc-123")
+
+        self.assertEqual(chunks, ["Present simple is used for habits."])
+        mock_runtime.retriever.get_context_hits.assert_called_once_with(
+            retrieval_query,
+            allowed_document_ids=["doc-123"],
+        )
+
+
+class TestGenerateQuizBatchRetrievalQuery(unittest.IsolatedAsyncioTestCase):
+    async def test_generate_quiz_batch_passes_combined_query_to_rag_loader(self):
+        request = GenerateQuizBatchRequest(
+            topic_name="English Grammar",
+            user_prompt="focus on present simple",
+            document_id="doc-1",
+            num_questions=1,
+            difficulty="easy",
+        )
+
+        parsed_question = {
+            "question": "She ___ to school every day.",
+            "type": "mcq",
+            "difficulty": "easy",
+            "options": [
+                {"text": "go", "isCorrect": False},
+                {"text": "goes", "isCorrect": True},
+                {"text": "going", "isCorrect": False},
+                {"text": "gone", "isCorrect": False},
+            ],
+            "explanation": "Vì chủ ngữ số ít.",
+        }
+
+        with patch("src.api.quiz_batch_service.runtime") as mock_runtime, patch(
+            "src.api.quiz_batch_service._load_quiz_context_from_rag",
+            return_value=["Chunk A"],
+        ) as mock_load_rag, patch(
+            "src.api.quiz_batch_service._parse_single_question",
+            return_value=parsed_question,
+        ):
+            mock_runtime.llm_quiz = MagicMock()
+            mock_runtime.llm_quiz.generate_json.return_value = {}
+            mock_runtime.llm_available.return_value = True
+            await generate_quiz_batch(request)
+
+        mock_load_rag.assert_called_once_with(
+            "English Grammar\nfocus on present simple",
+            "doc-1",
+        )
+
+    async def test_generate_quiz_batch_passes_topic_only_when_prompt_missing(self):
+        request = GenerateQuizBatchRequest(
+            topic_name="English Grammar",
+            user_prompt=None,
+            document_id="doc-1",
+            num_questions=1,
+            difficulty="easy",
+        )
+
+        parsed_question = {
+            "question": "He ___ to work every day.",
+            "type": "mcq",
+            "difficulty": "easy",
+            "options": [
+                {"text": "go", "isCorrect": False},
+                {"text": "goes", "isCorrect": True},
+                {"text": "going", "isCorrect": False},
+                {"text": "gone", "isCorrect": False},
+            ],
+            "explanation": "Vì chủ ngữ số ít.",
+        }
+
+        with patch("src.api.quiz_batch_service.runtime") as mock_runtime, patch(
+            "src.api.quiz_batch_service._load_quiz_context_from_rag",
+            return_value=["Chunk A"],
+        ) as mock_load_rag, patch(
+            "src.api.quiz_batch_service._parse_single_question",
+            return_value=parsed_question,
+        ):
+            mock_runtime.llm_quiz = MagicMock()
+            mock_runtime.llm_quiz.generate_json.return_value = {}
+            mock_runtime.llm_available.return_value = True
+            await generate_quiz_batch(request)
+
+        mock_load_rag.assert_called_once_with("English Grammar", "doc-1")
 
 
 class TestSeedSeenFromExisting(unittest.TestCase):

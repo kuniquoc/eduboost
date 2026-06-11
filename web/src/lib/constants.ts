@@ -47,3 +47,10 @@ export function teacherQuizPoolGeneratePath(params?: {
   if (params?.documentId) search.set('documentId', params.documentId);
   return `${ROUTES.TEACHER_QUIZ_POOL}?${search.toString()}`;
 }
+
+/** Deep-link to student Quiz Pool AI generation tab */
+export function studentQuizPoolGeneratePath(params?: { documentId?: string }): string {
+  const search = new URLSearchParams({ tab: 'generate' });
+  if (params?.documentId) search.set('documentId', params.documentId);
+  return `${ROUTES.STUDENT_QUIZ_POOL}?${search.toString()}`;
+}

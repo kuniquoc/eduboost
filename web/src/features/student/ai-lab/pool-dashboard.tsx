@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { poolService } from '@/services/pool.service';
 import { documentsService } from '@/services/documents.service';
 import { quizzesService } from '@/services/quizzes.service';
@@ -44,6 +44,7 @@ function parseGenerationDifficulty(value: string): GenerationDifficulty {
 export function StudentPoolDashboard() {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
   const [activeTab, setActiveTab] = useState<'pool' | 'revision' | 'generate'>('pool');
   
   // Search and selection states
@@ -69,6 +70,8 @@ export function StudentPoolDashboard() {
   const [genMode, setGenMode] = useState<'append' | 'replace'>('append');
   const [uploadingFile, setUploadingFile] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const hydratedTabParamRef = useRef<string | null>(null);
+  const hydratedDocumentParamRef = useRef<string | null>(null);
 
   // Inline topic rename states
   const [renamingTopicId, setRenamingTopicId] = useState<string | null>(null);
@@ -87,6 +90,8 @@ export function StudentPoolDashboard() {
   const { data: documents = [] } = useMyDocuments();
   const { data: quizzes = [], isLoading: isLoadingQuizzes } = useQuizzesInTopic(selectedTopic?.id);
   const { data: revisionSets = [], isLoading: isLoadingRevision } = useRevisionSets(activeTab === 'revision');
+  const tabParam = searchParams.get('tab');
+  const documentIdParam = searchParams.get('documentId');
 
   // Select topic initially
   useEffect(() => {
@@ -94,6 +99,29 @@ export function StudentPoolDashboard() {
       setSelectedTopic(topics[0]);
     }
   }, [topics, selectedTopic]);
+
+  useEffect(() => {
+    if (tabParam === 'generate') {
+      if (hydratedTabParamRef.current !== tabParam) {
+        setActiveTab('generate');
+        hydratedTabParamRef.current = tabParam;
+      }
+      return;
+    }
+    hydratedTabParamRef.current = null;
+  }, [tabParam]);
+
+  useEffect(() => {
+    if (!documentIdParam) {
+      hydratedDocumentParamRef.current = null;
+      return;
+    }
+    if (hydratedDocumentParamRef.current === documentIdParam) return;
+    const hasDocument = documents.some((doc) => doc.id === documentIdParam);
+    if (!hasDocument) return;
+    setSelectedDocId(documentIdParam);
+    hydratedDocumentParamRef.current = documentIdParam;
+  }, [documentIdParam, documents]);
 
   // Collapsible toggle helper
   const toggleQuiz = (quizId: string) => {

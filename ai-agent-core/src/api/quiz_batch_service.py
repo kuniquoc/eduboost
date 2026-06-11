@@ -18,6 +18,17 @@ logger = logging.getLogger(__name__)
 _DOC_CONTEXT_MAX_CHARS = 50_000
 
 
+def _build_quiz_retrieval_query(topic_name: str, user_prompt: str | None) -> str:
+    """Build the RAG retrieval query from topic + optional user input."""
+    topic = (topic_name or "").strip()
+    prompt = (user_prompt or "").strip()
+    if not prompt:
+        return topic
+    if not topic:
+        return prompt
+    return f"{topic}\n{prompt}"
+
+
 def _split_context_blob(context: str) -> list[str]:
     """Split a joined context string into chunks for per-question rotation."""
     if not context.strip():
@@ -26,13 +37,13 @@ def _split_context_blob(context: str) -> list[str]:
     return parts if parts else [context.strip()]
 
 
-def _load_quiz_context_from_rag(topic_name: str, document_id: str) -> list[str]:
+def _load_quiz_context_from_rag(retrieval_query: str, document_id: str) -> list[str]:
     """Load document context chunks from FAISS when the document was already ingested."""
     if not runtime.retriever:
         return []
     try:
         hits = runtime.retriever.get_context_hits(
-            topic_name,
+            retrieval_query,
             allowed_document_ids=[document_id],
         )
         if hits:
@@ -41,14 +52,14 @@ def _load_quiz_context_from_rag(topic_name: str, document_id: str) -> list[str]:
                 len(hits),
                 document_id,
             )
-            log_retrieved_chunks_success(logger, "[QUIZ-BATCH]", hits, query=topic_name)
+            log_retrieved_chunks_success(logger, "[QUIZ-BATCH]", hits, query=retrieval_query)
             return [chunk.get("text", "") for _score, chunk in hits]
     except Exception as e:
         logger.warning("[QUIZ-BATCH] RAG context lookup failed for document_id=%s: %s", document_id, e)
     return []
 
 
-def _rank_document_chunks(full_text: str, source_file: str, topic_name: str) -> list[str]:
+def _rank_document_chunks(full_text: str, source_file: str, retrieval_query: str) -> list[str]:
     """Split document text and return top relevant chunk texts for quiz context."""
     if not full_text.strip():
         return []
@@ -83,13 +94,13 @@ def _rank_document_chunks(full_text: str, source_file: str, topic_name: str) -> 
             import torch
             from sentence_transformers import util as st_util
 
-            topic_emb = embed_model.encode(topic_name, convert_to_tensor=True)
+            topic_emb = embed_model.encode(retrieval_query, convert_to_tensor=True)
             chunk_texts = [c["text"] for c in doc_chunks]
             chunk_embs = embed_model.encode(chunk_texts, convert_to_tensor=True)
             scores = st_util.cos_sim(topic_emb, chunk_embs)[0]
             top_k = min(6, len(doc_chunks))
             top_indices = sorted(torch.topk(scores, top_k).indices.tolist())
-            logger.info("[QUIZ-BATCH] Selected top-%d relevant chunks for topic '%s'", top_k, topic_name)
+            logger.info("[QUIZ-BATCH] Selected top-%d relevant chunks for query '%s'", top_k, retrieval_query)
             return [doc_chunks[i]["text"] for i in top_indices]
         except Exception as e:
             logger.warning("[QUIZ-BATCH] Chunk ranking failed, using first 6 chunks: %s", e)
@@ -97,7 +108,7 @@ def _rank_document_chunks(full_text: str, source_file: str, topic_name: str) -> 
     return [c["text"] for c in doc_chunks[: min(6, len(doc_chunks))]]
 
 
-def _load_quiz_context_from_doc_url(doc_url: str, topic_name: str) -> list[str]:
+def _load_quiz_context_from_doc_url(doc_url: str, retrieval_query: str) -> list[str]:
     """Download and parse a document URL. Returns empty list on failure (non-fatal)."""
     import requests as _requests
     import tempfile
@@ -125,7 +136,7 @@ def _load_quiz_context_from_doc_url(doc_url: str, topic_name: str) -> list[str]:
             logger.warning("[QUIZ-BATCH] Document parsed but contained no text")
             return []
 
-        return _rank_document_chunks(full_text, parsed_url, topic_name)
+        return _rank_document_chunks(full_text, parsed_url, retrieval_query)
     except Exception as e:
         logger.warning("[QUIZ-BATCH] Document parse/chunk failed (continuing without doc context): %s", e)
         return []
@@ -342,13 +353,15 @@ async def generate_quiz_batch(request: GenerateQuizBatchRequest):
     if not runtime.llm_available(runtime.llm_quiz):
         runtime.raise_ai_unavailable()
 
+    retrieval_query = _build_quiz_retrieval_query(request.topic_name, request.user_prompt)
+
     # ── Step 1: Load document context chunks (RAG first, then doc_url fallback) ─
     context_chunks: list[str] = []
     if request.document_id:
-        context_chunks = _load_quiz_context_from_rag(request.topic_name, request.document_id)
+        context_chunks = _load_quiz_context_from_rag(retrieval_query, request.document_id)
 
     if not context_chunks and request.doc_url:
-        context_chunks = _load_quiz_context_from_doc_url(request.doc_url, request.topic_name)
+        context_chunks = _load_quiz_context_from_doc_url(request.doc_url, retrieval_query)
 
     if not context_chunks and (request.document_id or request.doc_url):
         logger.warning(
@@ -437,7 +450,7 @@ async def generate_quiz_batch(request: GenerateQuizBatchRequest):
                     attempt,
                     difficulty_label,
                     chunk_slot,
-                    chunk_preview(request.topic_name, limit=200),
+                    chunk_preview(retrieval_query, limit=200),
                     chunk_preview(chunk),
                 )
             context_sections.append(

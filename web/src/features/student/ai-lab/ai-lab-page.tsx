@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useMyDocuments } from '@/hooks/use-my-documents';
 import { documentsService } from '@/services/documents.service';
@@ -13,7 +13,7 @@ import {
 import { Upload, Trash2, Sparkles, FileText, Download, Loader2, BookOpen, PenLine } from 'lucide-react';
 import { toast } from 'sonner';
 import { QuizBuilderDialog } from '@/components/shared/quiz-builder-dialog';
-import { QuizGenerationDialog } from '@/components/shared/quiz-generation-dialog';
+import { studentQuizPoolGeneratePath } from '@/lib/constants';
 import type { DocumentDto, CreateQuestionPayload } from '@/types';
 
 const statusMap: Record<string, { label: string; variant: 'default' | 'secondary' | 'destructive' | 'outline' }> = {
@@ -35,12 +35,12 @@ function formatSize(size: string) {
 }
 
 export function AILabPage() {
+  const navigate = useNavigate();
   const queryClient = useQueryClient();
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [uploading, setUploading] = useState(false);
   const [deleteDoc, setDeleteDoc] = useState<DocumentDto | null>(null);
   const [quizBuilderOpen, setQuizBuilderOpen] = useState(false);
-  const [quizDoc, setQuizDoc] = useState<DocumentDto | null>(null);
 
   const { data: documents, isLoading } = useMyDocuments();
 
@@ -84,20 +84,6 @@ export function AILabPage() {
       toast.success('Đang thử index RAG lại...');
     },
     onError: () => toast.error('Không thể thử lại index RAG'),
-  });
-
-  const generateMutation = useMutation({
-    mutationFn: (data: { docId: string; options?: { numQuestions?: number; difficulty?: string; mode?: string } }) =>
-      documentsService.generateMyQuiz(data.docId, data.options),
-    onSuccess: (job) => {
-      invalidate();
-      if (job.topicName) {
-        toast.success(job.message || `Đã tạo quiz vào Kho Pool — chủ đề: ${job.topicName}`);
-      } else {
-        toast.success(job.message || 'Đã tạo quiz thành công');
-      }
-    },
-    onError: () => toast.error('Tạo quiz thất bại'),
   });
 
   const createMyQuizMutation = useMutation({
@@ -191,14 +177,9 @@ export function AILabPage() {
                       <Button
                         variant="outline"
                         size="sm"
-                        onClick={() => setQuizDoc(doc)}
-                        disabled={generateMutation.isPending}
+                        onClick={() => navigate(studentQuizPoolGeneratePath({ documentId: doc.id }))}
                       >
-                        {generateMutation.isPending ? (
-                          <Loader2 className="h-4 w-4 animate-spin mr-1" />
-                        ) : (
-                          <Sparkles className="h-4 w-4 mr-1" />
-                        )}
+                        <Sparkles className="h-4 w-4 mr-1" />
                         {doc.status === 'error' ? 'Thử lại' : doc.generatedQuizId ? 'Sinh thêm' : 'Tạo Quiz'}
                       </Button>
                     )}
@@ -244,20 +225,6 @@ export function AILabPage() {
           </DialogFooter>
         </DialogContent>
       </Dialog>
-
-      {/* Quiz Generation Settings Dialog */}
-      <QuizGenerationDialog
-        open={!!quizDoc}
-        onOpenChange={(open) => !open && setQuizDoc(null)}
-        doc={quizDoc}
-        onSubmit={(options) => {
-          if (quizDoc) {
-            generateMutation.mutate({ docId: quizDoc.id, options });
-            setQuizDoc(null);
-          }
-        }}
-        isPending={generateMutation.isPending}
-      />
 
       {/* Quiz Builder Dialog */}
       <QuizBuilderDialog
