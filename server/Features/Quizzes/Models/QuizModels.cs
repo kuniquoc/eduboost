@@ -17,6 +17,8 @@ public class QuestionDto
     public string Text { get; set; } = "";
     public string Type { get; set; } = "mcq"; // "mcq" | "multi_select" | "fill_blank"
     public string Difficulty { get; set; } = "medium";
+    public double DifficultyIndex { get; set; }
+    public bool IsEstimatedDifficultyIndex { get; set; }
     public List<OptionDto> Options { get; set; } = [];
     public string? CorrectAnswer { get; set; }
     public string? Explanation { get; set; }
@@ -107,6 +109,7 @@ public class CreateQuestionRequest
     [Required] public string Text { get; set; } = "";
     public string Type { get; set; } = "mcq"; // "mcq" | "multi_select" | "fill_blank"
     public string Difficulty { get; set; } = "medium";
+    public double? DifficultyIndex { get; set; }
     public string? Explanation { get; set; }
     public string? CorrectAnswer { get; set; }
     public List<OptionDto> Options { get; set; } = [];

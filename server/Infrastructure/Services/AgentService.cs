@@ -6,6 +6,7 @@ namespace EduBoost.API.Infrastructure.Services;
 
 public interface IAgentService
 {
+    Task<AgentNextActionResponse?> GetNextActionAsync(string studentId, string topicName, double? masteryProbability = null, double? irtTheta = null);
     Task<AgentQuizResponse?> GenerateQuizQuestionAsync(string topicName, double difficulty, List<string>? allowedDocumentIds = null, List<string>? allowedScopes = null, IReadOnlyList<string>? existingQuestions = null);
     Task<string?> GetExplanationAsync(string topicName, string studentState, List<string>? allowedDocumentIds = null, List<string>? allowedScopes = null);
     Task<string?> GetGraderExplanationAsync(string question, string correctAnswer, string studentAnswer, List<string>? allowedDocumentIds = null, List<string>? allowedScopes = null);
@@ -65,6 +66,28 @@ public class AgentService : IAgentService
         catch (Exception ex)
         {
             _logger.LogWarning(ex, "AI Agent unavailable for GenerateQuizQuestion (topic={Topic})", topicName);
+            return null;
+        }
+    }
+
+    public async Task<AgentNextActionResponse?> GetNextActionAsync(string studentId, string topicName, double? masteryProbability = null, double? irtTheta = null)
+    {
+        try
+        {
+            var query = $"/tutor/next-action?student_id={Uri.EscapeDataString(studentId)}&topic_name={Uri.EscapeDataString(topicName)}";
+            if (masteryProbability.HasValue)
+                query += $"&mastery_probability={masteryProbability.Value.ToString(System.Globalization.CultureInfo.InvariantCulture)}";
+            if (irtTheta.HasValue)
+                query += $"&irt_theta={irtTheta.Value.ToString(System.Globalization.CultureInfo.InvariantCulture)}";
+
+            var response = await _http.GetAsync(query);
+            response.EnsureSuccessStatusCode();
+            var json = await response.Content.ReadAsStringAsync();
+            return JsonSerializer.Deserialize<AgentNextActionResponse>(json, DeserializeOpts);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogWarning(ex, "AI Agent unavailable for GetNextAction (topic={Topic})", topicName);
             return null;
         }
     }
@@ -285,6 +308,8 @@ public class AgentQuizBatchQuestion
     public string Question { get; set; } = "";
     public string Type { get; set; } = "mcq";
     public string Difficulty { get; set; } = "medium";
+    [JsonPropertyName("difficulty_index")]
+    public double? DifficultyIndex { get; set; }
     public string Explanation { get; set; } = "";
     public List<AgentQuizBatchOption> Options { get; set; } = [];
 }

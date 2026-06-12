@@ -224,6 +224,8 @@ public class DocumentsRepository(
                             Text = q.Question,
                             Type = string.IsNullOrWhiteSpace(q.Type) ? "mcq" : q.Type,
                             Difficulty = string.IsNullOrWhiteSpace(q.Difficulty) ? "medium" : q.Difficulty,
+                            DifficultyIndex = ResolveDifficultyIndex(q),
+                            IsEstimatedDifficultyIndex = !q.DifficultyIndex.HasValue,
                             Explanation = q.Explanation,
                             CorrectAnswer = q.Options.FirstOrDefault(o => o.IsCorrect)?.Text ?? "",
                             VerifiedByTeacher = false,
@@ -526,6 +528,8 @@ public class DocumentsRepository(
                             Text = q.Question,
                             Type = string.IsNullOrWhiteSpace(q.Type) ? "mcq" : q.Type,
                             Difficulty = string.IsNullOrWhiteSpace(q.Difficulty) ? "medium" : q.Difficulty,
+                            DifficultyIndex = ResolveDifficultyIndex(q),
+                            IsEstimatedDifficultyIndex = !q.DifficultyIndex.HasValue,
                             Explanation = q.Explanation,
                             CorrectAnswer = q.Options.FirstOrDefault(o => o.IsCorrect)?.Text ?? "",
                             VerifiedByTeacher = false,
@@ -813,6 +817,8 @@ public class DocumentsRepository(
                 Text = q.Question,
                 Type = string.IsNullOrWhiteSpace(q.Type) ? "mcq" : q.Type,
                 Difficulty = string.IsNullOrWhiteSpace(q.Difficulty) ? "medium" : q.Difficulty,
+                DifficultyIndex = ResolveDifficultyIndex(q),
+                IsEstimatedDifficultyIndex = !q.DifficultyIndex.HasValue,
                 Explanation = q.Explanation,
                 CorrectAnswer = q.Options.FirstOrDefault(o => o.IsCorrect)?.Text ?? "",
                 VerifiedByTeacher = false,
@@ -842,6 +848,13 @@ public class DocumentsRepository(
         Scope = d.Scope,
         IsVisible = d.IsVisible
     };
+
+    private static double ResolveDifficultyIndex(AgentQuizBatchQuestion question)
+    {
+        if (question.DifficultyIndex.HasValue)
+            return DifficultyIndex.Clamp(question.DifficultyIndex.Value);
+        return DifficultyIndex.FromDifficultyLabel(question.Difficulty);
+    }
 
     public async Task<DocumentDto?> UpdateDocumentTopicAsync(Guid classId, Guid docId, string? topicId)
     {

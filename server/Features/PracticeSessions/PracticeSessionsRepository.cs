@@ -11,8 +11,11 @@ using EduBoost.API.Features.PracticeSessions.Models;
 using EduBoost.API.Infrastructure;
 
 using EduBoost.API.Infrastructure.Entities;
+using EduBoost.API.Infrastructure.Services;
 
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 
 using PracticeSrUpdateDto = EduBoost.API.Features.PracticeSessions.Models.SrUpdateDto;
 
@@ -38,11 +41,21 @@ public interface IPracticeSessionsRepository
 
 
 
-public class PracticeSessionsRepository(AppDbContext db, ILearningStatesRepository learningStates, IRoadmapRepository roadmap) : IPracticeSessionsRepository
+public class PracticeSessionsRepository(
+    AppDbContext db,
+    ILearningStatesRepository learningStates,
+    IRoadmapRepository roadmap,
+    IAgentService? agentService = null,
+    ILogger<PracticeSessionsRepository>? logger = null,
+    IConfiguration? configuration = null) : IPracticeSessionsRepository
 
 {
 
     private static readonly TimeSpan SessionTtl = TimeSpan.FromHours(2);
+    private readonly bool _agentDecisionEnabled = configuration?.GetValue("Features:AgentDecisionEnabled", true) ?? true;
+    private readonly bool _irtAdaptiveSelectionEnabled = configuration?.GetValue("Features:IrtAdaptiveSelectionEnabled", true) ?? true;
+    private readonly IAgentService? _agentService = agentService;
+    private readonly ILogger<PracticeSessionsRepository>? _logger = logger;
 
 
 
@@ -260,9 +273,9 @@ public class PracticeSessionsRepository(AppDbContext db, ILearningStatesReposito
 
                 .Where(q => q.Quiz.TopicId == topicId)
 
-                .OrderBy(q => q.Difficulty == targetDifficulty ? 0 : 1)
+                .OrderBy(q => Math.Abs(q.DifficultyIndex - (bktState != null ? bktState.IrtTheta : 0.0)))
 
-                .ThenBy(q => Guid.NewGuid())
+                .ThenBy(q => q.Difficulty == targetDifficulty ? 0 : 1)
 
                 .Take(request.QuestionCount)
 
@@ -490,7 +503,9 @@ public class PracticeSessionsRepository(AppDbContext db, ILearningStatesReposito
 
                 IsCorrect = isCorrect,
 
-                ResponseTime = request.ResponseTimeSeconds
+                ResponseTime = request.ResponseTimeSeconds,
+
+                QuestionDifficultyIndex = question.DifficultyIndex
 
             });
 
@@ -501,12 +516,25 @@ public class PracticeSessionsRepository(AppDbContext db, ILearningStatesReposito
         bool isComplete = state.CurrentIndex >= state.Questions.Count;
 
         PracticeQuestionDto? nextQuestion = null;
+        string? agentAction = null;
+        string? agentReason = null;
+        string? agentExplanation = null;
+        bool recommendNextSkill = false;
+        string? nextSkillSuggestion = null;
+        double? targetBeta = null;
 
 
 
         if (!isComplete)
 
         {
+            if (_irtAdaptiveSelectionEnabled
+                && !isTestMode
+                && updateResult != null
+                && string.Equals(state.Mode, "standard", StringComparison.OrdinalIgnoreCase))
+            {
+                await ReorderRemainingQuestionsByThetaAsync(state, updateResult.ThetaAfter);
+            }
 
             var nextQ = await db.Questions
 
@@ -518,6 +546,34 @@ public class PracticeSessionsRepository(AppDbContext db, ILearningStatesReposito
 
             else isComplete = true;
 
+        }
+
+        if (!isTestMode && updateResult != null)
+        {
+            var decision = await ResolveAgentDecisionAsync(
+                userId,
+                state,
+                updateResult.State.MasteryProbability,
+                updateResult.State.IrtTheta
+            );
+
+            agentAction = decision.Action;
+            agentReason = decision.Reason;
+            agentExplanation = decision.Explanation;
+            recommendNextSkill = decision.RecommendNextSkill;
+            nextSkillSuggestion = decision.NextSkillSuggestion;
+            targetBeta = decision.TargetBeta;
+
+            _logger?.LogInformation(
+                "Practice decision user={UserId} topic={TopicId} action={Action} mastery={Mastery:F3} theta_before={ThetaBefore:F3} theta_after={ThetaAfter:F3} beta={Beta:F3}",
+                userId,
+                state.TopicId,
+                agentAction ?? "N/A",
+                updateResult.State.MasteryProbability,
+                updateResult.ThetaBefore,
+                updateResult.ThetaAfter,
+                updateResult.QuestionBeta
+            );
         }
 
 
@@ -568,7 +624,25 @@ public class PracticeSessionsRepository(AppDbContext db, ILearningStatesReposito
 
             IsSessionComplete = isComplete,
 
-            SpacedRepetition = MapSrUpdate(updateResult?.SpacedRepetition)
+            SpacedRepetition = MapSrUpdate(updateResult?.SpacedRepetition),
+
+            AgentAction = agentAction,
+
+            AgentReason = agentReason,
+
+            AgentExplanation = agentExplanation,
+
+            RecommendNextSkill = recommendNextSkill,
+
+            NextSkillSuggestion = nextSkillSuggestion,
+
+            ThetaBefore = updateResult?.ThetaBefore,
+
+            ThetaAfter = updateResult?.ThetaAfter,
+
+            QuestionBeta = updateResult?.QuestionBeta,
+
+            TargetBeta = targetBeta
 
         };
 
@@ -864,6 +938,70 @@ public class PracticeSessionsRepository(AppDbContext db, ILearningStatesReposito
 
         };
 
+    private async Task ReorderRemainingQuestionsByThetaAsync(PracticeSessionState state, double theta)
+    {
+        if (state.CurrentIndex >= state.Questions.Count) return;
+
+        var remainingIds = state.Questions.Skip(state.CurrentIndex).ToList();
+        var remainingSet = remainingIds.ToHashSet();
+        var remainingQuestions = await db.Questions
+            .Where(q => remainingSet.Contains(q.Id))
+            .Select(q => new { q.Id, q.DifficultyIndex })
+            .ToListAsync();
+
+        var ordered = remainingQuestions
+            .OrderBy(q => Math.Abs(q.DifficultyIndex - theta))
+            .Select(q => q.Id)
+            .ToList();
+
+        for (var i = 0; i < ordered.Count; i++)
+            state.Questions[state.CurrentIndex + i] = ordered[i];
+    }
+
+    private async Task<(string? Action, string? Reason, string? Explanation, bool RecommendNextSkill, string? NextSkillSuggestion, double? TargetBeta)>
+        ResolveAgentDecisionAsync(Guid userId, PracticeSessionState state, double mastery, double theta)
+    {
+        var fallbackAction = mastery < 0.5 ? "EXPLAIN" : mastery < 0.8 ? "QUIZ" : "NEXT_SKILL";
+        var fallbackReason = $"Fallback decision from mastery={mastery:F2}";
+        var fallbackTargetBeta = DifficultyIndex.Clamp(theta);
+
+        if (!_agentDecisionEnabled || _agentService == null)
+            return (fallbackAction, fallbackReason, null, fallbackAction == "NEXT_SKILL", null, fallbackTargetBeta);
+
+        var response = await _agentService.GetNextActionAsync(userId.ToString(), state.TopicName, mastery, theta);
+        var action = response?.Action?.Trim().ToUpperInvariant();
+        if (action is not ("EXPLAIN" or "QUIZ" or "NEXT_SKILL"))
+        {
+            _logger?.LogWarning("Invalid agent action '{Action}' for topic {Topic}; using fallback", response?.Action, state.TopicName);
+            action = fallbackAction;
+        }
+
+        var reason = string.IsNullOrWhiteSpace(response?.Reason) ? fallbackReason : response!.Reason;
+        var targetBeta = fallbackTargetBeta;
+        if (response?.Params != null &&
+            response.Params.TryGetValue("beta", out var betaObj) &&
+            double.TryParse(Convert.ToString(betaObj), out var parsedBeta))
+        {
+            targetBeta = DifficultyIndex.Clamp(parsedBeta);
+        }
+
+        string? explanation = null;
+        if (action == "EXPLAIN")
+        {
+            var studentState = mastery < 0.5 ? "beginning" : mastery < 0.8 ? "learning" : "reviewing";
+            explanation = await _agentService.GetExplanationAsync(state.TopicName, studentState);
+        }
+
+        return (
+            action,
+            reason,
+            explanation,
+            action == "NEXT_SKILL",
+            action == "NEXT_SKILL" ? "Bạn nên chuyển sang chủ đề kế tiếp." : null,
+            targetBeta
+        );
+    }
+
 
 
     private async Task<PracticeActiveSession> LoadSessionAsync(Guid userId, string sessionId)
@@ -921,6 +1059,8 @@ public class PracticeSessionsRepository(AppDbContext db, ILearningStatesReposito
         Type = q.Type,
 
         Difficulty = q.Difficulty,
+
+        DifficultyIndex = q.DifficultyIndex,
 
         Options = q.Options.OrderBy(o => o.OrderIndex).Select(o => new PracticeOptionDto
 

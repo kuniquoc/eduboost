@@ -25,8 +25,35 @@ logger = logging.getLogger(__name__)
 router = APIRouter(prefix="/tutor", tags=["tutor"])
 
 @router.get("/next-action")
-async def get_next_action(student_id: str, topic_name: str):
+async def get_next_action(
+    student_id: str,
+    topic_name: str,
+    mastery_probability: Optional[float] = None,
+    irt_theta: Optional[float] = None,
+):
     """Uses BKT to decide: EXPLAIN, QUIZ, or NEXT_SKILL."""
+    if mastery_probability is not None:
+        if mastery_probability < 0.5:
+            return {
+                "action": "EXPLAIN",
+                "adapter": "explanation_adapter",
+                "reason": f"Mastery below threshold ({mastery_probability:.2f})",
+                "params": {}
+            }
+        if mastery_probability < 0.8:
+            return {
+                "action": "QUIZ",
+                "adapter": "quiz_adapter",
+                "reason": f"Mastery in learning band ({mastery_probability:.2f})",
+                "params": {"beta": irt_theta if irt_theta is not None else 0.0}
+            }
+        return {
+            "action": "NEXT_SKILL",
+            "adapter": None,
+            "reason": f"Mastery reached transfer threshold ({mastery_probability:.2f})",
+            "params": {}
+        }
+
     agent = get_or_create_agent(student_id)
     result = agent.decide_next_action(topic_name)
     return result
@@ -369,7 +396,7 @@ async def chat(request: ChatRequest):
 
     # RAG retrieval
     context = ""
-    sources = []
+    source_candidates = []
     if runtime.retriever and runtime.vector_db:
         try:
             query = request.question
@@ -390,7 +417,7 @@ async def chat(request: ChatRequest):
             for score, chunk in hits:
                 context_parts.append(chunk["text"])
                 meta = chunk.get("metadata", {})
-                sources.append({
+                source_candidates.append({
                     "document_id": str(meta.get("document_id", "")),
                     "file_name": meta.get("source_file", "unknown"),
                     "snippet": chunk["text"][:200]
@@ -399,6 +426,19 @@ async def chat(request: ChatRequest):
         except Exception as e:
             logger.error(f"[CHAT] RAG retrieval error: {e}")
             context = ""
+
+    # Keep one source per document/file to avoid displaying duplicate chunks as
+    # multiple references in the student chat UI.
+    sources = []
+    seen_sources = set()
+    for source in source_candidates:
+        doc_id = str(source.get("document_id", "") or "").strip()
+        file_name = str(source.get("file_name", "") or "").strip()
+        key = f"doc:{doc_id}" if doc_id else f"file:{file_name.lower()}"
+        if key in seen_sources:
+            continue
+        seen_sources.add(key)
+        sources.append(source)
 
     # Build conversation context from history
     conversation_context = ""
@@ -431,7 +471,7 @@ Hãy trả lời chính xác dựa trên tài liệu tham khảo. Nếu không t
     if not answer:
         return {
             "answer": "AI server không khả dụng. Vui lòng thử lại sau.",
-            "sources": sources[:3],
+            "sources": sources,
         }
 
     total_duration = time.time() - start_time
@@ -439,5 +479,5 @@ Hãy trả lời chính xác dựa trên tài liệu tham khảo. Nếu không t
 
     return {
         "answer": answer,
-        "sources": sources[:3]  # Return top 3 sources
+        "sources": sources
     }

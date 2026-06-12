@@ -1,4 +1,4 @@
-import { useParams, useNavigate, Link } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { quizzesService } from '@/services/quizzes.service';
 import { useClassDetail } from '@/hooks/use-class-detail';
@@ -18,7 +18,11 @@ export function ClassQuizzesPage() {
     enabled: !!classId,
   });
 
-  const practiceQuizzes = quizzes.filter((q) => q.type === 'practice' && q.isPublished);
+  // Include both "practice" and "pool" types — pool quizzes assigned to a class
+  // and published by the teacher should also be visible to enrolled students.
+  const practiceQuizzes = quizzes.filter(
+    (q) => (q.type === 'practice' || q.type === 'pool') && q.isPublished,
+  );
 
   const startPractice = (quizId: string, title: string) => {
     const params = new URLSearchParams({

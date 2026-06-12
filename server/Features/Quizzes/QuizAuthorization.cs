@@ -83,7 +83,11 @@ public class QuizAuthorization(AppDbContext db, IClassesRepository classes) : IQ
     {
         var quiz = await db.Quizzes.AsNoTracking().FirstOrDefaultAsync(q => q.Id == quizId);
         if (quiz == null) return false;
-        if (quiz.Type != "practice" || !quiz.IsPublished || !quiz.ClassId.HasValue) return false;
+        // Allow both "practice" and "pool" types — pool quizzes published to a class
+        // are visible to students (new publishes are promoted to "practice" at publish
+        // time, but existing published pool quizzes in the DB must also be accessible).
+        var isClassQuizType = quiz.Type is "practice" or "pool";
+        if (!isClassQuizType || !quiz.IsPublished || !quiz.ClassId.HasValue) return false;
         return await classes.IsStudentEnrolledAsync(quiz.ClassId.Value, studentId);
     }
 

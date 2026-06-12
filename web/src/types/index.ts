@@ -8,6 +8,7 @@ export interface User {
   email: string;
   role: UserRole;
   avatar?: string;
+  createdAt?: string;
 }
 
 export interface AuthTokens {
@@ -123,6 +124,8 @@ export interface QuestionDto {
   text: string;
   type: QuestionType;
   difficulty: 'easy' | 'medium' | 'hard';
+  difficultyIndex?: number;
+  isEstimatedDifficultyIndex?: boolean;
   options: OptionDto[];
   correctAnswer?: string;
   explanation?: string;
@@ -186,6 +189,7 @@ export interface CreateQuestionPayload {
   text: string;
   type: QuestionType;
   difficulty: 'easy' | 'medium' | 'hard';
+  difficultyIndex?: number;
   explanation?: string;
   correctAnswer?: string;
   options: Array<{ text: string; isCorrect: boolean }>;
@@ -276,6 +280,10 @@ export interface RoadmapStepDto {
   status: RoadmapStepStatus;
   progress: number;
   reason?: string;
+  mastery?: number;
+  theta?: number;
+  topicBeta?: number;
+  dueCount?: number;
   orderIndex: number;
 }
 
@@ -432,6 +440,7 @@ export interface PracticeQuestionDto {
   text: string;
   type: QuestionType;
   difficulty: string;
+  difficultyIndex?: number;
   options: Array<{ id: string; text: string }>;
 }
 
@@ -461,6 +470,15 @@ export interface SubmitPracticeAnswerResponse {
   isSessionComplete: boolean;
   totalQuestions?: number;
   spacedRepetition?: SrUpdateDto;
+  agentAction?: 'EXPLAIN' | 'QUIZ' | 'NEXT_SKILL';
+  agentReason?: string;
+  agentExplanation?: string;
+  recommendNextSkill?: boolean;
+  nextSkillSuggestion?: string;
+  thetaBefore?: number;
+  thetaAfter?: number;
+  questionBeta?: number;
+  targetBeta?: number;
 }
 
 export interface QuizReviewItemDto {

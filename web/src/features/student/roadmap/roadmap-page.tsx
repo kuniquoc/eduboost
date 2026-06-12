@@ -173,6 +173,14 @@ export function RoadmapPage() {
                             {step.reason && (
                               <p className="mt-1 text-xs text-muted-foreground">{step.reason}</p>
                             )}
+                            {(typeof step.mastery === 'number' || typeof step.theta === 'number' || typeof step.topicBeta === 'number') && (
+                              <p className="mt-1 text-[11px] text-muted-foreground">
+                                {typeof step.mastery === 'number' ? `Mastery ${step.mastery.toFixed(2)} · ` : ''}
+                                {typeof step.theta === 'number' ? `Theta ${step.theta.toFixed(2)} · ` : ''}
+                                {typeof step.topicBeta === 'number' ? `Beta ${step.topicBeta.toFixed(2)}` : ''}
+                                {typeof step.dueCount === 'number' ? ` · Due ${step.dueCount}` : ''}
+                              </p>
+                            )}
                           </div>
                           <Badge variant={config.badge}>{config.label}</Badge>
                         </div>

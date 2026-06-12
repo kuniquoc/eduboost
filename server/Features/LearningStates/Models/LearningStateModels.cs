@@ -18,6 +18,7 @@ public class UpdateBktRequest
     public Guid QuestionId { get; set; }
     public bool IsCorrect { get; set; }
     public double? ResponseTime { get; set; } // seconds
+    public double? QuestionDifficultyIndex { get; set; }
 }
 
 public class UpdateBktResponse
@@ -25,6 +26,9 @@ public class UpdateBktResponse
     public BktStateDto State { get; set; } = null!;
     public string? Recommendation { get; set; }
     public SrUpdateDto? SpacedRepetition { get; set; }
+    public double ThetaBefore { get; set; }
+    public double ThetaAfter { get; set; }
+    public double QuestionBeta { get; set; }
 }
 
 public class SrUpdateDto

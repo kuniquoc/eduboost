@@ -1,6 +1,7 @@
 using EduBoost.API.Features.Roadmap.Models;
 using EduBoost.API.Infrastructure;
 using EduBoost.API.Infrastructure.Entities;
+using EduBoost.API.Infrastructure.Services;
 using Microsoft.EntityFrameworkCore;
 
 namespace EduBoost.API.Features.Roadmap;
@@ -18,6 +19,7 @@ public class RoadmapRepository(AppDbContext db) : IRoadmapRepository
 {
     private const double MasteryCompleteThreshold = 0.95;
     private const double DefaultMastery = 0.3;
+    private const double DefaultTheta = 0.0;
 
     public async Task<RoadmapDto?> GetByClassIdAsync(Guid classId, Guid studentId)
     {
@@ -89,7 +91,14 @@ public class RoadmapRepository(AppDbContext db) : IRoadmapRepository
         var topicIds = topics.Select(t => t.Id).ToHashSet();
         var bktByTopic = await db.BktStates
             .Where(b => b.UserId == studentId && topicIds.Contains(b.TopicId))
-            .ToDictionaryAsync(b => b.TopicId, b => b.MasteryProbability);
+            .ToDictionaryAsync(b => b.TopicId, b => b);
+
+        var now = DateTime.UtcNow;
+        var dueByTopic = await db.SpacedRepetitionItems
+            .Where(sr => sr.UserId == studentId && topicIds.Contains(sr.TopicId) && sr.NextReviewDate <= now)
+            .GroupBy(sr => sr.TopicId)
+            .Select(g => new { TopicId = g.Key, Count = g.Count() })
+            .ToDictionaryAsync(x => x.TopicId, x => x.Count);
 
         var existing = await db.PersonalizedLearningPaths
             .Where(p => p.UserId == studentId && topicIds.Contains(p.TopicId))
@@ -102,13 +111,16 @@ public class RoadmapRepository(AppDbContext db) : IRoadmapRepository
         {
             var topic = topics[i];
             var current = existing.FirstOrDefault(p => p.TopicId == topic.Id);
-            var mastery = bktByTopic.GetValueOrDefault(topic.Id, DefaultMastery);
-            var priority = bktByTopic.ContainsKey(topic.Id)
-                ? Math.Max(0.0, 1.0 - mastery)
-                : Math.Max(0.0, 1.0 - (i * 0.1));
-            var difficulty = bktByTopic.ContainsKey(topic.Id)
-                ? MapDifficultyFromMastery(mastery)
-                : topic.Difficulty;
+            var state = bktByTopic.GetValueOrDefault(topic.Id);
+            var mastery = state?.MasteryProbability ?? DefaultMastery;
+            var theta = state?.IrtTheta ?? DefaultTheta;
+            var topicBeta = DifficultyIndex.TopicDifficultyToBeta(topic.Difficulty);
+            var dueCount = dueByTopic.GetValueOrDefault(topic.Id);
+            var reviewUrgency = Math.Min(1.0, dueCount / 5.0);
+            var knowledgeGap = Math.Max(0.0, 1.0 - mastery);
+            var challengeFit = 1.0 - Math.Min(1.0, Math.Abs(theta - topicBeta) / 6.0);
+            var priority = Math.Clamp((knowledgeGap * 0.55) + (challengeFit * 0.25) + (reviewUrgency * 0.20), 0.0, 1.0);
+            var difficulty = MapDifficultyFromMastery(mastery);
 
             if (current == null)
             {
@@ -144,7 +156,8 @@ public class RoadmapRepository(AppDbContext db) : IRoadmapRepository
             .ToListAsync();
 
         var topicMap = topics.ToDictionary(t => t.Id);
-        var steps = BuildSteps(refreshedPaths, topicMap);
+        var statesByTopic = bktByTopic.ToDictionary(kvp => kvp.Key, kvp => (kvp.Value.MasteryProbability, kvp.Value.IrtTheta));
+        var steps = BuildSteps(refreshedPaths, topicMap, statesByTopic, dueByTopic);
 
         return new RoadmapDto
         {
@@ -182,6 +195,9 @@ public class RoadmapRepository(AppDbContext db) : IRoadmapRepository
             .Where(t => t.ClassId == classId)
             .Select(t => t.Id)
             .ToListAsync();
+        var topicDifficultyById = await db.Topics
+            .Where(t => topicIds.Contains(t.Id))
+            .ToDictionaryAsync(t => t.Id, t => t.Difficulty);
 
         var classPaths = await db.PersonalizedLearningPaths
             .Where(p => p.UserId == studentId && topicIds.Contains(p.TopicId))
@@ -189,7 +205,14 @@ public class RoadmapRepository(AppDbContext db) : IRoadmapRepository
 
         var bktByTopic = await db.BktStates
             .Where(b => b.UserId == studentId && topicIds.Contains(b.TopicId))
-            .ToDictionaryAsync(b => b.TopicId, b => b.MasteryProbability);
+            .ToDictionaryAsync(b => b.TopicId, b => b);
+
+        var now = DateTime.UtcNow;
+        var dueByTopic = await db.SpacedRepetitionItems
+            .Where(sr => sr.UserId == studentId && topicIds.Contains(sr.TopicId) && sr.NextReviewDate <= now)
+            .GroupBy(sr => sr.TopicId)
+            .Select(g => new { TopicId = g.Key, Count = g.Count() })
+            .ToDictionaryAsync(x => x.TopicId, x => x.Count);
 
         var completedMaxOrder = classPaths
             .Where(p => p.IsCompleted)
@@ -199,7 +222,17 @@ public class RoadmapRepository(AppDbContext db) : IRoadmapRepository
 
         var incomplete = classPaths
             .Where(p => !p.IsCompleted)
-            .OrderBy(p => bktByTopic.GetValueOrDefault(p.TopicId, DefaultMastery))
+            .OrderByDescending(p =>
+            {
+                var bkt = bktByTopic.GetValueOrDefault(p.TopicId);
+                var mastery = bkt?.MasteryProbability ?? DefaultMastery;
+                var theta = bkt?.IrtTheta ?? DefaultTheta;
+                var topicBeta = DifficultyIndex.TopicDifficultyToBeta(topicDifficultyById.GetValueOrDefault(p.TopicId));
+                var reviewUrgency = Math.Min(1.0, dueByTopic.GetValueOrDefault(p.TopicId) / 5.0);
+                var knowledgeGap = Math.Max(0.0, 1.0 - mastery);
+                var challengeFit = 1.0 - Math.Min(1.0, Math.Abs(theta - topicBeta) / 6.0);
+                return (knowledgeGap * 0.55) + (challengeFit * 0.25) + (reviewUrgency * 0.20);
+            })
             .ThenBy(p => p.OrderIndex)
             .ToList();
 
@@ -240,11 +273,11 @@ public class RoadmapRepository(AppDbContext db) : IRoadmapRepository
         var maxOrder = existing.Count > 0 ? existing.Max(p => p.OrderIndex) : 0;
         var bktByTopic = await db.BktStates
             .Where(b => b.UserId == studentId && topicIds.Contains(b.TopicId))
-            .ToDictionaryAsync(b => b.TopicId, b => b.MasteryProbability);
+            .ToDictionaryAsync(b => b.TopicId, b => b);
 
         foreach (var topic in missingTopics)
         {
-            var mastery = bktByTopic.GetValueOrDefault(topic.Id, DefaultMastery);
+            var mastery = bktByTopic.GetValueOrDefault(topic.Id)?.MasteryProbability ?? DefaultMastery;
             maxOrder++;
             db.PersonalizedLearningPaths.Add(new PersonalizedLearningPath
             {
@@ -315,7 +348,9 @@ public class RoadmapRepository(AppDbContext db) : IRoadmapRepository
 
     private static List<RoadmapStepDto> BuildSteps(
         List<PersonalizedLearningPath> paths,
-        Dictionary<Guid, Topic> topicMap)
+        Dictionary<Guid, Topic> topicMap,
+        Dictionary<Guid, (double Mastery, double Theta)>? statesByTopic = null,
+        Dictionary<Guid, int>? dueByTopic = null)
     {
         var firstIncompleteOrder = paths
             .Where(p => !p.IsCompleted)
@@ -336,10 +371,19 @@ public class RoadmapRepository(AppDbContext db) : IRoadmapRepository
                 string? reason = null;
                 if (status == "recommended")
                 {
-                    reason = p.PriorityScore >= 0.7
-                        ? "Ưu tiên ôn vì mức thành thạo còn thấp"
-                        : "Bước học tiếp theo theo lộ trình cá nhân";
+                    var state = statesByTopic != null && statesByTopic.TryGetValue(p.TopicId, out var tuple)
+                        ? tuple
+                        : (Mastery: DefaultMastery, Theta: DefaultTheta);
+                    var beta = DifficultyIndex.TopicDifficultyToBeta(topicMap[p.TopicId].Difficulty);
+                    var due = dueByTopic?.GetValueOrDefault(p.TopicId) ?? 0;
+                    reason = $"mastery={state.Mastery:F2}, theta={state.Theta:F2}, beta={beta:F2}, due={due}";
                 }
+
+                var stateForDto = statesByTopic != null && statesByTopic.TryGetValue(p.TopicId, out var dtoTuple)
+                    ? dtoTuple
+                    : (Mastery: DefaultMastery, Theta: DefaultTheta);
+                var dtoBeta = DifficultyIndex.TopicDifficultyToBeta(topicMap[p.TopicId].Difficulty);
+                var dtoDue = dueByTopic?.GetValueOrDefault(p.TopicId) ?? 0;
 
                 return new RoadmapStepDto
                 {
@@ -349,6 +393,10 @@ public class RoadmapRepository(AppDbContext db) : IRoadmapRepository
                     Status = status,
                     Progress = p.IsCompleted ? 100 : 0,
                     Reason = reason,
+                    Mastery = stateForDto.Mastery,
+                    Theta = stateForDto.Theta,
+                    TopicBeta = dtoBeta,
+                    DueCount = dtoDue,
                     OrderIndex = p.OrderIndex
                 };
             })

@@ -254,9 +254,9 @@ export function PlacementTestPage() {
 
         });
 
-        setDetailedExplanations((prev) => ({ ...prev, [item.questionId]: explanation }));
+        setDetailedExplanations((prev) => ({ ...prev, [item.questionId]: explanation.explanation }));
 
-        return explanation;
+        return explanation.explanation;
 
       } catch {
 

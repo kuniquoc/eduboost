@@ -228,8 +228,8 @@ export function PracticeSessionPage() {
           correctAnswer: correctAnswerText ?? '',
           studentAnswer,
         });
-        setDetailedExplanations((prev) => ({ ...prev, [questionId]: explanation }));
-        return explanation;
+        setDetailedExplanations((prev) => ({ ...prev, [questionId]: explanation.explanation }));
+        return explanation.explanation;
       } catch {
         setDetailedErrors((prev) => ({ ...prev, [questionId]: true }));
         throw new Error('Failed');
@@ -299,7 +299,10 @@ export function PracticeSessionPage() {
           <Badge variant="secondary">
             {displayTopicName} — Câu {questionNumber}/{total}
           </Badge>
-          <Badge variant="outline">{question.difficulty}</Badge>
+          <Badge variant="outline">
+            {question.difficulty}
+            {typeof question.difficultyIndex === 'number' ? ` (β ${question.difficultyIndex.toFixed(2)})` : ''}
+          </Badge>
         </div>
         <Progress value={(questionNumber / total) * 100} className="h-2" />
 
@@ -336,39 +339,55 @@ export function PracticeSessionPage() {
             )}
 
             {phase === 'reviewing' && feedback && (
-              <QuizAnswerFeedback
-                questionText={question.text}
-                options={question.options}
-                selectedOptionIds={selectedOptions}
-                isCorrect={feedback.isCorrect}
-                correctAnswerText={feedback.correctAnswer}
-                explanation={feedback.explanation}
-                spacedRepetition={feedback.spacedRepetition}
-                variant="live"
-                continueLabel={feedback.isSessionComplete ? 'Xem kết quả' : 'Câu tiếp theo'}
-                onContinue={handleNext}
-                detailedExplanation={detailedExplanations[question.questionId]}
-                isLoadingDetailedExplanation={loadingDetailedFor === question.questionId}
-                detailedExplanationError={detailedErrors[question.questionId]}
-                onRequestDetailedExplanation={() =>
-                  requestDetailedExplanation(
-                    question.questionId,
-                    question.text,
-                    question.options,
-                    selectedOptions,
-                    feedback.correctAnswer,
-                  )
-                }
-                onRetryDetailedExplanation={() =>
-                  requestDetailedExplanation(
-                    question.questionId,
-                    question.text,
-                    question.options,
-                    selectedOptions,
-                    feedback.correctAnswer,
-                  )
-                }
-              />
+              <div className="space-y-3">
+                <QuizAnswerFeedback
+                  questionText={question.text}
+                  options={question.options}
+                  selectedOptionIds={selectedOptions}
+                  isCorrect={feedback.isCorrect}
+                  correctAnswerText={feedback.correctAnswer}
+                  explanation={feedback.explanation}
+                  spacedRepetition={feedback.spacedRepetition}
+                  variant="live"
+                  continueLabel={feedback.isSessionComplete ? 'Xem kết quả' : 'Câu tiếp theo'}
+                  onContinue={handleNext}
+                  detailedExplanation={detailedExplanations[question.questionId]}
+                  isLoadingDetailedExplanation={loadingDetailedFor === question.questionId}
+                  detailedExplanationError={detailedErrors[question.questionId]}
+                  onRequestDetailedExplanation={() =>
+                    requestDetailedExplanation(
+                      question.questionId,
+                      question.text,
+                      question.options,
+                      selectedOptions,
+                      feedback.correctAnswer,
+                    )
+                  }
+                  onRetryDetailedExplanation={() =>
+                    requestDetailedExplanation(
+                      question.questionId,
+                      question.text,
+                      question.options,
+                      selectedOptions,
+                      feedback.correctAnswer,
+                    )
+                  }
+                />
+                {(feedback.agentReason || feedback.agentExplanation || feedback.agentAction) && (
+                  <div className="rounded-lg border bg-muted/40 p-3 text-sm">
+                    {feedback.agentAction && <p className="font-medium">Agent action: {feedback.agentAction}</p>}
+                    {feedback.agentReason && <p className="text-muted-foreground">{feedback.agentReason}</p>}
+                    {feedback.agentExplanation && <p className="mt-2">{feedback.agentExplanation}</p>}
+                    {(typeof feedback.thetaAfter === 'number' || typeof feedback.questionBeta === 'number') && (
+                      <p className="mt-2 text-xs text-muted-foreground">
+                        {typeof feedback.thetaBefore === 'number' ? `θ trước: ${feedback.thetaBefore.toFixed(2)} · ` : ''}
+                        {typeof feedback.thetaAfter === 'number' ? `θ sau: ${feedback.thetaAfter.toFixed(2)} · ` : ''}
+                        {typeof feedback.questionBeta === 'number' ? `β câu hỏi: ${feedback.questionBeta.toFixed(2)}` : ''}
+                      </p>
+                    )}
+                  </div>
+                )}
+              </div>
             )}
           </CardContent>
         </Card>

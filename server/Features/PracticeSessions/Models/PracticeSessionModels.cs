@@ -31,6 +31,7 @@ public class PracticeQuestionDto
     public string Text { get; set; } = "";
     public string Type { get; set; } = "mcq";
     public string Difficulty { get; set; } = "medium";
+    public double DifficultyIndex { get; set; }
     public List<PracticeOptionDto> Options { get; set; } = [];
 }
 
@@ -61,6 +62,15 @@ public class SubmitAnswerResponse
     public int TotalQuestions { get; set; }
     public bool IsSessionComplete { get; set; }
     public SrUpdateDto? SpacedRepetition { get; set; }
+    public string? AgentAction { get; set; }
+    public string? AgentReason { get; set; }
+    public string? AgentExplanation { get; set; }
+    public bool RecommendNextSkill { get; set; }
+    public string? NextSkillSuggestion { get; set; }
+    public double? ThetaBefore { get; set; }
+    public double? ThetaAfter { get; set; }
+    public double? QuestionBeta { get; set; }
+    public double? TargetBeta { get; set; }
 }
 
 public class QuizReviewItemDto

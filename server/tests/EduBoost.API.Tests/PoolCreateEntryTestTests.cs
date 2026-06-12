@@ -155,6 +155,9 @@ public class PoolCreateEntryTestTests
 
     private sealed class FakeAgentService : IAgentService
     {
+        public Task<AgentNextActionResponse?> GetNextActionAsync(string studentId, string topicName, double? masteryProbability = null, double? irtTheta = null)
+            => Task.FromResult<AgentNextActionResponse?>(null);
+
         public Task<AgentQuizBatchResponse?> GenerateQuizBatchAsync(
             string topicName, string? userPrompt, string? docUrl, int numQuestions, string difficulty,
             int numEasy = 0, int numMedium = 0, int numHard = 0, string? documentId = null,

@@ -10,6 +10,9 @@ public static class AgentQuizValidation
 
         foreach (var question in questions)
         {
+            question.DifficultyIndex = DifficultyIndex.Clamp(
+                question.DifficultyIndex ?? DifficultyIndex.FromDifficultyLabel(question.Difficulty)
+            );
             var type = string.IsNullOrWhiteSpace(question.Type) ? "mcq" : question.Type;
             if (!string.Equals(type, "mcq", StringComparison.OrdinalIgnoreCase))
             {

@@ -186,7 +186,7 @@ def _is_duplicate_question(question_text: str, seen: set[str]) -> bool:
     return _is_exact_duplicate(question_text, seen)
 
 
-_QUIZ_AVOID_LIST_CAP = 40
+_QUIZ_AVOID_LIST_CAP = 21
 _QUIZ_AVOID_COMPLETED_RECENT = 20
 
 
@@ -194,15 +194,30 @@ def _build_avoid_texts(completed: list[dict], rejected: list[str]) -> list[str]:
     all_texts = [q["question"] for q in completed] + rejected
     if len(all_texts) <= _QUIZ_AVOID_LIST_CAP:
         return all_texts
-    recent_completed = [q["question"] for q in completed[-_QUIZ_AVOID_COMPLETED_RECENT:]]
-    merged = recent_completed + rejected
+
+    # Keep all rejected items first, then fill remaining slots with most recent completed
+    # while respecting the hard cap.
     seen: set[str] = set()
     result: list[str] = []
-    for text in merged:
+
+    for text in rejected:
         if text not in seen:
             seen.add(text)
             result.append(text)
-    return result
+
+    remaining_slots = max(0, _QUIZ_AVOID_LIST_CAP - len(result))
+    if remaining_slots == 0:
+        return result[:_QUIZ_AVOID_LIST_CAP]
+
+    recent_completed = [q["question"] for q in completed[-_QUIZ_AVOID_COMPLETED_RECENT:]]
+    for text in reversed(recent_completed):
+        if text not in seen:
+            seen.add(text)
+            result.append(text)
+            if len(result) >= _QUIZ_AVOID_LIST_CAP:
+                break
+
+    return result[:_QUIZ_AVOID_LIST_CAP]
 
 
 def _extract_forbidden_prefixes(avoid_texts: list[str]) -> list[str]:
@@ -331,10 +346,18 @@ def _parse_single_question(raw: dict, difficulty_label: str) -> dict | None:
         logger.warning("[QUIZ-BATCH] Expected exactly 1 correct option, got %d — skipping", correct_count)
         return None
 
+    difficulty_index_raw = raw.get("difficulty_index", raw.get("difficulty_level"))
+    try:
+        difficulty_index = float(difficulty_index_raw)
+    except (TypeError, ValueError):
+        difficulty_index = _DIFFICULTY_TO_BETA.get(difficulty_label, 0.0)
+    difficulty_index = max(-3.0, min(3.0, difficulty_index))
+
     return {
         "question": question_text,
         "type": "mcq",
         "difficulty": difficulty_label,
+        "difficulty_index": difficulty_index,
         "options": sanitized_options,
         "explanation": explanation,
     }

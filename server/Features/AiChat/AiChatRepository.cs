@@ -62,6 +62,13 @@ public class AiChatRepository(AppDbContext db, IAgentService agentService, IDocu
             allowedScopes
         );
 
+        var normalizedSources = await NormalizeSourcesAsync(agentResponse.Sources.Select(s => new SourceReferenceDto
+        {
+            DocumentId = s.DocumentId,
+            FileName = s.FileName,
+            Snippet = s.Snippet
+        }).ToList());
+
         // Save assistant response
         var assistantMessage = new ConversationMessage
         {
@@ -69,8 +76,8 @@ public class AiChatRepository(AppDbContext db, IAgentService agentService, IDocu
             TopicId = request.TopicId,
             Role = "assistant",
             Content = agentResponse.Answer,
-            SourceReferencesJson = agentResponse.Sources.Count > 0
-                ? JsonSerializer.Serialize(agentResponse.Sources, SourceReferenceJsonOptions)
+            SourceReferencesJson = normalizedSources.Count > 0
+                ? JsonSerializer.Serialize(normalizedSources, SourceReferenceJsonOptions)
                 : null
         };
         db.ConversationMessages.Add(assistantMessage);
@@ -79,12 +86,7 @@ public class AiChatRepository(AppDbContext db, IAgentService agentService, IDocu
         return new AskResponse
         {
             Answer = agentResponse.Answer,
-            Sources = agentResponse.Sources.Select(s => new SourceReferenceDto
-            {
-                DocumentId = s.DocumentId,
-                FileName = s.FileName,
-                Snippet = s.Snippet
-            }).ToList(),
+            Sources = normalizedSources,
             MessageId = assistantMessage.Id.ToString()
         };
     }
@@ -106,20 +108,26 @@ public class AiChatRepository(AppDbContext db, IAgentService agentService, IDocu
             .OrderBy(m => m.CreatedAt)
             .ToListAsync();
 
+        var parsedSourcesByMessage = messages.Select(m =>
+            string.IsNullOrEmpty(m.SourceReferencesJson)
+                ? []
+                : JsonSerializer.Deserialize<List<SourceReferenceDto>>(
+                    m.SourceReferencesJson,
+                    SourceReferenceJsonOptions
+                ) ?? []
+        ).ToList();
+
+        var docNameById = await BuildDocumentNameMapAsync(parsedSourcesByMessage.SelectMany(s => s));
+
         return new ChatHistoryDto
         {
             Total = total,
-            Messages = messages.Select(m => new ChatMessageDto
+            Messages = messages.Select((m, idx) => new ChatMessageDto
             {
                 Id = m.Id.ToString(),
                 Role = m.Role,
                 Content = m.Content,
-                Sources = string.IsNullOrEmpty(m.SourceReferencesJson)
-                    ? []
-                    : JsonSerializer.Deserialize<List<SourceReferenceDto>>(
-                        m.SourceReferencesJson,
-                        SourceReferenceJsonOptions
-                    ) ?? [],
+                Sources = NormalizeSources(parsedSourcesByMessage[idx], docNameById),
                 CreatedAt = m.CreatedAt.ToString("yyyy-MM-dd HH:mm:ss")
             }).ToList()
         };
@@ -130,5 +138,72 @@ public class AiChatRepository(AppDbContext db, IAgentService agentService, IDocu
         await db.ConversationMessages
             .Where(m => m.UserId == userId)
             .ExecuteDeleteAsync();
+    }
+
+    private async Task<List<SourceReferenceDto>> NormalizeSourcesAsync(List<SourceReferenceDto> sources)
+    {
+        var docNameById = await BuildDocumentNameMapAsync(sources);
+        return NormalizeSources(sources, docNameById);
+    }
+
+    private async Task<Dictionary<string, string>> BuildDocumentNameMapAsync(IEnumerable<SourceReferenceDto> sources)
+    {
+        var parsedDocIds = sources
+            .Select(s => s.DocumentId)
+            .Where(id => !string.IsNullOrWhiteSpace(id))
+            .Select(id => Guid.TryParse(id, out var parsed) ? parsed : Guid.Empty)
+            .Where(id => id != Guid.Empty)
+            .Distinct()
+            .ToList();
+
+        if (parsedDocIds.Count == 0)
+            return new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+
+        var documents = await db.Documents
+            .Where(d => parsedDocIds.Contains(d.Id))
+            .Select(d => new { d.Id, d.FileName })
+            .ToListAsync();
+
+        return documents.ToDictionary(
+            d => d.Id.ToString(),
+            d => d.FileName,
+            StringComparer.OrdinalIgnoreCase
+        );
+    }
+
+    private static List<SourceReferenceDto> NormalizeSources(
+        IEnumerable<SourceReferenceDto> sources,
+        IReadOnlyDictionary<string, string> docNameById
+    )
+    {
+        var normalized = new List<SourceReferenceDto>();
+        var seen = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+
+        foreach (var source in sources)
+        {
+            var key = !string.IsNullOrWhiteSpace(source.DocumentId)
+                ? $"doc:{source.DocumentId.Trim()}"
+                : $"file:{source.FileName?.Trim() ?? ""}";
+
+            if (!seen.Add(key))
+                continue;
+
+            var fileName = source.FileName?.Trim() ?? "";
+            if (!string.IsNullOrWhiteSpace(source.DocumentId)
+                && docNameById.TryGetValue(source.DocumentId.Trim(), out var mappedName)
+                && !string.IsNullOrWhiteSpace(mappedName))
+            {
+                fileName = mappedName;
+            }
+
+            normalized.Add(new SourceReferenceDto
+            {
+                DocumentId = source.DocumentId,
+                FileName = fileName,
+                Snippet = source.Snippet
+            });
+        }
+
+        return normalized;
     }
 }

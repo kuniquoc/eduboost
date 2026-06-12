@@ -9,6 +9,8 @@ public class Question
     public string Type { get; set; } = "mcq";
 
     public string Difficulty { get; set; } = "medium";
+    public double DifficultyIndex { get; set; } = 0.0;
+    public bool IsEstimatedDifficultyIndex { get; set; } = false;
     public string? Explanation { get; set; }
     public string? CorrectAnswer { get; set; } // for fill_blank
     public bool VerifiedByTeacher { get; set; }

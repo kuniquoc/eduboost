@@ -55,6 +55,12 @@ public class LearningStatesRepository(AppDbContext db, ISpacedRepetitionService 
             state.Topic = topic!;
         }
 
+        // BKT + IRT Update
+        var thetaBefore = state.IrtTheta;
+        var beta = DifficultyIndex.Clamp(request.QuestionDifficultyIndex ?? DifficultyIndex.FromDifficultyLabel(state.Topic?.Difficulty));
+        state.IrtTheta = UpdateTheta(thetaBefore, beta, request.IsCorrect);
+        var thetaAfter = state.IrtTheta;
+
         // BKT Update (Bayesian Knowledge Tracing)
         double pL = state.MasteryProbability;
         double pG = state.GuessProbability;
@@ -95,7 +101,10 @@ public class LearningStatesRepository(AppDbContext db, ISpacedRepetitionService 
         {
             State = MapToDto(state),
             Recommendation = recommendation,
-            SpacedRepetition = srUpdate
+            SpacedRepetition = srUpdate,
+            ThetaBefore = thetaBefore,
+            ThetaAfter = thetaAfter,
+            QuestionBeta = beta
         };
     }
 
@@ -210,4 +219,14 @@ public class LearningStatesRepository(AppDbContext db, ISpacedRepetitionService 
         IrtTheta = state.IrtTheta,
         UpdatedAt = state.UpdatedAt.ToString("yyyy-MM-dd HH:mm:ss")
     };
+
+    private static double UpdateTheta(double theta, double beta, bool isCorrect)
+    {
+        // 1PL IRT incremental update: theta <- theta + lr * (observed - expected)
+        const double learningRate = 0.35;
+        var expected = 1.0 / (1.0 + Math.Exp(-(theta - beta)));
+        var observed = isCorrect ? 1.0 : 0.0;
+        var updated = theta + learningRate * (observed - expected);
+        return Math.Clamp(updated, -3.0, 3.0);
+    }
 }

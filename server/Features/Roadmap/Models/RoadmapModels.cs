@@ -10,6 +10,10 @@ public class RoadmapStepDto
     public string Status { get; set; } = "locked"; // "completed" | "in_progress" | "recommended" | "locked"
     public int Progress { get; set; }
     public string? Reason { get; set; }
+    public double? Mastery { get; set; }
+    public double? Theta { get; set; }
+    public double? TopicBeta { get; set; }
+    public int? DueCount { get; set; }
     public int OrderIndex { get; set; }
 }
 

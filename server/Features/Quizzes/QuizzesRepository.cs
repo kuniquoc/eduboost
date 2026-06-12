@@ -237,6 +237,8 @@ public class QuizzesRepository(AppDbContext db, IAgentService agent, ILearningSt
                 Text = poolQ.Text,
                 Type = poolQ.Type,
                 Difficulty = poolQ.Difficulty,
+                DifficultyIndex = poolQ.DifficultyIndex,
+                IsEstimatedDifficultyIndex = poolQ.IsEstimatedDifficultyIndex,
                 Explanation = poolQ.Explanation,
                 CorrectAnswer = poolQ.CorrectAnswer,
                 VerifiedByTeacher = true,
@@ -272,6 +274,10 @@ public class QuizzesRepository(AppDbContext db, IAgentService agent, ILearningSt
         var quiz = await db.Quizzes.FindAsync(quizId);
         if (quiz == null) return false;
         quiz.IsPublished = true;
+        // Pool quizzes assigned to a class and published become practice quizzes
+        // so students can see and start them via the class quiz page.
+        if (quiz.Type == "pool" && quiz.ClassId.HasValue)
+            quiz.Type = "practice";
         await db.SaveChangesAsync();
         return true;
     }
@@ -374,6 +380,8 @@ public class QuizzesRepository(AppDbContext db, IAgentService agent, ILearningSt
                 Text = q.Text,
                 Type = q.Type,
                 Difficulty = q.Difficulty,
+                DifficultyIndex = ResolveDifficultyIndex(q.DifficultyIndex, q.Difficulty),
+                IsEstimatedDifficultyIndex = !q.DifficultyIndex.HasValue,
                 Explanation = q.Explanation,
                 CorrectAnswer = q.CorrectAnswer,
                 VerifiedByTeacher = false,
@@ -534,6 +542,8 @@ public class QuizzesRepository(AppDbContext db, IAgentService agent, ILearningSt
             Text = request.Text,
             Type = request.Type,
             Difficulty = request.Difficulty,
+            DifficultyIndex = ResolveDifficultyIndex(request.DifficultyIndex, request.Difficulty),
+            IsEstimatedDifficultyIndex = !request.DifficultyIndex.HasValue,
             Explanation = request.Explanation,
             CorrectAnswer = request.CorrectAnswer,
             VerifiedByTeacher = false,
@@ -598,6 +608,8 @@ public class QuizzesRepository(AppDbContext db, IAgentService agent, ILearningSt
             Text = agentQuestion.Question,
             Type = "mcq",
             Difficulty = difficulty,
+            DifficultyIndex = DifficultyIndex.Clamp(agentQuestion.DifficultyLevel),
+            IsEstimatedDifficultyIndex = false,
             Explanation = agentQuestion.Explanation,
             CorrectAnswer = agentQuestion.Options.GetValueOrDefault(correctKey, agentQuestion.CorrectAnswer),
             OrderIndex = orderIndex,
@@ -727,6 +739,8 @@ public class QuizzesRepository(AppDbContext db, IAgentService agent, ILearningSt
         Text = aiQ.Question,
         Type = string.IsNullOrWhiteSpace(aiQ.Type) ? "mcq" : aiQ.Type,
         Difficulty = string.IsNullOrWhiteSpace(aiQ.Difficulty) ? "medium" : aiQ.Difficulty,
+        DifficultyIndex = ResolveDifficultyIndex(aiQ.DifficultyIndex, aiQ.Difficulty),
+        IsEstimatedDifficultyIndex = !aiQ.DifficultyIndex.HasValue,
         Explanation = aiQ.Explanation,
         CorrectAnswer = aiQ.Options.FirstOrDefault(o => o.IsCorrect)?.Text ?? "",
         VerifiedByTeacher = false,
@@ -746,6 +760,8 @@ public class QuizzesRepository(AppDbContext db, IAgentService agent, ILearningSt
         Text = $"[AI] Câu hỏi về {topicName} ({index})",
         Type = "mcq",
         Difficulty = difficulty,
+        DifficultyIndex = DifficultyIndex.FromDifficultyLabel(difficulty),
+        IsEstimatedDifficultyIndex = true,
         Explanation = $"Đây là câu hỏi đánh giá kiến thức về {topicName}.",
         VerifiedByTeacher = false,
         OrderIndex = orderIndex,
@@ -766,6 +782,8 @@ public class QuizzesRepository(AppDbContext db, IAgentService agent, ILearningSt
         Text = q.Text,
         Type = q.Type,
         Difficulty = q.Difficulty,
+        DifficultyIndex = q.DifficultyIndex,
+        IsEstimatedDifficultyIndex = q.IsEstimatedDifficultyIndex,
         Explanation = q.Explanation,
         CorrectAnswer = q.CorrectAnswer,
         VerifiedByTeacher = q.VerifiedByTeacher,
@@ -777,6 +795,12 @@ public class QuizzesRepository(AppDbContext db, IAgentService agent, ILearningSt
             IsCorrect = o.IsCorrect
         }).ToList()
     };
+
+    private static double ResolveDifficultyIndex(double? difficultyIndex, string? difficultyLabel)
+    {
+        if (difficultyIndex.HasValue) return DifficultyIndex.Clamp(difficultyIndex.Value);
+        return DifficultyIndex.FromDifficultyLabel(difficultyLabel);
+    }
 
     public async Task CompleteTutorPracticeAsync(Guid userId, Guid topicId, int questionsAttempted, int correctAnswers)
     {

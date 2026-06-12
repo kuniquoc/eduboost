@@ -181,6 +181,8 @@ public class PoolRepository(AppDbContext db, IStorageService storage, IAgentServ
                 Text = q.Question,
                 Type = q.Type,
                 Difficulty = q.Difficulty,
+                DifficultyIndex = ResolveDifficultyIndex(q.DifficultyIndex, q.Difficulty),
+                IsEstimatedDifficultyIndex = !q.DifficultyIndex.HasValue,
                 Explanation = q.Explanation,
                 CorrectAnswer = q.Options.FirstOrDefault(o => o.IsCorrect)?.Text ?? "",
                 VerifiedByTeacher = false,
@@ -362,6 +364,8 @@ public class PoolRepository(AppDbContext db, IStorageService storage, IAgentServ
     public async Task<QuizDto?> CreateEntryTestFromPoolAsync(Guid userId, CreateEntryTestFromPoolRequest request)
     {
         var classGuid = Guid.Parse(request.ClassId);
+        var existingEntry = await db.Quizzes.AnyAsync(q => q.ClassId == classGuid && q.Type == "entry_test");
+        if (existingEntry) return null;
 
         var poolQuestions = await LoadPoolQuestionsForSelectionAsync(request);
         if (poolQuestions.Count == 0)
@@ -509,6 +513,8 @@ public class PoolRepository(AppDbContext db, IStorageService storage, IAgentServ
         Text = q.Text,
         Type = q.Type,
         Difficulty = q.Difficulty,
+        DifficultyIndex = q.DifficultyIndex,
+        IsEstimatedDifficultyIndex = q.IsEstimatedDifficultyIndex,
         Explanation = q.Explanation,
         CorrectAnswer = q.CorrectAnswer,
         VerifiedByTeacher = verifiedByTeacher,
@@ -564,6 +570,8 @@ public class PoolRepository(AppDbContext db, IStorageService storage, IAgentServ
         Text = q.Text,
         Type = q.Type,
         Difficulty = q.Difficulty,
+        DifficultyIndex = q.DifficultyIndex,
+        IsEstimatedDifficultyIndex = q.IsEstimatedDifficultyIndex,
         Explanation = q.Explanation,
         CorrectAnswer = q.CorrectAnswer,
         VerifiedByTeacher = q.VerifiedByTeacher,
@@ -575,4 +583,10 @@ public class PoolRepository(AppDbContext db, IStorageService storage, IAgentServ
             IsCorrect = o.IsCorrect
         }).ToList()
     };
+
+    private static double ResolveDifficultyIndex(double? difficultyIndex, string? difficultyLabel)
+    {
+        if (difficultyIndex.HasValue) return DifficultyIndex.Clamp(difficultyIndex.Value);
+        return DifficultyIndex.FromDifficultyLabel(difficultyLabel);
+    }
 }

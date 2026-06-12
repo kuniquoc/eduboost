@@ -27,8 +27,7 @@ function getSourceLabel(source: SourceReferenceDto, index: number) {
   const fileName = source.fileName?.trim();
   if (fileName) return fileName;
 
-  const documentId = source.documentId?.trim();
-  if (documentId) return `Tài liệu ${documentId.slice(0, 8)}`;
+  if (source.documentId?.trim()) return `Tài liệu ${index + 1}`;
 
   return `Nguồn ${index + 1}`;
 }
