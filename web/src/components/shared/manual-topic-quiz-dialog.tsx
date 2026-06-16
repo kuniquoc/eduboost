@@ -237,7 +237,7 @@ export function ManualTopicQuizForm({
           <button
             type="button"
             onClick={() => setIsAdvanced(!isAdvanced)}
-            className="text-xs text-indigo-400 hover:text-indigo-300 underline underline-offset-2"
+            className="text-xs text-indigo-600 hover:text-indigo-700 underline underline-offset-2"
           >
             {isAdvanced ? 'Cấu hình nhanh' : 'Tùy chỉnh theo độ khó'}
           </button>
@@ -259,7 +259,7 @@ export function ManualTopicQuizForm({
               ))}
             </div>
             <div className="text-right text-xs font-medium">
-              Tổng: <strong className="text-indigo-400">{easyCount + mediumCount + hardCount}</strong> câu
+              Tổng: <strong className="text-indigo-600">{easyCount + mediumCount + hardCount}</strong> câu
             </div>
           </div>
         ) : (
@@ -297,7 +297,7 @@ export function ManualTopicQuizForm({
             className={cn(
               'cursor-pointer rounded-xl p-3 border text-center text-xs transition-all duration-300',
               genMode === 'append'
-                ? 'border-indigo-500/50 bg-indigo-500/5 font-semibold text-indigo-300'
+                ? 'border-indigo-500/50 bg-indigo-500/5 font-semibold text-indigo-700'
                 : 'border-border/40 hover:bg-muted/40 text-muted-foreground'
             )}
           >
@@ -309,7 +309,7 @@ export function ManualTopicQuizForm({
             className={cn(
               'cursor-pointer rounded-xl p-3 border text-center text-xs transition-all duration-300',
               genMode === 'replace'
-                ? 'border-rose-500/50 bg-rose-500/5 font-semibold text-rose-300'
+                ? 'border-rose-500/50 bg-rose-500/5 font-semibold text-rose-700'
                 : 'border-border/40 hover:bg-muted/40 text-muted-foreground'
             )}
           >
@@ -318,7 +318,7 @@ export function ManualTopicQuizForm({
           </div>
         </div>
         {genMode === 'replace' && (
-          <p className="text-[10px] text-rose-400/80 italic">
+          <p className="text-[10px] text-rose-700/90 italic">
             ⚠ Chế độ thay thế sẽ xoá toàn bộ câu hỏi của bạn trong chủ đề này.
           </p>
         )}
@@ -332,7 +332,7 @@ export function ManualTopicQuizForm({
         )}
         <Button
           className={cn(
-            variant === 'inline' && 'w-full bg-gradient-to-r from-blue-500 via-indigo-600 to-violet-500 hover:from-blue-600 hover:to-violet-600 text-white font-semibold py-6 rounded-xl shadow-lg shadow-indigo-500/20',
+            variant === 'inline' && 'w-full bg-gradient-to-r from-blue-500 via-indigo-600 to-violet-500 hover:from-blue-600 hover:to-violet-600 text-primary-foreground font-semibold py-6 rounded-xl shadow-lg shadow-indigo-500/20',
             variant === 'dialog' && 'bg-indigo-600 hover:bg-indigo-700',
           )}
           onClick={handleGenerate}
@@ -359,11 +359,11 @@ export function ManualTopicQuizForm({
       {formContent}
 
       {showGenOverlay && (
-        <div className="fixed inset-0 bg-black/80 backdrop-blur-md z-[60] flex items-center justify-center animate-fadeIn p-4">
+        <div className="fixed inset-0 bg-background/85 backdrop-blur-md z-[60] flex items-center justify-center animate-fadeIn p-4">
           <Card className="max-w-md w-full border-indigo-500/30 bg-card/90 shadow-2xl p-6 text-center space-y-6">
             <div className="relative mx-auto h-20 w-20 flex items-center justify-center">
               <div className="absolute inset-0 rounded-full border-4 border-indigo-500/20 border-t-indigo-500 animate-spin" />
-              <Sparkles className="h-8 w-8 text-indigo-400 animate-pulse" />
+              <Sparkles className="h-8 w-8 text-indigo-600 animate-pulse" />
             </div>
 
             <div className="space-y-2">
@@ -386,13 +386,13 @@ export function ManualTopicQuizForm({
                   <div key={idx} className="flex items-center gap-3">
                     <div className={cn(
                       'h-4 w-4 rounded-full flex items-center justify-center text-[10px] font-bold shrink-0',
-                      isCompleted ? 'bg-green-500 text-black' : isActive ? 'bg-indigo-500 text-white animate-pulse' : 'bg-muted text-muted-foreground',
+                      isCompleted ? 'bg-green-600 text-primary-foreground' : isActive ? 'bg-indigo-600 text-primary-foreground animate-pulse' : 'bg-muted text-muted-foreground',
                     )}>
                       {isCompleted ? '✓' : idx + 1}
                     </div>
                     <span className={cn(
                       'text-xs',
-                      isActive ? 'text-indigo-300 font-semibold' : isCompleted ? 'text-green-400' : 'text-muted-foreground/60',
+                      isActive ? 'text-indigo-700 font-semibold' : isCompleted ? 'text-green-700' : 'text-muted-foreground/60',
                     )}>
                       {step}
                     </span>
@@ -423,7 +423,7 @@ export function ManualTopicQuizDialog({
       <DialogContent className="sm:max-w-lg">
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2">
-            <Sparkles className="h-5 w-5 text-indigo-400" />
+            <Sparkles className="h-5 w-5 text-indigo-600" />
             AI sinh câu hỏi từ chủ đề
           </DialogTitle>
           <DialogDescription>

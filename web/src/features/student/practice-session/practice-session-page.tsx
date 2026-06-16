@@ -10,6 +10,9 @@ import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
 import { QuizAnswerFeedback } from '@/components/quiz/quiz-answer-feedback';
 import {
+  Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter,
+} from '@/components/ui/dialog';
+import {
   ArrowLeft,
   Trophy,
   Loader2,
@@ -46,6 +49,7 @@ export function PracticeSessionPage() {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const topicId = searchParams.get('topicId') || '';
+  const classId = searchParams.get('classId') || '';
   const topicName = searchParams.get('topicName') || 'Luyện tập';
   const quizId = searchParams.get('quizId') || '';
   const mode = searchParams.get('mode') || 'standard';
@@ -53,7 +57,8 @@ export function PracticeSessionPage() {
   const isFixedMode = mode === 'fixed';
   const isQuizPracticeMode = mode === 'practice' && !!quizId;
   const isTestMode = mode === 'test' && !!quizId;
-  const autoStartMode = isReviewMode || isFixedMode || isQuizPracticeMode || isTestMode;
+  const isSelfPracticeMode = mode === 'self_practice' && !!classId && !!topicId;
+  const autoStartMode = isReviewMode || isFixedMode || isQuizPracticeMode || isTestMode || isSelfPracticeMode;
   const questionIdsParam = searchParams.get('questionIds');
   const reviewQuestionIds = questionIdsParam ? questionIdsParam.split(',').filter(Boolean) : undefined;
   const fixedQuestionIds = isFixedMode ? reviewQuestionIds : undefined;
@@ -66,9 +71,12 @@ export function PracticeSessionPage() {
   const [detailedErrors, setDetailedErrors] = useState<Record<string, boolean>>({});
   const questionStartRef = useRef<number>(Date.now());
   const autoStartedRef = useRef(false);
+  const [pendingNextSkill, setPendingNextSkill] = useState<SubmitPracticeAnswerResponse | null>(null);
 
   const modeLabel = isTestMode
     ? 'Bài kiểm tra'
+    : isSelfPracticeMode
+      ? 'Tự luyện tập'
     : isQuizPracticeMode
       ? 'Luyện tập quiz lớp'
       : isReviewMode
@@ -81,6 +89,7 @@ export function PracticeSessionPage() {
     mutationFn: () => {
       if (isTestMode) return practiceSessionService.startQuizTest(quizId);
       if (isQuizPracticeMode) return practiceSessionService.startQuizPractice(quizId);
+      if (isSelfPracticeMode) return practiceSessionService.startSelfPractice(classId, topicId);
       if (isReviewMode) return practiceSessionService.startReview(reviewQuestionIds);
       if (isFixedMode) {
         if (!fixedQuestionIds?.length) return Promise.reject(new Error('Missing questionIds'));
@@ -103,6 +112,8 @@ export function PracticeSessionPage() {
     onError: () => {
       const message = isTestMode
         ? 'Không thể bắt đầu bài kiểm tra.'
+        : isSelfPracticeMode
+          ? 'Không thể bắt đầu tự luyện tập.'
         : isQuizPracticeMode
           ? 'Không thể bắt đầu luyện tập quiz lớp.'
           : isReviewMode
@@ -158,7 +169,9 @@ export function PracticeSessionPage() {
   const summaryMutation = useMutation({
     mutationFn: (sessionId: string) => practiceSessionService.endSession(sessionId),
     onSuccess: (data) => {
-      invalidateLearningQueries(queryClient);
+      if (!isSelfPracticeMode) {
+        invalidateLearningQueries(queryClient);
+      }
       setState({ type: 'summary', data });
     },
     onError: () => toast.error('Không tải được kết quả'),
@@ -177,10 +190,10 @@ export function PracticeSessionPage() {
   }, [autoStartMode, handleStart]);
 
   useEffect(() => {
-    if (!isReviewMode && !isFixedMode && !isQuizPracticeMode && !isTestMode && !topicId) {
+    if (!isReviewMode && !isFixedMode && !isQuizPracticeMode && !isTestMode && !isSelfPracticeMode && !topicId) {
       navigate('/student/classes', { replace: true });
     }
-  }, [isReviewMode, isFixedMode, isQuizPracticeMode, isTestMode, topicId, navigate]);
+  }, [isReviewMode, isFixedMode, isQuizPracticeMode, isTestMode, isSelfPracticeMode, topicId, navigate]);
 
   const handleSubmit = useCallback(() => {
     if (state.type !== 'answering' || state.phase !== 'selecting' || selectedOptions.length === 0) return;
@@ -193,6 +206,44 @@ export function PracticeSessionPage() {
 
   const handleNext = useCallback(() => {
     if (state.type !== 'answering' || state.phase !== 'reviewing' || !state.feedback) return;
+    const { feedback, sessionId } = state;
+
+    if (isSelfPracticeMode && feedback.recommendNextSkill && feedback.suggestedNextTopicId) {
+      setPendingNextSkill(feedback);
+      return;
+    }
+
+    if (feedback.isSessionComplete || !feedback.nextQuestion) {
+      summaryMutation.mutate(sessionId);
+    } else {
+      setSelectedOptions([]);
+      questionStartRef.current = Date.now();
+      setState({
+        type: 'answering',
+        sessionId,
+        question: feedback.nextQuestion,
+        questionNumber: feedback.questionNumber,
+        total: feedback.totalQuestions ?? totalQuestions,
+        phase: 'selecting',
+      });
+    }
+  }, [state, summaryMutation, totalQuestions, isSelfPracticeMode]);
+
+  const acceptNextTopic = useCallback(() => {
+    if (!pendingNextSkill?.suggestedNextTopicId) return;
+    const params = new URLSearchParams({
+      mode: 'self_practice',
+      classId,
+      topicId: pendingNextSkill.suggestedNextTopicId,
+      topicName: pendingNextSkill.suggestedNextTopicName ?? 'Tự luyện tập',
+    });
+    setPendingNextSkill(null);
+    navigate(`/student/practice-session?${params.toString()}`);
+  }, [pendingNextSkill, classId, navigate]);
+
+  const continueCurrentTopic = useCallback(() => {
+    if (!pendingNextSkill || state.type !== 'answering' || !state.feedback) return;
+    setPendingNextSkill(null);
     const { feedback, sessionId } = state;
     if (feedback.isSessionComplete || !feedback.nextQuestion) {
       summaryMutation.mutate(sessionId);
@@ -208,7 +259,7 @@ export function PracticeSessionPage() {
         phase: 'selecting',
       });
     }
-  }, [state, summaryMutation, totalQuestions]);
+  }, [pendingNextSkill, state, summaryMutation, totalQuestions]);
 
   const toggleOption = (optId: string) => {
     if (state.type !== 'answering' || state.phase !== 'selecting') return;
@@ -244,6 +295,8 @@ export function PracticeSessionPage() {
     ? '/student/review'
     : isFixedMode
       ? '/student/quiz-pool'
+      : isSelfPracticeMode
+        ? `/student/classes/${classId}?tab=practice`
       : isTestMode || isQuizPracticeMode
         ? -1
         : -1;
@@ -385,12 +438,36 @@ export function PracticeSessionPage() {
                         {typeof feedback.questionBeta === 'number' ? `β câu hỏi: ${feedback.questionBeta.toFixed(2)}` : ''}
                       </p>
                     )}
+                    {(typeof feedback.sessionMastery === 'number' || typeof feedback.dbMasteryBaseline === 'number') && (
+                      <p className="mt-2 text-xs text-muted-foreground">
+                        Phiên: {typeof feedback.sessionMastery === 'number' ? `${Math.round(feedback.sessionMastery * 100)}%` : '—'}
+                        {' · '}
+                        DB (quiz lớp): {typeof feedback.dbMasteryBaseline === 'number' ? `${Math.round(feedback.dbMasteryBaseline * 100)}%` : '—'}
+                      </p>
+                    )}
                   </div>
                 )}
               </div>
             )}
           </CardContent>
         </Card>
+
+        <Dialog open={!!pendingNextSkill} onOpenChange={(open) => !open && setPendingNextSkill(null)}>
+          <DialogContent>
+            <DialogHeader>
+              <DialogTitle>Agent đề xuất chuyển chủ đề</DialogTitle>
+              <DialogDescription>
+                {pendingNextSkill?.nextSkillSuggestion ?? 'Bạn đã đạt mức thành thạo tốt cho chủ đề này trong phiên luyện tập.'}
+              </DialogDescription>
+            </DialogHeader>
+            <DialogFooter className="gap-2 sm:gap-0">
+              <Button variant="outline" onClick={continueCurrentTopic}>Tiếp tục ôn luyện</Button>
+              <Button onClick={acceptNextTopic}>
+                Chuyển sang {pendingNextSkill?.suggestedNextTopicName ?? 'chủ đề mới'}
+              </Button>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
       </div>
     );
   }

@@ -10,7 +10,7 @@ namespace EduBoost.API.Features.Documents;
 public interface IDocumentsRepository
 {
     // Class documents
-    Task<List<DocumentDto>> GetByClassIdAsync(Guid classId);
+    Task<List<DocumentDto>> GetByClassIdAsync(Guid classId, string? userRole = null);
     Task<UploadUrlDto> RequestClassUploadUrlAsync(Guid classId, Guid teacherId, RequestUploadUrlRequest request);
     Task<DocumentDto?> ConfirmClassUploadAsync(Guid classId, Guid teacherId, string documentId);
     Task<bool> DeleteClassDocumentAsync(Guid classId, Guid docId);
@@ -44,10 +44,12 @@ public class DocumentsRepository(
     private const string StudentBucket = MinioStorageService.Buckets.StudentDocuments;
 
     // ── Class documents ───────────────────────────────────────────────────────
-    public async Task<List<DocumentDto>> GetByClassIdAsync(Guid classId)
+    public async Task<List<DocumentDto>> GetByClassIdAsync(Guid classId, string? userRole = null)
     {
-        return await db.Documents
-            .Where(d => d.ClassId == classId)
+        var query = db.Documents.Where(d => d.ClassId == classId);
+        if (string.Equals(userRole, "student", StringComparison.OrdinalIgnoreCase))
+            query = query.Where(d => d.IsVisible);
+        return await query
             .OrderByDescending(d => d.UploadedAt)
             .Select(d => MapToDto(d))
             .ToListAsync();

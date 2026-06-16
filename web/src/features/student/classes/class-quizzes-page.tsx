@@ -21,8 +21,8 @@ export function ClassQuizzesPage() {
   // Include both "practice" and "pool" types — pool quizzes assigned to a class
   // and published by the teacher should also be visible to enrolled students.
   const practiceQuizzes = quizzes.filter(
-    (q) => (q.type === 'practice' || q.type === 'pool') && q.isPublished,
-  );
+    (q) => q.type === 'practice' || (q.type as string) === 'pool',
+  ).filter((q) => q.isPublished);
 
   const startPractice = (quizId: string, title: string) => {
     const params = new URLSearchParams({

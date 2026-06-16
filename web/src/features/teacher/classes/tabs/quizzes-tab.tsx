@@ -150,7 +150,7 @@ export function QuizzesTab({ classId, activeEntryTestId }: QuizzesTabProps) {
           )}
           <div className="space-y-2">
             {practiceQuizzes.map((quiz) => {
-              const typeInfo = typeLabels[quiz.type] ?? typeLabels.practice;
+              const typeInfo = typeLabels[quiz.type ?? 'practice'] ?? typeLabels.practice;
               const Icon = typeInfo.icon;
               return (
                 <Card key={quiz.id} className="border-border">

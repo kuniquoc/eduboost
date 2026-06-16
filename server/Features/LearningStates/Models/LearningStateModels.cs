@@ -30,7 +30,6 @@ public class UpdateBktResponse
     public double ThetaAfter { get; set; }
     public double QuestionBeta { get; set; }
 }
-
 public class SrUpdateDto
 {
     public string NextReviewDate { get; set; } = "";
@@ -60,3 +59,4 @@ public class ReviewItemDto
     public double EaseFactor { get; set; }
     public double? OverdueHours { get; set; }
 }
+

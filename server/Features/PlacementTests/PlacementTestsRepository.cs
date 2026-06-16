@@ -139,7 +139,8 @@ public class PlacementTestsRepository(AppDbContext db, IRoadmapRepository roadma
             {
                 TopicId = topicId.Value,
                 QuestionId = questionId,
-                IsCorrect = isCorrect
+                IsCorrect = isCorrect,
+                QuestionDifficultyIndex = question.DifficultyIndex
             });
         }
 

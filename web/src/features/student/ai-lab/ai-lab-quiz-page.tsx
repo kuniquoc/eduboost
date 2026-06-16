@@ -115,10 +115,10 @@ export function AILabQuizPage() {
                 </div>
                 {q.type === 'fill_blank' ? (
                   <div className="ml-9 mt-3 max-w-md">
-                    <div className="flex items-center gap-2.5 rounded-lg border border-emerald-500 bg-emerald-50 dark:bg-emerald-950/40 p-2.5 text-xs text-emerald-800 dark:text-emerald-300 font-semibold shadow-sm ring-1 ring-emerald-500/20">
-                      <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-emerald-600 text-white text-[10px] font-bold">✓</span>
+                    <div className="flex items-center gap-2.5 rounded-lg border border-emerald-500 bg-emerald-50 p-2.5 text-xs text-emerald-800 font-semibold shadow-sm ring-1 ring-emerald-500/20">
+                      <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-emerald-600 text-primary-foreground text-[10px] font-bold">✓</span>
                       <div className="flex-1 text-left">
-                        <span className="font-normal text-muted-foreground dark:text-muted-foreground/80 mr-1.5">Đáp án đúng:</span>
+                        <span className="font-normal text-muted-foreground mr-1.5">Đáp án đúng:</span>
                         <span>{q.correctAnswer}</span>
                       </div>
                     </div>
@@ -130,13 +130,13 @@ export function AILabQuizPage() {
                         key={opt.id}
                         className={`flex items-center gap-2.5 rounded-lg border p-2.5 text-xs transition-all shadow-sm ${
                           opt.isCorrect
-                            ? 'bg-emerald-50 dark:bg-emerald-950/40 border-emerald-500 text-emerald-800 dark:text-emerald-300 font-semibold ring-1 ring-emerald-500/20'
+                            ? 'bg-emerald-50 border-emerald-500 text-emerald-800 font-semibold ring-1 ring-emerald-500/20'
                             : 'bg-muted/30 border-border/60 text-muted-foreground'
                         }`}
                       >
                         <span className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-full text-[10px] font-bold ${
                           opt.isCorrect
-                            ? 'bg-emerald-600 text-white'
+                            ? 'bg-emerald-600 text-primary-foreground'
                             : 'bg-muted border border-border text-muted-foreground'
                         }`}>
                           {opt.isCorrect ? '✓' : '○'}
@@ -188,7 +188,7 @@ export function AILabQuizPage() {
                     key={i} 
                     className={`flex items-center gap-3 rounded-lg border p-2 transition-all ${
                       opt.isCorrect 
-                        ? 'bg-emerald-500/5 border-emerald-500/40 dark:bg-emerald-500/10' 
+                        ? 'bg-emerald-500/5 border-emerald-500/40'
                         : 'border-border bg-card'
                     }`}
                   >
@@ -213,7 +213,7 @@ export function AILabQuizPage() {
                       placeholder={`Đáp án ${String.fromCharCode(65 + i)}`}
                     />
                     {opt.isCorrect && (
-                      <span className="text-[10px] font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-500/10 dark:bg-emerald-500/20 px-2 py-0.5 rounded-full select-none shrink-0">
+                      <span className="text-[10px] font-bold text-emerald-600 bg-emerald-500/10 px-2 py-0.5 rounded-full select-none shrink-0">
                         Đúng
                       </span>
                     )}

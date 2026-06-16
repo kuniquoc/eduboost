@@ -185,4 +185,18 @@ public class PoolController(
         if (result == null) return NotFound(ApiResponse.Fail("Không tìm thấy chủ đề hoặc bạn không có quyền đổi tên"));
         return Ok(ApiResponse<TopicPoolDto>.Ok(result, "Đổi tên chủ đề thành công"));
     }
+
+    /// <summary>Sửa câu hỏi trong Pool (text, độ khó, β, options)</summary>
+    [HttpPatch("questions/{questionId:guid}")]
+    public async Task<IActionResult> UpdatePoolQuestion(Guid questionId, [FromBody] UpdateQuestionRequest request)
+    {
+        if (!ModelState.IsValid) return BadRequest(ApiResponse.Fail("Dữ liệu không hợp lệ", ModelState));
+        var question = await repo.GetPoolQuestionAsync(questionId);
+        if (question == null) return NotFound(ApiResponse.Fail("Không tìm thấy câu hỏi trong Pool"));
+        if (!await poolAuth.CanAccessTopicAsync(UserId, UserRole, question.TopicId))
+            return Forbid();
+        var updated = await quizzes.UpdateQuestionAsync(questionId, request);
+        if (updated == null) return NotFound(ApiResponse.Fail("Không thể cập nhật câu hỏi"));
+        return Ok(ApiResponse<QuestionDto>.Ok(updated, "Cập nhật câu hỏi thành công"));
+    }
 }

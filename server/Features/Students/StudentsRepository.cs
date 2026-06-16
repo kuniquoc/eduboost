@@ -121,12 +121,59 @@ public class StudentsRepository(AppDbContext db, IStudentStatsCalculator statsCa
             .Where(s => classQuizIds.Contains(s.QuizId))
             .ToList();
 
-        var weakBkt = await db.BktStates
-            .Where(b => b.UserId == studentId && topicIds.Contains(b.TopicId) && b.MasteryProbability < 0.5)
-            .Include(b => b.Topic)
-            .OrderBy(b => b.MasteryProbability)
-            .Take(3)
+        var classQuizzes = await db.Quizzes
+            .Where(q => classQuizIds.Contains(q.Id))
+            .Select(q => new { q.Id, q.Title })
             .ToListAsync();
+
+        var quizAttemptStats = classSubmissions
+            .GroupBy(s => s.QuizId)
+            .Select(g =>
+            {
+                var quiz = classQuizzes.FirstOrDefault(q => q.Id == g.Key);
+                var correct = g.Sum(s => s.Score);
+                var total = g.Sum(s => s.TotalQuestions);
+                return new QuizAttemptStatDto
+                {
+                    QuizId = g.Key.ToString(),
+                    QuizTitle = quiz?.Title ?? "Quiz",
+                    AttemptCount = g.Count(),
+                    CorrectCount = correct,
+                    TotalQuestions = total,
+                    CorrectRatio = total > 0 ? (double)correct / total : 0
+                };
+            })
+            .OrderByDescending(s => s.AttemptCount)
+            .ToList();
+
+        var totalCorrect = classSubmissions.Sum(s => s.Score);
+        var totalQuestions = classSubmissions.Sum(s => s.TotalQuestions);
+        var correctRatio = totalQuestions > 0 ? (double)totalCorrect / totalQuestions : 0;
+
+        var topics = await db.Topics
+            .Where(t => topicIds.Contains(t.Id))
+            .ToListAsync();
+
+        var bktStates = await db.BktStates
+            .Where(b => b.UserId == studentId && topicIds.Contains(b.TopicId))
+            .ToListAsync();
+
+        var topicMasteries = topics.Select(t =>
+        {
+            var state = bktStates.FirstOrDefault(b => b.TopicId == t.Id);
+            return new TopicMasteryDto
+            {
+                TopicId = t.Id.ToString(),
+                TopicName = t.Name,
+                MasteryProbability = state?.MasteryProbability ?? 0.3,
+                IrtTheta = state?.IrtTheta ?? 0
+            };
+        }).OrderBy(t => t.MasteryProbability).ToList();
+
+        var weakBkt = topicMasteries
+            .Where(t => t.MasteryProbability < 0.5)
+            .Take(3)
+            .ToList();
 
         var lastSession = await db.LearningSessions
             .Where(s => s.UserId == studentId && topicIds.Contains(s.TopicId))
@@ -155,12 +202,15 @@ public class StudentsRepository(AppDbContext db, IStudentStatsCalculator statsCa
             AverageScore = classSubmissions.Any()
                 ? (int)classSubmissions.Average(s => s.Percentage)
                 : 0,
+            CorrectRatio = correctRatio,
+            QuizAttemptStats = quizAttemptStats,
+            TopicMasteries = topicMasteries,
             LastActive = lastActive,
             EntryTestCompleted = enrollment.EntryTestCompleted,
             WeakSkills = weakBkt.Select(b => new WeakSkillDto
             {
-                TopicId = b.TopicId.ToString(),
-                TopicName = b.Topic.Name,
+                TopicId = b.TopicId,
+                TopicName = b.TopicName,
                 Score = (int)(b.MasteryProbability * 100)
             }).ToList()
         };

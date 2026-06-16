@@ -18,8 +18,16 @@ public class ClassDto
 
 public class ClassDetailDto : ClassDto
 {
+    public string? TeacherName { get; set; }
     public string? ActiveEntryTestId { get; set; }
     public List<TopicSummaryDto> Topics { get; set; } = [];
+}
+
+public class ClassmateDto
+{
+    public string StudentId { get; set; } = "";
+    public string Name { get; set; } = "";
+    public string? Avatar { get; set; }
 }
 
 public class SetActiveEntryTestRequest

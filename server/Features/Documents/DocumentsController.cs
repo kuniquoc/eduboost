@@ -23,7 +23,7 @@ public class DocumentsController(IDocumentsRepository repo, IClassesRepository c
     {
         if (!await classes.CanUserAccessClassAsync(classId, UserId, UserRole))
             return Forbid();
-        var docs = await repo.GetByClassIdAsync(classId);
+        var docs = await repo.GetByClassIdAsync(classId, UserRole);
         return Ok(ApiResponse<List<DocumentDto>>.Ok(docs));
     }
 

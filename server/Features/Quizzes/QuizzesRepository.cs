@@ -81,6 +81,13 @@ public class QuizzesRepository(AppDbContext db, IAgentService agent, ILearningSt
         if (request.CorrectAnswer != null) question.CorrectAnswer = request.CorrectAnswer;
         if (request.Explanation != null) question.Explanation = request.Explanation;
 
+        if (request.Difficulty != null || request.DifficultyIndex.HasValue)
+        {
+            if (request.Difficulty != null) question.Difficulty = request.Difficulty;
+            question.DifficultyIndex = ResolveDifficultyIndex(request.DifficultyIndex, request.Difficulty ?? question.Difficulty);
+            question.IsEstimatedDifficultyIndex = !request.DifficultyIndex.HasValue;
+        }
+
         if (request.Options != null)
         {
             // 1. Delete options not in the request using ExecuteDeleteAsync to bypass
@@ -682,13 +689,15 @@ public class QuizzesRepository(AppDbContext db, IAgentService agent, ILearningSt
 
                 if (correct) score++;
 
-                if (quiz.TopicId.HasValue)
+                var topicId = question.SourceTopicId ?? quiz.TopicId;
+                if (topicId.HasValue)
                 {
                     await learningStates.UpdateAfterAnswerAsync(studentId, new UpdateBktRequest
                     {
-                        TopicId = quiz.TopicId.Value,
+                        TopicId = topicId.Value,
                         QuestionId = question.Id,
-                        IsCorrect = correct
+                        IsCorrect = correct,
+                        QuestionDifficultyIndex = question.DifficultyIndex
                     });
                 }
             }

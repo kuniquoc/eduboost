@@ -5,6 +5,8 @@ namespace EduBoost.API.Features.QuizPool;
 
 public enum DeletePoolQuizResult { Success, NotFound, Forbidden }
 
+public record PoolQuestionRef(Guid QuestionId, Guid TopicId);
+
 public interface IPoolRepository
 {
     Task<QuizDto?> GeneratePoolQuizAsync(Guid userId, string userRole, GeneratePoolQuizRequest request);
@@ -17,4 +19,5 @@ public interface IPoolRepository
     Task<QuizDto> CreateRevisionSetFromPoolAsync(Guid userId, CreateRevisionSetFromPoolRequest request);
     Task<List<QuizDto>> GetRevisionSetsAsync(Guid userId);
     Task<TopicPoolDto?> RenameTopicAsync(Guid userId, string userRole, Guid topicId, string newName);
+    Task<PoolQuestionRef?> GetPoolQuestionAsync(Guid questionId);
 }

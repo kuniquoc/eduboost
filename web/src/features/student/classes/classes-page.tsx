@@ -4,7 +4,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { classesService } from '@/services/classes.service';
 import { useEnrolledClasses } from '@/hooks/use-enrolled-classes';
 import { useStudentProgress } from '@/hooks/use-student-progress';
-import { ROUTES, placementTestPath } from '@/lib/constants';
+import { placementTestPath } from '@/lib/constants';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -18,7 +18,7 @@ import type { ClassDto } from '@/types';
 
 function ClassCard({ cls, entryTestCompleted }: { cls: ClassDto; entryTestCompleted: boolean }) {
   const href = entryTestCompleted
-    ? ROUTES.STUDENT_ROADMAP.replace(':classId', cls.id)
+    ? `/student/classes/${cls.id}`
     : placementTestPath(cls.id);
 
   return (

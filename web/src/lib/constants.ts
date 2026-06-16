@@ -16,6 +16,7 @@ export const ROUTES = {
   // Student
   STUDENT_DASHBOARD: '/student/dashboard',
   STUDENT_CLASSES: '/student/classes',
+  STUDENT_CLASS_DETAIL: '/student/classes/:classId',
   /** @deprecated Use placementTestPath() — redirects to placement test */
   STUDENT_ENTRY_TEST: '/student/entry-test/:classId',
   STUDENT_PLACEMENT_TEST: '/student/placement-test/:classId',

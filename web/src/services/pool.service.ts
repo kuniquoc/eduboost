@@ -77,4 +77,9 @@ export const poolService = {
     const res = await apiClient.patch<ApiResponse<TopicPoolDto>>(`/pool/topics/${topicId}/rename`, { name });
     return res.data.data!;
   },
+
+  updatePoolQuestion: async (questionId: string, data: import('@/types').UpdateQuestionPayload) => {
+    const res = await apiClient.patch<ApiResponse<import('@/types').QuestionDto>>(`/pool/questions/${questionId}`, data);
+    return res.data.data!;
+  },
 };

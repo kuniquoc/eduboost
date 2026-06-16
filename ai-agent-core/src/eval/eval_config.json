@@ -1,0 +1,48 @@
+{
+  "default_base_url": "https://portable-lint-stretch.ngrok-free.dev/v1",
+  "judge_model": "gpt-4o",
+  "tasks": {
+    "quiz": {
+      "test_file": "data/gold_dataset/quiz_gold.jsonl"
+    },
+    "explanation": {
+      "test_file": "data/gold_dataset/explanation_gold.jsonl"
+    }
+  },
+  "models": [
+    {
+      "name": "qwen2.5_7b_base",
+      "base_model": "unsloth/qwen2.5-7b-instruct-unsloth-bnb-4bit"
+    },
+    {
+      "name": "qwen2.5_7b_quiz_finetuned",
+      "base_model": "unsloth/qwen2.5-7b-instruct-unsloth-bnb-4bit",
+      "adapter": "KuniQuoc/eduboost-quiz-adapter",
+      "base_url": "https://portable-lint-stretch.ngrok-free.dev/v1"
+    },
+    {
+      "name": "qwen2.5_7b_explanation_finetuned",
+      "base_model": "unsloth/qwen2.5-7b-instruct-unsloth-bnb-4bit",
+      "adapter": "KuniQuoc/eduboost-explanation-adapter",
+      "base_url": "https://obsessed-domain-goal.ngrok-free.dev/v1"
+    },
+    {
+      "name": "llama3.1_8b_base",
+      "base_model": "unsloth/Llama-3.1-8B-Instruct-bnb-4bit"
+    }
+  ],
+  "comparison_pairs": {
+    "base_vs_base": [
+      0,
+      3
+    ],
+    "base_vs_finetune_quiz": [
+      0,
+      1
+    ],
+    "base_vs_finetune_explanation": [
+      0,
+      2
+    ]
+  }
+}

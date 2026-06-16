@@ -58,33 +58,12 @@ public class LearningStatesRepository(AppDbContext db, ISpacedRepetitionService 
         // BKT + IRT Update
         var thetaBefore = state.IrtTheta;
         var beta = DifficultyIndex.Clamp(request.QuestionDifficultyIndex ?? DifficultyIndex.FromDifficultyLabel(state.Topic?.Difficulty));
-        state.IrtTheta = UpdateTheta(thetaBefore, beta, request.IsCorrect);
-        var thetaAfter = state.IrtTheta;
-
-        // BKT Update (Bayesian Knowledge Tracing)
-        double pL = state.MasteryProbability;
-        double pG = state.GuessProbability;
-        double pS = state.SlipProbability;
-        double pT = state.TransitionProbability;
-
-        double pCorrectGivenMastered = 1.0 - pS;
-        double pCorrectGivenNotMastered = pG;
-
-        double pCorrect = pL * pCorrectGivenMastered + (1 - pL) * pCorrectGivenNotMastered;
-
-        double pLGivenObs;
-        if (request.IsCorrect)
-        {
-            pLGivenObs = (pL * pCorrectGivenMastered) / pCorrect;
-        }
-        else
-        {
-            double pIncorrect = 1.0 - pCorrect;
-            pLGivenObs = (pL * pS) / pIncorrect;
-        }
-
-        double newPL = pLGivenObs + (1 - pLGivenObs) * pT;
-        state.MasteryProbability = Math.Clamp(newPL, 0.0, 1.0);
+        var bktResult = BktIrtCalculator.ApplyUpdate(
+            state.MasteryProbability, state.GuessProbability, state.SlipProbability, state.TransitionProbability,
+            thetaBefore, beta, request.IsCorrect);
+        state.IrtTheta = bktResult.Theta;
+        state.MasteryProbability = bktResult.Mastery;
+        var thetaAfter = bktResult.Theta;
         state.UpdatedAt = DateTime.UtcNow;
 
         var srUpdate = await UpdateSpacedRepetitionAsync(userId, request);
@@ -219,14 +198,4 @@ public class LearningStatesRepository(AppDbContext db, ISpacedRepetitionService 
         IrtTheta = state.IrtTheta,
         UpdatedAt = state.UpdatedAt.ToString("yyyy-MM-dd HH:mm:ss")
     };
-
-    private static double UpdateTheta(double theta, double beta, bool isCorrect)
-    {
-        // 1PL IRT incremental update: theta <- theta + lr * (observed - expected)
-        const double learningRate = 0.35;
-        var expected = 1.0 / (1.0 + Math.Exp(-(theta - beta)));
-        var observed = isCorrect ? 1.0 : 0.0;
-        var updated = theta + learningRate * (observed - expected);
-        return Math.Clamp(updated, -3.0, 3.0);
-    }
 }

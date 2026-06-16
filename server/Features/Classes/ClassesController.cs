@@ -75,6 +75,17 @@ public class ClassesController(IClassesRepository repo) : ControllerBase
         return Ok(ApiResponse<List<StudentEnrollmentDto>>.Ok(students));
     }
 
+    /// <summary>Student: Danh sách bạn cùng lớp (read-only, không email)</summary>
+    [HttpGet("{id:guid}/classmates")]
+    public async Task<IActionResult> GetClassmates(Guid id)
+    {
+        if (UserRole != "student") return Forbid();
+        if (!await repo.CanUserAccessClassAsync(id, UserId, UserRole))
+            return Forbid();
+        var classmates = await repo.GetClassmatesAsync(id);
+        return Ok(ApiResponse<List<ClassmateDto>>.Ok(classmates));
+    }
+
     /// <summary>Teacher: Thêm học sinh vào lớp bằng email</summary>
     [HttpPost("{id:guid}/students")]
     public async Task<IActionResult> AddStudent(Guid id, [FromBody] EnrollStudentRequest request)

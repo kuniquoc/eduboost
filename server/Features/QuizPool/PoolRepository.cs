@@ -562,6 +562,16 @@ public class PoolRepository(AppDbContext db, IStorageService storage, IAgentServ
         };
     }
 
+    public async Task<PoolQuestionRef?> GetPoolQuestionAsync(Guid questionId)
+    {
+        var question = await db.Questions
+            .AsNoTracking()
+            .Include(q => q.Quiz)
+            .FirstOrDefaultAsync(q => q.Id == questionId && q.Quiz != null && q.Quiz.Type == "pool");
+        if (question?.Quiz?.TopicId is not Guid topicId) return null;
+        return new PoolQuestionRef(questionId, topicId);
+    }
+
     private static QuestionDto MapToDto(Question q) => new()
     {
         Id = q.Id.ToString(),

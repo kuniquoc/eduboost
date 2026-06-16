@@ -446,7 +446,7 @@ export function StudentPoolDashboard() {
                                 <button
                                   onClick={() => renameMutation.mutate({ topicId: t.id, name: renameValue })}
                                   disabled={renameMutation.isPending || !renameValue.trim()}
-                                  className="text-indigo-400 hover:text-indigo-300 disabled:opacity-40"
+                                  className="text-indigo-600 hover:text-indigo-700 disabled:opacity-40"
                                 >
                                   <Check className="h-4 w-4" />
                                 </button>
@@ -456,7 +456,7 @@ export function StudentPoolDashboard() {
                               </div>
                             ) : (
                               <div className="flex items-center gap-1.5 flex-1 min-w-0">
-                                <span className="font-semibold text-sm group-hover:text-indigo-400 transition-colors truncate">
+                                <span className="font-semibold text-sm group-hover:text-indigo-600 transition-colors truncate">
                                   {t.name}
                                 </span>
                                 {canRename && (
@@ -466,7 +466,7 @@ export function StudentPoolDashboard() {
                                       setRenamingTopicId(t.id);
                                       setRenameValue(t.name);
                                     }}
-                                    className="shrink-0 opacity-0 group-hover:opacity-100 text-muted-foreground hover:text-indigo-400 transition-opacity"
+                                    className="shrink-0 opacity-0 group-hover:opacity-100 text-muted-foreground hover:text-indigo-600 transition-opacity"
                                   >
                                     <Pencil className="h-3 w-3" />
                                   </button>
@@ -474,7 +474,7 @@ export function StudentPoolDashboard() {
                               </div>
                             )}
                             {!isRenaming && (
-                              <Badge variant="outline" className="shrink-0 text-[10px] py-0 px-1 border-indigo-500/20 text-indigo-300">
+                              <Badge variant="outline" className="shrink-0 text-[10px] py-0 px-1 border-indigo-500/20 text-indigo-700">
                                 {t.difficulty === 'easy' ? 'Dễ' : t.difficulty === 'medium' ? 'TB' : 'Khó'}
                               </Badge>
                             )}
@@ -486,7 +486,7 @@ export function StudentPoolDashboard() {
                               </p>
                               <div className="mt-2 flex items-center justify-between text-[10px] text-muted-foreground border-t border-border/20 pt-1.5">
                                 <span>{t.quizCount} đợt sinh</span>
-                                <span className="font-medium text-indigo-300/80">{t.questionCount} câu hỏi</span>
+                                <span className="font-medium text-indigo-700/90">{t.questionCount} câu hỏi</span>
                               </div>
                             </>
                           )}
@@ -508,7 +508,7 @@ export function StudentPoolDashboard() {
                   <div className="flex flex-col gap-3 justify-between items-start md:flex-row md:items-center border-b border-border/50 pb-4 mb-4">
                     <div>
                       <div className="flex items-center gap-2">
-                        <Badge className="bg-indigo-600 hover:bg-indigo-700 text-white">Chủ đề ôn luyện</Badge>
+                        <Badge className="bg-indigo-600 hover:bg-indigo-700 text-primary-foreground">Chủ đề ôn luyện</Badge>
                         <h2 className="text-xl font-bold">{selectedTopic.name}</h2>
                       </div>
                       <p className="text-xs text-muted-foreground mt-1">
@@ -570,7 +570,7 @@ export function StudentPoolDashboard() {
                                   className="h-4.5 w-4.5 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 accent-indigo-600 cursor-pointer"
                                 />
                                 <div className="min-w-0" onClick={() => toggleQuiz(quiz.quizId)}>
-                                  <p className="font-semibold text-sm cursor-pointer hover:text-indigo-400 transition-colors truncate">
+                                  <p className="font-semibold text-sm cursor-pointer hover:text-indigo-600 transition-colors truncate">
                                     {quiz.title}
                                   </p>
                                   <p className="text-[10px] text-muted-foreground mt-0.5">
@@ -583,7 +583,7 @@ export function StudentPoolDashboard() {
                                 <Button 
                                   variant="outline" 
                                   size="sm" 
-                                  className="text-xs h-8 hover:bg-indigo-500/10 hover:text-indigo-400"
+                                  className="text-xs h-8 hover:bg-indigo-500/10 hover:text-indigo-600"
                                   onClick={() => startPoolQuiz(quiz)}
                                 >
                                   <Play className="h-3 w-3 mr-1" /> Làm bài
@@ -614,7 +614,7 @@ export function StudentPoolDashboard() {
                                 {quiz.questions.map((q, idx) => (
                                   <div key={q.id} className="space-y-2 border-b border-border/20 last:border-0 pb-3 last:pb-0">
                                     <div className="flex items-start gap-2">
-                                      <span className="flex h-5 w-5 items-center justify-center rounded-full bg-indigo-500/10 text-indigo-400 text-xs font-bold shrink-0 mt-0.5">
+                                      <span className="flex h-5 w-5 items-center justify-center rounded-full bg-indigo-500/10 text-indigo-600 text-xs font-bold shrink-0 mt-0.5">
                                         {idx + 1}
                                       </span>
                                       <p className="text-xs md:text-sm font-medium">{q.text}</p>
@@ -626,13 +626,13 @@ export function StudentPoolDashboard() {
                                           className={cn(
                                             "rounded-lg px-2.5 py-1.5 text-xs border transition-all shadow-sm",
                                             opt.isCorrect
-                                              ? "bg-emerald-50 dark:bg-emerald-950/40 text-emerald-800 dark:text-emerald-300 border-emerald-500 font-semibold ring-1 ring-emerald-500/20"
+                                              ? "bg-emerald-50 text-emerald-800 border-emerald-500 font-semibold ring-1 ring-emerald-500/20"
                                               : "bg-muted/30 text-muted-foreground border-border/60"
                                           )}
                                         >
                                           <span className={cn(
                                             "mr-1.5 font-bold",
-                                            opt.isCorrect ? "text-emerald-600 dark:text-emerald-400" : "text-muted-foreground/60"
+                                            opt.isCorrect ? "text-emerald-600" : "text-muted-foreground/60"
                                           )}>{opt.isCorrect ? '✓' : '○'}</span> {opt.text}
                                         </div>
                                       ))}
@@ -671,7 +671,7 @@ export function StudentPoolDashboard() {
         <div className="space-y-4">
           <div className="flex justify-between items-center border-b border-border/50 pb-3">
             <h2 className="text-xl font-bold flex items-center gap-2">
-              <Trophy className="h-5 w-5 text-indigo-400" />
+              <Trophy className="h-5 w-5 text-indigo-600" />
               Danh sách Bộ ôn tập cá nhân
             </h2>
             <p className="text-xs text-muted-foreground">
@@ -705,7 +705,7 @@ export function StudentPoolDashboard() {
                       <span className="font-bold text-base text-foreground line-clamp-1">
                         {kit.title}
                       </span>
-                      <Badge className="bg-indigo-600/10 text-indigo-300 border-indigo-500/20 text-[10px]">
+                      <Badge className="bg-indigo-600/10 text-indigo-700 border-indigo-500/20 text-[10px]">
                         {kit.questionCount} câu hỏi
                       </Badge>
                     </div>
@@ -754,7 +754,7 @@ export function StudentPoolDashboard() {
         <Card className="border-border bg-card/60 backdrop-blur-sm shadow-xl max-w-2xl mx-auto">
           <CardContent className="p-6 space-y-6">
             <div className="flex items-center gap-2 border-b border-border/50 pb-3">
-              <Sparkles className="h-5 w-5 text-indigo-400" />
+              <Sparkles className="h-5 w-5 text-indigo-600" />
               <h2 className="text-xl font-bold">Sinh câu hỏi ôn tập thông minh bằng AI</h2>
             </div>
 
@@ -828,7 +828,7 @@ export function StudentPoolDashboard() {
                 <button
                   type="button"
                   onClick={() => setIsAdvanced(!isAdvanced)}
-                  className="text-xs text-indigo-400 hover:text-indigo-300 underline underline-offset-2"
+                  className="text-xs text-indigo-600 hover:text-indigo-700 underline underline-offset-2"
                 >
                   {isAdvanced ? 'Cấu hình nhanh' : 'Tùy chỉnh theo độ khó'}
                 </button>
@@ -850,7 +850,7 @@ export function StudentPoolDashboard() {
                     ))}
                   </div>
                   <div className="text-right text-xs font-medium">
-                    Tổng: <strong className="text-indigo-400">{easyCount + mediumCount + hardCount}</strong> câu
+                    Tổng: <strong className="text-indigo-600">{easyCount + mediumCount + hardCount}</strong> câu
                   </div>
                 </div>
               ) : (
@@ -894,7 +894,7 @@ export function StudentPoolDashboard() {
                   className={cn(
                     'cursor-pointer rounded-xl p-3 border text-center text-xs transition-all duration-300',
                     genMode === 'append'
-                      ? 'border-indigo-500/50 bg-indigo-500/5 font-semibold text-indigo-300'
+                      ? 'border-indigo-500/50 bg-indigo-500/5 font-semibold text-indigo-700'
                       : 'border-border/40 hover:bg-muted/40 text-muted-foreground'
                   )}
                 >
@@ -906,7 +906,7 @@ export function StudentPoolDashboard() {
                   className={cn(
                     'cursor-pointer rounded-xl p-3 border text-center text-xs transition-all duration-300',
                     genMode === 'replace'
-                      ? 'border-rose-500/50 bg-rose-500/5 font-semibold text-rose-300'
+                      ? 'border-rose-500/50 bg-rose-500/5 font-semibold text-rose-700'
                       : 'border-border/40 hover:bg-muted/40 text-muted-foreground'
                   )}
                 >
@@ -915,14 +915,14 @@ export function StudentPoolDashboard() {
                 </div>
               </div>
               {genMode === 'replace' && (
-                <p className="text-[10px] text-rose-400/80 italic">
+                <p className="text-[10px] text-rose-700/90 italic">
                   ⚠ Chế độ thay thế sẽ xoá toàn bộ câu hỏi cũ trong chủ đề này.
                 </p>
               )}
             </div>
 
             <Button
-              className="w-full bg-gradient-to-r from-blue-500 via-indigo-600 to-violet-500 hover:from-blue-600 hover:to-violet-600 text-white font-semibold py-6 rounded-xl shadow-lg shadow-indigo-500/20"
+              className="w-full bg-gradient-to-r from-blue-500 via-indigo-600 to-violet-500 hover:from-blue-600 hover:to-violet-600 text-primary-foreground font-semibold py-6 rounded-xl shadow-lg shadow-indigo-500/20"
               onClick={handleGenerateQuiz}
               disabled={generateMutation.isPending}
             >
@@ -946,7 +946,7 @@ export function StudentPoolDashboard() {
       {selectedPoolQuizIds.length > 0 && activeTab === 'pool' && (
         <div className="fixed bottom-6 left-1/2 transform -translate-x-1/2 z-40 w-[90%] max-w-2xl bg-card/90 backdrop-blur-md border border-indigo-500/45 rounded-2xl shadow-2xl p-4 flex items-center justify-between gap-4 animate-slideUp">
           <div className="flex items-center gap-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-indigo-500/20 text-indigo-400">
+            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-indigo-500/20 text-indigo-600">
               <CheckCircle2 className="h-6 w-6" />
             </div>
             <div>
@@ -969,7 +969,7 @@ export function StudentPoolDashboard() {
             <Button
               size="sm"
               onClick={() => setIsRevisionDialogOpen(true)}
-              className="bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-semibold shadow-md shadow-indigo-500/10"
+              className="bg-indigo-600 hover:bg-indigo-700 text-primary-foreground text-xs font-semibold shadow-md shadow-indigo-500/10"
             >
               Lập bộ ôn tập <ArrowRight className="ml-1 h-3.5 w-3.5" />
             </Button>
@@ -982,7 +982,7 @@ export function StudentPoolDashboard() {
         <DialogContent className="sm:max-w-md">
           <DialogHeader>
             <DialogTitle className="flex items-center gap-2">
-              <Trophy className="h-5 w-5 text-indigo-400" />
+              <Trophy className="h-5 w-5 text-indigo-600" />
               Tạo bộ ôn tập tập trung
             </DialogTitle>
             <DialogDescription>
@@ -1005,7 +1005,7 @@ export function StudentPoolDashboard() {
           <DialogFooter>
             <Button variant="outline" onClick={() => setIsRevisionDialogOpen(false)}>Hủy</Button>
             <Button
-              className="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold"
+              className="bg-indigo-600 hover:bg-indigo-700 text-primary-foreground font-semibold"
               onClick={handleCreateRevision}
               disabled={createRevisionMutation.isPending}
             >
@@ -1017,11 +1017,11 @@ export function StudentPoolDashboard() {
 
       {/* AI PROGRESS PROGRESSIVE LOADING OVERLAY */}
       {showGenOverlay && (
-        <div className="fixed inset-0 bg-black/80 backdrop-blur-md z-50 flex items-center justify-center animate-fadeIn p-4">
+        <div className="fixed inset-0 bg-background/85 backdrop-blur-md z-50 flex items-center justify-center animate-fadeIn p-4">
           <Card className="max-w-md w-full border-indigo-500/30 bg-card/90 shadow-2xl p-6 text-center space-y-6">
             <div className="relative mx-auto h-20 w-20 flex items-center justify-center">
               <div className="absolute inset-0 rounded-full border-4 border-indigo-500/20 border-t-indigo-500 animate-spin" />
-              <Sparkles className="h-8 w-8 text-indigo-400 animate-pulse" />
+              <Sparkles className="h-8 w-8 text-indigo-600 animate-pulse" />
             </div>
 
             <div className="space-y-2">
@@ -1046,13 +1046,13 @@ export function StudentPoolDashboard() {
                   <div key={idx} className="flex items-center gap-3 transition-opacity duration-300">
                     <div className={cn(
                       "h-4 w-4 rounded-full flex items-center justify-center text-[10px] font-bold shrink-0",
-                      isCompleted ? "bg-green-500 text-black" : isActive ? "bg-indigo-500 text-white animate-pulse" : "bg-muted text-muted-foreground"
+                      isCompleted ? "bg-green-600 text-primary-foreground" : isActive ? "bg-indigo-600 text-primary-foreground animate-pulse" : "bg-muted text-muted-foreground"
                     )}>
                       {isCompleted ? '✓' : idx + 1}
                     </div>
                     <span className={cn(
                       "text-xs",
-                      isActive ? "text-indigo-300 font-semibold" : isCompleted ? "text-green-400" : "text-muted-foreground/60"
+                      isActive ? "text-indigo-700 font-semibold" : isCompleted ? "text-green-700" : "text-muted-foreground/60"
                     )}>
                       {step}
                     </span>

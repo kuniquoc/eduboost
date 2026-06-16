@@ -48,7 +48,10 @@ export function QuizReviewPage() {
   const [addText, setAddText] = useState('');
   const [addExplanation, setAddExplanation] = useState('');
   const [addType, setAddType] = useState<'mcq' | 'multi_select' | 'fill_blank'>('mcq');
+  const [editDifficulty, setEditDifficulty] = useState<'easy' | 'medium' | 'hard'>('medium');
+  const [editDifficultyIndex, setEditDifficultyIndex] = useState(0);
   const [addDifficulty, setAddDifficulty] = useState<'easy' | 'medium' | 'hard'>('medium');
+  const [addDifficultyIndex, setAddDifficultyIndex] = useState<number | ''>('');
   const [addOptions, setAddOptions] = useState([
     { text: '', isCorrect: true },
     { text: '', isCorrect: false },
@@ -130,6 +133,7 @@ export function QuizReviewPage() {
       text: addText,
       type: addType,
       difficulty: addDifficulty,
+      difficultyIndex: addDifficultyIndex === '' ? undefined : Number(addDifficultyIndex),
       explanation: addExplanation || undefined,
       correctAnswer: addType === 'fill_blank' ? addCorrectAnswer : undefined,
       options: addType !== 'fill_blank' ? addOptions.filter((o) => o.text.trim()) : [],
@@ -150,13 +154,21 @@ export function QuizReviewPage() {
     setEditText(q.text);
     setEditExplanation(q.explanation ?? '');
     setEditOptions(q.options.map((o) => ({ id: o.id, text: o.text, isCorrect: o.isCorrect })));
+    setEditDifficulty((q.difficulty as 'easy' | 'medium' | 'hard') || 'medium');
+    setEditDifficultyIndex(q.difficultyIndex ?? 0);
   };
 
   const handleSaveEdit = () => {
     if (!editQ) return;
     updateMutation.mutate({
       qId: editQ.id,
-      data: { text: editText, explanation: editExplanation, options: editOptions },
+      data: {
+        text: editText,
+        explanation: editExplanation,
+        options: editOptions,
+        difficulty: editDifficulty,
+        difficultyIndex: editDifficultyIndex,
+      },
     });
   };
 
@@ -233,6 +245,7 @@ export function QuizReviewPage() {
                   </div>
                   <div className="flex items-center gap-2 shrink-0">
                     <Badge variant={diff.variant}>{diff.label}</Badge>
+                    <Badge variant="outline">β {q.difficultyIndex?.toFixed(2) ?? '0.00'}</Badge>
                     <Badge variant="outline">{q.type}</Badge>
                   </div>
                 </div>
@@ -244,13 +257,13 @@ export function QuizReviewPage() {
                       key={opt.id}
                       className={`flex items-center gap-2.5 rounded-lg border p-2.5 text-xs transition-all shadow-sm ${
                         opt.isCorrect
-                          ? 'bg-emerald-50 dark:bg-emerald-950/40 border-emerald-500 text-emerald-800 dark:text-emerald-300 font-semibold ring-1 ring-emerald-500/20'
+                          ? 'bg-emerald-50 border-emerald-500 text-emerald-800 font-semibold ring-1 ring-emerald-500/20'
                           : 'bg-muted/30 border-border/60 text-muted-foreground'
                       }`}
                     >
                       <span className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-full text-[10px] font-bold ${
                         opt.isCorrect
-                          ? 'bg-emerald-600 text-white'
+                          ? 'bg-emerald-600 text-primary-foreground'
                           : 'bg-muted border border-border text-muted-foreground'
                       }`}>
                         {opt.isCorrect ? '✓' : '○'}
@@ -303,6 +316,31 @@ export function QuizReviewPage() {
               <Label>Giải thích</Label>
               <Textarea value={editExplanation} onChange={(e) => setEditExplanation(e.target.value)} rows={2} />
             </div>
+            <div className="grid gap-3 sm:grid-cols-2">
+              <div className="space-y-2">
+                <Label>Độ khó</Label>
+                <select
+                  className="flex h-9 w-full rounded-md border border-input bg-background px-3 text-sm"
+                  value={editDifficulty}
+                  onChange={(e) => setEditDifficulty(e.target.value as typeof editDifficulty)}
+                >
+                  <option value="easy">Dễ</option>
+                  <option value="medium">Trung bình</option>
+                  <option value="hard">Khó</option>
+                </select>
+              </div>
+              <div className="space-y-2">
+                <Label>Chỉ số β (-3 đến 3)</Label>
+                <Input
+                  type="number"
+                  min={-3}
+                  max={3}
+                  step={0.1}
+                  value={editDifficultyIndex}
+                  onChange={(e) => setEditDifficultyIndex(Number(e.target.value))}
+                />
+              </div>
+            </div>
             <div className="space-y-2.5">
               <Label className="text-sm font-semibold">Đáp án (Chọn checkbox bên cạnh đáp án đúng)</Label>
               {editOptions.map((opt, i) => (
@@ -310,7 +348,7 @@ export function QuizReviewPage() {
                   key={i} 
                   className={`flex items-center gap-3 rounded-lg border p-2 transition-all ${
                     opt.isCorrect 
-                      ? 'bg-emerald-500/5 border-emerald-500/40 dark:bg-emerald-500/10' 
+                      ? 'bg-emerald-500/5 border-emerald-500/40'
                       : 'border-border bg-card'
                   }`}
                 >
@@ -335,7 +373,7 @@ export function QuizReviewPage() {
                     placeholder={`Đáp án ${String.fromCharCode(65 + i)}`}
                   />
                   {opt.isCorrect && (
-                    <span className="text-[10px] font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-500/10 dark:bg-emerald-500/20 px-2 py-0.5 rounded-full select-none shrink-0">
+                    <span className="text-[10px] font-bold text-emerald-600 bg-emerald-500/10 px-2 py-0.5 rounded-full select-none shrink-0">
                       Đúng
                     </span>
                   )}
@@ -409,6 +447,18 @@ export function QuizReviewPage() {
                   <option value="hard">Khó</option>
                 </select>
               </div>
+            </div>
+            <div className="space-y-2">
+              <Label>Chỉ số β (-3 đến 3, tùy chọn)</Label>
+              <Input
+                type="number"
+                min={-3}
+                max={3}
+                step={0.1}
+                value={addDifficultyIndex}
+                onChange={(e) => setAddDifficultyIndex(e.target.value === '' ? '' : Number(e.target.value))}
+                placeholder="Tự map từ độ khó nếu để trống"
+              />
             </div>
             <div className="space-y-2">
               <Label>Giải thích (tùy chọn)</Label>

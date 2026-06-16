@@ -37,8 +37,8 @@ const StudentDashboardPage = lazy(() =>
 const StudentClassesPage = lazy(() =>
   import('@/features/student/classes/classes-page').then((m) => ({ default: m.StudentClassesPage })),
 );
-const ClassQuizzesPage = lazy(() =>
-  import('@/features/student/classes/class-quizzes-page').then((m) => ({ default: m.ClassQuizzesPage })),
+const StudentClassDetailPage = lazy(() =>
+  import('@/features/student/classes/class-detail-page').then((m) => ({ default: m.StudentClassDetailPage })),
 );
 const AILabPage = lazy(() =>
   import('@/features/student/ai-lab/ai-lab-page').then((m) => ({ default: m.AILabPage })),
@@ -49,8 +49,8 @@ const PlacementTestPage = lazy(() =>
 const EntryTestRedirect = lazy(() =>
   import('@/features/student/entry-test/entry-test-redirect').then((m) => ({ default: m.EntryTestRedirect })),
 );
-const RoadmapPage = lazy(() =>
-  import('@/features/student/roadmap/roadmap-page').then((m) => ({ default: m.RoadmapPage })),
+const StudentClassTabRedirect = lazy(() =>
+  import('@/features/student/classes/class-tab-redirect').then((m) => ({ default: m.StudentClassTabRedirect })),
 );
 const PracticePage = lazy(() =>
   import('@/features/student/practice/practice-page').then((m) => ({ default: m.PracticePage })),
@@ -135,14 +135,15 @@ function AppRoutes() {
             <Route path="/student" element={<Navigate to="/student/dashboard" replace />} />
             <Route path="/student/dashboard" element={<StudentDashboardPage />} />
             <Route path="/student/classes" element={<StudentClassesPage />} />
+            <Route path="/student/classes/:classId/quizzes" element={<StudentClassTabRedirect tab="quizzes" />} />
+            <Route path="/student/classes/:classId" element={<StudentClassDetailPage />} />
             <Route path="/student/ai-lab" element={<AILabPage />} />
             <Route path="/student/ai-lab/:quizId" element={<AILabQuizPage />} />
             <Route path="/student/quiz-pool" element={<StudentPoolDashboard />} />
             <Route path="/student/ai-chat" element={<AiChatPage />} />
             <Route path="/student/review" element={<ReviewPage />} />
             <Route path="/student/practice-session" element={<PracticeSessionPage />} />
-            <Route path="/student/roadmap/:classId" element={<RoadmapPage />} />
-            <Route path="/student/classes/:classId/quizzes" element={<ClassQuizzesPage />} />
+            <Route path="/student/roadmap/:classId" element={<StudentClassTabRedirect tab="practice" />} />
             <Route path="/student/practice/:topicId" element={<PracticePage />} />
             <Route path="/student/profile" element={<ProfilePage />} />
           </Route>

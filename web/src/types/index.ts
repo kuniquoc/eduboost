@@ -42,8 +42,15 @@ export interface TopicSummary {
 }
 
 export interface ClassDetailDto extends ClassDto {
+  teacherName?: string;
   activeEntryTestId?: string;
   topics: TopicSummary[];
+}
+
+export interface ClassmateDto {
+  studentId: string;
+  name: string;
+  avatar?: string;
 }
 
 export interface StudentEnrollmentDto {
@@ -178,6 +185,7 @@ export interface SubmitQuizRequest {
 export interface UpdateQuestionPayload {
   text?: string;
   difficulty?: 'easy' | 'medium' | 'hard';
+  difficultyIndex?: number;
   explanation?: string;
   options?: Array<{ id?: string; text: string; isCorrect: boolean }>;
   correctAnswer?: string;
@@ -209,7 +217,7 @@ export interface QuizDto {
   topicId?: string;
   documentId?: string;
   title: string;
-  type: 'entry_test' | 'practice' | 'private';
+  type?: 'entry_test' | 'practice' | 'private' | 'pool';
   isPublished: boolean;
   questionCount: number;
   createdAt: string;
@@ -223,6 +231,22 @@ export interface WeakSkillDto {
   score: number;
 }
 
+export interface QuizAttemptStatDto {
+  quizId: string;
+  quizTitle: string;
+  attemptCount: number;
+  correctCount: number;
+  totalQuestions: number;
+  correctRatio: number;
+}
+
+export interface TopicMasteryDto {
+  topicId: string;
+  topicName: string;
+  masteryProbability: number;
+  irtTheta: number;
+}
+
 export interface StudentAnalyticsDto {
   studentId: string;
   studentName: string;
@@ -231,7 +255,10 @@ export interface StudentAnalyticsDto {
   completionPercent: number;
   quizzesTaken: number;
   averageScore: number;
+  correctRatio: number;
   weakSkills: WeakSkillDto[];
+  quizAttemptStats: QuizAttemptStatDto[];
+  topicMasteries: TopicMasteryDto[];
   lastActive: string;
   entryTestCompleted: boolean;
 }
@@ -479,6 +506,10 @@ export interface SubmitPracticeAnswerResponse {
   thetaAfter?: number;
   questionBeta?: number;
   targetBeta?: number;
+  sessionMastery?: number;
+  dbMasteryBaseline?: number;
+  suggestedNextTopicId?: string;
+  suggestedNextTopicName?: string;
 }
 
 export interface QuizReviewItemDto {

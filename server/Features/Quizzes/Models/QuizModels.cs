@@ -42,6 +42,8 @@ public class QuizDto
 public class UpdateQuestionRequest
 {
     public string? Text { get; set; }
+    public string? Difficulty { get; set; }
+    public double? DifficultyIndex { get; set; }
     public List<OptionDto>? Options { get; set; }
     public string? CorrectAnswer { get; set; }
     public string? Explanation { get; set; }

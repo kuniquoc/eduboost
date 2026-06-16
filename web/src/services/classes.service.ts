@@ -1,5 +1,5 @@
 import { apiClient } from './api';
-import type { ApiResponse, ClassDto, ClassDetailDto, StudentEnrollmentDto } from '@/types';
+import type { ApiResponse, ClassDto, ClassDetailDto, StudentEnrollmentDto, ClassmateDto } from '@/types';
 
 export const classesService = {
   // ── Teacher ─────────────────────────────────────────────
@@ -52,6 +52,11 @@ export const classesService = {
 
   joinClass: async (classCode: string): Promise<ClassDto> => {
     const res = await apiClient.post<ApiResponse<ClassDto>>('/classes/join', { classCode });
+    return res.data.data!;
+  },
+
+  getClassmates: async (classId: string): Promise<ClassmateDto[]> => {
+    const res = await apiClient.get<ApiResponse<ClassmateDto[]>>(`/classes/${classId}/classmates`);
     return res.data.data!;
   },
 };

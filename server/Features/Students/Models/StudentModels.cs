@@ -7,6 +7,24 @@ public class WeakSkillDto
     public int Score { get; set; }
 }
 
+public class QuizAttemptStatDto
+{
+    public string QuizId { get; set; } = "";
+    public string QuizTitle { get; set; } = "";
+    public int AttemptCount { get; set; }
+    public int CorrectCount { get; set; }
+    public int TotalQuestions { get; set; }
+    public double CorrectRatio { get; set; }
+}
+
+public class TopicMasteryDto
+{
+    public string TopicId { get; set; } = "";
+    public string TopicName { get; set; } = "";
+    public double MasteryProbability { get; set; }
+    public double IrtTheta { get; set; }
+}
+
 public class StudentAnalyticsDto
 {
     public string StudentId { get; set; } = "";
@@ -16,7 +34,10 @@ public class StudentAnalyticsDto
     public int CompletionPercent { get; set; }
     public int QuizzesTaken { get; set; }
     public int AverageScore { get; set; }
+    public double CorrectRatio { get; set; }
     public List<WeakSkillDto> WeakSkills { get; set; } = [];
+    public List<QuizAttemptStatDto> QuizAttemptStats { get; set; } = [];
+    public List<TopicMasteryDto> TopicMasteries { get; set; } = [];
     public string LastActive { get; set; } = "";
     public bool EntryTestCompleted { get; set; }
 }

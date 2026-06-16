@@ -48,6 +48,16 @@ export const practiceSessionService = {
     return res.data.data!;
   },
 
+  startSelfPractice: async (classId: string, topicId: string, questionCount = 10): Promise<StartPracticeResponse> => {
+    const res = await apiClient.post<ApiResponse<StartPracticeResponse>>('/practice-sessions/start', {
+      mode: 'self_practice',
+      classId,
+      topicId,
+      questionCount,
+    });
+    return res.data.data!;
+  },
+
   submitAnswer: async (
     sessionId: string,
     questionId: string,

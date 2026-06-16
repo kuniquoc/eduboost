@@ -326,7 +326,8 @@ public class QuizzesController(
             TopicId = topicId,
             QuestionId = questionId,
             IsCorrect = isCorrect,
-            ResponseTime = request.ResponseTimeSeconds
+            ResponseTime = request.ResponseTimeSeconds,
+            QuestionDifficultyIndex = question.DifficultyIndex
         });
 
         var classId = await repo.GetTopicClassIdAsync(topicId);

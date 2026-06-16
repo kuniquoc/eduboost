@@ -5,6 +5,7 @@ namespace EduBoost.API.Features.PracticeSessions.Models;
 public class StartPracticeRequest
 {
     public Guid? TopicId { get; set; }
+    public Guid? ClassId { get; set; }
     public Guid? QuizId { get; set; }
     public int QuestionCount { get; set; } = 10;
     public string Mode { get; set; } = "standard";
@@ -71,6 +72,10 @@ public class SubmitAnswerResponse
     public double? ThetaAfter { get; set; }
     public double? QuestionBeta { get; set; }
     public double? TargetBeta { get; set; }
+    public double? SessionMastery { get; set; }
+    public double? DbMasteryBaseline { get; set; }
+    public string? SuggestedNextTopicId { get; set; }
+    public string? SuggestedNextTopicName { get; set; }
 }
 
 public class QuizReviewItemDto

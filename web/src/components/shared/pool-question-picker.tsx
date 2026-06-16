@@ -507,9 +507,16 @@ export function PoolQuestionPicker({
                                   </span>
                                   <div className="min-w-0 flex-1">
                                     <p className="text-xs md:text-sm font-medium">{q.text}</p>
-                                    <Badge variant="outline" className="mt-1 text-[10px] py-0">
-                                      {difficultyLabel[q.difficulty] ?? q.difficulty}
-                                    </Badge>
+                                    <div className="mt-1 flex flex-wrap gap-1">
+                                      <Badge variant="outline" className="text-[10px] py-0">
+                                        {difficultyLabel[q.difficulty] ?? q.difficulty}
+                                      </Badge>
+                                      {typeof q.difficultyIndex === 'number' && (
+                                        <Badge variant="secondary" className="text-[10px] py-0">
+                                          β {q.difficultyIndex.toFixed(2)}
+                                        </Badge>
+                                      )}
+                                    </div>
                                   </div>
                                 </div>
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-2 ml-7">

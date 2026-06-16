@@ -19,6 +19,7 @@ public interface IClassesRepository
     Task<bool> CanUserAccessClassAsync(Guid classId, Guid userId, string role);
     Task<ClassDto?> JoinByCodeAsync(Guid studentId, string classCode);
     Task<List<StudentEnrollmentDto>> GetStudentsAsync(Guid classId, string? search);
+    Task<List<ClassmateDto>> GetClassmatesAsync(Guid classId);
     Task<bool> AddStudentAsync(Guid classId, string studentEmail);
     Task<bool> RemoveStudentAsync(Guid classId, Guid studentId);
     Task<bool> SetActiveEntryTestAsync(Guid classId, Guid teacherId, Guid quizId);
@@ -86,6 +87,7 @@ public class ClassesRepository(AppDbContext db) : IClassesRepository
         var cls = await db.Classes
             .Include(c => c.Enrollments)
             .Include(c => c.Topics)
+            .Include(c => c.Teacher)
             .FirstOrDefaultAsync(c => c.Id == classId);
 
         if (cls == null) return null;
@@ -99,6 +101,7 @@ public class ClassesRepository(AppDbContext db) : IClassesRepository
             ClassCode      = cls.ClassCode,
             CreatedAt      = cls.CreatedAt.ToString("yyyy-MM-dd"),
             TeacherId      = cls.TeacherId.ToString(),
+            TeacherName    = cls.Teacher?.Name,
             StudentCount   = cls.Enrollments.Count,
             TopicCount     = cls.Topics.Count,
             AverageProgress = cls.Enrollments.Any()
@@ -266,6 +269,21 @@ public class ClassesRepository(AppDbContext db) : IClassesRepository
                 EnrolledAt         = e.EnrolledAt.ToString("yyyy-MM-dd"),
                 EntryTestCompleted = e.EntryTestCompleted,
                 Progress           = e.Progress
+            })
+            .ToListAsync();
+    }
+
+    public async Task<List<ClassmateDto>> GetClassmatesAsync(Guid classId)
+    {
+        return await db.Enrollments
+            .Where(e => e.ClassId == classId)
+            .Include(e => e.Student)
+            .OrderBy(e => e.Student.Name)
+            .Select(e => new ClassmateDto
+            {
+                StudentId = e.StudentId.ToString(),
+                Name = e.Student.Name,
+                Avatar = e.Student.AvatarUrl ?? e.Student.AvatarInitials
             })
             .ToListAsync();
     }
