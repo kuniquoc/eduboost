@@ -21,14 +21,14 @@ export function StudentSelfPracticeTab({
   const navigate = useNavigate();
   const [selectedTopicId, setSelectedTopicId] = useState(topics[0]?.id ?? '');
   const { data: roadmap } = useRoadmap(classId);
+  const selectedTopic = topics.find((t) => t.id === selectedTopicId);
 
   const startPractice = () => {
-    const topic = topics.find((t) => t.id === selectedTopicId);
     const params = new URLSearchParams({
       mode: 'self_practice',
       classId,
       topicId: selectedTopicId,
-      topicName: topic?.name ?? 'Tự luyện tập',
+      topicName: selectedTopic?.name ?? 'Tự luyện tập',
     });
     navigate(`/student/practice-session?${params.toString()}`);
   };
@@ -41,17 +41,15 @@ export function StudentSelfPracticeTab({
         <CardContent className="space-y-4 p-6">
           <div>
             <h3 className="font-semibold">Bắt đầu tự luyện tập</h3>
-            <p className="mt-1 text-sm text-muted-foreground">
-              Chọn chủ đề để luyện tập. Chỉ số BKT/IRT trong phiên chỉ dùng để agent đề xuất —
-              không ghi đè chỉ số từ quiz lớp.
-            </p>
           </div>
           <div className="flex flex-wrap items-end gap-3">
             <div className="min-w-[200px] flex-1">
               <label className="mb-1 block text-sm text-muted-foreground">Chủ đề</label>
               <Select value={selectedTopicId} onValueChange={(v) => v && setSelectedTopicId(v)}>
                 <SelectTrigger>
-                  <SelectValue placeholder="Chọn chủ đề" />
+                  <SelectValue placeholder="Chọn chủ đề">
+                    {selectedTopic?.name}
+                  </SelectValue>
                 </SelectTrigger>
                 <SelectContent>
                   {topics.map((t) => (
@@ -85,11 +83,11 @@ export function StudentSelfPracticeTab({
                     )}
                     <div>
                       <p className="font-medium">{step.topicName}</p>
-                      {typeof step.mastery === 'number' && (
+                      {typeof step.progress === 'number' && (
                         <div className="mt-1 flex items-center gap-2">
-                          <Progress value={step.mastery * 100} className="h-1.5 w-24" />
+                          <Progress value={step.progress} className="h-1.5 w-24" />
                           <span className="text-xs text-muted-foreground">
-                            {Math.round(step.mastery * 100)}% (DB)
+                            {Math.round(step.progress)}%
                           </span>
                         </div>
                       )}

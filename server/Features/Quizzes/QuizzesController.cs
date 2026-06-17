@@ -399,7 +399,7 @@ public class QuizzesController(
         return Ok(ApiResponse<object>.Ok(new { explanation, offline = false }));
     }
 
-    /// <summary>Student: Get detailed explanation for wrong answer</summary>
+    /// <summary>Student: Get Socratic hint for a wrong answer</summary>
     [HttpPost("tutor/explain-error")]
     public async Task<IActionResult> GetErrorExplanation([FromBody] ExplainErrorRequest request)
     {
@@ -416,7 +416,7 @@ public class QuizzesController(
         {
             return Ok(ApiResponse<object>.Ok(new
             {
-                explanation = $"Đáp án đúng là '{request.CorrectAnswer}'. Gia sư AI hiện đang ngoại tuyến.",
+                explanation = "Gia sư AI hiện đang ngoại tuyến. Hãy đọc lại câu, xác định dấu hiệu ngữ pháp hoặc từ vựng quan trọng, rồi thử loại dần các đáp án chưa phù hợp.",
                 offline = true
             }));
         }

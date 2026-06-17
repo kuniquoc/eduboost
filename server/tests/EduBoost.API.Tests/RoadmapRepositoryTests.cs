@@ -161,6 +161,54 @@ public class RoadmapRepositoryTests
         Assert.Equal(strongTopicId.ToString(), roadmap.Steps[1].TopicId);
     }
 
+    [Fact]
+    public async Task GetByClassId_UsesActualBktState_ForDisplayedProgress()
+    {
+        await using var db = CreateDb();
+        var classId = Guid.NewGuid();
+        var studentId = Guid.NewGuid();
+        var topicId = Guid.NewGuid();
+
+        SeedTopicAndPath(db, classId, studentId, topicId, orderIndex: 1);
+        db.BktStates.Add(new BktState
+        {
+            UserId = studentId,
+            TopicId = topicId,
+            MasteryProbability = 0.72,
+            IrtTheta = 0.4
+        });
+        await db.SaveChangesAsync();
+
+        var repo = new RoadmapRepository(db);
+        var roadmap = await repo.GetByClassIdAsync(classId, studentId);
+
+        Assert.NotNull(roadmap);
+        var step = Assert.Single(roadmap!.Steps);
+        Assert.Equal(72, step.Progress);
+        Assert.NotNull(step.Mastery);
+        Assert.InRange(step.Mastery!.Value, 0.719, 0.721);
+    }
+
+    [Fact]
+    public async Task GetByClassId_UsesZeroDisplayProgress_WhenNoBktStateExists()
+    {
+        await using var db = CreateDb();
+        var classId = Guid.NewGuid();
+        var studentId = Guid.NewGuid();
+        var topicId = Guid.NewGuid();
+
+        SeedTopicAndPath(db, classId, studentId, topicId, orderIndex: 1);
+        await db.SaveChangesAsync();
+
+        var repo = new RoadmapRepository(db);
+        var roadmap = await repo.GetByClassIdAsync(classId, studentId);
+
+        Assert.NotNull(roadmap);
+        var step = Assert.Single(roadmap!.Steps);
+        Assert.Equal(0, step.Progress);
+        Assert.Equal(0, step.Mastery);
+    }
+
     private static void SeedTopicAndPath(AppDbContext db, Guid classId, Guid studentId, Guid topicId, int orderIndex)
     {
         db.Topics.Add(new Topic

@@ -58,14 +58,14 @@ export function QuizAnswerFeedback({
   onRetryDetailedExplanation,
 }: QuizAnswerFeedbackProps) {
   const [showQuizExplanation, setShowQuizExplanation] = useState(!!explanation && variant === 'review');
-  const [showAiExplanation, setShowAiExplanation] = useState(false);
+  const [showAiHint, setShowAiHint] = useState(false);
 
   const resolvedCorrectOptionId =
     correctOptionId ?? options.find((o) => o.isCorrect)?.id ?? options.find((o) => o.text === correctAnswerText)?.id;
 
   const handleToggleDetailedExplanation = async () => {
-    const next = !showAiExplanation;
-    setShowAiExplanation(next);
+    const next = !showAiHint;
+    setShowAiHint(next);
     if (next && onRequestDetailedExplanation && !detailedExplanation && !isLoadingDetailedExplanation) {
       await onRequestDetailedExplanation();
     }
@@ -130,16 +130,16 @@ export function QuizAnswerFeedback({
         </div>
       )}
 
-      {showAiExplanation && (
+      {showAiHint && (
         <div className="rounded-xl border border-violet-500/20 bg-gradient-to-br from-violet-500/5 to-transparent p-4 animate-in fade-in duration-300">
           <div className="mb-2 flex items-center gap-2">
             <Sparkles className="h-4 w-4 text-violet-500" />
-            <span className="text-sm font-medium text-violet-600 dark:text-violet-400">Giải thích chi tiết</span>
+            <span className="text-sm font-medium text-violet-600 dark:text-violet-400">AI gợi ý</span>
           </div>
           {isLoadingDetailedExplanation && (
             <div className="flex items-center gap-2 py-2 text-sm text-muted-foreground">
               <Loader2 className="h-4 w-4 animate-spin text-violet-500" />
-              <span>Gia sư AI đang chuẩn bị giải thích chi tiết...</span>
+              <span>Gia sư AI đang chuẩn bị gợi ý...</span>
             </div>
           )}
           {detailedExplanationUnavailable && (
@@ -149,7 +149,7 @@ export function QuizAnswerFeedback({
           )}
           {detailedExplanationError && !detailedExplanationUnavailable && (
             <div className="py-2 text-sm text-destructive">
-              <span>Không thể tải giải thích chi tiết. </span>
+              <span>Không thể tải AI gợi ý. </span>
               {onRetryDetailedExplanation && (
                 <button
                   type="button"
@@ -184,18 +184,18 @@ export function QuizAnswerFeedback({
         )}
         {onRequestDetailedExplanation && (
           <Button
-            variant={showAiExplanation ? 'secondary' : 'outline'}
+            variant={showAiHint ? 'secondary' : 'outline'}
             size="sm"
             onClick={handleToggleDetailedExplanation}
             disabled={isLoadingDetailedExplanation}
             className="gap-2"
           >
             <Sparkles className="h-4 w-4 text-violet-500" />
-            {showAiExplanation
-              ? 'Ẩn giải thích chi tiết'
+            {showAiHint
+              ? 'Ẩn AI gợi ý'
               : isLoadingDetailedExplanation
                 ? 'Đang tải...'
-                : 'Giải thích chi tiết'}
+                : 'AI gợi ý'}
           </Button>
         )}
         {variant === 'live' && onContinue && (

@@ -51,8 +51,14 @@ public class RoadmapRepository(AppDbContext db) : IRoadmapRepository
                 .ToListAsync();
         }
 
+        var bktByTopic = await db.BktStates
+            .Where(b => b.UserId == studentId && topicIds.Contains(b.TopicId))
+            .ToDictionaryAsync(b => b.TopicId, b => b);
+
+        var dueByTopic = topicIds.ToDictionary(id => id, _ => 0);
         var topicMap = topics.ToDictionary(t => t.Id);
-        var steps = BuildSteps(paths, topicMap);
+        var statesByTopic = bktByTopic.ToDictionary(kvp => kvp.Key, kvp => (kvp.Value.MasteryProbability, kvp.Value.IrtTheta));
+        var steps = BuildSteps(paths, topicMap, statesByTopic, dueByTopic);
 
         return new RoadmapDto
         {
@@ -366,11 +372,18 @@ public class RoadmapRepository(AppDbContext db) : IRoadmapRepository
                     reason = $"mastery={state.Mastery:F2}, theta={state.Theta:F2}, beta={beta:F2}, due={due}";
                 }
 
-                var stateForDto = statesByTopic != null && statesByTopic.TryGetValue(p.TopicId, out var dtoTuple)
+                (double Mastery, double Theta) dtoTuple = default;
+                var hasStateForDto = statesByTopic != null && statesByTopic.TryGetValue(p.TopicId, out dtoTuple);
+                var stateForDto = hasStateForDto
                     ? dtoTuple
-                    : (Mastery: DefaultMastery, Theta: DefaultTheta);
+                    : (Mastery: 0.0, Theta: DefaultTheta);
                 var dtoBeta = DifficultyIndex.TopicDifficultyToBeta(topicMap[p.TopicId].Difficulty);
                 var dtoDue = dueByTopic?.GetValueOrDefault(p.TopicId) ?? 0;
+                var progress = p.IsCompleted
+                    ? 100
+                    : hasStateForDto
+                        ? (int)Math.Clamp(Math.Round(stateForDto.Mastery * 100), 0, 99)
+                        : 0;
 
                 return new RoadmapStepDto
                 {
@@ -378,7 +391,7 @@ public class RoadmapRepository(AppDbContext db) : IRoadmapRepository
                     TopicId = p.TopicId.ToString(),
                     TopicName = topicMap[p.TopicId].Name,
                     Status = status,
-                    Progress = p.IsCompleted ? 100 : 0,
+                    Progress = progress,
                     Reason = reason,
                     Mastery = stateForDto.Mastery,
                     Theta = stateForDto.Theta,

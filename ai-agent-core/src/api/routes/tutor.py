@@ -315,7 +315,7 @@ async def explain_topic(
 
 @router.post("/explain-error")
 async def grade_answer(request: GraderRequest):
-    """Analyzes a wrong answer and explains the knowledge gap (Explanation LLM)."""
+    """Provides a Socratic hint so the student can infer the answer (Explanation LLM)."""
     import time
     
     start_time = time.time()
@@ -332,7 +332,7 @@ async def grade_answer(request: GraderRequest):
     context = ""
     retrieval_start = time.time()
     if runtime.retriever:
-        # We query the database using the question text to get relevant grammar concepts
+        # Query by question text to fetch relevant grammar/vocabulary context for hinting
         logger.info(f"[GRADER-RAG][STEP 2] Launching RAG context retrieval using question text as query...")
         try:
             hits = runtime.retriever.get_context_hits(
@@ -354,14 +354,14 @@ async def grade_answer(request: GraderRequest):
     logger.info(f"[GRADER-RAG][STEP 2] Retrieval finished in {retrieval_duration:.3f}s")
 
     # Step 3: Prepare Prompt
-    logger.info("[GRADER-RAG][STEP 3] Formatting grader prompt with question details and retrieved context...")
+    logger.info("[GRADER-RAG][STEP 3] Formatting Socratic hint prompt with question details and retrieved context...")
     prompt = PromptTemplates.GRADER_TEMPLATE.format(
         question=request.question,
         correct_answer=request.correct_answer,
         student_answer=request.student_answer,
         context=context,
     )
-    logger.info(f"[GRADER-RAG][STEP 3] Grader prompt ready. Total characters: {len(prompt)}")
+    logger.info(f"[GRADER-RAG][STEP 3] Socratic hint prompt ready. Total characters: {len(prompt)}")
 
     # Step 4: Call LLM
     logger.info(f"[GRADER-RAG][STEP 4] Dispatching request to Explanation LLM (Model: '{runtime.llm_explain.model}', Endpoint: '{runtime.llm_explain.endpoint_url}')...")
@@ -372,12 +372,12 @@ async def grade_answer(request: GraderRequest):
         runtime.raise_ai_unavailable()
 
     llm_duration = time.time() - llm_start
-    logger.info(f"[GRADER-RAG][STEP 4] Grader LLM responded in {llm_duration:.3f}s")
+    logger.info(f"[GRADER-RAG][STEP 4] Hint LLM responded in {llm_duration:.3f}s")
 
     # Step 5: Process and Log Output
     total_duration = time.time() - start_time
-    logger.info(f"[GRADER-RAG][STEP 5] Grader explanation generated successfully in {total_duration:.3f}s!")
-    logger.info(f"  - Explanation: \"{explanation[:150]}...\"")
+    logger.info(f"[GRADER-RAG][STEP 5] Socratic hint generated successfully in {total_duration:.3f}s!")
+    logger.info(f"  - Hint: \"{explanation[:150]}...\"")
     logger.info("=" * 60)
 
     return {"explanation": explanation}

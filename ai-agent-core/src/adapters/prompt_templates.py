@@ -106,8 +106,8 @@ When both DOCUMENT CONTEXT and MANUAL REQUIREMENTS are present:
     "difficulty_level": {difficulty}
 }}"""
 
-    # Prompt cho việc phân tích lỗi sai (Grader)
-    GRADER_TEMPLATE = """Analyze why the student chose the wrong answer and help them understand the correct one.
+    # Prompt cho việc gợi ý đáp án theo Socratic method
+    GRADER_TEMPLATE = """Give the student a Socratic hint so they can find the correct answer by themselves.
 
 ## Context from textbook (USE THIS as reference if provided):
 {context}
@@ -119,14 +119,16 @@ When both DOCUMENT CONTEXT and MANUAL REQUIREMENTS are present:
 ## Student's Answer: {student_answer}
 
 ## Response Structure (in Vietnamese):
-1. **Acknowledge** (1 sentence): "Em đã chọn [student_answer], nhưng đáp án đúng là [correct_answer]."
-2. **Explain the error** (1-2 sentences): Identify the SPECIFIC grammar/vocabulary mistake — e.g., wrong tense, wrong preposition, confused words. Name the grammar rule.
-3. **Explain correct answer** (1-2 sentences): Why the correct answer is right — reference the rule and show how it applies to this sentence.
-4. **Quick tip** (1 sentence): A memorable tip to avoid this mistake in the future.
+1. **Focus clue** (1 sentence): Tell the student what signal to inspect in the sentence, such as tense marker, subject, article, collocation, or preposition.
+2. **Guiding prompt** (1-2 sentences): Point out the relevant grammar/vocabulary rule in simple Vietnamese without directly revealing the correct answer.
+3. **Socratic question** (1 sentence): Ask a short question that helps the student compare the remaining options and decide by themselves.
+4. **Self-check tip** (1 sentence): Tell the student how to verify the answer after choosing.
 
 ## IMPORTANT:
+- Do NOT reveal the correct answer explicitly
+- Do NOT say phrases like "đáp án đúng là..." or restate the correct option
 - Focus ONLY on this specific question — do not add unrelated grammar lessons
-- If the student's answer and correct answer are the same, congratulate them instead
+- If the student's answer and correct answer are the same, give a short confirmation and one quick self-check tip
 - Use simple Vietnamese appropriate for a language learner"""
 
     # Legacy single-call batch template — unused; /tutor/generate-quiz uses QUIZ_TEMPLATE per question.

@@ -28,6 +28,8 @@ import type {
   QuizReviewItemDto,
 } from '@/types';
 
+const GUID_PATTERN = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
+
 type SessionState =
   | { type: 'idle' }
   | { type: 'loading' }
@@ -50,7 +52,7 @@ export function PracticeSessionPage() {
   const queryClient = useQueryClient();
   const topicId = searchParams.get('topicId') || '';
   const classId = searchParams.get('classId') || '';
-  const topicName = searchParams.get('topicName') || 'Luyện tập';
+  const topicNameParam = searchParams.get('topicName') || '';
   const quizId = searchParams.get('quizId') || '';
   const mode = searchParams.get('mode') || 'standard';
   const isFixedMode = mode === 'fixed';
@@ -64,6 +66,7 @@ export function PracticeSessionPage() {
   const [state, setState] = useState<SessionState>({ type: 'idle' });
   const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
   const [totalQuestions, setTotalQuestions] = useState(10);
+  const [resolvedTopicName, setResolvedTopicName] = useState('');
   const [detailedExplanations, setDetailedExplanations] = useState<Record<string, string>>({});
   const [loadingDetailedFor, setLoadingDetailedFor] = useState<string | null>(null);
   const [detailedErrors, setDetailedErrors] = useState<Record<string, boolean>>({});
@@ -94,6 +97,7 @@ export function PracticeSessionPage() {
     },
     onSuccess: (data) => {
       setTotalQuestions(data.totalQuestions);
+      setResolvedTopicName(data.topicName);
       questionStartRef.current = Date.now();
       setState({
         type: 'answering',
@@ -292,6 +296,15 @@ export function PracticeSessionPage() {
         ? -1
         : -1;
 
+  const displayTopicName = (() => {
+    const topicNameLooksLikeId = GUID_PATTERN.test(topicNameParam);
+    const candidate = topicNameParam && topicNameParam !== topicId && !topicNameLooksLikeId
+      ? topicNameParam
+      : resolvedTopicName;
+    if (candidate) return candidate;
+    return modeLabel;
+  })();
+
   if (state.type === 'idle' && !autoStartMode) {
     return (
       <div className="mx-auto max-w-2xl space-y-6 p-6">
@@ -303,7 +316,7 @@ export function PracticeSessionPage() {
             <Brain className="mx-auto h-12 w-12 text-primary" />
             <CardTitle className="mt-4">Luyện tập thích ứng</CardTitle>
             <p className="text-muted-foreground">
-              Chủ đề: <strong>{topicName}</strong>
+              Chủ đề: <strong>{displayTopicName}</strong>
             </p>
           </CardHeader>
           <CardContent className="flex justify-center">
@@ -335,17 +348,12 @@ export function PracticeSessionPage() {
 
   if (state.type === 'answering') {
     const { question, questionNumber, total, phase, feedback } = state;
-    const displayTopicName = topicName !== 'Luyện tập' ? topicName : modeLabel;
 
     return (
       <div className="mx-auto max-w-2xl space-y-6 p-6">
         <div className="flex items-center justify-between">
           <Badge variant="secondary">
             {displayTopicName} — Câu {questionNumber}/{total}
-          </Badge>
-          <Badge variant="outline">
-            {question.difficulty}
-            {typeof question.difficultyIndex === 'number' ? ` (β ${question.difficultyIndex.toFixed(2)})` : ''}
           </Badge>
         </div>
         <Progress value={(questionNumber / total) * 100} className="h-2" />
@@ -416,27 +424,6 @@ export function PracticeSessionPage() {
                     )
                   }
                 />
-                {(feedback.agentReason || feedback.agentExplanation || feedback.agentAction) && (
-                  <div className="rounded-lg border bg-muted/40 p-3 text-sm">
-                    {feedback.agentAction && <p className="font-medium">Agent action: {feedback.agentAction}</p>}
-                    {feedback.agentReason && <p className="text-muted-foreground">{feedback.agentReason}</p>}
-                    {feedback.agentExplanation && <p className="mt-2">{feedback.agentExplanation}</p>}
-                    {(typeof feedback.thetaAfter === 'number' || typeof feedback.questionBeta === 'number') && (
-                      <p className="mt-2 text-xs text-muted-foreground">
-                        {typeof feedback.thetaBefore === 'number' ? `θ trước: ${feedback.thetaBefore.toFixed(2)} · ` : ''}
-                        {typeof feedback.thetaAfter === 'number' ? `θ sau: ${feedback.thetaAfter.toFixed(2)} · ` : ''}
-                        {typeof feedback.questionBeta === 'number' ? `β câu hỏi: ${feedback.questionBeta.toFixed(2)}` : ''}
-                      </p>
-                    )}
-                    {(typeof feedback.sessionMastery === 'number' || typeof feedback.dbMasteryBaseline === 'number') && (
-                      <p className="mt-2 text-xs text-muted-foreground">
-                        Phiên: {typeof feedback.sessionMastery === 'number' ? `${Math.round(feedback.sessionMastery * 100)}%` : '—'}
-                        {' · '}
-                        DB (quiz lớp): {typeof feedback.dbMasteryBaseline === 'number' ? `${Math.round(feedback.dbMasteryBaseline * 100)}%` : '—'}
-                      </p>
-                    )}
-                  </div>
-                )}
               </div>
             )}
           </CardContent>

@@ -92,8 +92,6 @@ export function PlacementTestPage() {
 
   const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
 
-  const [answeredCount, setAnsweredCount] = useState(0);
-
   const [detailedExplanations, setDetailedExplanations] = useState<Record<string, string>>({});
 
   const [loadingDetailedFor, setLoadingDetailedFor] = useState<string | null>(null);
@@ -151,8 +149,6 @@ export function PlacementTestPage() {
       placementTestService.submitAnswer(vars.sessionId, vars.questionId, vars.selectedOptionIds),
 
     onSuccess: (data, vars) => {
-
-      setAnsweredCount((c) => c + 1);
 
       setSelectedOptions([]);
 
@@ -382,7 +378,7 @@ export function PlacementTestPage() {
 
           </div>
 
-          <Progress value={(answeredCount / total) * 100} className="h-2" />
+          <Progress value={(questionNumber / total) * 100} className="h-2" />
 
           <Card>
 

@@ -21,7 +21,6 @@ public interface IPlacementTestsRepository
 
 public class PlacementTestsRepository(AppDbContext db, IRoadmapRepository roadmap, ILearningStatesRepository learningStates) : IPlacementTestsRepository
 {
-    private const int MinQuestions = 1;
     private const int MaxQuestions = 20;
     private static readonly TimeSpan SessionTtl = TimeSpan.FromHours(2);
 
@@ -90,7 +89,7 @@ public class PlacementTestsRepository(AppDbContext db, IRoadmapRepository roadma
             SessionId = sessionId.ToString(),
             Question = MapQuestionToDto(firstQuestion),
             QuestionNumber = 1,
-            TotalQuestions = Math.Min(questions.Count, MaxQuestions)
+            TotalQuestions = state.QuestionPool.Count
         };
     }
 
@@ -151,8 +150,7 @@ public class PlacementTestsRepository(AppDbContext db, IRoadmapRepository roadma
         else if (recentCorrect == 0)
             state.CurrentDifficulty = state.CurrentDifficulty == "hard" ? "medium" : "easy";
 
-        bool isComplete = state.CurrentIndex >= MaxQuestions ||
-            (state.CurrentIndex >= MinQuestions && IsLevelStable(state));
+        bool isComplete = state.CurrentIndex >= state.QuestionPool.Count;
 
         if (isComplete)
         {
@@ -163,12 +161,11 @@ public class PlacementTestsRepository(AppDbContext db, IRoadmapRepository roadma
                 IsComplete = true,
                 NextQuestion = null,
                 QuestionNumber = state.CurrentIndex,
-                TotalQuestions = state.CurrentIndex
+                TotalQuestions = state.QuestionPool.Count
             };
         }
 
-        var answeredIds = state.Answers.Select(a => a.QuestionId).ToHashSet();
-        var nextQuestion = await GetNextQuestionAsync(state, answeredIds, state.ClassId);
+        var nextQuestion = await ResolveNextQuestionFromPoolAsync(state);
 
         if (nextQuestion == null)
         {
@@ -179,7 +176,7 @@ public class PlacementTestsRepository(AppDbContext db, IRoadmapRepository roadma
                 IsComplete = true,
                 NextQuestion = null,
                 QuestionNumber = state.CurrentIndex,
-                TotalQuestions = state.CurrentIndex
+                TotalQuestions = state.QuestionPool.Count
             };
         }
 
@@ -190,7 +187,7 @@ public class PlacementTestsRepository(AppDbContext db, IRoadmapRepository roadma
             IsComplete = false,
             NextQuestion = MapQuestionToDto(nextQuestion),
             QuestionNumber = state.CurrentIndex + 1,
-            TotalQuestions = MaxQuestions
+            TotalQuestions = state.QuestionPool.Count
         };
     }
 
@@ -420,55 +417,16 @@ public class PlacementTestsRepository(AppDbContext db, IRoadmapRepository roadma
         return await query.OrderBy(q => Guid.NewGuid()).Take(MaxQuestions).ToListAsync();
     }
 
-    private async Task<Question?> GetNextQuestionAsync(PlacementSessionState state, HashSet<Guid> answeredIds, Guid? classId)
+    private async Task<Question?> ResolveNextQuestionFromPoolAsync(PlacementSessionState state)
     {
-        // When the session was created from an active entry_test, restrict to that quiz's questions
-        if (state.ActiveEntryTestQuizId.HasValue)
-        {
-            var quizId = state.ActiveEntryTestQuizId.Value;
-            IQueryable<Question> ActiveQuery() =>
-                db.Questions
-                    .Include(q => q.Options)
-                    .Include(q => q.Quiz).ThenInclude(q => q!.Topic)
-                    .Where(q => !answeredIds.Contains(q.Id) && q.QuizId == quizId);
+        if (state.CurrentIndex < 0 || state.CurrentIndex >= state.QuestionPool.Count)
+            return null;
 
-            return await ActiveQuery()
-                .Where(q => q.Difficulty == state.CurrentDifficulty)
-                .OrderBy(q => Guid.NewGuid())
-                .FirstOrDefaultAsync()
-                ?? await ActiveQuery().OrderBy(q => Guid.NewGuid()).FirstOrDefaultAsync();
-        }
-
-        IQueryable<Question> BaseQuery() =>
-            db.Questions
-                .Include(q => q.Options)
-                .Include(q => q.Quiz).ThenInclude(q => q!.Topic)
-                .Where(q => !answeredIds.Contains(q.Id));
-
-        if (classId.HasValue)
-        {
-            return await BaseQuery()
-                .Where(q =>
-                    q.Difficulty == state.CurrentDifficulty &&
-                    q.Quiz != null &&
-                    (q.Quiz.ClassId == classId.Value ||
-                     (q.Quiz.Topic != null && q.Quiz.Topic.ClassId == classId.Value)))
-                .OrderBy(q => Guid.NewGuid())
-                .FirstOrDefaultAsync()
-                ?? await BaseQuery()
-                    .Where(q =>
-                        q.Quiz != null &&
-                        (q.Quiz.ClassId == classId.Value ||
-                         (q.Quiz.Topic != null && q.Quiz.Topic.ClassId == classId.Value)))
-                    .OrderBy(q => Guid.NewGuid())
-                    .FirstOrDefaultAsync();
-        }
-
-        return await BaseQuery()
-            .Where(q => q.Difficulty == state.CurrentDifficulty)
-            .OrderBy(q => Guid.NewGuid())
-            .FirstOrDefaultAsync()
-            ?? await BaseQuery().OrderBy(q => Guid.NewGuid()).FirstOrDefaultAsync();
+        var nextQuestionId = state.QuestionPool[state.CurrentIndex];
+        return await db.Questions
+            .Include(q => q.Options)
+            .Include(q => q.Quiz).ThenInclude(q => q!.Topic)
+            .FirstOrDefaultAsync(q => q.Id == nextQuestionId);
     }
 
     private async Task<PlacementTestSession> LoadSessionAsync(Guid userId, string sessionId)
@@ -503,14 +461,6 @@ public class PlacementTestsRepository(AppDbContext db, IRoadmapRepository roadma
             db.PlacementTestSessions.RemoveRange(stale);
             await db.SaveChangesAsync();
         }
-    }
-
-    private static bool IsLevelStable(PlacementSessionState session)
-    {
-        if (session.Answers.Count < 5) return false;
-        var last5 = session.Answers.TakeLast(5).ToList();
-        var correctRate = last5.Count(a => a.IsCorrect) / 5.0;
-        return correctRate >= 0.8 || correctRate <= 0.2;
     }
 
     private static PlacementQuestionDto MapQuestionToDto(Question q) => new()

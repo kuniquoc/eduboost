@@ -61,9 +61,6 @@ export function StudentQuizzesTab({ classId }: { classId: string }) {
 
   return (
     <div className="space-y-3">
-      <p className="text-sm text-muted-foreground">
-        Luyện tập có phản hồi ngay và cập nhật chỉ số học tập; bài kiểm tra chỉ xem kết quả sau khi nộp.
-      </p>
       {practiceQuizzes.map((quiz) => (
         <Card key={quiz.id}>
           <CardContent className="flex flex-wrap items-center justify-between gap-4 py-4">

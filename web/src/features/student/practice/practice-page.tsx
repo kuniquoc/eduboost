@@ -194,7 +194,7 @@ export function PracticePage() {
       return explanation;
     } catch {
       setDetailedError(true);
-      toast.error('Không thể tải giải thích chi tiết');
+      toast.error('Không thể tải AI gợi ý');
       throw new Error('Failed');
     } finally {
       setLoadingDetailed(false);
