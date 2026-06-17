@@ -5,7 +5,6 @@ using EduBoost.API.Features.Roadmap;
 using EduBoost.API.Features.Roadmap.Models;
 using EduBoost.API.Infrastructure;
 using EduBoost.API.Infrastructure.Entities;
-using EduBoost.API.Infrastructure.Services;
 using Microsoft.EntityFrameworkCore;
 using Xunit;
 
@@ -105,9 +104,6 @@ public class PracticeSessionsRepositoryTests
         var bkt = await db.BktStates.SingleAsync(b => b.UserId == userId);
         Assert.Equal(sourceTopicId, bkt.TopicId);
 
-        var sr = await db.SpacedRepetitionItems.SingleAsync(sr => sr.UserId == userId);
-        Assert.Equal(sourceTopicId, sr.TopicId);
-        Assert.Equal(questionId, sr.QuestionId);
     }
 
     [Fact]
@@ -152,7 +148,7 @@ public class PracticeSessionsRepositoryTests
     }
 
     private static PracticeSessionsRepository CreateRepo(AppDbContext db) =>
-        new(db, new LearningStatesRepository(db, new SpacedRepetitionService()), new NoOpRoadmapRepository());
+        new(db, new LearningStatesRepository(db), new NoOpRoadmapRepository());
 
     private static Question CreateMcq(Guid id, Guid quizId, string text) => new()
     {

@@ -16,13 +16,6 @@ export const practiceSessionService = {
     return res.data.data!;
   },
 
-  startReview: async (questionIds?: string[]): Promise<StartPracticeResponse> => {
-    const res = await apiClient.post<ApiResponse<StartPracticeResponse>>('/practice-sessions/start-review', {
-      questionIds: questionIds?.length ? questionIds : undefined,
-    });
-    return res.data.data!;
-  },
-
   startFixed: async (questionIds: string[], topicId?: string): Promise<StartPracticeResponse> => {
     const res = await apiClient.post<ApiResponse<StartPracticeResponse>>('/practice-sessions/start', {
       mode: 'fixed',

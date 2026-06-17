@@ -71,22 +71,6 @@ public class PracticeSessionsController(IPracticeSessionsRepository repo, IQuizA
         }
     }
 
-    /// <summary>Student: Bắt đầu phiên ôn tập spaced repetition</summary>
-    [HttpPost("start-review")]
-    public async Task<IActionResult> StartReviewSession([FromBody] StartReviewRequest request)
-    {
-        if (UserRole != "student") return Forbid();
-        try
-        {
-            var result = await repo.StartReviewSessionAsync(UserId, request);
-            return Ok(ApiResponse<StartPracticeResponse>.Ok(result));
-        }
-        catch (InvalidOperationException ex)
-        {
-            return BadRequest(ApiResponse.Fail(ex.Message));
-        }
-    }
-
     /// <summary>Student: Gửi câu trả lời</summary>
     [HttpPost("answer")]
     public async Task<IActionResult> SubmitAnswer([FromBody] SubmitAnswerRequest request)

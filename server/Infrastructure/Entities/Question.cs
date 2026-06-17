@@ -27,5 +27,4 @@ public class Question
     public Document? SourceDocument { get; set; }
     public Topic? SourceTopic { get; set; }
     public ICollection<QuizOption> Options { get; set; } = [];
-    public ICollection<SpacedRepetitionItem> SpacedRepetitionItems { get; set; } = [];
 }

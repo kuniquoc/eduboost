@@ -12,7 +12,7 @@ public interface ITutorDecisionService
 public class TutorDecisionService : ITutorDecisionService
 {
     private const double WeakThreshold = 0.5;
-    private const double MasteredThreshold = 0.8;
+    private const double MasteredThreshold = 0.95;
     private const double DefaultMastery = 0.3;
 
     public AgentNextActionResponse DecideNextAction(string topicName, double masteryProbability, double irtTheta = 0)

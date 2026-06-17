@@ -2,11 +2,10 @@ import { Link } from 'react-router-dom';
 import { placementTestPath } from '@/lib/constants';
 import { useStudentProgress } from '@/hooks/use-student-progress';
 import { useStudentStats } from '@/hooks/use-student-stats';
-import { useReviewSchedule } from '@/hooks/use-review-schedule';
 import { Card, CardContent } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
 import { Badge } from '@/components/ui/badge';
-import { Flame, BookOpen, TrendingUp, CalendarClock, Brain } from 'lucide-react';
+import { Flame, BookOpen, TrendingUp } from 'lucide-react';
 
 function StatCard({ icon: Icon, label, value, sub }: { icon: React.ComponentType<{ className?: string }>; label: string; value: string | number; sub?: string }) {
   return (
@@ -28,7 +27,6 @@ function StatCard({ icon: Icon, label, value, sub }: { icon: React.ComponentType
 export function StudentDashboardPage() {
   const { data: progress, isLoading: loadingProgress } = useStudentProgress();
   const { data: stats, isLoading: loadingStats } = useStudentStats();
-  const { data: reviewSchedule } = useReviewSchedule();
 
   const isLoading = loadingProgress || loadingStats;
 
@@ -62,36 +60,6 @@ export function StudentDashboardPage() {
             label="Tỉ lệ đúng tuần này"
             value={`${Math.round(stats.weeklyProgress)}%`}
           />
-        </div>
-      )}
-
-      {/* Review reminder */}
-      {reviewSchedule && reviewSchedule.totalDueToday > 0 && (
-        <div className="grid gap-3 sm:grid-cols-2">
-          <Link to="/student/review">
-            <Card className="border-primary/20 bg-primary/5 transition-colors hover:border-primary/40 h-full">
-              <CardContent className="flex items-center gap-4 p-4">
-                <CalendarClock className="h-8 w-8 text-primary" />
-                <div className="flex-1">
-                  <p className="font-semibold text-foreground">
-                    {reviewSchedule.totalDueToday} câu hỏi cần ôn tập hôm nay
-                  </p>
-                  <p className="text-sm text-muted-foreground">Xem lịch ôn tập</p>
-                </div>
-              </CardContent>
-            </Card>
-          </Link>
-          <Link to="/student/practice-session?mode=review">
-            <Card className="border-primary/20 transition-colors hover:border-primary/40 h-full">
-              <CardContent className="flex items-center gap-4 p-4">
-                <Brain className="h-8 w-8 text-primary" />
-                <div className="flex-1">
-                  <p className="font-semibold text-foreground">Ôn ngay {reviewSchedule.totalDueToday} câu</p>
-                  <p className="text-sm text-muted-foreground">Bắt đầu phiên spaced repetition</p>
-                </div>
-              </CardContent>
-            </Card>
-          </Link>
         </div>
       )}
 

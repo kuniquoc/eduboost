@@ -17,7 +17,13 @@ from src.api.quiz_batch_service import (
     _seed_seen_from_existing,
     generate_quiz_batch,
 )
-from src.core.config import CHAT_MAX_HISTORY, RAG_SIMILARITY_THRESHOLD, RAG_TOP_K_DOCS
+from src.core.config import (
+    BKT_LEARNING_THRESHOLD,
+    BKT_MASTERY_THRESHOLD,
+    CHAT_MAX_HISTORY,
+    RAG_SIMILARITY_THRESHOLD,
+    RAG_TOP_K_DOCS,
+)
 from src.rag.retriever import format_context_from_hits, log_retrieved_chunks_success
 
 logger = logging.getLogger(__name__)
@@ -33,14 +39,14 @@ async def get_next_action(
 ):
     """Uses BKT to decide: EXPLAIN, QUIZ, or NEXT_SKILL."""
     if mastery_probability is not None:
-        if mastery_probability < 0.5:
+        if mastery_probability < BKT_LEARNING_THRESHOLD:
             return {
                 "action": "EXPLAIN",
                 "adapter": "explanation_adapter",
                 "reason": f"Mastery below threshold ({mastery_probability:.2f})",
                 "params": {}
             }
-        if mastery_probability < 0.8:
+        if mastery_probability < BKT_MASTERY_THRESHOLD:
             return {
                 "action": "QUIZ",
                 "adapter": "quiz_adapter",

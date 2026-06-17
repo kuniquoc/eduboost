@@ -231,12 +231,12 @@ sequenceDiagram
     alt mastery == 'Weak' (P(L) < 0.5)
         BKT-->>Orch: Trả về 'Weak'
         Orch-->>Student: Giao diện hiển thị: Giảng giải lý thuyết (EXPLAIN)
-    else mastery == 'Learning' (0.5 <= P(L) < 0.8)
+    else mastery == 'Learning' (0.5 <= P(L) < 0.95)
         BKT-->>Orch: Trả về 'Learning'
         Orch->>IRT: Đọc năng lực hiện tại (theta) của học sinh
         IRT-->>Orch: Đề xuất độ khó câu hỏi thích ứng (beta = theta)
         Orch-->>Student: Giao diện hiển thị: Làm câu hỏi thích ứng (QUIZ) độ khó tương ứng beta
-    else mastery == 'Mastered' (P(L) >= 0.8)
+    else mastery == 'Mastered' (P(L) >= 0.95)
         BKT-->>Orch: Trả về 'Mastered'
         Orch-->>Student: Giao diện hiển thị: Khuyên học sinh chuyển sang bài mới (NEXT_SKILL)
     end
@@ -301,7 +301,7 @@ sequenceDiagram
     - `GenerateAdaptiveQuestion` (Dòng 279-309): Đọc đề xuất thích ứng từ Python AI để trả về câu hỏi trắc nghiệm mới.
 - **Tầng AI Core (Python)**:
   - Bộ điều phối: [orchestrator.py](file:///d:/Code/Projects/eduboost/ai-agent-core/src/core/orchestrator.py)
-    - `decide_next_action` (Dòng 19-51): So sánh $P(L)$ với mốc phân loại kiến thức (Weak < 0.5; Learning < 0.8; Mastered >= 0.8) để trả về lệnh điều phối.
+    - `decide_next_action` (Dòng 19-51): So sánh $P(L)$ với mốc phân loại kiến thức (Weak < 0.5; Learning < 0.95; Mastered >= 0.95) để trả về lệnh điều phối.
     - `update_student_state` (Dòng 53-71): Kích hoạt tuần tự cập nhật BKT và IRT.
   - Thuật toán toán học: [bkt.py](file:///d:/Code/Projects/eduboost/ai-agent-core/src/core/bkt.py) & [irt.py](file:///d:/Code/Projects/eduboost/ai-agent-core/src/core/irt.py).
 

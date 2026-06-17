@@ -12,11 +12,6 @@ public class StartPracticeRequest
     public List<Guid>? QuestionIds { get; set; }
 }
 
-public class StartReviewRequest
-{
-    public List<Guid>? QuestionIds { get; set; }
-}
-
 public class StartPracticeResponse
 {
     public string SessionId { get; set; } = "";
@@ -62,7 +57,6 @@ public class SubmitAnswerResponse
     public int QuestionNumber { get; set; }
     public int TotalQuestions { get; set; }
     public bool IsSessionComplete { get; set; }
-    public SrUpdateDto? SpacedRepetition { get; set; }
     public string? AgentAction { get; set; }
     public string? AgentReason { get; set; }
     public string? AgentExplanation { get; set; }
@@ -89,15 +83,6 @@ public class QuizReviewItemDto
     public string? CorrectAnswer { get; set; }
     public bool IsCorrect { get; set; }
     public string? Explanation { get; set; }
-}
-
-public class SrUpdateDto
-{
-    public string NextReviewDate { get; set; } = "";
-    public double ReviewInterval { get; set; }
-    public int RepetitionCount { get; set; }
-    public bool IntervalChanged { get; set; }
-    public double PreviousInterval { get; set; }
 }
 
 public class EndPracticeRequest

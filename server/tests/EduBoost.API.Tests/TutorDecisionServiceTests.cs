@@ -10,7 +10,8 @@ public class TutorDecisionServiceTests
     [Theory]
     [InlineData(0.2, "EXPLAIN")]
     [InlineData(0.6, "QUIZ")]
-    [InlineData(0.9, "NEXT_SKILL")]
+    [InlineData(0.9, "QUIZ")]
+    [InlineData(0.95, "NEXT_SKILL")]
     public void DecideNextAction_UsesBktThresholds(double mastery, string expectedAction)
     {
         var result = _service.DecideNextAction("Algebra", mastery);

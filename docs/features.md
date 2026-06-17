@@ -364,8 +364,8 @@ Client                    Server                    MinIO
 2. Update IRT θ (student ability)
 3. Orchestrator quyết định:
    - P(L) < 0.5 → EXPLAIN (cần học lại)
-   - 0.5 ≤ P(L) < 0.8 → QUIZ (tiếp tục luyện)
-   - P(L) ≥ 0.8 → NEXT_SKILL (chuyển bài mới)
+   - 0.5 ≤ P(L) < 0.95 → QUIZ (tiếp tục luyện)
+   - P(L) ≥ 0.95 → NEXT_SKILL (chuyển bài mới)
 4. Update roadmap step progress/status accordingly
 
 ---

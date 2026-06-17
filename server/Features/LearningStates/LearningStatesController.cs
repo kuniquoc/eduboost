@@ -45,12 +45,4 @@ public class LearningStatesController(ILearningStatesRepository repo, IQuizAutho
         return Ok(ApiResponse<UpdateBktResponse>.Ok(result));
     }
 
-    /// <summary>Student: Lấy danh sách nội dung cần ôn tập hôm nay</summary>
-    [HttpGet("me/review-schedule")]
-    public async Task<IActionResult> GetReviewSchedule()
-    {
-        if (UserRole != "student") return Forbid();
-        var schedule = await repo.GetReviewScheduleAsync(UserId);
-        return Ok(ApiResponse<ReviewScheduleDto>.Ok(schedule));
-    }
 }

@@ -395,25 +395,6 @@ export interface UpdateBktResponse {
   recommendation?: string;
 }
 
-export interface ReviewScheduleDto {
-  totalDueToday: number;
-  items: ReviewItemDto[];
-}
-
-export interface ReviewItemDto {
-  questionId: string;
-  topicId: string;
-  topicName: string;
-  questionText: string;
-  nextReviewDate: string;
-  lastReviewDate?: string;
-  retentionScore: number;
-  repetitionCount: number;
-  reviewInterval: number;
-  easeFactor: number;
-  overdueHours?: number;
-}
-
 // ─── Placement Test (Adaptive) ────────────────────────────
 
 export interface PlacementQuestionDto {
@@ -479,14 +460,6 @@ export interface StartPracticeResponse {
   totalQuestions: number;
 }
 
-export interface SrUpdateDto {
-  nextReviewDate: string;
-  reviewInterval: number;
-  repetitionCount: number;
-  intervalChanged: boolean;
-  previousInterval: number;
-}
-
 export interface SubmitPracticeAnswerResponse {
   feedbackSuppressed?: boolean;
   isCorrect: boolean;
@@ -496,7 +469,6 @@ export interface SubmitPracticeAnswerResponse {
   questionNumber: number;
   isSessionComplete: boolean;
   totalQuestions?: number;
-  spacedRepetition?: SrUpdateDto;
   agentAction?: 'EXPLAIN' | 'QUIZ' | 'NEXT_SKILL';
   agentReason?: string;
   agentExplanation?: string;

@@ -142,7 +142,6 @@ builder.Services.AddCors(options =>
 });
 
 // ── DI — Infrastructure Services ────────────────────────────────────────────────
-builder.Services.AddSingleton<ISpacedRepetitionService, SpacedRepetitionService>();
 builder.Services.AddSingleton<ITutorDecisionService, TutorDecisionService>();
 builder.Services.AddScoped<IStudentStatsCalculator, StudentStatsCalculator>();
 

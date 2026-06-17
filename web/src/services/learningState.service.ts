@@ -1,5 +1,5 @@
 import { apiClient } from './api';
-import type { ApiResponse, BktStateDto, UpdateBktResponse, ReviewScheduleDto } from '@/types';
+import type { ApiResponse, BktStateDto, UpdateBktResponse } from '@/types';
 
 export const learningStateService = {
   getStates: async (): Promise<BktStateDto[]> => {
@@ -21,8 +21,4 @@ export const learningStateService = {
     return res.data.data!;
   },
 
-  getReviewSchedule: async (): Promise<ReviewScheduleDto> => {
-    const res = await apiClient.get<ApiResponse<ReviewScheduleDto>>('/learning-states/me/review-schedule');
-    return res.data.data!;
-  },
 };

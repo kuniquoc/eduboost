@@ -53,15 +53,13 @@ export function PracticeSessionPage() {
   const topicName = searchParams.get('topicName') || 'Luyện tập';
   const quizId = searchParams.get('quizId') || '';
   const mode = searchParams.get('mode') || 'standard';
-  const isReviewMode = mode === 'review';
   const isFixedMode = mode === 'fixed';
   const isQuizPracticeMode = mode === 'practice' && !!quizId;
   const isTestMode = mode === 'test' && !!quizId;
   const isSelfPracticeMode = mode === 'self_practice' && !!classId && !!topicId;
-  const autoStartMode = isReviewMode || isFixedMode || isQuizPracticeMode || isTestMode || isSelfPracticeMode;
+  const autoStartMode = isFixedMode || isQuizPracticeMode || isTestMode || isSelfPracticeMode;
   const questionIdsParam = searchParams.get('questionIds');
-  const reviewQuestionIds = questionIdsParam ? questionIdsParam.split(',').filter(Boolean) : undefined;
-  const fixedQuestionIds = isFixedMode ? reviewQuestionIds : undefined;
+  const fixedQuestionIds = isFixedMode ? questionIdsParam?.split(',').filter(Boolean) : undefined;
 
   const [state, setState] = useState<SessionState>({ type: 'idle' });
   const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
@@ -79,9 +77,7 @@ export function PracticeSessionPage() {
       ? 'Tự luyện tập'
     : isQuizPracticeMode
       ? 'Luyện tập quiz lớp'
-      : isReviewMode
-        ? 'Ôn tập'
-        : isFixedMode
+      : isFixedMode
           ? 'Quiz Pool'
           : 'Luyện tập';
 
@@ -90,7 +86,6 @@ export function PracticeSessionPage() {
       if (isTestMode) return practiceSessionService.startQuizTest(quizId);
       if (isQuizPracticeMode) return practiceSessionService.startQuizPractice(quizId);
       if (isSelfPracticeMode) return practiceSessionService.startSelfPractice(classId, topicId);
-      if (isReviewMode) return practiceSessionService.startReview(reviewQuestionIds);
       if (isFixedMode) {
         if (!fixedQuestionIds?.length) return Promise.reject(new Error('Missing questionIds'));
         return practiceSessionService.startFixed(fixedQuestionIds, topicId || undefined);
@@ -116,9 +111,7 @@ export function PracticeSessionPage() {
           ? 'Không thể bắt đầu tự luyện tập.'
         : isQuizPracticeMode
           ? 'Không thể bắt đầu luyện tập quiz lớp.'
-          : isReviewMode
-            ? 'Không thể bắt đầu phiên ôn tập.'
-            : isFixedMode
+          : isFixedMode
               ? 'Không thể bắt đầu phiên luyện tập từ Quiz Pool.'
               : 'Không thể bắt đầu phiên luyện tập.';
       setState({ type: 'error', message });
@@ -190,10 +183,10 @@ export function PracticeSessionPage() {
   }, [autoStartMode, handleStart]);
 
   useEffect(() => {
-    if (!isReviewMode && !isFixedMode && !isQuizPracticeMode && !isTestMode && !isSelfPracticeMode && !topicId) {
+    if (!isFixedMode && !isQuizPracticeMode && !isTestMode && !isSelfPracticeMode && !topicId) {
       navigate('/student/classes', { replace: true });
     }
-  }, [isReviewMode, isFixedMode, isQuizPracticeMode, isTestMode, isSelfPracticeMode, topicId, navigate]);
+  }, [isFixedMode, isQuizPracticeMode, isTestMode, isSelfPracticeMode, topicId, navigate]);
 
   const handleSubmit = useCallback(() => {
     if (state.type !== 'answering' || state.phase !== 'selecting' || selectedOptions.length === 0) return;
@@ -291,11 +284,9 @@ export function PracticeSessionPage() {
     [],
   );
 
-  const backTarget = isReviewMode
-    ? '/student/review'
-    : isFixedMode
-      ? '/student/quiz-pool'
-      : isSelfPracticeMode
+  const backTarget = isFixedMode
+    ? '/student/quiz-pool'
+    : isSelfPracticeMode
         ? `/student/classes/${classId}?tab=practice`
       : isTestMode || isQuizPracticeMode
         ? -1
@@ -400,7 +391,6 @@ export function PracticeSessionPage() {
                   isCorrect={feedback.isCorrect}
                   correctAnswerText={feedback.correctAnswer}
                   explanation={feedback.explanation}
-                  spacedRepetition={feedback.spacedRepetition}
                   variant="live"
                   continueLabel={feedback.isSessionComplete ? 'Xem kết quả' : 'Câu tiếp theo'}
                   onContinue={handleNext}
@@ -483,7 +473,7 @@ export function PracticeSessionPage() {
           <CardHeader className="text-center">
             <Trophy className="mx-auto h-12 w-12 text-yellow-500" />
             <CardTitle>
-              {isTestMode ? 'Kết quả bài kiểm tra' : isReviewMode ? 'Kết quả ôn tập' : isFixedMode ? 'Kết quả Quiz Pool' : 'Kết quả luyện tập'}
+              {isTestMode ? 'Kết quả bài kiểm tra' : isFixedMode ? 'Kết quả Quiz Pool' : 'Kết quả luyện tập'}
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
@@ -523,7 +513,7 @@ export function PracticeSessionPage() {
                 >
                   Quay lại
                 </Button>
-                {!isReviewMode && !isFixedMode && !isTestMode && (
+                {!isFixedMode && !isTestMode && (
                   <Button className="flex-1" onClick={() => setState({ type: 'idle' })}>
                     Luyện tiếp
                   </Button>

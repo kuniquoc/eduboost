@@ -27,7 +27,6 @@ export const ROUTES = {
   STUDENT_AI_LAB_QUIZ: '/student/ai-lab/:quizId',
   STUDENT_QUIZ_POOL: '/student/quiz-pool',
   STUDENT_AI_CHAT: '/student/ai-chat',
-  STUDENT_REVIEW: '/student/review',
   STUDENT_PROFILE: '/student/profile',
 } as const;
 

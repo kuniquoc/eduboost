@@ -6,7 +6,7 @@ BKT_TRANSITION = 0.1          # p_t:  Xác suất học được sau 1 câu hỏ
 BKT_SLIP = 0.1                # p_s:  Xác suất sai dù đã biết
 BKT_GUESS = 0.25              # p_g:  Xác suất đúng dù chưa biết
 
-BKT_MASTERY_THRESHOLD = 0.8   # P(L) >= threshold → Mastered
+BKT_MASTERY_THRESHOLD = 0.95   # P(L) >= threshold → Mastered
 BKT_LEARNING_THRESHOLD = 0.5  # P(L) >= threshold → Learning (else Weak)
 
 # ── IRT (Item Response Theory) ────────────────────────────────────────────────
@@ -19,12 +19,6 @@ IRT_DEFAULT_DIFFICULTY = 0.0   # Độ khó mặc định khi khởi tạo
 # Adaptive difficulty adjustment
 IRT_THETA_STEP_CORRECT = 0.3   # Tăng theta khi trả lời đúng
 IRT_THETA_STEP_WRONG = 0.3     # Giảm theta khi trả lời sai
-
-# ── Spaced Repetition (SM-2 based) ───────────────────────────────────────────
-SM2_INITIAL_INTERVAL = 1       # Ngày đến lần review đầu tiên
-SM2_INITIAL_EASINESS = 2.5     # Hệ số dễ khởi đầu
-SM2_MINIMUM_EASINESS = 1.3     # Hệ số dễ tối thiểu
-SM2_CORRECT_THRESHOLD = 3      # Điểm chất lượng tối thiểu để tăng interval
 
 # ── Placement / Entry Test ────────────────────────────────────────────────────
 PLACEMENT_TEST_MAX_QUESTIONS = 20   # Tối đa câu hỏi placement test

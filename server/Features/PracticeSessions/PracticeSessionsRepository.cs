@@ -17,10 +17,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 
-using PracticeSrUpdateDto = EduBoost.API.Features.PracticeSessions.Models.SrUpdateDto;
-
-
-
 namespace EduBoost.API.Features.PracticeSessions;
 
 
@@ -30,8 +26,6 @@ public interface IPracticeSessionsRepository
 {
 
     Task<StartPracticeResponse> StartSessionAsync(Guid userId, StartPracticeRequest request);
-
-    Task<StartPracticeResponse> StartReviewSessionAsync(Guid userId, StartReviewRequest request);
 
     Task<SubmitAnswerResponse> SubmitAnswerAsync(Guid userId, SubmitAnswerRequest request);
 
@@ -54,7 +48,7 @@ public class PracticeSessionsRepository(
     private static readonly TimeSpan SessionTtl = TimeSpan.FromHours(2);
     private readonly bool _agentDecisionEnabled = configuration?.GetValue("Features:AgentDecisionEnabled", true) ?? true;
     private readonly bool _irtAdaptiveSelectionEnabled = configuration?.GetValue("Features:IrtAdaptiveSelectionEnabled", true) ?? true;
-    private readonly double _selfPracticeMasteryThreshold = configuration?.GetValue("Features:SelfPracticeMasteryThreshold", 0.8) ?? 0.8;
+    private readonly double _selfPracticeMasteryThreshold = configuration?.GetValue("Features:SelfPracticeMasteryThreshold", 0.95) ?? 0.95;
     private readonly IAgentService? _agentService = agentService;
     private readonly ILogger<PracticeSessionsRepository>? _logger = logger;
 
@@ -66,105 +60,13 @@ public class PracticeSessionsRepository(
 
 
 
-    public async Task<StartPracticeResponse> StartReviewSessionAsync(Guid userId, StartReviewRequest request)
-
-    {
-
-        var dueQuestionIds = await learningStates.GetDueQuestionIdsAsync(userId, request.QuestionIds);
-
-        if (dueQuestionIds.Count == 0)
-
-            throw new InvalidOperationException("Không có câu hỏi nào cần ôn tập");
-
-
-
-        var firstQuestion = await db.Questions
-
-            .Include(q => q.Options)
-
-            .Include(q => q.Quiz)
-
-            .FirstOrDefaultAsync(q => q.Id == dueQuestionIds[0])
-
-            ?? throw new InvalidOperationException("Câu hỏi không tồn tại");
-
-
-
-        var topicId = ResolveQuestionTopicId(firstQuestion)
-
-            ?? throw new InvalidOperationException("Câu hỏi không thuộc chủ đề hợp lệ");
-
-
-
-        return await StartSessionInternalAsync(userId, new StartPracticeRequest
-
-        {
-
-            TopicId = topicId,
-
-            Mode = "review",
-
-            QuestionIds = dueQuestionIds,
-
-            QuestionCount = dueQuestionIds.Count
-
-        });
-
-    }
-
-
-
     private async Task<StartPracticeResponse> StartSessionInternalAsync(Guid userId, StartPracticeRequest request)
 
     {
 
         List<Question> questions;
 
-        if (string.Equals(request.Mode, "review", StringComparison.OrdinalIgnoreCase))
-
-        {
-
-            if (request.QuestionIds is not { Count: > 0 })
-
-                throw new InvalidOperationException("Review mode requires questionIds");
-
-
-
-            var dueIds = await learningStates.GetDueQuestionIdsAsync(userId, request.QuestionIds);
-
-            if (dueIds.Count == 0)
-
-                throw new InvalidOperationException("Không có câu hỏi due trong danh sách đã chọn");
-
-
-
-            var dueSet = dueIds.ToHashSet();
-
-            questions = await db.Questions
-
-                .Include(q => q.Options)
-
-                .Include(q => q.Quiz)
-
-                .Where(q => dueSet.Contains(q.Id))
-
-                .ToListAsync();
-
-
-
-            questions = dueIds
-
-                .Select(id => questions.FirstOrDefault(q => q.Id == id))
-
-                .Where(q => q != null)
-
-                .Cast<Question>()
-
-                .ToList();
-
-        }
-
-        else if (string.Equals(request.Mode, "fixed", StringComparison.OrdinalIgnoreCase))
+        if (string.Equals(request.Mode, "fixed", StringComparison.OrdinalIgnoreCase))
 
         {
 
@@ -735,8 +637,6 @@ public class PracticeSessionsRepository(
 
             IsSessionComplete = isComplete,
 
-            SpacedRepetition = MapSrUpdate(updateResult?.SpacedRepetition),
-
             AgentAction = agentAction,
 
             AgentReason = agentReason,
@@ -894,16 +794,6 @@ public class PracticeSessionsRepository(
 
 
 
-        var isReview = string.Equals(state.Mode, "review", StringComparison.OrdinalIgnoreCase);
-
-        string? nextReviewSummary = null;
-
-        if (isReview && state.CurrentIndex > 0)
-
-            nextReviewSummary = $"Đã lên lịch lại {state.CurrentIndex} câu theo SM-2";
-
-
-
         List<QuizReviewItemDto>? reviewItems = null;
 
         if (string.Equals(state.Mode, "test", StringComparison.OrdinalIgnoreCase) && state.Answers.Count > 0)
@@ -986,9 +876,9 @@ public class PracticeSessionsRepository(
 
             Recommendation = recommendation,
 
-            ItemsReviewed = isReview ? state.CurrentIndex : 0,
+            ItemsReviewed = 0,
 
-            NextReviewSummary = nextReviewSummary,
+            NextReviewSummary = null,
 
             ReviewItems = reviewItems
 
@@ -1058,24 +948,6 @@ public class PracticeSessionsRepository(
 
 
 
-    private static PracticeSrUpdateDto? MapSrUpdate(LearningStates.Models.SrUpdateDto? sr) =>
-
-        sr == null ? null : new PracticeSrUpdateDto
-
-        {
-
-            NextReviewDate = sr.NextReviewDate,
-
-            ReviewInterval = sr.ReviewInterval,
-
-            RepetitionCount = sr.RepetitionCount,
-
-            IntervalChanged = sr.IntervalChanged,
-
-            PreviousInterval = sr.PreviousInterval
-
-        };
-
     private async Task ReorderRemainingQuestionsByThetaAsync(PracticeSessionState state, double theta)
     {
         if (state.CurrentIndex >= state.Questions.Count) return;
@@ -1119,7 +991,7 @@ public class PracticeSessionsRepository(
             }
         }
 
-        var fallbackAction = mastery < 0.5 ? "EXPLAIN" : mastery < 0.8 ? "QUIZ" : "NEXT_SKILL";
+        var fallbackAction = mastery < 0.5 ? "EXPLAIN" : mastery < 0.95 ? "QUIZ" : "NEXT_SKILL";
         var fallbackReason = $"Fallback decision from mastery={mastery:F2}";
         var fallbackTargetBeta = DifficultyIndex.Clamp(theta);
 
@@ -1146,7 +1018,7 @@ public class PracticeSessionsRepository(
         string? explanation = null;
         if (action == "EXPLAIN")
         {
-            var studentState = mastery < 0.5 ? "beginning" : mastery < 0.8 ? "learning" : "reviewing";
+            var studentState = mastery < 0.5 ? "beginning" : mastery < 0.95 ? "learning" : "reviewing";
             explanation = await _agentService.GetExplanationAsync(state.TopicName, studentState);
         }
 

@@ -22,7 +22,6 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
     public DbSet<PracticeActiveSession> PracticeActiveSessions => Set<PracticeActiveSession>();
     public DbSet<PersonalizedLearningPath> PersonalizedLearningPaths => Set<PersonalizedLearningPath>();
     public DbSet<BktState> BktStates => Set<BktState>();
-    public DbSet<SpacedRepetitionItem> SpacedRepetitionItems => Set<SpacedRepetitionItem>();
     public DbSet<ConversationMessage> ConversationMessages => Set<ConversationMessage>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -47,7 +46,6 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
         modelBuilder.Entity<PracticeActiveSession>().ToTable("practice_active_sessions");
         modelBuilder.Entity<PersonalizedLearningPath>().ToTable("personalized_learning_paths");
         modelBuilder.Entity<BktState>().ToTable("bkt_states");
-        modelBuilder.Entity<SpacedRepetitionItem>().ToTable("spaced_repetition_items");
         modelBuilder.Entity<ConversationMessage>().ToTable("conversation_messages");
 
         // ── Unique constraints ────────────────────────────────────────────────
@@ -254,32 +252,6 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
         modelBuilder.Entity<BktState>()
             .HasIndex(b => new { b.UserId, b.TopicId })
             .IsUnique();
-
-        // SpacedRepetitionItem
-        modelBuilder.Entity<SpacedRepetitionItem>()
-            .HasOne(sr => sr.User)
-            .WithMany(u => u.SpacedRepetitionItems)
-            .HasForeignKey(sr => sr.UserId)
-            .OnDelete(DeleteBehavior.Cascade);
-
-        modelBuilder.Entity<SpacedRepetitionItem>()
-            .HasOne(sr => sr.Question)
-            .WithMany(q => q.SpacedRepetitionItems)
-            .HasForeignKey(sr => sr.QuestionId)
-            .OnDelete(DeleteBehavior.Cascade);
-
-        modelBuilder.Entity<SpacedRepetitionItem>()
-            .HasOne(sr => sr.Topic)
-            .WithMany()
-            .HasForeignKey(sr => sr.TopicId)
-            .OnDelete(DeleteBehavior.Restrict);
-
-        modelBuilder.Entity<SpacedRepetitionItem>()
-            .HasIndex(sr => new { sr.UserId, sr.QuestionId })
-            .IsUnique();
-
-        modelBuilder.Entity<SpacedRepetitionItem>()
-            .HasIndex(sr => sr.NextReviewDate);
 
         // ConversationMessage
         modelBuilder.Entity<ConversationMessage>()

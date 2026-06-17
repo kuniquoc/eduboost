@@ -1,5 +1,7 @@
 from typing import Literal
 
+from .config import BKT_LEARNING_THRESHOLD, BKT_MASTERY_THRESHOLD
+
 class BKTModel:
     """
     Bayesian Knowledge Tracing (BKT)
@@ -44,9 +46,9 @@ class BKTModel:
         """
         Phân loại mức độ nắm vững để Agent ra quyết định hành động.
         """
-        if p < 0.5: 
+        if p < BKT_LEARNING_THRESHOLD:
             return "Weak"      # Cần giảng lại (Explanation Adapter)
-        elif p < 0.8: 
+        elif p < BKT_MASTERY_THRESHOLD:
             return "Learning"  # Cần luyện tập (Quiz Adapter)
         else: 
             return "Mastered"  # Đã thành thạo, chuyển bài mới

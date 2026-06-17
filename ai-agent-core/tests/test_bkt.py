@@ -21,7 +21,8 @@ class TestBKTModel(unittest.TestCase):
         """Kiểm tra phân loại mức độ nắm vững"""
         self.assertEqual(self.bkt.get_mastery_level(0.3), "Weak")
         self.assertEqual(self.bkt.get_mastery_level(0.6), "Learning")
-        self.assertEqual(self.bkt.get_mastery_level(0.9), "Mastered")
+        self.assertEqual(self.bkt.get_mastery_level(0.9), "Learning")
+        self.assertEqual(self.bkt.get_mastery_level(0.95), "Mastered")
 
 if __name__ == "__main__":
     unittest.main()

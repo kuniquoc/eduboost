@@ -22,6 +22,5 @@ public class User
     public ICollection<PlacementTestResult> PlacementTestResults { get; set; } = [];
     public ICollection<PersonalizedLearningPath> LearningPaths { get; set; } = [];
     public ICollection<BktState> BktStates { get; set; } = [];
-    public ICollection<SpacedRepetitionItem> SpacedRepetitionItems { get; set; } = [];
     public ICollection<ConversationMessage> ConversationMessages { get; set; } = [];
 }

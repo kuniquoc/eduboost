@@ -41,8 +41,8 @@ sequenceDiagram
 | Mastery P(L) | Action |
 |--------------|--------|
 | &lt; 0.5 | EXPLAIN |
-| 0.5 – 0.8 | QUIZ |
-| ≥ 0.8 | NEXT_SKILL |
+| 0.5 – 0.95 | QUIZ |
+| ≥ 0.95 | NEXT_SKILL |
 
 Độ khó sinh câu hỏi: `MapMasteryToDifficulty` từ BKT (hoặc `IrtTheta` nếu có).
 

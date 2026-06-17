@@ -7,12 +7,10 @@ import {
   Sparkles,
   Loader2,
   ArrowRight,
-  Calendar,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { normalizeText } from '@/utils/text-normalization';
-import type { SrUpdateDto } from '@/types';
 
 export interface QuizFeedbackOption {
   id: string;
@@ -29,7 +27,6 @@ export interface QuizAnswerFeedbackProps {
   correctOptionId?: string;
   explanation?: string;
   variant?: 'live' | 'review';
-  spacedRepetition?: SrUpdateDto;
   masteryLabel?: string;
   continueLabel?: string;
   onContinue?: () => void;
@@ -41,12 +38,6 @@ export interface QuizAnswerFeedbackProps {
   onRetryDetailedExplanation?: () => void;
 }
 
-function milestoneLabel(repetitionCount: number, reviewInterval: number): string {
-  if (repetitionCount <= 1) return 'Mốc 1 — ôn lại sau 1 ngày';
-  if (repetitionCount === 2) return 'Mốc 2 — ôn lại sau 6 ngày';
-  return `Mốc ${repetitionCount} — ôn lại sau ${Math.round(reviewInterval)} ngày`;
-}
-
 export function QuizAnswerFeedback({
   questionText,
   options,
@@ -56,7 +47,6 @@ export function QuizAnswerFeedback({
   correctOptionId,
   explanation,
   variant = 'live',
-  spacedRepetition,
   masteryLabel,
   continueLabel = 'Câu tiếp theo',
   onContinue,
@@ -177,13 +167,6 @@ export function QuizAnswerFeedback({
             </div>
           )}
         </div>
-      )}
-
-      {spacedRepetition && (
-        <Badge variant="secondary" className="flex w-fit items-center gap-1">
-          <Calendar className="h-3 w-3" />
-          {milestoneLabel(spacedRepetition.repetitionCount, spacedRepetition.reviewInterval)}
-        </Badge>
       )}
 
       {masteryLabel && (
