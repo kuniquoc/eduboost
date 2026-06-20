@@ -14,11 +14,14 @@ public class TutorAnswerRequest
     public double? ResponseTimeSeconds { get; set; }
 }
 
-/// <summary>Request body for getting a detailed explanation for a wrong answer</summary>
+/// <summary>Request body for getting a Socratic hint before or after answering</summary>
 public class ExplainErrorRequest
 {
     [Required] public string Question { get; set; } = "";
-    [Required] public string CorrectAnswer { get; set; } = "";
+    /// <summary>Known correct answer text. Optional when <see cref="QuestionId"/> is provided.</summary>
+    public string? CorrectAnswer { get; set; }
+    /// <summary>Resolve correct answer server-side for pre-answer hints (client must not receive it early).</summary>
+    public string? QuestionId { get; set; }
     public List<ExplainErrorOptionRequest> Options { get; set; } = [];
     public string? StudentAnswer { get; set; } = "";
 }

@@ -406,6 +406,21 @@ public class QuizzesController(
         if (UserRole != "student") return Forbid();
         if (!ModelState.IsValid) return BadRequest(ApiResponse.Fail("Invalid request data", ModelState));
 
+        var correctAnswer = request.CorrectAnswer?.Trim() ?? "";
+        if (string.IsNullOrWhiteSpace(correctAnswer) && !string.IsNullOrWhiteSpace(request.QuestionId))
+        {
+            if (!Guid.TryParse(request.QuestionId, out var questionId))
+                return BadRequest(ApiResponse.Fail("Invalid questionId"));
+
+            if (!await quizAuth.CanStudentAccessFixedQuestionsAsync([questionId], UserId))
+                return Forbid();
+
+            correctAnswer = (await repo.GetQuestionCorrectAnswerForHintAsync(questionId))?.Trim() ?? "";
+        }
+
+        if (string.IsNullOrWhiteSpace(correctAnswer))
+            return BadRequest(ApiResponse.Fail("CorrectAnswer or QuestionId is required"));
+
         var allowedDocIds = await docRepo.GetAllowedDocumentIdsAsync(UserId);
         var allowedScopes = new List<string> { "system" };
         var options = request.Options
@@ -418,7 +433,7 @@ public class QuizzesController(
             .ToList();
 
         var explanation = await agent.GetGraderExplanationAsync(
-            request.Question, request.CorrectAnswer, options, allowedDocIds, allowedScopes);
+            request.Question, correctAnswer, options, allowedDocIds, allowedScopes);
 
         if (explanation == null)
         {

@@ -361,7 +361,8 @@ export interface TutorAnswerResult {
 
 export interface ExplainErrorRequest {
   question: string;
-  correctAnswer: string;
+  correctAnswer?: string;
+  questionId?: string;
   options?: Array<{ id: string; text: string }>;
   studentAnswer?: string;
 }

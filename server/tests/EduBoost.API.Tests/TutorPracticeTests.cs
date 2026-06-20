@@ -58,6 +58,68 @@ public class TutorPracticeTests
     }
 
     [Fact]
+    public void ExplainErrorRequest_WithoutCorrectAnswer_IsValidWhenQuestionIdProvided()
+    {
+        var request = new ExplainErrorRequest
+        {
+            Question = "If I ___ more time, I would travel the world.",
+            QuestionId = Guid.NewGuid().ToString(),
+            Options =
+            [
+                new ExplainErrorOptionRequest { Id = "A", Text = "have" },
+                new ExplainErrorOptionRequest { Id = "B", Text = "had" },
+            ],
+        };
+
+        var results = new List<ValidationResult>();
+        var isValid = Validator.TryValidateObject(request, new ValidationContext(request), results, true);
+
+        Assert.True(isValid);
+        Assert.DoesNotContain(results, r => r.MemberNames.Contains(nameof(ExplainErrorRequest.CorrectAnswer)));
+    }
+
+    [Fact]
+    public async Task GetQuestionCorrectAnswerForHintAsync_ReturnsCorrectOptionText()
+    {
+        await using var db = CreateDb();
+        var userId = Guid.NewGuid();
+        var topicId = Guid.NewGuid();
+        var quizId = Guid.NewGuid();
+        var questionId = Guid.NewGuid();
+
+        db.Topics.Add(new Topic { Id = topicId, Name = "Conditionals", OwnerId = userId });
+        db.Quizzes.Add(new Quiz
+        {
+            Id = quizId,
+            TopicId = topicId,
+            Title = "Pool quiz",
+            Type = "private",
+            OwnerId = userId,
+            CreatedAt = DateTime.UtcNow,
+        });
+        db.Questions.Add(new Question
+        {
+            Id = questionId,
+            QuizId = quizId,
+            Text = "If I ___ more time, I would travel the world.",
+            Type = "mcq",
+            Difficulty = "medium",
+            OrderIndex = 0,
+            Options =
+            [
+                new QuizOption { Id = Guid.NewGuid(), Text = "have", IsCorrect = false },
+                new QuizOption { Id = Guid.NewGuid(), Text = "had", IsCorrect = true },
+            ],
+        });
+        await db.SaveChangesAsync();
+
+        var repo = new QuizzesRepository(db, null!, null!, null!, null!);
+        var correctAnswer = await repo.GetQuestionCorrectAnswerForHintAsync(questionId);
+
+        Assert.Equal("had", correctAnswer);
+    }
+
+    [Fact]
     public async Task PersistTutorQuestionAsync_StoresCorrectOption_ForServerSideScoring()
     {
         await using var db = CreateDb();

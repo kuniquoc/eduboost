@@ -38,6 +38,7 @@ public interface IQuizzesRepository
     Task<List<string>> GetRecentTutorQuestionTextsAsync(Guid topicId, int limit = 150);
     Task<Guid> PersistTutorQuestionAsync(Guid topicId, AgentQuizResponse agentQuestion);
     Task<QuestionDto?> GetTutorQuestionAsync(Guid topicId, Guid questionId);
+    Task<string?> GetQuestionCorrectAnswerForHintAsync(Guid questionId);
     Task CompleteTutorPracticeAsync(Guid userId, Guid topicId, int questionsAttempted, int correctAnswers);
 }
 
@@ -642,6 +643,22 @@ public class QuizzesRepository(AppDbContext db, IAgentService agent, ILearningSt
             .FirstOrDefaultAsync(q => q.Id == questionId && q.Quiz.TopicId == topicId && q.Quiz.Type == "tutor");
 
         return question == null ? null : MapToDto(question);
+    }
+
+    public async Task<string?> GetQuestionCorrectAnswerForHintAsync(Guid questionId)
+    {
+        var question = await db.Questions
+            .AsNoTracking()
+            .Include(q => q.Options)
+            .FirstOrDefaultAsync(q => q.Id == questionId);
+
+        if (question == null) return null;
+
+        if (string.Equals(question.Type, "fill_blank", StringComparison.OrdinalIgnoreCase))
+            return question.CorrectAnswer?.Trim();
+
+        var correctOption = question.Options.FirstOrDefault(o => o.IsCorrect);
+        return correctOption?.Text.Trim() ?? question.CorrectAnswer?.Trim();
     }
 
     private async Task<Guid> GetOrCreateTutorQuizAsync(Guid topicId)

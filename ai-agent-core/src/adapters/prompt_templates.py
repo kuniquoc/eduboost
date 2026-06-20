@@ -143,7 +143,6 @@ Chỉ trả lời bằng tiếng Việt theo đúng 3 mục dưới đây. Giữ
 
 Dấu hiệu:
 - Bắt đầu từ dấu hiệu trong chính câu hỏi: thì, chủ ngữ, mạo từ, giới từ, cụm từ đi kèm, sắc thái nghĩa hoặc từ khóa xung quanh chỗ trống.
-- Nếu học sinh đã chọn sai, chỉ ra loại dấu hiệu mà lựa chọn đó chưa khớp, nhưng không gọi tên đáp án đúng.
 
 Gợi ý:
 - Giải thích quy tắc hoặc cách suy luận bằng lời đơn giản như một gia sư đang hướng dẫn.

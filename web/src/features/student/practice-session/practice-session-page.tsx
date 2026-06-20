@@ -17,8 +17,11 @@ import {
   ArrowRight,
   ChevronLeft,
   ChevronRight,
+  Sparkles,
+  MessageSquareQuote,
 } from 'lucide-react';
 import { toast } from 'sonner';
+import { normalizeText } from '@/utils/text-normalization';
 import type {
   SubmitPracticeAnswerResponse,
   PracticeSessionSummary,
@@ -68,6 +71,7 @@ export function PracticeSessionPage() {
   const [detailedExplanations, setDetailedExplanations] = useState<Record<string, string>>({});
   const [loadingDetailedFor, setLoadingDetailedFor] = useState<string | null>(null);
   const [detailedErrors, setDetailedErrors] = useState<Record<string, boolean>>({});
+  const [detailedOffline, setDetailedOffline] = useState<Record<string, boolean>>({});
   const questionStartRef = useRef<number>(Date.now());
   const autoStartedRef = useRef(false);
 
@@ -237,25 +241,51 @@ export function PracticeSessionPage() {
   };
 
   const requestDetailedExplanation = useCallback(
-    async (questionId: string, questionText: string, options: { id: string; text: string }[], correctAnswerText?: string) => {
+    async (
+      questionId: string,
+      questionText: string,
+      options: { id: string; text: string }[],
+      correctAnswerText?: string,
+      hintQuestionId?: string,
+    ) => {
       setLoadingDetailedFor(questionId);
       setDetailedErrors((prev) => ({ ...prev, [questionId]: false }));
+      setDetailedOffline((prev) => ({ ...prev, [questionId]: false }));
       try {
-        const explanation = await quizzesService.getErrorExplanation({
+        const { explanation, offline } = await quizzesService.getErrorExplanation({
           question: questionText,
           options,
-          correctAnswer: correctAnswerText ?? '',
+          ...(correctAnswerText ? { correctAnswer: correctAnswerText } : {}),
+          ...(hintQuestionId ? { questionId: hintQuestionId } : {}),
         });
-        setDetailedExplanations((prev) => ({ ...prev, [questionId]: explanation.explanation }));
-        return explanation.explanation;
+        if (offline) {
+          setDetailedOffline((prev) => ({ ...prev, [questionId]: true }));
+          return;
+        }
+        setDetailedExplanations((prev) => ({ ...prev, [questionId]: explanation }));
+        return explanation;
       } catch {
         setDetailedErrors((prev) => ({ ...prev, [questionId]: true }));
+        toast.error('Không thể tải AI gợi ý');
         throw new Error('Failed');
       } finally {
         setLoadingDetailedFor(null);
       }
     },
     [],
+  );
+
+  const fetchPreAnswerHint = useCallback(
+    async (question: PracticeQuestionDto) => {
+      await requestDetailedExplanation(
+        question.questionId,
+        question.text,
+        question.options,
+        undefined,
+        question.questionId,
+      );
+    },
+    [requestDetailedExplanation],
   );
 
   const backTarget = isFixedMode
@@ -349,6 +379,73 @@ export function PracticeSessionPage() {
               ))}
             </div>
 
+            {phase === 'selecting' && !isTestMode && (
+              <>
+                <div className="flex flex-wrap items-center gap-3">
+                  <Button
+                    variant="outline"
+                    onClick={() => void fetchPreAnswerHint(question)}
+                    disabled={loadingDetailedFor === question.questionId}
+                    className="gap-2"
+                  >
+                    {loadingDetailedFor === question.questionId ? (
+                      <>
+                        <Loader2 className="h-4 w-4 animate-spin text-violet-500" />
+                        Đang tải gợi ý...
+                      </>
+                    ) : (
+                      <>
+                        <Sparkles className="h-4 w-4 text-violet-500" />
+                        AI gợi ý
+                      </>
+                    )}
+                  </Button>
+                </div>
+
+                {(loadingDetailedFor === question.questionId ||
+                  detailedExplanations[question.questionId] ||
+                  detailedErrors[question.questionId] ||
+                  detailedOffline[question.questionId]) && (
+                  <div className="rounded-xl border border-violet-500/20 bg-gradient-to-br from-violet-500/5 to-transparent p-4 animate-in fade-in duration-300">
+                    <div className="mb-2 flex items-center gap-2">
+                      <MessageSquareQuote className="h-4 w-4 text-violet-500" />
+                      <span className="text-sm font-medium text-violet-600 dark:text-violet-400">AI gợi ý</span>
+                    </div>
+                    {loadingDetailedFor === question.questionId && (
+                      <div className="flex items-center gap-2 py-2 text-sm text-muted-foreground">
+                        <Loader2 className="h-4 w-4 animate-spin text-violet-500" />
+                        <span>Gia sư AI đang chuẩn bị gợi ý...</span>
+                      </div>
+                    )}
+                    {detailedOffline[question.questionId] && loadingDetailedFor !== question.questionId && (
+                      <div className="py-2 text-sm text-muted-foreground">
+                        Gia sư AI hiện không khả dụng.
+                      </div>
+                    )}
+                    {detailedErrors[question.questionId] &&
+                      !detailedOffline[question.questionId] &&
+                      loadingDetailedFor !== question.questionId && (
+                        <div className="py-2 text-sm text-destructive">
+                          <span>Không thể tải AI gợi ý. </span>
+                          <button
+                            type="button"
+                            onClick={() => void fetchPreAnswerHint(question)}
+                            className="ml-1 font-medium text-violet-600 underline hover:text-violet-500 dark:text-violet-400"
+                          >
+                            Thử lại
+                          </button>
+                        </div>
+                      )}
+                    {detailedExplanations[question.questionId] && loadingDetailedFor !== question.questionId && (
+                      <div className="prose prose-sm max-w-none whitespace-pre-wrap leading-relaxed text-foreground/90 dark:prose-invert">
+                        {normalizeText(detailedExplanations[question.questionId])}
+                      </div>
+                    )}
+                  </div>
+                )}
+              </>
+            )}
+
             {phase === 'selecting' && (
               <Button
                 className="w-full"
@@ -372,25 +469,6 @@ export function PracticeSessionPage() {
                   variant="live"
                   continueLabel={feedback.isSessionComplete ? 'Xem kết quả' : 'Câu tiếp theo'}
                   onContinue={handleNext}
-                  detailedExplanation={detailedExplanations[question.questionId]}
-                  isLoadingDetailedExplanation={loadingDetailedFor === question.questionId}
-                  detailedExplanationError={detailedErrors[question.questionId]}
-                  onRequestDetailedExplanation={() =>
-                    requestDetailedExplanation(
-                      question.questionId,
-                      question.text,
-                      question.options,
-                      feedback.correctAnswer,
-                    )
-                  }
-                  onRetryDetailedExplanation={() =>
-                    requestDetailedExplanation(
-                      question.questionId,
-                      question.text,
-                      question.options,
-                      feedback.correctAnswer,
-                    )
-                  }
                 />
                 {isSelfPracticeMode && feedback.recommendNextSkill && feedback.suggestedNextTopicId && (
                   <div className="rounded-lg border border-primary/20 bg-primary/5 p-3">

@@ -65,6 +65,7 @@ export function PracticePage() {
   const questionsAnsweredRef = useRef(0);
   const correctCountRef = useRef(0);
   const sessionRecordedRef = useRef(false);
+  const skipNextSkillCheckRef = useRef(false);
 
   const finalizeTutorSession = useCallback(async () => {
     if (sessionRecordedRef.current || questionsAnsweredRef.current === 0 || !topicId) return;
@@ -82,6 +83,7 @@ export function PracticePage() {
   }, [topicId, queryClient]);
 
   const handleExit = useCallback(async () => {
+    skipNextSkillCheckRef.current = false;
     await finalizeTutorSession();
     navigate(-1);
   }, [finalizeTutorSession, navigate]);
@@ -95,6 +97,10 @@ export function PracticePage() {
       } else if (data.action === 'QUIZ') {
         generateQuestionMutation.mutate();
       } else if (data.action === 'NEXT_SKILL') {
+        if (skipNextSkillCheckRef.current) {
+          generateQuestionMutation.mutate();
+          return;
+        }
         void finalizeTutorSession();
         invalidateLearningQueries(queryClient);
         setStep({ type: 'mastered' });
@@ -185,6 +191,20 @@ export function PracticePage() {
     setDetailedOffline(false);
     nextActionMutation.mutate();
   }, [nextActionMutation]);
+
+  const handleContinuePractice = useCallback(() => {
+    skipNextSkillCheckRef.current = true;
+    sessionRecordedRef.current = false;
+    setQuestionsAnswered(0);
+    setCorrectCount(0);
+    questionsAnsweredRef.current = 0;
+    correctCountRef.current = 0;
+    setDetailedExplanation(null);
+    setDetailedError(false);
+    setDetailedOffline(false);
+    setStep({ type: 'loading' });
+    generateQuestionMutation.mutate();
+  }, [generateQuestionMutation]);
 
   const fetchDetailedExplanation = useCallback(async (question: TutorQuestionDto) => {
     setLoadingDetailed(true);
@@ -522,7 +542,7 @@ export function PracticePage() {
           </h1>
           <p className="mt-3 text-muted-foreground max-w-sm mx-auto">
             Chúc mừng! Bạn đã nắm vững kiến thức của chủ đề này.
-            Hãy chuyển sang chủ đề tiếp theo trong lộ trình học tập.
+            Bạn có thể tiếp tục luyện tập để củng cố hoặc quay lại lộ trình để chuyển sang chủ đề khác.
           </p>
 
           {questionsAnswered > 0 && (
@@ -544,8 +564,11 @@ export function PracticePage() {
             </div>
           )}
 
-          <div className="mt-8 flex justify-center gap-3">
-            <Button variant="outline" onClick={() => void handleExit()}>
+          <div className="mt-8 flex flex-wrap justify-center gap-3">
+            <Button onClick={handleContinuePractice} className="gap-2">
+              <Sparkles className="h-4 w-4" /> Tiếp tục luyện tập
+            </Button>
+            <Button variant="outline" onClick={() => void handleExit()} className="gap-2">
               <ArrowLeft className="h-4 w-4" /> Quay lại lộ trình
             </Button>
           </div>
