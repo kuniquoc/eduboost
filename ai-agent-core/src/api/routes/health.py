@@ -13,5 +13,6 @@ async def health():
         "llm": {
             "quiz": runtime.llm_available(runtime.llm_quiz),
             "explain": runtime.llm_available(runtime.llm_explain),
+            "chat": runtime.llm_available(runtime.llm_chat),
         },
     }

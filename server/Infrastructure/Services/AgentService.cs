@@ -9,11 +9,17 @@ public interface IAgentService
     Task<AgentNextActionResponse?> GetNextActionAsync(string studentId, string topicName, double? masteryProbability = null, double? irtTheta = null);
     Task<AgentQuizResponse?> GenerateQuizQuestionAsync(string topicName, double difficulty, List<string>? allowedDocumentIds = null, List<string>? allowedScopes = null, IReadOnlyList<string>? existingQuestions = null);
     Task<string?> GetExplanationAsync(string topicName, string studentState, List<string>? allowedDocumentIds = null, List<string>? allowedScopes = null);
-    Task<string?> GetGraderExplanationAsync(string question, string correctAnswer, string studentAnswer, List<string>? allowedDocumentIds = null, List<string>? allowedScopes = null);
+    Task<string?> GetGraderExplanationAsync(string question, string correctAnswer, IReadOnlyList<AgentGraderOption>? options = null, List<string>? allowedDocumentIds = null, List<string>? allowedScopes = null);
     Task<AgentQuizBatchResponse?> GenerateQuizBatchAsync(string topicName, string? userPrompt, string? docUrl, int numQuestions, string difficulty, int numEasy = 0, int numMedium = 0, int numHard = 0, string? documentId = null, IReadOnlyList<string>? existingQuestions = null);
     Task<AgentChatResponse> AskAsync(string question, string? topicId, string level, List<ChatMessage> history, List<string>? allowedDocumentIds = null, List<string>? allowedScopes = null);
     Task IngestDocumentAsync(string documentId, string fileUrl, string scope, string? classId = null, string? ownerId = null, string? topicId = null);
     Task DeleteDocumentAsync(string documentId);
+}
+
+public class AgentGraderOption
+{
+    public string Id { get; set; } = "";
+    public string Text { get; set; } = "";
 }
 
 public class AgentService : IAgentService
@@ -117,7 +123,7 @@ public class AgentService : IAgentService
         }
     }
 
-    public async Task<string?> GetGraderExplanationAsync(string question, string correctAnswer, string studentAnswer, List<string>? allowedDocumentIds = null, List<string>? allowedScopes = null)
+    public async Task<string?> GetGraderExplanationAsync(string question, string correctAnswer, IReadOnlyList<AgentGraderOption>? options = null, List<string>? allowedDocumentIds = null, List<string>? allowedScopes = null)
     {
         try
         {
@@ -125,7 +131,7 @@ public class AgentService : IAgentService
             {
                 question,
                 correct_answer = correctAnswer,
-                student_answer = studentAnswer,
+                options = options ?? Array.Empty<AgentGraderOption>(),
                 allowed_document_ids = allowedDocumentIds,
                 allowed_scopes = allowedScopes
             };

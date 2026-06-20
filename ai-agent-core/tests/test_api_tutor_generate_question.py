@@ -115,5 +115,59 @@ class TestTutorGenerateQuestionDedupe(unittest.TestCase):
         self.assertIn("Source 1: Present simple is used for habits.", prompt)
 
 
+@unittest.skipUnless(HAS_FASTAPI, "fastapi not installed")
+class TestTutorExplainErrorHint(unittest.TestCase):
+    def test_explain_error_cleans_structured_heading_output(self):
+        mock_llm = MagicMock()
+        mock_llm.model = "test-model"
+        mock_llm.endpoint_url = "http://test-llm"
+        mock_llm.generate.return_value = (
+            "1. **Focus clue**: Bạn hãy chú ý động từ 'couldn't stop crying'.\n"
+            "2. **Guiding prompt**: Đây là một trạng thái cảm xúc kéo dài.\n"
+            "3. **Socratic question**: Từ nào phù hợp với cảm xúc buồn bã trong ngữ cảnh này?\n"
+            "4. **Self-check tip**: Hãy thử thay vào câu và đọc lại."
+        )
+
+        with patch("src.api.routes.tutor.runtime") as mock_runtime:
+            mock_runtime.llm_explain = mock_llm
+            mock_runtime.retriever = None
+            mock_runtime.llm_available.return_value = True
+
+            with TestClient(app) as client:
+                response = client.post(
+                    "/tutor/explain-error",
+                    json={
+                        "question": "She couldn't stop crying because she felt ___.",
+                        "options": [
+                            {"id": "A", "text": "happy"},
+                            {"id": "B", "text": "sad"},
+                            {"id": "C", "text": "excited"},
+                            {"id": "D", "text": "hungry"},
+                        ],
+                        "correct_answer": "B. sad",
+                    },
+                )
+
+        self.assertEqual(response.status_code, 200)
+        prompt = mock_llm.generate.call_args.args[0]
+        self.assertIn("## Các lựa chọn:", prompt)
+        self.assertIn("- A. happy", prompt)
+        self.assertIn("- B. sad", prompt)
+        self.assertNotIn("Câu trả lời của học sinh", prompt)
+        explanation = response.json()["explanation"]
+        self.assertNotIn("Focus clue", explanation)
+        self.assertNotIn("Guiding prompt", explanation)
+        self.assertNotIn("Socratic question", explanation)
+        self.assertNotIn("Self-check tip", explanation)
+        self.assertNotIn("**", explanation)
+        self.assertIn("Dấu hiệu:", explanation)
+        self.assertIn("Gợi ý:", explanation)
+        self.assertIn("Tự kiểm tra:", explanation)
+        self.assertIn("couldn't stop crying", explanation)
+        self.assertNotIn("đáp án đúng", explanation.lower())
+        self.assertNotIn("sad", explanation.lower())
+        self.assertEqual(len(explanation.split("\n\n")), 3)
+
+
 if __name__ == "__main__":
     unittest.main()

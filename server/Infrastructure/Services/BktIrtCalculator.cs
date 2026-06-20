@@ -3,6 +3,10 @@ namespace EduBoost.API.Infrastructure.Services;
 /// <summary>In-memory BKT + 1PL IRT update logic shared by DB persistence and practice sessions.</summary>
 public static class BktIrtCalculator
 {
+    public const double DefaultGuessProbability = 0.40;
+    public const double DefaultSlipProbability = 0.20;
+    public const double DefaultTransitionProbability = 0.05;
+
     public record UpdateResult(double Mastery, double Theta, double ThetaBefore, double Beta);
 
     public static UpdateResult ApplyUpdate(

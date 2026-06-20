@@ -1,5 +1,6 @@
 """Tutor HTTP routes — quiz, explain, chat."""
 import logging
+import re
 import time
 from typing import Optional
 
@@ -29,6 +30,117 @@ from src.rag.retriever import format_context_from_hits, log_retrieved_chunks_suc
 logger = logging.getLogger(__name__)
 
 router = APIRouter(prefix="/tutor", tags=["tutor"])
+
+_HINT_SECTION_HEADING_RE = re.compile(
+    r"^\s*(?:\d+[\.)]\s*)?(?:\*\*)?\s*"
+    r"(?:Focus clue|Guiding prompt|Socratic question|Self-check tip|Dấu hiệu|Gợi ý|Tự kiểm tra)"
+    r"\s*(?:\*\*)?\s*:?\s*",
+    re.IGNORECASE,
+)
+_HINT_SECTION_LABEL_RE = re.compile(
+    r"^\s*(?:[-*]\s*)?(?:\d+[\.)]\s*)?(?:\*\*)?\s*"
+    r"(Focus clue|Guiding prompt|Socratic question|Self-check tip|Dấu hiệu|Gợi ý|Tự kiểm tra)"
+    r"\s*(?:\*\*)?\s*:?\s*(.*)$",
+    re.IGNORECASE,
+)
+_HINT_DISCLOSURE_RE = re.compile(
+    r"\b(correct answer|correct option|đáp án đúng|câu trả lời đúng|lựa chọn đúng|phương án đúng)\b",
+    re.IGNORECASE,
+)
+_HINT_STANDARD_HEADINGS = ("Dấu hiệu", "Gợi ý", "Tự kiểm tra")
+
+
+def _standard_hint_parts(has_student_answer: bool) -> list[str]:
+    return [
+        "Em hãy tìm dấu hiệu quanh chỗ trống trước: thời gian, chủ ngữ, từ đi kèm hoặc sắc thái nghĩa của câu.",
+        "Từ dấu hiệu đó, xác định câu đang cần loại từ, thì hoặc cụm diễn đạt nào. Đừng chọn vội theo cảm giác quen mắt.",
+        "Thử thay từng lựa chọn vào chỗ trống và đọc lại toàn câu. Lựa chọn nào vừa đúng quy tắc vừa hợp nghĩa nhất?",
+    ]
+
+
+def _format_socratic_hint(parts: list[str]) -> str:
+    return "\n\n".join(
+        f"{heading}:\n- {part.strip()}"
+        for heading, part in zip(_HINT_STANDARD_HEADINGS, parts)
+    )
+
+
+def _fallback_socratic_hint(has_student_answer: bool) -> str:
+    return _format_socratic_hint(_standard_hint_parts(has_student_answer))
+
+
+def _format_grader_options(options: list) -> str:
+    formatted: list[str] = []
+    for index, option in enumerate(options):
+        option_id = str(getattr(option, "id", "") or "").strip()
+        option_text = str(getattr(option, "text", "") or "").strip()
+        label = option_id or chr(ord("A") + index)
+        if option_text:
+            formatted.append(f"- {label}. {option_text}")
+
+    return "\n".join(formatted) if formatted else "- Không có danh sách lựa chọn được cung cấp."
+
+
+def _clean_socratic_hint(raw_hint: str, has_student_answer: bool) -> str:
+    """Normalize model hints into the student-facing three-section format."""
+    hint = (raw_hint or "").strip()
+    if not hint:
+        return _fallback_socratic_hint(has_student_answer)
+
+    hint = re.sub(r"^```(?:\w+)?\s*|\s*```$", "", hint).strip()
+    hint = hint.replace("**", "")
+
+    sections: list[list[str]] = [[], [], []]
+    loose_lines: list[str] = []
+    current_section: int | None = None
+
+    for raw_line in hint.splitlines():
+        line = raw_line.strip()
+        if not line:
+            continue
+
+        label_match = _HINT_SECTION_LABEL_RE.match(line)
+        if label_match:
+            label = label_match.group(1).lower()
+            content = re.sub(r"^\s*[-*]\s*", "", label_match.group(2).strip())
+            if label in {"focus clue", "dấu hiệu"}:
+                current_section = 0
+            elif label in {"guiding prompt", "gợi ý"}:
+                current_section = 1
+            else:
+                current_section = 2
+
+            if content:
+                sections[current_section].append(content)
+            continue
+
+        line = _HINT_SECTION_HEADING_RE.sub("", line)
+        line = re.sub(r"^\s*[-*]\s*", "", line)
+        line = re.sub(r"^\s*\d+[\.)]\s*", "", line)
+        line = re.sub(r"\s+", " ", line).strip()
+        if line:
+            if current_section is None:
+                loose_lines.append(line)
+            else:
+                sections[current_section].append(line)
+
+    if loose_lines and not any(sections):
+        for index, line in enumerate(loose_lines[:3]):
+            sections[index].append(line)
+    elif loose_lines:
+        sections[0].extend(loose_lines)
+
+    fallback_parts = _standard_hint_parts(has_student_answer)
+    normalized_parts = [
+        " ".join(part_lines).strip() or fallback_parts[index]
+        for index, part_lines in enumerate(sections)
+    ]
+    cleaned = _format_socratic_hint(normalized_parts)
+
+    if _HINT_DISCLOSURE_RE.search(cleaned):
+        return _fallback_socratic_hint(has_student_answer)
+
+    return cleaned
 
 @router.get("/next-action")
 async def get_next_action(
@@ -322,7 +434,12 @@ async def grade_answer(request: GraderRequest):
     
     # Step 1: Log receipt of request
     logger.info("=" * 60)
-    logger.info(f"[GRADER-RAG][STEP 1] Received explain-error request: Question='{request.question[:80]}...', Correct='{request.correct_answer}', Student='{request.student_answer}'")
+    logger.info(
+        "[GRADER-RAG][STEP 1] Received explain-error request: Question='%s...', Correct='%s', Options=%d",
+        request.question[:80],
+        request.correct_answer,
+        len(request.options),
+    )
 
     if not runtime.llm_available(runtime.llm_explain):
         logger.warning("[GRADER-RAG] Explanation LLM unavailable")
@@ -357,8 +474,8 @@ async def grade_answer(request: GraderRequest):
     logger.info("[GRADER-RAG][STEP 3] Formatting Socratic hint prompt with question details and retrieved context...")
     prompt = PromptTemplates.GRADER_TEMPLATE.format(
         question=request.question,
+        options=_format_grader_options(request.options),
         correct_answer=request.correct_answer,
-        student_answer=request.student_answer,
         context=context,
     )
     logger.info(f"[GRADER-RAG][STEP 3] Socratic hint prompt ready. Total characters: {len(prompt)}")
@@ -370,6 +487,7 @@ async def grade_answer(request: GraderRequest):
     if not explanation:
         logger.warning("[GRADER-RAG][STEP 4] LLM call returned no content")
         runtime.raise_ai_unavailable()
+    explanation = _clean_socratic_hint(explanation, has_student_answer=False)
 
     llm_duration = time.time() - llm_start
     logger.info(f"[GRADER-RAG][STEP 4] Hint LLM responded in {llm_duration:.3f}s")
@@ -397,7 +515,7 @@ async def chat(request: ChatRequest):
     start_time = time.time()
     logger.info(f"[CHAT] Received question: '{request.question[:100]}...', level={request.level}, topic_id={request.topic_id}")
 
-    if not runtime.llm_available(runtime.llm_explain):
+    if not runtime.llm_available(runtime.llm_chat):
         runtime.raise_ai_unavailable()
 
     # RAG retrieval
@@ -457,23 +575,49 @@ async def chat(request: ChatRequest):
 
     # Build prompt
     level_instruction = {
-        "beginner": "Giải thích bằng ngôn ngữ đơn giản, ngắn gọn, dùng ví dụ dễ hiểu. Dùng tiếng Việt.",
-        "intermediate": "Giải thích rõ ràng với ví dụ minh hoạ. Có thể dùng thuật ngữ chuyên môn cơ bản. Dùng tiếng Việt.",
-        "advanced": "Giải thích chi tiết, chuyên sâu, có ví dụ nâng cao và so sánh. Dùng tiếng Việt."
-    }.get(request.level, "Giải thích rõ ràng, dùng tiếng Việt.")
+        "beginner": "Dùng câu ngắn, từ đơn giản, ví dụ gần gũi. Tránh thuật ngữ khó nếu không giải thích ngay.",
+        "intermediate": "Giải thích rõ ràng, có ví dụ minh hoạ và thuật ngữ cơ bản khi cần.",
+        "advanced": "Giải thích sâu hơn, có so sánh, lưu ý ngoại lệ hoặc lỗi dễ nhầm khi phù hợp."
+    }.get(request.level, "Giải thích rõ ràng, dùng tiếng Việt tự nhiên.")
 
-    prompt = f"""Bạn là gia sư AI hỗ trợ học tiếng Anh. {level_instruction}
+    prompt = f"""Bạn là gia sư AI hỗ trợ học tiếng Anh cho học sinh Việt Nam. {level_instruction}
 
-Tài liệu tham khảo:
+## Tài liệu tham khảo:
 {context if context else "Không có tài liệu cụ thể."}
 
-{f"Lịch sử hội thoại gần đây:{chr(10)}{conversation_context}" if conversation_context else ""}
+{f"## Lịch sử hội thoại gần đây:{chr(10)}{conversation_context}" if conversation_context else ""}
 
-Câu hỏi của học sinh: {request.question}
+## Câu hỏi của học sinh:
+{request.question}
 
-Hãy trả lời chính xác dựa trên tài liệu tham khảo. Nếu không tìm thấy thông tin trong tài liệu, hãy nói rõ và cung cấp kiến thức chung."""
+## Yêu cầu trả lời:
+- Luôn trả lời bằng tiếng Việt tự nhiên, dễ đọc.
+- Ưu tiên dựa trên tài liệu tham khảo. Nếu tài liệu không đủ thông tin, nói rõ "Trong tài liệu chưa thấy phần này" rồi bổ sung kiến thức chung chuẩn.
+- Không viết thành một đoạn dài. Chia thành các phần ngắn theo mẫu bên dưới.
+- Không dùng markdown đậm, không dùng bảng, không dùng tiêu đề tiếng Anh.
+- Mỗi gạch đầu dòng chỉ nêu một ý; tránh câu quá dài.
 
-    answer = runtime.llm_explain.generate(prompt)
+## Định dạng mong muốn:
+Tóm tắt:
+- Trả lời trực tiếp câu hỏi trong 1-2 ý.
+
+Giải thích:
+- Nêu quy tắc hoặc lý do chính.
+- Nếu có thuật ngữ tiếng Anh, giải thích nghĩa tiếng Việt ngay sau đó.
+
+Ví dụ:
+- Đưa 1 ví dụ tiếng Anh ngắn.
+- Giải thích ví dụ bằng tiếng Việt.
+
+Ghi nhớ:
+- Chốt lại bằng 1 mẹo học hoặc lỗi cần tránh."""
+
+    logger.info(
+        "[CHAT] Dispatching request to Chat LLM (Model: '%s', Endpoint: '%s')...",
+        runtime.llm_chat.model,
+        runtime.llm_chat.endpoint_url,
+    )
+    answer = runtime.llm_chat.generate(prompt)
     if not answer:
         return {
             "answer": "AI server không khả dụng. Vui lòng thử lại sau.",

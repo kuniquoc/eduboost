@@ -18,6 +18,7 @@ import {
   GraduationCap,
   CheckCircle,
   XCircle,
+  MessageSquareQuote,
 } from 'lucide-react';
 import { toast } from 'sonner';
 import { QuizAnswerFeedback } from '@/components/quiz/quiz-answer-feedback';
@@ -36,6 +37,15 @@ type TutorStep =
   }
   | { type: 'mastered' }
   | { type: 'error'; message: string };
+
+function toTutorHintOptions(question: TutorQuestionDto) {
+  return Object.entries(question.options).map(([id, text]) => ({ id, text }));
+}
+
+function getTutorCorrectAnswerForHint(question: TutorQuestionDto) {
+  const correctText = question.options[question.correctAnswer];
+  return correctText ? `${question.correctAnswer}. ${correctText}` : question.correctAnswer;
+}
 
 export function PracticePage() {
   const { topicId } = useParams<{ topicId: string }>();
@@ -160,8 +170,8 @@ export function PracticePage() {
   const startSession = useCallback(() => {
     setStarted(true);
     setStep({ type: 'loading' });
-    nextActionMutation.mutate();
-  }, [nextActionMutation]);
+    generateQuestionMutation.mutate();
+  }, [generateQuestionMutation]);
 
   const handleSubmitAnswer = useCallback(() => {
     if (!selectedOption || step.type !== 'quiz' || step.phase !== 'selecting') return;
@@ -176,15 +186,40 @@ export function PracticePage() {
     nextActionMutation.mutate();
   }, [nextActionMutation]);
 
-  const fetchDetailedExplanation = useCallback(async (question: TutorQuestionDto, selectedKey: string) => {
+  const fetchDetailedExplanation = useCallback(async (question: TutorQuestionDto) => {
     setLoadingDetailed(true);
     setDetailedError(false);
     setDetailedOffline(false);
     try {
       const { explanation, offline } = await quizzesService.getErrorExplanation({
         question: question.question,
-        correctAnswer: question.options[question.correctAnswer] || question.correctAnswer,
-        studentAnswer: question.options[selectedKey] || selectedKey,
+        options: toTutorHintOptions(question),
+        correctAnswer: getTutorCorrectAnswerForHint(question),
+      });
+      if (offline) {
+        setDetailedOffline(true);
+        return;
+      }
+      setDetailedExplanation(explanation);
+      return explanation;
+    } catch {
+      setDetailedError(true);
+      toast.error('Không thể tải AI gợi ý');
+      throw new Error('Failed');
+    } finally {
+      setLoadingDetailed(false);
+    }
+  }, []);
+
+  const fetchPreAnswerHint = useCallback(async (question: TutorQuestionDto) => {
+    setLoadingDetailed(true);
+    setDetailedError(false);
+    setDetailedOffline(false);
+    try {
+      const { explanation, offline } = await quizzesService.getErrorExplanation({
+        question: question.question,
+        options: toTutorHintOptions(question),
+        correctAnswer: getTutorCorrectAnswerForHint(question),
       });
       if (offline) {
         setDetailedOffline(true);
@@ -369,18 +404,72 @@ export function PracticePage() {
               </div>
 
               {step.phase === 'selecting' && (
-                <Button
-                  className="w-full"
-                  onClick={handleSubmitAnswer}
-                  disabled={!selectedOption || submitAnswerMutation.isPending}
-                  size="lg"
-                >
-                  {submitAnswerMutation.isPending ? (
-                    <><Loader2 className="mr-2 h-4 w-4 animate-spin" /> Đang chấm...</>
-                  ) : (
-                    'Nộp bài'
+                <>
+                  <div className="flex flex-wrap items-center gap-3">
+                    <Button
+                      variant="outline"
+                      onClick={() => void fetchPreAnswerHint(step.question)}
+                      disabled={loadingDetailed}
+                      className="gap-2"
+                    >
+                      {loadingDetailed ? (
+                        <><Loader2 className="h-4 w-4 animate-spin text-violet-500" /> Đang tải gợi ý...</>
+                      ) : (
+                        <><Sparkles className="h-4 w-4 text-violet-500" /> AI gợi ý</>
+                      )}
+                    </Button>
+                  </div>
+
+                  {(loadingDetailed || detailedExplanation || detailedError || detailedOffline) && (
+                    <div className="rounded-xl border border-violet-500/20 bg-gradient-to-br from-violet-500/5 to-transparent p-4 animate-in fade-in duration-300">
+                      <div className="mb-2 flex items-center gap-2">
+                        <MessageSquareQuote className="h-4 w-4 text-violet-500" />
+                        <span className="text-sm font-medium text-violet-600 dark:text-violet-400">AI gợi ý</span>
+                      </div>
+                      {loadingDetailed && (
+                        <div className="flex items-center gap-2 py-2 text-sm text-muted-foreground">
+                          <Loader2 className="h-4 w-4 animate-spin text-violet-500" />
+                          <span>Gia sư AI đang chuẩn bị gợi ý...</span>
+                        </div>
+                      )}
+                      {detailedOffline && !loadingDetailed && (
+                        <div className="py-2 text-sm text-muted-foreground">
+                          Gia sư AI hiện không khả dụng.
+                        </div>
+                      )}
+                      {detailedError && !detailedOffline && !loadingDetailed && (
+                        <div className="py-2 text-sm text-destructive">
+                          <span>Không thể tải AI gợi ý. </span>
+                          <button
+                            type="button"
+                            onClick={() => void fetchPreAnswerHint(step.question)}
+                            className="ml-1 font-medium text-violet-600 underline hover:text-violet-500 dark:text-violet-400"
+                          >
+                            Thử lại
+                          </button>
+                        </div>
+                      )}
+                      {detailedExplanation && !loadingDetailed && (
+                        <div className="prose prose-sm max-w-none whitespace-pre-wrap leading-relaxed text-foreground/90 dark:prose-invert">
+                          {normalizeText(detailedExplanation)}
+                        </div>
+                      )}
+                    </div>
                   )}
-                </Button>
+
+                  <Button
+                    className="w-full"
+                    onClick={handleSubmitAnswer}
+                    disabled={!selectedOption || submitAnswerMutation.isPending}
+                    size="lg"
+                  >
+                    {submitAnswerMutation.isPending ? (
+                      <><Loader2 className="mr-2 h-4 w-4 animate-spin" /> Đang chấm...</>
+                    ) : (
+                      'Nộp bài'
+                    )}
+                  </Button>
+                </>
               )}
 
               {step.phase === 'reviewing' && step.result && step.selectedKey && (
@@ -407,10 +496,10 @@ export function PracticePage() {
                   detailedExplanationError={detailedError}
                   detailedExplanationUnavailable={detailedOffline}
                   onRequestDetailedExplanation={() =>
-                    fetchDetailedExplanation(step.question, step.selectedKey!)
+                    fetchDetailedExplanation(step.question)
                   }
                   onRetryDetailedExplanation={() =>
-                    fetchDetailedExplanation(step.question, step.selectedKey!)
+                    fetchDetailedExplanation(step.question)
                   }
                 />
               )}
@@ -432,7 +521,7 @@ export function PracticePage() {
             Chủ đề đã thành thạo!
           </h1>
           <p className="mt-3 text-muted-foreground max-w-sm mx-auto">
-            Chúc mừng! Bạn đã nắm vững kiến thức của chủ đề này (P ≥ 80%).
+            Chúc mừng! Bạn đã nắm vững kiến thức của chủ đề này.
             Hãy chuyển sang chủ đề tiếp theo trong lộ trình học tập.
           </p>
 

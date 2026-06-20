@@ -15,6 +15,10 @@ public interface ILearningStatesRepository
 
 public class LearningStatesRepository(AppDbContext db) : ILearningStatesRepository
 {
+    private const double LegacyGuessProbability = 0.25;
+    private const double LegacySlipProbability = 0.10;
+    private const double LegacyTransitionProbability = 0.10;
+
     public async Task<List<BktStateDto>> GetAllStatesAsync(Guid userId)
     {
         var states = await db.BktStates
@@ -52,6 +56,8 @@ public class LearningStatesRepository(AppDbContext db) : ILearningStatesReposito
             db.BktStates.Add(state);
             state.Topic = topic!;
         }
+
+        NormalizeLegacyBktParameters(state);
 
         // BKT + IRT Update
         var thetaBefore = state.IrtTheta;
@@ -93,4 +99,20 @@ public class LearningStatesRepository(AppDbContext db) : ILearningStatesReposito
         IrtTheta = state.IrtTheta,
         UpdatedAt = state.UpdatedAt.ToString("yyyy-MM-dd HH:mm:ss")
     };
+
+    private static void NormalizeLegacyBktParameters(BktState state)
+    {
+        if (!NearlyEqual(state.GuessProbability, LegacyGuessProbability)
+            || !NearlyEqual(state.SlipProbability, LegacySlipProbability)
+            || !NearlyEqual(state.TransitionProbability, LegacyTransitionProbability))
+        {
+            return;
+        }
+
+        state.GuessProbability = BktIrtCalculator.DefaultGuessProbability;
+        state.SlipProbability = BktIrtCalculator.DefaultSlipProbability;
+        state.TransitionProbability = BktIrtCalculator.DefaultTransitionProbability;
+    }
+
+    private static bool NearlyEqual(double left, double right) => Math.Abs(left - right) < 0.000001;
 }

@@ -42,7 +42,7 @@
 | OpenAI SDK | OpenAI-compatible endpoints |
 | PyPDF2 / pymupdf / python-docx | Document reading |
 
-**Env:** `FAISS_INDEX_PATH`, `EMBEDDING_MODEL`, `QUIZ_LLM_*`, `EXPLAIN_LLM_*`, `OPENAI_API_KEY`.
+**Env:** `FAISS_INDEX_PATH`, `EMBEDDING_MODEL`, `QUIZ_LLM_*`, `EXPLAIN_LLM_*`, `OPENAI_API_KEY`, `CHAT_LLM_MODEL`.
 
 ## Infrastructure
 

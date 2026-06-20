@@ -408,9 +408,17 @@ public class QuizzesController(
 
         var allowedDocIds = await docRepo.GetAllowedDocumentIdsAsync(UserId);
         var allowedScopes = new List<string> { "system" };
+        var options = request.Options
+            .Where(o => !string.IsNullOrWhiteSpace(o.Text))
+            .Select(o => new AgentGraderOption
+            {
+                Id = o.Id?.Trim() ?? "",
+                Text = o.Text.Trim()
+            })
+            .ToList();
 
         var explanation = await agent.GetGraderExplanationAsync(
-            request.Question, request.CorrectAnswer, request.StudentAnswer, allowedDocIds, allowedScopes);
+            request.Question, request.CorrectAnswer, options, allowedDocIds, allowedScopes);
 
         if (explanation == null)
         {

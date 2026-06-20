@@ -15,6 +15,7 @@ class AgentRuntime:
     retriever: Optional[KnowledgeRetriever] = None
     llm_quiz: Optional[LLMManager] = None
     llm_explain: Optional[LLMManager] = None
+    llm_chat: Optional[LLMManager] = None
     ingestor: Optional[RAGIngestor] = None
 
     @staticmethod

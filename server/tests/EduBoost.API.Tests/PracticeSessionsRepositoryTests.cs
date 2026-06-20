@@ -6,6 +6,7 @@ using EduBoost.API.Features.Roadmap.Models;
 using EduBoost.API.Infrastructure;
 using EduBoost.API.Infrastructure.Entities;
 using Microsoft.EntityFrameworkCore;
+using System.Text.Json;
 using Xunit;
 
 namespace EduBoost.API.Tests;
@@ -145,6 +146,73 @@ public class PracticeSessionsRepositoryTests
         var profile = await db.UserProfiles.SingleAsync(p => p.UserId == userId);
         Assert.Equal(3, profile.LearningStreak);
         Assert.Null(await db.PracticeActiveSessions.FindAsync(sessionId));
+    }
+
+    [Fact]
+    public async Task SubmitAnswerAsync_SelfPracticeMasteredTopic_AllowsContinuingCurrentTopic()
+    {
+        await using var db = CreateDb();
+        var userId = Guid.NewGuid();
+        var classId = Guid.NewGuid();
+        var currentTopicId = Guid.NewGuid();
+        var nextTopicId = Guid.NewGuid();
+        var quizId = Guid.NewGuid();
+        var q1 = Guid.NewGuid();
+        var q2 = Guid.NewGuid();
+        var sessionId = Guid.NewGuid();
+
+        db.Topics.AddRange(
+            new Topic { Id = currentTopicId, Name = "Present Simple", ClassId = classId, OwnerId = userId },
+            new Topic { Id = nextTopicId, Name = "Past Simple", ClassId = classId, OwnerId = userId });
+        db.Quizzes.Add(new Quiz { Id = quizId, Title = "Self practice", ClassId = classId, TopicId = currentTopicId, Type = "pool" });
+        db.Questions.AddRange(
+            CreateMcq(q1, quizId, "Q1"),
+            CreateMcq(q2, quizId, "Q2"));
+        db.PracticeActiveSessions.Add(new PracticeActiveSession
+        {
+            Id = sessionId,
+            UserId = userId,
+            StateJson = JsonSerializer.Serialize(new
+            {
+                UserId = userId,
+                TopicId = currentTopicId,
+                TopicName = "Present Simple",
+                Mode = "self_practice",
+                ClassId = classId,
+                Questions = new[] { q1, q2 },
+                AffectedTopicIds = new[] { currentTopicId },
+                CurrentIndex = 0,
+                CorrectCount = 0,
+                StartTime = DateTime.UtcNow,
+                MasteryBefore = 0.96,
+                DbMasteryBaseline = 0.96,
+                DbThetaBaseline = 0.0,
+                SessionMastery = 0.96,
+                SessionTheta = 0.0
+            }),
+            CreatedAt = DateTime.UtcNow,
+            ExpiresAt = DateTime.UtcNow.AddHours(2)
+        });
+        await db.SaveChangesAsync();
+
+        var correctOption = await db.Questions
+            .Where(q => q.Id == q1)
+            .SelectMany(q => q.Options)
+            .SingleAsync(o => o.IsCorrect);
+
+        var repo = CreateRepo(db);
+        var response = await repo.SubmitAnswerAsync(userId, new SubmitAnswerRequest
+        {
+            SessionId = sessionId.ToString(),
+            QuestionId = q1.ToString(),
+            SelectedOptionId = correctOption.Id.ToString()
+        });
+
+        Assert.False(response.IsSessionComplete);
+        Assert.NotNull(response.NextQuestion);
+        Assert.Equal("QUIZ", response.AgentAction);
+        Assert.True(response.RecommendNextSkill);
+        Assert.Equal(nextTopicId.ToString(), response.SuggestedNextTopicId);
     }
 
     private static PracticeSessionsRepository CreateRepo(AppDbContext db) =>

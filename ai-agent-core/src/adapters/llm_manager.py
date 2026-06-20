@@ -18,9 +18,10 @@ logger = logging.getLogger(__name__)
 
 OPENAI_ENDPOINT = "https://api.openai.com/v1"
 OPENAI_DEFAULT_MODEL = "gpt-4o-mini"
+OPENAI_CHAT_MODEL = "gpt-4o"
 AI_UNAVAILABLE_MSG = "AI server không khả dụng"
 
-Role = Literal["quiz", "explain"]
+Role = Literal["quiz", "explain", "chat"]
 
 
 def resolve_llm_config(role: Role) -> Optional[dict]:
@@ -28,18 +29,30 @@ def resolve_llm_config(role: Role) -> Optional[dict]:
     Resolve LLM configuration for a role.
 
     Priority:
-    1. Custom endpoint (QUIZ_LLM_ENDPOINT / EXPLAIN_LLM_ENDPOINT)
-    2. OpenAI fallback when OPENAI_API_KEY is set
-    3. Unavailable (returns None)
+    1. Chat role uses OpenAI directly (CHAT_LLM_MODEL, default gpt-4o)
+    2. Custom endpoint (QUIZ_LLM_ENDPOINT / EXPLAIN_LLM_ENDPOINT)
+    3. OpenAI fallback when OPENAI_API_KEY is set
+    4. Unavailable (returns None)
     """
     load_dotenv()
+
+    openai_key = (os.getenv("OPENAI_API_KEY") or "").strip()
+    if role == "chat":
+        chat_model = (os.getenv("CHAT_LLM_MODEL") or "").strip() or OPENAI_CHAT_MODEL
+        if openai_key:
+            return {
+                "endpoint_url": OPENAI_ENDPOINT,
+                "model": chat_model,
+                "api_key": openai_key,
+                "requires_openai_key": True,
+            }
+        return None
 
     endpoint_var = "QUIZ_LLM_ENDPOINT" if role == "quiz" else "EXPLAIN_LLM_ENDPOINT"
     model_var = "QUIZ_LLM_MODEL" if role == "quiz" else "EXPLAIN_LLM_MODEL"
 
     custom_endpoint = (os.getenv(endpoint_var) or "").strip()
     custom_model = (os.getenv(model_var) or "").strip() or None
-    openai_key = (os.getenv("OPENAI_API_KEY") or "").strip()
 
     if custom_endpoint:
         return {

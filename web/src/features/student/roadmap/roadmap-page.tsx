@@ -8,7 +8,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
-import { ArrowLeft, CheckCircle, PlayCircle, Star, Lock, BookOpen, ClipboardList, Users, RefreshCw } from 'lucide-react';
+import { ArrowLeft, CheckCircle, PlayCircle, Star, BookOpen, ClipboardList, Users, RefreshCw } from 'lucide-react';
 import { placementTestPath } from '@/lib/constants';
 import { toast } from 'sonner';
 import type { RoadmapStepStatus } from '@/types';
@@ -20,9 +20,9 @@ const statusConfig: Record<RoadmapStepStatus, {
   badge: 'default' | 'secondary' | 'outline' | 'destructive';
 }> = {
   completed: { icon: CheckCircle, label: 'Hoàn thành', color: 'text-green-400', badge: 'secondary' },
-  in_progress: { icon: PlayCircle, label: 'Đang học', color: 'text-primary', badge: 'default' },
+  in_progress: { icon: PlayCircle, label: 'Có thể học', color: 'text-primary', badge: 'default' },
   recommended: { icon: Star, label: 'Đề xuất', color: 'text-yellow-400', badge: 'outline' },
-  locked: { icon: Lock, label: 'Chưa mở', color: 'text-muted-foreground', badge: 'outline' },
+  locked: { icon: PlayCircle, label: 'Có thể học', color: 'text-primary', badge: 'outline' },
 };
 
 export function RoadmapPage() {
@@ -140,8 +140,6 @@ export function RoadmapPage() {
           const config = statusConfig[step.status];
           const Icon = config.icon;
           const isLast = i === steps.length - 1;
-          const canPractice = step.status !== 'locked';
-
           return (
             <div key={step.id} className="relative flex gap-4">
               {/* Timeline line + icon */}
@@ -150,7 +148,7 @@ export function RoadmapPage() {
                   step.status === 'completed' ? 'border-green-400 bg-green-400/10' :
                   step.status === 'in_progress' ? 'border-primary bg-primary/10' :
                   step.status === 'recommended' ? 'border-yellow-400 bg-yellow-400/10' :
-                  'border-border bg-muted'
+                  'border-primary/40 bg-primary/5'
                 }`}>
                   <Icon className={`h-5 w-5 ${config.color}`} />
                 </div>
@@ -163,46 +161,35 @@ export function RoadmapPage() {
 
               {/* Content card */}
               <div className="flex-1 pb-6">
-                {canPractice ? (
-                  <Link to={`/student/practice/${step.topicId}`}>
-                    <Card className="border-border transition-colors hover:border-primary/40">
-                      <CardContent className="p-4">
-                        <div className="flex items-start justify-between">
-                          <div>
-                            <h3 className="font-semibold text-foreground">{step.topicName}</h3>
-                            {step.reason && (
-                              <p className="mt-1 text-xs text-muted-foreground">{step.reason}</p>
-                            )}
-                            {(typeof step.mastery === 'number' || typeof step.theta === 'number' || typeof step.topicBeta === 'number') && (
-                              <p className="mt-1 text-[11px] text-muted-foreground">
-                                {typeof step.mastery === 'number' ? `Mastery ${step.mastery.toFixed(2)} · ` : ''}
-                                {typeof step.theta === 'number' ? `Theta ${step.theta.toFixed(2)} · ` : ''}
-                                {typeof step.topicBeta === 'number' ? `Beta ${step.topicBeta.toFixed(2)}` : ''}
-                                {typeof step.dueCount === 'number' ? ` · Due ${step.dueCount}` : ''}
-                              </p>
-                            )}
-                          </div>
-                          <Badge variant={config.badge}>{config.label}</Badge>
-                        </div>
-                        {step.progress > 0 && (
-                          <div className="mt-3 flex items-center gap-2">
-                            <Progress value={step.progress} className="h-1.5 flex-1" />
-                            <span className="text-xs text-muted-foreground">{Math.round(step.progress)}%</span>
-                          </div>
-                        )}
-                      </CardContent>
-                    </Card>
-                  </Link>
-                ) : (
-                  <Card className="border-border opacity-60">
+                <Link to={`/student/practice/${step.topicId}`}>
+                  <Card className="border-border transition-colors hover:border-primary/40">
                     <CardContent className="p-4">
                       <div className="flex items-start justify-between">
-                        <h3 className="font-semibold text-muted-foreground">{step.topicName}</h3>
+                        <div>
+                          <h3 className="font-semibold text-foreground">{step.topicName}</h3>
+                          {step.reason && (
+                            <p className="mt-1 text-xs text-muted-foreground">{step.reason}</p>
+                          )}
+                          {(typeof step.mastery === 'number' || typeof step.theta === 'number' || typeof step.topicBeta === 'number') && (
+                            <p className="mt-1 text-[11px] text-muted-foreground">
+                              {typeof step.mastery === 'number' ? `Mastery ${step.mastery.toFixed(2)} · ` : ''}
+                              {typeof step.theta === 'number' ? `Theta ${step.theta.toFixed(2)} · ` : ''}
+                              {typeof step.topicBeta === 'number' ? `Beta ${step.topicBeta.toFixed(2)}` : ''}
+                              {typeof step.dueCount === 'number' ? ` · Due ${step.dueCount}` : ''}
+                            </p>
+                          )}
+                        </div>
                         <Badge variant={config.badge}>{config.label}</Badge>
                       </div>
+                      {step.progress > 0 && (
+                        <div className="mt-3 flex items-center gap-2">
+                          <Progress value={step.progress} className="h-1.5 flex-1" />
+                          <span className="text-xs text-muted-foreground">{Math.round(step.progress)}%</span>
+                        </div>
+                      )}
                     </CardContent>
                   </Card>
-                )}
+                </Link>
               </div>
             </div>
           );

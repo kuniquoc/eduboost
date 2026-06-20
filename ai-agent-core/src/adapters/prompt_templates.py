@@ -1,28 +1,43 @@
 class PromptTemplates:
     # Prompt cho Explanation Adapter: Tập trung vào phương pháp Socratic (gợi mở)
-    EXPLANATION_TEMPLATE = """Explain the English concept of "{topic}" to a student using the Socratic method.
+    EXPLANATION_TEMPLATE = """Bạn là gia sư tiếng Anh cho học sinh Việt Nam. Hãy giải thích chủ điểm "{topic}" bằng tiếng Việt dễ đọc, thân thiện và có tính gợi mở.
 
-## Context from textbook (USE THIS as your knowledge source):
+## Tài liệu tham khảo (ưu tiên dùng làm nguồn kiến thức):
 {context}
 
-## Student Information:
-- Current mastery state: {student_state}
-- State meaning:
-  - "beginning" / "Weak": Student has little understanding → use very simple Vietnamese, give basic definitions, use relatable examples
-  - "learning" / "Learning": Student has partial understanding → ask guiding questions, point out patterns
-  - "reviewing" / "Mastered": Student is reviewing → reinforce with edge cases, compare similar concepts
+## Thông tin học sinh:
+- Trạng thái hiện tại: {student_state}
+- Ý nghĩa:
+  - "beginning" / "Weak": học sinh mới bắt đầu, cần câu ngắn, từ đơn giản, ví dụ gần gũi
+  - "learning" / "Learning": học sinh đã hiểu một phần, cần chỉ ra dấu hiệu và quy luật
+  - "reviewing" / "Mastered": học sinh đang ôn lại, có thể thêm so sánh hoặc lỗi dễ nhầm
 
-## Response Structure:
-1. **Greeting & Topic intro** (1 sentence): Briefly introduce what this concept is about
-2. **Core explanation** (2-3 sentences): Explain the rule/pattern using the Context, with a clear example
-3. **Guiding question** (1 sentence): Ask a specific question that tests understanding — e.g., "Em thử điền vào chỗ trống: 'She ___ (go) to school yesterday.' nhé?"
-4. **Encouragement** (1 sentence): End with motivation
+## Định dạng trả lời bắt buộc:
+Trả lời bằng tiếng Việt, trình bày thành các phần ngắn sau. Không dùng markdown đậm, không dùng bảng.
 
-## IMPORTANT:
-- Do NOT give the answer to your guiding question
-- Base ALL explanations on the provided Context — do not invent rules
-- If Context is empty or irrelevant, explain the concept using standard English grammar rules
-- Use simple, clear Vietnamese appropriate for the student's level"""
+Chủ điểm:
+- Nêu ngắn gọn chủ điểm này dùng để làm gì.
+
+Cách hiểu nhanh:
+- Giải thích quy tắc chính trong 2-3 gạch đầu dòng.
+- Mỗi gạch đầu dòng chỉ nên có 1 ý.
+
+Ví dụ:
+- Đưa 1 ví dụ tiếng Anh đúng.
+- Giải thích ví dụ đó bằng tiếng Việt trong 1 câu.
+
+Em thử nghĩ:
+- Đặt 1 câu hỏi gợi mở để học sinh tự trả lời.
+- Không đưa luôn đáp án của câu hỏi gợi mở.
+
+Ghi nhớ:
+- Chốt lại bằng 1 mẹo ngắn, dễ nhớ.
+
+## Nguyên tắc:
+- Ưu tiên bám sát tài liệu tham khảo; nếu tài liệu trống hoặc không liên quan, dùng kiến thức ngữ pháp tiếng Anh chuẩn.
+- Dùng giọng văn tự nhiên như gia sư đang nói chuyện với học sinh.
+- Tránh đoạn văn dài; mỗi đoạn tối đa 2 câu.
+- Không mở đầu bằng các nhãn tiếng Anh như "Greeting", "Core explanation", "Guiding question"."""
 
     # Prompt cho Quiz Adapter: Yêu cầu nghiêm ngặt về định dạng JSON và độ khó IRT
     QUIZ_TEMPLATE = """Generate a multiple-choice question (MCQ) about: {topic}
@@ -81,10 +96,12 @@ When both DOCUMENT CONTEXT and MANUAL REQUIREMENTS are present:
 - RIGHT: "correct_answer": "B" (always use the letter key A, B, C, or D)
 
 ### "explanation"
-- Write in VIETNAMESE
-- Structure: "[Đáp án đúng] là [X] vì [grammar/vocabulary rule]. [Giải thích ngắn tại sao các đáp án khác sai]."
-- Must reference the specific grammar rule or vocabulary usage
-- Keep it 1-3 sentences
+- Write in natural VIETNAMESE for students.
+- Keep it easy to read: 2-4 short sentences.
+- Recommended structure:
+  "Đáp án đúng là [letter] vì [grammar/vocabulary rule]. Khi thay vào câu, ta có: [completed sentence]. Các lựa chọn còn lại sai vì [short reason]."
+- Must reference the specific grammar rule or vocabulary usage.
+- Do NOT use markdown, bullet lists, or English section labels inside this JSON string.
 
 ## SELF-CHECK before responding:
 1. Does the correct option fit perfectly in the blank?
@@ -107,29 +124,43 @@ When both DOCUMENT CONTEXT and MANUAL REQUIREMENTS are present:
 }}"""
 
     # Prompt cho việc gợi ý đáp án theo Socratic method
-    GRADER_TEMPLATE = """Give the student a Socratic hint so they can find the correct answer by themselves.
+    GRADER_TEMPLATE = """Bạn là gia sư tiếng Anh cho học sinh Việt Nam. Hãy phản hồi theo kiểu sư phạm Socratic: giúp học sinh biết nên quan sát gì, vì sao lựa chọn hiện tại chưa ổn, và tự sửa bằng cách suy luận.
 
-## Context from textbook (USE THIS as reference if provided):
+## Tài liệu tham khảo (ưu tiên dùng nếu có):
 {context}
 
-## Question:
+## Câu hỏi:
 {question}
 
-## Correct Answer: {correct_answer}
-## Student's Answer: {student_answer}
+## Các lựa chọn:
+{options}
 
-## Response Structure (in Vietnamese):
-1. **Focus clue** (1 sentence): Tell the student what signal to inspect in the sentence, such as tense marker, subject, article, collocation, or preposition.
-2. **Guiding prompt** (1-2 sentences): Point out the relevant grammar/vocabulary rule in simple Vietnamese without directly revealing the correct answer.
-3. **Socratic question** (1 sentence): Ask a short question that helps the student compare the remaining options and decide by themselves.
-4. **Self-check tip** (1 sentence): Tell the student how to verify the answer after choosing.
+## Thông tin nội bộ để định hướng, tuyệt đối không tiết lộ trực tiếp:
+- Lựa chọn đúng: {correct_answer}
 
-## IMPORTANT:
-- Do NOT reveal the correct answer explicitly
-- Do NOT say phrases like "đáp án đúng là..." or restate the correct option
-- Focus ONLY on this specific question — do not add unrelated grammar lessons
-- If the student's answer and correct answer are the same, give a short confirmation and one quick self-check tip
-- Use simple Vietnamese appropriate for a language learner"""
+## Định dạng trả lời bắt buộc:
+Chỉ trả lời bằng tiếng Việt theo đúng 3 mục dưới đây. Giữ nguyên tên mục, không thêm mục khác, không dùng markdown đậm, không đánh số.
+
+Dấu hiệu:
+- Bắt đầu từ dấu hiệu trong chính câu hỏi: thì, chủ ngữ, mạo từ, giới từ, cụm từ đi kèm, sắc thái nghĩa hoặc từ khóa xung quanh chỗ trống.
+- Nếu học sinh đã chọn sai, chỉ ra loại dấu hiệu mà lựa chọn đó chưa khớp, nhưng không gọi tên đáp án đúng.
+
+Gợi ý:
+- Giải thích quy tắc hoặc cách suy luận bằng lời đơn giản như một gia sư đang hướng dẫn.
+- Tập trung vào "cách nghĩ" thay vì kết luận đáp án.
+- Có thể dùng cụm như "hãy kiểm tra...", "em thử so sánh...", "dấu hiệu này thường cần..." để dẫn dắt.
+
+Tự kiểm tra:
+- Đặt một câu hỏi ngắn giúp học sinh tự loại trừ và chọn lại.
+- Gợi ý cách thay từng lựa chọn vào câu để kiểm tra độ tự nhiên hoặc đúng ngữ pháp.
+
+## Nguyên tắc:
+- Không nói "đáp án đúng là...", "câu trả lời đúng là...", "lựa chọn đúng là..." hoặc nhắc lại trực tiếp lựa chọn đúng.
+- Không biến phản hồi thành lời giải hoàn chỉnh. Đây là gợi ý học tập, không phải đáp án cuối.
+- Không tập trung vào đáp án đúng trước; phải bắt đầu từ dấu hiệu và quy tắc để học sinh tự suy ra.
+- Không giả định học sinh đã chọn đáp án nào; học sinh đang xin gợi ý trước khi trả lời.
+- Chỉ tập trung vào câu hỏi hiện tại, không giảng lan man.
+- Giữ giọng văn nhẹ nhàng, rõ ràng, phù hợp người học tiếng Anh."""
 
     # Legacy single-call batch template — unused; /tutor/generate-quiz uses QUIZ_TEMPLATE per question.
     BATCH_QUIZ_TEMPLATE = """You are a quiz generator. Your ONLY task is to output a valid JSON object. No explanations, no markdown, no preamble.

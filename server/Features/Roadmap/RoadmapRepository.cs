@@ -359,7 +359,7 @@ public class RoadmapRepository(AppDbContext db) : IRoadmapRepository
                     ? "completed"
                     : firstIncompleteOrder.HasValue && p.OrderIndex == firstIncompleteOrder.Value
                         ? "recommended"
-                        : "locked";
+                        : "in_progress";
 
                 string? reason = null;
                 if (status == "recommended")

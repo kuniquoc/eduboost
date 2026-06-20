@@ -100,6 +100,12 @@ async def lifespan(app: FastAPI):
     else:
         logger.warning("Explain LLM unavailable — set EXPLAIN_LLM_ENDPOINT or OPENAI_API_KEY")
 
+    runtime.llm_chat = LLMManager.from_role("chat")
+    if runtime.llm_available(runtime.llm_chat):
+        logger.info("Chat LLM available at: %s (model=%s)", runtime.llm_chat.endpoint_url, runtime.llm_chat.model)
+    else:
+        logger.warning("Chat LLM unavailable — set OPENAI_API_KEY")
+
     logger.info("EduBoost AI Agent ready.")
     yield
     logger.info("Shutting down EduBoost AI Agent.")

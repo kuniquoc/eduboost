@@ -2,9 +2,9 @@ import os
 
 # ── BKT (Bayesian Knowledge Tracing) ─────────────────────────────────────────
 BKT_INITIAL_KNOWLEDGE = 0.3   # p_l0: Xác suất biết ban đầu
-BKT_TRANSITION = 0.1          # p_t:  Xác suất học được sau 1 câu hỏi
-BKT_SLIP = 0.1                # p_s:  Xác suất sai dù đã biết
-BKT_GUESS = 0.25              # p_g:  Xác suất đúng dù chưa biết
+BKT_TRANSITION = 0.05         # p_t:  Xác suất học được sau 1 câu hỏi
+BKT_SLIP = 0.2                # p_s:  Xác suất sai dù đã biết
+BKT_GUESS = 0.4               # p_g:  Xác suất đúng dù chưa biết
 
 BKT_MASTERY_THRESHOLD = 0.95   # P(L) >= threshold → Mastered
 BKT_LEARNING_THRESHOLD = 0.5  # P(L) >= threshold → Learning (else Weak)

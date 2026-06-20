@@ -10,13 +10,11 @@ import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
 import { QuizAnswerFeedback } from '@/components/quiz/quiz-answer-feedback';
 import {
-  Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter,
-} from '@/components/ui/dialog';
-import {
   ArrowLeft,
   Trophy,
   Loader2,
   Brain,
+  ArrowRight,
   ChevronLeft,
   ChevronRight,
 } from 'lucide-react';
@@ -43,7 +41,7 @@ type SessionState =
       feedback?: SubmitPracticeAnswerResponse;
     }
   | { type: 'summary'; data: PracticeSessionSummary }
-  | { type: 'review'; items: QuizReviewItemDto[]; index: number; topicName: string }
+  | { type: 'review'; items: QuizReviewItemDto[]; index: number; topicName: string; summary: PracticeSessionSummary }
   | { type: 'error'; message: string };
 
 export function PracticeSessionPage() {
@@ -72,7 +70,6 @@ export function PracticeSessionPage() {
   const [detailedErrors, setDetailedErrors] = useState<Record<string, boolean>>({});
   const questionStartRef = useRef<number>(Date.now());
   const autoStartedRef = useRef(false);
-  const [pendingNextSkill, setPendingNextSkill] = useState<SubmitPracticeAnswerResponse | null>(null);
 
   const modeLabel = isTestMode
     ? 'Bài kiểm tra'
@@ -205,11 +202,6 @@ export function PracticeSessionPage() {
     if (state.type !== 'answering' || state.phase !== 'reviewing' || !state.feedback) return;
     const { feedback, sessionId } = state;
 
-    if (isSelfPracticeMode && feedback.recommendNextSkill && feedback.suggestedNextTopicId) {
-      setPendingNextSkill(feedback);
-      return;
-    }
-
     if (feedback.isSessionComplete || !feedback.nextQuestion) {
       summaryMutation.mutate(sessionId);
     } else {
@@ -224,39 +216,18 @@ export function PracticeSessionPage() {
         phase: 'selecting',
       });
     }
-  }, [state, summaryMutation, totalQuestions, isSelfPracticeMode]);
+  }, [state, summaryMutation, totalQuestions]);
 
-  const acceptNextTopic = useCallback(() => {
-    if (!pendingNextSkill?.suggestedNextTopicId) return;
+  const goToSuggestedTopic = useCallback((feedback: SubmitPracticeAnswerResponse) => {
+    if (!feedback.suggestedNextTopicId) return;
     const params = new URLSearchParams({
       mode: 'self_practice',
       classId,
-      topicId: pendingNextSkill.suggestedNextTopicId,
-      topicName: pendingNextSkill.suggestedNextTopicName ?? 'Tự luyện tập',
+      topicId: feedback.suggestedNextTopicId,
+      topicName: feedback.suggestedNextTopicName ?? 'Tự luyện tập',
     });
-    setPendingNextSkill(null);
     navigate(`/student/practice-session?${params.toString()}`);
-  }, [pendingNextSkill, classId, navigate]);
-
-  const continueCurrentTopic = useCallback(() => {
-    if (!pendingNextSkill || state.type !== 'answering' || !state.feedback) return;
-    setPendingNextSkill(null);
-    const { feedback, sessionId } = state;
-    if (feedback.isSessionComplete || !feedback.nextQuestion) {
-      summaryMutation.mutate(sessionId);
-    } else {
-      setSelectedOptions([]);
-      questionStartRef.current = Date.now();
-      setState({
-        type: 'answering',
-        sessionId,
-        question: feedback.nextQuestion,
-        questionNumber: feedback.questionNumber,
-        total: feedback.totalQuestions ?? totalQuestions,
-        phase: 'selecting',
-      });
-    }
-  }, [pendingNextSkill, state, summaryMutation, totalQuestions]);
+  }, [classId, navigate]);
 
   const toggleOption = (optId: string) => {
     if (state.type !== 'answering' || state.phase !== 'selecting') return;
@@ -266,15 +237,14 @@ export function PracticeSessionPage() {
   };
 
   const requestDetailedExplanation = useCallback(
-    async (questionId: string, questionText: string, options: { id: string; text: string }[], selectedOptionIds: string[], correctAnswerText?: string) => {
+    async (questionId: string, questionText: string, options: { id: string; text: string }[], correctAnswerText?: string) => {
       setLoadingDetailedFor(questionId);
       setDetailedErrors((prev) => ({ ...prev, [questionId]: false }));
       try {
-        const studentAnswer = options.find((o) => selectedOptionIds.includes(o.id))?.text ?? '';
         const explanation = await quizzesService.getErrorExplanation({
           question: questionText,
+          options,
           correctAnswer: correctAnswerText ?? '',
-          studentAnswer,
         });
         setDetailedExplanations((prev) => ({ ...prev, [questionId]: explanation.explanation }));
         return explanation.explanation;
@@ -410,7 +380,6 @@ export function PracticeSessionPage() {
                       question.questionId,
                       question.text,
                       question.options,
-                      selectedOptions,
                       feedback.correctAnswer,
                     )
                   }
@@ -419,32 +388,33 @@ export function PracticeSessionPage() {
                       question.questionId,
                       question.text,
                       question.options,
-                      selectedOptions,
                       feedback.correctAnswer,
                     )
                   }
                 />
+                {isSelfPracticeMode && feedback.recommendNextSkill && feedback.suggestedNextTopicId && (
+                  <div className="rounded-lg border border-primary/20 bg-primary/5 p-3">
+                    <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                      <p className="text-sm text-muted-foreground">
+                        {feedback.nextSkillSuggestion ?? 'Bạn đã thành thạo chủ đề này và có thể chuyển sang chủ đề khác.'}
+                      </p>
+                      <Button
+                        type="button"
+                        variant="outline"
+                        size="sm"
+                        className="shrink-0 gap-2"
+                        onClick={() => goToSuggestedTopic(feedback)}
+                      >
+                        Chuyển chủ đề
+                        <ArrowRight className="h-4 w-4" />
+                      </Button>
+                    </div>
+                  </div>
+                )}
               </div>
             )}
           </CardContent>
         </Card>
-
-        <Dialog open={!!pendingNextSkill} onOpenChange={(open) => !open && setPendingNextSkill(null)}>
-          <DialogContent>
-            <DialogHeader>
-              <DialogTitle>Agent đề xuất chuyển chủ đề</DialogTitle>
-              <DialogDescription>
-                {pendingNextSkill?.nextSkillSuggestion ?? 'Bạn đã đạt mức thành thạo tốt cho chủ đề này trong phiên luyện tập.'}
-              </DialogDescription>
-            </DialogHeader>
-            <DialogFooter className="gap-2 sm:gap-0">
-              <Button variant="outline" onClick={continueCurrentTopic}>Tiếp tục ôn luyện</Button>
-              <Button onClick={acceptNextTopic}>
-                Chuyển sang {pendingNextSkill?.suggestedNextTopicName ?? 'chủ đề mới'}
-              </Button>
-            </DialogFooter>
-          </DialogContent>
-        </Dialog>
       </div>
     );
   }
@@ -486,6 +456,7 @@ export function PracticeSessionPage() {
                       items: data.reviewItems!,
                       index: 0,
                       topicName: data.topicName,
+                      summary: data,
                     })
                   }
                 >
@@ -520,11 +491,14 @@ export function PracticeSessionPage() {
     return (
       <div className="mx-auto max-w-2xl space-y-6 p-6">
         <div className="flex items-center justify-between">
+          <Button variant="ghost" size="sm" onClick={() => setState({ type: 'summary', data: state.summary })}>
+            <ArrowLeft className="mr-2 h-4 w-4" /> Quay lại kết quả
+          </Button>
           <Badge variant="secondary">
             Xem lại — Câu {state.index + 1}/{state.items.length}
           </Badge>
-          <span className="text-sm text-muted-foreground">{state.topicName}</span>
         </div>
+        <div className="text-sm text-muted-foreground">{state.topicName}</div>
         <Progress value={((state.index + 1) / state.items.length) * 100} className="h-2" />
 
         <Card>
@@ -549,7 +523,6 @@ export function PracticeSessionPage() {
                   item.questionId,
                   item.text,
                   item.options,
-                  selectedIds,
                   item.correctAnswer,
                 )
               }
@@ -558,7 +531,6 @@ export function PracticeSessionPage() {
                   item.questionId,
                   item.text,
                   item.options,
-                  selectedIds,
                   item.correctAnswer,
                 )
               }

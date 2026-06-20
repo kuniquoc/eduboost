@@ -11,15 +11,15 @@ Hệ thống sử dụng phương pháp **Fixed Parameter BKT** với các giá 
 | Tham số | Ký hiệu | Giá trị lựa chọn | Ý nghĩa |
 | :--- | :---: | :---: | :--- |
 | **Initial Knowledge** | $P(L_0)$ | $0.3$ | Xác suất học sinh biết kỹ năng ngay từ khi bắt đầu. |
-| **Transition Prob.** | $P(T)$ | $0.1$ | Xác suất học sinh chuyển từ "Không biết" $\rightarrow$ "Biết" sau một tương tác. |
-| **Slip Probability** | $P(S)$ | $0.1$ | Xác suất trả lời **Sai** dù học sinh **đã biết** kỹ năng. |
-| **Guess Probability** | $P(G)$ | $0.25$ | Xác suất trả lời **Đúng** dù học sinh **chưa biết** kỹ năng. |
+| **Transition Prob.** | $P(T)$ | $0.05$ | Xác suất học sinh chuyển từ "Không biết" $\rightarrow$ "Biết" sau một tương tác. |
+| **Slip Probability** | $P(S)$ | $0.2$ | Xác suất trả lời **Sai** dù học sinh **đã biết** kỹ năng. |
+| **Guess Probability** | $P(G)$ | $0.4$ | Xác suất trả lời **Đúng** dù học sinh **chưa biết** kỹ năng. |
 
 ### 1.3. Lý luận và Căn cứ lựa chọn
 *   **$P(L_0) = 0.3$**: Được thiết lập ở mức trung bình thấp, giả định học sinh có một lượng kiến thức nền cơ bản nhưng chưa thành thạo. Giá trị này sẽ được cập nhật động nếu có bài test đầu vào (Placement Test).
-*   **$P(T) = 0.1$**: Dựa trên nghiên cứu của **Koedly et al. (2005)**, việc tiếp thu kiến thức là một quá trình tích lũy. Giá trị $0.1$ đảm bảo mô hình không thay đổi trạng thái quá đột ngột, phản ánh đúng thực tế học tập.
-*   **$P(S) = 0.1$**: Phản ánh tỷ lệ sai sót do bất cẩn. Trong các hệ thống ITS, tỷ lệ Slip thường thấp hơn tỷ lệ Guess vì khi đã biết, xác suất sai thường chỉ do lỗi trình bày hoặc nhầm lẫn nhỏ.
-*   **$P(G) = 0.25$**: Được tính toán dựa trên logic của câu hỏi trắc nghiệm 4 lựa chọn ($1/4 = 0.25$). Đây là xác suất lý thuyết khi học sinh chọn ngẫu nhiên một đáp án.
+*   **$P(T) = 0.05$**: Việc tiếp thu kiến thức là một quá trình tích lũy, nên transition thấp giúp hệ thống không kết luận thành thạo chỉ sau vài câu đúng.
+*   **$P(S) = 0.2$**: Phản ánh khả năng sai do bất cẩn hoặc hiểu chưa ổn định, nhất là trong giai đoạn luyện tập ngắn.
+*   **$P(G) = 0.4$**: Cao hơn xác suất đoán ngẫu nhiên 4 lựa chọn để tránh mô hình quá tin vào một câu đúng đơn lẻ; học sinh có thể loại trừ đáp án hoặc gặp câu dễ hơn năng lực thật.
 
 ### 1.4. Công thức cập nhật trạng thái
 Sau mỗi câu trả lời, xác suất nắm vững $P(L_{n+1})$ được tính qua 2 bước:
@@ -80,7 +80,7 @@ Sự kết hợp này tạo nên cơ chế **Adaptive Learning** hoàn chỉnh:
 *   **BKT:** $P(\text{Present Simple}) = 0.6$ (Đang trong giai đoạn luyện tập).
 *   **IRT:** $\theta = -1.2$ (Học sinh đang ở mức yếu).
 *   **Agent:** Gọi Quiz Adapter sinh câu hỏi Present Simple với độ khó $\beta = -1.2$ (Câu hỏi dễ).
-*   **Kết quả:** Học sinh trả lời đúng $\rightarrow$ BKT tăng $P(L)$ lên $0.65$, IRT tăng $\theta$ lên $-1.0$.
+*   **Kết quả:** Học sinh trả lời đúng $\rightarrow$ BKT tăng $P(L)$ vừa phải dựa trên bằng chứng mới, IRT tăng $\theta$ lên $-1.0$.
 
 ---
 

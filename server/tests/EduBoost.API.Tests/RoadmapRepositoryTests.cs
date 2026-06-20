@@ -162,6 +162,28 @@ public class RoadmapRepositoryTests
     }
 
     [Fact]
+    public async Task GenerateAsync_keepsAllIncompleteTopicsAvailable()
+    {
+        await using var db = CreateDb();
+        var classId = Guid.NewGuid();
+        var studentId = Guid.NewGuid();
+        var firstTopicId = Guid.NewGuid();
+        var secondTopicId = Guid.NewGuid();
+
+        db.Topics.AddRange(
+            new Topic { Id = firstTopicId, ClassId = classId, Name = "First", Difficulty = "easy", CreatedAt = DateTime.UtcNow },
+            new Topic { Id = secondTopicId, ClassId = classId, Name = "Second", Difficulty = "medium", CreatedAt = DateTime.UtcNow.AddMinutes(1) });
+        await db.SaveChangesAsync();
+
+        var repo = new RoadmapRepository(db);
+        var roadmap = await repo.GenerateAsync(classId, studentId, entryTestResultId: string.Empty);
+
+        Assert.Equal("recommended", roadmap.Steps[0].Status);
+        Assert.Equal("in_progress", roadmap.Steps[1].Status);
+        Assert.DoesNotContain(roadmap.Steps, step => step.Status == "locked");
+    }
+
+    [Fact]
     public async Task GetByClassId_UsesActualBktState_ForDisplayedProgress()
     {
         await using var db = CreateDb();

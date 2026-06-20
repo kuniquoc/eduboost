@@ -238,15 +238,13 @@ export function PlacementTestPage() {
 
       try {
 
-        const studentAnswer = item.options.find((o) => o.id === item.selectedOptionId)?.text ?? '';
-
         const explanation = await quizzesService.getErrorExplanation({
 
           question: item.text,
 
-          correctAnswer: item.correctAnswer ?? '',
+          options: item.options,
 
-          studentAnswer,
+          correctAnswer: item.correctAnswer ?? '',
 
         });
 

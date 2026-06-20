@@ -9,7 +9,14 @@ import {
   Select, SelectContent, SelectItem, SelectTrigger, SelectValue,
 } from '@/components/ui/select';
 import { PlayCircle, Star, CheckCircle } from 'lucide-react';
-import type { TopicSummary } from '@/types';
+import type { RoadmapStepStatus, TopicSummary } from '@/types';
+
+const roadmapStatusLabel: Record<RoadmapStepStatus, string> = {
+  completed: 'Hoàn thành',
+  in_progress: 'Có thể học',
+  recommended: 'Đề xuất',
+  locked: 'Có thể học',
+};
 
 export function StudentSelfPracticeTab({
   classId,
@@ -23,14 +30,9 @@ export function StudentSelfPracticeTab({
   const { data: roadmap } = useRoadmap(classId);
   const selectedTopic = topics.find((t) => t.id === selectedTopicId);
 
-  const startPractice = () => {
-    const params = new URLSearchParams({
-      mode: 'self_practice',
-      classId,
-      topicId: selectedTopicId,
-      topicName: selectedTopic?.name ?? 'Tự luyện tập',
-    });
-    navigate(`/student/practice-session?${params.toString()}`);
+  const startPractice = (topicId = selectedTopicId) => {
+    if (!topicId) return;
+    navigate(`/student/practice/${topicId}`);
   };
 
   const steps = roadmap?.steps ? [...roadmap.steps].sort((a, b) => a.orderIndex - b.orderIndex) : [];
@@ -58,7 +60,7 @@ export function StudentSelfPracticeTab({
                 </SelectContent>
               </Select>
             </div>
-            <Button onClick={startPractice} disabled={!selectedTopicId}>
+            <Button onClick={() => startPractice()} disabled={!selectedTopicId}>
               <PlayCircle className="mr-2 h-4 w-4" />
               Bắt đầu luyện tập
             </Button>
@@ -93,7 +95,19 @@ export function StudentSelfPracticeTab({
                       )}
                     </div>
                   </div>
-                  <Badge variant="outline">{step.status}</Badge>
+                  <div className="flex items-center gap-2">
+                    <Badge variant={step.status === 'recommended' ? 'default' : 'outline'}>
+                      {roadmapStatusLabel[step.status]}
+                    </Badge>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => startPractice(step.topicId)}
+                    >
+                      <PlayCircle className="mr-2 h-4 w-4" />
+                      Luyện tập
+                    </Button>
+                  </div>
                 </CardContent>
               </Card>
             ))}

@@ -1,6 +1,13 @@
 from typing import Literal
 
-from .config import BKT_LEARNING_THRESHOLD, BKT_MASTERY_THRESHOLD
+from .config import (
+    BKT_GUESS,
+    BKT_INITIAL_KNOWLEDGE,
+    BKT_LEARNING_THRESHOLD,
+    BKT_MASTERY_THRESHOLD,
+    BKT_SLIP,
+    BKT_TRANSITION,
+)
 
 class BKTModel:
     """
@@ -9,10 +16,10 @@ class BKTModel:
     """
     def __init__(
         self, 
-        p_l0: float = 0.3, 
-        p_t: float = 0.1, 
-        p_s: float = 0.1, 
-        p_g: float = 0.25
+        p_l0: float = BKT_INITIAL_KNOWLEDGE,
+        p_t: float = BKT_TRANSITION,
+        p_s: float = BKT_SLIP,
+        p_g: float = BKT_GUESS
     ):
         # Tham số cố định dựa trên nghiên cứu AIED
         self.p_l0 = p_l0  # Initial Knowledge: Xác suất biết ban đầu

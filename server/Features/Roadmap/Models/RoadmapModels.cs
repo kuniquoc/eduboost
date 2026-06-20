@@ -7,7 +7,7 @@ public class RoadmapStepDto
     public string Id { get; set; } = "";
     public string TopicId { get; set; } = "";
     public string TopicName { get; set; } = "";
-    public string Status { get; set; } = "locked"; // "completed" | "in_progress" | "recommended" | "locked"
+    public string Status { get; set; } = "in_progress"; // "completed" | "in_progress" | "recommended"
     public int Progress { get; set; }
     public string? Reason { get; set; }
     public double? Mastery { get; set; }

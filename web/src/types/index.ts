@@ -362,7 +362,8 @@ export interface TutorAnswerResult {
 export interface ExplainErrorRequest {
   question: string;
   correctAnswer: string;
-  studentAnswer: string;
+  options?: Array<{ id: string; text: string }>;
+  studentAnswer?: string;
 }
 
 // ─── User Profile ─────────────────────────────────────────

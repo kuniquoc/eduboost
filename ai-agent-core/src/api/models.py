@@ -46,10 +46,16 @@ class ExplainRequest(BaseModel):
     student_state: str = "beginning"
 
 
+class GraderOption(BaseModel):
+    id: str
+    text: str
+
+
 class GraderRequest(BaseModel):
     question: str
     correct_answer: str
-    student_answer: str
+    options: list[GraderOption] = Field(default_factory=list)
+    student_answer: str = ""
     allowed_document_ids: Optional[list[str]] = None
     allowed_scopes: Optional[list[str]] = None
 

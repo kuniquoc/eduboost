@@ -43,10 +43,10 @@ class TestChatTopicSearch(unittest.TestCase):
 
         with patch.dict("os.environ", {"APP_ENV": "production"}), patch("src.api.routes.tutor.runtime") as mock_runtime:
             mock_runtime.llm_available.return_value = True
-            mock_runtime.llm_explain = MagicMock()
+            mock_runtime.llm_chat = MagicMock()
             mock_runtime.retriever = MagicMock()
             mock_runtime.vector_db = mock_db
-            mock_runtime.llm_explain.generate.return_value = "answer"
+            mock_runtime.llm_chat.generate.return_value = "answer"
 
             with self.assertLogs("src.api.routes.tutor", level="INFO") as logs:
                 with TestClient(app) as client:

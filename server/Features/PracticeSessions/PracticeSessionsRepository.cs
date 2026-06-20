@@ -979,11 +979,11 @@ public class PracticeSessionsRepository(
             if (nextTopic != null)
             {
                 return (
-                    "NEXT_SKILL",
-                    $"Bạn đã đạt mức thành thạo {mastery:P0} cho chủ đề này trong phiên luyện tập.",
+                    "QUIZ",
+                    $"Bạn đã đạt mức thành thạo {mastery:P0} cho chủ đề này, nhưng vẫn có thể tiếp tục tự luyện tập.",
                     null,
                     true,
-                    $"Đề xuất chuyển sang chủ đề: {nextTopic.Name}",
+                    $"Bạn có thể chuyển sang chủ đề: {nextTopic.Name}",
                     DifficultyIndex.Clamp(theta),
                     nextTopic.Id.ToString(),
                     nextTopic.Name
@@ -991,7 +991,7 @@ public class PracticeSessionsRepository(
             }
         }
 
-        var fallbackAction = mastery < 0.5 ? "EXPLAIN" : mastery < 0.95 ? "QUIZ" : "NEXT_SKILL";
+        var fallbackAction = mastery < 0.5 ? "EXPLAIN" : isSelfPractice || mastery < 0.95 ? "QUIZ" : "NEXT_SKILL";
         var fallbackReason = $"Fallback decision from mastery={mastery:F2}";
         var fallbackTargetBeta = DifficultyIndex.Clamp(theta);
 
@@ -1004,6 +1004,10 @@ public class PracticeSessionsRepository(
         {
             _logger?.LogWarning("Invalid agent action '{Action}' for topic {Topic}; using fallback", response?.Action, state.TopicName);
             action = fallbackAction;
+        }
+        else if (isSelfPractice && action == "NEXT_SKILL")
+        {
+            action = "QUIZ";
         }
 
         var reason = string.IsNullOrWhiteSpace(response?.Reason) ? fallbackReason : response!.Reason;
