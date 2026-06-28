@@ -19,5 +19,6 @@ public interface IPoolRepository
     Task<QuizDto> CreateRevisionSetFromPoolAsync(Guid userId, CreateRevisionSetFromPoolRequest request);
     Task<List<QuizDto>> GetRevisionSetsAsync(Guid userId);
     Task<TopicPoolDto?> RenameTopicAsync(Guid userId, string userRole, Guid topicId, string newName);
+    Task<PoolQuizDetailDto?> RenamePoolQuizAsync(Guid userId, string userRole, Guid quizId, string newTitle);
     Task<PoolQuestionRef?> GetPoolQuestionAsync(Guid questionId);
 }

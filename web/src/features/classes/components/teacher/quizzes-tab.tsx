@@ -49,6 +49,15 @@ export function QuizzesTab({ classId, activeEntryTestId }: QuizzesTabProps) {
     onError: () => toast.error('Xoá thất bại'),
   });
 
+  const publishQuizMutation = useMutation({
+    mutationFn: (quizId: string) => quizzesService.publishQuiz(quizId),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['class-quizzes', classId] });
+      toast.success('Đã xuất bản quiz thành công!');
+    },
+    onError: () => toast.error('Xuất bản thất bại'),
+  });
+
   if (isLoading) {
     return (
       <div className="space-y-2">
@@ -168,11 +177,29 @@ export function QuizzesTab({ classId, activeEntryTestId }: QuizzesTabProps) {
                       <Badge variant={quiz.isPublished ? 'default' : 'outline'}>
                         {quiz.isPublished ? 'Đã publish' : 'Nháp'}
                       </Badge>
+                      {!quiz.isPublished && (
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          onClick={() => publishQuizMutation.mutate(quiz.id)}
+                          disabled={publishQuizMutation.isPending}
+                        >
+                          Xuất bản
+                        </Button>
+                      )}
                       <Link to={`/teacher/ai-studio/${quiz.id}`}>
                         <Button variant="outline" size="sm">
                           <Eye className="h-3.5 w-3.5" /> Xem & Sửa
                         </Button>
                       </Link>
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        className="text-destructive hover:bg-destructive/10 hover:text-destructive border-destructive/30"
+                        onClick={() => setDeleteQuizId(quiz.id)}
+                      >
+                        <Trash2 className="h-3.5 w-3.5" />
+                      </Button>
                     </div>
                   </CardContent>
                 </Card>
@@ -186,12 +213,12 @@ export function QuizzesTab({ classId, activeEntryTestId }: QuizzesTabProps) {
       <Dialog open={!!deleteQuizId} onOpenChange={(open) => { if (!open) setDeleteQuizId(null); }}>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>Xoá bài test đầu vào?</DialogTitle>
+            <DialogTitle>Xoá quiz lớp học?</DialogTitle>
             <DialogDescription>
-              Bài test <span className="font-medium">"{quizToDelete?.title}"</span> sẽ bị xoá vĩnh viễn cùng tất cả câu hỏi.
+              Quiz/Bài test <span className="font-medium">"{quizToDelete?.title}"</span> sẽ bị xoá vĩnh viễn cùng tất cả câu hỏi.
               {quizToDelete?.id === activeEntryTestId && (
                 <span className="block mt-1 text-amber-500 font-medium">
-                  Đây là bài test đang active. Sau khi xoá, lớp học sẽ không có bài test active.
+                  Đây là bài test đầu vào đang active. Sau khi xoá, lớp học sẽ không có bài test active.
                 </span>
               )}
             </DialogDescription>

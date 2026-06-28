@@ -31,6 +31,9 @@ import {
   RevisionSetDialog,
   type StudentPoolTab,
 } from '@/features/quiz-pool/components/student-pool-dashboard-components';
+import {
+  Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter,
+} from '@/shared/ui/dialog';
 
 type GenerationDifficulty = 'easy' | 'medium' | 'hard';
 
@@ -89,6 +92,10 @@ export function StudentPoolDashboard() {
   // Create Revision Set Dialog states
   const [isRevisionDialogOpen, setIsRevisionDialogOpen] = useState(false);
   const [revisionTitle, setRevisionTitle] = useState('');
+
+  // Delete confirm states
+  const [deleteQuizId, setDeleteQuizId] = useState<string | null>(null);
+  const [deleteRevisionId, setDeleteRevisionId] = useState<string | null>(null);
 
   // Queries
   const { data: topics = [], isLoading: isLoadingTopics } = usePoolTopics(search);
@@ -291,6 +298,7 @@ export function StudentPoolDashboard() {
     mutationFn: (quizId: string) => poolService.deletePoolQuiz(quizId),
     onSuccess: () => {
       toast.success('Đã xóa quiz khỏi Pool cá nhân');
+      setDeleteQuizId(null);
       queryClient.invalidateQueries({ queryKey: ['student-pool-topics'] });
       if (selectedTopic) {
         queryClient.invalidateQueries({ queryKey: ['quizzes-in-topic', selectedTopic.id] });
@@ -307,6 +315,7 @@ export function StudentPoolDashboard() {
     mutationFn: (quizId: string) => poolService.deletePoolQuiz(quizId), // private quiz deletion is same API
     onSuccess: () => {
       toast.success('Đã xóa Bộ ôn tập');
+      setDeleteRevisionId(null);
       queryClient.invalidateQueries({ queryKey: ['student-revision-sets'] });
     },
     onError: (error: unknown) => {
@@ -562,12 +571,12 @@ export function StudentPoolDashboard() {
                                   <Play className="h-3 w-3 mr-1" /> Làm bài
                                 </Button>
                                 <Button 
-                                  variant="ghost" 
-                                  size="icon" 
-                                  className="h-8 w-8 text-destructive hover:bg-destructive/10"
-                                  onClick={() => deleteQuizMutation.mutate(quiz.quizId)}
-                                  disabled={deleteQuizMutation.isPending}
-                                >
+                                   variant="ghost" 
+                                   size="icon" 
+                                   className="h-8 w-8 text-destructive hover:bg-destructive/10"
+                                   onClick={() => setDeleteQuizId(quiz.quizId)}
+                                   disabled={deleteQuizMutation.isPending}
+                                 >
                                   <Trash2 className="h-4 w-4" />
                                 </Button>
                                 <Button 
@@ -694,7 +703,7 @@ export function StudentPoolDashboard() {
                         variant="ghost"
                         size="icon-sm"
                         className="text-destructive hover:bg-destructive/10"
-                        onClick={() => deleteRevisionMutation.mutate(kit.id)}
+                        onClick={() => setDeleteRevisionId(kit.id)}
                         disabled={deleteRevisionMutation.isPending}
                       >
                         <Trash2 className="h-4 w-4" />
@@ -934,6 +943,56 @@ export function StudentPoolDashboard() {
       />
 
       {showGenOverlay && <GenerationProgressOverlay step={generatingStep} />}
+
+      <Dialog open={!!deleteQuizId} onOpenChange={(open) => { if (!open) setDeleteQuizId(null); }}>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle>Xóa lượt sinh quiz</DialogTitle>
+            <DialogDescription>
+              Bạn có chắc muốn xóa lượt sinh <strong>"{quizzes.find(q => q.quizId === deleteQuizId)?.title}"</strong> khỏi Pool cá nhân?
+            </DialogDescription>
+          </DialogHeader>
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setDeleteQuizId(null)}>Hủy</Button>
+            <Button
+              variant="destructive"
+              onClick={() => {
+                if (deleteQuizId) {
+                  deleteQuizMutation.mutate(deleteQuizId);
+                }
+              }}
+              disabled={deleteQuizMutation.isPending}
+            >
+              {deleteQuizMutation.isPending ? 'Đang xóa...' : 'Xóa'}
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      <Dialog open={!!deleteRevisionId} onOpenChange={(open) => { if (!open) setDeleteRevisionId(null); }}>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle>Xóa bộ ôn tập</DialogTitle>
+            <DialogDescription>
+              Bạn có chắc muốn xóa Bộ ôn tập <strong>"{revisionSets.find(r => r.id === deleteRevisionId)?.title}"</strong>? Các câu hỏi đã tổng hợp trong bộ này sẽ bị loại bỏ (nhưng vẫn nằm trong Pool gốc).
+            </DialogDescription>
+          </DialogHeader>
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setDeleteRevisionId(null)}>Hủy</Button>
+            <Button
+              variant="destructive"
+              onClick={() => {
+                if (deleteRevisionId) {
+                  deleteRevisionMutation.mutate(deleteRevisionId);
+                }
+              }}
+              disabled={deleteRevisionMutation.isPending}
+            >
+              {deleteRevisionMutation.isPending ? 'Đang xóa...' : 'Xóa'}
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }

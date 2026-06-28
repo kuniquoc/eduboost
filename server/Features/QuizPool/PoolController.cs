@@ -101,13 +101,23 @@ public class PoolController(
     {
         if (!ModelState.IsValid) return BadRequest(ApiResponse.Fail("Dữ liệu không hợp lệ", ModelState));
         if (UserRole != "teacher") return Forbid();
-        if (request.PoolQuizIds.Count == 0) return BadRequest(ApiResponse.Fail("Cần chọn ít nhất một quiz trong pool để tạo bài test"));
+
+        if (request.QuestionIds.Count == 0 && request.PoolQuizIds.Count == 0)
+            return BadRequest(ApiResponse.Fail("Cần chọn ít nhất một câu hỏi hoặc quiz trong pool để tạo bài test"));
 
         var classId = Guid.Parse(request.ClassId);
         if (!await classes.IsOwnedByTeacherAsync(classId, UserId)) return Forbid();
 
-        var poolIds = request.PoolQuizIds.Select(Guid.Parse).ToList();
-        if (!await poolAuth.CanAccessPoolQuizzesAsync(UserId, UserRole, poolIds)) return Forbid();
+        var poolQuizIds = request.PoolQuizIds.Select(Guid.Parse).ToList();
+        if (request.QuestionIds.Count > 0)
+        {
+            var questionGuids = request.QuestionIds.Select(Guid.Parse).ToList();
+            var parentQuizIds = await repo.GetPoolQuizIdsForQuestionsAsync(questionGuids);
+            poolQuizIds = poolQuizIds.Union(parentQuizIds).Distinct().ToList();
+        }
+
+        if (poolQuizIds.Count > 0 && !await poolAuth.CanAccessPoolQuizzesAsync(UserId, UserRole, poolQuizIds))
+            return Forbid();
 
         var test = await repo.CreateTestFromPoolAsync(UserId, request);
         return Ok(ApiResponse<QuizDto>.Ok(test, "Tổng hợp bài thi từ Pool thành công. Hãy kiểm duyệt và xuất bản trong AI Studio!"));
@@ -184,6 +194,16 @@ public class PoolController(
         var result = await repo.RenameTopicAsync(UserId, UserRole, topicId, request.Name);
         if (result == null) return NotFound(ApiResponse.Fail("Không tìm thấy chủ đề hoặc bạn không có quyền đổi tên"));
         return Ok(ApiResponse<TopicPoolDto>.Ok(result, "Đổi tên chủ đề thành công"));
+    }
+
+    /// <summary>Đổi tên một lượt sinh quiz trong Pool (chủ sở hữu hoặc giáo viên sở hữu lớp)</summary>
+    [HttpPatch("quizzes/{quizId:guid}/rename")]
+    public async Task<IActionResult> RenamePoolQuiz(Guid quizId, [FromBody] RenamePoolQuizRequest request)
+    {
+        if (!ModelState.IsValid) return BadRequest(ApiResponse.Fail("Dữ liệu không hợp lệ", ModelState));
+        var result = await repo.RenamePoolQuizAsync(UserId, UserRole, quizId, request.Name);
+        if (result == null) return NotFound(ApiResponse.Fail("Không tìm thấy quiz hoặc bạn không có quyền đổi tên"));
+        return Ok(ApiResponse<PoolQuizDetailDto>.Ok(result, "Đổi tên quiz thành công"));
     }
 
     /// <summary>Sửa câu hỏi trong Pool (text, độ khó, β, options)</summary>

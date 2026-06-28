@@ -15,6 +15,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/shared/ui/tabs';
 import { ArrowLeft, Settings, Copy, Check, Trash2, PenLine, FileQuestion } from 'lucide-react';
 import { toast } from 'sonner';
 import { EntryTestPoolPickerDialog } from '@/features/quiz-pool/components/entry-test-pool-picker-dialog';
+import { PracticeQuizPoolPickerDialog } from '@/features/quiz-pool/components/practice-quiz-pool-picker-dialog';
 import { TopicsTab } from '@/features/classes/components/teacher/topics-tab';
 import { DocumentsTab } from '@/features/classes/components/teacher/documents-tab';
 import { StudentsTab } from '@/features/classes/components/teacher/students-tab';
@@ -31,6 +32,7 @@ export function TeacherClassDetailPage() {
   const [deleteOpen, setDeleteOpen] = useState(false);
   const [quizBuilderOpen, setQuizBuilderOpen] = useState(false);
   const [entryTestPickerOpen, setEntryTestPickerOpen] = useState(false);
+  const [practiceQuizPickerOpen, setPracticeQuizPickerOpen] = useState(false);
   const [copied, setCopied] = useState(false);
 
   const { data: cls, isLoading } = useClassDetail(id);
@@ -139,6 +141,13 @@ export function TeacherClassDetailPage() {
             >
               <FileQuestion className="h-4 w-4" /> Tạo test đầu vào từ Pool
             </Button>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => setPracticeQuizPickerOpen(true)}
+            >
+              <FileQuestion className="h-4 w-4" /> Tạo quiz từ Pool
+            </Button>
             <Button variant="outline" size="sm" onClick={() => setQuizBuilderOpen(true)}>
               <PenLine className="h-4 w-4" /> Tạo quiz
             </Button>
@@ -238,6 +247,16 @@ export function TeacherClassDetailPage() {
       <EntryTestPoolPickerDialog
         open={entryTestPickerOpen}
         onOpenChange={setEntryTestPickerOpen}
+        classId={id!}
+        className={cls.name}
+        onSuccess={(quiz) => {
+          queryClient.invalidateQueries({ queryKey: ['class-quizzes', id] });
+          navigate(`/teacher/ai-studio/${quiz.id}`);
+        }}
+      />
+      <PracticeQuizPoolPickerDialog
+        open={practiceQuizPickerOpen}
+        onOpenChange={setPracticeQuizPickerOpen}
         classId={id!}
         className={cls.name}
         onSuccess={(quiz) => {

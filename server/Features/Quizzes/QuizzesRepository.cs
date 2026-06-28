@@ -415,11 +415,10 @@ public partial class QuizzesRepository : IQuizzesRepository
         }
         return quizDto;
     }
-
     public async Task<List<QuizDto>> GetClassQuizzesAsync(Guid classId)
     {
         return await db.Quizzes
-            .Where(q => q.ClassId == classId)
+            .Where(q => q.ClassId == classId && q.Type != "pool")
             .OrderByDescending(q => q.CreatedAt)
             .Select(q => new QuizDto
             {

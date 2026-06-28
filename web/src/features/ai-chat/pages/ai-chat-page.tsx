@@ -6,6 +6,9 @@ import { Button } from '@/shared/ui/button';
 import { Input } from '@/shared/ui/input';
 import { Badge } from '@/shared/ui/badge';
 import {
+  Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter,
+} from '@/shared/ui/dialog';
+import {
   Bot,
   Send,
   Loader2,
@@ -37,6 +40,7 @@ export function AiChatPage() {
   const [input, setInput] = useState('');
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const [localMessages, setLocalMessages] = useState<ChatMessageDto[] | null>(null);
+  const [clearConfirmOpen, setClearConfirmOpen] = useState(false);
 
   const { data: history, isLoading } = useAiChatHistory();
   const displayedMessages = useMemo(
@@ -111,7 +115,7 @@ export function AiChatPage() {
         <Button
           variant="ghost"
           size="sm"
-          onClick={() => clearMutation.mutate()}
+          onClick={() => setClearConfirmOpen(true)}
           disabled={clearMutation.isPending || displayedMessages.length === 0}
         >
           <Trash2 className="mr-1 h-4 w-4" /> Xóa
@@ -205,6 +209,30 @@ export function AiChatPage() {
           </Button>
         </div>
       </div>
+
+      <Dialog open={clearConfirmOpen} onOpenChange={setClearConfirmOpen}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Xóa lịch sử cuộc trò chuyện</DialogTitle>
+            <DialogDescription>
+              Bạn có chắc chắn muốn xóa toàn bộ lịch sử cuộc trò chuyện này? Hành động này không thể hoàn tác.
+            </DialogDescription>
+          </DialogHeader>
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setClearConfirmOpen(false)}>Hủy</Button>
+            <Button
+              variant="destructive"
+              onClick={() => {
+                clearMutation.mutate();
+                setClearConfirmOpen(false);
+              }}
+              disabled={clearMutation.isPending}
+            >
+              {clearMutation.isPending ? 'Đang xóa...' : 'Xóa'}
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }

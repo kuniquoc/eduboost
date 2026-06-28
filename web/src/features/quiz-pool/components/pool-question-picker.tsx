@@ -9,6 +9,9 @@ import { Input } from '@/shared/ui/input';
 import { Badge } from '@/shared/ui/badge';
 import { Separator } from '@/shared/ui/separator';
 import {
+  Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter,
+} from '@/shared/ui/dialog';
+import {
   Search, Trash2, BookOpen, ChevronDown, ChevronUp, Loader2, Library, HelpCircle, Pencil, Check, X,
 } from 'lucide-react';
 import { toast } from 'sonner';
@@ -34,6 +37,7 @@ export interface PoolQuestionPickerProps {
   showQuestionSearch?: boolean;
   showDeleteButton?: boolean;
   enableTopicRename?: boolean;
+  enableQuizRename?: boolean;
   onSelectedQuestionsChange?: (questions: Array<QuestionDto & { topicName?: string }>) => void;
 }
 
@@ -77,13 +81,17 @@ export function PoolQuestionPicker({
   showQuestionSearch = false,
   showDeleteButton = false,
   enableTopicRename = false,
+  enableQuizRename = false,
   onSelectedQuestionsChange,
 }: PoolQuestionPickerProps) {
   const queryClient = useQueryClient();
   const questionCache = useRef<Map<string, QuestionDto & { topicName?: string }>>(new Map());
   const [search, setSearch] = useState('');
+  const [deleteQuizId, setDeleteQuizId] = useState<string | null>(null);
   const [renamingTopicId, setRenamingTopicId] = useState<string | null>(null);
   const [renameValue, setRenameValue] = useState('');
+  const [renamingQuizId, setRenamingQuizId] = useState<string | null>(null);
+  const [renameQuizValue, setRenameQuizValue] = useState('');
   const [selectedTopicState, setSelectedTopic] = useState<TopicPoolDto | null>(null);
   const [expandedQuizzes, setExpandedQuizzes] = useState<Record<string, boolean>>({});
   const [difficultyFilter, setDifficultyFilter] = useState<DifficultyFilter>('all');
@@ -123,6 +131,7 @@ export function PoolQuestionPicker({
     mutationFn: (quizId: string) => poolService.deletePoolQuiz(quizId),
     onSuccess: (_data, quizId) => {
       toast.success('Đã xóa quiz khỏi Pool');
+      setDeleteQuizId(null);
       queryClient.invalidateQueries({ queryKey: ['pool-topics'] });
       if (selectedTopic) {
         queryClient.invalidateQueries({ queryKey: ['quizzes-in-topic', selectedTopic.id] });
@@ -143,6 +152,22 @@ export function PoolQuestionPicker({
       if (selectedTopic?.id === updated.id) setSelectedTopic(updated);
       setRenamingTopicId(null);
       toast.success('Đã đổi tên chủ đề thành công');
+    },
+    onError: (error: unknown) => {
+      toast.error('Đổi tên thất bại: ' + getErrorMessage(error));
+    },
+  });
+
+  const renameQuizMutation = useMutation({
+    mutationFn: ({ quizId, name }: { quizId: string; name: string }) =>
+      poolService.renamePoolQuiz(quizId, name),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['pool-topics'] });
+      if (selectedTopic) {
+        queryClient.invalidateQueries({ queryKey: ['quizzes-in-topic', selectedTopic.id] });
+      }
+      setRenamingQuizId(null);
+      toast.success('Đã đổi tên quiz thành công');
     },
     onError: (error: unknown) => {
       toast.error('Đổi tên thất bại: ' + getErrorMessage(error));
@@ -447,16 +472,55 @@ export function PoolQuestionPicker({
                               checked={selected}
                               ref={(el) => { if (el) el.indeterminate = partial; }}
                               onChange={() => handleSelectQuiz(quiz.quizId)}
-                              className="h-4.5 w-4.5 rounded border-gray-300 text-purple-600 focus:ring-purple-500 accent-purple-600 cursor-pointer"
+                              className="h-4.5 w-4.5 rounded border-gray-300 text-purple-600 focus:ring-purple-500 accent-purple-600 cursor-pointer shrink-0"
                             />
-                            <div className="min-w-0" onClick={() => toggleQuiz(quiz.quizId)}>
-                              <p className="font-semibold text-sm cursor-pointer hover:text-purple-400 transition-colors truncate">
-                                {quiz.title}
-                              </p>
-                              <p className="text-[10px] text-muted-foreground mt-0.5">
-                                {quiz.questions.length} câu hỏi · {new Date(quiz.createdAt).toLocaleDateString('vi-VN')}
-                              </p>
-                            </div>
+                            {enableQuizRename && renamingQuizId === quiz.quizId ? (
+                              <div className="flex items-center gap-1.5 flex-1 min-w-0" onClick={(e) => e.stopPropagation()}>
+                                <Input
+                                  autoFocus
+                                  value={renameQuizValue}
+                                  onChange={(e) => setRenameQuizValue(e.target.value)}
+                                  onKeyDown={(e) => {
+                                    if (e.key === 'Enter') renameQuizMutation.mutate({ quizId: quiz.quizId, name: renameQuizValue });
+                                    if (e.key === 'Escape') setRenamingQuizId(null);
+                                  }}
+                                  className="h-8 text-xs bg-muted/20 border border-purple-500 outline-none px-2 rounded"
+                                />
+                                <button
+                                  onClick={() => renameQuizMutation.mutate({ quizId: quiz.quizId, name: renameQuizValue })}
+                                  disabled={renameQuizMutation.isPending || !renameQuizValue.trim()}
+                                  className="text-purple-400 hover:text-purple-300 disabled:opacity-40"
+                                >
+                                  <Check className="h-4 w-4" />
+                                </button>
+                                <button onClick={() => setRenamingQuizId(null)} className="text-muted-foreground hover:text-foreground">
+                                  <X className="h-4 w-4" />
+                                </button>
+                              </div>
+                            ) : (
+                              <div className="min-w-0 flex-1 group/quiz flex items-center justify-between gap-1.5">
+                                <div className="min-w-0 flex-1" onClick={() => toggleQuiz(quiz.quizId)}>
+                                  <p className="font-semibold text-sm cursor-pointer hover:text-purple-400 transition-colors truncate">
+                                    {quiz.title}
+                                  </p>
+                                  <p className="text-[10px] text-muted-foreground mt-0.5">
+                                    {quiz.questions.length} câu hỏi · {new Date(quiz.createdAt).toLocaleDateString('vi-VN')}
+                                  </p>
+                                </div>
+                                {enableQuizRename && (
+                                  <button
+                                    onClick={(e) => {
+                                      e.stopPropagation();
+                                      setRenamingQuizId(quiz.quizId);
+                                      setRenameQuizValue(quiz.title);
+                                    }}
+                                    className="shrink-0 opacity-0 group-hover/quiz:opacity-100 text-muted-foreground hover:text-purple-400 transition-opacity"
+                                  >
+                                    <Pencil className="h-3.5 w-3.5" />
+                                  </button>
+                                )}
+                              </div>
+                            )}
                           </div>
 
                           <div className="flex items-center gap-1.5 shrink-0">
@@ -465,7 +529,7 @@ export function PoolQuestionPicker({
                                 variant="ghost"
                                 size="icon"
                                 className="h-8 w-8 text-destructive hover:bg-destructive/10"
-                                onClick={() => deleteQuizMutation.mutate(quiz.quizId)}
+                                onClick={() => setDeleteQuizId(quiz.quizId)}
                                 disabled={deleteQuizMutation.isPending}
                               >
                                 <Trash2 className="h-4 w-4" />
@@ -550,6 +614,31 @@ export function PoolQuestionPicker({
           </Card>
         )}
       </div>
+
+      <Dialog open={!!deleteQuizId} onOpenChange={(open) => { if (!open) setDeleteQuizId(null); }}>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle>Xóa lượt sinh quiz khỏi Pool</DialogTitle>
+            <DialogDescription>
+              Bạn có chắc muốn xóa lượt sinh <strong>"{quizzes.find(q => q.quizId === deleteQuizId)?.title}"</strong>? Các câu hỏi của lượt sinh này sẽ bị xóa khỏi Pool của chủ đề.
+            </DialogDescription>
+          </DialogHeader>
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setDeleteQuizId(null)}>Hủy</Button>
+            <Button
+              variant="destructive"
+              onClick={() => {
+                if (deleteQuizId) {
+                  deleteQuizMutation.mutate(deleteQuizId);
+                }
+              }}
+              disabled={deleteQuizMutation.isPending}
+            >
+              {deleteQuizMutation.isPending ? 'Đang xóa...' : 'Xóa'}
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }

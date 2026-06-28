@@ -216,6 +216,7 @@ export function TeacherPoolDashboard() {
             onSelectionChange={({ poolQuizIds }) => setSelectedPoolQuizIds(poolQuizIds)}
             showDeleteButton
             enableTopicRename
+            enableQuizRename
           />
         </div>
       ) : (

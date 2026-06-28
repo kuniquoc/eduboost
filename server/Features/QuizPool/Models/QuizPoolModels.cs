@@ -31,6 +31,13 @@ public class RenamePoolTopicRequest
     public string Name { get; set; } = "";
 }
 
+public class RenamePoolQuizRequest
+{
+    [Required]
+    [MinLength(1)]
+    public string Name { get; set; } = "";
+}
+
 public class CreateTestFromPoolRequest
 {
     [Required]
@@ -39,8 +46,9 @@ public class CreateTestFromPoolRequest
     [Required]
     public string ClassId { get; set; } = "";
     
-    [Required]
     public List<string> PoolQuizIds { get; set; } = [];
+
+    public List<string> QuestionIds { get; set; } = [];
     
     public int TimeLimitMinutes { get; set; } = 45;
     public int TotalScore { get; set; } = 10;

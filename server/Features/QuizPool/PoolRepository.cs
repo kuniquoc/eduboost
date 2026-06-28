@@ -324,17 +324,43 @@ public class PoolRepository(AppDbContext db, IStorageService storage, IAgentServ
         return DeletePoolQuizResult.Success;
     }
 
+    public async Task<PoolQuizDetailDto?> RenamePoolQuizAsync(Guid userId, string userRole, Guid quizId, string newTitle)
+    {
+        var quiz = await db.Quizzes
+            .Include(q => q.Questions)
+                .ThenInclude(qu => qu.Options)
+            .FirstOrDefaultAsync(q => q.Id == quizId && q.Type == "pool");
+
+        if (quiz == null) return null;
+
+        bool isOwner = quiz.OwnerId == userId;
+        if (!isOwner && quiz.ClassId.HasValue)
+        {
+            var cls = await db.Classes.FindAsync(quiz.ClassId.Value);
+            isOwner = cls != null && cls.TeacherId == userId;
+        }
+
+        if (!isOwner) return null;
+
+        quiz.Title = newTitle.Trim();
+        await db.SaveChangesAsync();
+
+        return new PoolQuizDetailDto
+        {
+            QuizId = quiz.Id.ToString(),
+            Title = quiz.Title,
+            CreatedAt = quiz.CreatedAt.ToString("o"),
+            Questions = quiz.Questions.OrderBy(qu => qu.OrderIndex).Select(QuestionMapper.ToDto).ToList()
+        };
+    }
+
     public async Task<QuizDto> CreateTestFromPoolAsync(Guid userId, CreateTestFromPoolRequest request)
     {
         var classGuid = Guid.Parse(request.ClassId);
 
-        // Fetch selected pool quizzes and their questions
-        var poolQuizGuids = request.PoolQuizIds.Select(Guid.Parse).ToList();
-        var poolQuestions = await db.Questions
-            .Where(q => poolQuizGuids.Contains(q.QuizId) && q.Quiz.Type == "pool")
-            .Include(q => q.Options)
-            .Include(q => q.Quiz)
-            .ToListAsync();
+        var poolQuestions = await LoadPoolQuestionsForSelectionAsync(request.QuestionIds, request.PoolQuizIds);
+        if (poolQuestions.Count == 0)
+            throw new InvalidOperationException("Không có câu hỏi nào được chọn từ pool");
 
         // Create new quiz for the test
         var quiz = new Quiz
@@ -371,7 +397,7 @@ public class PoolRepository(AppDbContext db, IStorageService storage, IAgentServ
         var existingEntry = await db.Quizzes.AnyAsync(q => q.ClassId == classGuid && q.Type == "entry_test");
         if (existingEntry) return null;
 
-        var poolQuestions = await LoadPoolQuestionsForSelectionAsync(request);
+        var poolQuestions = await LoadPoolQuestionsForSelectionAsync(request.QuestionIds, request.PoolQuizIds);
         if (poolQuestions.Count == 0)
             throw new InvalidOperationException("Không có câu hỏi nào được chọn từ pool");
 
@@ -470,14 +496,14 @@ public class PoolRepository(AppDbContext db, IStorageService storage, IAgentServ
 
     // ── Helpers ─────────────────────────────────────────────────────────────
 
-    private async Task<List<Question>> LoadPoolQuestionsForSelectionAsync(CreateEntryTestFromPoolRequest request)
+    private async Task<List<Question>> LoadPoolQuestionsForSelectionAsync(List<string> questionIds, List<string> poolQuizIds)
     {
         var result = new List<Question>();
         var seen = new HashSet<Guid>();
 
-        if (request.QuestionIds.Count > 0)
+        if (questionIds.Count > 0)
         {
-            var questionGuids = request.QuestionIds.Select(Guid.Parse).ToList();
+            var questionGuids = questionIds.Select(Guid.Parse).ToList();
             var byId = await db.Questions
                 .Where(q => questionGuids.Contains(q.Id) && q.Quiz.Type == "pool")
                 .Include(q => q.Options)
@@ -491,9 +517,9 @@ public class PoolRepository(AppDbContext db, IStorageService storage, IAgentServ
             }
         }
 
-        if (request.PoolQuizIds.Count > 0)
+        if (poolQuizIds.Count > 0)
         {
-            var poolQuizGuids = request.PoolQuizIds.Select(Guid.Parse).ToList();
+            var poolQuizGuids = poolQuizIds.Select(Guid.Parse).ToList();
             var batchQuestions = await db.Questions
                 .Where(q => poolQuizGuids.Contains(q.QuizId) && q.Quiz.Type == "pool")
                 .Include(q => q.Options)

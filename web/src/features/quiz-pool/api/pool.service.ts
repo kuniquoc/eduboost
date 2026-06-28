@@ -71,6 +71,11 @@ export const poolService = {
     return res.data.data!;
   },
 
+  renamePoolQuiz: async (quizId: string, name: string): Promise<PoolQuizDetailDto> => {
+    const res = await apiClient.patch<ApiResponse<PoolQuizDetailDto>>(`/pool/quizzes/${quizId}/rename`, { name });
+    return res.data.data!;
+  },
+
   updatePoolQuestion: async (questionId: string, data: import('@/features/quizzes/types').UpdateQuestionPayload) => {
     const res = await apiClient.patch<ApiResponse<import('@/features/quizzes/types').QuestionDto>>(`/pool/questions/${questionId}`, data);
     return res.data.data!;

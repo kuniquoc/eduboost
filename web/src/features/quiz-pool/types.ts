@@ -18,7 +18,8 @@ export interface GeneratePoolQuizRequest {
 export interface CreateTestFromPoolRequest {
   title: string;
   classId: string;
-  poolQuizIds: string[];
+  poolQuizIds?: string[];
+  questionIds?: string[];
   timeLimitMinutes?: number;
   totalScore?: number;
 }
