@@ -4,7 +4,7 @@ from unittest.mock import MagicMock, patch
 
 try:
     from fastapi.testclient import TestClient
-    from src.api.main import app
+    from eduboost_agent.api.main import app
 
     HAS_FASTAPI = True
 except ImportError:
@@ -41,14 +41,14 @@ class TestChatTopicSearch(unittest.TestCase):
         mock_db = MagicMock()
         mock_db.search = fake_search
 
-        with patch.dict("os.environ", {"APP_ENV": "production"}), patch("src.api.routes.tutor.runtime") as mock_runtime:
+        with patch.dict("os.environ", {"APP_ENV": "production"}), patch("eduboost_agent.api.routes.tutor.runtime") as mock_runtime:
             mock_runtime.llm_available.return_value = True
             mock_runtime.llm_chat = MagicMock()
             mock_runtime.retriever = MagicMock()
             mock_runtime.vector_db = mock_db
             mock_runtime.llm_chat.generate.return_value = "answer"
 
-            with self.assertLogs("src.api.routes.tutor", level="INFO") as logs:
+            with self.assertLogs("eduboost_agent.api.routes.tutor", level="INFO") as logs:
                 with TestClient(app) as client:
                     response = client.post(
                         "/tutor/chat",

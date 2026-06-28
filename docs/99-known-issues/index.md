@@ -25,17 +25,6 @@
 | 1 | Mobile entry-test → migrate sang placement-tests | mobile | 🔧 |
 | 2 | vLLM orchestrator (future) | agent | 🔧 |
 
-## Tài liệu cũ đã lỗi thời
-
-| File | Vấn đề |
-|------|--------|
-| `docs/implementation-plan.md` | Nhiều mục "chưa có" đã implement |
-| `docs/web-technical-spec.md` | Mô tả hooks/, sidebar cũ |
-| `docs/features.md` | Demo login — không có (cố ý) |
-| `docs/01-web/services/learningPath.service.md` | Service đã gỡ |
-
-Xem header DEPRECATED trong từng file cũ.
-
 ## Cách gắn badge trong docs mới
 
 Mọi file trong `01-web/`, `02-server/`, `03-ai-agent-core/` dùng badge ở đầu file và trong bảng hàm. Khi sửa code, cập nhật badge tương ứng.

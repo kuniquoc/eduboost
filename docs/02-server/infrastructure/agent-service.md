@@ -1,6 +1,6 @@
 # Infrastructure: AgentService
 
-> File: [`server/Infrastructure/Services/AgentService.cs`](../../../server/Infrastructure/Services/AgentService.cs)
+> File: [`server/Infrastructure/Integrations/Agent/AgentService.cs`](../../../server/Infrastructure/Integrations/Agent/AgentService.cs)
 
 ## Vai trò
 

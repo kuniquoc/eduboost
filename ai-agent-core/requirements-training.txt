@@ -1,0 +1,12 @@
+-r requirements-dev.txt
+torch
+transformers
+datasets
+accelerate
+peft
+trl
+bitsandbytes
+unsloth
+matplotlib
+seaborn
+pyngrok

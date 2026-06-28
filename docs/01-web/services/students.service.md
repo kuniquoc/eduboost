@@ -1,6 +1,6 @@
 # Module: students.service
 
-> File nguồn: [`web/src/services/students.service.ts`](../../../web/src/services/students.service.ts)
+> File nguồn: [`web/src/features/students.service.ts`](../../../web/src/features/students/api/students.service.ts)
 
 ## Vai trò
 API client wrapper cho `students` endpoints.

@@ -3,7 +3,7 @@ import unittest
 
 try:
     from fastapi.testclient import TestClient
-    from src.api.main import app
+    from eduboost_agent.api.main import app
 
     HAS_FASTAPI = True
 except ImportError:

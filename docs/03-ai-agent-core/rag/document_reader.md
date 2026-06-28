@@ -1,6 +1,6 @@
 # Module: document_reader.py
 
-> File: [`ai-agent-core/src/src/rag/document_reader.py`](../../../ai-agent-core/src/src/rag/document_reader.py)
+> File: [`ai-agent-core/src/src/eduboost_agent/rag/document_reader.py`](../../../ai-agent-core/src/eduboost_agent/rag/document_reader.py)
 
 ## RAG stack
 

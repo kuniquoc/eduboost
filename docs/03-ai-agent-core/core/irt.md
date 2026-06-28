@@ -1,6 +1,6 @@
 # Module: irt.py
 
-> File: [`ai-agent-core/src/src/core/irt.py`](../../../ai-agent-core/src/src/core/irt.py)
+> File: [`ai-agent-core/src/src/eduboost_agent/learning/irt.py`](../../../ai-agent-core/src/eduboost_agent/learning/irt.py)
 
 ## Core algorithms
 

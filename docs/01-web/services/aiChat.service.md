@@ -1,6 +1,6 @@
 # Module: aiChat.service
 
-> File nguồn: [`web/src/services/aiChat.service.ts`](../../../web/src/services/aiChat.service.ts)
+> File nguồn: [`web/src/features/aiChat.service.ts`](../../../web/src/features/ai-chat/api/ai-chat.service.ts)
 
 ## Vai trò
 API client wrapper cho `aiChat` endpoints.

@@ -13,12 +13,17 @@ Features/
 ├── QuizPool/
 ├── ...
 Infrastructure/
-├── AppDbContext.cs
-├── Entities/
-├── Migrations/
-├── Services/AgentService.cs
-└── Storage/MinioStorageService.cs
+├── DependencyInjection.cs
+├── Persistence/       AppDbContext + Entities + Migrations + Seeding
+└── Integrations/
+    ├── Agent/         AgentService + contracts + validation
+    └── Storage/       MinioStorageService
 ```
+
+Repository công khai vẫn giữ interface cũ. Các phần dùng chung được tách theo
+feature: mapper/factory câu hỏi, session store và repository partial theo use case.
+Test project mirror feature tại `tests/server/EduBoost.API.Tests/`.
+`Program.cs` đăng ký qua `AddEduBoostFeatures()` và `AddAgentIntegration()`.
 
 ## Bootstrap ([`Program.cs`](../../server/Program.cs))
 
@@ -29,7 +34,7 @@ Infrastructure/
 | Swagger | JWT Bearer tại `/swagger` |
 | EF Core | PostgreSQL, auto-migrate startup |
 | JWT | Bearer, claims: sub, email, role, name, jti |
-| CORS | AllowAnyOrigin ❌ |
+| CORS | Whitelist theo `Cors:AllowedOrigins`; chỉ mở rộng trong development |
 | DI | 15 repositories scoped + IAgentService + IStorageService |
 | Minimal APIs | `GET /`, `GET /health` |
 

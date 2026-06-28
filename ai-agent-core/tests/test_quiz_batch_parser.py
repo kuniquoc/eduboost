@@ -1,8 +1,8 @@
 import unittest
 from unittest.mock import MagicMock, patch
 
-from src.api.models import GenerateQuizBatchRequest
-from src.api.quiz_batch_service import (
+from eduboost_agent.api.models import GenerateQuizBatchRequest
+from eduboost_agent.api.quiz_batch_service import (
     _build_quiz_retrieval_query,
     _build_avoid_texts,
     _build_retry_hint,
@@ -124,7 +124,7 @@ class TestBuildQuizRetrievalQuery(unittest.TestCase):
 class TestLoadQuizContextFromRag(unittest.TestCase):
     def test_uses_retrieval_query_for_lookup(self):
         retrieval_query = "English Grammar\nfocus on present simple"
-        with patch("src.api.quiz_batch_service.runtime") as mock_runtime:
+        with patch("eduboost_agent.api.quiz_batch_service.runtime") as mock_runtime:
             mock_runtime.retriever = MagicMock()
             mock_runtime.retriever.get_context_hits.return_value = [
                 (0.9, {"text": "Present simple is used for habits."})
@@ -161,11 +161,11 @@ class TestGenerateQuizBatchRetrievalQuery(unittest.IsolatedAsyncioTestCase):
             "explanation": "Vì chủ ngữ số ít.",
         }
 
-        with patch("src.api.quiz_batch_service.runtime") as mock_runtime, patch(
-            "src.api.quiz_batch_service._load_quiz_context_from_rag",
+        with patch("eduboost_agent.api.quiz_batch_service.runtime") as mock_runtime, patch(
+            "eduboost_agent.api.quiz_batch_service._load_quiz_context_from_rag",
             return_value=["Chunk A"],
         ) as mock_load_rag, patch(
-            "src.api.quiz_batch_service._parse_single_question",
+            "eduboost_agent.api.quiz_batch_service._parse_single_question",
             return_value=parsed_question,
         ):
             mock_runtime.llm_quiz = MagicMock()
@@ -200,11 +200,11 @@ class TestGenerateQuizBatchRetrievalQuery(unittest.IsolatedAsyncioTestCase):
             "explanation": "Vì chủ ngữ số ít.",
         }
 
-        with patch("src.api.quiz_batch_service.runtime") as mock_runtime, patch(
-            "src.api.quiz_batch_service._load_quiz_context_from_rag",
+        with patch("eduboost_agent.api.quiz_batch_service.runtime") as mock_runtime, patch(
+            "eduboost_agent.api.quiz_batch_service._load_quiz_context_from_rag",
             return_value=["Chunk A"],
         ) as mock_load_rag, patch(
-            "src.api.quiz_batch_service._parse_single_question",
+            "eduboost_agent.api.quiz_batch_service._parse_single_question",
             return_value=parsed_question,
         ):
             mock_runtime.llm_quiz = MagicMock()

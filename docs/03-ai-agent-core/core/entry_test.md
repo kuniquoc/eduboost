@@ -1,6 +1,6 @@
 # Module: entry_test.py
 
-> File: [`ai-agent-core/src/src/core/entry_test.py`](../../../ai-agent-core/src/src/core/entry_test.py)
+> File: [`ai-agent-core/src/src/eduboost_agent/learning/entry_test.py`](../../../ai-agent-core/src/eduboost_agent/learning/entry_test.py)
 
 ## Core algorithms
 

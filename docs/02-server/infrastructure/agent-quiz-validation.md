@@ -1,6 +1,6 @@
 # Infrastructure: AgentQuizValidation
 
-> File: [`server/Infrastructure/Services/AgentQuizValidation.cs`](../../../server/Infrastructure/Services/AgentQuizValidation.cs)
+> File: [`server/Infrastructure/Integrations/Agent/AgentQuizValidation.cs`](../../../server/Infrastructure/Integrations/Agent/AgentQuizValidation.cs)
 
 ## Vai trò
 

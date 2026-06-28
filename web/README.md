@@ -19,9 +19,8 @@ App runs at http://localhost:5173
 
 ## Structure
 
-- `src/features/` — pages by role (student, teacher, admin)
-- `src/services/` — API clients
-- `src/hooks/` — shared React Query hooks
-- `src/components/` — layout and UI primitives
+- `src/app/` — router, providers and layouts
+- `src/features/<domain>/` — API, hooks, types, components, pages and tests
+- `src/shared/` — API client, UI primitives and cross-domain utilities
 
 See [docs/01-web/](../docs/01-web/README.md) for routing and architecture.

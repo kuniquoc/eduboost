@@ -30,7 +30,7 @@ Tài liệu tham chiếu đầy đủ cho toàn bộ hệ thống EduBoost: **we
 1. [03-ai-agent-core/README.md](03-ai-agent-core/README.md)
 2. [03-ai-agent-core/api/](03-ai-agent-core/api/) — 16 FastAPI endpoints
 3. [03-ai-agent-core/core/](03-ai-agent-core/core/) — BKT, IRT, orchestrator
-4. [ai-agent-core/docs/](../ai-agent-core/docs/) — Training, RAG theory (tiếng Việt)
+4. [03-ai-agent-core/guides/](03-ai-agent-core/guides/) — Training, RAG theory (tiếng Việt)
 
 ### QA / PM
 1. [99-known-issues/index.md](99-known-issues/index.md) — **Đọc trước khi test**
@@ -49,17 +49,6 @@ docs/
 ├── 04-integration/              API reference, data models, flows, mapping
 └── 99-known-issues/             Gap, technical debt, inconsistencies
 ```
-
-## Tài liệu cũ (deprecated)
-
-| File cũ | Thay thế bởi |
-|---------|--------------|
-| `web-technical-spec.md` | [01-web/architecture.md](01-web/architecture.md) |
-| `implementation-plan.md` | [99-known-issues/index.md](99-known-issues/index.md) |
-| `code-flows.md` | [04-integration/flows/](04-integration/flows/) |
-| `api-reference.md` (root) | [04-integration/api-reference.md](04-integration/api-reference.md) |
-| `data-models.md` (root) | [04-integration/data-models.md](04-integration/data-models.md) |
-| `features.md` (root) | [01-web/features/](01-web/features/) |
 
 ## Luồng đọc nhanh (người mới)
 

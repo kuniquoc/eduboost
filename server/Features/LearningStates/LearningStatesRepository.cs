@@ -1,7 +1,10 @@
 using EduBoost.API.Features.LearningStates.Models;
 using EduBoost.API.Infrastructure;
 using EduBoost.API.Infrastructure.Entities;
-using EduBoost.API.Infrastructure.Services;
+using EduBoost.API.Common.Learning;
+using EduBoost.API.Features.Quizzes.Services;
+using EduBoost.API.Features.Students.Services;
+using EduBoost.API.Infrastructure.Integrations.Agent;
 using Microsoft.EntityFrameworkCore;
 
 namespace EduBoost.API.Features.LearningStates;

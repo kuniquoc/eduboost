@@ -1,6 +1,6 @@
 # Module: ingest.py
 
-> File: [`ai-agent-core/src/src/rag/ingest.py`](../../../ai-agent-core/src/src/rag/ingest.py)
+> File: [`ai-agent-core/src/src/eduboost_agent/rag/ingest.py`](../../../ai-agent-core/src/eduboost_agent/rag/ingest.py)
 
 ## RAG stack
 

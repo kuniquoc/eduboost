@@ -1,5 +1,6 @@
 import unittest
-from src.core.orchestrator import AgentOrchestrator
+from eduboost_agent.learning.orchestrator import AgentOrchestrator
+from eduboost_agent.learning.config import BKT_MASTERY_THRESHOLD
 
 class TestAgentOrchestrator(unittest.TestCase):
     def setUp(self):
@@ -23,7 +24,7 @@ class TestAgentOrchestrator(unittest.TestCase):
 
     def test_decide_next_skill(self):
         """Kiểm tra ra quyết định CHUYỂN BÀI khi P(L) cao"""
-        self.orchestrator.skills["grammar"] = 0.9 # Mastered
+        self.orchestrator.skills["grammar"] = BKT_MASTERY_THRESHOLD  # Mastered
         decision = self.orchestrator.decide_next_action("grammar")
         self.assertEqual(decision["action"], "NEXT_SKILL")
 

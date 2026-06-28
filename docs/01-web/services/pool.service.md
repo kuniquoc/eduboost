@@ -1,6 +1,6 @@
 # Module: pool.service
 
-> File nguồn: [`web/src/services/pool.service.ts`](../../../web/src/services/pool.service.ts)
+> File nguồn: [`web/src/features/pool.service.ts`](../../../web/src/features/quiz-pool/api/pool.service.ts)
 
 ## Vai trò
 API client wrapper cho `pool` endpoints.

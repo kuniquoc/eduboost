@@ -23,7 +23,6 @@
 
 ## SM-2 (Spaced Repetition)
 
-- **Service:** [`SpacedRepetitionService.cs`](../../../server/Infrastructure/Services/SpacedRepetitionService.cs)
 - **Quality:** `ComputeQuality(isCorrect, responseTimeSeconds)` — port từ Python (5/4/3/1)
 - **Mốc interval:** rep 0→1 ngày, rep 1→6 ngày, sau đó `interval × easeFactor`
 - **Nguồn sự thật:** PostgreSQL `spaced_repetition_items` — không gọi agent `/spaced-repetition/update`

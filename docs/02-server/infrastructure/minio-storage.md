@@ -1,6 +1,6 @@
 # Infrastructure: MinioStorageService
 
-> File: [`server/Infrastructure/Storage/MinioStorageService.cs`](../../../server/Infrastructure/Storage/MinioStorageService.cs)
+> File: [`server/Infrastructure/Integrations/Storage/MinioStorageService.cs`](../../../server/Infrastructure/Integrations/Storage/MinioStorageService.cs)
 
 ## Buckets
 

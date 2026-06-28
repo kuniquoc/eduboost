@@ -1,6 +1,6 @@
 # Components
 
-## Layout ([`components/layout/`](../../../web/src/components/layout/))
+## Layout ([`components/layout/`](../../../web/src/app/layouts/))
 
 | Component | File | Mô tả | Status |
 |-----------|------|-------|--------|
@@ -8,14 +8,14 @@
 | `AppLayout` | `app-layout.tsx` | Sidebar + outlet theo role | ✅ |
 | `ProtectedRoute` | `protected-route.tsx` | Auth + role guard | ✅ |
 
-## Shared ([`components/shared/`](../../../web/src/components/shared/))
+## Shared ([`components/shared/`](../../../web/src/features/quiz-pool/components/))
 
 | Component | File | Mô tả | Status |
 |-----------|------|-------|--------|
 | `QuizGenerationDialog` | `quiz-generation-dialog.tsx` | Sinh quiz từ document | ✅ |
 | `QuizBuilderDialog` | `quiz-builder-dialog.tsx` | Tạo quiz thủ công | ✅ |
 
-## UI primitives ([`components/ui/`](../../../web/src/components/ui/))
+## UI primitives ([`components/ui/`](../../../web/src/shared/ui/))
 
 16 shadcn components: `avatar`, `badge`, `button`, `card`, `dialog`, `dropdown-menu`, `input`, `label`, `progress`, `select`, `separator`, `sonner`, `switch`, `table`, `tabs`, `textarea`, `tooltip`.
 

@@ -1,6 +1,6 @@
 # Web Services
 
-16 API client modules wrapping `apiClient` (Axios).
+14 API client modules wrapping shared `apiClient` (Axios).
 
 | Service | Methods | Doc |
 |---------|---------|-----|
@@ -13,8 +13,6 @@
 | pool.service | 6 | [pool.service.md](pool.service.md) |
 | roadmap.service | 3 | [roadmap.service.md](roadmap.service.md) |
 | students.service | 4 | [students.service.md](students.service.md) |
-| learningState.service | 4 | [learningState.service.md](learningState.service.md) |
-| learningPath.service | 3 🔧 | [learningPath.service.md](learningPath.service.md) |
 | placementTest.service | 4 | [placementTest.service.md](placementTest.service.md) |
 | practiceSession.service | 3 | [practiceSession.service.md](practiceSession.service.md) |
 | aiChat.service | 3 | [aiChat.service.md](aiChat.service.md) |

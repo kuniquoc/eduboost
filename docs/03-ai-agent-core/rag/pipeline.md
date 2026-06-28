@@ -1,6 +1,6 @@
 # Module: pipeline.py
 
-> File: [`ai-agent-core/src/src/rag/pipeline.py`](../../../ai-agent-core/src/src/rag/pipeline.py)
+> File: [`ai-agent-core/src/src/eduboost_agent/rag/pipeline.py`](../../../ai-agent-core/src/eduboost_agent/rag/pipeline.py)
 
 ## RAG stack
 

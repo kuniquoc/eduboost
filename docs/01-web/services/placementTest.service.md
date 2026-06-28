@@ -1,6 +1,6 @@
 # Module: placementTest.service
 
-> File nguồn: [`web/src/services/placementTest.service.ts`](../../../web/src/services/placementTest.service.ts)
+> File nguồn: [`web/src/features/placementTest.service.ts`](../../../web/src/features/placement-test/api/placement-test.service.ts)
 
 ## Vai trò
 API client wrapper cho `placementTest` endpoints.

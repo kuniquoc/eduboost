@@ -8,7 +8,7 @@ Trang/feature `AI Chat` trong EduBoost web app.
 
 ## File nguồn
 
-[`web/src/features/student/ai-chat/ai-chat-page.tsx`](../../../web/src/features/student/ai-chat/ai-chat-page.tsx)
+[`web/src/features/ai-chat/ai-chat-page.tsx`](../../../web/src/features/ai-chat/pages/ai-chat-page.tsx)
 
 ## Routes
 

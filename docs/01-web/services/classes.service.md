@@ -1,6 +1,6 @@
 # Module: classes.service
 
-> File nguồn: [`web/src/services/classes.service.ts`](../../../web/src/services/classes.service.ts)
+> File nguồn: [`web/src/features/classes.service.ts`](../../../web/src/features/classes/api/classes.service.ts)
 
 ## Vai trò
 API client wrapper cho `classes` endpoints.

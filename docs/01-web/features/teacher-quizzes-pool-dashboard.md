@@ -8,7 +8,7 @@ Trang/feature `Teacher Quiz Pool` trong EduBoost web app.
 
 ## File nguồn
 
-[`web/src/features/teacher/quizzes/pool-dashboard.tsx`](../../../web/src/features/teacher/quizzes/pool-dashboard.tsx)
+[`web/src/features/quizzes/pool-dashboard.tsx`](../../../web/src/features/quiz-pool/pages/teacher-pool-dashboard.tsx)
 
 ## Routes
 

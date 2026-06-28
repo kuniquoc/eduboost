@@ -8,7 +8,7 @@ Trang/feature `AI Studio` trong EduBoost web app.
 
 ## File nguồn
 
-[`web/src/features/teacher/quizzes/quiz-review-page.tsx`](../../../web/src/features/teacher/quizzes/quiz-review-page.tsx)
+[`web/src/features/quizzes/quiz-review-page.tsx`](../../../web/src/features/quizzes/pages/teacher-quiz-review-page.tsx)
 
 ## Routes
 

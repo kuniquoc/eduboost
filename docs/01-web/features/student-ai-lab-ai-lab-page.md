@@ -8,7 +8,7 @@ Trang/feature `AI Lab` trong EduBoost web app.
 
 ## File nguồn
 
-[`web/src/features/student/ai-lab/ai-lab-page.tsx`](../../../web/src/features/student/ai-lab/ai-lab-page.tsx)
+[`web/src/features/ai-lab/ai-lab-page.tsx`](../../../web/src/features/ai-lab/pages/ai-lab-page.tsx)
 
 ## Routes
 

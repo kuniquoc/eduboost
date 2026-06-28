@@ -8,7 +8,7 @@ Trang tổng quan tiến độ học tập của học sinh.
 
 ## File nguồn
 
-[`web/src/features/student/dashboard/dashboard-page.tsx`](../../../web/src/features/student/dashboard/dashboard-page.tsx)
+[`web/src/features/student/dashboard/dashboard-page.tsx`](../../../web/src/features/dashboard/pages/student-dashboard-page.tsx)
 
 ## Routes
 

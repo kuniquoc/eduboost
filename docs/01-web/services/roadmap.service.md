@@ -1,6 +1,6 @@
 # Module: roadmap.service
 
-> File nguồn: [`web/src/services/roadmap.service.ts`](../../../web/src/services/roadmap.service.ts)
+> File nguồn: [`web/src/features/roadmap.service.ts`](../../../web/src/features/roadmap/api/roadmap.service.ts)
 
 ## Vai trò
 API client wrapper cho `roadmap` endpoints.

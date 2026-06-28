@@ -1,6 +1,6 @@
 # Module: config.py
 
-> File: [`ai-agent-core/src/src/core/config.py`](../../../ai-agent-core/src/src/core/config.py)
+> File: [`ai-agent-core/src/src/eduboost_agent/learning/config.py`](../../../ai-agent-core/src/eduboost_agent/learning/config.py)
 
 ## Core algorithms
 

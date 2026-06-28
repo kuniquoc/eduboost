@@ -1,6 +1,6 @@
 # Store & Types
 
-## auth-store ([`store/auth-store.ts`](../../web/src/store/auth-store.ts))
+## auth-store ([`store/auth-store.ts`](../../web/src/features/auth/auth-store.ts))
 
 > Trạng thái: ✅
 
@@ -16,30 +16,26 @@
 
 Đăng ký `setOnLogoutCallback` để axios interceptor gọi logout khi refresh fail.
 
-## types/index.ts ([`types/index.ts`](../../web/src/types/index.ts))
+## Types theo domain
 
-Shared TypeScript interfaces ported từ mobile:
+DTO được đặt cạnh feature sở hữu; không có barrel `types/index.ts` dùng chung:
 
 | Nhóm | Types chính |
 |------|-------------|
-| Auth | `User`, `AuthTokens`, `ApiResponse<T>` |
-| Classes | `ClassDto`, `ClassDetailDto`, `StudentEnrollmentDto` |
-| Documents | `DocumentDto`, `UploadUrlDto`, `GenerateQuizJobDto` |
-| Quizzes | `QuestionDto`, `QuizDto`, `EntryTestDto`, `TutorNextActionDto` |
-| Pool | `TopicPoolDto`, `PoolQuizDetailDto`, `GeneratePoolQuizRequest` |
-| Learning | `BktStateDto`, `ReviewScheduleDto`, `RoadmapDto` |
-| Placement | `PlacementTestResultDto`, `StartPlacementTestResponse` |
-| Chat | `ChatMessageDto`, `AskAiRequest` |
+| Auth | `features/auth/types.ts` |
+| Classes | `features/classes/types.ts` |
+| Documents | `features/documents/types.ts` |
+| Quizzes | `features/quizzes/types.ts` |
+| Pool | `features/quiz-pool/types.ts` |
+| Practice/placement | `features/practice/types.ts`, `shared/types/learning.ts` |
+| Chat/admin | `features/ai-chat/types.ts`, `features/admin/types.ts` |
+| API envelope | `shared/api/types.ts` |
 
-## lib/
+## shared/lib/
 
 | File | Export | Trạng thái |
 |------|--------|------------|
 | `utils.ts` | `cn()` clsx + tailwind-merge | ✅ |
 | `constants.ts` | `ROUTES` — đầy đủ routes trong App.tsx | ✅ |
 
-## utils/
-
-| File | Mô tả |
-|------|-------|
-| `text-normalization.ts` | LaTeX → Unicode cho tutor/practice display |
+`text-normalization.ts` chuẩn hóa LaTeX cho tutor/practice display.

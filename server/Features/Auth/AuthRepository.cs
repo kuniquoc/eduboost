@@ -5,7 +5,7 @@ using System.Text;
 using EduBoost.API.Features.Auth.Models;
 using EduBoost.API.Infrastructure;
 using EduBoost.API.Infrastructure.Entities;
-using EduBoost.API.Infrastructure.Storage;
+using EduBoost.API.Infrastructure.Integrations.Storage;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 

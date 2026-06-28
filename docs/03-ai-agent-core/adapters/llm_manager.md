@@ -1,6 +1,6 @@
 # Module: llm_manager.py
 
-> File: [`ai-agent-core/src/src/adapters/llm_manager.py`](../../../ai-agent-core/src/src/adapters/llm_manager.py)
+> File: [`ai-agent-core/src/src/eduboost_agent/llm/llm_manager.py`](../../../ai-agent-core/src/eduboost_agent/llm/llm_manager.py)
 
 ## LLM adapters
 

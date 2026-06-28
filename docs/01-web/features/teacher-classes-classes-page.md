@@ -8,7 +8,7 @@ Trang/feature `Teacher Classes` trong EduBoost web app.
 
 ## File nguồn
 
-[`web/src/features/teacher/classes/classes-page.tsx`](../../../web/src/features/teacher/classes/classes-page.tsx)
+[`web/src/features/classes/classes-page.tsx`](../../../web/src/features/classes/pages/student/classes-page.tsx)
 
 ## Routes
 

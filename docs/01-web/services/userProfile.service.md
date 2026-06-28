@@ -1,6 +1,6 @@
 # Module: userProfile.service
 
-> File nguồn: [`web/src/services/userProfile.service.ts`](../../../web/src/services/userProfile.service.ts)
+> File nguồn: [`web/src/features/userProfile.service.ts`](../../../web/src/features/profile/api/user-profile.service.ts)
 
 ## Vai trò
 API client wrapper cho `userProfile` endpoints.

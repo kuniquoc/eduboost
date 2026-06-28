@@ -8,7 +8,7 @@ Trang/feature `Quizzes Tab` trong EduBoost web app.
 
 ## File nguồn
 
-[`web/src/features/teacher/classes/tabs/quizzes-tab.tsx`](../../../web/src/features/teacher/classes/tabs/quizzes-tab.tsx)
+[`web/src/features/classes/tabs/quizzes-tab.tsx`](../../../web/src/features/classes/components/teacher/quizzes-tab.tsx)
 
 ## Routes
 

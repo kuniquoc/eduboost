@@ -40,7 +40,3 @@ Checklist đảm bảo mỗi endpoint có tài liệu cross-reference.
 4. Thêm flow trong `04-integration/flows/`
 5. Cập nhật `web-server-agent-map.md`
 6. Ghi gap vào `99-known-issues/` nếu chưa hoàn thiện
-
-## Deprecated docs
-
-Các file root `docs/*.md` cũ có header DEPRECATED — dùng `04-integration/` và cấu trúc mới.

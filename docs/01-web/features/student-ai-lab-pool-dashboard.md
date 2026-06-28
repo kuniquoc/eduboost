@@ -8,7 +8,7 @@ Trang quản lý kho câu hỏi AI cá nhân, tạo bộ ôn tập, và **bắt 
 
 ## File nguồn
 
-[`web/src/features/student/ai-lab/pool-dashboard.tsx`](../../../web/src/features/student/ai-lab/pool-dashboard.tsx)
+[`web/src/features/ai-lab/pool-dashboard.tsx`](../../../web/src/features/quiz-pool/pages/student-pool-dashboard.tsx)
 
 ## Routes
 

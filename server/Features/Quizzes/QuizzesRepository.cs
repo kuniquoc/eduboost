@@ -5,7 +5,10 @@ using EduBoost.API.Features.LearningStates.Models;
 using EduBoost.API.Features.Quizzes.Models;
 using EduBoost.API.Infrastructure;
 using EduBoost.API.Infrastructure.Entities;
-using EduBoost.API.Infrastructure.Services;
+using EduBoost.API.Common.Learning;
+using EduBoost.API.Features.Quizzes.Services;
+using EduBoost.API.Features.Students.Services;
+using EduBoost.API.Infrastructure.Integrations.Agent;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 
@@ -42,8 +45,28 @@ public interface IQuizzesRepository
     Task CompleteTutorPracticeAsync(Guid userId, Guid topicId, int questionsAttempted, int correctAnswers);
 }
 
-public class QuizzesRepository(AppDbContext db, IAgentService agent, ILearningStatesRepository learningStates, IRoadmapRepository roadmap, ILogger<QuizzesRepository> logger) : IQuizzesRepository
+public partial class QuizzesRepository : IQuizzesRepository
 {
+    private readonly AppDbContext db;
+    private readonly IAgentService agent;
+    private readonly ILearningStatesRepository learningStates;
+    private readonly IRoadmapRepository roadmap;
+    private readonly ILogger<QuizzesRepository> logger;
+
+    public QuizzesRepository(
+        AppDbContext db,
+        IAgentService agent,
+        ILearningStatesRepository learningStates,
+        IRoadmapRepository roadmap,
+        ILogger<QuizzesRepository> logger)
+    {
+        this.db = db;
+        this.agent = agent;
+        this.learningStates = learningStates;
+        this.roadmap = roadmap;
+        this.logger = logger;
+    }
+
     public async Task<QuizDto?> GetQuizByIdAsync(Guid quizId)
     {
         var quiz = await db.Quizzes
@@ -69,7 +92,7 @@ public class QuizzesRepository(AppDbContext db, IAgentService agent, ILearningSt
             .Where(q => q.QuizId == quizId)
             .Include(q => q.Options)
             .OrderBy(q => q.OrderIndex)
-            .Select(q => MapToDto(q))
+            .Select(q => QuestionMapper.ToDto(q))
             .ToListAsync();
     }
 
@@ -85,7 +108,7 @@ public class QuizzesRepository(AppDbContext db, IAgentService agent, ILearningSt
         if (request.Difficulty != null || request.DifficultyIndex.HasValue)
         {
             if (request.Difficulty != null) question.Difficulty = request.Difficulty;
-            question.DifficultyIndex = ResolveDifficultyIndex(request.DifficultyIndex, request.Difficulty ?? question.Difficulty);
+            question.DifficultyIndex = QuestionMapper.ResolveDifficultyIndex(request.DifficultyIndex, request.Difficulty ?? question.Difficulty);
             question.IsEstimatedDifficultyIndex = !request.DifficultyIndex.HasValue;
         }
 
@@ -179,7 +202,7 @@ public class QuizzesRepository(AppDbContext db, IAgentService agent, ILearningSt
             await db.SaveChangesAsync();
         }
 
-        return MapToDto(question);
+        return QuestionMapper.ToDto(question);
     }
 
     public async Task<bool> DeleteQuestionAsync(Guid questionId)
@@ -265,7 +288,7 @@ public class QuizzesRepository(AppDbContext db, IAgentService agent, ILearningSt
         }
 
         await db.SaveChangesAsync();
-        return added.Select(MapToDto).ToList();
+        return added.Select(QuestionMapper.ToDto).ToList();
     }
 
     public async Task<QuestionDto?> VerifyQuestionAsync(Guid questionId, bool verified)
@@ -274,7 +297,7 @@ public class QuizzesRepository(AppDbContext db, IAgentService agent, ILearningSt
         if (question == null) return null;
         question.VerifiedByTeacher = verified;
         await db.SaveChangesAsync();
-        return MapToDto(question);
+        return QuestionMapper.ToDto(question);
     }
 
     public async Task<bool> PublishQuizAsync(Guid quizId)
@@ -290,47 +313,6 @@ public class QuizzesRepository(AppDbContext db, IAgentService agent, ILearningSt
         return true;
     }
 
-    public async Task<EntryTestDto?> GetEntryTestAsync(Guid classId)
-    {
-        var quiz = await db.Quizzes
-            .Include(q => q.Questions).ThenInclude(q => q.Options)
-            .FirstOrDefaultAsync(q => q.ClassId == classId && q.Type == "entry_test" && q.IsPublished);
-
-        if (quiz == null) return null;
-
-        var cls = await db.Classes.FindAsync(classId);
-
-        return new EntryTestDto
-        {
-            QuizId = quiz.Id.ToString(),
-            ClassId = classId.ToString(),
-            ClassName = cls?.Name ?? "",
-            Questions = quiz.Questions.OrderBy(q => q.OrderIndex).Select(MapToDto).ToList()
-        };
-    }
-
-    public async Task<QuizResultDto> SubmitEntryTestAsync(Guid classId, Guid studentId, SubmitQuizRequest request)
-    {
-        var quiz = await db.Quizzes
-            .Include(q => q.Questions).ThenInclude(q => q.Options)
-            .FirstOrDefaultAsync(q => q.ClassId == classId && q.Type == "entry_test");
-
-        var result = await ScoreAndSaveAsync(quiz, studentId, request);
-
-        // Mark entry test as completed on the enrollment
-        var enrollment = await db.Enrollments
-            .FirstOrDefaultAsync(e => e.StudentId == studentId && e.ClassId == classId);
-        if (enrollment != null && !enrollment.EntryTestCompleted)
-        {
-            enrollment.EntryTestCompleted = true;
-            await db.SaveChangesAsync();
-        }
-
-        await roadmap.GenerateAsync(classId, studentId, entryTestResultId: string.Empty);
-
-        return result;
-    }
-
     public async Task<EntryTestDto> GetPracticeQuizAsync(Guid topicId, int limit)
     {
         var quiz = await db.Quizzes
@@ -338,7 +320,7 @@ public class QuizzesRepository(AppDbContext db, IAgentService agent, ILearningSt
             .FirstOrDefaultAsync(q => q.TopicId == topicId && q.Type == "practice" && q.IsPublished);
 
         var questions = quiz?.Questions
-            .OrderBy(q => q.OrderIndex).Take(limit).Select(MapToDto).ToList() ?? [];
+            .OrderBy(q => q.OrderIndex).Take(limit).Select(QuestionMapper.ToDto).ToList() ?? [];
 
         return new EntryTestDto
         {
@@ -364,7 +346,7 @@ public class QuizzesRepository(AppDbContext db, IAgentService agent, ILearningSt
             .Where(q => q.QuizId == quizId)
             .Include(q => q.Options)
             .OrderBy(q => q.OrderIndex)
-            .Select(q => MapToDto(q))
+            .Select(q => QuestionMapper.ToDto(q))
             .ToListAsync();
     }
 
@@ -388,7 +370,7 @@ public class QuizzesRepository(AppDbContext db, IAgentService agent, ILearningSt
                 Text = q.Text,
                 Type = q.Type,
                 Difficulty = q.Difficulty,
-                DifficultyIndex = ResolveDifficultyIndex(q.DifficultyIndex, q.Difficulty),
+                DifficultyIndex = QuestionMapper.ResolveDifficultyIndex(q.DifficultyIndex, q.Difficulty),
                 IsEstimatedDifficultyIndex = !q.DifficultyIndex.HasValue,
                 Explanation = q.Explanation,
                 CorrectAnswer = q.CorrectAnswer,
@@ -454,88 +436,6 @@ public class QuizzesRepository(AppDbContext db, IAgentService agent, ILearningSt
             .ToListAsync();
     }
 
-    public async Task<bool> HasEntryTestAsync(Guid classId)
-    {
-        return await db.Quizzes.AnyAsync(q => q.ClassId == classId && q.Type == "entry_test");
-    }
-
-    public async Task<QuizDto> GenerateEntryTestAsync(Guid classId)
-    {
-        var cls = await db.Classes.FindAsync(classId);
-        var topics = await db.Topics
-            .Where(t => t.ClassId == classId)
-            .OrderBy(t => t.Difficulty == "easy" ? 0 : t.Difficulty == "medium" ? 1 : 2)
-            .ThenBy(t => t.CreatedAt)
-            .ToListAsync();
-
-        var questions = new List<Question>();
-        int order = 0;
-
-        foreach (var topic in topics)
-        {
-            int count = topic.Difficulty == "easy" ? 2 : topic.Difficulty == "hard" ? 3 : 2;
-            var aiResponse = await agent.GenerateQuizBatchAsync(
-                topic.Name,
-                userPrompt: $"Generate placement/entry test questions for topic \"{topic.Name}\".",
-                docUrl: null,
-                numQuestions: count,
-                difficulty: topic.Difficulty);
-
-            var aiQuestions = aiResponse?.Questions is { Count: > 0 }
-                ? AgentQuizValidation.FilterQuestionsWithSingleCorrectOption(aiResponse.Questions, logger)
-                : [];
-
-            if (aiQuestions.Count > 0)
-            {
-                foreach (var aiQ in aiQuestions)
-                {
-                    var entity = MapAgentQuestionToEntity(aiQ, order++);
-                    entity.SourceTopicId = topic.Id;
-                    questions.Add(entity);
-                }
-                continue;
-            }
-
-            logger.LogWarning("AI unavailable for entry test topic {Topic} — using placeholder questions", topic.Name);
-            for (int i = 0; i < count; i++)
-            {
-                var placeholder = CreatePlaceholderQuestion(topic.Name, topic.Difficulty, order++, i + 1);
-                placeholder.SourceTopicId = topic.Id;
-                questions.Add(placeholder);
-            }
-        }
-
-        if (questions.Count == 0)
-        {
-            questions.Add(CreatePlaceholderQuestion(cls?.Name ?? "Lớp học", "medium", 0, 1));
-        }
-
-        var quiz = new Quiz
-        {
-            Id = Guid.NewGuid(),
-            Title = $"Bài test đầu vào — {cls?.Name ?? "Lớp học"}",
-            Type = "entry_test",
-            ClassId = classId,
-            IsPublished = false,
-            CreatedAt = DateTime.UtcNow,
-            Questions = questions,
-        };
-
-        db.Quizzes.Add(quiz);
-        await db.SaveChangesAsync();
-
-        return new QuizDto
-        {
-            Id = quiz.Id.ToString(),
-            ClassId = classId.ToString(),
-            Title = quiz.Title,
-            Type = quiz.Type,
-            IsPublished = quiz.IsPublished,
-            QuestionCount = quiz.Questions.Count,
-            CreatedAt = quiz.CreatedAt.ToString("o"),
-        };
-    }
-
     public async Task<QuestionDto?> AddQuestionAsync(Guid quizId, CreateQuestionRequest request)
     {
         var quiz = await db.Quizzes.Include(q => q.Questions).FirstOrDefaultAsync(q => q.Id == quizId);
@@ -550,7 +450,7 @@ public class QuizzesRepository(AppDbContext db, IAgentService agent, ILearningSt
             Text = request.Text,
             Type = request.Type,
             Difficulty = request.Difficulty,
-            DifficultyIndex = ResolveDifficultyIndex(request.DifficultyIndex, request.Difficulty),
+            DifficultyIndex = QuestionMapper.ResolveDifficultyIndex(request.DifficultyIndex, request.Difficulty),
             IsEstimatedDifficultyIndex = !request.DifficultyIndex.HasValue,
             Explanation = request.Explanation,
             CorrectAnswer = request.CorrectAnswer,
@@ -568,7 +468,7 @@ public class QuizzesRepository(AppDbContext db, IAgentService agent, ILearningSt
         db.Questions.Add(question);
         await db.SaveChangesAsync();
 
-        return MapToDto(question);
+        return QuestionMapper.ToDto(question);
     }
 
     public async Task<string?> GetTopicNameAsync(Guid topicId)
@@ -642,7 +542,7 @@ public class QuizzesRepository(AppDbContext db, IAgentService agent, ILearningSt
             .Include(q => q.Quiz)
             .FirstOrDefaultAsync(q => q.Id == questionId && q.Quiz.TopicId == topicId && q.Quiz.Type == "tutor");
 
-        return question == null ? null : MapToDto(question);
+        return question == null ? null : QuestionMapper.ToDto(question);
     }
 
     public async Task<string?> GetQuestionCorrectAnswerForHintAsync(Guid questionId)
@@ -759,26 +659,8 @@ public class QuizzesRepository(AppDbContext db, IAgentService agent, ILearningSt
         return result;
     }
 
-    private static Question MapAgentQuestionToEntity(AgentQuizBatchQuestion aiQ, int orderIndex) => new()
-    {
-        Id = Guid.NewGuid(),
-        Text = aiQ.Question,
-        Type = string.IsNullOrWhiteSpace(aiQ.Type) ? "mcq" : aiQ.Type,
-        Difficulty = string.IsNullOrWhiteSpace(aiQ.Difficulty) ? "medium" : aiQ.Difficulty,
-        DifficultyIndex = ResolveDifficultyIndex(aiQ.DifficultyIndex, aiQ.Difficulty),
-        IsEstimatedDifficultyIndex = !aiQ.DifficultyIndex.HasValue,
-        Explanation = aiQ.Explanation,
-        CorrectAnswer = aiQ.Options.FirstOrDefault(o => o.IsCorrect)?.Text ?? "",
-        VerifiedByTeacher = false,
-        OrderIndex = orderIndex,
-        Options = aiQ.Options.Select((o, i) => new QuizOption
-        {
-            Id = Guid.NewGuid(),
-            Text = o.Text,
-            IsCorrect = o.IsCorrect,
-            OrderIndex = i
-        }).ToList()
-    };
+    private static Question MapAgentQuestionToEntity(AgentQuizBatchQuestion question, int orderIndex) =>
+        QuestionMapper.FromAgent(question, orderIndex);
 
     private static Question CreatePlaceholderQuestion(string topicName, string difficulty, int orderIndex, int index) => new()
     {
@@ -799,34 +681,6 @@ public class QuizzesRepository(AppDbContext db, IAgentService agent, ILearningSt
             new QuizOption { Id = Guid.NewGuid(), Text = "Đáp án D", IsCorrect = false, OrderIndex = 3 },
         ]
     };
-
-    private static QuestionDto MapToDto(Question q) => new()
-    {
-        Id = q.Id.ToString(),
-        QuizId = q.QuizId.ToString(),
-        TopicId = q.Quiz?.TopicId?.ToString() ?? "",
-        Text = q.Text,
-        Type = q.Type,
-        Difficulty = q.Difficulty,
-        DifficultyIndex = q.DifficultyIndex,
-        IsEstimatedDifficultyIndex = q.IsEstimatedDifficultyIndex,
-        Explanation = q.Explanation,
-        CorrectAnswer = q.CorrectAnswer,
-        VerifiedByTeacher = q.VerifiedByTeacher,
-        OrderIndex = q.OrderIndex,
-        Options = q.Options.OrderBy(o => o.OrderIndex).Select(o => new OptionDto
-        {
-            Id = o.Id.ToString(),
-            Text = o.Text,
-            IsCorrect = o.IsCorrect
-        }).ToList()
-    };
-
-    private static double ResolveDifficultyIndex(double? difficultyIndex, string? difficultyLabel)
-    {
-        if (difficultyIndex.HasValue) return DifficultyIndex.Clamp(difficultyIndex.Value);
-        return DifficultyIndex.FromDifficultyLabel(difficultyLabel);
-    }
 
     public async Task CompleteTutorPracticeAsync(Guid userId, Guid topicId, int questionsAttempted, int correctAnswers)
     {

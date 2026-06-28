@@ -6,7 +6,10 @@ using EduBoost.API.Features.LearningStates;
 using EduBoost.API.Features.LearningStates.Models;
 using EduBoost.API.Features.Quizzes.Models;
 using EduBoost.API.Features.Roadmap;
-using EduBoost.API.Infrastructure.Services;
+using EduBoost.API.Common.Learning;
+using EduBoost.API.Features.Quizzes.Services;
+using EduBoost.API.Features.Students.Services;
+using EduBoost.API.Infrastructure.Integrations.Agent;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -15,7 +18,7 @@ namespace EduBoost.API.Features.Quizzes;
 [ApiController]
 [Route("api/quizzes")]
 [Authorize]
-public class QuizzesController(
+public partial class QuizzesController(
     IQuizzesRepository repo,
     IAgentService agent,
     IDocumentsRepository docRepo,
@@ -194,30 +197,6 @@ public class QuizzesController(
         if (request.Questions.Count == 0) return BadRequest(ApiResponse.Fail("Quiz cần ít nhất 1 câu hỏi"));
         var quiz = await repo.CreatePrivateQuizAsync(UserId, request);
         return Ok(ApiResponse<QuizDto>.Ok(quiz, "Tạo quiz cá nhân thành công"));
-    }
-
-    /// <summary>Student: Lấy bài test đầu vào của lớp (legacy — dùng placement-tests thay thế)</summary>
-    [Obsolete("Use /api/placement-tests instead")]
-    [HttpGet("entry-test/{classId:guid}")]
-    public async Task<IActionResult> GetEntryTest(Guid classId)
-    {
-        if (UserRole != "student") return Forbid();
-        if (!await classes.IsStudentEnrolledAsync(classId, UserId)) return Forbid();
-        var test = await repo.GetEntryTestAsync(classId);
-        if (test == null) return NotFound(ApiResponse.Fail("Lớp học chưa có bài test đầu vào"));
-        return Ok(ApiResponse<EntryTestDto>.Ok(test));
-    }
-
-    /// <summary>Student: Nộp bài test đầu vào (legacy — dùng placement-tests thay thế)</summary>
-    [Obsolete("Use /api/placement-tests instead")]
-    [HttpPost("entry-test/{classId:guid}/submit")]
-    public async Task<IActionResult> SubmitEntryTest(Guid classId, [FromBody] SubmitQuizRequest request)
-    {
-        if (UserRole != "student") return Forbid();
-        if (!await classes.IsStudentEnrolledAsync(classId, UserId)) return Forbid();
-        if (!ModelState.IsValid) return BadRequest(ApiResponse.Fail("Dữ liệu không hợp lệ", ModelState));
-        var result = await repo.SubmitEntryTestAsync(classId, UserId, request);
-        return Ok(ApiResponse<QuizResultDto>.Ok(result, "Nộp bài thành công. AI đang tạo lộ trình học tập..."));
     }
 
     /// <summary>Student: Lấy câu hỏi luyện tập theo topic</summary>
@@ -511,69 +490,4 @@ public class QuizzesController(
         return Ok(ApiResponse<TutorQuestionDto>.Ok(dto));
     }
 
-    private static bool TryNormalizeAgentQuestion(AgentQuizResponse question)
-    {
-        if (string.IsNullOrWhiteSpace(question.Question) || question.Options.Count < 2)
-            return false;
-
-        var options = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
-        foreach (var (key, value) in question.Options)
-        {
-            if (string.IsNullOrWhiteSpace(key) || string.IsNullOrWhiteSpace(value)) continue;
-            options[key.Trim()] = value.Trim();
-        }
-
-        if (options.Count < 2 || string.IsNullOrWhiteSpace(question.CorrectAnswer))
-            return false;
-
-        var rawCorrectAnswer = question.CorrectAnswer.Trim();
-        var correctKey = options.Keys.FirstOrDefault(k =>
-            string.Equals(k, rawCorrectAnswer, StringComparison.OrdinalIgnoreCase));
-
-        correctKey ??= options.FirstOrDefault(o =>
-            string.Equals(o.Value, rawCorrectAnswer, StringComparison.OrdinalIgnoreCase)).Key;
-
-        if (string.IsNullOrWhiteSpace(correctKey))
-            return false;
-
-        question.Question = question.Question.Trim();
-        question.Options = options;
-        question.CorrectAnswer = correctKey;
-        question.Explanation = question.Explanation?.Trim() ?? "";
-
-        return true;
-    }
-
-    private static bool IsDuplicateTutorQuestion(string question, IEnumerable<string> existingQuestions)
-    {
-        var normalized = NormalizeQuestionText(question);
-        return !string.IsNullOrEmpty(normalized)
-            && existingQuestions.Any(existing => NormalizeQuestionText(existing) == normalized);
-    }
-
-    private static string NormalizeQuestionText(string question)
-    {
-        return new string(question
-            .Where(c => c is >= 'a' and <= 'z' or >= 'A' and <= 'Z' or >= '0' and <= '9')
-            .Select(char.ToLowerInvariant)
-            .ToArray());
-    }
-
-    private static OptionDto? FindTutorSelectedOption(QuestionDto question, string selectedAnswer)
-    {
-        var selected = selectedAnswer.Trim();
-        for (var i = 0; i < question.Options.Count; i++)
-        {
-            var option = question.Options[i];
-            var key = ((char)('A' + i)).ToString();
-            if (string.Equals(selected, key, StringComparison.OrdinalIgnoreCase)
-                || string.Equals(selected, option.Id, StringComparison.OrdinalIgnoreCase)
-                || string.Equals(selected, option.Text, StringComparison.OrdinalIgnoreCase))
-            {
-                return option;
-            }
-        }
-
-        return null;
-    }
 }

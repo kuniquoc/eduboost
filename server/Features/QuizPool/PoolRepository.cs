@@ -1,9 +1,13 @@
 using EduBoost.API.Features.Quizzes.Models;
+using EduBoost.API.Features.Quizzes;
 using EduBoost.API.Features.QuizPool.Models;
 using EduBoost.API.Infrastructure;
 using EduBoost.API.Infrastructure.Entities;
-using EduBoost.API.Infrastructure.Services;
-using EduBoost.API.Infrastructure.Storage;
+using EduBoost.API.Common.Learning;
+using EduBoost.API.Features.Quizzes.Services;
+using EduBoost.API.Features.Students.Services;
+using EduBoost.API.Infrastructure.Integrations.Agent;
+using EduBoost.API.Infrastructure.Integrations.Storage;
 using Microsoft.EntityFrameworkCore;
 
 namespace EduBoost.API.Features.QuizPool;
@@ -181,7 +185,7 @@ public class PoolRepository(AppDbContext db, IStorageService storage, IAgentServ
                 Text = q.Question,
                 Type = q.Type,
                 Difficulty = q.Difficulty,
-                DifficultyIndex = ResolveDifficultyIndex(q.DifficultyIndex, q.Difficulty),
+                DifficultyIndex = QuestionMapper.ResolveDifficultyIndex(q.DifficultyIndex, q.Difficulty),
                 IsEstimatedDifficultyIndex = !q.DifficultyIndex.HasValue,
                 Explanation = q.Explanation,
                 CorrectAnswer = q.Options.FirstOrDefault(o => o.IsCorrect)?.Text ?? "",
@@ -296,7 +300,7 @@ public class PoolRepository(AppDbContext db, IStorageService storage, IAgentServ
             QuizId = q.Id.ToString(),
             Title = q.Title,
             CreatedAt = q.CreatedAt.ToString("o"),
-            Questions = q.Questions.OrderBy(qu => qu.OrderIndex).Select(MapToDto).ToList()
+            Questions = q.Questions.OrderBy(qu => qu.OrderIndex).Select(QuestionMapper.ToDto).ToList()
         }).ToList();
     }
 
@@ -507,27 +511,8 @@ public class PoolRepository(AppDbContext db, IStorageService storage, IAgentServ
         return result;
     }
 
-    private static Question CopyPoolQuestion(Question q, int orderIndex, bool verifiedByTeacher) => new()
-    {
-        Id = Guid.NewGuid(),
-        Text = q.Text,
-        Type = q.Type,
-        Difficulty = q.Difficulty,
-        DifficultyIndex = q.DifficultyIndex,
-        IsEstimatedDifficultyIndex = q.IsEstimatedDifficultyIndex,
-        Explanation = q.Explanation,
-        CorrectAnswer = q.CorrectAnswer,
-        VerifiedByTeacher = verifiedByTeacher,
-        OrderIndex = orderIndex,
-        SourceTopicId = q.Quiz?.TopicId,
-        Options = q.Options.Select((o, oidx) => new QuizOption
-        {
-            Id = Guid.NewGuid(),
-            Text = o.Text,
-            IsCorrect = o.IsCorrect,
-            OrderIndex = oidx
-        }).ToList()
-    };
+    private static Question CopyPoolQuestion(Question question, int orderIndex, bool verifiedByTeacher) =>
+        QuestionMapper.CloneForQuiz(question, orderIndex, verifiedByTeacher);
 
     public async Task<TopicPoolDto?> RenameTopicAsync(Guid userId, string userRole, Guid topicId, string newName)
     {
@@ -572,31 +557,4 @@ public class PoolRepository(AppDbContext db, IStorageService storage, IAgentServ
         return new PoolQuestionRef(questionId, topicId);
     }
 
-    private static QuestionDto MapToDto(Question q) => new()
-    {
-        Id = q.Id.ToString(),
-        QuizId = q.QuizId.ToString(),
-        TopicId = q.Quiz?.TopicId?.ToString() ?? "",
-        Text = q.Text,
-        Type = q.Type,
-        Difficulty = q.Difficulty,
-        DifficultyIndex = q.DifficultyIndex,
-        IsEstimatedDifficultyIndex = q.IsEstimatedDifficultyIndex,
-        Explanation = q.Explanation,
-        CorrectAnswer = q.CorrectAnswer,
-        VerifiedByTeacher = q.VerifiedByTeacher,
-        OrderIndex = q.OrderIndex,
-        Options = q.Options.OrderBy(o => o.OrderIndex).Select(o => new OptionDto
-        {
-            Id = o.Id.ToString(),
-            Text = o.Text,
-            IsCorrect = o.IsCorrect
-        }).ToList()
-    };
-
-    private static double ResolveDifficultyIndex(double? difficultyIndex, string? difficultyLabel)
-    {
-        if (difficultyIndex.HasValue) return DifficultyIndex.Clamp(difficultyIndex.Value);
-        return DifficultyIndex.FromDifficultyLabel(difficultyLabel);
-    }
 }

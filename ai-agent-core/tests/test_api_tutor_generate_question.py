@@ -4,7 +4,7 @@ from unittest.mock import MagicMock, patch
 
 try:
     from fastapi.testclient import TestClient
-    from src.api.main import app
+    from eduboost_agent.api.main import app
 
     HAS_FASTAPI = True
 except ImportError:
@@ -37,7 +37,7 @@ class TestTutorGenerateQuestionDedupe(unittest.TestCase):
             },
         ]
 
-        with patch("src.api.routes.tutor.runtime") as mock_runtime:
+        with patch("eduboost_agent.api.routes.tutor.runtime") as mock_runtime:
             mock_runtime.llm_quiz = mock_llm
             mock_runtime.retriever = None
             mock_runtime.llm_available.return_value = True
@@ -87,7 +87,7 @@ class TestTutorGenerateQuestionDedupe(unittest.TestCase):
         ]
         mock_vector_db = MagicMock()
 
-        with patch("src.api.routes.tutor.runtime") as mock_runtime:
+        with patch("eduboost_agent.api.routes.tutor.runtime") as mock_runtime:
             mock_runtime.llm_quiz = mock_llm
             mock_runtime.retriever = mock_retriever
             mock_runtime.vector_db = mock_vector_db
@@ -128,7 +128,7 @@ class TestTutorExplainErrorHint(unittest.TestCase):
             "4. **Self-check tip**: Hãy thử thay vào câu và đọc lại."
         )
 
-        with patch("src.api.routes.tutor.runtime") as mock_runtime:
+        with patch("eduboost_agent.api.routes.tutor.runtime") as mock_runtime:
             mock_runtime.llm_explain = mock_llm
             mock_runtime.retriever = None
             mock_runtime.llm_available.return_value = True

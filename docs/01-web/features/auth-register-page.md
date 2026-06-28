@@ -8,7 +8,7 @@ Trang/feature `Register` trong EduBoost web app.
 
 ## File nguồn
 
-[`web/src/features/auth/register-page.tsx`](../../../web/src/features/auth/register-page.tsx)
+[`web/src/features/auth/register-page.tsx`](../../../web/src/features/auth/pages/register-page.tsx)
 
 ## Routes
 

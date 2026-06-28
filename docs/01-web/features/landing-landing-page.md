@@ -8,7 +8,7 @@ Trang/feature `Landing` trong EduBoost web app.
 
 ## File nguồn
 
-[`web/src/features/landing/landing-page.tsx`](../../../web/src/features/landing/landing-page.tsx)
+[`web/src/features/landing/landing-page.tsx`](../../../web/src/features/landing/pages/landing-page.tsx)
 
 ## Routes
 

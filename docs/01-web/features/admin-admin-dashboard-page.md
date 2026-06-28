@@ -8,7 +8,7 @@ Trang/feature `Admin Dashboard` trong EduBoost web app.
 
 ## File nguồn
 
-[`web/src/features/admin/admin-dashboard-page.tsx`](../../../web/src/features/admin/admin-dashboard-page.tsx)
+[`web/src/features/admin/admin-dashboard-page.tsx`](../../../web/src/features/admin/pages/admin-dashboard-page.tsx)
 
 ## Routes
 

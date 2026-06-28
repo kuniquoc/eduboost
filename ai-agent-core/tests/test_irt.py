@@ -1,5 +1,5 @@
 import unittest
-from src.core.irt import IRTModel
+from eduboost_agent.learning.irt import IRTModel
 
 class TestIRTModel(unittest.TestCase):
     def setUp(self):

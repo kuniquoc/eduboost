@@ -1,6 +1,6 @@
 # Module: auth.service
 
-> File nguồn: [`web/src/services/auth.service.ts`](../../../web/src/services/auth.service.ts)
+> File nguồn: [`web/src/features/auth.service.ts`](../../../web/src/features/auth/api/auth.service.ts)
 
 ## Vai trò
 API client wrapper cho `auth` endpoints.

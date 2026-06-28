@@ -1,21 +1,6 @@
 using System.Text;
-using EduBoost.API.Features.Admin;
-using EduBoost.API.Features.AiChat;
-using EduBoost.API.Features.Auth;
-using EduBoost.API.Features.Classes;
-using EduBoost.API.Features.Documents;
-using EduBoost.API.Features.LearningStates;
-using EduBoost.API.Features.PlacementTests;
-using EduBoost.API.Features.PracticeSessions;
-using EduBoost.API.Features.Quizzes;
-using EduBoost.API.Features.Roadmap;
-using EduBoost.API.Features.Students;
-using EduBoost.API.Features.Topics;
-using EduBoost.API.Features.QuizPool;
-using EduBoost.API.Features.UserProfiles;
 using EduBoost.API.Infrastructure;
-using EduBoost.API.Infrastructure.Services;
-using EduBoost.API.Infrastructure.Storage;
+using EduBoost.API.Infrastructure.Integrations.Storage;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.HttpLogging;
 using Microsoft.EntityFrameworkCore;
@@ -142,51 +127,8 @@ builder.Services.AddCors(options =>
 });
 
 // ── DI — Infrastructure Services ────────────────────────────────────────────────
-builder.Services.AddSingleton<ITutorDecisionService, TutorDecisionService>();
-builder.Services.AddScoped<IStudentStatsCalculator, StudentStatsCalculator>();
-
-builder.Services.AddSingleton<DocumentIngestQueue>();
-builder.Services.AddSingleton<IDocumentIngestQueue>(sp => sp.GetRequiredService<DocumentIngestQueue>());
-builder.Services.AddHostedService<DocumentIngestBackgroundService>();
-
-// ── DI — Feature Repositories ─────────────────────────────────────────────────
-builder.Services.AddScoped<IAuthRepository, AuthRepository>();
-builder.Services.AddScoped<IClassesRepository, ClassesRepository>();
-builder.Services.AddScoped<ITopicsRepository, TopicsRepository>();
-builder.Services.AddScoped<IDocumentsRepository, DocumentsRepository>();
-builder.Services.AddScoped<IQuizAuthorization, QuizAuthorization>();
-builder.Services.AddScoped<IQuizzesRepository, QuizzesRepository>();
-builder.Services.AddScoped<IStudentsRepository, StudentsRepository>();
-builder.Services.AddScoped<IRoadmapRepository, RoadmapRepository>();
-builder.Services.AddScoped<IPoolRepository, PoolRepository>();
-builder.Services.AddScoped<IPoolAuthorization, PoolAuthorization>();
-builder.Services.AddScoped<IUserProfilesRepository, UserProfilesRepository>();
-builder.Services.AddScoped<ILearningStatesRepository, LearningStatesRepository>();
-builder.Services.AddScoped<IPlacementTestsRepository, PlacementTestsRepository>();
-builder.Services.AddScoped<IPracticeSessionsRepository, PracticeSessionsRepository>();
-builder.Services.AddScoped<IAiChatRepository, AiChatRepository>();
-builder.Services.AddScoped<IAdminRepository, AdminRepository>();
-
-// ── DI — AI Agent Service ─────────────────────────────────────────────────────
-static void ConfigureAgentClient(IServiceProvider sp, HttpClient client, int timeoutSeconds)
-{
-    var config = sp.GetRequiredService<IConfiguration>();
-    var configuredBaseUrl = config["AIAgent:BaseUrl"];
-    if (string.IsNullOrWhiteSpace(configuredBaseUrl))
-        configuredBaseUrl = "http://host.docker.internal:8000";
-    else if (!configuredBaseUrl.StartsWith("http://", StringComparison.OrdinalIgnoreCase)
-          && !configuredBaseUrl.StartsWith("https://", StringComparison.OrdinalIgnoreCase))
-        configuredBaseUrl = $"http://{configuredBaseUrl}";
-
-    client.BaseAddress = new Uri(configuredBaseUrl);
-    client.Timeout = TimeSpan.FromSeconds(timeoutSeconds);
-}
-
-builder.Services.AddHttpClient<IAgentService, AgentService>((sp, client) =>
-    ConfigureAgentClient(sp, client, timeoutSeconds: 120));
-
-builder.Services.AddHttpClient("AgentQuizBatch", (sp, client) =>
-    ConfigureAgentClient(sp, client, timeoutSeconds: 600));
+builder.Services.AddEduBoostFeatures();
+builder.Services.AddAgentIntegration();
 
 // ─────────────────────────────────────────────────────────────────────────────
 var app = builder.Build();

@@ -5,7 +5,7 @@ import ast
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
-SRC = ROOT / "ai-agent-core" / "src"
+SRC = ROOT / "ai-agent-core" / "src" / "eduboost_agent"
 OUT_API = ROOT / "docs" / "03-ai-agent-core" / "api"
 OUT_CORE = ROOT / "docs" / "03-ai-agent-core" / "core"
 OUT_RAG = ROOT / "docs" / "03-ai-agent-core" / "rag"
@@ -56,7 +56,7 @@ def doc_main_py():
     lines = [
         "# API Endpoints (main.py)",
         "",
-        "> File: [`ai-agent-core/src/api/main.py`](../../../ai-agent-core/src/api/main.py)",
+        "> File: [`ai-agent-core/src/eduboost_agent/api/main.py`](../../../ai-agent-core/src/eduboost_agent/api/main.py)",
         "",
         "## Endpoints",
         "",
@@ -112,13 +112,13 @@ def doc_main_py():
 
 def main():
     doc_main_py()
-    for p in (SRC / "core").glob("*.py"):
+    for p in (SRC / "learning").glob("*.py"):
         doc_module(p, OUT_CORE, "Core algorithms")
     for p in (SRC / "rag").glob("*.py"):
         if p.name == "test_pipeline.py":
             continue
         doc_module(p, OUT_RAG, "RAG stack")
-    for p in (SRC / "adapters").glob("*.py"):
+    for p in (SRC / "llm").glob("*.py"):
         doc_module(p, OUT_ADAPTERS, "LLM adapters")
     print("Agent docs generated")
 

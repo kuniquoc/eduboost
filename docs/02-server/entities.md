@@ -1,6 +1,6 @@
 # EF Entities
 
-> Nguồn: [`Infrastructure/Entities/`](../../server/Infrastructure/Entities/), [`AppDbContext.cs`](../../server/Infrastructure/AppDbContext.cs)
+> Nguồn: [`Infrastructure/Entities/`](../../server/Infrastructure/Persistence/Entities/), [`AppDbContext.cs`](../../server/Infrastructure/Persistence/AppDbContext.cs)
 
 ## Bảng (17 entities)
 

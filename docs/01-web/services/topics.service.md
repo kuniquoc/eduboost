@@ -1,6 +1,6 @@
 # Module: topics.service
 
-> File nguồn: [`web/src/services/topics.service.ts`](../../../web/src/services/topics.service.ts)
+> File nguồn: [`web/src/features/topics.service.ts`](../../../web/src/features/classes/api/topics.service.ts)
 
 ## Vai trò
 API client wrapper cho `topics` endpoints.

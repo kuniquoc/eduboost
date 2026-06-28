@@ -36,7 +36,7 @@ sequenceDiagram
 
 ## BKT routing (server)
 
-[`TutorDecisionService.cs`](../../../server/Infrastructure/Services/TutorDecisionService.cs) — ngưỡng giống agent orchestrator:
+[`TutorDecisionService.cs`](../../../server/Features/Quizzes/Services/TutorDecisionService.cs) — ngưỡng giống agent orchestrator:
 
 | Mastery P(L) | Action |
 |--------------|--------|

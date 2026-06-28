@@ -2,15 +2,18 @@ import os
 import shutil
 import tempfile
 import unittest
+import pytest
+
+pytestmark = [pytest.mark.integration, pytest.mark.slow]
 import logging
 from unittest.mock import patch
 from typing import List, Dict, Any
 
-from src.rag.document_reader import DocumentReader
-from src.rag.retriever import KnowledgeRetriever, chunk_preview, log_retrieved_chunks_success
-from src.rag.text_splitters import SlidingWindowTextSplitter, SemanticTextSplitter
-from src.rag.vector_db import VectorDB
-from src.rag.pipeline import RAGPipeline
+from eduboost_agent.rag.document_reader import DocumentReader
+from eduboost_agent.rag.retriever import KnowledgeRetriever, chunk_preview, log_retrieved_chunks_success
+from eduboost_agent.rag.text_splitters import SlidingWindowTextSplitter, SemanticTextSplitter
+from eduboost_agent.rag.vector_db import VectorDB
+from eduboost_agent.rag.pipeline import RAGPipeline
 
 class TestRAGComponents(unittest.TestCase):
     def setUp(self):

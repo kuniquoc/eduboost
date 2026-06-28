@@ -8,7 +8,7 @@ Trang/feature `Topics Tab` trong EduBoost web app.
 
 ## File nguồn
 
-[`web/src/features/teacher/classes/tabs/topics-tab.tsx`](../../../web/src/features/teacher/classes/tabs/topics-tab.tsx)
+[`web/src/features/classes/tabs/topics-tab.tsx`](../../../web/src/features/classes/components/teacher/topics-tab.tsx)
 
 ## Routes
 

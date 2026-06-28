@@ -8,7 +8,7 @@ Trang/feature `Student Classes` trong EduBoost web app.
 
 ## File nguồn
 
-[`web/src/features/student/classes/classes-page.tsx`](../../../web/src/features/student/classes/classes-page.tsx)
+[`web/src/features/classes/classes-page.tsx`](../../../web/src/features/classes/pages/student/classes-page.tsx)
 
 ## Routes
 

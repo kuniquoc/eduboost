@@ -23,7 +23,7 @@ _Không còn mục open._
 | ingest_failed no retry | Nút "Thử lại RAG" (re-confirm upload) |
 | Analytics "entry test" copy | Đổi thành "placement test" |
 | Chunk size > 500kB | `React.lazy` route splitting + `manualChunks` trong vite.config |
-| hooks migration | 23 hooks trong `web/src/hooks/` |
+| hooks migration | 23 hooks trong `web/src/features/` |
 
 ## Liên kết
 

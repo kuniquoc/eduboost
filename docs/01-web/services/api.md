@@ -1,6 +1,6 @@
 # Module: api.ts
 
-> File: [`web/src/services/api.ts`](../../../web/src/services/api.ts)
+> File: [`web/src/shared/api/client.ts`](../../../web/src/shared/api/client.ts)
 
 ## Vai trò
 

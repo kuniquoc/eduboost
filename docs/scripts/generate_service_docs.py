@@ -5,7 +5,7 @@ import os
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
-SERVICES_DIR = ROOT / "web" / "src" / "services"
+WEB_SRC = ROOT / "web" / "src"
 OUT_DIR = ROOT / "docs" / "01-web" / "services"
 
 METHOD_RE = re.compile(
@@ -30,17 +30,15 @@ def extract_methods(content: str) -> list[tuple[str, str]]:
 
 def main():
     OUT_DIR.mkdir(parents=True, exist_ok=True)
-    skip = {"api.ts"}
-    for f in sorted(SERVICES_DIR.glob("*.ts")):
-        if f.name in skip:
-            continue
+    service_files = sorted((WEB_SRC / "features").glob("*/api/*.service.ts"))
+    for f in service_files:
         content = f.read_text(encoding="utf-8")
         methods = extract_methods(content)
         name = f.stem
         lines = [
             f"# Module: {name}",
             "",
-            f"> File nguồn: [`web/src/services/{f.name}`](../../../web/src/services/{f.name})",
+            f"> File nguồn: [`{f.relative_to(ROOT).as_posix()}`](../../../{f.relative_to(ROOT).as_posix()})",
             "",
             "## Vai trò",
             f"API client wrapper cho `{name.replace('.service', '')}` endpoints.",

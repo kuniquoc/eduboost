@@ -1,90 +1,73 @@
-# ===== .NET =====
+# Build output and dependency caches
 **/bin/
 **/obj/
+**/dist/
+**/node_modules/
+**/.vite/
+**/.cache/
+**/.pytest_cache/
+**/__pycache__/
+*.py[cod]
+*.tsbuildinfo
+
+# Local environments and coverage
+.venv/
+venv/
+env/
+ENV/
+.coverage
+coverage/
+htmlcov/
+
+# IDE and OS generated files
+.vs/
+.vscode/
+.idea/
 *.user
 *.suo
-.vs/
-**/*.DotSettings.user
+*.swp
+*.swo
+*.lscache
+*.DotSettings.user
+.DS_Store
+Thumbs.db
+desktop.ini
 
-# EF Core migrations SQLite snapshots (keep .cs migrations)
-*.db
-*.db-shm
-*.db-wal
-
-# ===== Node / Expo =====
-**/node_modules/
-**/.expo/
-**/.expo-shared/
-**/dist/
-**/.next/
-**/.cache/
-
-# ===== Environment & Secrets =====
+# Secrets and local configuration
+.env
+.env.local
+.env.*.local
 **/.env
 **/.env.local
 **/.env.*.local
 **/appsettings.Production.json
 **/appsettings.*.Secret.json
 
-# ===== Docker volumes =====
+# Logs and temporary backups
+*.log
+*.bak
+
+# Local databases and Docker volumes
+*.db
+*.db-shm
+*.db-wal
 docker-volumes/
 
-# ===== OS =====
-.DS_Store
-Thumbs.db
-desktop.ini
-
-# ===== Editors =====
-.idea/
-*.swp
-*.swo
-
-# Data files
-/data/raw/
-/data/processed/
-/data/finetuning/*.jsonl
-/results/
-
-# Environment variables
-.env
-.env.local
-
-# Python
-__pycache__/
-*.py[cod]
-*$py.class
-*.so
-.Python
-venv/
-env/
-ENV/
-.venv
-
-# Jupyter
-.ipynb_checkpoints/
-*.ipynb_checkpoints
-
-# IDE
-.vscode/
-.idea/
-*.swp
-*.swo
-
-# OS
-.DS_Store
-Thumbs.db
-
-# ML models
-*.pkl
-*.joblib
-*.model
-
-# Vector DB files
-.faiss_*
-
-
-# Custom ignore rules
+# AI datasets, outputs, model artifacts and runtime state
 data/
 outputs/
 responses/
 results/
+ai-agent-core/var/
+ai-agent-core/models/
+ai-agent-core/resources/faiss-seed/*
+!ai-agent-core/resources/faiss-seed/faiss_index.bin
+!ai-agent-core/resources/faiss-seed/faiss_index.pkl
+*.pkl
+!ai-agent-core/resources/faiss-seed/faiss_index.pkl
+*.joblib
+*.model
+.faiss_*
+
+# Notebook checkpoints
+**/.ipynb_checkpoints/

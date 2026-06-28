@@ -8,7 +8,7 @@ Trang hồ sơ cá nhân — thông tin tài khoản và (với học sinh) ch�
 
 ## File nguồn
 
-[`web/src/features/shared/profile-page.tsx`](../../../web/src/features/shared/profile-page.tsx)
+[`web/src/features/profile/profile-page.tsx`](../../../web/src/features/profile/pages/profile-page.tsx)
 
 ## Routes
 

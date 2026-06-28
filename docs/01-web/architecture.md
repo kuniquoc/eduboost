@@ -6,7 +6,7 @@
 
 React 19 + TypeScript + Vite 8 + TanStack Query + Zustand + Axios + Tailwind v4 + shadcn/ui.
 
-## Bootstrap ([`App.tsx`](../../web/src/App.tsx))
+## Bootstrap ([`App.tsx`](../../web/src/app/App.tsx))
 
 ```mermaid
 flowchart TD
@@ -38,11 +38,11 @@ flowchart TD
 
 ## Protected routes
 
-[`protected-route.tsx`](../../web/src/components/layout/protected-route.tsx): check `isAuthenticated` + optional `role` → redirect `/login` hoặc dashboard đúng role.
+[`protected-route.tsx`](../../web/src/app/layouts/protected-route.tsx): check `isAuthenticated` + optional `role` → redirect `/login` hoặc dashboard đúng role.
 
 ## API layer
 
-[`api.ts`](../../web/src/services/api.ts):
+[`api.ts`](../../web/src/shared/api/client.ts):
 - `baseURL`: `VITE_API_URL` hoặc `/api`
 - `timeout`: 120s (LLM calls)
 - `tokenManager`: localStorage keys `eduboost_access_token`, `eduboost_refresh_token`
@@ -51,11 +51,19 @@ flowchart TD
 
 [`vite.config.ts`](../../web/vite.config.ts): `/api` → `http://localhost:5000`.
 
-## Hooks ([`hooks/`](../../web/src/hooks/))
+## Hooks ([`hooks/`](../../web/src/features/))
 
-**23 shared React Query hooks** — migration hoàn tất; features không còn inline `useQuery`. `useMutation` vẫn inline trong feature pages (expected).
+Shared React Query hooks quản lý server state; `use-ai-explanation` gom trạng thái
+loading/error/offline dùng chung cho practice và placement review.
 
 Ví dụ: `useMyDocuments`, `useClassDocuments`, `useReviewSchedule`, `useEnrolledClasses`, `useMyQuizQuestions`, ...
+
+## Feature state và types
+
+- DTO nằm cạnh feature sở hữu; import trực tiếp từ `features/<domain>/types.ts`.
+- Flow practice dùng state/mode thuần trong `practice-session-state.ts`, có Vitest.
+- Component lớn giữ orchestration; header, dialog và progress overlay được tách
+  thành component trình bày theo feature.
 
 ## Điểm chưa tối ưu
 

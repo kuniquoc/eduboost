@@ -1,6 +1,6 @@
 # Module: documents.service
 
-> File nguồn: [`web/src/services/documents.service.ts`](../../../web/src/services/documents.service.ts)
+> File nguồn: [`web/src/features/documents.service.ts`](../../../web/src/features/documents/api/documents.service.ts)
 
 ## Vai trò
 API client wrapper cho `documents` endpoints.

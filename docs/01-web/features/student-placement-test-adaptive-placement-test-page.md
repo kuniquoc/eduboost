@@ -8,7 +8,7 @@ Trang/feature `Placement Test` trong EduBoost web app.
 
 ## File nguồn
 
-[`web/src/features/student/placement-test/adaptive-placement-test-page.tsx`](../../../web/src/features/student/placement-test/adaptive-placement-test-page.tsx)
+[`web/src/features/student/placement-test/adaptive-placement-test-page.tsx`](../../../web/src/features/placement-test/pages/placement-test-page.tsx)
 
 ## Routes
 

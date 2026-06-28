@@ -1,6 +1,6 @@
 # Module: prompt_templates.py
 
-> File: [`ai-agent-core/src/src/adapters/prompt_templates.py`](../../../ai-agent-core/src/src/adapters/prompt_templates.py)
+> File: [`ai-agent-core/src/src/eduboost_agent/llm/prompt_templates.py`](../../../ai-agent-core/src/eduboost_agent/llm/prompt_templates.py)
 
 ## LLM adapters
 

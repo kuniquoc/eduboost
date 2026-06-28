@@ -1,6 +1,6 @@
 # Module: llm_generator.py
 
-> File: [`ai-agent-core/src/src/rag/llm_generator.py`](../../../ai-agent-core/src/src/rag/llm_generator.py)
+> File: [`ai-agent-core/src/src/eduboost_agent/rag/llm_generator.py`](../../../ai-agent-core/src/eduboost_agent/rag/llm_generator.py)
 
 ## RAG stack
 

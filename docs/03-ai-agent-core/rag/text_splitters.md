@@ -1,6 +1,6 @@
 # Module: text_splitters.py
 
-> File: [`ai-agent-core/src/src/rag/text_splitters.py`](../../../ai-agent-core/src/src/rag/text_splitters.py)
+> File: [`ai-agent-core/src/src/eduboost_agent/rag/text_splitters.py`](../../../ai-agent-core/src/eduboost_agent/rag/text_splitters.py)
 
 ## RAG stack
 

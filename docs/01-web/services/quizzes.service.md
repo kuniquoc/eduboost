@@ -1,6 +1,6 @@
 # Module: quizzes.service
 
-> File nguồn: [`web/src/services/quizzes.service.ts`](../../../web/src/services/quizzes.service.ts)
+> File nguồn: [`web/src/features/quizzes.service.ts`](../../../web/src/features/quizzes/api/quizzes.service.ts)
 
 ## Vai trò
 API client wrapper cho `quizzes` endpoints.

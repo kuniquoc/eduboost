@@ -16,7 +16,7 @@ FastAPI service tại [`ai-agent-core/`](../../ai-agent-core/).
 
 ## Training docs (riêng)
 
-Lý thuyết và training pipeline: [`ai-agent-core/docs/`](../../ai-agent-core/docs/)
+Lý thuyết và training pipeline: [`docs/03-ai-agent-core/guides/`](../../docs/03-ai-agent-core/guides/)
 
 | File | Nội dung |
 |------|----------|
@@ -28,7 +28,7 @@ Lý thuyết và training pipeline: [`ai-agent-core/docs/`](../../ai-agent-core/
 ## Run
 
 ```bash
-uvicorn src.api.main:app --host 0.0.0.0 --port 8000
+uvicorn eduboost_agent.api.main:app --app-dir src --host 0.0.0.0 --port 8000
 ```
 
 Docker: [`ai-agent-core/Dockerfile`](../../ai-agent-core/Dockerfile)

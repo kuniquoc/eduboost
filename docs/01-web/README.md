@@ -10,7 +10,7 @@ React 19 SPA tại [`web/`](../../web/).
 | [routing.md](routing.md) | Toàn bộ routes từ App.tsx |
 | [store-and-types.md](store-and-types.md) | Zustand + TypeScript DTOs |
 | [services/](services/) | 14 API service modules |
-| [hooks/](../../web/src/hooks/) | 23 shared React Query hooks |
+| [hooks/](../../web/src/features/) | 23 shared React Query hooks |
 | [features/](features/) | 25 trang/tính năng UI |
 | [components/](components/) | Layout, shared, UI primitives |
 | [flows/](../04-integration/flows/) | Luồng end-to-end |
@@ -19,18 +19,15 @@ React 19 SPA tại [`web/`](../../web/).
 
 ```
 web/src/
-├── App.tsx              Routes + providers
-├── main.tsx             Entry
-├── components/
-│   ├── layout/          auth-layout, app-layout, protected-route
-│   ├── shared/          quiz-generation-dialog, quiz-builder-dialog
-│   └── ui/              16 shadcn primitives
-├── features/            Role-based pages
-├── hooks/             Shared React Query hooks
-├── services/          Axios API clients
-├── store/auth-store.ts  JWT auth state
-├── types/index.ts       Shared DTOs
-└── lib/                 utils, constants
+├── app/                  Router, providers và layouts
+├── features/<domain>/    API, hooks, types, components, pages và tests
+├── shared/
+│   ├── api/              Axios client dùng chung
+│   ├── ui/               shadcn primitives
+│   ├── lib/              Tiện ích đa domain
+│   └── types/            Contract thực sự dùng chung
+├── main.tsx              Entry
+└── index.css
 ```
 
 ## Known issues

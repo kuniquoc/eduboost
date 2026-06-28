@@ -8,7 +8,7 @@ Phiên luyện tập BKT + Spaced Repetition — standard hoặc review mode.
 
 ## File nguồn
 
-[`web/src/features/student/practice-session/practice-session-page.tsx`](../../../web/src/features/student/practice-session/practice-session-page.tsx)
+[`web/src/features/practice/practice-session-page.tsx`](../../../web/src/features/practice/pages/practice-session-page.tsx)
 
 ## Query params
 

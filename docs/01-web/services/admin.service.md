@@ -1,6 +1,6 @@
 # Module: admin.service
 
-> File nguồn: [`web/src/services/admin.service.ts`](../../../web/src/services/admin.service.ts)
+> File nguồn: [`web/src/features/admin.service.ts`](../../../web/src/features/admin/api/admin.service.ts)
 
 ## Vai trò
 API client wrapper cho `admin` endpoints.

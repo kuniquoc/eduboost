@@ -1,5 +1,5 @@
 import unittest
-from src.core.bkt import BKTModel
+from eduboost_agent.learning.bkt import BKTModel
 
 class TestBKTModel(unittest.TestCase):
     def setUp(self):

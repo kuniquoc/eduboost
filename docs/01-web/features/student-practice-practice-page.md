@@ -8,7 +8,7 @@ Trang/feature `AI Tutor Practice` trong EduBoost web app.
 
 ## File nguồn
 
-[`web/src/features/student/practice/practice-page.tsx`](../../../web/src/features/student/practice/practice-page.tsx)
+[`web/src/features/practice/practice-page.tsx`](../../../web/src/features/practice/pages/practice-page.tsx)
 
 ## Routes
 

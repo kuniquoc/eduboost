@@ -8,7 +8,7 @@ Trang/feature `AI Lab Quiz Review` trong EduBoost web app.
 
 ## File nguồn
 
-[`web/src/features/student/ai-lab/ai-lab-quiz-page.tsx`](../../../web/src/features/student/ai-lab/ai-lab-quiz-page.tsx)
+[`web/src/features/ai-lab/ai-lab-quiz-page.tsx`](../../../web/src/features/ai-lab/pages/ai-lab-quiz-page.tsx)
 
 ## Routes
 

@@ -1,6 +1,6 @@
 # API Endpoints
 
-> Routers: [`ai-agent-core/src/api/routes/`](../../../ai-agent-core/src/api/routes/) — mounted từ [`main.py`](../../../ai-agent-core/src/api/main.py)
+> Routers: [`ai-agent-core/src/eduboost_agent/api/routes/`](../../../ai-agent-core/src/eduboost_agent/api/routes/) — mounted từ [`main.py`](../../../ai-agent-core/src/eduboost_agent/api/main.py)
 
 **11 endpoints triển khai** + 4 documented-only (chưa có HTTP handler).
 

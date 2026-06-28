@@ -1,6 +1,6 @@
 # Module: vector_db.py
 
-> File: [`ai-agent-core/src/src/rag/vector_db.py`](../../../ai-agent-core/src/src/rag/vector_db.py)
+> File: [`ai-agent-core/src/src/eduboost_agent/rag/vector_db.py`](../../../ai-agent-core/src/eduboost_agent/rag/vector_db.py)
 
 ## RAG stack
 

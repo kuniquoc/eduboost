@@ -9,10 +9,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="tests/**" />
-  </ItemGroup>
-
-  <ItemGroup>
     <!-- Swagger / OpenAPI -->
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.14" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="7.3.1" />

@@ -1,8 +1,12 @@
 using EduBoost.API.Features.Documents.Models;
+using EduBoost.API.Features.Quizzes;
 using EduBoost.API.Infrastructure;
 using EduBoost.API.Infrastructure.Entities;
-using EduBoost.API.Infrastructure.Services;
-using EduBoost.API.Infrastructure.Storage;
+using EduBoost.API.Common.Learning;
+using EduBoost.API.Features.Quizzes.Services;
+using EduBoost.API.Features.Students.Services;
+using EduBoost.API.Infrastructure.Integrations.Agent;
+using EduBoost.API.Infrastructure.Integrations.Storage;
 using Microsoft.EntityFrameworkCore;
 
 namespace EduBoost.API.Features.Documents;
@@ -33,673 +37,32 @@ public interface IDocumentsRepository
     Task<DocumentDto?> UpdateDocumentVisibilityAsync(Guid classId, Guid docId, bool isVisible);
 }
 
-public class DocumentsRepository(
-    AppDbContext db,
-    IStorageService storage,
-    IAgentService agent,
-    ILogger<DocumentsRepository> logger,
-    IDocumentIngestQueue ingestQueue) : IDocumentsRepository
+public partial class DocumentsRepository : IDocumentsRepository
 {
+    private readonly AppDbContext db;
+    private readonly IStorageService storage;
+    private readonly IAgentService agent;
+    private readonly ILogger<DocumentsRepository> logger;
+    private readonly IDocumentIngestQueue ingestQueue;
+
+    public DocumentsRepository(
+        AppDbContext db,
+        IStorageService storage,
+        IAgentService agent,
+        ILogger<DocumentsRepository> logger,
+        IDocumentIngestQueue ingestQueue)
+    {
+        this.db = db;
+        this.storage = storage;
+        this.agent = agent;
+        this.logger = logger;
+        this.ingestQueue = ingestQueue;
+    }
+
     private const string ClassBucket = MinioStorageService.Buckets.ClassDocuments;
     private const string StudentBucket = MinioStorageService.Buckets.StudentDocuments;
 
     // ── Class documents ───────────────────────────────────────────────────────
-    public async Task<List<DocumentDto>> GetByClassIdAsync(Guid classId, string? userRole = null)
-    {
-        var query = db.Documents.Where(d => d.ClassId == classId);
-        if (string.Equals(userRole, "student", StringComparison.OrdinalIgnoreCase))
-            query = query.Where(d => d.IsVisible);
-        return await query
-            .OrderByDescending(d => d.UploadedAt)
-            .Select(d => MapToDto(d))
-            .ToListAsync();
-    }
-
-    public async Task<UploadUrlDto> RequestClassUploadUrlAsync(
-        Guid classId, Guid teacherId, RequestUploadUrlRequest request)
-    {
-        await storage.EnsureBucketExistsAsync(ClassBucket);
-
-        var docId = Guid.NewGuid();
-        var ext = Path.GetExtension(request.FileName);
-        var objectKey = $"class/{classId}/{docId}{ext}";
-
-        // Create pending document record
-        var doc = new Document
-        {
-            Id = docId,
-            OwnerId = teacherId,
-            ClassId = classId,
-            TopicId = request.TopicId is null ? null : Guid.TryParse(request.TopicId, out var tid) ? tid : null,
-            FileName = request.FileName,
-            FileSize = request.FileSize,
-            StorageKey = objectKey,
-            Status = "pending",
-            Scope = "class",
-            UploadedAt = DateTime.UtcNow
-        };
-
-        db.Documents.Add(doc);
-        await db.SaveChangesAsync();
-
-        var uploadUrl = await storage.GetPresignedUploadUrlAsync(ClassBucket, objectKey, 600);
-
-        return new UploadUrlDto
-        {
-            DocumentId = docId.ToString(),
-            UploadUrl = uploadUrl,
-            ExpiresInSeconds = 600
-        };
-    }
-
-    public async Task<DocumentDto?> ConfirmClassUploadAsync(Guid classId, Guid teacherId, string documentId)
-    {
-        if (!Guid.TryParse(documentId, out var docId)) return null;
-
-        var doc = await db.Documents
-            .FirstOrDefaultAsync(d => d.Id == docId && d.ClassId == classId && d.OwnerId == teacherId);
-
-        if (doc == null) return null;
-
-        doc.Status = "ingesting";
-        await db.SaveChangesAsync();
-
-        await ScheduleBackgroundIngest(
-            doc.Id,
-            documentScope: "class",
-            classId: doc.ClassId?.ToString(),
-            topicId: doc.TopicId?.ToString());
-
-        return MapToDto(doc);
-    }
-
-    public async Task<bool> DeleteClassDocumentAsync(Guid classId, Guid docId)
-    {
-        var doc = await db.Documents
-            .FirstOrDefaultAsync(d => d.Id == docId && d.ClassId == classId);
-
-        if (doc == null) return false;
-
-        try
-        {
-            await agent.DeleteDocumentAsync(docId.ToString());
-        }
-        catch (Exception ex)
-        {
-            logger.LogWarning(ex, "RAG delete failed for class document {DocId}; removing from storage/DB anyway", docId);
-        }
-
-        if (doc.StorageKey != null)
-            await storage.DeleteObjectAsync(ClassBucket, doc.StorageKey);
-
-        db.Documents.Remove(doc);
-        await db.SaveChangesAsync();
-        return true;
-    }
-
-    public async Task<GenerateQuizJobDto> GenerateQuizFromDocumentAsync(Guid classId, Guid docId, GenerateQuizRequest request)
-    {
-        var jobId = $"job-{Guid.NewGuid():N}";
-        var doc = await db.Documents.FirstOrDefaultAsync(d => d.Id == docId && d.ClassId == classId && d.Scope == "class");
-
-        if (doc == null)
-        {
-            return new GenerateQuizJobDto
-            {
-                JobId = jobId,
-                Status = "error",
-                Message = "Không tìm thấy tài liệu lớp cần tạo quiz."
-            };
-        }
-
-        try
-        {
-            doc.Status = "processing";
-            await db.SaveChangesAsync();
-
-            var (topicName, difficulty, resolvedTopicId) = await ResolveTopicContextAsync(request.TopicId, doc.TopicId, doc.FileName, request.Difficulty);
-            var downloadUrl = await ResolveDocumentDownloadUrlAsync(doc);
-
-            // Handle Append Mode
-            if (request.Mode == "append" && doc.GeneratedQuizId != null)
-            {
-                var quiz = await db.Quizzes.Include(q => q.Questions).FirstOrDefaultAsync(q => q.Id == doc.GeneratedQuizId);
-                if (quiz != null)
-                {
-                    var existingQuestions = quiz.Questions
-                        .OrderByDescending(q => q.OrderIndex)
-                        .Select(q => q.Text)
-                        .Where(t => !string.IsNullOrWhiteSpace(t))
-                        .Take(150)
-                        .ToList();
-
-                    var appendAiQuestions = new List<AgentQuizBatchQuestion>();
-                    bool isAdvanced = (request.NumEasyQuestions ?? 0) > 0 || 
-                                      (request.NumMediumQuestions ?? 0) > 0 || 
-                                      (request.NumHardQuestions ?? 0) > 0;
-                                      
-                    if (isAdvanced)
-                    {
-                        var res = await agent.GenerateQuizBatchAsync(
-                            topicName, 
-                            null, 
-                            downloadUrl, 
-                            request.NumQuestions, 
-                            "mixed", 
-                            request.NumEasyQuestions ?? 0, 
-                            request.NumMediumQuestions ?? 0, 
-                            request.NumHardQuestions ?? 0,
-                            documentId: doc.Id.ToString(),
-                            existingQuestions: existingQuestions);
-                        if (res?.Questions != null) appendAiQuestions.AddRange(res.Questions);
-                    }
-                    else
-                    {
-                        var res = await agent.GenerateQuizBatchAsync(
-                            topicName, null, downloadUrl, request.NumQuestions, difficulty,
-                            documentId: doc.Id.ToString(), existingQuestions: existingQuestions);
-                        if (res?.Questions != null) appendAiQuestions.AddRange(res.Questions);
-                    }
-
-                    appendAiQuestions = AgentQuizValidation.FilterQuestionsWithSingleCorrectOption(appendAiQuestions, logger);
-
-                    if (appendAiQuestions.Count == 0)
-                    {
-                        doc.Status = "ready"; // Reset to ready since the original quiz is still valid
-                        await db.SaveChangesAsync();
-                        return new GenerateQuizJobDto
-                        {
-                            JobId = jobId,
-                            Status = "error",
-                            Message = "AI không sinh thêm được câu hỏi hợp lệ từ tài liệu lớp."
-                        };
-                    }
-
-                    var maxOrderIndex = quiz.Questions.Any() ? quiz.Questions.Max(q => q.OrderIndex) : -1;
-                    foreach (var (q, idx) in appendAiQuestions.Select((q, idx) => (q, idx)))
-                    {
-                        var question = new Question
-                        {
-                            Id = Guid.NewGuid(),
-                            QuizId = quiz.Id,
-                            SourceDocumentId = doc.Id,
-                            Text = q.Question,
-                            Type = string.IsNullOrWhiteSpace(q.Type) ? "mcq" : q.Type,
-                            Difficulty = string.IsNullOrWhiteSpace(q.Difficulty) ? "medium" : q.Difficulty,
-                            DifficultyIndex = ResolveDifficultyIndex(q),
-                            IsEstimatedDifficultyIndex = !q.DifficultyIndex.HasValue,
-                            Explanation = q.Explanation,
-                            CorrectAnswer = q.Options.FirstOrDefault(o => o.IsCorrect)?.Text ?? "",
-                            VerifiedByTeacher = false,
-                            OrderIndex = maxOrderIndex + 1 + idx,
-                            Options = q.Options.Select((o, oidx) => new QuizOption
-                            {
-                                Id = Guid.NewGuid(),
-                                Text = o.Text,
-                                IsCorrect = o.IsCorrect,
-                                OrderIndex = oidx
-                            }).ToList()
-                        };
-                        db.Questions.Add(question);
-                    }
-
-                    doc.Status = "ready";
-                    await db.SaveChangesAsync();
-
-                    return new GenerateQuizJobDto
-                    {
-                        JobId = jobId,
-                        Status = "completed",
-                        QuizId = quiz.Id.ToString(),
-                        Message = $"Đã sinh thêm {appendAiQuestions.Count} câu hỏi thành công từ tài liệu lớp."
-                    };
-                }
-            }
-
-            // Create Mode or Retry Mode (delete old quiz if it exists)
-            if (doc.GeneratedQuizId != null)
-            {
-                var oldQuiz = await db.Quizzes.FindAsync(doc.GeneratedQuizId);
-                if (oldQuiz != null)
-                {
-                    db.Quizzes.Remove(oldQuiz);
-                }
-                doc.GeneratedQuizId = null;
-                await db.SaveChangesAsync();
-            }
-
-            var createAiQuestions = new List<AgentQuizBatchQuestion>();
-            bool isCreateAdvanced = (request.NumEasyQuestions ?? 0) > 0 || 
-                                    (request.NumMediumQuestions ?? 0) > 0 || 
-                                    (request.NumHardQuestions ?? 0) > 0;
-                                    
-            if (isCreateAdvanced)
-            {
-                var res = await agent.GenerateQuizBatchAsync(
-                    topicName, 
-                    null, 
-                    downloadUrl, 
-                    request.NumQuestions, 
-                    "mixed", 
-                    request.NumEasyQuestions ?? 0, 
-                    request.NumMediumQuestions ?? 0, 
-                    request.NumHardQuestions ?? 0,
-                    documentId: doc.Id.ToString());
-                if (res?.Questions != null) createAiQuestions.AddRange(res.Questions);
-            }
-            else
-            {
-                var res = await agent.GenerateQuizBatchAsync(topicName, null, downloadUrl, request.NumQuestions, difficulty, documentId: doc.Id.ToString());
-                if (res?.Questions != null) createAiQuestions.AddRange(res.Questions);
-            }
-
-            createAiQuestions = AgentQuizValidation.FilterQuestionsWithSingleCorrectOption(createAiQuestions, logger);
-
-            if (createAiQuestions.Count == 0)
-            {
-                doc.Status = "error";
-                await db.SaveChangesAsync();
-
-                return new GenerateQuizJobDto
-                {
-                    JobId = jobId,
-                    Status = "error",
-                    Message = "AI không sinh được câu hỏi hợp lệ từ tài liệu lớp."
-                };
-            }
-
-            var newQuiz = BuildGeneratedQuiz(
-                titlePrefix: topicName,
-                type: "pool",
-                ownerId: doc.OwnerId,
-                classId: classId,
-                topicId: resolvedTopicId,
-                sourceDocumentId: doc.Id,
-                aiQuestions: createAiQuestions);
-
-            db.Quizzes.Add(newQuiz);
-            doc.GeneratedQuizId = newQuiz.Id;
-            doc.Status = "ready";
-            await db.SaveChangesAsync();
-
-            return new GenerateQuizJobDto
-            {
-                JobId = jobId,
-                Status = "completed",
-                QuizId = newQuiz.Id.ToString(),
-                Message = "Đã tạo mới quiz thành công từ tài liệu lớp."
-            };
-        }
-        catch (Exception ex)
-        {
-            logger.LogError(ex, "GenerateQuizFromDocument failed for class={ClassId}, doc={DocId}", classId, docId);
-
-            try
-            {
-                db.ChangeTracker.Clear();
-                var freshDoc = await db.Documents.FindAsync(docId);
-                if (freshDoc != null)
-                {
-                    freshDoc.Status = "error";
-                    await db.SaveChangesAsync();
-                }
-            }
-            catch (Exception saveEx)
-            {
-                logger.LogError(saveEx, "Failed to set document status to error for doc={DocId}", docId);
-            }
-
-            return new GenerateQuizJobDto
-            {
-                JobId = jobId,
-                Status = "error",
-                Message = "Lỗi khi tạo quiz từ tài liệu lớp. Vui lòng thử lại."
-            };
-        }
-    }
-
-    public async Task<DownloadUrlDto?> GetClassDocumentDownloadUrlAsync(Guid classId, Guid docId)
-    {
-        var doc = await db.Documents
-            .FirstOrDefaultAsync(d => d.Id == docId && d.ClassId == classId);
-
-        if (doc?.StorageKey == null) return null;
-
-        var url = await storage.GetPresignedDownloadUrlAsync(ClassBucket, doc.StorageKey, 3600);
-        return new DownloadUrlDto { DownloadUrl = url, ExpiresInSeconds = 3600 };
-    }
-
-    // ── Student private documents ──────────────────────────────────────────────
-    public async Task<List<DocumentDto>> GetMyDocumentsAsync(Guid studentId)
-    {
-        return await db.Documents
-            .Where(d => d.OwnerId == studentId && d.Scope == "student")
-            .OrderByDescending(d => d.UploadedAt)
-            .Select(d => MapToDto(d))
-            .ToListAsync();
-    }
-
-    public async Task<UploadUrlDto> RequestStudentUploadUrlAsync(
-        Guid studentId, RequestUploadUrlRequest request)
-    {
-        await storage.EnsureBucketExistsAsync(StudentBucket);
-
-        var docId = Guid.NewGuid();
-        var ext = Path.GetExtension(request.FileName);
-        var objectKey = $"student/{studentId}/{docId}{ext}";
-
-        var doc = new Document
-        {
-            Id = docId,
-            OwnerId = studentId,
-            FileName = request.FileName,
-            FileSize = request.FileSize,
-            StorageKey = objectKey,
-            Status = "pending",
-            Scope = "student",
-            UploadedAt = DateTime.UtcNow
-        };
-
-        db.Documents.Add(doc);
-        await db.SaveChangesAsync();
-
-        var uploadUrl = await storage.GetPresignedUploadUrlAsync(StudentBucket, objectKey, 600);
-
-        return new UploadUrlDto
-        {
-            DocumentId = docId.ToString(),
-            UploadUrl = uploadUrl,
-            ExpiresInSeconds = 600
-        };
-    }
-
-    public async Task<DocumentDto?> ConfirmStudentUploadAsync(Guid studentId, string documentId)
-    {
-        if (!Guid.TryParse(documentId, out var docId)) return null;
-
-        var doc = await db.Documents
-            .FirstOrDefaultAsync(d => d.Id == docId && d.OwnerId == studentId && d.Scope == "student");
-
-        if (doc == null) return null;
-
-        doc.Status = "ingesting";
-        await db.SaveChangesAsync();
-
-        await ScheduleBackgroundIngest(
-            doc.Id,
-            documentScope: "student",
-            ownerId: doc.OwnerId.ToString());
-
-        return MapToDto(doc);
-    }
-
-    public async Task<GenerateQuizJobDto> GenerateMyQuizAsync(Guid studentId, Guid docId, GenerateQuizRequest request)
-    {
-        var jobId = $"job-{Guid.NewGuid():N}";
-        var doc = await db.Documents.FirstOrDefaultAsync(d => d.Id == docId && d.Scope == "student" && d.OwnerId == studentId);
-
-        if (doc == null)
-        {
-            return new GenerateQuizJobDto
-            {
-                JobId = jobId,
-                Status = "error",
-                Message = "Không tìm thấy tài liệu cá nhân cần tạo quiz."
-            };
-        }
-
-        try
-        {
-            doc.Status = "processing";
-            await db.SaveChangesAsync();
-
-            var (topicName, topicId) = await ResolveOrCreateStudentTopicFromDocumentAsync(
-                studentId, doc, request.Difficulty);
-            var downloadUrl = await ResolveDocumentDownloadUrlAsync(doc);
-
-            // Handle Append Mode
-            if (request.Mode == "append" && doc.GeneratedQuizId != null)
-            {
-                var quiz = await db.Quizzes.Include(q => q.Questions).FirstOrDefaultAsync(q => q.Id == doc.GeneratedQuizId);
-                if (quiz != null)
-                {
-                    var existingQuestions = quiz.Questions
-                        .OrderByDescending(q => q.OrderIndex)
-                        .Select(q => q.Text)
-                        .Where(t => !string.IsNullOrWhiteSpace(t))
-                        .Take(150)
-                        .ToList();
-
-                    var studentAppendAiQuestions = new List<AgentQuizBatchQuestion>();
-                    bool isStudentAppendAdvanced = (request.NumEasyQuestions ?? 0) > 0 || 
-                                                 (request.NumMediumQuestions ?? 0) > 0 || 
-                                                 (request.NumHardQuestions ?? 0) > 0;
-                                                 
-                    if (isStudentAppendAdvanced)
-                    {
-                        var res = await agent.GenerateQuizBatchAsync(
-                            topicName, 
-                            null, 
-                            downloadUrl, 
-                            request.NumQuestions, 
-                            "mixed", 
-                            request.NumEasyQuestions ?? 0, 
-                            request.NumMediumQuestions ?? 0, 
-                            request.NumHardQuestions ?? 0,
-                            documentId: doc.Id.ToString(),
-                            existingQuestions: existingQuestions);
-                        if (res?.Questions != null) studentAppendAiQuestions.AddRange(res.Questions);
-                    }
-                    else
-                    {
-                        var res = await agent.GenerateQuizBatchAsync(
-                            topicName, null, downloadUrl, request.NumQuestions, request.Difficulty,
-                            documentId: doc.Id.ToString(), existingQuestions: existingQuestions);
-                        if (res?.Questions != null) studentAppendAiQuestions.AddRange(res.Questions);
-                    }
-
-                    studentAppendAiQuestions = AgentQuizValidation.FilterQuestionsWithSingleCorrectOption(
-                        studentAppendAiQuestions, logger);
-
-                    if (studentAppendAiQuestions.Count == 0)
-                    {
-                        doc.Status = "ready"; // Reset to ready since the original quiz is still valid
-                        await db.SaveChangesAsync();
-                        return new GenerateQuizJobDto
-                        {
-                            JobId = jobId,
-                            Status = "error",
-                            Message = "AI không sinh thêm được câu hỏi hợp lệ từ tài liệu cá nhân."
-                        };
-                    }
-
-                    if (quiz.TopicId != topicId || quiz.Type != "pool")
-                    {
-                        quiz.TopicId = topicId;
-                        quiz.Type = "pool";
-                    }
-
-                    var maxOrderIndex = quiz.Questions.Any() ? quiz.Questions.Max(q => q.OrderIndex) : -1;
-                    foreach (var (q, idx) in studentAppendAiQuestions.Select((q, idx) => (q, idx)))
-                    {
-                        var question = new Question
-                        {
-                            Id = Guid.NewGuid(),
-                            QuizId = quiz.Id,
-                            SourceDocumentId = doc.Id,
-                            Text = q.Question,
-                            Type = string.IsNullOrWhiteSpace(q.Type) ? "mcq" : q.Type,
-                            Difficulty = string.IsNullOrWhiteSpace(q.Difficulty) ? "medium" : q.Difficulty,
-                            DifficultyIndex = ResolveDifficultyIndex(q),
-                            IsEstimatedDifficultyIndex = !q.DifficultyIndex.HasValue,
-                            Explanation = q.Explanation,
-                            CorrectAnswer = q.Options.FirstOrDefault(o => o.IsCorrect)?.Text ?? "",
-                            VerifiedByTeacher = false,
-                            OrderIndex = maxOrderIndex + 1 + idx,
-                            Options = q.Options.Select((o, oidx) => new QuizOption
-                            {
-                                Id = Guid.NewGuid(),
-                                Text = o.Text,
-                                IsCorrect = o.IsCorrect,
-                                OrderIndex = oidx
-                            }).ToList()
-                        };
-                        db.Questions.Add(question);
-                    }
-
-                    doc.Status = "ready";
-                    await db.SaveChangesAsync();
-
-                    return new GenerateQuizJobDto
-                    {
-                        JobId = jobId,
-                        Status = "completed",
-                        QuizId = quiz.Id.ToString(),
-                        TopicName = topicName,
-                        Message = $"Đã sinh thêm {studentAppendAiQuestions.Count} câu vào Kho Pool — chủ đề: {topicName}."
-                    };
-                }
-            }
-
-            // Create Mode or Retry Mode (delete old quiz if it exists)
-            if (doc.GeneratedQuizId != null)
-            {
-                var oldQuiz = await db.Quizzes.FindAsync(doc.GeneratedQuizId);
-                if (oldQuiz != null)
-                {
-                    db.Quizzes.Remove(oldQuiz);
-                }
-                doc.GeneratedQuizId = null;
-                await db.SaveChangesAsync();
-            }
-
-            var studentCreateAiQuestions = new List<AgentQuizBatchQuestion>();
-            bool isStudentCreateAdvanced = (request.NumEasyQuestions ?? 0) > 0 || 
-                                           (request.NumMediumQuestions ?? 0) > 0 || 
-                                           (request.NumHardQuestions ?? 0) > 0;
-                                           
-            if (isStudentCreateAdvanced)
-            {
-                var res = await agent.GenerateQuizBatchAsync(
-                    topicName, 
-                    null, 
-                    downloadUrl, 
-                    request.NumQuestions, 
-                    "mixed", 
-                    request.NumEasyQuestions ?? 0, 
-                    request.NumMediumQuestions ?? 0, 
-                    request.NumHardQuestions ?? 0,
-                    documentId: doc.Id.ToString());
-                if (res?.Questions != null) studentCreateAiQuestions.AddRange(res.Questions);
-            }
-            else
-            {
-                var res = await agent.GenerateQuizBatchAsync(topicName, null, downloadUrl, request.NumQuestions, request.Difficulty, documentId: doc.Id.ToString());
-                if (res?.Questions != null) studentCreateAiQuestions.AddRange(res.Questions);
-            }
-
-            studentCreateAiQuestions = AgentQuizValidation.FilterQuestionsWithSingleCorrectOption(
-                studentCreateAiQuestions, logger);
-
-            if (studentCreateAiQuestions.Count == 0)
-            {
-                doc.Status = "error";
-                await db.SaveChangesAsync();
-
-                return new GenerateQuizJobDto
-                {
-                    JobId = jobId,
-                    Status = "error",
-                    Message = "AI không sinh được câu hỏi hợp lệ từ tài liệu cá nhân."
-                };
-            }
-
-            var newQuiz = BuildGeneratedQuiz(
-                titlePrefix: topicName,
-                type: "pool",
-                ownerId: doc.OwnerId,
-                classId: null,
-                topicId: topicId,
-                sourceDocumentId: doc.Id,
-                aiQuestions: studentCreateAiQuestions);
-
-            db.Quizzes.Add(newQuiz);
-            doc.GeneratedQuizId = newQuiz.Id;
-            doc.Status = "ready";
-            await db.SaveChangesAsync();
-
-            return new GenerateQuizJobDto
-            {
-                JobId = jobId,
-                Status = "completed",
-                QuizId = newQuiz.Id.ToString(),
-                TopicName = topicName,
-                Message = $"Đã tạo {studentCreateAiQuestions.Count} câu vào Kho Pool — chủ đề: {topicName}."
-            };
-        }
-        catch (Exception ex)
-        {
-            logger.LogError(ex, "GenerateMyQuiz failed for doc={DocId}", docId);
-
-            try
-            {
-                db.ChangeTracker.Clear();
-                var freshDoc = await db.Documents.FindAsync(docId);
-                if (freshDoc != null)
-                {
-                    freshDoc.Status = "error";
-                    await db.SaveChangesAsync();
-                }
-            }
-            catch (Exception saveEx)
-            {
-                logger.LogError(saveEx, "Failed to set document status to error for doc={DocId}", docId);
-            }
-
-            return new GenerateQuizJobDto
-            {
-                JobId = jobId,
-                Status = "error",
-                Message = "Lỗi khi tạo quiz cá nhân. Vui lòng thử lại."
-            };
-        }
-    }
-
-    public async Task<bool> DeleteMyDocumentAsync(Guid studentId, Guid docId)
-    {
-        var doc = await db.Documents
-            .FirstOrDefaultAsync(d => d.Id == docId && d.OwnerId == studentId && d.Scope == "student");
-
-        if (doc == null) return false;
-
-        try
-        {
-            await agent.DeleteDocumentAsync(docId.ToString());
-        }
-        catch (Exception ex)
-        {
-            logger.LogWarning(ex, "RAG delete failed for student document {DocId}; removing from storage/DB anyway", docId);
-        }
-
-        if (doc.StorageKey != null)
-            await storage.DeleteObjectAsync(StudentBucket, doc.StorageKey);
-
-        db.Documents.Remove(doc);
-        await db.SaveChangesAsync();
-        return true;
-    }
-
-    public async Task<DownloadUrlDto?> GetStudentDocumentDownloadUrlAsync(Guid studentId, Guid docId)
-    {
-        var doc = await db.Documents
-            .FirstOrDefaultAsync(d => d.Id == docId && d.OwnerId == studentId && d.Scope == "student");
-
-        if (doc?.StorageKey == null) return null;
-
-        var url = await storage.GetPresignedDownloadUrlAsync(StudentBucket, doc.StorageKey, 3600);
-        return new DownloadUrlDto { DownloadUrl = url, ExpiresInSeconds = 3600 };
-    }
-
     public async Task<DocumentDto?> GetByIdAsync(Guid docId)
     {
         var doc = await db.Documents.FindAsync(docId);
@@ -793,6 +156,36 @@ public class DocumentsRepository(
         return (fallbackTopic, defaultDifficulty, null);
     }
 
+    private async Task<List<AgentQuizBatchQuestion>> GenerateDocumentQuestionsAsync(
+        string topicName,
+        string? downloadUrl,
+        Guid documentId,
+        GenerateQuizRequest request,
+        string difficulty,
+        IReadOnlyList<string>? existingQuestions = null)
+    {
+        var useDifficultyCounts = (request.NumEasyQuestions ?? 0) > 0
+            || (request.NumMediumQuestions ?? 0) > 0
+            || (request.NumHardQuestions ?? 0) > 0;
+
+        // Luồng append truyền câu cũ để agent tránh sinh lại cùng nội dung.
+        var response = await agent.GenerateQuizBatchAsync(
+            topicName,
+            null,
+            downloadUrl,
+            request.NumQuestions,
+            useDifficultyCounts ? "mixed" : difficulty,
+            useDifficultyCounts ? request.NumEasyQuestions ?? 0 : 0,
+            useDifficultyCounts ? request.NumMediumQuestions ?? 0 : 0,
+            useDifficultyCounts ? request.NumHardQuestions ?? 0 : 0,
+            documentId: documentId.ToString(),
+            existingQuestions: existingQuestions);
+
+        return AgentQuizValidation.FilterQuestionsWithSingleCorrectOption(
+            response?.Questions ?? [],
+            logger);
+    }
+
     private static Quiz BuildGeneratedQuiz(
         string titlePrefix,
         string type,
@@ -812,27 +205,9 @@ public class DocumentsRepository(
             ClassId = classId,
             TopicId = topicId,
             OwnerId = ownerId,
-            Questions = aiQuestions.Select((q, qidx) => new Question
-            {
-                Id = Guid.NewGuid(),
-                SourceDocumentId = sourceDocumentId,
-                Text = q.Question,
-                Type = string.IsNullOrWhiteSpace(q.Type) ? "mcq" : q.Type,
-                Difficulty = string.IsNullOrWhiteSpace(q.Difficulty) ? "medium" : q.Difficulty,
-                DifficultyIndex = ResolveDifficultyIndex(q),
-                IsEstimatedDifficultyIndex = !q.DifficultyIndex.HasValue,
-                Explanation = q.Explanation,
-                CorrectAnswer = q.Options.FirstOrDefault(o => o.IsCorrect)?.Text ?? "",
-                VerifiedByTeacher = false,
-                OrderIndex = qidx,
-                Options = q.Options.Select((o, oidx) => new QuizOption
-                {
-                    Id = Guid.NewGuid(),
-                    Text = o.Text,
-                    IsCorrect = o.IsCorrect,
-                    OrderIndex = oidx
-                }).ToList()
-            }).ToList()
+            Questions = aiQuestions
+                .Select((question, index) => QuestionMapper.FromAgent(question, index, sourceDocumentId))
+                .ToList()
         };
     }
 
@@ -850,13 +225,6 @@ public class DocumentsRepository(
         Scope = d.Scope,
         IsVisible = d.IsVisible
     };
-
-    private static double ResolveDifficultyIndex(AgentQuizBatchQuestion question)
-    {
-        if (question.DifficultyIndex.HasValue)
-            return DifficultyIndex.Clamp(question.DifficultyIndex.Value);
-        return DifficultyIndex.FromDifficultyLabel(question.Difficulty);
-    }
 
     public async Task<DocumentDto?> UpdateDocumentTopicAsync(Guid classId, Guid docId, string? topicId)
     {

@@ -1,6 +1,6 @@
 # Module: practiceSession.service
 
-> File nguồn: [`web/src/services/practiceSession.service.ts`](../../../web/src/services/practiceSession.service.ts)
+> File nguồn: [`web/src/features/practiceSession.service.ts`](../../../web/src/features/practice/api/practice-session.service.ts)
 
 ## Hàm
 

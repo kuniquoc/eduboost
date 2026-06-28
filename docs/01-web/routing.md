@@ -2,7 +2,7 @@
 
 
 
-> Nguồn: [`web/src/App.tsx`](../../web/src/App.tsx)
+> Nguồn: [`web/src/App.tsx`](../../web/src/app/App.tsx)
 
 
 
@@ -104,7 +104,7 @@
 
 
 
-## Sidebar nav ([`app-layout.tsx`](../../web/src/components/layout/app-layout.tsx))
+## Sidebar nav ([`app-layout.tsx`](../../web/src/app/layouts/app-layout.tsx))
 
 
 

@@ -1,6 +1,6 @@
 # Module: reranker.py
 
-> File: [`ai-agent-core/src/src/rag/reranker.py`](../../../ai-agent-core/src/src/rag/reranker.py)
+> File: [`ai-agent-core/src/src/eduboost_agent/rag/reranker.py`](../../../ai-agent-core/src/eduboost_agent/rag/reranker.py)
 
 ## RAG stack
 

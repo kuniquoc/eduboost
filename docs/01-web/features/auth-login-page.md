@@ -8,7 +8,7 @@ Trang/feature `Login` trong EduBoost web app.
 
 ## File nguồn
 
-[`web/src/features/auth/login-page.tsx`](../../../web/src/features/auth/login-page.tsx)
+[`web/src/features/auth/login-page.tsx`](../../../web/src/features/auth/pages/login-page.tsx)
 
 ## Routes
 
