@@ -37,6 +37,7 @@ export function TeacherPoolDashboard() {
   const [uploadingFile, setUploadingFile] = useState(false);
   const [selectedClassIdForTopic, setSelectedClassIdForTopic] = useState(searchParams.get('classId') ?? '');
   const [lastGeneratedQuizId, setLastGeneratedQuizId] = useState<string | null>(null);
+  const [lastGeneratedTopicId, setLastGeneratedTopicId] = useState<string | null>(null);
 
   // Create Test Dialog states
   const [isTestDialogOpen, setIsTestDialogOpen] = useState(false);
@@ -88,15 +89,19 @@ export function TeacherPoolDashboard() {
     }
   };
 
-  const handleManualQuizSuccess = (quiz: { id: string; questionCount: number }) => {
+  const handleManualQuizSuccess = (quiz: { id: string; topicId?: string; questionCount: number }) => {
     setLastGeneratedQuizId(quiz.id);
-    toast.success(`Đã tạo thành công ${quiz.questionCount} câu hỏi vào Quiz Pool!`, {
+    setLastGeneratedTopicId(quiz.topicId ?? null);
+    toast.success(`Đã tạo thành công ${quiz.questionCount} câu hỏi vào kho câu hỏi!`, {
       action: {
         label: 'Kiểm tra ngay',
         onClick: () => navigate(`/teacher/ai-studio/${quiz.id}`),
       },
     });
     queryClient.invalidateQueries({ queryKey: ['pool-topics'] });
+    if (quiz.topicId) {
+      queryClient.invalidateQueries({ queryKey: ['quizzes-in-topic', quiz.topicId] });
+    }
     setTopicName('');
     setSelectedClassTopicId('');
     setActiveTab('pool');
@@ -175,7 +180,7 @@ export function TeacherPoolDashboard() {
       <div className="mb-6 flex flex-col justify-between gap-4 md:flex-row md:items-center">
         <div>
           <h1 className="text-3xl font-extrabold tracking-tight bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
-            AI Quiz Pool Studio
+            Kho câu hỏi AI
           </h1>
         </div>
         <div className="flex rounded-xl bg-muted/60 p-1 border border-border/50 max-w-fit">
@@ -184,7 +189,7 @@ export function TeacherPoolDashboard() {
             className="rounded-lg text-xs md:text-sm font-medium"
             onClick={() => setActiveTab('pool')}
           >
-            <Library className="mr-2 h-4 w-4" /> Kho Quiz Pool
+            <Library className="mr-2 h-4 w-4" /> Kho câu hỏi
           </Button>
           <Button
             variant={activeTab === 'generate' ? 'default' : 'ghost'}
@@ -210,6 +215,7 @@ export function TeacherPoolDashboard() {
             </div>
           )}
           <PoolQuestionPicker
+            preferredTopicId={lastGeneratedTopicId ?? undefined}
             selectionMode="batch"
             selectedQuestionIds={[]}
             selectedPoolQuizIds={selectedPoolQuizIds}
@@ -400,4 +406,3 @@ export function TeacherPoolDashboard() {
     </div>
   );
 }
-

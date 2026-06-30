@@ -290,6 +290,8 @@ public class PoolRepository(AppDbContext db, IStorageService storage, IAgentServ
             .Where(q => q.TopicId == topicId && q.Type == "pool")
             .Include(q => q.Questions)
                 .ThenInclude(qu => qu.Options)
+            .Include(q => q.Questions)
+                .ThenInclude(qu => qu.IrtItem)
             .OrderByDescending(q => q.CreatedAt)
             .ToListAsync();
 
@@ -327,6 +329,8 @@ public class PoolRepository(AppDbContext db, IStorageService storage, IAgentServ
         var quiz = await db.Quizzes
             .Include(q => q.Questions)
                 .ThenInclude(qu => qu.Options)
+            .Include(q => q.Questions)
+                .ThenInclude(qu => qu.IrtItem)
             .FirstOrDefaultAsync(q => q.Id == quizId && q.Type == "pool");
 
         if (quiz == null) return null;

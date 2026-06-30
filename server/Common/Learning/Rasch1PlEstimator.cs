@@ -5,6 +5,7 @@ public readonly record struct RaschEstimate(double Theta, double StandardError, 
 
 public static class Rasch1PlEstimator
 {
+    public const int CurrentVersion = 2;
     private const double PriorVariance = 1.0;
     private const int MaxIterations = 25;
     private const double Tolerance = 1e-6;

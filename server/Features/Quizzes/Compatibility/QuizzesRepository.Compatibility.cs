@@ -20,6 +20,7 @@ public partial class QuizzesRepository
     {
         var quiz = await db.Quizzes
             .Include(q => q.Questions).ThenInclude(q => q.Options)
+            .Include(q => q.Questions).ThenInclude(q => q.IrtItem)
             .FirstOrDefaultAsync(q => q.ClassId == classId && q.Type == "entry_test" && q.IsPublished);
 
         if (quiz == null) return null;

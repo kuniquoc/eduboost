@@ -187,7 +187,7 @@ export function DocumentsTab({ classId }: { classId: string }) {
                             documentId: doc.id,
                             topicId: doc.topicId ?? undefined,
                           }))}
-                          title="Sinh quiz AI trong Quiz Pool"
+                          title="Sinh quiz AI trong kho câu hỏi"
                         >
                           <Sparkles className="h-3.5 w-3.5" />
                         </Button>

@@ -301,6 +301,9 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
         modelBuilder.Entity<IrtAbilityState>()
             .HasIndex(a => new { a.UserId, a.TopicId })
             .IsUnique();
+        modelBuilder.Entity<IrtAbilityState>()
+            .Property(a => a.EstimatorVersion)
+            .HasDefaultValue(Common.Learning.Rasch1PlEstimator.CurrentVersion);
 
         // ConversationMessage
         modelBuilder.Entity<ConversationMessage>()

@@ -97,7 +97,7 @@ export function PracticeSessionPage() {
         : isQuizPracticeMode
           ? 'Không thể bắt đầu luyện tập quiz lớp.'
           : isFixedMode
-              ? 'Không thể bắt đầu phiên luyện tập từ Quiz Pool.'
+              ? 'Không thể bắt đầu phiên luyện tập từ kho câu hỏi.'
               : 'Không thể bắt đầu phiên luyện tập.';
       setState({ type: 'error', message });
       toast.error(message);
@@ -473,7 +473,7 @@ export function PracticeSessionPage() {
           <CardHeader className="text-center">
             <Trophy className="mx-auto h-12 w-12 text-yellow-500" />
             <CardTitle>
-              {isTestMode ? 'Kết quả bài kiểm tra' : isFixedMode ? 'Kết quả Quiz Pool' : 'Kết quả luyện tập'}
+              {isTestMode ? 'Kết quả bài kiểm tra' : isFixedMode ? 'Kết quả kho câu hỏi' : 'Kết quả luyện tập'}
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">

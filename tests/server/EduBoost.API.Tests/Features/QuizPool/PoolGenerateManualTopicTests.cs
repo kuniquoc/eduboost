@@ -54,6 +54,43 @@ public class PoolGenerateManualTopicTests
     }
 
     [Fact]
+    public async Task GetQuizzesInTopicPoolAsync_LoadsIrtItemAfterTrackerIsCleared()
+    {
+        await using var db = CreateDb();
+        var teacherId = Guid.NewGuid();
+        var topicId = Guid.NewGuid();
+
+        db.Users.Add(new User { Id = teacherId, Name = "T", Email = "t@test.com", PasswordHash = "x", Role = "teacher" });
+        db.Topics.Add(new Topic
+        {
+            Id = topicId,
+            Name = "Đại số",
+            OwnerId = teacherId,
+            Difficulty = "medium",
+            CreatedAt = DateTime.UtcNow
+        });
+        await db.SaveChangesAsync();
+
+        var repo = new PoolRepository(db, new NoOpStorage(), new FakeAgentService());
+        var generated = await repo.GeneratePoolQuizAsync(teacherId, "teacher", new GeneratePoolQuizRequest
+        {
+            TopicId = topicId.ToString(),
+            UserSuggestion = "Tạo câu hỏi về phương trình bậc hai",
+            NumQuestions = 1
+        });
+        Assert.NotNull(generated);
+
+        // Mô phỏng request HTTP kế tiếp: không còn navigation entity từ request tạo quiz.
+        db.ChangeTracker.Clear();
+
+        var quizzes = await repo.GetQuizzesInTopicPoolAsync(teacherId, topicId);
+
+        var question = Assert.Single(Assert.Single(quizzes).Questions);
+        Assert.Equal("medium", question.DifficultyBand);
+        Assert.Equal(IrtScale.MediumPrior, question.IrtBeta);
+    }
+
+    [Fact]
     public async Task GeneratePoolQuizAsync_WithUnknownTopicId_ReturnsNull()
     {
         await using var db = CreateDb();

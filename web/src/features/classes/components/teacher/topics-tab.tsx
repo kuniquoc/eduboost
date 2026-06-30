@@ -154,7 +154,7 @@ export function TopicsTab({ classId, topics }: TopicsTabProps) {
                     <Button
                       variant="ghost"
                       size="icon-sm"
-                      title="AI sinh câu hỏi trong Quiz Pool"
+                      title="AI sinh câu hỏi trong kho câu hỏi"
                       onClick={() => navigate(teacherQuizPoolGeneratePath({ classId, topicId: t.id }))}
                     >
                       <Sparkles className="h-3.5 w-3.5 text-indigo-400" />

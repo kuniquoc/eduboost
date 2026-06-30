@@ -12,7 +12,7 @@ describe('resolvePracticeSessionMode', () => {
     );
 
     expect(mode.autoStart).toBe(true);
-    expect(mode.label).toBe('Quiz Pool');
+    expect(mode.label).toBe('Kho câu hỏi');
     expect(mode.fixedQuestionIds).toEqual(['q1', 'q2']);
   });
 

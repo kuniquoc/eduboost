@@ -8,6 +8,7 @@ public class IrtAbilityState
     public double Theta { get; set; }
     public double StandardError { get; set; } = 1.0;
     public int ResponseCount { get; set; }
+    public int EstimatorVersion { get; set; } = Common.Learning.Rasch1PlEstimator.CurrentVersion;
     public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
 
     public User User { get; set; } = null!;

@@ -43,6 +43,7 @@ internal static class DependencyInjection
         services.AddScoped<IUserProfilesRepository, UserProfilesRepository>();
         services.AddScoped<ILearningStatesRepository, LearningStatesRepository>();
         services.AddScoped<ILearningEvidenceService, LearningEvidenceService>();
+        services.AddScoped<IIrtAbilityBackfillService, IrtAbilityBackfillService>();
         services.AddScoped<IPlacementTestsRepository, PlacementTestsRepository>();
         services.AddScoped<IPracticeSessionsRepository, PracticeSessionsRepository>();
         services.AddScoped<IAiChatRepository, AiChatRepository>();

@@ -1,6 +1,7 @@
 using System.Text;
 using EduBoost.API.Infrastructure;
 using EduBoost.API.Infrastructure.Integrations.Storage;
+using EduBoost.API.Features.LearningStates;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.HttpLogging;
 using Microsoft.EntityFrameworkCore;
@@ -143,6 +144,9 @@ using (var scope = app.Services.CreateScope())
         logger.LogInformation("Applying EF Core migrations...");
         await db.Database.MigrateAsync();
         logger.LogInformation("Migrations applied successfully.");
+
+        var irtBackfill = scope.ServiceProvider.GetRequiredService<IIrtAbilityBackfillService>();
+        await irtBackfill.RunAsync();
 
         var config = scope.ServiceProvider.GetRequiredService<IConfiguration>();
         await AdminBootstrap.EnsureAsync(db, config, logger);

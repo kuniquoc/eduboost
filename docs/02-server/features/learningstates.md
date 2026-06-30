@@ -42,6 +42,13 @@ Mọi luồng trả lời gọi `UpdateAfterAnswerAsync`:
 - Placement test (`PlacementTestsRepository`)
 - AI Tutor submit (`QuizzesController` — câu hỏi AI được persist vào quiz `type=tutor`)
 
+## IRT ability và snapshot độ khó
+
+- Mỗi câu trả lời lưu độ khó tại thời điểm trả lời vào `IrtResponse.BetaAtResponse`.
+- Theta được tính bằng Rasch 1PL từ snapshot này, không đọc lại `IrtItem.Beta` hiện tại. Vì vậy việc giáo viên chỉnh độ khó không làm thay đổi theta lịch sử; chỉ phản hồi mới dùng beta mới.
+- Mỗi chủ đề dùng tối đa 50 item khác nhau trong 180 ngày gần nhất và chỉ phản hồi mới nhất của mỗi item.
+- `IrtAbilityState.EstimatorVersion` theo dõi phiên bản công thức. Startup backfill các state cũ trước khi nhận request; state legacy không có phản hồi được giữ nguyên.
+
 ## Liên kết
 
 - [practicesessions.md](practicesessions.md)

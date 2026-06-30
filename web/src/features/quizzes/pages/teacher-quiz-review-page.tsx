@@ -535,7 +535,7 @@ export function QuizReviewPage() {
             <DialogHeader>
               <DialogTitle className="flex items-center gap-2">
                 <Library className="h-5 w-5 text-purple-400" />
-                Thêm câu hỏi từ Quiz Pool
+                Thêm câu hỏi từ kho câu hỏi
               </DialogTitle>
               <DialogDescription>
                 Chọn câu hỏi từ kho pool của lớp để thêm vào quiz này.

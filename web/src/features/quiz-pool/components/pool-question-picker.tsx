@@ -29,6 +29,7 @@ interface PoolSelectionState {
 
 export interface PoolQuestionPickerProps {
   classId?: string;
+  preferredTopicId?: string;
   selectionMode: 'question' | 'batch';
   selectedQuestionIds: string[];
   selectedPoolQuizIds: string[];
@@ -73,6 +74,7 @@ function filterQuizzes(
 
 export function PoolQuestionPicker({
   classId,
+  preferredTopicId,
   selectionMode,
   selectedQuestionIds,
   selectedPoolQuizIds,
@@ -100,7 +102,7 @@ export function PoolQuestionPicker({
   const { data: topics = [], isLoading: isLoadingTopics } = usePoolTopics(search, classId);
   const selectedTopic = selectedTopicState && topics.some((topic) => topic.id === selectedTopicState.id)
     ? selectedTopicState
-    : topics[0] ?? null;
+    : topics.find((topic) => topic.id === preferredTopicId) ?? topics[0] ?? null;
   const { data: quizzes = [], isLoading: isLoadingQuizzes } = useQuizzesInTopic(selectedTopic?.id);
 
   const filteredQuizzes = useMemo(

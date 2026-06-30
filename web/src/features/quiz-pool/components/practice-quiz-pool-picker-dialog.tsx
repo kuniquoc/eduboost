@@ -65,7 +65,7 @@ export function PracticeQuizPoolPickerDialog({
       totalScore: totalScore,
     }),
     onSuccess: (quiz) => {
-      toast.success('Đã tạo quiz luyện tập từ Quiz Pool. Hãy kiểm tra và xuất bản!');
+      toast.success('Đã tạo quiz luyện tập từ kho câu hỏi. Hãy kiểm tra và xuất bản!');
       setSelectedQuestionIds([]);
       setSelectedQuestions([]);
       setTitle('');
@@ -108,7 +108,7 @@ export function PracticeQuizPoolPickerDialog({
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2">
             <FileQuestion className="h-5 w-5 text-purple-400" />
-            Tạo quiz luyện tập từ Quiz Pool
+            Tạo quiz luyện tập từ kho câu hỏi
           </DialogTitle>
           <DialogDescription>
             Chọn các câu hỏi từ kho pool của lớp{className ? ` "${className}"` : ''} để tổng hợp thành bài luyện tập.

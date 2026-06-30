@@ -80,7 +80,7 @@ export function resolvePracticeSessionMode(params: URLSearchParams): PracticeSes
         : isQuizPractice
           ? 'Luyện tập quiz lớp'
           : isFixed
-            ? 'Quiz Pool'
+            ? 'Kho câu hỏi'
             : 'Luyện tập',
   };
 }

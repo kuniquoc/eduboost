@@ -309,7 +309,10 @@ public partial class QuizzesRepository : IQuizzesRepository
 
     public async Task<QuestionDto?> VerifyQuestionAsync(Guid questionId, bool verified)
     {
-        var question = await db.Questions.Include(q => q.Options).FirstOrDefaultAsync(q => q.Id == questionId);
+        var question = await db.Questions
+            .Include(q => q.Options)
+            .Include(q => q.IrtItem)
+            .FirstOrDefaultAsync(q => q.Id == questionId);
         if (question == null) return null;
         question.VerifiedByTeacher = verified;
         await db.SaveChangesAsync();
@@ -333,6 +336,7 @@ public partial class QuizzesRepository : IQuizzesRepository
     {
         var quiz = await db.Quizzes
             .Include(q => q.Questions).ThenInclude(q => q.Options)
+            .Include(q => q.Questions).ThenInclude(q => q.IrtItem)
             .FirstOrDefaultAsync(q => q.TopicId == topicId && q.Type == "practice" && q.IsPublished);
 
         var questions = quiz?.Questions
@@ -361,6 +365,7 @@ public partial class QuizzesRepository : IQuizzesRepository
         return await db.Questions
             .Where(q => q.QuizId == quizId)
             .Include(q => q.Options)
+            .Include(q => q.IrtItem)
             .OrderBy(q => q.OrderIndex)
             .Select(q => QuestionMapper.ToDto(q))
             .ToListAsync();

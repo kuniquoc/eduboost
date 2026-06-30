@@ -26,7 +26,7 @@ export function PoolDashboardHeader({
     <div className="mb-6 flex flex-col justify-between gap-4 md:flex-row md:items-center">
       <div>
         <h1 className="text-3xl font-extrabold tracking-tight bg-gradient-to-r from-blue-400 via-indigo-400 to-violet-400 bg-clip-text text-transparent">
-          AI Quiz Pool cá nhân
+          Kho câu hỏi AI cá nhân
         </h1>
         <p className="mt-1 text-sm text-muted-foreground">
           Tự xây dựng kho kiến thức ôn luyện cá nhân hóa, bám sát tài liệu bài học của bạn.
@@ -124,7 +124,7 @@ export function GenerationProgressOverlay({ step }: { step: number }) {
     'Đọc tài liệu và hiểu ngữ cảnh...',
     'Phân tích cây kiến thức & tìm lỗ hổng...',
     'Soạn thảo câu hỏi trắc nghiệm & giải thích...',
-    'Đang chuẩn hóa định dạng Quiz Pool...',
+    'Đang chuẩn hóa định dạng kho câu hỏi...',
   ];
   return (
     <div className="fixed inset-0 bg-background/85 backdrop-blur-md z-50 flex items-center justify-center animate-fadeIn p-4">

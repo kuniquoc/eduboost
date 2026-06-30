@@ -21,7 +21,7 @@ interface NavItem {
 
 const teacherNav: NavItem[] = [
   { label: 'Lớp học', href: ROUTES.TEACHER_CLASSES, icon: BookOpen },
-  { label: 'Quiz Pool', href: ROUTES.TEACHER_QUIZ_POOL, icon: Database },
+  { label: 'Kho quiz', href: ROUTES.TEACHER_QUIZ_POOL, icon: Database },
   { label: 'Hồ sơ', href: ROUTES.TEACHER_PROFILE, icon: User },
 ];
 
@@ -29,8 +29,8 @@ const studentNav: NavItem[] = [
   { label: 'Tổng quan', href: ROUTES.STUDENT_DASHBOARD, icon: LayoutDashboard },
   { label: 'Lớp học', href: ROUTES.STUDENT_CLASSES, icon: GraduationCap },
   { label: 'AI Chat', href: ROUTES.STUDENT_AI_CHAT, icon: MessageCircle },
-  { label: 'AI Lab', href: ROUTES.STUDENT_AI_LAB, icon: Bot },
-  { label: 'Quiz Pool', href: ROUTES.STUDENT_QUIZ_POOL, icon: Database },
+  { label: 'Tài liệu', href: ROUTES.STUDENT_AI_LAB, icon: Bot },
+  { label: 'Kho quiz', href: ROUTES.STUDENT_QUIZ_POOL, icon: Database },
   { label: 'Hồ sơ', href: ROUTES.STUDENT_PROFILE, icon: User },
 ];
 

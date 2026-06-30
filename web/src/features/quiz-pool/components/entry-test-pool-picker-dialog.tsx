@@ -61,7 +61,7 @@ export function EntryTestPoolPickerDialog({
       questionIds: selectedQuestionIds,
     }),
     onSuccess: (quiz) => {
-      toast.success('Đã tạo bài test đầu vào từ Quiz Pool. Hãy kiểm tra và xuất bản!');
+      toast.success('Đã tạo bài test đầu vào từ kho câu hỏi. Hãy kiểm tra và xuất bản!');
       setSelectedQuestionIds([]);
       setSelectedQuestions([]);
       setTitle('');
@@ -102,7 +102,7 @@ export function EntryTestPoolPickerDialog({
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2">
             <FileQuestion className="h-5 w-5 text-purple-400" />
-            Tạo test đầu vào từ Quiz Pool
+            Tạo test đầu vào từ kho câu hỏi
           </DialogTitle>
           <DialogDescription>
             Chọn câu hỏi từ kho pool của lớp{className ? ` "${className}"` : ''}. Độ khó và chủ đề được giữ nguyên để phục vụ BKT/IRT.

@@ -35,6 +35,7 @@ public interface ILearningEvidenceService
         CancellationToken cancellationToken = default);
 
     Task<IrtAbilityState?> GetAbilityAsync(Guid userId, Guid topicId, CancellationToken cancellationToken = default);
+    Task<RaschEstimate> EstimateAbilityAsync(Guid userId, Guid topicId, CancellationToken cancellationToken = default);
     Task SeedPlacementBktAsync(Guid userId, Guid topicId, IReadOnlyList<bool> answers, CancellationToken cancellationToken = default);
     Task<IrtAbilityState> RecomputeAbilityAsync(Guid userId, Guid topicId, CancellationToken cancellationToken = default);
 }
@@ -115,12 +116,14 @@ public sealed class LearningEvidenceService(AppDbContext db) : ILearningEvidence
     public Task<IrtAbilityState?> GetAbilityAsync(Guid userId, Guid topicId, CancellationToken cancellationToken = default) =>
         db.IrtAbilityStates.FirstOrDefaultAsync(a => a.UserId == userId && a.TopicId == topicId, cancellationToken);
 
-    public async Task<IrtAbilityState> RecomputeAbilityAsync(Guid userId, Guid topicId, CancellationToken cancellationToken = default)
+    public async Task<RaschEstimate> EstimateAbilityAsync(
+        Guid userId,
+        Guid topicId,
+        CancellationToken cancellationToken = default)
     {
         var cutoff = DateTime.UtcNow.Subtract(AbilityWindow);
         var responses = await db.IrtResponses
             .Where(r => r.UserId == userId && r.TopicId == topicId && r.CreatedAt >= cutoff)
-            .Include(r => r.IrtItem)
             .OrderByDescending(r => r.CreatedAt)
             .ToListAsync(cancellationToken);
 
@@ -128,9 +131,14 @@ public sealed class LearningEvidenceService(AppDbContext db) : ILearningEvidence
             .GroupBy(r => r.IrtItemId)
             .Select(g => g.First())
             .Take(MaxAbilityItems)
-            .Select(r => new RaschObservation(r.IrtItem.Beta, r.IsCorrect))
+            .Select(r => new RaschObservation(r.BetaAtResponse, r.IsCorrect))
             .ToList();
-        var estimate = Rasch1PlEstimator.Estimate(observations);
+        return Rasch1PlEstimator.Estimate(observations);
+    }
+
+    public async Task<IrtAbilityState> RecomputeAbilityAsync(Guid userId, Guid topicId, CancellationToken cancellationToken = default)
+    {
+        var estimate = await EstimateAbilityAsync(userId, topicId, cancellationToken);
 
         var ability = await db.IrtAbilityStates.FirstOrDefaultAsync(
             a => a.UserId == userId && a.TopicId == topicId, cancellationToken);
@@ -147,6 +155,7 @@ public sealed class LearningEvidenceService(AppDbContext db) : ILearningEvidence
         ability.Theta = estimate.Theta;
         ability.StandardError = estimate.StandardError;
         ability.ResponseCount = estimate.ResponseCount;
+        ability.EstimatorVersion = Rasch1PlEstimator.CurrentVersion;
         ability.UpdatedAt = DateTime.UtcNow;
         await db.SaveChangesAsync(cancellationToken);
         return ability;
