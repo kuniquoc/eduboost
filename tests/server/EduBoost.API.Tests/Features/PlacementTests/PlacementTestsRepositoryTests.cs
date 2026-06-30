@@ -134,7 +134,7 @@ public class PlacementTestsRepositoryTests
     }
 
     private static PlacementTestsRepository CreateRepo(AppDbContext db) =>
-        new(db, new NoOpRoadmapRepository(), new LearningStatesRepository(db));
+        new(db, new NoOpRoadmapRepository(), new LearningEvidenceService(db));
 
     private static AppDbContext CreateDb()
     {
@@ -150,7 +150,12 @@ public class PlacementTestsRepositoryTests
         QuizId = quizId,
         Text = text,
         Type = "mcq",
-        Difficulty = "medium",
+        IrtItem = new IrtItem
+        {
+            Id = Guid.NewGuid(),
+            InitialBeta = 0,
+            Beta = 0
+        },
         OrderIndex = orderIndex,
         Options =
         [

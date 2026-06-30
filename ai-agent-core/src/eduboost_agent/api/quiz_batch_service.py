@@ -258,9 +258,9 @@ async def generate_quiz_batch(request: GenerateQuizBatchRequest):
         if res is not None:
             final_questions.append(res)
 
-    easy_count = sum(1 for q in final_questions if q["difficulty"] == "easy")
-    medium_count = sum(1 for q in final_questions if q["difficulty"] == "medium")
-    hard_count = sum(1 for q in final_questions if q["difficulty"] == "hard")
+    easy_count = sum(1 for q in final_questions if q["difficulty_band"] == "easy")
+    medium_count = sum(1 for q in final_questions if q["difficulty_band"] == "medium")
+    hard_count = sum(1 for q in final_questions if q["difficulty_band"] == "hard")
 
     logger.info(
         "[QUIZ-BATCH] Final batch generated: %d questions (Requested total: %d, Easy: %d/%d, Medium: %d/%d, Hard: %d/%d)",

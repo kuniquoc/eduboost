@@ -6,14 +6,14 @@ from typing import Any
 
 logger = logging.getLogger("eduboost_agent.api.quiz_batch_service")
 
-DIFFICULTY_TO_BETA = {"easy": -1.5, "medium": 0.0, "hard": 1.5}
+DIFFICULTY_TO_BETA = {
+    "easy": -1.0986122886681098,
+    "medium": 0.0,
+    "hard": 1.0986122886681098,
+}
 QUIZ_RETRY_TEMPERATURES = [0.35, 0.45, 0.55, 0.60, 0.65]
 
 _OPTION_LETTERS = ["A", "B", "C", "D"]
-_PROHIBITED_EXAMPLES = {
-    "thechildrenplayinginthegardenwhenitstartedtorain",
-    "sheisanexpertinthefieldofartificialintelligence",
-}
 _AVOID_LIST_CAP = 21
 _AVOID_COMPLETED_RECENT = 20
 _EXISTING_QUESTIONS_CAP = 150
@@ -72,25 +72,13 @@ def build_avoid_texts(completed: list[dict], rejected: list[str]) -> list[str]:
     return result[:_AVOID_LIST_CAP]
 
 
-def _extract_forbidden_prefixes(avoid_texts: list[str]) -> list[str]:
-    prefixes: set[str] = set()
-    for text in avoid_texts:
-        lowered = text.strip().lower()
-        for starter in ("the new ", "the company ", "the project ", "the law ", "the policy "):
-            if lowered.startswith(starter):
-                prefixes.add(starter.strip() + "...")
-    return sorted(prefixes)
-
-
 def build_retry_hint(attempt: int, avoid_texts: list[str]) -> str:
     if attempt <= 1:
         return ""
     if attempt == 2:
         return "\n\nRETRY: Use a DIFFERENT subject and verb pattern than every avoid-list sentence."
     if attempt == 3:
-        hint = "\n\nRETRY: Generate a COMPLETELY DIFFERENT sentence."
-        banned = _extract_forbidden_prefixes(avoid_texts)
-        return hint + (f" Do NOT start with: {', '.join(banned)}" if banned else "")
+        return "\n\nRETRY: Generate a COMPLETELY DIFFERENT sentence."
     if attempt == 4:
         return (
             "\n\nRETRY: Pick vocabulary from a DIFFERENT part of the FOCUS EXCERPT. "
@@ -138,10 +126,6 @@ def parse_single_question(raw: dict, difficulty_label: str) -> dict | None:
     question_text = raw.get("question", "").strip()
     if not question_text:
         return None
-    if normalize_question_text(question_text) in _PROHIBITED_EXAMPLES:
-        logger.info("[QUIZ-BATCH] Skipped prohibited example question: %s", question_text)
-        return None
-
     options_raw = raw.get("options", {})
     if isinstance(options_raw, dict) and len(options_raw) == 4:
         correct_letter = resolve_correct_letter(raw.get("correct_answer", ""), options_raw)
@@ -169,15 +153,20 @@ def parse_single_question(raw: dict, difficulty_label: str) -> dict | None:
         return None
 
     try:
-        difficulty_index = float(raw.get("difficulty_index", raw.get("difficulty_level")))
+        difficulty_index = float(
+            raw.get(
+                "initial_irt_beta",
+                raw.get("difficulty_index", raw.get("difficulty_level")),
+            )
+        )
     except (TypeError, ValueError):
         difficulty_index = DIFFICULTY_TO_BETA.get(difficulty_label, 0.0)
 
     return {
         "question": question_text,
         "type": "mcq",
-        "difficulty": difficulty_label,
-        "difficulty_index": max(-3.0, min(3.0, difficulty_index)),
+        "difficulty_band": difficulty_label,
+        "initial_irt_beta": max(-3.0, min(3.0, difficulty_index)),
         "options": options,
         "explanation": raw.get("explanation", ""),
     }

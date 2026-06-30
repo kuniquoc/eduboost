@@ -15,7 +15,7 @@ namespace EduBoost.API.Tests;
 public class PoolCreateEntryTestTests
 {
     [Fact]
-    public async Task CreateEntryTestFromPoolAsync_CopiesDifficultyAndSourceTopicId()
+    public async Task CreateEntryTestFromPoolAsync_CopiesIrtItemAndSourceTopicId()
     {
         await using var db = CreateDb();
         var teacherId = Guid.NewGuid();
@@ -34,7 +34,12 @@ public class PoolCreateEntryTestTests
             QuizId = poolQuizId,
             Text = "Câu hỏi pool",
             Type = "mcq",
-            Difficulty = "hard",
+            IrtItem = new IrtItem
+            {
+                Id = Guid.NewGuid(),
+                InitialBeta = IrtScale.HardPrior,
+                Beta = IrtScale.HardPrior
+            },
             OrderIndex = 0,
             Options =
             [
@@ -56,11 +61,11 @@ public class PoolCreateEntryTestTests
         Assert.Equal(classId.ToString(), result.ClassId);
 
         var entryQuiz = await db.Quizzes
-            .Include(q => q.Questions)
+            .Include(q => q.Questions).ThenInclude(q => q.IrtItem)
             .SingleAsync(q => q.ClassId == classId && q.Type == "entry_test");
 
         var copied = entryQuiz.Questions.Single();
-        Assert.Equal("hard", copied.Difficulty);
+        Assert.Equal(IrtScale.HardPrior, copied.IrtItem.Beta);
         Assert.Equal(topicId, copied.SourceTopicId);
         Assert.Equal("Câu hỏi pool", copied.Text);
     }
@@ -137,7 +142,12 @@ public class PoolCreateEntryTestTests
         QuizId = quizId,
         Text = text,
         Type = "mcq",
-        Difficulty = difficulty,
+        IrtItem = new IrtItem
+        {
+            Id = Guid.NewGuid(),
+            InitialBeta = IrtScale.PriorFromBand(difficulty),
+            Beta = IrtScale.PriorFromBand(difficulty)
+        },
         OrderIndex = 0,
         Options =
         [

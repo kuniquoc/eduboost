@@ -26,14 +26,14 @@ class TestTutorGenerateQuestionDedupe(unittest.TestCase):
                 "options": {"A": "go", "B": "goes", "C": "going", "D": "gone"},
                 "correct_answer": "B",
                 "explanation": "Duplicate explanation",
-                "difficulty_level": 0.35,
+                "initial_irt_beta": 0.35,
             },
             {
                 "question": new_question,
                 "options": {"A": "go", "B": "goes", "C": "going", "D": "gone"},
                 "correct_answer": "A",
                 "explanation": "Fresh explanation",
-                "difficulty_level": 0.35,
+                "initial_irt_beta": 0.35,
             },
         ]
 
@@ -54,6 +54,7 @@ class TestTutorGenerateQuestionDedupe(unittest.TestCase):
 
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.json()["question"], new_question)
+        self.assertEqual(response.json()["initial_irt_beta"], 0.35)
         self.assertEqual(mock_llm.generate_json.call_count, 2)
 
         first_prompt = mock_llm.generate_json.call_args_list[0].args[0]
@@ -72,7 +73,7 @@ class TestTutorGenerateQuestionDedupe(unittest.TestCase):
             "options": {"A": "go", "B": "goes", "C": "going", "D": "gone"},
             "correct_answer": "B",
             "explanation": "Present simple explanation",
-            "difficulty_level": 0.35,
+            "initial_irt_beta": 0.35,
         }
 
         mock_retriever = MagicMock()

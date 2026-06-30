@@ -38,15 +38,11 @@ public partial class PracticeSessionsRepository
 
         var score = state.CurrentIndex > 0 ? (double)state.CorrectCount / state.CurrentIndex * 100 : 0;
 
-        var isSelfPractice = string.Equals(state.Mode, "self_practice", StringComparison.OrdinalIgnoreCase);
-
         var bktAfter = await db.BktStates
 
             .FirstOrDefaultAsync(b => b.UserId == userId && b.TopicId == state.TopicId);
 
-        var masteryAfter = isSelfPractice
-            ? state.SessionMastery
-            : bktAfter?.MasteryProbability ?? state.MasteryBefore;
+        var masteryAfter = bktAfter?.MasteryProbability ?? state.MasteryBefore;
 
         if (state.QuizId.HasValue && state.CurrentIndex > 0)
         {
@@ -119,9 +115,7 @@ public partial class PracticeSessionsRepository
 
 
 
-        IEnumerable<Guid> topicsToSync = isSelfPractice
-            ? []
-            : state.AffectedTopicIds is { Count: > 0 }
+        IEnumerable<Guid> topicsToSync = state.AffectedTopicIds is { Count: > 0 }
                 ? state.AffectedTopicIds
                 : [state.TopicId];
 

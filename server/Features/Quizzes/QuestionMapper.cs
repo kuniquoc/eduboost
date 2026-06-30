@@ -16,9 +16,12 @@ internal static class QuestionMapper
         TopicId = question.Quiz?.TopicId?.ToString() ?? "",
         Text = question.Text,
         Type = question.Type,
-        Difficulty = question.Difficulty,
-        DifficultyIndex = question.DifficultyIndex,
-        IsEstimatedDifficultyIndex = question.IsEstimatedDifficultyIndex,
+        DifficultyBand = IrtScale.BandFromBeta(question.IrtItem.Beta),
+        InitialIrtBeta = question.IrtItem.InitialBeta,
+        IrtBeta = question.IrtItem.Beta,
+        IrtBetaStandardError = question.IrtItem.BetaStandardError,
+        IrtCalibrationSampleCount = question.IrtItem.CalibrationSampleCount,
+        IrtCalibrationStatus = question.IrtItem.CalibrationStatus,
         Explanation = question.Explanation,
         CorrectAnswer = question.CorrectAnswer,
         VerifiedByTeacher = question.VerifiedByTeacher,
@@ -34,10 +37,18 @@ internal static class QuestionMapper
             .ToList()
     };
 
-    public static double ResolveDifficultyIndex(double? difficultyIndex, string? difficultyLabel) =>
-        difficultyIndex.HasValue
-            ? DifficultyIndex.Clamp(difficultyIndex.Value)
-            : DifficultyIndex.FromDifficultyLabel(difficultyLabel);
+    public static IrtItem CreateIrtItem(double? initialBeta, string? difficultyBand, string priorSource)
+    {
+        var beta = IrtScale.Clamp(initialBeta ?? IrtScale.PriorFromBand(difficultyBand));
+        return new IrtItem
+        {
+            Id = Guid.NewGuid(),
+            InitialBeta = beta,
+            Beta = beta,
+            PriorSource = initialBeta.HasValue ? priorSource : "label",
+            CalibrationStatus = "provisional"
+        };
+    }
 
     public static Question FromAgent(
         AgentQuizBatchQuestion source,
@@ -48,9 +59,7 @@ internal static class QuestionMapper
         SourceDocumentId = sourceDocumentId,
         Text = source.Question,
         Type = string.IsNullOrWhiteSpace(source.Type) ? "mcq" : source.Type,
-        Difficulty = string.IsNullOrWhiteSpace(source.Difficulty) ? "medium" : source.Difficulty,
-        DifficultyIndex = ResolveDifficultyIndex(source.DifficultyIndex, source.Difficulty),
-        IsEstimatedDifficultyIndex = !source.DifficultyIndex.HasValue,
+        IrtItem = CreateIrtItem(source.InitialIrtBeta, source.DifficultyBand, "ai"),
         Explanation = source.Explanation,
         CorrectAnswer = source.Options.FirstOrDefault(option => option.IsCorrect)?.Text ?? "",
         VerifiedByTeacher = false,
@@ -69,9 +78,8 @@ internal static class QuestionMapper
         Id = Guid.NewGuid(),
         Text = source.Text,
         Type = source.Type,
-        Difficulty = source.Difficulty,
-        DifficultyIndex = source.DifficultyIndex,
-        IsEstimatedDifficultyIndex = source.IsEstimatedDifficultyIndex,
+        IrtItemId = source.IrtItemId,
+        IrtItem = source.IrtItem,
         Explanation = source.Explanation,
         CorrectAnswer = source.CorrectAnswer,
         VerifiedByTeacher = verifiedByTeacher,

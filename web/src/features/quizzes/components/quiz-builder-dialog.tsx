@@ -27,7 +27,7 @@ function emptyQuestion(): CreateQuestionPayload {
   return {
     text: '',
     type: 'mcq',
-    difficulty: 'medium',
+    difficultyBand: 'medium',
     explanation: '',
     correctAnswer: '',
     options: [
@@ -172,9 +172,9 @@ export function QuizBuilderDialog({
                             <button
                               key={d.value}
                               type="button"
-                              onClick={() => updateQuestion(idx, { difficulty: d.value })}
+                              onClick={() => updateQuestion(idx, { difficultyBand: d.value })}
                               className={`rounded px-1.5 py-0.5 text-[10px] transition-colors ${
-                                q.difficulty === d.value
+                                q.difficultyBand === d.value
                                   ? 'bg-primary text-primary-foreground'
                                   : 'bg-muted text-muted-foreground hover:text-foreground'
                               }`}

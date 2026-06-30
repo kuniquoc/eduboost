@@ -106,7 +106,7 @@ public class PoolGenerateManualTopicTests
                     {
                         Question = $"Câu hỏi về {topicName}?",
                         Type = "mcq",
-                        Difficulty = difficulty,
+                        DifficultyBand = difficulty,
                         Explanation = "Giải thích mẫu",
                         Options =
                         [

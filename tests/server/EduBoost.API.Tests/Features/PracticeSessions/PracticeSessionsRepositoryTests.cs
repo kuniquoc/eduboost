@@ -75,6 +75,12 @@ public class PracticeSessionsRepositoryTests
             QuizId = revisionQuizId,
             Text = "Copied question",
             SourceTopicId = sourceTopicId,
+            IrtItem = new IrtItem
+            {
+                Id = Guid.NewGuid(),
+                InitialBeta = 0,
+                Beta = 0
+            },
             Options = [new QuizOption { Id = optionId, Text = "A", IsCorrect = true, OrderIndex = 0 }]
         });
         db.PracticeActiveSessions.Add(new PracticeActiveSession
@@ -99,7 +105,6 @@ public class PracticeSessionsRepositoryTests
             SessionId = sessionId.ToString(),
             QuestionId = questionId.ToString(),
             SelectedOptionId = optionId.ToString(),
-            ResponseTimeSeconds = 2
         });
 
         var bkt = await db.BktStates.SingleAsync(b => b.UserId == userId);
@@ -168,6 +173,13 @@ public class PracticeSessionsRepositoryTests
         db.Questions.AddRange(
             CreateMcq(q1, quizId, "Q1"),
             CreateMcq(q2, quizId, "Q2"));
+        db.BktStates.Add(new BktState
+        {
+            Id = Guid.NewGuid(),
+            UserId = userId,
+            TopicId = currentTopicId,
+            MasteryProbability = 0.96
+        });
         db.PracticeActiveSessions.Add(new PracticeActiveSession
         {
             Id = sessionId,
@@ -216,13 +228,19 @@ public class PracticeSessionsRepositoryTests
     }
 
     private static PracticeSessionsRepository CreateRepo(AppDbContext db) =>
-        new(db, new LearningStatesRepository(db), new NoOpRoadmapRepository());
+        new(db, new LearningEvidenceService(db), new NoOpRoadmapRepository());
 
     private static Question CreateMcq(Guid id, Guid quizId, string text) => new()
     {
         Id = id,
         QuizId = quizId,
         Text = text,
+        IrtItem = new IrtItem
+        {
+            Id = Guid.NewGuid(),
+            InitialBeta = 0,
+            Beta = 0
+        },
         Options = [new QuizOption { Id = Guid.NewGuid(), Text = "A", IsCorrect = true, OrderIndex = 0 }]
     };
 

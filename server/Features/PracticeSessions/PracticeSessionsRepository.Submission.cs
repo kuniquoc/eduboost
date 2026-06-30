@@ -35,10 +35,16 @@ public partial class PracticeSessionsRepository
 
 
         var questionId = Guid.Parse(request.QuestionId);
+        if (state.CurrentIndex >= state.Questions.Count || state.Questions[state.CurrentIndex] != questionId)
+            throw new InvalidOperationException("Question is not the current session question");
+
+        var sequence = state.CurrentIndex;
 
         var question = await db.Questions
 
             .Include(q => q.Options)
+
+            .Include(q => q.IrtItem)
 
             .Include(q => q.Quiz)
 
@@ -54,31 +60,12 @@ public partial class PracticeSessionsRepository
 
 
 
-        bool isCorrect;
-
-        string? correctAnswer;
-
-        if (question.Type == "fill_blank")
-
-        {
-
-            isCorrect = string.Equals(question.CorrectAnswer?.Trim(), request.TextAnswer?.Trim(), StringComparison.OrdinalIgnoreCase);
-
-            correctAnswer = question.CorrectAnswer;
-
-        }
-
-        else
-
-        {
-
-            var correctOption = question.Options.FirstOrDefault(o => o.IsCorrect);
-
-            isCorrect = correctOption != null && correctOption.Id.ToString() == selectedOptionId;
-
-            correctAnswer = correctOption?.Text;
-
-        }
+        var selectedOptionIds = request.SelectedOptionIds ??
+            (request.SelectedOptionId == null ? [] : [request.SelectedOptionId]);
+        var isCorrect = QuestionGrader.Grade(question, selectedOptionIds, request.TextAnswer);
+        var correctAnswer = question.Type == "fill_blank"
+            ? question.CorrectAnswer
+            : string.Join(", ", question.Options.Where(o => o.IsCorrect).Select(o => o.Text));
 
 
 
@@ -110,81 +97,17 @@ public partial class PracticeSessionsRepository
 
 
 
-        UpdateBktResponse? updateResult = null;
-
-        double masteryForDecision;
-
-        double thetaForDecision;
-
-        double? thetaBefore = null;
-
-        double? thetaAfter = null;
-
-        double? questionBeta = null;
-
         var topicIdForAnswer = ResolveQuestionTopicId(question) ?? state.TopicId;
-
-        var beta = DifficultyIndex.Clamp(question.DifficultyIndex);
-
-
-
-        if (isSelfPractice)
-
-        {
-
-            thetaBefore = state.SessionTheta;
-
-            var bktResult = BktIrtCalculator.ApplyUpdate(
-
-                state.SessionMastery, 0.25, 0.1, 0.1,
-
-                state.SessionTheta, beta, isCorrect);
-
-            state.SessionMastery = bktResult.Mastery;
-
-            state.SessionTheta = bktResult.Theta;
-
-            thetaAfter = bktResult.Theta;
-
-            questionBeta = bktResult.Beta;
-
-            masteryForDecision = state.SessionMastery;
-
-            thetaForDecision = state.SessionTheta;
-
-        }
-
-        else
-
-        {
-
-            updateResult = await learningStates.UpdateAfterAnswerAsync(userId, new UpdateBktRequest
-
-            {
-
-                TopicId = topicIdForAnswer,
-
-                QuestionId = questionId,
-
-                IsCorrect = isCorrect,
-
-                ResponseTime = isTestMode ? null : request.ResponseTimeSeconds,
-
-                QuestionDifficultyIndex = question.DifficultyIndex
-
-            });
-
-            masteryForDecision = updateResult.State.MasteryProbability;
-
-            thetaForDecision = updateResult.State.IrtTheta;
-
-            thetaBefore = updateResult.ThetaBefore;
-
-            thetaAfter = updateResult.ThetaAfter;
-
-            questionBeta = updateResult.QuestionBeta;
-
-        }
+        var updateResult = await learningEvidence.RecordAsync(
+            userId,
+            topicIdForAnswer,
+            question,
+            isCorrect,
+            state.Mode,
+            session.Id,
+            sequence);
+        var masteryForDecision = updateResult.MasteryProbability;
+        var thetaForDecision = updateResult.Theta;
 
 
 
@@ -196,7 +119,6 @@ public partial class PracticeSessionsRepository
         string? agentExplanation = null;
         bool recommendNextSkill = false;
         string? nextSkillSuggestion = null;
-        double? targetBeta = null;
         string? suggestedNextTopicId = null;
         string? suggestedNextTopicName = null;
 
@@ -205,19 +127,18 @@ public partial class PracticeSessionsRepository
         if (!isComplete)
 
         {
-            if (_irtAdaptiveSelectionEnabled
-                && !isTestMode
-                && (updateResult != null || isSelfPractice)
+            if (!isTestMode
                 && (string.Equals(state.Mode, "standard", StringComparison.OrdinalIgnoreCase)
                     || isSelfPractice))
             {
-                var reorderTheta = isSelfPractice ? state.SessionTheta : updateResult!.ThetaAfter;
-                await ReorderRemainingQuestionsByThetaAsync(state, reorderTheta);
+                await ReorderRemainingQuestionsByThetaAsync(state, updateResult.Theta);
             }
 
             var nextQ = await db.Questions
 
                 .Include(q => q.Options)
+
+                .Include(q => q.IrtItem)
 
                 .FirstOrDefaultAsync(q => q.Id == state.Questions[state.CurrentIndex]);
 
@@ -227,7 +148,7 @@ public partial class PracticeSessionsRepository
 
         }
 
-        if (!isTestMode && (updateResult != null || isSelfPractice))
+        if (!isTestMode)
         {
             var decision = await ResolveAgentDecisionAsync(
                 userId,
@@ -241,19 +162,17 @@ public partial class PracticeSessionsRepository
             agentExplanation = decision.Explanation;
             recommendNextSkill = decision.RecommendNextSkill;
             nextSkillSuggestion = decision.NextSkillSuggestion;
-            targetBeta = decision.TargetBeta;
             suggestedNextTopicId = decision.SuggestedNextTopicId;
             suggestedNextTopicName = decision.SuggestedNextTopicName;
 
             _logger?.LogInformation(
-                "Practice decision user={UserId} topic={TopicId} action={Action} mastery={Mastery:F3} theta_before={ThetaBefore:F3} theta_after={ThetaAfter:F3} beta={Beta:F3}",
+                "Practice decision user={UserId} topic={TopicId} action={Action} mastery={Mastery:F3} theta={Theta:F3} beta={Beta:F3}",
                 userId,
                 state.TopicId,
                 agentAction ?? "N/A",
                 masteryForDecision,
-                thetaBefore,
-                thetaAfter,
-                questionBeta
+                thetaForDecision,
+                question.IrtItem.Beta
             );
         }
 
@@ -314,18 +233,6 @@ public partial class PracticeSessionsRepository
             RecommendNextSkill = recommendNextSkill,
 
             NextSkillSuggestion = nextSkillSuggestion,
-
-            ThetaBefore = thetaBefore,
-
-            ThetaAfter = thetaAfter,
-
-            QuestionBeta = questionBeta,
-
-            TargetBeta = targetBeta,
-
-            SessionMastery = isSelfPractice ? state.SessionMastery : null,
-
-            DbMasteryBaseline = isSelfPractice ? state.DbMasteryBaseline : null,
 
             SuggestedNextTopicId = suggestedNextTopicId,
 

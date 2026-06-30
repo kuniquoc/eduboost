@@ -22,6 +22,9 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
     public DbSet<PracticeActiveSession> PracticeActiveSessions => Set<PracticeActiveSession>();
     public DbSet<PersonalizedLearningPath> PersonalizedLearningPaths => Set<PersonalizedLearningPath>();
     public DbSet<BktState> BktStates => Set<BktState>();
+    public DbSet<IrtItem> IrtItems => Set<IrtItem>();
+    public DbSet<IrtResponse> IrtResponses => Set<IrtResponse>();
+    public DbSet<IrtAbilityState> IrtAbilityStates => Set<IrtAbilityState>();
     public DbSet<ConversationMessage> ConversationMessages => Set<ConversationMessage>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -46,6 +49,9 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
         modelBuilder.Entity<PracticeActiveSession>().ToTable("practice_active_sessions");
         modelBuilder.Entity<PersonalizedLearningPath>().ToTable("personalized_learning_paths");
         modelBuilder.Entity<BktState>().ToTable("bkt_states");
+        modelBuilder.Entity<IrtItem>().ToTable("irt_items");
+        modelBuilder.Entity<IrtResponse>().ToTable("irt_responses");
+        modelBuilder.Entity<IrtAbilityState>().ToTable("irt_ability_states");
         modelBuilder.Entity<ConversationMessage>().ToTable("conversation_messages");
 
         // ── Unique constraints ────────────────────────────────────────────────
@@ -146,6 +152,12 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
             .WithMany(qz => qz.Questions)
             .HasForeignKey(q => q.QuizId)
             .OnDelete(DeleteBehavior.Cascade);
+
+        modelBuilder.Entity<Question>()
+            .HasOne(q => q.IrtItem)
+            .WithMany(i => i.Questions)
+            .HasForeignKey(q => q.IrtItemId)
+            .OnDelete(DeleteBehavior.Restrict);
 
         modelBuilder.Entity<QuizOption>()
             .HasOne(o => o.Question)
@@ -251,6 +263,43 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
 
         modelBuilder.Entity<BktState>()
             .HasIndex(b => new { b.UserId, b.TopicId })
+            .IsUnique();
+
+        modelBuilder.Entity<IrtResponse>()
+            .HasOne(r => r.User)
+            .WithMany()
+            .HasForeignKey(r => r.UserId)
+            .OnDelete(DeleteBehavior.Cascade);
+        modelBuilder.Entity<IrtResponse>()
+            .HasOne(r => r.Topic)
+            .WithMany()
+            .HasForeignKey(r => r.TopicId)
+            .OnDelete(DeleteBehavior.Cascade);
+        modelBuilder.Entity<IrtResponse>()
+            .HasOne(r => r.IrtItem)
+            .WithMany()
+            .HasForeignKey(r => r.IrtItemId)
+            .OnDelete(DeleteBehavior.Restrict);
+        modelBuilder.Entity<IrtResponse>()
+            .HasIndex(r => new { r.UserId, r.Source, r.AttemptId, r.Sequence })
+            .IsUnique();
+        modelBuilder.Entity<IrtResponse>()
+            .HasIndex(r => new { r.UserId, r.TopicId, r.CreatedAt });
+        modelBuilder.Entity<IrtResponse>()
+            .HasIndex(r => new { r.IrtItemId, r.UserId, r.CreatedAt });
+
+        modelBuilder.Entity<IrtAbilityState>()
+            .HasOne(a => a.User)
+            .WithMany()
+            .HasForeignKey(a => a.UserId)
+            .OnDelete(DeleteBehavior.Cascade);
+        modelBuilder.Entity<IrtAbilityState>()
+            .HasOne(a => a.Topic)
+            .WithMany()
+            .HasForeignKey(a => a.TopicId)
+            .OnDelete(DeleteBehavior.Cascade);
+        modelBuilder.Entity<IrtAbilityState>()
+            .HasIndex(a => new { a.UserId, a.TopicId })
             .IsUnique();
 
         // ConversationMessage

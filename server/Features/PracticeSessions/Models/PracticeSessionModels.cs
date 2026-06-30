@@ -26,8 +26,8 @@ public class PracticeQuestionDto
     public string QuestionId { get; set; } = "";
     public string Text { get; set; } = "";
     public string Type { get; set; } = "mcq";
-    public string Difficulty { get; set; } = "medium";
-    public double DifficultyIndex { get; set; }
+    public string DifficultyBand { get; set; } = "medium";
+    public double IrtBeta { get; set; }
     public List<PracticeOptionDto> Options { get; set; } = [];
 }
 
@@ -44,7 +44,6 @@ public class SubmitAnswerRequest
     public string? SelectedOptionId { get; set; }
     public List<string>? SelectedOptionIds { get; set; }
     public string? TextAnswer { get; set; }
-    public double? ResponseTimeSeconds { get; set; }
 }
 
 public class SubmitAnswerResponse
@@ -62,12 +61,6 @@ public class SubmitAnswerResponse
     public string? AgentExplanation { get; set; }
     public bool RecommendNextSkill { get; set; }
     public string? NextSkillSuggestion { get; set; }
-    public double? ThetaBefore { get; set; }
-    public double? ThetaAfter { get; set; }
-    public double? QuestionBeta { get; set; }
-    public double? TargetBeta { get; set; }
-    public double? SessionMastery { get; set; }
-    public double? DbMasteryBaseline { get; set; }
     public string? SuggestedNextTopicId { get; set; }
     public string? SuggestedNextTopicName { get; set; }
 }

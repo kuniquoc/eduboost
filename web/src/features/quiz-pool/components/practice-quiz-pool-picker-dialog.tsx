@@ -41,7 +41,7 @@ export function PracticeQuizPoolPickerDialog({
     const topicCounts: Record<string, { name: string; count: number }> = {};
 
     for (const q of selectedQuestions) {
-      counts[q.difficulty]++;
+      counts[q.difficultyBand]++;
       const tid = q.topicId;
       if (!topicCounts[tid]) {
         topicCounts[tid] = { name: q.topicName ?? tid, count: 0 };

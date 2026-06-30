@@ -8,9 +8,7 @@ public class Question
     /// <summary>"mcq" | "multi_select" | "fill_blank"</summary>
     public string Type { get; set; } = "mcq";
 
-    public string Difficulty { get; set; } = "medium";
-    public double DifficultyIndex { get; set; } = 0.0;
-    public bool IsEstimatedDifficultyIndex { get; set; } = false;
+    public Guid IrtItemId { get; set; }
     public string? Explanation { get; set; }
     public string? CorrectAnswer { get; set; } // for fill_blank
     public bool VerifiedByTeacher { get; set; }
@@ -26,5 +24,6 @@ public class Question
     public Quiz Quiz { get; set; } = null!;
     public Document? SourceDocument { get; set; }
     public Topic? SourceTopic { get; set; }
+    public IrtItem IrtItem { get; set; } = null!;
     public ICollection<QuizOption> Options { get; set; } = [];
 }

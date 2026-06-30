@@ -76,7 +76,7 @@ public class AgentQuizBatchDeserializationTests
               },
               "correct_answer": "B",
               "explanation": "Vì chủ ngữ là She...",
-              "difficulty_level": 0.42
+              "initial_irt_beta": 0.42
             }
             """;
 
@@ -84,7 +84,7 @@ public class AgentQuizBatchDeserializationTests
 
         Assert.NotNull(result);
         Assert.Equal("B", result!.CorrectAnswer);
-        Assert.Equal(0.42, result.DifficultyLevel);
+        Assert.Equal(0.42, result.InitialIrtBeta);
     }
 
     [Fact]

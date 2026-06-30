@@ -42,22 +42,20 @@ public class TutorPracticeTests
     }
 
     [Fact]
-    public void TutorAnswerRequest_WithoutCorrectAnswer_IsValid()
+    public void TutorAnswerRequest_WithMinimalServerScoredFields_IsValid()
     {
         var request = new TutorAnswerRequest
         {
             TopicId = Guid.NewGuid().ToString(),
             QuestionId = Guid.NewGuid().ToString(),
-            QuestionText = "She ___ to school every day.",
-            SelectedAnswer = "B",
-            Difficulty = 0.42
+            SelectedAnswer = "B"
         };
 
         var results = new List<ValidationResult>();
         var isValid = Validator.TryValidateObject(request, new ValidationContext(request), results, true);
 
         Assert.True(isValid);
-        Assert.DoesNotContain(results, r => r.MemberNames.Contains(nameof(TutorAnswerRequest.CorrectAnswer)));
+        Assert.Empty(results);
     }
 
     [Fact]
@@ -106,7 +104,12 @@ public class TutorPracticeTests
             QuizId = quizId,
             Text = "If I ___ more time, I would travel the world.",
             Type = "mcq",
-            Difficulty = "medium",
+            IrtItem = new IrtItem
+            {
+                Id = Guid.NewGuid(),
+                InitialBeta = 0,
+                Beta = 0
+            },
             OrderIndex = 0,
             Options =
             [
@@ -145,13 +148,14 @@ public class TutorPracticeTests
             },
             CorrectAnswer = "B",
             Explanation = "Vì chủ ngữ là She...",
-            DifficultyLevel = 0.42
+            InitialIrtBeta = 0.42
         });
 
         var question = await repo.GetTutorQuestionAsync(topicId, questionId);
 
         Assert.NotNull(question);
         Assert.Equal("goes", question!.CorrectAnswer);
+        Assert.Equal(0.42, question.IrtBeta);
         Assert.Equal("goes", question.Options.Single(o => o.IsCorrect).Text);
         Assert.False(question.Options[0].IsCorrect);
         Assert.True(question.Options[1].IsCorrect);
@@ -190,7 +194,12 @@ public class TutorPracticeTests
             QuizId = poolQuizId,
             Text = "Pool question should be ignored.",
             Type = "mcq",
-            Difficulty = "easy",
+            IrtItem = new IrtItem
+            {
+                Id = Guid.NewGuid(),
+                InitialBeta = IrtScale.EasyPrior,
+                Beta = IrtScale.EasyPrior
+            },
             CorrectAnswer = "A",
             OrderIndex = 0
         });
@@ -224,7 +233,7 @@ public class TutorPracticeTests
             },
             CorrectAnswer = "A",
             Explanation = "Sample explanation",
-            DifficultyLevel = 0.42
+            InitialIrtBeta = 0.42
         };
     }
 }

@@ -87,9 +87,9 @@ class TestBuildRetryHint(unittest.TestCase):
     def test_no_hint_on_first_attempt(self):
         self.assertEqual(_build_retry_hint(1, ["The new law will ___"]), "")
 
-    def test_attempt_three_includes_forbidden_prefixes(self):
+    def test_attempt_three_requests_a_different_sentence(self):
         hint = _build_retry_hint(3, ["The new policy will ___ change."])
-        self.assertIn("the new...", hint.lower())
+        self.assertIn("completely different", hint.lower())
 
 
 class TestSplitContextBlob(unittest.TestCase):
@@ -151,7 +151,8 @@ class TestGenerateQuizBatchRetrievalQuery(unittest.IsolatedAsyncioTestCase):
         parsed_question = {
             "question": "She ___ to school every day.",
             "type": "mcq",
-            "difficulty": "easy",
+            "difficulty_band": "easy",
+            "initial_irt_beta": -1.0986122886681098,
             "options": [
                 {"text": "go", "isCorrect": False},
                 {"text": "goes", "isCorrect": True},
@@ -190,7 +191,8 @@ class TestGenerateQuizBatchRetrievalQuery(unittest.IsolatedAsyncioTestCase):
         parsed_question = {
             "question": "He ___ to work every day.",
             "type": "mcq",
-            "difficulty": "easy",
+            "difficulty_band": "easy",
+            "initial_irt_beta": -1.0986122886681098,
             "options": [
                 {"text": "go", "isCorrect": False},
                 {"text": "goes", "isCorrect": True},
@@ -280,7 +282,8 @@ class TestParseSingleQuestion(unittest.TestCase):
     def test_letter_correct_answer(self):
         parsed = _parse_single_question(self._base_raw(), "easy")
         self.assertIsNotNone(parsed)
-        self.assertEqual(parsed["difficulty"], "easy")
+        self.assertEqual(parsed["difficulty_band"], "easy")
+        self.assertEqual(parsed["initial_irt_beta"], -1.0986122886681098)
         self.assertEqual(sum(1 for o in parsed["options"] if o["isCorrect"]), 1)
         self.assertTrue(parsed["options"][1]["isCorrect"])
 
@@ -308,11 +311,20 @@ class TestParseSingleQuestion(unittest.TestCase):
         self.assertIsNotNone(parsed)
         self.assertTrue(parsed["options"][1]["isCorrect"])
 
-    def test_prohibited_example_question(self):
+    def test_previously_prohibited_example_is_parsed_normally(self):
         raw = self._base_raw(
             question="The children playing in the garden when it started to rain ___"
         )
-        self.assertIsNone(_parse_single_question(raw, "easy"))
+        self.assertIsNotNone(_parse_single_question(raw, "easy"))
+
+    def test_legacy_difficulty_field_is_accepted_but_emits_new_contract(self):
+        parsed = _parse_single_question(
+            self._base_raw(difficulty_index=0.42),
+            "medium",
+        )
+        self.assertIsNotNone(parsed)
+        self.assertEqual(parsed["initial_irt_beta"], 0.42)
+        self.assertNotIn("difficulty_index", parsed)
 
     def test_missing_question(self):
         raw = self._base_raw(question="")

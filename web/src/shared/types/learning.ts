@@ -36,23 +36,18 @@ export interface TutorQuestionDto {
   options: Record<string, string>;
   correctAnswer: string;
   explanation: string;
-  difficultyLevel: number;
+  irtBeta: number;
 }
 
 export interface TutorAnswerRequest {
   topicId: string;
   questionId: string;
-  questionText: string;
   selectedAnswer: string;
-  difficulty: number;
-  responseTimeSeconds?: number;
 }
 
 export interface TutorAnswerResult {
   isCorrect: boolean;
   mastery?: string;
-  newProbability?: number;
-  newTheta?: number;
   explanation?: string;
   nextAction?: string;
 }

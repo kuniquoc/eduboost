@@ -49,20 +49,20 @@ public partial class QuizzesRepository : IQuizzesRepository
 {
     private readonly AppDbContext db;
     private readonly IAgentService agent;
-    private readonly ILearningStatesRepository learningStates;
+    private readonly ILearningEvidenceService learningEvidence;
     private readonly IRoadmapRepository roadmap;
     private readonly ILogger<QuizzesRepository> logger;
 
     public QuizzesRepository(
         AppDbContext db,
         IAgentService agent,
-        ILearningStatesRepository learningStates,
+        ILearningEvidenceService learningEvidence,
         IRoadmapRepository roadmap,
         ILogger<QuizzesRepository> logger)
     {
         this.db = db;
         this.agent = agent;
-        this.learningStates = learningStates;
+        this.learningEvidence = learningEvidence;
         this.roadmap = roadmap;
         this.logger = logger;
     }
@@ -91,6 +91,7 @@ public partial class QuizzesRepository : IQuizzesRepository
         return await db.Questions
             .Where(q => q.QuizId == quizId)
             .Include(q => q.Options)
+            .Include(q => q.IrtItem)
             .OrderBy(q => q.OrderIndex)
             .Select(q => QuestionMapper.ToDto(q))
             .ToListAsync();
@@ -98,18 +99,33 @@ public partial class QuizzesRepository : IQuizzesRepository
 
     public async Task<QuestionDto?> UpdateQuestionAsync(Guid questionId, UpdateQuestionRequest request)
     {
-        var question = await db.Questions.Include(q => q.Options).FirstOrDefaultAsync(q => q.Id == questionId);
+        var question = await db.Questions.Include(q => q.Options).Include(q => q.IrtItem).FirstOrDefaultAsync(q => q.Id == questionId);
         if (question == null) return null;
+
+        var contentChanged = request.Text != null || request.CorrectAnswer != null || request.Options != null;
 
         if (request.Text != null) question.Text = request.Text;
         if (request.CorrectAnswer != null) question.CorrectAnswer = request.CorrectAnswer;
         if (request.Explanation != null) question.Explanation = request.Explanation;
 
-        if (request.Difficulty != null || request.DifficultyIndex.HasValue)
+        if (contentChanged)
         {
-            if (request.Difficulty != null) question.Difficulty = request.Difficulty;
-            question.DifficultyIndex = QuestionMapper.ResolveDifficultyIndex(request.DifficultyIndex, request.Difficulty ?? question.Difficulty);
-            question.IsEstimatedDifficultyIndex = !request.DifficultyIndex.HasValue;
+            question.IrtItem = QuestionMapper.CreateIrtItem(
+                request.InitialIrtBeta ?? question.IrtItem.InitialBeta,
+                request.DifficultyBand,
+                request.InitialIrtBeta.HasValue ? "teacher" : question.IrtItem.PriorSource);
+            question.IrtItemId = question.IrtItem.Id;
+        }
+        else if (request.DifficultyBand != null || request.InitialIrtBeta.HasValue)
+        {
+            var beta = IrtScale.Clamp(request.InitialIrtBeta ?? IrtScale.PriorFromBand(request.DifficultyBand));
+            question.IrtItem.InitialBeta = beta;
+            question.IrtItem.Beta = beta;
+            question.IrtItem.PriorSource = request.InitialIrtBeta.HasValue ? "teacher" : "label";
+            question.IrtItem.BetaStandardError = null;
+            question.IrtItem.CalibrationSampleCount = 0;
+            question.IrtItem.CalibrationStatus = "provisional";
+            question.IrtItem.CalibratedAt = null;
         }
 
         if (request.Options != null)
@@ -254,6 +270,7 @@ public partial class QuizzesRepository : IQuizzesRepository
             .Where(q => questionIds.Contains(q.Id) && q.Quiz.Type == "pool")
             .Include(q => q.Options)
             .Include(q => q.Quiz)
+            .Include(q => q.IrtItem)
             .ToListAsync();
 
         var maxOrder = quiz.Questions.Count > 0 ? quiz.Questions.Max(q => q.OrderIndex) + 1 : 0;
@@ -267,9 +284,8 @@ public partial class QuizzesRepository : IQuizzesRepository
                 QuizId = quizId,
                 Text = poolQ.Text,
                 Type = poolQ.Type,
-                Difficulty = poolQ.Difficulty,
-                DifficultyIndex = poolQ.DifficultyIndex,
-                IsEstimatedDifficultyIndex = poolQ.IsEstimatedDifficultyIndex,
+                IrtItemId = poolQ.IrtItemId,
+                IrtItem = poolQ.IrtItem,
                 Explanation = poolQ.Explanation,
                 CorrectAnswer = poolQ.CorrectAnswer,
                 VerifiedByTeacher = true,
@@ -369,9 +385,7 @@ public partial class QuizzesRepository : IQuizzesRepository
                 Id = Guid.NewGuid(),
                 Text = q.Text,
                 Type = q.Type,
-                Difficulty = q.Difficulty,
-                DifficultyIndex = QuestionMapper.ResolveDifficultyIndex(q.DifficultyIndex, q.Difficulty),
-                IsEstimatedDifficultyIndex = !q.DifficultyIndex.HasValue,
+                IrtItem = QuestionMapper.CreateIrtItem(q.InitialIrtBeta, q.DifficultyBand, "teacher"),
                 Explanation = q.Explanation,
                 CorrectAnswer = q.CorrectAnswer,
                 VerifiedByTeacher = false,
@@ -448,9 +462,7 @@ public partial class QuizzesRepository : IQuizzesRepository
             QuizId = quizId,
             Text = request.Text,
             Type = request.Type,
-            Difficulty = request.Difficulty,
-            DifficultyIndex = QuestionMapper.ResolveDifficultyIndex(request.DifficultyIndex, request.Difficulty),
-            IsEstimatedDifficultyIndex = !request.DifficultyIndex.HasValue,
+            IrtItem = QuestionMapper.CreateIrtItem(request.InitialIrtBeta, request.DifficultyBand, "teacher"),
             Explanation = request.Explanation,
             CorrectAnswer = request.CorrectAnswer,
             VerifiedByTeacher = false,
@@ -501,22 +513,13 @@ public partial class QuizzesRepository : IQuizzesRepository
         var correctKey = agentQuestion.Options.Keys.FirstOrDefault(k =>
             string.Equals(k, agentQuestion.CorrectAnswer, StringComparison.OrdinalIgnoreCase)) ?? agentQuestion.CorrectAnswer;
 
-        var difficulty = agentQuestion.DifficultyLevel switch
-        {
-            < 0.35 => "easy",
-            > 0.65 => "hard",
-            _ => "medium"
-        };
-
         var question = new Question
         {
             Id = Guid.NewGuid(),
             QuizId = quizId,
             Text = agentQuestion.Question,
             Type = "mcq",
-            Difficulty = difficulty,
-            DifficultyIndex = DifficultyIndex.Clamp(agentQuestion.DifficultyLevel),
-            IsEstimatedDifficultyIndex = false,
+            IrtItem = QuestionMapper.CreateIrtItem(agentQuestion.InitialIrtBeta, null, "ai"),
             Explanation = agentQuestion.Explanation,
             CorrectAnswer = agentQuestion.Options.GetValueOrDefault(correctKey, agentQuestion.CorrectAnswer),
             OrderIndex = orderIndex,
@@ -539,6 +542,7 @@ public partial class QuizzesRepository : IQuizzesRepository
         var question = await db.Questions
             .Include(q => q.Options)
             .Include(q => q.Quiz)
+            .Include(q => q.IrtItem)
             .FirstOrDefaultAsync(q => q.Id == questionId && q.Quiz.TopicId == topicId && q.Quiz.Type == "tutor");
 
         return question == null ? null : QuestionMapper.ToDto(question);
@@ -585,36 +589,24 @@ public partial class QuizzesRepository : IQuizzesRepository
         int total = request.Answers.Count;
         int score = 0;
 
+        var submissionId = Guid.NewGuid();
         if (quiz != null)
         {
             var questionMap = quiz.Questions.ToDictionary(q => q.Id.ToString());
 
-            foreach (var answer in request.Answers)
+            foreach (var (answer, sequence) in request.Answers.Select((answer, index) => (answer, index)))
             {
                 if (!questionMap.TryGetValue(answer.QuestionId, out var question)) continue;
 
-                bool correct = question.Type switch
-                {
-                    "fill_blank" => answer.FillBlankValue?.Trim().Equals(question.CorrectAnswer?.Trim(), StringComparison.OrdinalIgnoreCase) == true,
-                    "mcq" => question.Options.Any(o => o.IsCorrect && answer.SelectedOptionIds.Contains(o.Id.ToString())),
-                    "multi_select" =>
-                        question.Options.Where(o => o.IsCorrect).Select(o => o.Id.ToString()).OrderBy(x => x).SequenceEqual(
-                        answer.SelectedOptionIds.OrderBy(x => x)),
-                    _ => false
-                };
+                var correct = QuestionGrader.Grade(question, answer.SelectedOptionIds, answer.FillBlankValue);
 
                 if (correct) score++;
 
                 var topicId = question.SourceTopicId ?? quiz.TopicId;
                 if (topicId.HasValue)
                 {
-                    await learningStates.UpdateAfterAnswerAsync(studentId, new UpdateBktRequest
-                    {
-                        TopicId = topicId.Value,
-                        QuestionId = question.Id,
-                        IsCorrect = correct,
-                        QuestionDifficultyIndex = question.DifficultyIndex
-                    });
+                    await learningEvidence.RecordAsync(
+                        studentId, topicId.Value, question, correct, "quiz", submissionId, sequence);
                 }
             }
         }
@@ -641,7 +633,7 @@ public partial class QuizzesRepository : IQuizzesRepository
         {
             var submission = new QuizSubmission
             {
-                Id = Guid.NewGuid(),
+                Id = submissionId,
                 StudentId = studentId,
                 QuizId = quiz.Id,
                 Score = score,
@@ -666,9 +658,7 @@ public partial class QuizzesRepository : IQuizzesRepository
         Id = Guid.NewGuid(),
         Text = $"[AI] Câu hỏi về {topicName} ({index})",
         Type = "mcq",
-        Difficulty = difficulty,
-        DifficultyIndex = DifficultyIndex.FromDifficultyLabel(difficulty),
-        IsEstimatedDifficultyIndex = true,
+        IrtItem = QuestionMapper.CreateIrtItem(null, difficulty, "label"),
         Explanation = $"Đây là câu hỏi đánh giá kiến thức về {topicName}.",
         VerifiedByTeacher = false,
         OrderIndex = orderIndex,

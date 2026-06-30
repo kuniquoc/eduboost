@@ -48,8 +48,8 @@ export interface PracticeQuestionDto {
   questionId: string;
   text: string;
   type: QuestionType;
-  difficulty: string;
-  difficultyIndex?: number;
+  difficultyBand: string;
+  irtBeta: number;
   options: Array<{ id: string; text: string }>;
 }
 

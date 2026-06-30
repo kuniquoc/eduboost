@@ -7,11 +7,7 @@ public class TutorAnswerRequest
 {
     [Required] public string TopicId { get; set; } = "";
     [Required] public string QuestionId { get; set; } = "";
-    [Required] public string QuestionText { get; set; } = "";
     [Required] public string SelectedAnswer { get; set; } = "";
-    public string? CorrectAnswer { get; set; }
-    public double Difficulty { get; set; } = 0.5;
-    public double? ResponseTimeSeconds { get; set; }
 }
 
 /// <summary>Request body for getting a Socratic hint before or after answering</summary>
@@ -40,7 +36,7 @@ public class TutorQuestionDto
     public Dictionary<string, string> Options { get; set; } = new();
     public string CorrectAnswer { get; set; } = "";
     public string Explanation { get; set; } = "";
-    public double DifficultyLevel { get; set; }
+    public double IrtBeta { get; set; }
 }
 
 /// <summary>Record tutor practice session stats (streak, learning_sessions).</summary>
@@ -57,7 +53,5 @@ public class TutorAnswerResult
     public bool IsCorrect { get; set; }
     public string Explanation { get; set; } = "";
     public string? Mastery { get; set; }
-    public double? NewProbability { get; set; }
-    public double? NewTheta { get; set; }
     public string? NextAction { get; set; }
 }

@@ -11,9 +11,12 @@ export interface QuestionDto {
   topicId: string;
   text: string;
   type: QuestionType;
-  difficulty: 'easy' | 'medium' | 'hard';
-  difficultyIndex?: number;
-  isEstimatedDifficultyIndex?: boolean;
+  difficultyBand: 'easy' | 'medium' | 'hard';
+  initialIrtBeta: number;
+  irtBeta: number;
+  irtBetaStandardError?: number;
+  irtCalibrationSampleCount: number;
+  irtCalibrationStatus: string;
   options: OptionDto[];
   correctAnswer?: string;
   explanation?: string;
@@ -57,8 +60,8 @@ export interface SubmitQuizRequest {
 
 export interface UpdateQuestionPayload {
   text?: string;
-  difficulty?: 'easy' | 'medium' | 'hard';
-  difficultyIndex?: number;
+  difficultyBand?: 'easy' | 'medium' | 'hard';
+  initialIrtBeta?: number;
   explanation?: string;
   options?: Array<{ id?: string; text: string; isCorrect: boolean }>;
   correctAnswer?: string;
@@ -67,8 +70,8 @@ export interface UpdateQuestionPayload {
 export interface CreateQuestionPayload {
   text: string;
   type: QuestionType;
-  difficulty: 'easy' | 'medium' | 'hard';
-  difficultyIndex?: number;
+  difficultyBand: 'easy' | 'medium' | 'hard';
+  initialIrtBeta?: number;
   explanation?: string;
   correctAnswer?: string;
   options: Array<{ text: string; isCorrect: boolean }>;

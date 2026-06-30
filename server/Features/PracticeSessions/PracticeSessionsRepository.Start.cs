@@ -53,6 +53,7 @@ public partial class PracticeSessionsRepository
             var loaded = await db.Questions
 
                 .Include(q => q.Options)
+                .Include(q => q.IrtItem)
 
                 .Include(q => q.Quiz)
 
@@ -91,6 +92,7 @@ public partial class PracticeSessionsRepository
             questions = await db.Questions
 
                 .Include(q => q.Options)
+                .Include(q => q.IrtItem)
 
                 .Include(q => q.Quiz)
 
@@ -128,11 +130,12 @@ public partial class PracticeSessionsRepository
 
                 .FirstOrDefaultAsync(b => b.UserId == userId && b.TopicId == topicId);
 
-            var theta = bktState?.IrtTheta ?? 0.0;
+            var theta = (await learningEvidence.GetAbilityAsync(userId, topicId))?.Theta ?? 0.0;
 
             questions = await db.Questions
 
                 .Include(q => q.Options)
+                .Include(q => q.IrtItem)
 
                 .Include(q => q.Quiz)
 
@@ -142,7 +145,7 @@ public partial class PracticeSessionsRepository
 
                     && (q.Quiz.TopicId == topicId || q.SourceTopicId == topicId))
 
-                .OrderBy(q => Math.Abs(q.DifficultyIndex - theta))
+                .OrderBy(q => Math.Abs(q.IrtItem.Beta - theta))
 
                 .Take(request.QuestionCount)
 
@@ -165,6 +168,7 @@ public partial class PracticeSessionsRepository
             var bktState = await db.BktStates
 
                 .FirstOrDefaultAsync(b => b.UserId == userId && b.TopicId == topicId);
+            var theta = (await learningEvidence.GetAbilityAsync(userId, topicId))?.Theta ?? 0.0;
 
 
 
@@ -180,17 +184,20 @@ public partial class PracticeSessionsRepository
 
             }
 
+            var targetBeta = IrtScale.PriorFromBand(targetDifficulty);
+
 
 
             questions = await db.Questions
 
                 .Include(q => q.Options)
+                .Include(q => q.IrtItem)
 
                 .Where(q => q.Quiz.TopicId == topicId)
 
-                .OrderBy(q => Math.Abs(q.DifficultyIndex - (bktState != null ? bktState.IrtTheta : 0.0)))
+                .OrderBy(q => Math.Abs(q.IrtItem.Beta - theta))
 
-                .ThenBy(q => q.Difficulty == targetDifficulty ? 0 : 1)
+                .ThenBy(q => Math.Abs(q.IrtItem.Beta - targetBeta))
 
                 .Take(request.QuestionCount)
 
@@ -271,14 +278,6 @@ public partial class PracticeSessionsRepository
             StartTime = DateTime.UtcNow,
 
             MasteryBefore = bktStateForSession?.MasteryProbability ?? 0.3,
-
-            DbMasteryBaseline = bktStateForSession?.MasteryProbability ?? 0.3,
-
-            DbThetaBaseline = bktStateForSession?.IrtTheta ?? 0.0,
-
-            SessionMastery = bktStateForSession?.MasteryProbability ?? 0.3,
-
-            SessionTheta = bktStateForSession?.IrtTheta ?? 0.0,
 
             Answers = []
 

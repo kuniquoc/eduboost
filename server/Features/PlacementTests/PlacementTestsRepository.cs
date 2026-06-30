@@ -19,7 +19,7 @@ public interface IPlacementTestsRepository
     Task<List<QuizReviewItemDto>?> GetReviewAsync(Guid userId, Guid resultId);
 }
 
-public class PlacementTestsRepository(AppDbContext db, IRoadmapRepository roadmap, ILearningStatesRepository learningStates) : IPlacementTestsRepository
+public class PlacementTestsRepository(AppDbContext db, IRoadmapRepository roadmap, ILearningEvidenceService learningEvidence) : IPlacementTestsRepository
 {
     private const int MaxQuestions = 20;
     private static readonly TimeSpan SessionTtl = TimeSpan.FromHours(2);
@@ -67,7 +67,6 @@ public class PlacementTestsRepository(AppDbContext db, IRoadmapRepository roadma
             ClassId = classId,
             ActiveEntryTestQuizId = activeEntryTestQuizId,
             QuestionPool = questions.Select(q => q.Id).ToList(),
-            CurrentDifficulty = "medium",
             CurrentIndex = 0,
             Answers = []
         };
@@ -99,8 +98,11 @@ public class PlacementTestsRepository(AppDbContext db, IRoadmapRepository roadma
         var state = DeserializeState(session);
 
         var questionId = Guid.Parse(request.QuestionId);
+        if (state.CurrentIndex >= state.QuestionPool.Count || state.QuestionPool[state.CurrentIndex] != questionId)
+            throw new InvalidOperationException("Question is not the current placement question");
         var question = await db.Questions
             .Include(q => q.Options)
+            .Include(q => q.IrtItem)
             .Include(q => q.Quiz).ThenInclude(q => q!.Topic)
             .FirstOrDefaultAsync(q => q.Id == questionId)
             ?? throw new InvalidOperationException("Question not found");
@@ -108,16 +110,9 @@ public class PlacementTestsRepository(AppDbContext db, IRoadmapRepository roadma
         var selectedOptionId = request.SelectedOptionId
             ?? request.SelectedOptionIds?.FirstOrDefault();
 
-        bool isCorrect;
-        if (question.Type == "fill_blank")
-        {
-            isCorrect = string.Equals(question.CorrectAnswer?.Trim(), request.TextAnswer?.Trim(), StringComparison.OrdinalIgnoreCase);
-        }
-        else
-        {
-            var correctOption = question.Options.FirstOrDefault(o => o.IsCorrect);
-            isCorrect = correctOption != null && correctOption.Id.ToString() == selectedOptionId;
-        }
+        var selectedIds = request.SelectedOptionIds ??
+            (request.SelectedOptionId == null ? [] : [request.SelectedOptionId]);
+        var isCorrect = Common.Learning.QuestionGrader.Grade(question, selectedIds, request.TextAnswer);
 
         var topicId = question.SourceTopicId ?? question.Quiz?.TopicId;
 
@@ -127,28 +122,10 @@ public class PlacementTestsRepository(AppDbContext db, IRoadmapRepository roadma
             SelectedOptionId = selectedOptionId,
             TextAnswer = request.TextAnswer,
             IsCorrect = isCorrect,
-            Difficulty = question.Difficulty,
+            Difficulty = Common.Learning.IrtScale.BandFromBeta(question.IrtItem.Beta),
             TopicId = topicId
         });
         state.CurrentIndex++;
-
-        if (topicId != null)
-        {
-            await learningStates.UpdateAfterAnswerAsync(userId, new UpdateBktRequest
-            {
-                TopicId = topicId.Value,
-                QuestionId = questionId,
-                IsCorrect = isCorrect,
-                QuestionDifficultyIndex = question.DifficultyIndex
-            });
-        }
-
-        var recentAnswers = state.Answers.TakeLast(3).ToList();
-        var recentCorrect = recentAnswers.Count(a => a.IsCorrect);
-        if (recentCorrect >= 2)
-            state.CurrentDifficulty = state.CurrentDifficulty == "easy" ? "medium" : "hard";
-        else if (recentCorrect == 0)
-            state.CurrentDifficulty = state.CurrentDifficulty == "hard" ? "medium" : "easy";
 
         bool isComplete = state.CurrentIndex >= state.QuestionPool.Count;
 
@@ -195,6 +172,8 @@ public class PlacementTestsRepository(AppDbContext db, IRoadmapRepository roadma
     {
         var session = await LoadSessionAsync(userId, sessionId);
         var state = DeserializeState(session);
+        if (state.CurrentIndex < state.QuestionPool.Count)
+            throw new InvalidOperationException("Placement test is not complete");
 
         db.PlacementTestSessions.Remove(session);
 
@@ -245,18 +224,10 @@ public class PlacementTestsRepository(AppDbContext db, IRoadmapRepository roadma
         };
         db.PlacementTestResults.Add(result);
 
-        foreach (var ts in topicScores)
+        foreach (var topicGroup in state.Answers.Where(a => a.TopicId.HasValue).GroupBy(a => a.TopicId!.Value))
         {
-            var existing = await db.BktStates.FirstOrDefaultAsync(b => b.UserId == userId && b.TopicId == ts.TopicId);
-            if (existing == null)
-            {
-                db.BktStates.Add(new BktState
-                {
-                    UserId = userId,
-                    TopicId = ts.TopicId,
-                    MasteryProbability = ts.Score * 0.5,
-                });
-            }
+            await learningEvidence.SeedPlacementBktAsync(
+                userId, topicGroup.Key, topicGroup.Select(a => a.IsCorrect).ToList());
         }
 
         var profile = await db.UserProfiles.FirstOrDefaultAsync(p => p.UserId == userId);
@@ -377,6 +348,7 @@ public class PlacementTestsRepository(AppDbContext db, IRoadmapRepository roadma
                 {
                     return await db.Questions
                         .Include(q => q.Options)
+                        .Include(q => q.IrtItem)
                         .Include(q => q.Quiz).ThenInclude(q => q!.Topic)
                         .Where(q => q.QuizId == cls.ActiveEntryTestId)
                         .OrderBy(q => q.OrderIndex)
@@ -388,8 +360,10 @@ public class PlacementTestsRepository(AppDbContext db, IRoadmapRepository roadma
         // Fallback: any class question
         IQueryable<Question> query = db.Questions
             .Include(q => q.Options)
+            .Include(q => q.IrtItem)
             .Include(q => q.Quiz).ThenInclude(q => q!.Topic)
-            .Where(q => q.Difficulty == "medium");
+            .Where(q => q.IrtItem.Beta > -Common.Learning.IrtScale.BandBoundary
+                     && q.IrtItem.Beta < Common.Learning.IrtScale.BandBoundary);
 
         if (classId.HasValue)
         {
@@ -404,6 +378,7 @@ public class PlacementTestsRepository(AppDbContext db, IRoadmapRepository roadma
 
         query = db.Questions
             .Include(q => q.Options)
+            .Include(q => q.IrtItem)
             .Include(q => q.Quiz).ThenInclude(q => q!.Topic);
 
         if (classId.HasValue)
@@ -425,6 +400,7 @@ public class PlacementTestsRepository(AppDbContext db, IRoadmapRepository roadma
         var nextQuestionId = state.QuestionPool[state.CurrentIndex];
         return await db.Questions
             .Include(q => q.Options)
+            .Include(q => q.IrtItem)
             .Include(q => q.Quiz).ThenInclude(q => q!.Topic)
             .FirstOrDefaultAsync(q => q.Id == nextQuestionId);
     }
@@ -468,7 +444,7 @@ public class PlacementTestsRepository(AppDbContext db, IRoadmapRepository roadma
         QuestionId = q.Id.ToString(),
         Text = q.Text,
         Type = q.Type,
-        Difficulty = q.Difficulty,
+        Difficulty = Common.Learning.IrtScale.BandFromBeta(q.IrtItem.Beta),
         Options = q.Options.OrderBy(o => o.OrderIndex).Select(o => new PlacementOptionDto
         {
             Id = o.Id.ToString(),
@@ -483,7 +459,6 @@ public class PlacementTestsRepository(AppDbContext db, IRoadmapRepository roadma
         /// <summary>Quiz ID của active entry_test được dùng để giới hạn câu hỏi</summary>
         public Guid? ActiveEntryTestQuizId { get; set; }
         public List<Guid> QuestionPool { get; set; } = [];
-        public string CurrentDifficulty { get; set; } = "medium";
         public int CurrentIndex { get; set; }
         public List<PlacementAnswerState> Answers { get; set; } = [];
     }

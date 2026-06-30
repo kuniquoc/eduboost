@@ -149,10 +149,7 @@ export function PracticePage() {
       quizzesService.submitTutorAnswer({
         topicId: topicId!,
         questionId: vars.question.questionId,
-        questionText: vars.question.question,
         selectedAnswer: vars.selectedKey,
-        difficulty: vars.question.difficultyLevel,
-        responseTimeSeconds: (currentTimeMs() - questionStartRef.current) / 1000,
       }),
     onSuccess: (result: TutorAnswerResult, vars) => {
       setQuestionsAnswered((c) => c + 1);
@@ -381,7 +378,7 @@ export function PracticePage() {
               </div>
             </div>
             <Badge variant="outline">
-              Độ khó: {step.question.difficultyLevel > 0 ? '+' : ''}{step.question.difficultyLevel.toFixed(1)}
+              Độ khó: {step.question.irtBeta > 0 ? '+' : ''}{step.question.irtBeta.toFixed(1)}
             </Badge>
           </div>
 

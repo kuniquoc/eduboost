@@ -112,7 +112,7 @@ public class DocumentQuizGenerationTests
                     new AgentQuizBatchQuestion
                     {
                         Question = $"Câu hỏi số {_callCount}",
-                        Difficulty = difficulty,
+                        DifficultyBand = difficulty,
                         Options =
                         [
                             new AgentQuizBatchOption { Text = "Đúng", IsCorrect = true },

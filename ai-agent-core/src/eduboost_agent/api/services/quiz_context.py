@@ -11,9 +11,6 @@ from eduboost_agent.rag.text_splitters import SemanticTextSplitter, SlidingWindo
 
 logger = logging.getLogger("eduboost_agent.api.quiz_batch_service")
 
-DOC_CONTEXT_MAX_CHARS = 50_000
-
-
 def build_quiz_retrieval_query(topic_name: str, user_prompt: str | None) -> str:
     topic = (topic_name or "").strip()
     prompt = (user_prompt or "").strip()
@@ -68,10 +65,6 @@ def rank_document_chunks(
 ) -> list[str]:
     if not full_text.strip():
         return []
-
-    if len(full_text) > DOC_CONTEXT_MAX_CHARS:
-        full_text = full_text[:DOC_CONTEXT_MAX_CHARS]
-        logger.info("[QUIZ-BATCH] Truncated document to %d chars", DOC_CONTEXT_MAX_CHARS)
 
     embed_model = runtime_state.vector_db.embed_model if runtime_state.vector_db else None
     try:

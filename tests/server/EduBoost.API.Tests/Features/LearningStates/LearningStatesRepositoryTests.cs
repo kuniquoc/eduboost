@@ -14,43 +14,51 @@ namespace EduBoost.API.Tests;
 public class LearningStatesRepositoryTests
 {
     [Fact]
-    public async Task UpdateAfterAnswerAsync_NormalizesLegacyBktParametersBeforeUpdating()
+    public async Task RecordAsync_UpdatesBothStates_AndIsIdempotent()
     {
         await using var db = CreateDb();
         var userId = Guid.NewGuid();
         var topicId = Guid.NewGuid();
+        var quizId = Guid.NewGuid();
+        var questionId = Guid.NewGuid();
+        var attemptId = Guid.NewGuid();
 
         db.Topics.Add(new Topic { Id = topicId, Name = "Present Simple", OwnerId = userId });
-        db.BktStates.Add(new BktState
+        db.Quizzes.Add(new Quiz
         {
-            UserId = userId,
+            Id = quizId,
             TopicId = topicId,
-            MasteryProbability = 0.3,
-            GuessProbability = 0.25,
-            SlipProbability = 0.10,
-            TransitionProbability = 0.10
+            Title = "Evidence quiz",
+            Type = "practice"
+        });
+        db.Questions.Add(new Question
+        {
+            Id = questionId,
+            QuizId = quizId,
+            Text = "She ___ to school.",
+            IrtItem = new IrtItem
+            {
+                Id = Guid.NewGuid(),
+                InitialBeta = 0,
+                Beta = 0
+            }
         });
         await db.SaveChangesAsync();
 
+        var evidence = new LearningEvidenceService(db);
         var repo = new LearningStatesRepository(db);
 
-        for (var i = 0; i < 3; i++)
-        {
-            await repo.UpdateAfterAnswerAsync(userId, new UpdateBktRequest
-            {
-                TopicId = topicId,
-                QuestionId = Guid.NewGuid(),
-                IsCorrect = true,
-                QuestionDifficultyIndex = 0
-            });
-        }
+        var first = await evidence.RecordAsync(userId, topicId, questionId, true, "test", attemptId, 0);
+        var duplicate = await evidence.RecordAsync(userId, topicId, questionId, true, "test", attemptId, 0);
+        var state = await repo.GetStateByTopicAsync(userId, topicId);
 
-        var state = await db.BktStates.SingleAsync();
-
-        Assert.Equal(BktIrtCalculator.DefaultGuessProbability, state.GuessProbability);
-        Assert.Equal(BktIrtCalculator.DefaultSlipProbability, state.SlipProbability);
-        Assert.Equal(BktIrtCalculator.DefaultTransitionProbability, state.TransitionProbability);
-        Assert.True(state.MasteryProbability < 0.95);
+        Assert.True(first.WasRecorded);
+        Assert.False(duplicate.WasRecorded);
+        Assert.Single(await db.IrtResponses.ToListAsync());
+        Assert.NotNull(state);
+        Assert.Equal(BktCalculator.Update(BktCalculator.InitialMastery, true), state!.MasteryProbability, 8);
+        Assert.Equal(first.Theta, state.IrtTheta, 8);
+        Assert.Equal(1, state.IrtResponseCount);
     }
 
     private static AppDbContext CreateDb()

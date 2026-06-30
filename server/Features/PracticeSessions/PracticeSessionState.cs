@@ -14,10 +14,6 @@ internal sealed class PracticeSessionState
     public int CorrectCount { get; set; }
     public DateTime StartTime { get; set; }
     public double MasteryBefore { get; set; }
-    public double DbMasteryBaseline { get; set; }
-    public double DbThetaBaseline { get; set; }
-    public double SessionMastery { get; set; }
-    public double SessionTheta { get; set; }
     public List<PracticeAnswerState> Answers { get; set; } = [];
 }
 

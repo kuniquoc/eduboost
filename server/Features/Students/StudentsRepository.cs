@@ -160,16 +160,20 @@ public class StudentsRepository(AppDbContext db, IStudentStatsCalculator statsCa
         var bktStates = await db.BktStates
             .Where(b => b.UserId == studentId && topicIds.Contains(b.TopicId))
             .ToListAsync();
+        var abilityStates = await db.IrtAbilityStates
+            .Where(a => a.UserId == studentId && topicIds.Contains(a.TopicId))
+            .ToListAsync();
 
         var topicMasteries = topics.Select(t =>
         {
             var state = bktStates.FirstOrDefault(b => b.TopicId == t.Id);
+            var ability = abilityStates.FirstOrDefault(a => a.TopicId == t.Id);
             return new TopicMasteryDto
             {
                 TopicId = t.Id.ToString(),
                 TopicName = t.Name,
                 MasteryProbability = state?.MasteryProbability ?? 0.3,
-                IrtTheta = state?.IrtTheta ?? 0
+                IrtTheta = ability?.Theta ?? 0
             };
         }).OrderBy(t => t.MasteryProbability).ToList();
 

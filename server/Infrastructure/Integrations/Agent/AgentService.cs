@@ -5,7 +5,7 @@ namespace EduBoost.API.Infrastructure.Integrations.Agent;
 public interface IAgentService
 {
     Task<AgentNextActionResponse?> GetNextActionAsync(string studentId, string topicName, double? masteryProbability = null, double? irtTheta = null);
-    Task<AgentQuizResponse?> GenerateQuizQuestionAsync(string topicName, double difficulty, List<string>? allowedDocumentIds = null, List<string>? allowedScopes = null, IReadOnlyList<string>? existingQuestions = null);
+    Task<AgentQuizResponse?> GenerateQuizQuestionAsync(string topicName, double targetIrtBeta, List<string>? allowedDocumentIds = null, List<string>? allowedScopes = null, IReadOnlyList<string>? existingQuestions = null);
     Task<string?> GetExplanationAsync(string topicName, string studentState, List<string>? allowedDocumentIds = null, List<string>? allowedScopes = null);
     Task<string?> GetGraderExplanationAsync(string question, string correctAnswer, IReadOnlyList<AgentGraderOption>? options = null, List<string>? allowedDocumentIds = null, List<string>? allowedScopes = null);
     Task<AgentQuizBatchResponse?> GenerateQuizBatchAsync(string topicName, string? userPrompt, string? docUrl, int numQuestions, string difficulty, int numEasy = 0, int numMedium = 0, int numHard = 0, string? documentId = null, IReadOnlyList<string>? existingQuestions = null);
@@ -30,14 +30,14 @@ public class AgentService : IAgentService
         _logger.LogInformation("AI Agent base URL configured: {BaseUrl}", _http.BaseAddress);
     }
 
-    public async Task<AgentQuizResponse?> GenerateQuizQuestionAsync(string topicName, double difficulty, List<string>? allowedDocumentIds = null, List<string>? allowedScopes = null, IReadOnlyList<string>? existingQuestions = null)
+    public async Task<AgentQuizResponse?> GenerateQuizQuestionAsync(string topicName, double targetIrtBeta, List<string>? allowedDocumentIds = null, List<string>? allowedScopes = null, IReadOnlyList<string>? existingQuestions = null)
     {
         try
         {
             var payload = new
             {
                 topic_name = topicName,
-                difficulty,
+                target_irt_beta = targetIrtBeta,
                 allowed_document_ids = allowedDocumentIds,
                 allowed_scopes = allowedScopes,
                 existing_questions = existingQuestions ?? Array.Empty<string>()

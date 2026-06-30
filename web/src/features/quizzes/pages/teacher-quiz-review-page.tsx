@@ -49,9 +49,9 @@ export function QuizReviewPage() {
   const [addExplanation, setAddExplanation] = useState('');
   const [addType, setAddType] = useState<'mcq' | 'multi_select' | 'fill_blank'>('mcq');
   const [editDifficulty, setEditDifficulty] = useState<'easy' | 'medium' | 'hard'>('medium');
-  const [editDifficultyIndex, setEditDifficultyIndex] = useState(0);
+  const [editInitialIrtBeta, setEditInitialIrtBeta] = useState(0);
   const [addDifficulty, setAddDifficulty] = useState<'easy' | 'medium' | 'hard'>('medium');
-  const [addDifficultyIndex, setAddDifficultyIndex] = useState<number | ''>('');
+  const [addInitialIrtBeta, setAddInitialIrtBeta] = useState<number | ''>('');
   const [addOptions, setAddOptions] = useState([
     { text: '', isCorrect: true },
     { text: '', isCorrect: false },
@@ -132,8 +132,8 @@ export function QuizReviewPage() {
     addMutation.mutate({
       text: addText,
       type: addType,
-      difficulty: addDifficulty,
-      difficultyIndex: addDifficultyIndex === '' ? undefined : Number(addDifficultyIndex),
+      difficultyBand: addDifficulty,
+      initialIrtBeta: addInitialIrtBeta === '' ? undefined : Number(addInitialIrtBeta),
       explanation: addExplanation || undefined,
       correctAnswer: addType === 'fill_blank' ? addCorrectAnswer : undefined,
       options: addType !== 'fill_blank' ? addOptions.filter((o) => o.text.trim()) : [],
@@ -154,8 +154,8 @@ export function QuizReviewPage() {
     setEditText(q.text);
     setEditExplanation(q.explanation ?? '');
     setEditOptions(q.options.map((o) => ({ id: o.id, text: o.text, isCorrect: o.isCorrect })));
-    setEditDifficulty((q.difficulty as 'easy' | 'medium' | 'hard') || 'medium');
-    setEditDifficultyIndex(q.difficultyIndex ?? 0);
+    setEditDifficulty(q.difficultyBand || 'medium');
+    setEditInitialIrtBeta(q.initialIrtBeta);
   };
 
   const handleSaveEdit = () => {
@@ -166,8 +166,8 @@ export function QuizReviewPage() {
         text: editText,
         explanation: editExplanation,
         options: editOptions,
-        difficulty: editDifficulty,
-        difficultyIndex: editDifficultyIndex,
+        difficultyBand: editDifficulty,
+        initialIrtBeta: editInitialIrtBeta,
       },
     });
   };
@@ -225,7 +225,7 @@ export function QuizReviewPage() {
       {/* Questions list */}
       <div className="space-y-3">
         {questions?.map((q, idx) => {
-          const diff = getDiffBadge(q.difficulty);
+          const diff = getDiffBadge(q.difficultyBand);
           return (
             <Card key={q.id} className="border-border">
               <CardContent className="p-4">
@@ -245,7 +245,7 @@ export function QuizReviewPage() {
                   </div>
                   <div className="flex items-center gap-2 shrink-0">
                     <Badge variant={diff.variant}>{diff.label}</Badge>
-                    <Badge variant="outline">β {q.difficultyIndex?.toFixed(2) ?? '0.00'}</Badge>
+                    <Badge variant="outline">β {q.irtBeta.toFixed(2)}</Badge>
                     <Badge variant="outline">{q.type}</Badge>
                   </div>
                 </div>
@@ -336,8 +336,8 @@ export function QuizReviewPage() {
                   min={-3}
                   max={3}
                   step={0.1}
-                  value={editDifficultyIndex}
-                  onChange={(e) => setEditDifficultyIndex(Number(e.target.value))}
+                  value={editInitialIrtBeta}
+                  onChange={(e) => setEditInitialIrtBeta(Number(e.target.value))}
                 />
               </div>
             </div>
@@ -455,8 +455,8 @@ export function QuizReviewPage() {
                 min={-3}
                 max={3}
                 step={0.1}
-                value={addDifficultyIndex}
-                onChange={(e) => setAddDifficultyIndex(e.target.value === '' ? '' : Number(e.target.value))}
+                value={addInitialIrtBeta}
+                onChange={(e) => setAddInitialIrtBeta(e.target.value === '' ? '' : Number(e.target.value))}
                 placeholder="Tự map từ độ khó nếu để trống"
               />
             </div>

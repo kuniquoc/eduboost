@@ -1,4 +1,5 @@
 using EduBoost.API.Infrastructure.Entities;
+using EduBoost.API.Common.Learning;
 using EduBoost.API.Infrastructure.Integrations.Storage;
 using Microsoft.EntityFrameworkCore;
 using System.IO;
@@ -16,6 +17,19 @@ public static class DatabaseSeeder
     // BCrypt hash of "password123" (cost=11) — precomputed to avoid overhead when seeding
     private const string SeedPassword = "password123";
     private static readonly string SeedPasswordHash = BCrypt.Net.BCrypt.HashPassword(SeedPassword, 11);
+
+    private static IrtItem SeedIrtItem(string band)
+    {
+        var beta = IrtScale.PriorFromBand(band);
+        return new IrtItem
+        {
+            Id = Guid.NewGuid(),
+            InitialBeta = beta,
+            Beta = beta,
+            PriorSource = "seed",
+            CalibrationStatus = "provisional"
+        };
+    }
 
     // ── Fixed IDs ─────────────────────────────────────────────────────────────
     private static readonly Guid A1 = Guid.Parse("00000000-0000-0000-0000-000000000001");
@@ -138,7 +152,7 @@ public static class DatabaseSeeder
                 QuizId = Q1,
                 Text = "Which sentence is correct?",
                 Type = "mcq",
-                Difficulty = "easy",
+                IrtItem = SeedIrtItem("easy"),
                 Explanation = "'Know' is a stative verb and is not used in the continuous form.",
                 VerifiedByTeacher = true,
                 OrderIndex = 0,
@@ -156,7 +170,7 @@ public static class DatabaseSeeder
                 QuizId = Q1,
                 Text = "Choose the correct form: 'Look! The children _____ in the garden.'",
                 Type = "mcq",
-                Difficulty = "easy",
+                IrtItem = SeedIrtItem("easy"),
                 Explanation = "We use the present continuous for actions happening right now, indicated by 'Look!'",
                 VerifiedByTeacher = true,
                 OrderIndex = 1,
@@ -174,7 +188,7 @@ public static class DatabaseSeeder
                 QuizId = Q1,
                 Text = "Which signal word indicates Present Simple?",
                 Type = "mcq",
-                Difficulty = "easy",
+                IrtItem = SeedIrtItem("easy"),
                 Explanation = "'Every day' indicates a routine/habit, which requires Present Simple.",
                 VerifiedByTeacher = true,
                 OrderIndex = 2,
@@ -192,7 +206,7 @@ public static class DatabaseSeeder
                 QuizId = Q1,
                 Text = "Select the correct sentence:",
                 Type = "mcq",
-                Difficulty = "medium",
+                IrtItem = SeedIrtItem("medium"),
                 Explanation = "Habitual actions with 'usually' require Present Simple, not Present Continuous.",
                 VerifiedByTeacher = true,
                 OrderIndex = 3,
@@ -210,7 +224,7 @@ public static class DatabaseSeeder
                 QuizId = Q1,
                 Text = "'The train _____ at 9:00 tomorrow.' Choose the best answer.",
                 Type = "mcq",
-                Difficulty = "medium",
+                IrtItem = SeedIrtItem("medium"),
                 Explanation = "Present Simple is used for scheduled/timetabled events even when referring to the future.",
                 VerifiedByTeacher = true,
                 OrderIndex = 4,
@@ -233,7 +247,7 @@ public static class DatabaseSeeder
                 QuizId = Q3,
                 Text = "She _____ to school every morning.",
                 Type = "mcq",
-                Difficulty = "easy",
+                IrtItem = SeedIrtItem("easy"),
                 Explanation = "For routines and habits we use Present Simple. Third person singular requires 'goes'.",
                 VerifiedByTeacher = true,
                 OrderIndex = 0,
@@ -252,7 +266,7 @@ public static class DatabaseSeeder
                 QuizId = Q3,
                 Text = "Be quiet! The baby _____ right now.",
                 Type = "mcq",
-                Difficulty = "easy",
+                IrtItem = SeedIrtItem("easy"),
                 Explanation = "We use Present Continuous for actions happening at the moment of speaking. 'Right now' is the signal.",
                 VerifiedByTeacher = true,
                 OrderIndex = 1,
@@ -271,7 +285,7 @@ public static class DatabaseSeeder
                 QuizId = Q3,
                 Text = "They _____ to Paris last summer.",
                 Type = "mcq",
-                Difficulty = "medium",
+                IrtItem = SeedIrtItem("medium"),
                 Explanation = "Past Simple is used for completed actions at a specific time in the past. 'Last summer' signals Past Simple.",
                 VerifiedByTeacher = true,
                 OrderIndex = 2,
@@ -290,7 +304,7 @@ public static class DatabaseSeeder
                 QuizId = Q3,
                 Text = "I _____ this book three times so far.",
                 Type = "mcq",
-                Difficulty = "medium",
+                IrtItem = SeedIrtItem("medium"),
                 Explanation = "Present Perfect is used for experiences up to the present. 'So far' signals Present Perfect.",
                 VerifiedByTeacher = true,
                 OrderIndex = 3,
@@ -309,7 +323,7 @@ public static class DatabaseSeeder
                 QuizId = Q3,
                 Text = "If it _____ tomorrow, we will cancel the picnic.",
                 Type = "mcq",
-                Difficulty = "medium",
+                IrtItem = SeedIrtItem("medium"),
                 Explanation = "First conditional uses 'if + Present Simple, will + base form' for real/possible future situations.",
                 VerifiedByTeacher = true,
                 OrderIndex = 4,
@@ -328,7 +342,7 @@ public static class DatabaseSeeder
                 QuizId = Q3,
                 Text = "The report _____ by the manager yesterday.",
                 Type = "mcq",
-                Difficulty = "hard",
+                IrtItem = SeedIrtItem("hard"),
                 Explanation = "Past Simple Passive is formed with 'was/were + past participle'. Since 'report' is singular, we use 'was approved'.",
                 VerifiedByTeacher = true,
                 OrderIndex = 5,

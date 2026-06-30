@@ -42,30 +42,28 @@ public partial class PracticeSessionsRepository : IPracticeSessionsRepository
 
 {
     private readonly AppDbContext db;
-    private readonly ILearningStatesRepository learningStates;
+    private readonly ILearningEvidenceService learningEvidence;
     private readonly IRoadmapRepository roadmap;
 
     private readonly PracticeSessionStore _sessionStore;
     private readonly bool _agentDecisionEnabled;
-    private readonly bool _irtAdaptiveSelectionEnabled;
     private readonly double _selfPracticeMasteryThreshold;
     private readonly IAgentService? _agentService;
     private readonly ILogger<PracticeSessionsRepository>? _logger;
 
     public PracticeSessionsRepository(
         AppDbContext db,
-        ILearningStatesRepository learningStates,
+        ILearningEvidenceService learningEvidence,
         IRoadmapRepository roadmap,
         IAgentService? agentService = null,
         ILogger<PracticeSessionsRepository>? logger = null,
         IConfiguration? configuration = null)
     {
         this.db = db;
-        this.learningStates = learningStates;
+        this.learningEvidence = learningEvidence;
         this.roadmap = roadmap;
         _sessionStore = new PracticeSessionStore(db);
         _agentDecisionEnabled = configuration?.GetValue("Features:AgentDecisionEnabled", true) ?? true;
-        _irtAdaptiveSelectionEnabled = configuration?.GetValue("Features:IrtAdaptiveSelectionEnabled", true) ?? true;
         _selfPracticeMasteryThreshold = configuration?.GetValue("Features:SelfPracticeMasteryThreshold", 0.95) ?? 0.95;
         _agentService = agentService;
         _logger = logger;
@@ -141,11 +139,11 @@ public partial class PracticeSessionsRepository : IPracticeSessionsRepository
         var remainingSet = remainingIds.ToHashSet();
         var remainingQuestions = await db.Questions
             .Where(q => remainingSet.Contains(q.Id))
-            .Select(q => new { q.Id, q.DifficultyIndex })
+            .Select(q => new { q.Id, Beta = q.IrtItem.Beta })
             .ToListAsync();
 
         var ordered = remainingQuestions
-            .OrderBy(q => Math.Abs(q.DifficultyIndex - theta))
+            .OrderBy(q => Math.Abs(q.Beta - theta))
             .Select(q => q.Id)
             .ToList();
 
@@ -169,7 +167,7 @@ public partial class PracticeSessionsRepository : IPracticeSessionsRepository
                     null,
                     true,
                     $"Bạn có thể chuyển sang chủ đề: {nextTopic.Name}",
-                    DifficultyIndex.Clamp(theta),
+                    IrtScale.Clamp(theta),
                     nextTopic.Id.ToString(),
                     nextTopic.Name
                 );
@@ -178,7 +176,7 @@ public partial class PracticeSessionsRepository : IPracticeSessionsRepository
 
         var fallbackAction = mastery < 0.5 ? "EXPLAIN" : isSelfPractice || mastery < 0.95 ? "QUIZ" : "NEXT_SKILL";
         var fallbackReason = $"Fallback decision from mastery={mastery:F2}";
-        var fallbackTargetBeta = DifficultyIndex.Clamp(theta);
+        var fallbackTargetBeta = IrtScale.Clamp(theta);
 
         if (!_agentDecisionEnabled || _agentService == null)
             return (fallbackAction, fallbackReason, null, fallbackAction == "NEXT_SKILL", null, fallbackTargetBeta, null, null);
@@ -201,7 +199,7 @@ public partial class PracticeSessionsRepository : IPracticeSessionsRepository
             response.Params.TryGetValue("beta", out var betaObj) &&
             double.TryParse(Convert.ToString(betaObj), out var parsedBeta))
         {
-            targetBeta = DifficultyIndex.Clamp(parsedBeta);
+            targetBeta = IrtScale.Clamp(parsedBeta);
         }
 
         string? explanation = null;
@@ -266,9 +264,9 @@ public partial class PracticeSessionsRepository : IPracticeSessionsRepository
 
         Type = q.Type,
 
-        Difficulty = q.Difficulty,
+        DifficultyBand = IrtScale.BandFromBeta(q.IrtItem.Beta),
 
-        DifficultyIndex = q.DifficultyIndex,
+        IrtBeta = q.IrtItem.Beta,
 
         Options = q.Options.OrderBy(o => o.OrderIndex).Select(o => new PracticeOptionDto
 

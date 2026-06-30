@@ -42,6 +42,7 @@ internal static class DependencyInjection
         services.AddScoped<IPoolAuthorization, PoolAuthorization>();
         services.AddScoped<IUserProfilesRepository, UserProfilesRepository>();
         services.AddScoped<ILearningStatesRepository, LearningStatesRepository>();
+        services.AddScoped<ILearningEvidenceService, LearningEvidenceService>();
         services.AddScoped<IPlacementTestsRepository, PlacementTestsRepository>();
         services.AddScoped<IPracticeSessionsRepository, PracticeSessionsRepository>();
         services.AddScoped<IAiChatRepository, AiChatRepository>();

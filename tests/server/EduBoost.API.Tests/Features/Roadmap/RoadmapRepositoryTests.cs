@@ -196,8 +196,13 @@ public class RoadmapRepositoryTests
         {
             UserId = studentId,
             TopicId = topicId,
-            MasteryProbability = 0.72,
-            IrtTheta = 0.4
+            MasteryProbability = 0.72
+        });
+        db.IrtAbilityStates.Add(new IrtAbilityState
+        {
+            UserId = studentId,
+            TopicId = topicId,
+            Theta = 0.4
         });
         await db.SaveChangesAsync();
 

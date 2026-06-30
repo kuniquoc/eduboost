@@ -16,9 +16,12 @@ public class QuestionDto
     public string TopicId { get; set; } = "";
     public string Text { get; set; } = "";
     public string Type { get; set; } = "mcq"; // "mcq" | "multi_select" | "fill_blank"
-    public string Difficulty { get; set; } = "medium";
-    public double DifficultyIndex { get; set; }
-    public bool IsEstimatedDifficultyIndex { get; set; }
+    public string DifficultyBand { get; set; } = "medium";
+    public double InitialIrtBeta { get; set; }
+    public double IrtBeta { get; set; }
+    public double? IrtBetaStandardError { get; set; }
+    public int IrtCalibrationSampleCount { get; set; }
+    public string IrtCalibrationStatus { get; set; } = "provisional";
     public List<OptionDto> Options { get; set; } = [];
     public string? CorrectAnswer { get; set; }
     public string? Explanation { get; set; }
@@ -42,8 +45,8 @@ public class QuizDto
 public class UpdateQuestionRequest
 {
     public string? Text { get; set; }
-    public string? Difficulty { get; set; }
-    public double? DifficultyIndex { get; set; }
+    public string? DifficultyBand { get; set; }
+    public double? InitialIrtBeta { get; set; }
     public List<OptionDto>? Options { get; set; }
     public string? CorrectAnswer { get; set; }
     public string? Explanation { get; set; }
@@ -110,8 +113,8 @@ public class CreateQuestionRequest
 {
     [Required] public string Text { get; set; } = "";
     public string Type { get; set; } = "mcq"; // "mcq" | "multi_select" | "fill_blank"
-    public string Difficulty { get; set; } = "medium";
-    public double? DifficultyIndex { get; set; }
+    public string DifficultyBand { get; set; } = "medium";
+    public double? InitialIrtBeta { get; set; }
     public string? Explanation { get; set; }
     public string? CorrectAnswer { get; set; }
     public List<OptionDto> Options { get; set; } = [];

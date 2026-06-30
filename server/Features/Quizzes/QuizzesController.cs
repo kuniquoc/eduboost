@@ -23,6 +23,7 @@ public partial class QuizzesController(
     IAgentService agent,
     IDocumentsRepository docRepo,
     ILearningStatesRepository learningStates,
+    ILearningEvidenceService learningEvidence,
     ITutorDecisionService tutorDecision,
     IRoadmapRepository roadmap,
     IClassesRepository classes,
@@ -300,14 +301,15 @@ public partial class QuizzesController(
         var selectedOption = FindTutorSelectedOption(question, request.SelectedAnswer);
         bool isCorrect = selectedOption?.IsCorrect == true;
 
-        var updateResult = await learningStates.UpdateAfterAnswerAsync(UserId, new UpdateBktRequest
-        {
-            TopicId = topicId,
-            QuestionId = questionId,
-            IsCorrect = isCorrect,
-            ResponseTime = request.ResponseTimeSeconds,
-            QuestionDifficultyIndex = question.DifficultyIndex
-        });
+        var updateResult = await learningEvidence.RecordAsync(
+            UserId,
+            topicId,
+            questionId,
+            isCorrect,
+            source: "tutor",
+            attemptId: questionId,
+            sequence: 0,
+            HttpContext.RequestAborted);
 
         var classId = await repo.GetTopicClassIdAsync(topicId);
         if (classId.HasValue)
@@ -315,9 +317,9 @@ public partial class QuizzesController(
 
         string explanation = isCorrect ? "Correct! Well done." : $"The correct answer is '{correctOption.Text}'.";
 
-        var masteryLabel = updateResult.State.MasteryProbability >= 0.95 ? "mastered"
-            : updateResult.State.MasteryProbability >= 0.7 ? "proficient"
-            : updateResult.State.MasteryProbability >= 0.4 ? "learning"
+        var masteryLabel = updateResult.MasteryProbability >= 0.95 ? "mastered"
+            : updateResult.MasteryProbability >= 0.7 ? "proficient"
+            : updateResult.MasteryProbability >= 0.4 ? "learning"
             : "needs_review";
 
         var result = new TutorAnswerResult
@@ -325,8 +327,6 @@ public partial class QuizzesController(
             IsCorrect = isCorrect,
             Explanation = explanation,
             Mastery = masteryLabel,
-            NewProbability = updateResult.State.MasteryProbability,
-            NewTheta = updateResult.State.IrtTheta,
             NextAction = null
         };
 
@@ -457,7 +457,7 @@ public partial class QuizzesController(
                 options = new Dictionary<string, string>(),
                 correctAnswer = "",
                 explanation = "",
-                difficultyLevel = effectiveDifficulty,
+                irtBeta = effectiveDifficulty,
                 offline = true
             }));
         }
@@ -470,7 +470,7 @@ public partial class QuizzesController(
                 options = new Dictionary<string, string>(),
                 correctAnswer = "",
                 explanation = "",
-                difficultyLevel = effectiveDifficulty,
+                irtBeta = effectiveDifficulty,
                 offline = true
             }));
         }
@@ -481,7 +481,7 @@ public partial class QuizzesController(
             Options = agentQuestion.Options,
             CorrectAnswer = agentQuestion.CorrectAnswer,
             Explanation = agentQuestion.Explanation,
-            DifficultyLevel = agentQuestion.DifficultyLevel
+            IrtBeta = agentQuestion.InitialIrtBeta
         };
 
         var questionId = await repo.PersistTutorQuestionAsync(topicId, agentQuestion);

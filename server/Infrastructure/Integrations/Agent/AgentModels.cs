@@ -35,8 +35,8 @@ public class AgentQuizResponse
 
     public string Explanation { get; set; } = "";
 
-    [JsonPropertyName("difficulty_level")]
-    public double DifficultyLevel { get; set; }
+    [JsonPropertyName("initial_irt_beta")]
+    public double InitialIrtBeta { get; set; }
 }
 
 public class AgentQuizBatchOption
@@ -51,10 +51,11 @@ public class AgentQuizBatchQuestion
 {
     public string Question { get; set; } = "";
     public string Type { get; set; } = "mcq";
-    public string Difficulty { get; set; } = "medium";
+    [JsonPropertyName("difficulty_band")]
+    public string DifficultyBand { get; set; } = "medium";
 
-    [JsonPropertyName("difficulty_index")]
-    public double? DifficultyIndex { get; set; }
+    [JsonPropertyName("initial_irt_beta")]
+    public double? InitialIrtBeta { get; set; }
 
     public string Explanation { get; set; } = "";
     public List<AgentQuizBatchOption> Options { get; set; } = [];

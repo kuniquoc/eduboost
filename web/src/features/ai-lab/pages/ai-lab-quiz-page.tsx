@@ -92,7 +92,7 @@ export function AILabQuizPage() {
 
       <div className="space-y-3">
         {questions?.map((q, idx) => {
-          const diff = diffBadge[q.difficulty];
+          const diff = diffBadge[q.difficultyBand];
           return (
             <Card key={q.id} className="border-border">
               <CardContent className="p-4">

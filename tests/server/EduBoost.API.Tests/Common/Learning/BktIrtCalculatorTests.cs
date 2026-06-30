@@ -6,54 +6,37 @@ using Xunit;
 
 namespace EduBoost.API.Tests;
 
-public class BktIrtCalculatorTests
+public class LearningCalculatorTests
 {
     [Fact]
-    public void ApplyUpdate_ThreeCorrectAnswers_DoesNotReachMasteryThreshold()
+    public void BktUpdate_CorrectAndWrongAnswers_MoveMasteryInExpectedDirections()
     {
-        var mastery = 0.3;
-        var theta = 0.0;
+        var correct = BktCalculator.Update(0.3, isCorrect: true);
+        var wrong = BktCalculator.Update(0.7, isCorrect: false);
 
-        for (var i = 0; i < 3; i++)
-        {
-            var result = BktIrtCalculator.ApplyUpdate(
-                mastery,
-                BktIrtCalculator.DefaultGuessProbability,
-                BktIrtCalculator.DefaultSlipProbability,
-                BktIrtCalculator.DefaultTransitionProbability,
-                theta,
-                beta: 0,
-                isCorrect: true);
-
-            mastery = result.Mastery;
-            theta = result.Theta;
-        }
-
-        Assert.InRange(mastery, 0.80, 0.95);
+        Assert.True(correct > 0.3);
+        Assert.True(wrong < 0.7);
     }
 
     [Fact]
-    public void ApplyUpdate_CorrectAndWrongAnswers_MoveMasteryInExpectedDirections()
+    public void RaschEstimate_MovesThetaTowardObservedPerformance()
     {
-        var correct = BktIrtCalculator.ApplyUpdate(
-            mastery: 0.3,
-            guess: BktIrtCalculator.DefaultGuessProbability,
-            slip: BktIrtCalculator.DefaultSlipProbability,
-            transition: BktIrtCalculator.DefaultTransitionProbability,
-            theta: 0,
-            beta: 0,
-            isCorrect: true);
+        var correct = Rasch1PlEstimator.Estimate([new RaschObservation(0, true)]);
+        var wrong = Rasch1PlEstimator.Estimate([new RaschObservation(0, false)]);
 
-        var wrong = BktIrtCalculator.ApplyUpdate(
-            mastery: 0.7,
-            guess: BktIrtCalculator.DefaultGuessProbability,
-            slip: BktIrtCalculator.DefaultSlipProbability,
-            transition: BktIrtCalculator.DefaultTransitionProbability,
-            theta: 0,
-            beta: 0,
-            isCorrect: false);
+        Assert.True(correct.Theta > 0);
+        Assert.True(wrong.Theta < 0);
+        Assert.Equal(1, correct.ResponseCount);
+        Assert.InRange(correct.StandardError, 0, 1);
+    }
 
-        Assert.True(correct.Mastery > 0.3);
-        Assert.True(wrong.Mastery < 0.7);
+    [Theory]
+    [InlineData("easy", IrtScale.EasyPrior)]
+    [InlineData("medium", IrtScale.MediumPrior)]
+    [InlineData("hard", IrtScale.HardPrior)]
+    public void IrtScale_RoundTripsDifficultyBands(string band, double beta)
+    {
+        Assert.Equal(beta, IrtScale.PriorFromBand(band));
+        Assert.Equal(band, IrtScale.BandFromBeta(beta));
     }
 }

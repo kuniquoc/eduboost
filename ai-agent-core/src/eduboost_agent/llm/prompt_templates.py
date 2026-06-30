@@ -120,7 +120,7 @@ When both DOCUMENT CONTEXT and MANUAL REQUIREMENTS are present:
     }},
     "correct_answer": "A or B or C or D",
     "explanation": "Vietnamese explanation with grammar rule",
-    "difficulty_level": {difficulty}
+    "initial_irt_beta": {difficulty}
 }}"""
 
     # Prompt cho việc gợi ý đáp án theo Socratic method

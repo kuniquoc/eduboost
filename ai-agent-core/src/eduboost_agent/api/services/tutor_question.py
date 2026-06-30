@@ -119,5 +119,8 @@ async def generate_question(
         "options": result.get("options", {}),
         "correct_answer": result.get("correct_answer", ""),
         "explanation": result.get("explanation", ""),
-        "difficulty_level": result.get("difficulty_level", difficulty),
+        "initial_irt_beta": result.get(
+            "initial_irt_beta",
+            result.get("difficulty_level", difficulty),
+        ),
     }

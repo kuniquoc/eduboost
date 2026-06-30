@@ -59,7 +59,7 @@ function filterQuizzes(
       let questions = quiz.questions;
 
       if (difficultyFilter !== 'all') {
-        questions = questions.filter((q) => q.difficulty === difficultyFilter);
+        questions = questions.filter((q) => q.difficultyBand === difficultyFilter);
       }
       if (qSearch) {
         questions = questions.filter((q) => q.text.toLowerCase().includes(qSearch));
@@ -566,11 +566,11 @@ export function PoolQuestionPicker({
                                     <p className="text-xs md:text-sm font-medium">{q.text}</p>
                                     <div className="mt-1 flex flex-wrap gap-1">
                                       <Badge variant="outline" className="text-[10px] py-0">
-                                        {difficultyLabel[q.difficulty] ?? q.difficulty}
+                                        {difficultyLabel[q.difficultyBand] ?? q.difficultyBand}
                                       </Badge>
-                                      {typeof q.difficultyIndex === 'number' && (
+                                      {typeof q.irtBeta === 'number' && (
                                         <Badge variant="secondary" className="text-[10px] py-0">
-                                          β {q.difficultyIndex.toFixed(2)}
+                                          β {q.irtBeta.toFixed(2)}
                                         </Badge>
                                       )}
                                     </div>
