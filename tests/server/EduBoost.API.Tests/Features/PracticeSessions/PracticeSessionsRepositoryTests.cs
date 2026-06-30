@@ -5,6 +5,7 @@ using EduBoost.API.Features.Roadmap;
 using EduBoost.API.Features.Roadmap.Models;
 using EduBoost.API.Infrastructure;
 using EduBoost.API.Infrastructure.Entities;
+using EduBoost.API.Infrastructure.Integrations.Agent;
 using Microsoft.EntityFrameworkCore;
 using System.Text.Json;
 using Xunit;
@@ -227,8 +228,73 @@ public class PracticeSessionsRepositoryTests
         Assert.Equal(nextTopicId.ToString(), response.SuggestedNextTopicId);
     }
 
-    private static PracticeSessionsRepository CreateRepo(AppDbContext db) =>
-        new(db, new LearningEvidenceService(db), new NoOpRoadmapRepository());
+    [Fact]
+    public async Task SubmitAnswerAsync_ExplainDecision_DoesNotGenerateExplanation()
+    {
+        await using var db = CreateDb();
+        var userId = Guid.NewGuid();
+        var topicId = Guid.NewGuid();
+        var quizId = Guid.NewGuid();
+        var q1 = Guid.NewGuid();
+        var q2 = Guid.NewGuid();
+        var sessionId = Guid.NewGuid();
+
+        db.Topics.Add(new Topic { Id = topicId, Name = "Present Simple", OwnerId = userId });
+        db.Quizzes.Add(new Quiz { Id = quizId, Title = "Adaptive practice", TopicId = topicId, Type = "practice" });
+        db.Questions.AddRange(
+            CreateMcq(q1, quizId, "Q1"),
+            CreateMcq(q2, quizId, "Q2"));
+        db.PracticeActiveSessions.Add(new PracticeActiveSession
+        {
+            Id = sessionId,
+            UserId = userId,
+            StateJson = JsonSerializer.Serialize(new
+            {
+                UserId = userId,
+                TopicId = topicId,
+                TopicName = "Present Simple",
+                Mode = "standard",
+                Questions = new[] { q1, q2 },
+                AffectedTopicIds = new[] { topicId },
+                CurrentIndex = 0,
+                CorrectCount = 0,
+                StartTime = DateTime.UtcNow,
+                MasteryBefore = 0.3,
+                DbMasteryBaseline = 0.3,
+                DbThetaBaseline = 0.0,
+                SessionMastery = 0.3,
+                SessionTheta = 0.0
+            }),
+            CreatedAt = DateTime.UtcNow,
+            ExpiresAt = DateTime.UtcNow.AddHours(2)
+        });
+        await db.SaveChangesAsync();
+
+        var selectedOption = await db.Questions
+            .Where(q => q.Id == q1)
+            .SelectMany(q => q.Options)
+            .SingleAsync();
+        var agent = new ExplainDecisionAgentService();
+        var repo = CreateRepo(db, agent);
+
+        var response = await repo.SubmitAnswerAsync(userId, new SubmitAnswerRequest
+        {
+            SessionId = sessionId.ToString(),
+            QuestionId = q1.ToString(),
+            SelectedOptionId = selectedOption.Id.ToString()
+        });
+
+        Assert.Equal(1, agent.NextActionCalls);
+        Assert.Equal(0, agent.ExplanationCalls);
+        Assert.Equal("EXPLAIN", response.AgentAction);
+        Assert.Null(response.AgentExplanation);
+        Assert.NotNull(response.NextQuestion);
+        Assert.False(response.IsSessionComplete);
+        Assert.True(response.IsCorrect);
+    }
+
+    private static PracticeSessionsRepository CreateRepo(AppDbContext db, IAgentService? agentService = null) =>
+        new(db, new LearningEvidenceService(db), new NoOpRoadmapRepository(), agentService);
 
     private static Question CreateMcq(Guid id, Guid quizId, string text) => new()
     {
@@ -261,5 +327,44 @@ public class PracticeSessionsRepositoryTests
             Task.FromResult<RoadmapStepDto?>(null);
         public Task SyncAfterLearningAsync(Guid classId, Guid userId, Guid topicId) => Task.CompletedTask;
         public Task EnsureClassTopicsSyncedAsync(Guid classId, Guid studentId) => Task.CompletedTask;
+    }
+
+    private sealed class ExplainDecisionAgentService : IAgentService
+    {
+        public int NextActionCalls { get; private set; }
+        public int ExplanationCalls { get; private set; }
+
+        public Task<AgentNextActionResponse?> GetNextActionAsync(string studentId, string topicName, double? masteryProbability = null, double? irtTheta = null)
+        {
+            NextActionCalls++;
+            return Task.FromResult<AgentNextActionResponse?>(new AgentNextActionResponse
+            {
+                Action = "EXPLAIN",
+                Reason = "Student needs review"
+            });
+        }
+
+        public Task<string?> GetExplanationAsync(string topicName, string studentState, List<string>? allowedDocumentIds = null, List<string>? allowedScopes = null)
+        {
+            ExplanationCalls++;
+            return Task.FromResult<string?>("This should not be generated");
+        }
+
+        public Task<AgentQuizResponse?> GenerateQuizQuestionAsync(string topicName, double targetIrtBeta, List<string>? allowedDocumentIds = null, List<string>? allowedScopes = null, IReadOnlyList<string>? existingQuestions = null) =>
+            Task.FromResult<AgentQuizResponse?>(null);
+
+        public Task<string?> GetGraderExplanationAsync(string question, string correctAnswer, IReadOnlyList<AgentGraderOption>? options = null, List<string>? allowedDocumentIds = null, List<string>? allowedScopes = null) =>
+            Task.FromResult<string?>(null);
+
+        public Task<AgentQuizBatchResponse?> GenerateQuizBatchAsync(string topicName, string? userPrompt, string? docUrl, int numQuestions, string difficulty, int numEasy = 0, int numMedium = 0, int numHard = 0, string? documentId = null, IReadOnlyList<string>? existingQuestions = null) =>
+            Task.FromResult<AgentQuizBatchResponse?>(null);
+
+        public Task<AgentChatResponse> AskAsync(string question, string? topicId, string level, List<ChatMessage> history, List<string>? allowedDocumentIds = null, List<string>? allowedScopes = null) =>
+            Task.FromResult(new AgentChatResponse());
+
+        public Task IngestDocumentAsync(string documentId, string fileUrl, string scope, string? classId = null, string? ownerId = null, string? topicId = null) =>
+            Task.CompletedTask;
+
+        public Task DeleteDocumentAsync(string documentId) => Task.CompletedTask;
     }
 }

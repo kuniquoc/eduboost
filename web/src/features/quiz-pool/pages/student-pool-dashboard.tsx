@@ -23,6 +23,7 @@ import {
 import { toast } from 'sonner';
 import { cn } from '@/shared/lib/utils';
 import { getErrorMessage } from '@/shared/lib/error-message';
+import { normalizeText } from '@/shared/lib/text-normalization';
 import type { TopicPoolDto, PoolQuizDetailDto } from '@/features/quiz-pool/types';
 import {
   GenerationProgressOverlay,
@@ -570,6 +571,17 @@ export function StudentPoolDashboard() {
                                 >
                                   <Play className="h-3 w-3 mr-1" /> Làm bài
                                 </Button>
+                                <Button
+                                  type="button"
+                                  variant="outline"
+                                  size="sm"
+                                  className="h-8 px-2 text-xs hover:bg-indigo-500/10 hover:text-indigo-600"
+                                  aria-label={`Xem và sửa ${quiz.title}`}
+                                  onClick={() => navigate(`/student/ai-lab/${quiz.quizId}`)}
+                                >
+                                  <Eye className="h-3.5 w-3.5 sm:mr-1" />
+                                  <span className="hidden sm:inline">Xem &amp; sửa</span>
+                                </Button>
                                 <Button 
                                    variant="ghost" 
                                    size="icon" 
@@ -621,7 +633,7 @@ export function StudentPoolDashboard() {
                                     </div>
                                     {q.explanation && (
                                       <p className="text-[11px] text-muted-foreground italic ml-7 mt-1.5">
-                                        💡 {q.explanation}
+                                        💡 {normalizeText(q.explanation)}
                                       </p>
                                     )}
                                   </div>

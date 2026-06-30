@@ -159,7 +159,6 @@ public partial class PracticeSessionsRepository
 
             agentAction = decision.Action;
             agentReason = decision.Reason;
-            agentExplanation = decision.Explanation;
             recommendNextSkill = decision.RecommendNextSkill;
             nextSkillSuggestion = decision.NextSkillSuggestion;
             suggestedNextTopicId = decision.SuggestedNextTopicId;

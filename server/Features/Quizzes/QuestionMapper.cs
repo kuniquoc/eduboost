@@ -79,7 +79,6 @@ internal static class QuestionMapper
         Text = source.Text,
         Type = source.Type,
         IrtItemId = source.IrtItemId,
-        IrtItem = source.IrtItem,
         Explanation = source.Explanation,
         CorrectAnswer = source.CorrectAnswer,
         VerifiedByTeacher = verifiedByTeacher,

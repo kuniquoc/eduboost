@@ -102,7 +102,16 @@ public partial class QuizzesRepository : IQuizzesRepository
         var question = await db.Questions.Include(q => q.Options).Include(q => q.IrtItem).FirstOrDefaultAsync(q => q.Id == questionId);
         if (question == null) return null;
 
-        var contentChanged = request.Text != null || request.CorrectAnswer != null || request.Options != null;
+        Microsoft.EntityFrameworkCore.Storage.IDbContextTransaction? transaction = null;
+        if (db.Database.IsRelational())
+            transaction = await db.Database.BeginTransactionAsync();
+
+        await using var transactionScope = transaction;
+
+        var contentChanged = HasQuestionContentChanged(question, request);
+        var (requestedBeta, requestedPriorSource) = ResolveRequestedIrtPrior(question.IrtItem, request);
+        var irtPriorChanged = (request.InitialIrtBeta.HasValue || request.DifficultyBand != null)
+            && requestedBeta != question.IrtItem.InitialBeta;
 
         if (request.Text != null) question.Text = request.Text;
         if (request.CorrectAnswer != null) question.CorrectAnswer = request.CorrectAnswer;
@@ -110,18 +119,16 @@ public partial class QuizzesRepository : IQuizzesRepository
 
         if (contentChanged)
         {
-            question.IrtItem = QuestionMapper.CreateIrtItem(
-                request.InitialIrtBeta ?? question.IrtItem.InitialBeta,
-                request.DifficultyBand,
-                request.InitialIrtBeta.HasValue ? "teacher" : question.IrtItem.PriorSource);
-            question.IrtItemId = question.IrtItem.Id;
+            var newIrtItem = QuestionMapper.CreateIrtItem(requestedBeta, null, requestedPriorSource);
+            db.IrtItems.Add(newIrtItem);
+            question.IrtItem = newIrtItem;
+            question.IrtItemId = newIrtItem.Id;
         }
-        else if (request.DifficultyBand != null || request.InitialIrtBeta.HasValue)
+        else if (irtPriorChanged)
         {
-            var beta = IrtScale.Clamp(request.InitialIrtBeta ?? IrtScale.PriorFromBand(request.DifficultyBand));
-            question.IrtItem.InitialBeta = beta;
-            question.IrtItem.Beta = beta;
-            question.IrtItem.PriorSource = request.InitialIrtBeta.HasValue ? "teacher" : "label";
+            question.IrtItem.InitialBeta = requestedBeta;
+            question.IrtItem.Beta = requestedBeta;
+            question.IrtItem.PriorSource = requestedPriorSource;
             question.IrtItem.BetaStandardError = null;
             question.IrtItem.CalibrationSampleCount = 0;
             question.IrtItem.CalibrationStatus = "provisional";
@@ -155,7 +162,11 @@ public partial class QuizzesRepository : IQuizzesRepository
                 foreach (var id in idsToDelete)
                 {
                     var tracked = question.Options.FirstOrDefault(o => o.Id == id);
-                    if (tracked != null) question.Options.Remove(tracked);
+                    if (tracked != null)
+                    {
+                        db.Entry(tracked).State = EntityState.Detached;
+                        question.Options.Remove(tracked);
+                    }
                 }
             }
 
@@ -174,26 +185,32 @@ public partial class QuizzesRepository : IQuizzesRepository
                     }
                     else
                     {
-                        question.Options.Add(new QuizOption
+                        var newOption = new QuizOption
                         {
-                            Id = optId,
+                            // Never trust an option ID that does not belong to this question.
+                            // Reusing it could update/re-parent another question's option.
+                            Id = Guid.NewGuid(),
                             QuestionId = question.Id,
                             Text = reqOpt.Text,
                             IsCorrect = reqOpt.IsCorrect,
                             OrderIndex = i
-                        });
+                        };
+                        db.QuizOptions.Add(newOption);
+                        question.Options.Add(newOption);
                     }
                 }
                 else
                 {
-                    question.Options.Add(new QuizOption
+                    var newOption = new QuizOption
                     {
                         Id = Guid.NewGuid(),
                         QuestionId = question.Id,
                         Text = reqOpt.Text,
                         IsCorrect = reqOpt.IsCorrect,
                         OrderIndex = i
-                    });
+                    };
+                    db.QuizOptions.Add(newOption);
+                    question.Options.Add(newOption);
                 }
             }
 
@@ -218,7 +235,55 @@ public partial class QuizzesRepository : IQuizzesRepository
             await db.SaveChangesAsync();
         }
 
+        if (transaction != null)
+            await transaction.CommitAsync();
+
         return QuestionMapper.ToDto(question);
+    }
+
+    private static bool HasQuestionContentChanged(Question question, UpdateQuestionRequest request)
+    {
+        if (request.Text != null && !string.Equals(request.Text, question.Text, StringComparison.Ordinal))
+            return true;
+
+        if (request.CorrectAnswer != null
+            && !string.Equals(request.CorrectAnswer, question.CorrectAnswer, StringComparison.Ordinal))
+            return true;
+
+        if (request.Options == null)
+            return false;
+
+        var currentOptions = question.Options.OrderBy(option => option.OrderIndex).ToList();
+        if (request.Options.Count != currentOptions.Count)
+            return true;
+
+        for (var index = 0; index < request.Options.Count; index++)
+        {
+            var requested = request.Options[index];
+            var current = currentOptions[index];
+            if (!Guid.TryParse(requested.Id, out var requestedId)
+                || requestedId != current.Id
+                || !string.Equals(requested.Text, current.Text, StringComparison.Ordinal)
+                || requested.IsCorrect != current.IsCorrect)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private static (double Beta, string PriorSource) ResolveRequestedIrtPrior(
+        IrtItem current,
+        UpdateQuestionRequest request)
+    {
+        if (request.InitialIrtBeta.HasValue)
+            return (IrtScale.Clamp(request.InitialIrtBeta.Value), "teacher");
+
+        if (request.DifficultyBand != null)
+            return (IrtScale.Clamp(IrtScale.PriorFromBand(request.DifficultyBand)), "label");
+
+        return (IrtScale.Clamp(current.InitialBeta), current.PriorSource);
     }
 
     public async Task<bool> DeleteQuestionAsync(Guid questionId)
@@ -285,7 +350,6 @@ public partial class QuizzesRepository : IQuizzesRepository
                 Text = poolQ.Text,
                 Type = poolQ.Type,
                 IrtItemId = poolQ.IrtItemId,
-                IrtItem = poolQ.IrtItem,
                 Explanation = poolQ.Explanation,
                 CorrectAnswer = poolQ.CorrectAnswer,
                 VerifiedByTeacher = true,
@@ -304,7 +368,14 @@ public partial class QuizzesRepository : IQuizzesRepository
         }
 
         await db.SaveChangesAsync();
-        return added.Select(QuestionMapper.ToDto).ToList();
+        var addedIds = added.Select(question => question.Id).ToList();
+        return await db.Questions
+            .Where(question => addedIds.Contains(question.Id))
+            .Include(question => question.Options)
+            .Include(question => question.IrtItem)
+            .OrderBy(question => question.OrderIndex)
+            .Select(question => QuestionMapper.ToDto(question))
+            .ToListAsync();
     }
 
     public async Task<QuestionDto?> VerifyQuestionAsync(Guid questionId, bool verified)

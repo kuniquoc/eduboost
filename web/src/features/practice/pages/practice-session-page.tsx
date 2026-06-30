@@ -156,6 +156,7 @@ export function PracticeSessionPage() {
   });
 
   const handleStart = () => {
+    setSelectedOptions([]);
     setState({ type: 'loading' });
     startMutation.mutate();
   };
@@ -515,7 +516,7 @@ export function PracticeSessionPage() {
                   Quay lại
                 </Button>
                 {!isFixedMode && !isTestMode && (
-                  <Button className="flex-1" onClick={() => setState({ type: 'idle' })}>
+                  <Button className="flex-1" onClick={handleStart}>
                     Luyện tiếp
                   </Button>
                 )}

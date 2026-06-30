@@ -151,7 +151,7 @@ public partial class PracticeSessionsRepository : IPracticeSessionsRepository
             state.Questions[state.CurrentIndex + i] = ordered[i];
     }
 
-    private async Task<(string? Action, string? Reason, string? Explanation, bool RecommendNextSkill, string? NextSkillSuggestion, double? TargetBeta, string? SuggestedNextTopicId, string? SuggestedNextTopicName)>
+    private async Task<(string? Action, string? Reason, bool RecommendNextSkill, string? NextSkillSuggestion, double? TargetBeta, string? SuggestedNextTopicId, string? SuggestedNextTopicName)>
         ResolveAgentDecisionAsync(Guid userId, PracticeSessionState state, double mastery, double theta)
     {
         var isSelfPractice = string.Equals(state.Mode, "self_practice", StringComparison.OrdinalIgnoreCase);
@@ -164,7 +164,6 @@ public partial class PracticeSessionsRepository : IPracticeSessionsRepository
                 return (
                     "QUIZ",
                     $"Bạn đã đạt mức thành thạo {mastery:P0} cho chủ đề này, nhưng vẫn có thể tiếp tục tự luyện tập.",
-                    null,
                     true,
                     $"Bạn có thể chuyển sang chủ đề: {nextTopic.Name}",
                     IrtScale.Clamp(theta),
@@ -179,7 +178,7 @@ public partial class PracticeSessionsRepository : IPracticeSessionsRepository
         var fallbackTargetBeta = IrtScale.Clamp(theta);
 
         if (!_agentDecisionEnabled || _agentService == null)
-            return (fallbackAction, fallbackReason, null, fallbackAction == "NEXT_SKILL", null, fallbackTargetBeta, null, null);
+            return (fallbackAction, fallbackReason, fallbackAction == "NEXT_SKILL", null, fallbackTargetBeta, null, null);
 
         var response = await _agentService.GetNextActionAsync(userId.ToString(), state.TopicName, mastery, theta);
         var action = response?.Action?.Trim().ToUpperInvariant();
@@ -202,17 +201,9 @@ public partial class PracticeSessionsRepository : IPracticeSessionsRepository
             targetBeta = IrtScale.Clamp(parsedBeta);
         }
 
-        string? explanation = null;
-        if (action == "EXPLAIN")
-        {
-            var studentState = mastery < 0.5 ? "beginning" : mastery < 0.95 ? "learning" : "reviewing";
-            explanation = await _agentService.GetExplanationAsync(state.TopicName, studentState);
-        }
-
         return (
             action,
             reason,
-            explanation,
             action == "NEXT_SKILL",
             action == "NEXT_SKILL" ? "Bạn nên chuyển sang chủ đề kế tiếp." : null,
             targetBeta,

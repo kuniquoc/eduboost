@@ -12,7 +12,7 @@ import {
   Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter,
 } from '@/shared/ui/dialog';
 import {
-  Search, Trash2, BookOpen, ChevronDown, ChevronUp, Loader2, Library, HelpCircle, Pencil, Check, X,
+  Search, Trash2, BookOpen, ChevronDown, ChevronUp, Loader2, Library, HelpCircle, Pencil, Check, X, Eye,
 } from 'lucide-react';
 import { toast } from 'sonner';
 import { cn } from '@/shared/lib/utils';
@@ -39,6 +39,7 @@ export interface PoolQuestionPickerProps {
   showDeleteButton?: boolean;
   enableTopicRename?: boolean;
   enableQuizRename?: boolean;
+  onReviewQuiz?: (quizId: string) => void;
   onSelectedQuestionsChange?: (questions: Array<QuestionDto & { topicName?: string }>) => void;
 }
 
@@ -84,6 +85,7 @@ export function PoolQuestionPicker({
   showDeleteButton = false,
   enableTopicRename = false,
   enableQuizRename = false,
+  onReviewQuiz,
   onSelectedQuestionsChange,
 }: PoolQuestionPickerProps) {
   const queryClient = useQueryClient();
@@ -526,6 +528,22 @@ export function PoolQuestionPicker({
                           </div>
 
                           <div className="flex items-center gap-1.5 shrink-0">
+                            {onReviewQuiz && (
+                              <Button
+                                type="button"
+                                variant="outline"
+                                size="sm"
+                                className="h-8 px-2 text-xs hover:bg-purple-500/10 hover:text-purple-400"
+                                aria-label={`Kiểm duyệt ${quiz.title}`}
+                                onClick={(event) => {
+                                  event.stopPropagation();
+                                  onReviewQuiz(quiz.quizId);
+                                }}
+                              >
+                                <Eye className="h-3.5 w-3.5 sm:mr-1" />
+                                <span className="hidden sm:inline">Kiểm duyệt</span>
+                              </Button>
+                            )}
                             {showDeleteButton && (
                               <Button
                                 variant="ghost"

@@ -48,6 +48,7 @@ public class PoolCreateEntryTestTests
             ]
         });
         await db.SaveChangesAsync();
+        db.ChangeTracker.Clear();
 
         var repo = new PoolRepository(db, new NoOpStorage(), new FakeAgentService());
         var result = await repo.CreateEntryTestFromPoolAsync(teacherId, new CreateEntryTestFromPoolRequest
@@ -112,6 +113,7 @@ public class PoolCreateEntryTestTests
         db.Quizzes.Add(new Quiz { Id = poolQuizId, Title = "Pool batch", TopicId = topicId, Type = "pool", OwnerId = teacherId });
         db.Questions.Add(CreateMcq(Guid.NewGuid(), poolQuizId, "Q1", "medium"));
         await db.SaveChangesAsync();
+        db.ChangeTracker.Clear();
 
         var repo = new PoolRepository(db, new NoOpStorage(), new FakeAgentService());
         await repo.CreateTestFromPoolAsync(teacherId, new CreateTestFromPoolRequest

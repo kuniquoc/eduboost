@@ -223,6 +223,7 @@ export function TeacherPoolDashboard() {
             showDeleteButton
             enableTopicRename
             enableQuizRename
+            onReviewQuiz={(quizId) => navigate(`/teacher/ai-studio/${quizId}`)}
           />
         </div>
       ) : (

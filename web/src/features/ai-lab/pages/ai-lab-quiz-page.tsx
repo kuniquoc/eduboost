@@ -14,6 +14,7 @@ import {
 } from '@/shared/ui/dialog';
 import { ArrowLeft, Pencil, Trash2 } from 'lucide-react';
 import { toast } from 'sonner';
+import { normalizeText } from '@/shared/lib/text-normalization';
 import type { QuestionDto, UpdateQuestionPayload } from '@/features/quizzes/types';
 
 const diffBadge = {
@@ -147,7 +148,7 @@ export function AILabQuizPage() {
                   </div>
                 )}
                 {q.explanation && (
-                  <p className="ml-9 mt-2 text-xs text-muted-foreground italic">💡 {q.explanation}</p>
+                  <p className="ml-9 mt-2 text-xs text-muted-foreground italic">💡 {normalizeText(q.explanation)}</p>
                 )}
               </CardContent>
             </Card>
