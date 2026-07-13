@@ -1,4 +1,4 @@
-using System.Security.Claims;
+using EduBoost.API.Common.Http;
 using EduBoost.API.Common.Models;
 using EduBoost.API.Features.Admin.Models;
 using Microsoft.AspNetCore.Authorization;
@@ -28,13 +28,19 @@ public class AdminController(IAdminRepository repo) : ControllerBase
         return Ok(ApiResponse.Ok("Đã cập nhật role"));
     }
 
-    /// <summary>Vô hiệu hóa tài khoản</summary>
+    /// <summary>Xóa vĩnh viễn tài khoản và dữ liệu liên quan</summary>
     [HttpDelete("users/{id:guid}")]
     public async Task<IActionResult> DeleteUser(Guid id)
     {
-        var success = await repo.DeleteUserAsync(id);
-        if (!success) return NotFound(ApiResponse.Fail("Không tìm thấy user"));
-        return Ok(ApiResponse.Ok("Đã xóa tài khoản"));
+        var result = await repo.DeleteUserAsync(id, ControllerAuth.GetUserId(User));
+        return result switch
+        {
+            DeleteUserResult.Deleted => Ok(ApiResponse.Ok("Đã xóa vĩnh viễn tài khoản và dữ liệu liên quan")),
+            DeleteUserResult.NotFound => NotFound(ApiResponse.Fail("Không tìm thấy user")),
+            DeleteUserResult.SelfDeletionForbidden => Conflict(ApiResponse.Fail("Không thể tự xóa tài khoản admin đang đăng nhập")),
+            DeleteUserResult.LastAdminForbidden => Conflict(ApiResponse.Fail("Không thể xóa admin cuối cùng của hệ thống")),
+            _ => throw new ArgumentOutOfRangeException(nameof(result), result, null)
+        };
     }
 
     /// <summary>Thống kê hệ thống</summary>

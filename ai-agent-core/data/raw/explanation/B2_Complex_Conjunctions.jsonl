@@ -1,0 +1,702 @@
+[
+  {
+    "topic": "Complex Conjunctions (Despite, Although)",
+    "level": "B2",
+    "student_input": "Although the heavy traffic, I managed to arrive at the meeting on time.",
+    "correct_answer": "Despite the heavy traffic, I managed to arrive at the meeting on time.",
+    "explanation": "Hãy nhìn vào cụm 'the heavy traffic'. Đây là một cụm danh từ hay là một mệnh đề có đầy đủ chủ ngữ và động từ? Bạn hãy nhớ lại xem 'Although' đi với mệnh đề, còn từ nào dùng để nối với một cụm danh từ để chỉ sự đối lập?"
+  },
+  {
+    "topic": "Complex Conjunctions (Despite, Although)",
+    "level": "B2",
+    "student_input": "Despite he had a fever, he insisted on going to the office.",
+    "correct_answer": "Although he had a fever, he insisted on going to the office.",
+    "explanation": "Hãy phân tích vế 'he had a fever'. Đây là một mệnh đề hoàn chỉnh. Từ 'Despite' có thể đi trực tiếp với một mệnh đề không? Nếu bạn muốn giữ nguyên vế này, bạn nên dùng 'Although' hay 'Despite'?"
+  },
+  {
+    "topic": "Complex Conjunctions (Despite, Although)",
+    "level": "B2",
+    "student_input": "In spite of the weather was terrible, we decided to go hiking.",
+    "correct_answer": "In spite of the weather being terrible, we decided to go hiking.",
+    "explanation": "Cụm 'In spite of' yêu cầu một danh từ hoặc V-ing theo sau. Tuy nhiên, bạn đang dùng một mệnh đề 'the weather was terrible'. Bạn có hai cách sửa: một là dùng 'Although', hai là biến mệnh đề này thành một cụm danh từ/V-ing. Bạn sẽ chọn cách nào?"
+  },
+  {
+    "topic": "Complex Conjunctions (Despite, Although)",
+    "level": "B2",
+    "student_input": "Even though her lack of experience, she was hired for the senior position.",
+    "correct_answer": "Despite her lack of experience, she was hired for the senior position.",
+    "explanation": "Hãy chú ý 'her lack of experience'. Đây là một cụm danh từ. 'Even though' có đi kèm với cụm danh từ không, hay nó cần một mệnh đề đi sau? Bạn hãy tìm một từ thay thế cho 'Even though' phù hợp với cụm danh từ này."
+  },
+  {
+    "topic": "Complex Conjunctions (Despite, Although)",
+    "level": "B2",
+    "student_input": "Despite of the high price, the smartphone is selling like hotcakes.",
+    "correct_answer": "Despite the high price, the smartphone is selling like hotcakes.",
+    "explanation": "Hãy nhìn kỹ vào cụm 'Despite of'. Có một sự nhầm lẫn phổ biến giữa 'Despite' và 'In spite of'. Trong hai cụm này, từ nào là từ KHÔNG đi kèm với 'of'? Bạn hãy thử bỏ 'of' hoặc thay 'Despite' bằng 'In spite of' xem sao."
+  },
+  {
+    "topic": "Complex Conjunctions (Despite, Although)",
+    "level": "B2",
+    "student_input": "Although he is very wealthy, but he lives a very simple life.",
+    "correct_answer": "Although he is very wealthy, he lives a very simple life.",
+    "explanation": "Bạn đang dùng cả 'Although' và 'but' trong cùng một câu. Trong tiếng Anh, chúng ta chỉ chọn một trong hai để thể hiện sự đối lập. Nếu bạn đã bắt đầu bằng 'Although', bạn có còn cần 'but' ở vế sau không?"
+  },
+  {
+    "topic": "Complex Conjunctions (Despite, Although)",
+    "level": "B2",
+    "student_input": "In spite of she studied hard, she failed the exam.",
+    "correct_answer": "In spite of studying hard, she failed the exam.",
+    "explanation": "Hãy phân tích vế 'she studied hard'. Như đã nói, 'In spite of' không đi với mệnh đề. Để giữ nguyên ý nghĩa mà không dùng 'Although', bạn có thể biến động từ 'studied' thành dạng V-ing để tạo thành một cụm từ không? Bạn sẽ viết lại như thế nào?"
+  },
+  {
+    "topic": "Complex Conjunctions (Despite, Although)",
+    "level": "B2",
+    "student_input": "Despite the fact that it was raining, but we went for a walk.",
+    "correct_answer": "Despite the fact that it was raining, we went for a walk.",
+    "explanation": "Bạn đã sử dụng cụm 'Despite the fact that' rất chính xác để nối với một mệnh đề. Tuy nhiên, hãy nhìn vào vế sau: bạn lại dùng 'but'. Tương tự như trường hợp 'Although', liệu 'but' có bị thừa khi đã có 'Despite' ở đầu câu không?"
+  },
+  {
+    "topic": "Complex Conjunctions (Despite, Although)",
+    "level": "B2",
+    "student_input": "Even though the noise, I could concentrate on my studies.",
+    "correct_answer": "Despite the noise, I could concentrate on my studies.",
+    "explanation": "Hãy nhìn vào 'the noise'. Đây là một danh từ. 'Even though' yêu cầu một mệnh đề (S+V) theo sau. Bạn nên dùng từ nối nào để đi với danh từ 'the noise' nhằm chỉ sự đối lập?"
+  },
+  {
+    "topic": "Complex Conjunctions (Despite, Although)",
+    "level": "B2",
+    "student_input": "Despite having a map, but he still got lost in the city.",
+    "correct_answer": "Despite having a map, he still got lost in the city.",
+    "explanation": "Bạn dùng 'Despite + V-ing' rất tốt. Nhưng hãy chú ý đến từ 'but'. Khi đã có 'Despite' ở đầu câu để thiết lập sự đối lập, bạn có cần dùng thêm một liên từ đối lập nữa ở vế sau không?"
+  },
+  {
+    "topic": "Complex Conjunctions (Despite, Although)",
+    "level": "B2",
+    "student_input": "Although the risk was high, but the investors decided to proceed.",
+    "correct_answer": "Although the risk was high, the investors decided to proceed.",
+    "explanation": "Một lỗi lặp lại: 'Although' và 'but' không bao giờ đứng chung trong một câu để nối hai vế đối lập. Bạn hãy thử bỏ một trong hai từ này và xem câu văn trở nên tự nhiên hơn như thế nào."
+  },
+  {
+    "topic": "Complex Conjunctions (Despite, Although)",
+    "level": "B2",
+    "student_input": "In spite of the fact that he is old, but he is still very active.",
+    "correct_answer": "In spite of the fact that he is old, he is still very active.",
+    "explanation": "Bạn đã dùng đúng cụm 'In spite of the fact that' để nối với mệnh đề. Tuy nhiên, hãy kiểm tra lại vế sau. Liệu từ 'but' có đang làm câu bị thừa liên từ không?"
+  },
+  {
+    "topic": "Complex Conjunctions (Despite, Although)",
+    "level": "B2",
+    "student_input": "Despite of being tired, she finished the project on time.",
+    "correct_answer": "Despite being tired, she finished the project on time.",
+    "explanation": "Hãy nhìn lại cụm 'Despite of'. Bạn có nhớ sự khác biệt giữa 'Despite' và 'In spite of' không? Từ nào trong hai từ này tuyệt đối không đi kèm với 'of'?"
+  },
+  {
+    "topic": "Complex Conjunctions (Despite, Although)",
+    "level": "B2",
+    "student_input": "Even though the price is exorbitant, but I will buy that dress.",
+    "correct_answer": "Even though the price is exorbitant, I will buy that dress.",
+    "explanation": "Bạn sử dụng từ 'exorbitant' (đắt cắt cổ) rất chuẩn B2. Tuy nhiên, cấu trúc câu lại bị lỗi 'thừa'. Khi đã dùng 'Even though' ở đầu, bạn xử lý vế sau như thế nào để không bị lặp lại ý nghĩa đối lập?"
+  },
+  {
+    "topic": "Complex Conjunctions (Despite, Although)",
+    "level": "B2",
+    "student_input": "Despite she has a degree in finance, she struggles with basic accounting.",
+    "correct_answer": "Despite having a degree in finance, she struggles with basic accounting.",
+    "explanation": "Hãy phân tích vế 'she has a degree'. Đây là một mệnh đề. 'Despite' có thể đi trực tiếp với mệnh đề không? Bạn có thể chuyển mệnh đề này thành một cụm V-ing để phù hợp với 'Despite' không?"
+  },
+  {
+    "topic": "Complex Conjunctions (Despite, Although)",
+    "level": "B2",
+    "student_input": "Although the lack of funding, the research team continued their experiments.",
+    "correct_answer": "Despite the lack of funding, the research team continued their experiments.",
+    "explanation": "Hãy nhìn vào 'the lack of funding'. Đây là một cụm danh từ hay một mệnh đề có chủ ngữ và động từ? Bạn hãy nhớ lại: 'Although' đi với mệnh đề, vậy từ nào dùng để nối với một cụm danh từ để chỉ sự đối lập?"
+  },
+  {
+    "topic": "Complex Conjunctions (Despite, Although)",
+    "level": "B2",
+    "student_input": "Despite he was exhausted after the flight, he attended the gala dinner.",
+    "correct_answer": "Although he was exhausted after the flight, he attended the gala dinner.",
+    "explanation": "Hãy phân tích vế 'he was exhausted'. Đây là một mệnh đề hoàn chỉnh. Từ 'Despite' có thể đi trực tiếp với một mệnh đề không? Nếu bạn muốn giữ nguyên cấu trúc này, bạn nên dùng 'Although' hay 'Despite'?"
+  },
+  {
+    "topic": "Complex Conjunctions (Despite, Although)",
+    "level": "B2",
+    "student_input": "In spite of the traffic was heavy, the courier delivered the package on time.",
+    "correct_answer": "In spite of the heavy traffic, the courier delivered the package on time.",
+    "explanation": "Cụm 'In spite of' yêu cầu một danh từ hoặc V-ing theo sau. Tuy nhiên, bạn đang dùng một mệnh đề 'the traffic was heavy'. Bạn có thể biến mệnh đề này thành một cụm danh từ ngắn gọn hơn để phù hợp với 'In spite of' không?"
+  },
+  {
+    "topic": "Complex Conjunctions (Despite, Although)",
+    "level": "B2",
+    "student_input": "Even though the high cost of living, many people still move to New York.",
+    "correct_answer": "Despite the high cost of living, many people still move to New York.",
+    "explanation": "Hãy chú ý 'the high cost of living'. Đây là một cụm danh từ. 'Even though' có đi kèm với cụm danh từ không, hay nó cần một mệnh đề (S+V) đi sau? Bạn hãy tìm một từ thay thế cho 'Even though' phù hợp với cụm danh từ này."
+  },
+  {
+    "topic": "Complex Conjunctions (Despite, Although)",
+    "level": "B2",
+    "student_input": "Despite of the regulatory hurdles, the startup managed to launch its product.",
+    "correct_answer": "Despite the regulatory hurdles, the startup managed to launch its product.",
+    "explanation": "Hãy nhìn kỹ vào cụm 'Despite of'. Có một sự nhầm lẫn phổ biến giữa 'Despite' và 'In spite of'. Trong hai cụm này, từ nào là từ KHÔNG đi kèm với 'of'?"
+  },
+  {
+    "topic": "Complex Conjunctions (Despite, Although)",
+    "level": "B2",
+    "student_input": "Although the company faced a deficit, but it decided to hire more staff.",
+    "correct_answer": "Although the company faced a deficit, it decided to hire more staff.",
+    "explanation": "Bạn đang dùng cả 'Although' và 'but' trong cùng một câu. Trong tiếng Anh, chúng ta chỉ chọn một trong hai để thể hiện sự đối lập. Nếu bạn đã bắt đầu bằng 'Although', bạn có còn cần 'but' ở vế sau không?"
+  },
+  {
+    "topic": "Complex Conjunctions (Despite, Although)",
+    "level": "B2",
+    "student_input": "In spite of she had a PhD, she struggled to find a job in her field.",
+    "correct_answer": "In spite of having a PhD, she struggled to find a job in her field.",
+    "explanation": "Hãy phân tích vế 'she had a PhD'. Như đã nói, 'In spite of' không đi với mệnh đề. Để giữ nguyên ý nghĩa mà không dùng 'Although', bạn có thể biến động từ 'had' thành dạng V-ing để tạo thành một cụm từ không?"
+  },
+  {
+    "topic": "Complex Conjunctions (Despite, Although)",
+    "level": "B2",
+    "student_input": "Despite the fact that the prototype failed, but the engineers remained optimistic.",
+    "correct_answer": "Despite the fact that the prototype failed, the engineers remained optimistic.",
+    "explanation": "Bạn đã sử dụng cụm 'Despite the fact that' rất chính xác để nối với một mệnh đề. Tuy nhiên, hãy nhìn vào vế sau: bạn lại dùng 'but'. Liệu 'but' có bị thừa khi đã có 'Despite' ở đầu câu không?"
+  },
+  {
+    "topic": "Complex Conjunctions (Despite, Although)",
+    "level": "B2",
+    "student_input": "Even though the noise from the construction site, I managed to sleep.",
+    "correct_answer": "Despite the noise from the construction site, I managed to sleep.",
+    "explanation": "Hãy nhìn vào 'the noise from the construction site'. Đây là một cụm danh từ. 'Even though' yêu cầu một mệnh đề (S+V) theo sau. Bạn nên dùng từ nối nào để đi với cụm danh từ này?"
+  },
+  {
+    "topic": "Complex Conjunctions (Despite, Although)",
+    "level": "B2",
+    "student_input": "Despite having a great reputation, but the restaurant recently closed down.",
+    "correct_answer": "Despite having a great reputation, the restaurant recently closed down.",
+    "explanation": "Bạn dùng 'Despite + V-ing' rất tốt. Nhưng hãy chú ý đến từ 'but'. Khi đã có 'Despite' ở đầu câu để thiết lập sự đối lập, bạn có cần dùng thêm một liên từ đối lập nữa ở vế sau không?"
+  },
+  {
+    "topic": "Complex Conjunctions (Despite, Although)",
+    "level": "B2",
+    "student_input": "Although the risk was substantial, but the investors decided to proceed.",
+    "correct_answer": "Although the risk was substantial, the investors decided to proceed.",
+    "explanation": "Một lỗi lặp lại: 'Although' và 'but' không bao giờ đứng chung trong một câu. Bạn hãy thử bỏ một trong hai từ này và xem câu văn trở nên tự nhiên hơn như thế nào."
+  },
+  {
+    "topic": "Complex Conjunctions (Despite, Although)",
+    "level": "B2",
+    "student_input": "In spite of the fact that he is a novice, but he won the chess tournament.",
+    "correct_answer": "In spite of the fact that he is a novice, he won the chess tournament.",
+    "explanation": "Bạn đã dùng đúng cụm 'In spite of the fact that'. Tuy nhiên, hãy kiểm tra lại vế sau. Liệu từ 'but' có đang làm câu bị thừa liên từ không?"
+  },
+  {
+    "topic": "Complex Conjunctions (Despite, Although)",
+    "level": "B2",
+    "student_input": "Despite of the fierce competition, the small shop survived.",
+    "correct_answer": "Despite the fierce competition, the small shop survived.",
+    "explanation": "Hãy nhìn lại cụm 'Despite of'. Bạn có nhớ sự khác biệt giữa 'Despite' và 'In spite of' không? Từ nào tuyệt đối không đi kèm với 'of'?"
+  },
+  {
+    "topic": "Complex Conjunctions (Despite, Although)",
+    "level": "B2",
+    "student_input": "Even though the price is exorbitant, but I decided to buy the painting.",
+    "correct_answer": "Even though the price is exorbitant, I decided to buy the painting.",
+    "explanation": "Bạn sử dụng từ 'exorbitant' rất chuẩn B2. Tuy nhiên, cấu trúc câu bị lỗi 'thừa'. Khi đã dùng 'Even though' ở đầu, bạn xử lý vế sau như thế nào để không bị lặp lại ý nghĩa đối lập?"
+  },
+  {
+    "topic": "Complex Conjunctions (Despite, Although)",
+    "level": "B2",
+    "student_input": "Despite she speaks four languages, she feels insecure in international meetings.",
+    "correct_answer": "Despite speaking four languages, she feels insecure in international meetings.",
+    "explanation": "Hãy phân tích vế 'she speaks four languages'. Đây là một mệnh đề. 'Despite' có thể đi trực tiếp với mệnh đề không? Bạn có thể chuyển mệnh đề này thành một cụm V-ing để phù hợp với 'Despite' không?"
+  },
+  {
+    "topic": "Complex Conjunctions (Despite, Although)",
+    "level": "B2",
+    "student_input": "Although the lack of evidence, the suspect was detained for questioning.",
+    "correct_answer": "Despite the lack of evidence, the suspect was detained for questioning.",
+    "explanation": "Hãy nhìn vào 'the lack of evidence'. Đây là một cụm danh từ. 'Although' có đi kèm với cụm danh từ không, hay nó cần một mệnh đề đi sau? Bạn hãy tìm một từ thay thế phù hợp."
+  },
+  {
+    "topic": "Complex Conjunctions (Despite, Although)",
+    "level": "B2",
+    "student_input": "Despite he had an injury, he finished the marathon.",
+    "correct_answer": "Although he had an injury, he finished the marathon.",
+    "explanation": "Hãy phân tích vế 'he had an injury'. Đây là một mệnh đề hoàn chỉnh. Bạn nên dùng 'Although' hay 'Despite' để nối với một mệnh đề?"
+  },
+  {
+    "topic": "Complex Conjunctions (Despite, Although)",
+    "level": "B2",
+    "student_input": "In spite of the weather was freezing, they decided to go camping.",
+    "correct_answer": "In spite of the freezing weather, they decided to go camping.",
+    "explanation": "Cụm 'In spite of' yêu cầu một danh từ hoặc V-ing. Tuy nhiên, bạn đang dùng một mệnh đề 'the weather was freezing'. Bạn hãy thử biến nó thành một cụm danh từ (ví dụ: the freezing weather) để khớp với 'In spite of'."
+  },
+  {
+    "topic": "Complex Conjunctions (Despite, Although)",
+    "level": "B2",
+    "student_input": "Even though the complexity of the task, she completed it in record time.",
+    "correct_answer": "Despite the complexity of the task, she completed it in record time.",
+    "explanation": "Hãy chú ý 'the complexity of the task'. Đây là một cụm danh từ. 'Even though' có đi kèm với cụm danh từ không? Bạn hãy dùng một từ nối khác phù hợp hơn."
+  },
+  {
+    "topic": "Complex Conjunctions (Despite, Although)",
+    "level": "B2",
+    "student_input": "Despite of the warnings, he decided to climb the mountain during the storm.",
+    "correct_answer": "Despite the warnings, he decided to climb the mountain during the storm.",
+    "explanation": "Một lần nữa, hãy kiểm tra cụm 'Despite of'. Bạn có nhớ từ nào trong 'Despite' và 'In spite of' là từ không đi cùng với 'of' không?"
+  },
+  {
+    "topic": "Complex Conjunctions (Despite, Although)",
+    "level": "B2",
+    "student_input": "Although it was a small town, but it had all the facilities of a big city.",
+    "correct_answer": "Although it was a small town, it had all the facilities of a big city.",
+    "explanation": "Lỗi 'thừa liên từ'. Bạn đã dùng 'Although' ở đầu câu, vậy vế sau bạn có cần dùng 'but' để thể hiện sự đối lập nữa không?"
+  },
+  {
+    "topic": "Complex Conjunctions (Despite, Although)",
+    "level": "B2",
+    "student_input": "In spite of he was tired, he stayed up late to finish the project.",
+    "correct_answer": "In spite of being tired, he stayed up late to finish the project.",
+    "explanation": "Hãy phân tích vế 'he was tired'. 'In spite of' không đi với mệnh đề. Bạn hãy thử chuyển động từ 'was' thành dạng V-ing ('being') để tạo thành một cụm từ phù hợp."
+  },
+  {
+    "topic": "Complex Conjunctions (Despite, Although)",
+    "level": "B2",
+    "student_input": "Although the heavy rain, the match continued until the end.",
+    "correct_answer": "Despite the heavy rain, the match continued until the end.",
+    "explanation": "Hãy nhìn vào 'the heavy rain'. Đây là một cụm danh từ. 'Although' có đi kèm với cụm danh từ không? Bạn nên dùng từ nối nào để chỉ sự đối lập trong trường hợp này?"
+  },
+  {
+    "topic": "Complex Conjunctions (Despite, Although)",
+    "level": "B2",
+    "student_input": "Despite the plan was flawed, it surprisingly worked.",
+    "correct_answer": "Although the plan was flawed, it surprisingly worked.",
+    "explanation": "Hãy phân tích vế 'the plan was flawed'. Đây là một mệnh đề. 'Despite' có thể đi trực tiếp với một mệnh đề không? Bạn nên dùng 'Although' hay 'Despite'?"
+  },
+  {
+    "topic": "Complex Conjunctions (Despite, Although)",
+    "level": "B2",
+    "student_input": "In spite of the fact that he is rich, but he lives in a tiny apartment.",
+    "correct_answer": "In spite of the fact that he is rich, he lives in a tiny apartment.",
+    "explanation": "Bạn đã dùng 'In spite of the fact that' rất chính xác. Tuy nhiên, hãy nhìn vào vế sau. Liệu từ 'but' có bị thừa khi đã có cụm từ đối lập ở đầu câu không?"
+  },
+  {
+    "topic": "Complex Conjunctions (Despite, Although)",
+    "level": "B2",
+    "student_input": "Even if it rained heavily yesterday, the football match still took place.",
+    "correct_answer": "Even though it rained heavily yesterday, the football match still took place.",
+    "explanation": "Hãy nhìn vào mốc thời gian 'yesterday' và sự việc 'the match still took place'. Việc trời mưa hôm qua là một sự thật đã xảy ra hay chỉ là một giả định 'nếu-thì'? Bạn nên dùng 'Even if' (cho giả định) hay 'Even though' (cho sự thật) trong trường hợp này?"
+  },
+  {
+    "topic": "Complex Conjunctions (Despite, Although)",
+    "level": "B2",
+    "student_input": "Even though I win the lottery next year, I will still continue to work.",
+    "correct_answer": "Even if I win the lottery next year, I will still continue to work.",
+    "explanation": "Hãy phân tích: Việc bạn 'trúng số vào năm tới' đã xảy ra chưa, hay đó là một kịch bản giả định mà bạn đang đặt ra? Đối với một điều kiện giả định trong tương lai, chúng ta dùng 'Even though' hay 'Even if'?"
+  },
+  {
+    "topic": "Complex Conjunctions (Despite, Although)",
+    "level": "B2",
+    "student_input": "The company's profits have decreased, nevertheless, they decided to increase employee bonuses.",
+    "correct_answer": "The company's profits have decreased; nevertheless, they decided to increase employee bonuses.",
+    "explanation": "Bạn dùng 'nevertheless' để tạo sự đối lập rất chuyên nghiệp. Tuy nhiên, hãy nhìn vào dấu câu. 'Nevertheless' là một trạng từ liên kết (conjunctive adverb), không phải là liên từ phụ thuộc. Bạn không thể dùng dấu phẩy để nối hai mệnh đề độc lập. Bạn nên dùng dấu gì (chấm hoặc chấm phẩy) trước 'nevertheless' để câu đúng ngữ pháp?"
+  },
+  {
+    "topic": "Complex Conjunctions (Despite, Although)",
+    "level": "B2",
+    "student_input": "He accepted the job offer, albeit he knew the salary was quite low.",
+    "correct_answer": "He accepted the job offer, albeit knowing the salary was quite low.",
+    "explanation": "Hãy chú ý từ 'albeit'. Khác với 'although', 'albeit' thường không đi kèm với một mệnh đề đầy đủ (có chủ ngữ và động từ). Bạn có thể biến vế 'he knew...' thành một cụm V-ing hoặc một cụm tính từ để phù hợp với 'albeit' không?"
+  },
+  {
+    "topic": "Complex Conjunctions (Despite, Although)",
+    "level": "B2",
+    "student_input": "Even though you don't support me, I will still pursue my dream of becoming an artist.",
+    "correct_answer": "Even if you don't support me, I will still pursue my dream of becoming an artist.",
+    "explanation": "Hãy xem xét sắc thái: Bạn đang nói về một sự thật là 'bạn không ủng hộ tôi' hay bạn đang đặt ra một trường hợp giả định 'cho dù bạn có ủng hộ hay không thì tôi vẫn làm'? Trong trường hợp nhấn mạnh điều kiện, bạn nên dùng 'Even though' hay 'Even if'?"
+  },
+  {
+    "topic": "Complex Conjunctions (Despite, Although)",
+    "level": "B2",
+    "student_input": "The team played exceptionally well, nonetheless they lost the game in the final minute.",
+    "correct_answer": "The team played exceptionally well; nonetheless, they lost the game in the final minute.",
+    "explanation": "Tương tự như với 'nevertheless', từ 'nonetheless' không thể dùng dấu phẩy để nối hai câu độc lập. Bạn hãy thử thay dấu phẩy bằng dấu chấm phẩy hoặc dấu chấm để tạo ra một cấu trúc câu chuẩn mực."
+  },
+  {
+    "topic": "Complex Conjunctions (Despite, Although)",
+    "level": "B2",
+    "student_input": "The project was completed on time, albeit it was slightly over budget.",
+    "correct_answer": "The project was completed on time, albeit slightly over budget.",
+    "explanation": "Hãy nhìn vào vế 'albeit it was slightly over budget'. Như đã nói, 'albeit' thường không đi với một mệnh đề S+V. Bạn hãy thử lược bỏ 'it was' để biến vế này thành một cụm tính từ. Câu văn sẽ trở nên súc tích và tự nhiên hơn nhiều."
+  },
+  {
+    "topic": "Complex Conjunctions (Despite, Although)",
+    "level": "B2",
+    "student_input": "Even if she has a great deal of experience, she still fails to lead the team effectively.",
+    "correct_answer": "Even though she has a great deal of experience, she still fails to lead the team effectively.",
+    "explanation": "Hãy phân tích: Việc cô ấy 'có nhiều kinh nghiệm' là một sự thật hiện hữu (fact). Khi đối lập một sự thật với một kết quả không mong muốn, chúng ta dùng 'Even if' (giả định) hay 'Even though' (sự thật)?"
+  },
+  {
+    "topic": "Complex Conjunctions (Despite, Although)",
+    "level": "B2",
+    "student_input": "The product is high-quality, although it is expensive, however, people still buy it.",
+    "correct_answer": "The product is high-quality; although it is expensive, people still buy it.",
+    "explanation": "Câu này đang bị 'quá tải' liên từ đối lập. Bạn dùng cả 'although' và 'however' trong cùng một mạch ý. Bạn hãy thử chọn một trong hai từ này để tạo sự đối lập, và chú ý dấu câu để câu văn không bị vụn."
+  },
+  {
+    "topic": "Complex Conjunctions (Despite, Although)",
+    "level": "B2",
+    "student_input": "Despite the fact that the evidence was strong, but the jury acquitted the defendant.",
+    "correct_answer": "Despite the fact that the evidence was strong, the jury acquitted the defendant.",
+    "explanation": "Một lỗi kinh điển: Bạn dùng 'Despite' ở đầu và 'but' ở vế sau. Hãy nhớ quy tắc: một câu chỉ cần một liên từ chỉ sự đối lập. Bạn hãy thử bỏ 'but' và xem câu văn có mượt mà hơn không?"
+  },
+  {
+    "topic": "Complex Conjunctions (Despite, Although)",
+    "level": "B2",
+    "student_input": "Even though it may rain tomorrow, we will still go on the picnic.",
+    "correct_answer": "Even if it rains tomorrow, we will still go on the picnic.",
+    "explanation": "Hãy nhìn vào 'it may rain tomorrow'. Đây là một khả năng trong tương lai, một giả thuyết. Bạn nên dùng 'Even though' (dành cho sự thật) hay 'Even if' (dành cho giả thuyết)?"
+  },
+  {
+    "topic": "Complex Conjunctions (Despite, Although)",
+    "level": "B2",
+    "student_input": "The economy is stagnant, nonetheless, some sectors are showing growth.",
+    "correct_answer": "The economy is stagnant; nonetheless, some sectors are showing growth.",
+    "explanation": "Hãy kiểm tra lại dấu câu trước từ 'nonetheless'. Bạn có đang dùng dấu phẩy để nối hai mệnh đề độc lập không? Hãy thay thế bằng dấu chấm phẩy hoặc dấu chấm để đúng quy tắc viết câu tiếng Anh chuyên nghiệp."
+  },
+  {
+    "topic": "Complex Conjunctions (Despite, Although)",
+    "level": "B2",
+    "student_input": "The house is beautiful, albeit it is very small.",
+    "correct_answer": "The house is beautiful, albeit very small.",
+    "explanation": "Hãy nhớ lại đặc điểm của 'albeit'. Nó thường nối một tính từ hoặc một cụm từ, không phải một mệnh đề 'S+V'. Bạn hãy thử lược bỏ 'it is' để câu văn đúng cấu trúc của 'albeit'."
+  },
+  {
+    "topic": "Complex Conjunctions (Despite, Although)",
+    "level": "B2",
+    "student_input": "Even if the boss is angry now, he will eventually forgive us.",
+    "correct_answer": "Even though the boss is angry now, he will eventually forgive us.",
+    "explanation": "Hãy phân tích: 'The boss is angry now' là một sự thật đang diễn ra (Fact). Khi đối lập một sự thật hiện tại với một kết quả tương lai, bạn nên dùng 'Even if' hay 'Even though'?"
+  },
+  {
+    "topic": "Complex Conjunctions (Despite, Although)",
+    "level": "B2",
+    "student_input": "Although he has a PhD in physics, however, he cannot explain this simple concept.",
+    "correct_answer": "Although he has a PhD in physics, he cannot explain this simple concept.",
+    "explanation": "Bạn lại mắc lỗi 'thừa liên từ'. 'Although' và 'however' cùng thực hiện chức năng chỉ sự đối lập. Bạn hãy thử bỏ 'however' và xem câu văn có còn giữ nguyên nghĩa mà lại gọn gàng hơn không?"
+  },
+  {
+    "topic": "Complex Conjunctions (Despite, Although)",
+    "level": "B2",
+    "student_input": "Even though you offer me a million dollars, I will not sell this house.",
+    "correct_answer": "Even if you offer me a million dollars, I will not sell this house.",
+    "explanation": "Hãy suy nghĩ: Hiện tại người đó đã đưa cho bạn một triệu đô la chưa? Không, đây là một giả định về một điều kiện trong tương lai. Vậy bạn nên dùng 'Even though' hay 'Even if'?"
+  },
+  {
+    "topic": "Complex Conjunctions (Despite, Although)",
+    "level": "B2",
+    "student_input": "The results were inconclusive, nonetheless the research provided valuable insights.",
+    "correct_answer": "The results were inconclusive; nonetheless, the research provided valuable insights.",
+    "explanation": "Hãy chú ý đến dấu câu. 'Nonetheless' là một trạng từ chuyển tiếp mạnh, nó cần một dấu ngắt câu rõ ràng (chấm hoặc chấm phẩy) trước nó. Bạn hãy điều chỉnh lại dấu phẩy thành dấu chấm phẩy xem sao."
+  },
+  {
+    "topic": "Complex Conjunctions (Despite, Although)",
+    "level": "B2",
+    "student_input": "The lecture was la’s boring, albeit it was very informative.",
+    "correct_answer": "The lecture was boring, albeit very informative.",
+    "explanation": "Hãy bỏ qua lỗi đánh máy 'la’s'. Hãy tập trung vào 'albeit it was'. Bạn hãy thử lược bỏ 'it was' để 'albeit' nối trực tiếp với tính từ 'informative'. Câu văn sẽ trở nên súc tích và chuẩn B2 hơn."
+  },
+  {
+    "topic": "Complex Conjunctions (Despite, Although)",
+    "level": "B2",
+    "student_input": "Even if he apologized, I would never trust him again.",
+    "correct_answer": "Even if he apologized, I would never trust him again.",
+    "explanation": "Câu này hoàn toàn chính xác. Bạn đã dùng 'Even if' cho một giả định trái ngược với thực tế (loại 2). Thử thách: Nếu anh ấy ĐÃ xin lỗi rồi, nhưng bạn vẫn không tin, bạn sẽ thay 'Even if' bằng từ nào?"
+  },
+  {
+    "topic": "Complex Conjunctions (Despite, Although)",
+    "level": "B2",
+    "student_input": "Despite the fact that he is a billionaire, but he is very unhappy.",
+    "correct_answer": "Despite the fact that he is a billionaire, he is very unhappy.",
+    "explanation": "Hãy nhìn vào 'Despite the fact that' và 'but'. Một lần nữa, bạn đang dùng hai liên từ đối lập trong một câu. Bạn hãy thử loại bỏ 'but' để câu văn mượt mà hơn."
+  },
+  {
+    "topic": "Complex Conjunctions (Despite, Although)",
+    "level": "B2",
+    "student_input": "Even though it may be expensive, I will buy it if I can.",
+    "correct_answer": "Even if it is expensive, I will buy it if I can.",
+    "explanation": "Hãy phân tích: 'It may be expensive' là một khả năng/giả định. Bạn đang dùng 'Even though' (sự thật). Bạn hãy thử thay bằng 'Even if' để thể hiện đúng tính chất giả định của câu."
+  },
+  {
+    "topic": "Complex Conjunctions (Despite, Although)",
+    "level": "B2",
+    "student_input": "The movie was long, nevertheless it kept me engaged until the end.",
+    "correct_answer": "The movie was long; nevertheless, it kept me engaged until the end.",
+    "explanation": " hãy kiểm tra lại dấu câu trước 'nevertheless'. Bạn hãy thay dấu phẩy bằng dấu chấm phẩy để phân tách hai mệnh đề độc lập một cách chính xác."
+  },
+  {
+    "topic": "Complex Conjunctions (Despite, Although)",
+    "level": "B2",
+    "student_input": "The plan was a bit risky, albeit knowing the potential rewards.",
+    "correct_answer": "The plan was a bit risky, albeit with potential rewards.",
+    "explanation": "Bạn dùng 'albeit' để nối. Tuy nhiên, 'albeit knowing' nghe không tự nhiên trong ngữ cảnh này. Bạn hãy thử dùng 'albeit' kết hợp với một cụm danh từ (ví dụ: 'albeit with...') để mô tả sự đánh đổi."
+  },
+  {
+    "topic": "Complex Conjunctions (Despite, Although)",
+    "level": "B2",
+    "student_input": "Even if the weather was great, we stayed indoors all day.",
+    "correct_answer": "Even though the weather was great, we stayed indoors all day.",
+    "explanation": "Hãy nhìn vào 'the weather was great' (thời tiết đã tuyệt vời - một sự thật trong quá khứ). Bạn nên dùng 'Even if' (giả định) hay 'Even though' (sự thật)?"
+  },
+  {
+    "topic": "Complex Conjunctions (Despite, Although)",
+    "level": "B2",
+    "student_input": "Although she is very young, but she has a lot of wisdom.",
+    "correct_answer": "Although she is very young, she has a lot of wisdom.",
+    "explanation": "Lỗi 'Although... but' lặp lại. Bạn hãy thử bỏ 'but' và xem câu văn trở nên tự nhiên hơn như thế nào."
+  },
+  {
+    "topic": "Complex Conjunctions (Despite, Although)",
+    "level": "B2",
+    "student_input": "The evidence was overwhelming, nonetheless the jury acquitted him.",
+    "correct_answer": "The evidence was overwhelming; nonetheless, the jury acquitted him.",
+    "explanation": "Một lần nữa, hãy chú ý dấu câu trước 'nonetheless'. Bạn hãy thay dấu phẩy bằng dấu chấm phẩy để đúng quy tắc viết câu với trạng từ liên kết."
+  },
+  {
+    "topic": "Complex Conjunctions (Despite, Although)",
+    "level": "B2",
+    "student_input": "He is a great leader, albeit he can be a bit stubborn sometimes.",
+    "correct_answer": "He is a great leader, albeit a bit stubborn sometimes.",
+    "explanation": "Hãy nhớ lại quy tắc của 'albeit': không đi với mệnh đề S+V. Bạn hãy thử lược bỏ 'he can be' để biến vế sau thành một cụm tính từ."
+  },
+  {
+    "topic": "Complex Conjunctions (Despite, Although)",
+    "level": "B2",
+    "student_input": "Even though you apologize, I will never forgive you.",
+    "correct_answer": "Even if you apologize, I will never forgive you.",
+    "explanation": "Hãy phân tích: Bạn đã xin lỗi chưa, hay đây là một giả định 'ngay cả khi bạn có xin lỗi đi chăng nữa'? Bạn nên dùng 'Even though' hay 'Even if'?"
+  },
+  {
+    "topic": "Complex Conjunctions (Despite, Although)",
+    "level": "B2",
+    "student_input": "The salary is modest, nevertheless the benefits are excellent.",
+    "correct_answer": "The salary is modest; nevertheless, the benefits are excellent.",
+    "explanation": "Hãy kiểm tra lại dấu câu trước 'nevertheless'. Bạn hãy thay dấu phẩy bằng dấu chấm phẩy để phân tách hai mệnh đề chính một cách chính xác."
+  },
+  {
+    "topic": "Complex Conjunctions (Despite, Although)",
+    "level": "B2",
+    "student_input": "She succeeded in her career, albeit it took her many years of hard work.",
+    "correct_answer": "She succeeded in her career, albeit after many years of hard work.",
+    "explanation": "Hãy nhìn vào 'albeit it took her...'. 'Albeit' không đi với mệnh đề. Bạn hãy thử biến vế này thành một cụm từ (ví dụ: 'albeit after...') để câu văn súc tích hơn."
+  },
+  {
+    "topic": "Complex Conjunctions (Despite, Although)",
+    "level": "B2",
+    "student_input": "Notwithstanding he was exhausted, he continued to climb the mountain.",
+    "correct_answer": "Notwithstanding his exhaustion, he continued to climb the mountain.",
+    "explanation": "Bạn đang sử dụng 'Notwithstanding', một từ nối rất trang trọng. Tuy nhiên, 'Notwithstanding' hoạt động như một giới từ, vì vậy nó yêu cầu một cụm danh từ hoặc V-ing theo sau, chứ không phải một mệnh đề S+V. Bạn có thể biến 'he was exhausted' thành một cụm danh từ để phù hợp với từ này không?"
+  },
+  {
+    "topic": "Complex Conjunctions (Despite, Although)",
+    "level": "B2",
+    "student_input": "The city is vibrant and modern, whereas the countryside is peaceful, but both have their own charm.",
+    "correct_answer": "The city is vibrant and modern, whereas the countryside is peaceful; both have their own charm.",
+    "explanation": "Hãy nhìn vào cấu trúc câu. Bạn đã dùng 'whereas' để tạo sự đối lập giữa thành phố và nông thôn. Khi bạn thêm 'but' ở vế cuối, câu trở nên bị lặp ý đối lập. Bạn hãy thử bỏ 'but' và sử dụng dấu chấm phẩy để kết nối ý cuối cùng một cách mượt mà hơn xem sao."
+  },
+  {
+    "topic": "Complex Conjunctions (Despite, Although)",
+    "level": "B2",
+    "student_input": "Regardless of if it rains or not, the outdoor concert will proceed as planned.",
+    "correct_answer": "Regardless of whether it rains or not, the outdoor concert will proceed as planned.",
+    "explanation": "Cụm 'Regardless of' thường đi kèm với 'whether' khi nói về hai khả năng trái ngược nhau (có hoặc không). Việc dùng 'if' ở đây không sai về nghĩa nhưng không chuẩn về phong cách B2. Bạn hãy thử thay 'if' bằng 'whether' và cảm nhận sự chuyên nghiệp hơn của câu văn."
+  },
+  {
+    "topic": "Complex Conjunctions (Despite, Although)",
+    "level": "B2",
+    "student_input": "While the economy is growing, although inflation is also rising, making life difficult for many.",
+    "correct_answer": "While the economy is growing, inflation is also rising, making life difficult for many.",
+    "explanation": "Bạn đang dùng cả 'While' và 'although' để cùng chỉ một sự đối lập trong một câu. Điều này gây ra hiện tượng thừa liên từ. Bạn chỉ cần một trong hai từ này để thiết lập sự tương phản. Bạn nên bỏ từ nào để câu văn gọn gàng hơn?"
+  },
+  {
+    "topic": "Complex Conjunctions (Despite, Although)",
+    "level": "B2",
+    "student_input": "Despite the fact that the evidence was overwhelming, however, the jury acquitted the defendant.",
+    "correct_answer": "Despite the fact that the evidence was overwhelming, the jury acquitted the defendant.",
+    "explanation": "Hãy phân tích: 'Despite the fact that' đã làm nhiệm vụ thiết lập sự đối lập rồi. Khi bạn thêm 'however' vào vế sau, bạn đang lặp lại chức năng đó một lần nữa. Bạn hãy thử bỏ 'however' để câu văn không bị vụn và lặp ý."
+  },
+  {
+    "topic": "Complex Conjunctions (Despite, Although)",
+    "level": "B2",
+    "student_input": "Even though the company offers a high salary, but the working hours are grueling.",
+    "correct_answer": "Even though the company offers a high salary, the working hours are grueling.",
+    "explanation": "Một lỗi rất phổ biến: 'Even though' và 'but' không bao giờ đứng chung trong một câu. Bạn hãy thử bỏ 'but' và xem câu văn có trở nên tự nhiên và đúng chuẩn ngữ pháp hơn không."
+  },
+  {
+    "topic": "Complex Conjunctions (Despite, Although)",
+    "level": "B2",
+    "student_input": "Although he is a genius, yet he struggles with basic social interactions.",
+    "correct_answer": "Although he is a genius, he struggles with basic social interactions.",
+    "explanation": "Tương tự như trường hợp 'but', từ 'yet' cũng là một liên từ chỉ sự đối lập. Khi bạn đã dùng 'Although' ở đầu câu, việc dùng 'yet' ở vế sau là dư thừa. Bạn hãy thử loại bỏ 'yet' để câu văn mượt mà hơn."
+  },
+  {
+    "topic": "Complex Conjunctions (Despite, Although)",
+    "level": "B2",
+    "student_input": "Even if it is a small mistake, but it could lead to a huge disaster.",
+    "correct_answer": "Even if it is a small mistake, it could lead to a huge disaster.",
+    "explanation": "Hãy nhìn vào sự kết hợp 'Even if... but'. Bạn đang dùng một giả định (Even if) và một liên từ đối lập (but). Bạn hãy thử bỏ 'but' và xem câu văn có còn giữ nguyên nghĩa mà lại đúng cấu trúc hơn không?"
+  },
+  {
+    "topic": "Complex Conjunctions (Despite, Although)",
+    "level": "B2",
+    "student_input": "Notwithstanding the high cost of the project, although the benefits are clear, the board is hesitating.",
+    "correct_answer": "Notwithstanding the high cost of the project, and although the benefits are clear, the board is hesitating.",
+    "explanation": "Câu này đang bị chồng chéo các từ nối. 'Notwithstanding' và 'although' cùng chỉ sự đối lập. Nếu bạn muốn dùng cả hai để đưa ra hai lý do đối lập khác nhau, bạn cần một liên từ như 'and' để kết nối chúng. Bạn hãy thử thêm 'and' vào trước 'although' xem sao."
+  },
+  {
+    "topic": "Complex Conjunctions (Despite, Although)",
+    "level": "B2",
+    "student_input": "In spite of his fame, however, he remains a very humble person.",
+    "correct_answer": "In spite of his fame, he remains a very humble person.",
+    "explanation": "Hãy phân tích: 'In spite of his fame' đã thiết lập sự đối lập. Việc thêm 'however' vào giữa câu làm cho mạch văn bị ngắt quãng và dư thừa. Bạn hãy thử bỏ 'however' để câu văn trôi chảy hơn."
+  },
+  {
+    "topic": "Complex Conjunctions (Despite, Although)",
+    "level": "B2",
+    "student_input": "The results were disappointing, nevertheless, we should not give up.",
+    "correct_answer": "The results were disappointing; nevertheless, we should not give up.",
+    "explanation": "Hãy kiểm tra lại dấu câu trước 'nevertheless'. Vì đây là một trạng từ liên kết nối hai mệnh đề độc lập, bạn không thể chỉ dùng dấu phẩy. Bạn nên dùng dấu gì (chấm hoặc chấm phẩy) để phân tách hai vế này một cách chính xác?"
+  },
+  {
+    "topic": "Complex Conjunctions (Despite, Although)",
+    "level": "B2",
+    "student_input": "He is a great musician, albeit he lacks formal training.",
+    "correct_answer": "He is a great musician, albeit lacking formal training.",
+    "explanation": "Hãy nhớ lại quy tắc của 'albeit': nó không đi với mệnh đề S+V. Bạn hãy thử biến 'he lacks' thành một cụm V-ing ('lacking') để phù hợp với phong cách của 'albeit'."
+  },
+  {
+    "topic": "Complex Conjunctions (Despite, Although)",
+    "level": "B2",
+    "student_input": "Even though the weather was great, however, we stayed indoors to study.",
+    "correct_answer": "Even though the weather was great, we stayed indoors to study.",
+    "explanation": "Lỗi 'thừa liên từ' lặp lại. 'Even though' và 'however' không đứng chung để nối hai vế của một câu. Bạn hãy thử bỏ 'however' và xem câu văn có tự nhiên hơn không."
+  },
+  {
+    "topic": "Complex Conjunctions (Despite, Although)",
+    "level": "B2",
+    "student_input": "Despite he tried his best, but he couldn't win the race.",
+    "correct_answer": "Despite trying his best, he couldn't win the race.",
+    "explanation": "Câu này có hai lỗi. Một là 'Despite' đi với mệnh đề 'he tried' (sai), hai là dùng thêm 'but' ở vế sau (dư thừa). Bạn hãy thử sửa 'Despite he tried' thành 'Despite trying' và bỏ 'but' xem sao."
+  },
+  {
+    "topic": "Complex Conjunctions (Despite, Although)",
+    "level": "B2",
+    "student_input": "Even if the evidence is strong, but the judge might still acquit him.",
+    "correct_answer": "Even if the evidence is strong, the judge might still acquit him.",
+    "explanation": "Hãy phân tích: 'Even if' dùng cho một giả định. 'But' dùng cho sự đối lập. Khi đã có 'Even if' ở đầu, bạn có còn cần 'but' ở vế sau không? Bạn hãy thử loại bỏ nó."
+  },
+  {
+    "topic": "Complex Conjunctions (Despite, Although)",
+    "level": "B2",
+    "student_input": "Although the company is small, nonetheless it has a global reach.",
+    "correct_answer": "Although the company is small, it has a global reach.",
+    "explanation": "Bạn đang dùng cả 'Although' và 'nonetheless' trong cùng một câu. Điều này khiến câu bị lặp ý đối lập. Bạn nên chọn một trong hai từ này để làm từ nối duy nhất. Bạn hãy thử bỏ 'nonetheless' xem sao."
+  },
+  {
+    "topic": "Complex Conjunctions (Despite, Although)",
+    "level": "B2",
+    "student_input": "In spite of the fact that it was midnight, however, the city was still bustling.",
+    "correct_answer": "In spite of the fact that it was midnight, the city was still bustling.",
+    "explanation": "Hãy nhìn vào 'In spite of the fact that' và 'however'. Một lần nữa, lỗi dư thừa liên từ xuất hiện. Bạn hãy thử bỏ 'however' để câu văn mượt mà hơn."
+  },
+  {
+    "topic": "Complex Conjunctions (Despite, Although)",
+    "level": "B2",
+    "student_input": "Even though it is a long journey, but the scenery makes it worthwhile.",
+    "correct_answer": "Even though it is a long journey, the scenery makes it worthwhile.",
+    "explanation": "Lỗi kinh điển 'Even though... but'. Bạn hãy thử bỏ 'but' và xem câu văn có trở nên đúng chuẩn ngữ pháp hơn không."
+  },
+  {
+    "topic": "Complex Conjunctions (Despite, Although)",
+    "level": "B2",
+    "student_input": "Notwithstanding the risks, although the rewards are high, we must be cautious.",
+    "correct_answer": "Notwithstanding the risks, and although the rewards are high, we must be cautious.",
+    "explanation": "Bạn đang dùng hai từ nối đối lập liên tiếp mà không có từ kết nối. Hãy thử thêm 'and' vào trước 'although' để tạo ra một chuỗi lý do đối lập logic hơn."
+  },
+  {
+    "topic": "Complex Conjunctions (Despite, Although)",
+    "level": "B2",
+    "student_input": "Regardless of he is a beginner, he can play the piano beautifully.",
+    "correct_answer": "Regardless of the fact that he is a beginner, he can play the piano beautifully.",
+    "explanation": "Hãy nhìn vào 'Regardless of he is...'. 'Regardless of' là một giới từ, nó không thể đi trực tiếp với mệnh đề S+V. Bạn cần thêm cụm từ nào vào sau 'Regardless of' để có thể giữ lại mệnh đề 'he is a beginner'?"
+  },
+  {
+    "topic": "Complex Conjunctions (Despite, Although)",
+    "level": "B2",
+    "student_input": "While the first option is cheaper, but the second one is more durable.",
+    "correct_answer": "While the first option is cheaper, the second one is more durable.",
+    "explanation": "Hãy chú ý: 'While' ở đây dùng để chỉ sự tương phản (giống 'although'). Khi đã dùng 'While', bạn không dùng 'but' ở vế sau. Bạn hãy thử bỏ 'but' và xem câu văn có tự nhiên hơn không."
+  },
+  {
+    "topic": "Complex Conjunctions (Despite, Although)",
+    "level": "B2",
+    "student_input": "Even though he apologized, but I still can't trust him.",
+    "correct_answer": "Even though he apologized, I still can't trust him.",
+    "explanation": "Lại là lỗi 'Even though... but'. Bạn hãy thử bỏ 'but' để câu văn đúng chuẩn ngữ pháp."
+  },
+  {
+    "topic": "Complex Conjunctions (Despite, Although)",
+    "level": "B2",
+    "student_input": "Despite the fact that he was injured, however, he finished the race.",
+    "correct_answer": "Despite the fact that he was injured, he finished the race.",
+    "explanation": " Hãy phân tích: 'Despite the fact that' đã thiết lập sự đối lập. Việc dùng thêm 'however' khiến câu bị lặp. Bạn hãy thử loại bỏ 'however'."
+  },
+  {
+    "topic": "Complex Conjunctions (Despite, Although)",
+    "level": "B2",
+    "student_input": "Even if the sun shines tomorrow, but we will still stay home.",
+    "correct_answer": "Even if the sun shines tomorrow, we will still stay home.",
+    "explanation": "Hãy nhìn vào 'Even if... but'. Một lần nữa, bạn hãy bỏ 'but' để câu văn không bị dư thừa liên từ."
+  },
+  {
+    "topic": "Complex Conjunctions (Despite, Although)",
+    "level": "B2",
+    "student_input": "The project was successful, nevertheless, it took much longer than expected.",
+    "correct_answer": "The project was successful; nevertheless, it took much longer than expected.",
+    "explanation": "Hãy kiểm tra dấu câu trước 'nevertheless'. Bạn có đang dùng dấu phẩy để nối hai câu độc lập không? Hãy thay bằng dấu chấm phẩy để đúng quy tắc."
+  },
+  {
+    "topic": "Complex Conjunctions (Despite, Although)",
+    "level": "B2",
+    "student_input": "The house is cozy, albeit it is a bit old.",
+    "correct_answer": "The house is cozy, albeit a bit old.",
+    "explanation": "Hãy nhớ lại đặc điểm của 'albeit': không đi với mệnh đề S+V. Bạn hãy thử lược bỏ 'it is' để câu văn súc tích hơn."
+  },
+  {
+    "topic": "Complex Conjunctions (Despite, Although)",
+    "level": "B2",
+    "student_input": "Even though the rain was heavy, but they continued the match.",
+    "correct_answer": "Even though the rain was heavy, they continued the match.",
+    "explanation": "Lỗi 'Even though... but' lặp lại. Bạn hãy thử bỏ 'but' xem sao."
+  },
+  {
+    "topic": "Complex Conjunctions (Despite, Although)",
+    "level": "B2",
+    "student_input": "Regardless of the price, although it's expensive, I'll buy it.",
+    "correct_answer": "Regardless of the price, I'll buy it.",
+    "explanation": "Hãy nhìn vào 'Regardless of the price' và 'although it's expensive'. Hai cụm này nói cùng một ý (giá cao). Việc dùng cả hai khiến câu bị lặp ý. Bạn nên chọn một trong hai cách diễn đạt để câu văn súc tích hơn."
+  },
+  {
+    "topic": "Complex Conjunctions (Despite, Although)",
+    "level": "B2",
+    "student_input": "In spite of the fact that he is rich, however, he is very unhappy.",
+    "correct_answer": "In spite of the fact that he is rich, he is very unhappy.",
+    "explanation": " Hãy phân tích: 'In spite of the fact that' đã làm nhiệm vụ đối lập. Bạn hãy bỏ 'however' để câu văn mượt mà hơn."
+  },
+  {
+    "topic": "Complex Conjunctions (Despite, Although)",
+    "level": "B2",
+    "student_input": "Even if the results are negative, but we will not stop the research.",
+    "correct_answer": "Even if the results are negative, we will not stop the research.",
+    "explanation": "Một lần cuối: 'Even if' và 'but' không đứng chung. Bạn hãy bỏ 'but' và hoàn tất câu này."
+  }
+]

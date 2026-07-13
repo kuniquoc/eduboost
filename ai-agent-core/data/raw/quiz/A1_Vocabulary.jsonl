@@ -1,0 +1,5216 @@
+[
+  {
+    "topic": "Family",
+    "difficulty": -3.0,
+    "context": "Basic family members",
+    "output": {
+      "question": "My father's wife is my ___.",
+      "options": ["sister", "mother", "aunt", "grandmother"],
+      "correct_answer": "mother",
+      "explanation": "Vợ của bố là mẹ (mother)."
+    }
+  },
+  {
+    "topic": "Family",
+    "difficulty": -2.8,
+    "context": "Basic family members",
+    "output": {
+      "question": "My mother's brother is my ___.",
+      "options": ["uncle", "aunt", "cousin", "grandfather"],
+      "correct_answer": "uncle",
+      "explanation": "Anh/em trai của mẹ là chú/bác (uncle)."
+    }
+  },
+  {
+    "topic": "Family",
+    "difficulty": -2.5,
+    "context": "Family relations",
+    "output": {
+      "question": "My father's father is my ___.",
+      "options": ["uncle", "grandfather", "grandmother", "brother"],
+      "correct_answer": "grandfather",
+      "explanation": "Bố của bố là ông nội (grandfather)."
+    }
+  },
+  {
+    "topic": "Family",
+    "difficulty": -2.2,
+    "context": "Family relations",
+    "output": {
+      "question": "My aunt's children are my ___.",
+      "options": ["brothers", "sisters", "cousins", "uncles"],
+      "correct_answer": "cousins",
+      "explanation": "Con của cô/dì/chú/bác là anh chị em họ (cousins)."
+    }
+  },
+  {
+    "topic": "Family",
+    "difficulty": -2.0,
+    "context": "Family relations",
+    "output": {
+      "question": "My mother's sister is my ___.",
+      "options": ["aunt", "uncle", "grandmother", "sister"],
+      "correct_answer": "aunt",
+      "explanation": "Chị/em gái của mẹ là dì/cô (aunt)."
+    }
+  },
+  {
+    "topic": "Family",
+    "difficulty": -1.8,
+    "context": "Sibling relations",
+    "output": {
+      "question": "I am a boy. My parents' daughter is my ___.",
+      "options": ["brother", "sister", "cousin", "aunt"],
+      "correct_answer": "sister",
+      "explanation": "Con gái của bố mẹ là chị/em gái (sister)."
+    }
+  },
+  {
+    "topic": "Personal Info",
+    "difficulty": -3.0,
+    "context": "Asking for name",
+    "output": {
+      "question": "What is your ___? - My name is Nam.",
+      "options": ["age", "job", "name", "address"],
+      "correct_answer": "name",
+      "explanation": "Câu trả lời 'My name is...' cho biết câu hỏi đang hỏi về tên (name)."
+    }
+  },
+  {
+    "topic": "Personal Info",
+    "difficulty": -2.8,
+    "context": "Asking for age",
+    "output": {
+      "question": "How old are you? - I am ten ___ old.",
+      "options": ["days", "months", "years", "weeks"],
+      "correct_answer": "years",
+      "explanation": "Khi hỏi về tuổi (How old), đơn vị thường dùng là năm (years)."
+    }
+  },
+  {
+    "topic": "Personal Info",
+    "difficulty": -2.5,
+    "context": "Asking for origin",
+    "output": {
+      "question": "Where are you from? - I am from ___.",
+      "options": ["English", "Vietnam", "Student", "Teacher"],
+      "correct_answer": "Vietnam",
+      "explanation": "'Where are you from?' hỏi về quốc gia/nơi đến, 'Vietnam' là tên một quốc gia."
+    }
+  },
+  {
+    "topic": "Personal Info",
+    "difficulty": -2.2,
+    "context": "Asking for job",
+    "output": {
+      "question": "What is your ___? - I am a student.",
+      "options": ["name", "job", "age", "hobby"],
+      "correct_answer": "job",
+      "explanation": "Câu trả lời 'I am a student' (Tôi là học sinh) cho biết đang hỏi về nghề nghiệp (job)."
+    }
+  },
+  {
+    "topic": "Personal Info",
+    "difficulty": -2.0,
+    "context": "Asking for address",
+    "output": {
+      "question": "What is your ___? - 123 Main Street.",
+      "options": ["phone number", "name", "address", "age"],
+      "correct_answer": "address",
+      "explanation": "'123 Main Street' là một địa chỉ (address)."
+    }
+  },
+  {
+    "topic": "Personal Info",
+    "difficulty": -1.5,
+    "context": "Asking for phone number",
+    "output": {
+      "question": "What is your ___? - It is 090-123-4567.",
+      "options": ["address", "phone number", "email", "name"],
+      "correct_answer": "phone number",
+      "explanation": "Một dãy số dài thường là số điện thoại (phone number)."
+    }
+  },
+  {
+    "topic": "Colors",
+    "difficulty": -3.0,
+    "context": "Basic colors",
+    "output": {
+      "question": "The sky is ___ on a sunny day.",
+      "options": ["red", "green", "blue", "yellow"],
+      "correct_answer": "blue",
+      "explanation": "Bầu trời ngày nắng thường có màu xanh dương (blue)."
+    }
+  },
+  {
+    "topic": "Colors",
+    "difficulty": -2.8,
+    "context": "Basic colors",
+    "output": {
+      "question": "Grass is usually ___.",
+      "options": ["blue", "red", "green", "pink"],
+      "correct_answer": "green",
+      "explanation": "Cỏ thường có màu xanh lá cây (green)."
+    }
+  },
+  {
+    "topic": "Colors",
+    "difficulty": -2.5,
+    "context": "Basic colors",
+    "output": {
+      "question": "A tomato is ___.",
+      "options": ["yellow", "blue", "red", "purple"],
+      "correct_answer": "red",
+      "explanation": "Quả cà chua thường có màu đỏ (red)."
+    }
+  },
+  {
+    "topic": "Colors",
+    "difficulty": -2.2,
+    "context": "Basic colors",
+    "output": {
+      "question": "Bananas are ___.",
+      "options": ["red", "yellow", "blue", "green"],
+      "correct_answer": "yellow",
+      "explanation": "Chuối chín có màu vàng (yellow)."
+    }
+  },
+  {
+    "topic": "Colors",
+    "difficulty": -1.8,
+    "context": "Mixed colors",
+    "output": {
+      "question": "When you mix red and white, you get ___.",
+      "options": ["purple", "orange", "pink", "brown"],
+      "correct_answer": "pink",
+      "explanation": "Màu đỏ pha với màu trắng tạo thành màu hồng (pink)."
+    }
+  },
+  {
+    "topic": "Colors",
+    "difficulty": -1.5,
+    "context": "Common colors",
+    "output": {
+      "question": "Chocolate is usually ___.",
+      "options": ["brown", "white", "blue", "yellow"],
+      "correct_answer": "brown",
+      "explanation": "Sô-cô-la thường có màu nâu (brown)."
+    }
+  },
+  {
+    "topic": "Numbers",
+    "difficulty": -3.0,
+    "context": "Counting",
+    "output": {
+      "question": "One, two, ___, four, five.",
+      "options": ["six", "three", "seven", "eight"],
+      "correct_answer": "three",
+      "explanation": "Thứ tự đếm số từ 1 đến 5: 1, 2, 3, 4, 5."
+    }
+  },
+  {
+    "topic": "Numbers",
+    "difficulty": -2.8,
+    "context": "Simple math",
+    "output": {
+      "question": "Two plus three is ___.",
+      "options": ["four", "five", "six", "seven"],
+      "correct_answer": "five",
+      "explanation": "2 + 3 = 5 (five)."
+    }
+  },
+  {
+    "topic": "Numbers",
+    "difficulty": -2.5,
+    "context": "Simple math",
+    "output": {
+      "question": "Ten minus four is ___.",
+      "options": ["six", "seven", "eight", "five"],
+      "correct_answer": "six",
+      "explanation": "10 - 4 = 6 (six)."
+    }
+  },
+  {
+    "topic": "Numbers",
+    "difficulty": -2.2,
+    "context": "Counting",
+    "output": {
+      "question": "A week has ___ days.",
+      "options": ["five", "six", "seven", "eight"],
+      "correct_answer": "seven",
+      "explanation": "Một tuần có 7 ngày (seven)."
+    }
+  },
+  {
+    "topic": "Numbers",
+    "difficulty": -2.0,
+    "context": "Counting",
+    "output": {
+      "question": "A year has ___ months.",
+      "options": ["ten", "eleven", "twelve", "thirteen"],
+      "correct_answer": "twelve",
+      "explanation": "Một năm có 12 tháng (twelve)."
+    }
+  },
+  {
+    "topic": "Numbers",
+    "difficulty": -1.8,
+    "context": "Simple math",
+    "output": {
+      "question": "Five times two is ___.",
+      "options": ["seven", "eight", "nine", "ten"],
+      "correct_answer": "ten",
+      "explanation": "5 x 2 = 10 (ten)."
+    }
+  },
+  {
+    "topic": "Time",
+    "difficulty": -3.0,
+    "context": "Clock time",
+    "output": {
+      "question": "What time is it? - It is eight ___.",
+      "options": ["hour", "minute", "o'clock", "time"],
+      "correct_answer": "o'clock",
+      "explanation": "Dùng 'o'clock' khi nói giờ đúng."
+    }
+  },
+  {
+    "topic": "Time",
+    "difficulty": -2.8,
+    "context": "Parts of the day",
+    "output": {
+      "question": "I have breakfast in the ___.",
+      "options": ["afternoon", "evening", "morning", "night"],
+      "correct_answer": "morning",
+      "explanation": "Bữa sáng (breakfast) diễn ra vào buổi sáng (morning)."
+    }
+  },
+  {
+    "topic": "Time",
+    "difficulty": -2.5,
+    "context": "Parts of the day",
+    "output": {
+      "question": "I go to sleep at ___.",
+      "options": ["morning", "noon", "night", "afternoon"],
+      "correct_answer": "night",
+      "explanation": "Đi ngủ thường diễn ra vào ban đêm (night)."
+    }
+  },
+  {
+    "topic": "Time",
+    "difficulty": -2.2,
+    "context": "Parts of the day",
+    "output": {
+      "question": "I have lunch in the ___.",
+      "options": ["morning", "afternoon", "evening", "night"],
+      "correct_answer": "afternoon",
+      "explanation": "Bữa trưa (lunch) thường diễn ra vào buổi trưa hoặc đầu buổi chiều (afternoon)."
+    }
+  },
+  {
+    "topic": "Time",
+    "difficulty": -2.0,
+    "context": "Parts of the day",
+    "output": {
+      "question": "I have dinner in the ___.",
+      "options": ["morning", "afternoon", "evening", "noon"],
+      "correct_answer": "evening",
+      "explanation": "Bữa tối (dinner) diễn ra vào buổi tối (evening)."
+    }
+  },
+  {
+    "topic": "Time",
+    "difficulty": -1.7,
+    "context": "Days of the week",
+    "output": {
+      "question": "The day after Monday is ___.",
+      "options": ["Sunday", "Tuesday", "Wednesday", "Thursday"],
+      "correct_answer": "Tuesday",
+      "explanation": "Ngày sau thứ Hai là thứ Ba (Tuesday)."
+    }
+  },
+  {
+    "topic": "Time",
+    "difficulty": -1.5,
+    "context": "Days of the week",
+    "output": {
+      "question": "The day before Saturday is ___.",
+      "options": ["Thursday", "Friday", "Sunday", "Wednesday"],
+      "correct_answer": "Friday",
+      "explanation": "Ngày trước thứ Bảy là thứ Sáu (Friday)."
+    }
+  },
+  {
+    "topic": "Family",
+    "difficulty": -2.8,
+    "context": "Family relations",
+    "output": {
+      "question": "My father's daughter is my ___.",
+      "options": ["brother", "sister", "aunt", "cousin"],
+      "correct_answer": "sister",
+      "explanation": "Con gái của bố là chị/em gái (sister)."
+    }
+  },
+  {
+    "topic": "Family",
+    "difficulty": -2.5,
+    "context": "Family relations",
+    "output": {
+      "question": "My mother's mother is my ___.",
+      "options": ["grandfather", "grandmother", "aunt", "uncle"],
+      "correct_answer": "grandmother",
+      "explanation": "Mẹ của mẹ là bà ngoại (grandmother)."
+    }
+  },
+  {
+    "topic": "Family",
+    "difficulty": -2.2,
+    "context": "Family relations",
+    "output": {
+      "question": "My father's brother is my ___.",
+      "options": ["uncle", "aunt", "cousin", "grandfather"],
+      "correct_answer": "uncle",
+      "explanation": "Anh/em trai của bố là chú/bác (uncle)."
+    }
+  },
+  {
+    "topic": "Family",
+    "difficulty": -2.0,
+    "context": "Family relations",
+    "output": {
+      "question": "My mother's sister is my ___.",
+      "options": ["aunt", "uncle", "grandmother", "sister"],
+      "correct_answer": "aunt",
+      "explanation": "Chị/em gái của mẹ là dì/cô (aunt)."
+    }
+  },
+  {
+    "topic": "Family",
+    "difficulty": -1.8,
+    "context": "Family relations",
+    "output": {
+      "question": "My uncle's son is my ___.",
+      "options": ["brother", "cousin", "uncle", "nephew"],
+      "correct_answer": "cousin",
+      "explanation": "Con trai của chú/bác là anh em họ (cousin)."
+    }
+  },
+  {
+    "topic": "Family",
+    "difficulty": -1.5,
+    "context": "Family relations",
+    "output": {
+      "question": "My parents' son is my ___.",
+      "options": ["sister", "brother", "cousin", "uncle"],
+      "correct_answer": "brother",
+      "explanation": "Con trai của bố mẹ là anh/em trai (brother)."
+    }
+  },
+  {
+    "topic": "Personal Info",
+    "difficulty": -3.0,
+    "context": "Asking for name",
+    "output": {
+      "question": "Nice to ___ you!",
+      "options": ["see", "meet", "look", "watch"],
+      "correct_answer": "meet",
+      "explanation": "Cụm từ giao tiếp cơ bản: 'Nice to meet you' (Rất vui được gặp bạn)."
+    }
+  },
+  {
+    "topic": "Personal Info",
+    "difficulty": -2.8,
+    "context": "Asking for origin",
+    "output": {
+      "question": "I am from Japan. I am ___.",
+      "options": ["Japan", "Japanese", "Japanish", "Japanian"],
+      "correct_answer": "Japanese",
+      "explanation": "Người đến từ Japan được gọi là Japanese."
+    }
+  },
+  {
+    "topic": "Personal Info",
+    "difficulty": -2.5,
+    "context": "Asking for origin",
+    "output": {
+      "question": "I am from the USA. I am ___.",
+      "options": ["USA", "American", "Usian", "English"],
+      "correct_answer": "American",
+      "explanation": "Người đến từ USA được gọi là American."
+    }
+  },
+  {
+    "topic": "Personal Info",
+    "difficulty": -2.2,
+    "context": "Asking for origin",
+    "output": {
+      "question": "I am from England. I am ___.",
+      "options": ["English", "England", "Englisher", "Englisian"],
+      "correct_answer": "English",
+      "explanation": "Người đến từ England được gọi là English."
+    }
+  },
+  {
+    "topic": "Personal Info",
+    "difficulty": -2.0,
+    "context": "Asking for origin",
+    "output": {
+      "question": "I am from China. I am ___.",
+      "options": ["China", "Chinese", "Chinish", "Chinian"],
+      "correct_answer": "Chinese",
+      "explanation": "Người đến từ China được gọi là Chinese."
+    }
+  },
+  {
+    "topic": "Personal Info",
+    "difficulty": -1.7,
+    "context": "Asking for origin",
+    "output": {
+      "question": "I am from France. I am ___.",
+      "options": ["France", "French", "Frencian", "Frencish"],
+      "correct_answer": "French",
+      "explanation": "Người đến từ France được gọi là French."
+    }
+  },
+  {
+    "topic": "Colors",
+    "difficulty": -3.0,
+    "context": "Basic colors",
+    "output": {
+      "question": "A lemon is usually ___.",
+      "options": ["blue", "red", "yellow", "purple"],
+      "correct_answer": "yellow",
+      "explanation": "Quả chanh vàng có màu yellow."
+    }
+  },
+  {
+    "topic": "Colors",
+    "difficulty": -2.8,
+    "context": "Basic colors",
+    "output": {
+      "question": "The color of a carrot is ___.",
+      "options": ["blue", "orange", "pink", "green"],
+      "correct_answer": "orange",
+      "explanation": "Củ cà rốt có màu cam (orange)."
+    }
+  },
+  {
+    "topic": "Colors",
+    "difficulty": -2.5,
+    "context": "Basic colors",
+    "output": {
+      "question": "Snow is ___.",
+      "options": ["black", "red", "white", "blue"],
+      "correct_answer": "white",
+      "explanation": "Tuyết có màu trắng (white)."
+    }
+  },
+  {
+    "topic": "Colors",
+    "difficulty": -2.2,
+    "context": "Basic colors",
+    "output": {
+      "question": "The night sky is ___.",
+      "options": ["white", "black", "yellow", "pink"],
+      "correct_answer": "black",
+      "explanation": "Bầu trời đêm thường có màu đen (black)."
+    }
+  },
+  {
+    "topic": "Colors",
+    "difficulty": -2.0,
+    "context": "Common colors",
+    "output": {
+      "question": "A grape can be ___ or green.",
+      "options": ["red", "purple", "yellow", "orange"],
+      "correct_answer": "purple",
+      "explanation": "Nho thường có màu tím (purple) hoặc xanh lá."
+    }
+  },
+  {
+    "topic": "Colors",
+    "difficulty": -1.8,
+    "context": "Common colors",
+    "output": {
+      "question": "The color of a pig is usually ___.",
+      "options": ["blue", "green", "pink", "purple"],
+      "correct_answer": "pink",
+      "explanation": "Con lợn thường được mô tả có màu hồng (pink)."
+    }
+  },
+  {
+    "topic": "Numbers",
+    "difficulty": -3.0,
+    "context": "Counting",
+    "output": {
+      "question": "Ten, eleven, ___, thirteen.",
+      "options": ["twelve", "twenty", "fourteen", "nine"],
+      "correct_answer": "twelve",
+      "explanation": "Thứ tự đếm: 10, 11, 12, 13."
+    }
+  },
+  {
+    "topic": "Numbers",
+    "difficulty": -2.8,
+    "context": "Counting",
+    "output": {
+      "question": "Twenty, thirty, ___, fifty.",
+      "options": ["forty", "fourteen", "sixty", "thirty-one"],
+      "correct_answer": "forty",
+      "explanation": "Đếm theo hàng chục: 20, 30, 40, 50."
+    }
+  },
+  {
+    "topic": "Numbers",
+    "difficulty": -2.5,
+    "context": "Simple math",
+    "output": {
+      "question": "Eight plus eight is ___.",
+      "options": ["fifteen", "sixteen", "seventeen", "eighteen"],
+      "correct_answer": "sixteen",
+      "explanation": "8 + 8 = 16 (sixteen)."
+    }
+  },
+  {
+    "topic": "Numbers",
+    "difficulty": -2.2,
+    "context": "Simple math",
+    "output": {
+      "question": "Twenty minus ten is ___.",
+      "options": ["five", "ten", "fifteen", "twenty"],
+      "correct_answer": "ten",
+      "explanation": "20 - 10 = 10 (ten)."
+    }
+  },
+  {
+    "topic": "Numbers",
+    "difficulty": -2.0,
+    "context": "Counting",
+    "output": {
+      "question": "How many fingers do you have on one hand? - I have ___.",
+      "options": ["four", "five", "six", "ten"],
+      "correct_answer": "five",
+      "explanation": "Một bàn tay thường có 5 ngón (five)."
+    }
+  },
+  {
+    "topic": "Numbers",
+    "difficulty": -1.8,
+    "context": "Counting",
+    "output": {
+      "question": "How many legs does a spider have? - It has ___.",
+      "options": ["six", "seven", "eight", "ten"],
+      "correct_answer": "eight",
+      "explanation": "Con nhện có 8 chân (eight)."
+    }
+  },
+  {
+    "topic": "Time",
+    "difficulty": -3.0,
+    "context": "Clock time",
+    "output": {
+      "question": "What time is it? - It is seven ___.",
+      "options": ["hour", "minute", "o'clock", "time"],
+      "correct_answer": "o'clock",
+      "explanation": "Dùng 'o'clock' cho giờ đúng."
+    }
+  },
+  {
+    "topic": "Time",
+    "difficulty": -2.8,
+    "context": "Parts of the day",
+    "output": {
+      "question": "I go to school in the ___.",
+      "options": ["night", "morning", "evening", "midnight"],
+      "correct_answer": "morning",
+      "explanation": "Đi học thường vào buổi sáng (morning)."
+    }
+  },
+  {
+    "topic": "Time",
+    "difficulty": -2.5,
+    "context": "Parts of the day",
+    "output": {
+      "question": "I watch TV in the ___.",
+      "options": ["morning", "afternoon", "evening", "noon"],
+      "correct_answer": "evening",
+      "explanation": "Xem TV thường là hoạt động buổi tối (evening)."
+    }
+  },
+  {
+    "topic": "Time",
+    "difficulty": -2.2,
+    "context": "Days of the week",
+    "output": {
+      "question": "The first day of the school week is ___.",
+      "options": ["Sunday", "Monday", "Friday", "Saturday"],
+      "correct_answer": "Monday",
+      "explanation": "Ngày đầu tuần đi học thường là thứ Hai (Monday)."
+    }
+  },
+  {
+    "topic": "Time",
+    "difficulty": -2.0,
+    "context": "Days of the week",
+    "output": {
+      "question": "Saturday and ___ are the weekend.",
+      "options": ["Monday", "Friday", "Sunday", "Thursday"],
+      "correct_answer": "Sunday",
+      "explanation": "Thứ Bảy và Chủ Nhật là cuối tuần."
+    }
+  },
+  {
+    "topic": "Time",
+    "difficulty": -1.7,
+    "context": "Days of the week",
+    "output": {
+      "question": "The day after Wednesday is ___.",
+      "options": ["Tuesday", "Thursday", "Friday", "Saturday"],
+      "correct_answer": "Thursday",
+      "explanation": "Ngày sau thứ Tư là thứ Năm (Thursday)."
+    }
+  },
+  {
+    "topic": "Family",
+    "difficulty": -2.8,
+    "context": "Family relations",
+    "output": {
+      "question": "My father's sister is my ___.",
+      "options": ["uncle", "aunt", "grandmother", "cousin"],
+      "correct_answer": "aunt",
+      "explanation": "Chị/em gái của bố là cô/dì (aunt)."
+    }
+  },
+  {
+    "topic": "Family",
+    "difficulty": -2.5,
+    "context": "Family relations",
+    "output": {
+      "question": "My mother's father is my ___.",
+      "options": ["grandfather", "grandmother", "uncle", "brother"],
+      "correct_answer": "grandfather",
+      "explanation": "Bố của mẹ là ông ngoại (grandfather)."
+    }
+  },
+  {
+    "topic": "Family",
+    "difficulty": -2.2,
+    "context": "Family relations",
+    "output": {
+      "question": "My parents' children are my ___.",
+      "options": ["uncles", "aunts", "siblings", "cousins"],
+      "correct_answer": "siblings",
+      "explanation": "Con của bố mẹ (bao gồm anh chị em) được gọi chung là siblings."
+    }
+  },
+  {
+    "topic": "Family",
+    "difficulty": -2.0,
+    "context": "Family relations",
+    "output": {
+      "question": "My aunt's daughter is my ___.",
+      "options": ["sister", "cousin", "aunt", "grandmother"],
+      "correct_answer": "cousin",
+      "explanation": "Con gái của cô/dì/chú/bác là anh chị em họ (cousin)."
+    }
+  },
+  {
+    "topic": "Family",
+    "difficulty": -1.8,
+    "context": "Family relations",
+    "output": {
+      "question": "My father and mother are my ___.",
+      "options": ["children", "grandparents", "parents", "siblings"],
+      "correct_answer": "parents",
+      "explanation": "Bố và mẹ gọi chung là phụ huynh/cha mẹ (parents)."
+    }
+  },
+  {
+    "topic": "Family",
+    "difficulty": -1.5,
+    "context": "Family relations",
+    "output": {
+      "question": "My brother's daughter is my ___.",
+      "options": ["nephew", "niece", "cousin", "sister"],
+      "correct_answer": "niece",
+      "explanation": "Con gái của anh/em trai gọi là cháu gái (niece)."
+    }
+  },
+  {
+    "topic": "Personal Info",
+    "difficulty": -3.0,
+    "context": "Daily greeting",
+    "output": {
+      "question": "How are you? - I am ___ , thank you.",
+      "options": ["bad", "fine", "sad", "angry"],
+      "correct_answer": "fine",
+      "explanation": "Câu trả lời phổ biến cho 'How are you?' là 'I am fine' (Tôi khỏe)."
+    }
+  },
+  {
+    "topic": "Personal Info",
+    "difficulty": -2.7,
+    "context": "Asking for origin",
+    "output": {
+      "question": "I am from Korea. I am ___.",
+      "options": ["Korea", "Korean", "Koreanish", "Koreanian"],
+      "correct_answer": "Korean",
+      "explanation": "Người đến từ Korea được gọi là Korean."
+    }
+  },
+  {
+    "topic": "Personal Info",
+    "difficulty": -2.4,
+    "context": "Asking for origin",
+    "output": {
+      "question": "I am from Thailand. I am ___.",
+      "options": ["Thailand", "Thai", "Thailander", "Thailish"],
+      "correct_answer": "Thai",
+      "explanation": "Người đến từ Thailand được gọi là Thai."
+    }
+  },
+  {
+    "topic": "Personal Info",
+    "difficulty": -2.0,
+    "context": "Asking for origin",
+    "output": {
+      "question": "I am from Spain. I am ___.",
+      "options": ["Spain", "Spanish", "Spainish", "Spainian"],
+      "correct_answer": "Spanish",
+      "explanation": "Người đến từ Spain được gọi là Spanish."
+    }
+  },
+  {
+    "topic": "Personal Info",
+    "difficulty": -1.8,
+    "context": "Asking for origin",
+    "output": {
+      "question": "I am from Canada. I am ___.",
+      "options": ["Canada", "Canadian", "Canadish", "Canadain"],
+      "correct_answer": "Canadian",
+      "explanation": "Người đến từ Canada được gọi là Canadian."
+    }
+  },
+  {
+    "topic": "Personal Info",
+    "difficulty": -1.5,
+    "context": "Asking for origin",
+    "output": {
+      "question": "I am from Australia. I am ___.",
+      "options": ["Australia", "Australian", "Australish", "Australianish"],
+      "correct_answer": "Australian",
+      "explanation": "Người đến từ Australia được gọi là Australian."
+    }
+  },
+  {
+    "topic": "Common Objects",
+    "difficulty": -3.0,
+    "context": "School supplies",
+    "output": {
+      "question": "I use a ___ to write in my notebook.",
+      "options": ["pen", "bag", "chair", "table"],
+      "correct_answer": "pen",
+      "explanation": "Dùng bút (pen) để viết."
+    }
+  },
+  {
+    "topic": "Common Objects",
+    "difficulty": -2.8,
+    "context": "School supplies",
+    "output": {
+      "question": "I read a ___ to get information.",
+      "options": ["pencil", "book", "ruler", "eraser"],
+      "correct_answer": "book",
+      "explanation": "Đọc sách (book) để lấy thông tin."
+    }
+  },
+  {
+    "topic": "Common Objects",
+    "difficulty": -2.5,
+    "context": "School supplies",
+    "output": {
+      "question": "I put my books and pens in my ___.",
+      "options": ["desk", "bag", "chair", "window"],
+      "correct_answer": "bag",
+      "explanation": "Cho sách và bút vào cặp (bag)."
+    }
+  },
+  {
+    "topic": "Common Objects",
+    "difficulty": -2.2,
+    "context": "School supplies",
+    "output": {
+      "question": "I use an ___ to remove mistakes in my drawing.",
+      "options": ["eraser", "ruler", "pencil", "pen"],
+      "correct_answer": "eraser",
+      "explanation": "Dùng tẩy (eraser) để xóa lỗi sai."
+    }
+  },
+  {
+    "topic": "Common Objects",
+    "difficulty": -2.0,
+    "context": "School supplies",
+    "output": {
+      "question": "I use a ___ to draw a straight line.",
+      "options": ["pen", "ruler", "book", "bag"],
+      "correct_answer": "ruler",
+      "explanation": "Dùng thước kẻ (ruler) để vẽ đường thẳng."
+    }
+  },
+  {
+    "topic": "Common Objects",
+    "difficulty": -1.8,
+    "context": "School supplies",
+    "output": {
+      "question": "I write my lessons in a ___.",
+      "options": ["notebook", "pencil", "desk", "chair"],
+      "correct_answer": "notebook",
+      "explanation": "Viết bài học vào vở (notebook)."
+    }
+  },
+  {
+    "topic": "Common Objects",
+    "difficulty": -2.8,
+    "context": "Furniture",
+    "output": {
+      "question": "I sit on a ___ to study.",
+      "options": ["table", "chair", "door", "wall"],
+      "correct_answer": "chair",
+      "explanation": "Ngồi trên ghế (chair) để học."
+    }
+  },
+  {
+    "topic": "Common Objects",
+    "difficulty": -2.5,
+    "context": "Furniture",
+    "output": {
+      "question": "I put my computer on the ___.",
+      "options": ["chair", "desk", "floor", "window"],
+      "correct_answer": "desk",
+      "explanation": "Đặt máy tính trên bàn làm việc/bàn học (desk)."
+    }
+  },
+  {
+    "topic": "Common Objects",
+    "difficulty": -2.2,
+    "context": "Furniture",
+    "output": {
+      "question": "I open the ___ to go out of the room.",
+      "options": ["window", "door", "wall", "floor"],
+      "correct_answer": "door",
+      "explanation": "Mở cửa (door) để đi ra ngoài."
+    }
+  },
+  {
+    "topic": "Common Objects",
+    "difficulty": -2.0,
+    "context": "Furniture",
+    "output": {
+      "question": "I look out of the ___ to see the garden.",
+      "options": ["door", "window", "floor", "ceiling"],
+      "correct_answer": "window",
+      "explanation": "Nhìn ra ngoài cửa sổ (window) để thấy vườn."
+    }
+  },
+  {
+    "topic": "Common Objects",
+    "difficulty": -1.8,
+    "context": "Electronics",
+    "output": {
+      "question": "I use a ___ to call my friends.",
+      "options": ["computer", "phone", "television", "radio"],
+      "correct_answer": "phone",
+      "explanation": "Dùng điện thoại (phone) để gọi bạn."
+    }
+  },
+  {
+    "topic": "Common Objects",
+    "difficulty": -1.5,
+    "context": "Electronics",
+    "output": {
+      "question": "I use a ___ to surf the internet.",
+      "options": ["phone", "computer", "book", "pencil"],
+      "correct_answer": "computer",
+      "explanation": "Dùng máy tính (computer) để lướt internet."
+    }
+  },
+  {
+    "topic": "Common Objects",
+    "difficulty": -1.3,
+    "context": "Electronics",
+    "output": {
+      "question": "I watch cartoons on the ___.",
+      "options": ["radio", "television", "computer", "phone"],
+      "correct_answer": "television",
+      "explanation": "Xem hoạt hình trên tivi (television)."
+    }
+  },
+  {
+    "topic": "Common Places",
+    "difficulty": -3.0,
+    "context": "Education",
+    "output": {
+      "question": "I go to ___ to learn and study.",
+      "options": ["park", "school", "cinema", "hospital"],
+      "correct_answer": "school",
+      "explanation": "Đến trường (school) để học tập."
+    }
+  },
+  {
+    "topic": "Common Places",
+    "difficulty": -2.8,
+    "context": "Housing",
+    "output": {
+      "question": "I live with my family in a ___.",
+      "options": ["school", "house", "cinema", "hospital"],
+      "correct_answer": "house",
+      "explanation": "Sống cùng gia đình trong một ngôi nhà (house)."
+    }
+  },
+  {
+    "topic": "Common Places",
+    "difficulty": -2.5,
+    "context": "Health",
+    "output": {
+      "question": "I go to the ___ when I am sick.",
+      "options": ["park", "hospital", "cinema", "school"],
+      "correct_answer": "hospital",
+      "explanation": "Đến bệnh viện (hospital) khi bị ốm."
+    }
+  },
+  {
+    "topic": "Common Places",
+    "difficulty": -2.2,
+    "context": "Entertainment",
+    "output": {
+      "question": "I go to the ___ to watch a new movie.",
+      "options": ["library", "cinema", "hospital", "park"],
+      "correct_answer": "cinema",
+      "explanation": "Đến rạp chiếu phim (cinema) để xem phim."
+    }
+  },
+  {
+    "topic": "Common Places",
+    "difficulty": -2.0,
+    "context": "Shopping",
+    "output": {
+      "question": "I go to the ___ to buy food and milk.",
+      "options": ["cinema", "supermarket", "school", "hospital"],
+      "correct_answer": "supermarket",
+      "explanation": "Đến siêu thị (supermarket) để mua thực phẩm."
+    }
+  },
+  {
+    "topic": "Common Places",
+    "difficulty": -1.8,
+    "context": "Recreation",
+    "output": {
+      "question": "I go to the ___ to play and run.",
+      "options": ["hospital", "school", "park", "cinema"],
+      "correct_answer": "park",
+      "explanation": "Đến công viên (park) để chơi và chạy bộ."
+    }
+  },
+  {
+    "topic": "Common Places",
+    "difficulty": -1.5,
+    "context": "Knowledge",
+    "output": {
+      "question": "I go to the ___ to borrow books.",
+      "options": ["school", "library", "supermarket", "park"],
+      "correct_answer": "library",
+      "explanation": "Đến thư viện (library) để mượn sách."
+    }
+  },
+  {
+    "topic": "Common Places",
+    "difficulty": -1.3,
+    "context": "Transport",
+    "output": {
+      "question": "I wait for the bus at the ___.",
+      "options": ["station", "cinema", "school", "hospital"],
+      "correct_answer": "station",
+      "explanation": "Đợi xe buýt tại trạm/nhà ga (station)."
+    }
+  },
+  {
+    "topic": "Common Objects",
+    "difficulty": -3.0,
+    "context": "Kitchenware",
+    "output": {
+      "question": "I drink water from a ___.",
+      "options": ["plate", "glass", "fork", "spoon"],
+      "correct_answer": "glass",
+      "explanation": "Uống nước từ cái ly (glass)."
+    }
+  },
+  {
+    "topic": "Common Objects",
+    "difficulty": -2.8,
+    "context": "Kitchenware",
+    "output": {
+      "question": "I eat soup with a ___.",
+      "options": ["fork", "knife", "spoon", "glass"],
+      "correct_answer": "spoon",
+      "explanation": "Ăn súp bằng cái thìa (spoon)."
+    }
+  },
+  {
+    "topic": "Common Objects",
+    "difficulty": -2.5,
+    "context": "Kitchenware",
+    "output": {
+      "question": "I use a ___ to cut meat.",
+      "options": ["spoon", "fork", "knife", "glass"],
+      "correct_answer": "knife",
+      "explanation": "Dùng dao (knife) để cắt thịt."
+    }
+  },
+  {
+    "topic": "Common Objects",
+    "difficulty": -2.2,
+    "context": "Kitchenware",
+    "output": {
+      "question": "I put my food on a ___.",
+      "options": ["glass", "plate", "spoon", "knife"],
+      "correct_answer": "plate",
+      "explanation": "Đặt thức ăn lên đĩa (plate)."
+    }
+  },
+  {
+    "topic": "Common Objects",
+    "difficulty": -2.0,
+    "context": "Clothing",
+    "output": {
+      "question": "I wear a ___ on my head.",
+      "options": ["shoe", "sock", "hat", "shirt"],
+      "correct_answer": "hat",
+      "explanation": "Đội mũ (hat) trên đầu."
+    }
+  },
+  {
+    "topic": "Common Objects",
+    "difficulty": -1.8,
+    "context": "Clothing",
+    "output": {
+      "question": "I wear ___ on my feet.",
+      "options": ["hats", "shoes", "shirts", "gloves"],
+      "correct_answer": "shoes",
+      "explanation": "Đi giày (shoes) dưới chân."
+    }
+  },
+  {
+    "topic": "Common Objects",
+    "difficulty": -1.5,
+    "context": "Clothing",
+    "output": {
+      "question": "I wear a ___ when it is cold.",
+      "options": ["T-shirt", "jacket", "hat", "shoe"],
+      "correct_answer": "jacket",
+      "explanation": "Mặc áo khoác (jacket) khi trời lạnh."
+    }
+  },
+  {
+    "topic": "Common Objects",
+    "difficulty": -1.3,
+    "context": "Clothing",
+    "output": {
+      "question": "I wear a ___ to go to school.",
+      "options": ["pillow", "uniform", "blanket", "towel"],
+      "correct_answer": "uniform",
+      "explanation": "Mặc đồng phục (uniform) đi học."
+    }
+  },
+  {
+    "topic": "Common Places",
+    "difficulty": -3.0,
+    "context": "City",
+    "output": {
+      "question": "I go to the ___ to buy bread.",
+      "options": ["bakery", "hospital", "cinema", "park"],
+      "correct_answer": "bakery",
+      "explanation": "Đến tiệm bánh (bakery) để mua bánh mì."
+    }
+  },
+  {
+    "topic": "Common Places",
+    "difficulty": -2.8,
+    "context": "City",
+    "output": {
+      "question": "I go to the ___ to buy medicine.",
+      "options": ["bakery", "pharmacy", "cinema", "school"],
+      "correct_answer": "pharmacy",
+      "explanation": "Đến nhà thuốc (pharmacy) để mua thuốc."
+    }
+  },
+  {
+    "topic": "Common Places",
+    "difficulty": -2.5,
+    "context": "City",
+    "output": {
+      "question": "I go to the ___ to send a letter.",
+      "options": ["post office", "hospital", "park", "school"],
+      "correct_answer": "post office",
+      "explanation": "Đến bưu điện (post office) để gửi thư."
+    }
+  },
+  {
+    "topic": "Common Places",
+    "difficulty": -2.2,
+    "context": "City",
+    "output": {
+      "question": "I go to the ___ to eat dinner.",
+      "options": ["library", "restaurant", "hospital", "school"],
+      "correct_answer": "restaurant",
+      "explanation": "Đến nhà hàng (restaurant) để ăn tối."
+    }
+  },
+  {
+    "topic": "Common Places",
+    "difficulty": -2.0,
+    "context": "City",
+    "output": {
+      "question": "I go to the ___ to see animals.",
+      "options": ["cinema", "zoo", "school", "pharmacy"],
+      "correct_answer": "zoo",
+      "explanation": "Đến vườn thú (zoo) để xem động vật."
+    }
+  },
+  {
+    "topic": "Common Places",
+    "difficulty": -1.8,
+    "context": "City",
+    "output": {
+      "question": "I go to the ___ to pray.",
+      "options": ["church", "supermarket", "cinema", "park"],
+      "correct_answer": "church",
+      "explanation": "Đến nhà thờ (church) để cầu nguyện."
+    }
+  },
+  {
+    "topic": "Common Objects",
+    "difficulty": -3.0,
+    "context": "Bedroom",
+    "output": {
+      "question": "I sleep on a ___.",
+      "options": ["table", "bed", "chair", "desk"],
+      "correct_answer": "bed",
+      "explanation": "Ngủ trên giường (bed)."
+    }
+  },
+  {
+    "topic": "Common Objects",
+    "difficulty": -2.8,
+    "context": "Bedroom",
+    "output": {
+      "question": "I put my head on a ___ when I sleep.",
+      "options": ["blanket", "pillow", "sheet", "bed"],
+      "correct_answer": "pillow",
+      "explanation": "Đặt đầu lên gối (pillow) khi ngủ."
+    }
+  },
+  {
+    "topic": "Common Objects",
+    "difficulty": -2.5,
+    "context": "Bedroom",
+    "output": {
+      "question": "I use a ___ to keep warm at night.",
+      "options": ["pillow", "blanket", "curtain", "rug"],
+      "correct_answer": "blanket",
+      "explanation": "Dùng chăn (blanket) để giữ ấm."
+    }
+  },
+  {
+    "topic": "Common Objects",
+    "difficulty": -2.2,
+    "context": "Bathroom",
+    "output": {
+      "question": "I use a ___ to wash my face.",
+      "options": ["towel", "blanket", "pillow", "bed"],
+      "correct_answer": "towel",
+      "explanation": "Dùng khăn tắm/khăn mặt (towel) để lau mặt."
+    }
+  },
+  {
+    "topic": "Common Objects",
+    "difficulty": -2.0,
+    "context": "Bathroom",
+    "output": {
+      "question": "I brush my teeth with a ___.",
+      "options": ["comb", "toothbrush", "soap", "towel"],
+      "correct_answer": "toothbrush",
+      "explanation": "Đánh răng bằng bàn chải (toothbrush)."
+    }
+  },
+  {
+    "topic": "Common Objects",
+    "difficulty": -1.8,
+    "context": "Bathroom",
+    "output": {
+      "question": "I use ___ to wash my hands.",
+      "options": ["shampoo", "soap", "toothpaste", "oil"],
+      "correct_answer": "soap",
+      "explanation": "Dùng xà phòng (soap) để rửa tay."
+    }
+  },
+  {
+    "topic": "Common Objects",
+    "difficulty": -1.5,
+    "context": "Bathroom",
+    "output": {
+      "question": "I use a ___ to make my hair neat.",
+      "options": ["toothbrush", "comb", "towel", "soap"],
+      "correct_answer": "comb",
+      "explanation": "Dùng lược (comb) để chải tóc."
+    }
+  },
+  {
+    "topic": "Common Places",
+    "difficulty": -3.0,
+    "context": "Nature",
+    "output": {
+      "question": "I go to the ___ to swim in the sea.",
+    "options": ["park", "beach", "school", "hospital"],
+    "correct_answer": "beach",
+    "explanation": "Đến bãi biển (beach) để bơi ở biển."
+    }
+  },
+  {
+    "topic": "Common Places",
+    "difficulty": -2.8,
+    "context": "Nature",
+    "output": {
+      "question": "I go to the ___ to see many tall trees.",
+    "options": ["beach", "forest", "city", "market"],
+    "correct_answer": "forest",
+    "explanation": "Đến rừng (forest) để thấy nhiều cây cao."
+    }
+  },
+  {
+    "topic": "Common Places",
+    "difficulty": -2.5,
+    "context": "City",
+    "output": {
+      "question": "I go to the ___ to buy fresh vegetables.",
+    "options": ["cinema", "market", "library", "hospital"],
+    "correct_answer": "market",
+    "explanation": "Đến chợ (market) để mua rau tươi."
+    }
+  },
+  {
+    "topic": "Common Places",
+    "difficulty": -2.2,
+    "context": "City",
+    "output": {
+      "question": "I go to the ___ to catch a plane.",
+    "options": ["station", "airport", "bus stop", "port"],
+    "correct_answer": "airport",
+    "explanation": "Đến sân bay (airport) để bắt máy bay."
+    }
+  },
+  {
+    "topic": "Common Places",
+    "difficulty": -2.0,
+    "context": "City",
+    "output": {
+      "question": "I go to the ___ to catch a train.",
+    "options": ["airport", "railway station", "bus stop", "port"],
+    "correct_answer": "railway station",
+    "explanation": "Đến nhà ga xe lửa (railway station) để bắt tàu."
+    }
+  },
+  {
+    "topic": "Common Places",
+    "difficulty": -1.8,
+    "context": "City",
+    "output": {
+      "question": "I go to the ___ to catch a bus.",
+    "options": ["airport", "bus stop", "station", "port"],
+    "correct_answer": "bus stop",
+    "explanation": "Đợi xe buýt tại điểm dừng xe buýt (bus stop)."
+    }
+  },
+  {
+    "topic": "Common Objects",
+    "difficulty": -3.0,
+    "context": "School",
+    "output": {
+      "question": "I write on a ___.",
+      "options": ["chair", "board", "window", "door"],
+      "correct_answer": "board",
+      "explanation": "Viết lên bảng (board)."
+    }
+  },
+  {
+    "topic": "Common Objects",
+    "difficulty": -2.8,
+    "context": "School",
+    "output": {
+      "question": "I use a ___ to sharpen my pencil.",
+      "options": ["ruler", "sharpener", "eraser", "pen"],
+      "correct_answer": "sharpener",
+      "explanation": "Dùng gọt bút chì (sharpener) để chuốt bút chì."
+    }
+  },
+  {
+    "topic": "Common Objects",
+    "difficulty": -2.5,
+    "context": "School",
+    "output": {
+      "question": "I use a ___ to glue two papers together.",
+      "options": ["sharpener", "glue stick", "eraser", "ruler"],
+      "correct_answer": "glue stick",
+      "explanation": "Dùng hồ dán (glue stick) để dán giấy."
+    }
+  },
+  {
+    "topic": "Common Objects",
+    "difficulty": -2.2,
+    "context": "School",
+    "output": {
+      "question": "I use a ___ to cut paper.",
+      "options": ["ruler", "scissors", "pencil", "pen"],
+      "correct_answer": "scissors",
+      "explanation": "Dùng kéo (scissors) để cắt giấy."
+    }
+  },
+  {
+    "topic": "Common Objects",
+    "difficulty": -2.0,
+    "context": "School",
+    "output": {
+      "question": "I keep my pencils in a ___.",
+      "options": ["pencil case", "book", "bag", "chair"],
+      "correct_answer": "pencil case",
+      "explanation": "Để bút chì trong hộp bút (pencil case)."
+    }
+  },
+  {
+    "topic": "Common Objects",
+    "difficulty": -1.8,
+    "context": "School",
+    "output": {
+      "question": "I put my books on a ___.",
+      "options": ["pillow", "bookshelf", "window", "door"],
+      "correct_answer": "bookshelf",
+      "explanation": "Đặt sách lên kệ sách (bookshelf)."
+    }
+  },
+  {
+    "topic": "Common Objects",
+    "difficulty": -3.0,
+    "context": "Bedroom",
+    "output": {
+      "question": "I put my clothes in the ___.",
+      "options": ["bed", "wardrobe", "pillow", "curtain"],
+      "correct_answer": "wardrobe",
+      "explanation": "Quần áo được để trong tủ quần áo (wardrobe)."
+    }
+  },
+  {
+    "topic": "Common Objects",
+    "difficulty": -2.8,
+    "context": "Living room",
+    "output": {
+      "question": "I sit on the ___ to watch TV.",
+      "options": ["table", "sofa", "desk", "shelf"],
+      "correct_answer": "sofa",
+      "explanation": "Ghế sofa (sofa) là nơi thường dùng để ngồi xem TV."
+    }
+  },
+  {
+    "topic": "Common Objects",
+    "difficulty": -2.5,
+    "context": "Living room",
+    "output": {
+      "question": "I turn on the ___ when it is dark.",
+      "options": ["window", "lamp", "door", "floor"],
+      "correct_answer": "lamp",
+      "explanation": "Bật đèn (lamp) khi trời tối."
+    }
+  },
+  {
+    "topic": "Common Objects",
+    "difficulty": -2.2,
+    "context": "Living room",
+    "output": {
+      "question": "I use a ___ to change the TV channels.",
+      "options": ["phone", "remote control", "computer", "radio"],
+      "correct_answer": "remote control",
+      "explanation": "Dùng điều khiển từ xa (remote control) để chuyển kênh TV."
+    }
+  },
+  {
+    "topic": "Common Objects",
+    "difficulty": -2.0,
+    "context": "Kitchen",
+    "output": {
+      "question": "I keep milk and eggs in the ___.",
+      "options": ["oven", "fridge", "sink", "dishwasher"],
+      "correct_answer": "fridge",
+      "explanation": "Sữa và trứng được bảo quản trong tủ lạnh (fridge)."
+    }
+  },
+  {
+    "topic": "Common Objects",
+    "difficulty": -1.8,
+    "context": "Kitchen",
+    "output": {
+      "question": "I use a ___ to heat up my food quickly.",
+      "options": ["fridge", "microwave", "sink", "cupboard"],
+      "correct_answer": "microwave",
+      "explanation": "Dùng lò vi sóng (microwave) để hâm nóng thức ăn nhanh."
+    }
+  },
+  {
+    "topic": "Common Objects",
+    "difficulty": -1.5,
+    "context": "Kitchen",
+    "output": {
+      "question": "I wash the dishes in the ___.",
+      "options": ["fridge", "oven", "sink", "table"],
+      "correct_answer": "sink",
+      "explanation": "Rửa bát đĩa trong bồn rửa (sink)."
+    }
+  },
+  {
+    "topic": "Common Objects",
+    "difficulty": -2.5,
+    "context": "General items",
+    "output": {
+      "question": "I carry my money and cards in a ___.",
+      "options": ["bag", "wallet", "pocket", "box"],
+      "correct_answer": "wallet",
+      "explanation": "Tiền và thẻ được để trong ví (wallet)."
+    }
+  },
+  {
+    "topic": "Common Objects",
+    "difficulty": -2.0,
+    "context": "General items",
+    "output": {
+      "question": "I use an ___ when it rains.",
+      "options": ["hat", "umbrella", "coat", "bag"],
+      "correct_answer": "umbrella",
+      "explanation": "Dùng ô/dù (umbrella) khi trời mưa."
+    }
+  },
+  {
+    "topic": "Common Objects",
+    "difficulty": -1.7,
+    "context": "General items",
+    "output": {
+      "question": "I use ___ to open the door.",
+      "options": ["coins", "keys", "pens", "rings"],
+      "correct_answer": "keys",
+      "explanation": "Dùng chìa khóa (keys) để mở cửa."
+    }
+  },
+  {
+    "topic": "Common Places",
+    "difficulty": -3.0,
+    "context": "City",
+    "output": {
+      "question": "I go to the ___ to save my money.",
+      "options": ["school", "bank", "cinema", "park"],
+      "correct_answer": "bank",
+      "explanation": "Đến ngân hàng (bank) để gửi/tiết kiệm tiền."
+    }
+  },
+  {
+    "topic": "Common Places",
+    "difficulty": -2.8,
+    "context": "City",
+    "output": {
+      "question": "I go to the ___ to see old paintings and history.",
+      "options": ["supermarket", "museum", "pharmacy", "bakery"],
+      "correct_answer": "museum",
+      "explanation": "Đến bảo tàng (museum) để xem tranh và lịch sử."
+    }
+  },
+  {
+    "topic": "Common Places",
+    "difficulty": -2.5,
+    "context": "City",
+    "output": {
+      "question": "I go to the ___ to exercise and lift weights.",
+      "options": ["library", "gym", "cinema", "hospital"],
+      "correct_answer": "gym",
+      "explanation": "Đến phòng gym (gym) để tập thể dục."
+    }
+  },
+  {
+    "topic": "Common Places",
+    "difficulty": -2.2,
+    "context": "City",
+    "output": {
+      "question": "I go to the ___ to buy a cake.",
+      "options": ["pharmacy", "bakery", "bank", "museum"],
+      "correct_answer": "bakery",
+      "explanation": "Đến tiệm bánh (bakery) để mua bánh."
+    }
+  },
+  {
+    "topic": "Common Places",
+    "difficulty": -2.0,
+    "context": "City",
+    "output": {
+      "question": "I go to the ___ to buy medicine.",
+      "options": ["bakery", "pharmacy", "gym", "bank"],
+      "correct_answer": "pharmacy",
+      "explanation": "Đến nhà thuốc (pharmacy) để mua thuốc."
+    }
+  },
+  {
+    "topic": "Common Places",
+    "difficulty": -1.8,
+    "context": "City",
+    "output": {
+      "question": "I go to the ___ to report a crime.",
+      "options": ["school", "police station", "library", "cinema"],
+      "correct_answer": "police station",
+      "explanation": "Đến đồn cảnh sát (police station) để báo cáo tội phạm."
+    }
+  },
+  {
+    "topic": "Common Places",
+    "difficulty": -1.5,
+    "context": "Nature",
+    "output": {
+      "question": "I go to the ___ to see high peaks and snow.",
+      "options": ["beach", "mountain", "forest", "park"],
+      "correct_answer": "mountain",
+      "explanation": "Đến núi (mountain) để thấy các đỉnh cao và tuyết."
+    }
+  },
+  {
+    "topic": "Common Places",
+    "difficulty": -1.3,
+    "context": "Nature",
+    "output": {
+      "question": "I go to the ___ to see a river and many trees.",
+      "options": ["beach", "forest", "cinema", "bank"],
+      "correct_answer": "forest",
+      "explanation": "Đến rừng (forest) để thấy sông và nhiều cây."
+    }
+  },
+  {
+    "topic": "Common Objects",
+    "difficulty": -3.0,
+    "context": "Bathroom",
+    "output": {
+      "question": "I use a ___ to dry my body after a shower.",
+      "options": ["blanket", "towel", "curtain", "pillow"],
+      "correct_answer": "towel",
+      "explanation": "Dùng khăn (towel) để lau khô người."
+    }
+  },
+  {
+    "topic": "Common Objects",
+    "difficulty": -2.8,
+    "context": "Bathroom",
+    "output": {
+      "question": "I use ___ to wash my hair.",
+      "options": ["soap", "shampoo", "toothpaste", "oil"],
+      "correct_answer": "shampoo",
+      "explanation": "Dùng dầu gội (shampoo) để gội đầu."
+    }
+  },
+  {
+    "topic": "Common Objects",
+    "difficulty": -2.5,
+    "context": "Bathroom",
+    "output": {
+      "question": "I use ___ to clean my teeth.",
+      "options": ["soap", "toothpaste", "shampoo", "oil"],
+      "correct_answer": "toothpaste",
+      "explanation": "Dùng kem đánh răng (toothpaste) để làm sạch răng."
+    }
+  },
+  {
+    "topic": "Common Objects",
+    "difficulty": -2.2,
+    "context": "Bathroom",
+    "output": {
+      "question": "I look at myself in the ___.",
+      "options": ["window", "mirror", "door", "wall"],
+      "correct_answer": "mirror",
+      "explanation": "Nhìn bản thân trong gương (mirror)."
+    }
+  },
+  {
+    "topic": "Common Objects",
+    "difficulty": -2.0,
+    "context": "General items",
+    "output": {
+      "question": "I use a ___ to tell the time.",
+      "options": ["phone", "clock", "computer", "radio"],
+      "correct_answer": "clock",
+      "explanation": "Dùng đồng hồ (clock) để xem giờ."
+    }
+  },
+  {
+    "topic": "Common Objects",
+    "difficulty": -1.8,
+    "context": "General items",
+    "output": {
+      "question": "I put my waste in the ___.",
+      "options": ["box", "bin", "bag", "desk"],
+      "correct_answer": "bin",
+      "explanation": "Để rác vào thùng rác (bin)."
+    }
+  },
+  {
+    "topic": "Common Objects",
+    "difficulty": -1.5,
+    "context": "General items",
+    "output": {
+      "question": "I use a ___ to keep my hair neat.",
+      "options": ["toothbrush", "comb", "towel", "soap"],
+      "correct_answer": "comb",
+      "explanation": "Dùng lược (comb) để chải tóc."
+    }
+  },
+  {
+    "topic": "Common Places",
+    "difficulty": -3.0,
+    "context": "City",
+    "output": {
+      "question": "I go to the ___ to buy stamps.",
+      "options": ["bank", "post office", "museum", "gym"],
+      "correct_answer": "post office",
+      "explanation": "Đến bưu điện (post office) để mua tem."
+    }
+  },
+  {
+    "topic": "Common Places",
+    "difficulty": -2.8,
+    "context": "City",
+    "output": {
+      "question": "I go to the ___ to watch a play or a concert.",
+      "options": ["cinema", "theater", "library", "park"],
+      "correct_answer": "theater",
+      "explanation": "Đến nhà hát (theater) để xem kịch hoặc hòa nhạc."
+    }
+  },
+  {
+    "topic": "Common Places",
+    "difficulty": -2.5,
+    "context": "City",
+    "output": {
+      "question": "I go to the ___ to buy fresh fish and meat.",
+      "options": ["bakery", "market", "pharmacy", "bank"],
+      "correct_answer": "market",
+      "explanation": "Đến chợ (market) để mua cá và thịt tươi."
+    }
+  },
+  {
+    "topic": "Common Places",
+    "difficulty": -2.2,
+    "context": "City",
+    "output": {
+      "question": "I go to the ___ to catch a ferry to an island.",
+      "options": ["airport", "port", "station", "bus stop"],
+      "correct_answer": "port",
+      "explanation": "Đến cảng (port) để bắt phà ra đảo."
+    }
+  },
+  {
+    "topic": "Common Places",
+    "difficulty": -2.0,
+    "context": "Nature",
+    "output": {
+      "question": "I go to the ___ to walk on the sand.",
+      "options": ["forest", "beach", "mountain", "park"],
+      "correct_answer": "beach",
+      "explanation": "Đến bãi biển (beach) để đi trên cát."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -3.0,
+    "context": "Size - Opposites",
+    "output": {
+      "question": "An elephant is ___, but a mouse is small.",
+      "options": ["short", "big", "thin", "long"],
+      "correct_answer": "big",
+      "explanation": "Đối lập với 'small' (nhỏ) là 'big' (lớn)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -2.8,
+    "context": "Size - Opposites",
+    "output": {
+      "question": "A giraffe is ___, but a cat is short.",
+      "options": ["fat", "tall", "big", "long"],
+      "correct_answer": "tall",
+      "explanation": "Đối lập với 'short' (thấp) là 'tall' (cao)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -2.5,
+    "context": "Weight - Opposites",
+    "output": {
+      "question": "A whale is ___, but a bird is light.",
+      "options": ["big", "heavy", "fat", "tall"],
+      "correct_answer": "heavy",
+      "explanation": "Đối lập với 'light' (nhẹ) là 'heavy' (nặng)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -2.2,
+    "context": "Build - Opposites",
+    "output": {
+      "question": "He is ___ , but his brother is thin.",
+      "options": ["tall", "fat", "big", "long"],
+      "correct_answer": "fat",
+      "explanation": "Đối lập với 'thin' (gầy) là 'fat' (mập)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -2.0,
+    "context": "Length - Opposites",
+    "output": {
+      "question": "A snake is ___ , but a worm is short.",
+      "options": ["tall", "long", "big", "heavy"],
+      "correct_answer": "long",
+      "explanation": "Đối lập với 'short' (ngắn) là 'long' (dài)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -1.8,
+    "context": "Speed - Opposites",
+    "output": {
+      "question": "A rabbit is ___ , but a turtle is slow.",
+      "options": ["quick", "fast", "tall", "big"],
+      "correct_answer": "fast",
+      "explanation": "Đối lập với 'slow' (chậm) là 'fast' (nhanh)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -3.0,
+    "context": "Temperature - Opposites",
+    "output": {
+      "question": "Fire is ___ , but ice is cold.",
+      "options": ["warm", "hot", "big", "red"],
+      "correct_answer": "hot",
+      "explanation": "Đối lập với 'cold' (lạnh) là 'hot' (nóng)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -2.8,
+    "context": "Temperature - Opposites",
+    "output": {
+      "question": "The sun is hot, but the snow is ___.",
+      "options": ["cool", "cold", "wet", "white"],
+      "correct_answer": "cold",
+      "explanation": "Đối lập với 'hot' (nóng) là 'cold' (lạnh)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -2.5,
+    "context": "Emotions - Opposites",
+    "output": {
+      "question": "I win a game, so I am ___ .",
+      "options": ["sad", "angry", "happy", "tired"],
+      "correct_answer": "happy",
+      "explanation": "Khi chiến thắng, cảm xúc là vui vẻ (happy)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -2.2,
+    "context": "Emotions - Opposites",
+    "output": {
+      "question": "I lose my toy, so I am ___ .",
+      "options": ["happy", "sad", "angry", "excited"],
+      "correct_answer": "sad",
+      "explanation": "Khi mất đồ chơi, cảm xúc là buồn (sad)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -2.0,
+    "context": "Emotions - Opposites",
+    "output": {
+      "question": "He shouts because he is ___ .",
+      "options": ["happy", "sad", "angry", "tired"],
+      "correct_answer": "angry",
+      "explanation": "Hành động la hét thường do tức giận (angry)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -1.8,
+    "context": "Physical state",
+    "output": {
+      "question": "I work all day, so I am ___ now.",
+      "options": ["happy", "tired", "angry", "fast"],
+      "correct_answer": "tired",
+      "explanation": "Làm việc cả ngày dẫn đến mệt mỏi (tired)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -3.0,
+    "context": "Quality - Opposites",
+    "output": {
+      "question": "This cake is ___ . I love it!",
+      "options": ["bad", "good", "ugly", "difficult"],
+      "correct_answer": "good",
+      "explanation": "Yêu thích một thứ gì đó vì nó ngon/tốt (good)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -2.8,
+    "context": "Quality - Opposites",
+    "output": {
+      "question": "The food is ___ . I don't like it.",
+      "options": ["good", "bad", "sweet", "big"],
+      "correct_answer": "bad",
+      "explanation": "Không thích vì đồ ăn dở/tệ (bad)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -2.5,
+    "context": "Appearance - Opposites",
+    "output": {
+      "question": "The flower is ___ . It looks wonderful.",
+      "options": ["ugly", "beautiful", "big", "small"],
+      "correct_answer": "beautiful",
+      "explanation": "Nhìn tuyệt vời nghĩa là đẹp (beautiful)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -2.2,
+    "context": "Appearance - Opposites",
+    "output": {
+      "question": "The monster in the movie is ___ .",
+      "options": ["beautiful", "ugly", "happy", "small"],
+      "correct_answer": "ugly",
+      "explanation": "Quái vật trong phim thường được mô tả là xấu xí (ugly)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -2.0,
+    "context": "Difficulty - Opposites",
+    "output": {
+      "question": "1 + 1 is ___ . Any child can do it.",
+      "options": ["difficult", "hard", "easy", "big"],
+      "correct_answer": "easy",
+      "explanation": "Việc trẻ em nào cũng làm được là dễ (easy)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -1.8,
+    "context": "Difficulty - Opposites",
+    "output": {
+      "question": "This puzzle is very ___ . I can't finish it.",
+      "options": ["easy", "difficult", "small", "good"],
+      "correct_answer": "difficult",
+      "explanation": "Không thể hoàn thành nghĩa là khó (difficult)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -3.0,
+    "context": "Taste",
+    "output": {
+      "question": "Sugar is ___ .",
+      "options": ["salty", "sour", "sweet", "bitter"],
+      "correct_answer": "sweet",
+      "explanation": "Đường có vị ngọt (sweet)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -2.8,
+    "context": "Taste",
+    "output": {
+      "question": "Lemon is ___ .",
+      "options": ["sweet", "sour", "salty", "bitter"],
+      "correct_answer": "sour",
+      "explanation": "Chanh có vị chua (sour)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -2.5,
+    "context": "Taste",
+    "output": {
+      "question": "Sea water is ___ .",
+      "options": ["sweet", "sour", "salty", "bitter"],
+      "correct_answer": "salty",
+      "explanation": "Nước biển có vị mặn (salty)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -2.2,
+    "context": "Appearance",
+    "output": {
+      "question": "The street is ___ . There are no cars.",
+      "options": ["noisy", "quiet", "busy", "big"],
+      "correct_answer": "quiet",
+      "explanation": "Không có xe cộ nghĩa là yên tĩnh (quiet)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -2.0,
+    "context": "Appearance",
+    "output": {
+      "question": "The market is very ___ . There are many people.",
+      "options": ["quiet", "noisy", "small", "cold"],
+      "correct_answer": "noisy",
+      "explanation": "Nhiều người thường gây ra ồn ào (noisy)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -1.8,
+    "context": "Appearance",
+    "output": {
+      "question": "The city is very ___ . There are many buildings.",
+      "options": ["small", "busy", "quiet", "slow"],
+      "correct_answer": "busy",
+      "explanation": "Nhiều tòa nhà và hoạt động nghĩa là nhộn nhịp/bận rộn (busy)."
+    }
+  },
+  {
+    "topic": "Common Objects",
+    "difficulty": -3.0,
+    "context": "Living room",
+    "output": {
+      "question": "I put the curtains on the ___.",
+      "options": ["floor", "window", "door", "wall"],
+      "correct_answer": "window",
+      "explanation": "Rèm cửa (curtains) được treo ở cửa sổ (window)."
+    }
+  },
+  {
+    "topic": "Common Objects",
+    "difficulty": -2.8,
+    "context": "Living room",
+    "output": {
+      "question": "I put the rug on the ___.",
+      "options": ["wall", "floor", "ceiling", "window"],
+      "correct_answer": "floor",
+      "explanation": "Thảm (rug) được trải trên sàn nhà (floor)."
+    }
+  },
+  {
+    "topic": "Common Objects",
+    "difficulty": -2.5,
+    "context": "Living room",
+    "output": {
+      "question": "I put my books on the ___.",
+      "options": ["floor", "shelf", "door", "window"],
+      "correct_answer": "shelf",
+      "explanation": "Sách thường được để trên kệ (shelf)."
+    }
+  },
+  {
+    "topic": "Common Objects",
+    "difficulty": -2.2,
+    "context": "General",
+    "output": {
+      "question": "I use a ___ to keep my money.",
+      "options": ["bag", "wallet", "box", "pocket"],
+      "correct_answer": "wallet",
+      "explanation": "Dùng ví (wallet) để giữ tiền."
+    }
+  },
+  {
+    "topic": "Common Objects",
+    "difficulty": -2.0,
+    "context": "General",
+    "output": {
+      "question": "I use a ___ to wash my hair.",
+      "options": ["soap", "shampoo", "toothpaste", "towel"],
+      "correct_answer": "shampoo",
+      "explanation": "Dùng dầu gội (shampoo) để gội đầu."
+    }
+  },
+  {
+    "topic": "Common Objects",
+    "difficulty": -1.8,
+    "context": "General",
+    "output": {
+      "question": "I use a ___ to clean my teeth.",
+      "options": ["comb", "toothbrush", "soap", "towel"],
+      "correct_answer": "toothbrush",
+      "explanation": "Dùng bàn chải (toothbrush) để đánh răng."
+    }
+  },
+  {
+    "topic": "Common Places",
+    "difficulty": -3.0,
+    "context": "City",
+    "output": {
+      "question": "I go to the ___ to buy stamps.",
+      "options": ["bank", "post office", "museum", "gym"],
+      "correct_answer": "post office",
+      "explanation": "Mua tem ở bưu điện (post office)."
+    }
+  },
+  {
+    "topic": "Common Places",
+    "difficulty": -2.8,
+    "context": "City",
+    "output": {
+      "question": "I go to the ___ to see a movie.",
+      "options": ["library", "cinema", "hospital", "school"],
+      "correct_answer": "cinema",
+      "explanation": "Xem phim ở rạp chiếu phim (cinema)."
+    }
+  },
+  {
+    "topic": "Common Places",
+    "difficulty": -2.5,
+    "context": "City",
+    "output": {
+      "question": "I go to the ___ to borrow books.",
+      "options": ["school", "library", "supermarket", "park"],
+      "correct_answer": "library",
+      "explanation": "Mượn sách ở thư viện (library)."
+    }
+  },
+  {
+    "topic": "Common Places",
+    "difficulty": -2.2,
+    "context": "City",
+    "output": {
+      "question": "I go to the ___ to exercise.",
+      "options": ["cinema", "gym", "bakery", "bank"],
+      "correct_answer": "gym",
+      "explanation": "Tập thể dục ở phòng gym (gym)."
+    }
+  },
+  {
+    "topic": "Common Places",
+    "difficulty": -2.0,
+    "context": "City",
+    "output": {
+      "question": "I go to the ___ to buy bread.",
+      "options": ["pharmacy", "bakery", "museum", "gym"],
+      "correct_answer": "bakery",
+      "explanation": "Mua bánh mì ở tiệm bánh (bakery)."
+    }
+  },
+  {
+    "topic": "Common Places",
+    "difficulty": -1.8,
+    "context": "City",
+    "output": {
+      "question": "I go to the ___ to buy medicine.",
+      "options": ["bakery", "pharmacy", "bank", "cinema"],
+      "correct_answer": "pharmacy",
+      "explanation": "Mua thuốc ở nhà thuốc (pharmacy)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -3.0,
+    "context": "Size",
+    "output": {
+      "question": "An ant is ___ , but an elephant is big.",
+      "options": ["tall", "small", "long", "fat"],
+      "correct_answer": "small",
+      "explanation": "Đối lập với 'big' (lớn) là 'small' (nhỏ)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -2.8,
+    "context": "Height",
+    "output": {
+      "question": "A cat is ___ , but a giraffe is tall.",
+      "options": ["small", "short", "thin", "short"],
+      "correct_answer": "short",
+      "explanation": "Đối lập với 'tall' (cao) là 'short' (thấp)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -2.5,
+    "context": "Temperature",
+    "output": {
+      "question": "Ice is ___ , but fire is hot.",
+      "options": ["cool", "cold", "wet", "white"],
+      "correct_answer": "cold",
+      "explanation": "Đối lập với 'hot' (nóng) là 'cold' (lạnh)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -2.2,
+    "context": "Emotion",
+    "output": {
+      "question": "I lose my pen, so I am ___ .",
+      "options": ["happy", "sad", "angry", "tired"],
+      "correct_answer": "sad",
+      "explanation": "Mất đồ khiến ta cảm thấy buồn (sad)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -2.0,
+    "context": "Quality",
+    "output": {
+      "question": "The movie is ___ . I don't like it.",
+      "options": ["good", "bad", "beautiful", "easy"],
+      "correct_answer": "bad",
+      "explanation": "Không thích vì bộ phim tệ/dở (bad)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -1.8,
+    "context": "Speed",
+    "output": {
+      "question": "A snail is ___ , but a car is fast.",
+      "options": ["slow", "short", "small", "bad"],
+      "correct_answer": "slow",
+      "explanation": "Đối lập với 'fast' (nhanh) là 'slow' (chậm)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -1.5,
+    "context": "Appearance",
+    "output": {
+      "question": "The monster is ___ . It is not beautiful.",
+      "options": ["big", "ugly", "happy", "sad"],
+      "correct_answer": "ugly",
+      "explanation": "Không đẹp nghĩa là xấu xí (ugly)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -1.3,
+    "context": "Complexity",
+    "output": {
+      "question": "English is ___ for me. I can speak it well.",
+      "options": ["difficult", "hard", "easy", "bad"],
+      "correct_answer": "easy",
+      "explanation": "Nói tốt nghĩa là ngôn ngữ đó dễ (easy) đối với mình."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -1.1,
+    "context": "Complexity",
+    "output": {
+      "question": "This math problem is very ___ . I can't solve it.",
+      "options": ["easy", "difficult", "small", "good"],
+      "correct_answer": "difficult",
+      "explanation": "Không giải được nghĩa là bài toán khó (difficult)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -3.0,
+    "context": "Emotion - Opposites",
+    "output": {
+      "question": "I have a new toy! I am very ___.",
+      "options": ["sad", "angry", "happy", "tired"],
+      "correct_answer": "happy",
+      "explanation": "Có đồ chơi mới khiến chúng ta cảm thấy hạnh phúc (happy)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -2.8,
+    "context": "Emotion - Opposites",
+    "output": {
+      "question": "My friend is sick. I feel ___.",
+      "options": ["happy", "sad", "excited", "fast"],
+      "correct_answer": "sad",
+      "explanation": "Bạn bị ốm khiến chúng ta cảm thấy buồn (sad)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -2.5,
+    "context": "Emotion - Situation",
+    "output": {
+      "question": "I have a big test tomorrow. I feel ___.",
+      "options": ["happy", "nervous", "slow", "sweet"],
+      "correct_answer": "nervous",
+      "explanation": "Trước một bài kiểm tra lớn, người ta thường cảm thấy lo lắng (nervous)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -2.2,
+    "context": "Emotion - Situation",
+    "output": {
+      "question": "I wait for the bus for one hour. I am ___.",
+      "options": ["excited", "bored", "happy", "beautiful"],
+      "correct_answer": "bored",
+      "explanation": "Chờ đợi quá lâu khiến chúng ta cảm thấy chán nản (bored)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -2.0,
+    "context": "Emotion - Situation",
+    "output": {
+      "question": "He broke my favorite vase! I am very ___.",
+      "options": ["happy", "sad", "angry", "tired"],
+      "correct_answer": "angry",
+      "explanation": "Khi ai đó làm hỏng đồ vật yêu thích, chúng ta cảm thấy tức giận (angry)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -1.7,
+    "context": "Emotion - Situation",
+    "output": {
+      "question": "I am going to Disneyland tomorrow! I am so ___!",
+      "options": ["bored", "excited", "sad", "slow"],
+      "correct_answer": "excited",
+      "explanation": "Sắp được đi chơi nơi thú vị khiến chúng ta hào hứng (excited)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -3.0,
+    "context": "Price - Opposites",
+    "output": {
+      "question": "This pen is only 1 dollar. It is ___.",
+      "options": ["expensive", "cheap", "big", "new"],
+      "correct_answer": "cheap",
+      "explanation": "Giá 1 đô la là mức giá rẻ (cheap)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -2.7,
+    "context": "Price - Opposites",
+    "output": {
+      "question": "This car costs 1 million dollars. It is ___.",
+      "options": ["cheap", "expensive", "small", "old"],
+      "correct_answer": "expensive",
+      "explanation": "Giá 1 triệu đô la là rất đắt (expensive)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -2.4,
+    "context": "Condition - Opposites",
+    "output": {
+      "question": "I just washed my hands. Now they are ___.",
+      "options": ["dirty", "clean", "expensive", "heavy"],
+      "correct_answer": "clean",
+      "explanation": "Sau khi rửa tay, tay sẽ sạch sẽ (clean)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -2.1,
+    "context": "Condition - Opposites",
+    "output": {
+      "question": "He played in the mud. His clothes are ___.",
+      "options": ["clean", "dirty", "new", "beautiful"],
+      "correct_answer": "dirty",
+      "explanation": "Chơi trong bùn khiến quần áo bị bẩn (dirty)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -1.8,
+    "context": "Condition - Opposites",
+    "output": {
+      "question": "I bought this phone yesterday. It is ___.",
+      "options": ["old", "new", "dirty", "cheap"],
+      "correct_answer": "new",
+      "explanation": "Vừa mua ngày hôm qua nên điện thoại là đồ mới (new)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -1.5,
+    "context": "Condition - Opposites",
+    "output": {
+      "question": "This book was written 100 years ago. It is ___.",
+      "options": ["new", "old", "clean", "expensive"],
+      "correct_answer": "old",
+      "explanation": "Viết từ 100 năm trước nên cuốn sách này cũ (old)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -3.0,
+    "context": "Taste - Basics",
+    "output": {
+      "question": "Candy is usually ___.",
+      "options": ["salty", "sour", "sweet", "bitter"],
+      "correct_answer": "sweet",
+      "explanation": "Kẹo thường có vị ngọt (sweet)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -2.8,
+    "context": "Taste - Basics",
+    "output": {
+      "question": "Lemon is ___.",
+      "options": ["sweet", "sour", "salty", "bitter"],
+      "correct_answer": "sour",
+      "explanation": "Chanh có vị chua (sour)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -2.5,
+    "context": "Taste - Basics",
+    "output": {
+      "question": "Salt is ___.",
+      "options": ["sweet", "sour", "salty", "bitter"],
+      "correct_answer": "salty",
+      "explanation": "Muối có vị mặn (salty)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -2.2,
+    "context": "Taste - Basics",
+    "output": {
+      "question": "Dark chocolate without sugar is often ___.",
+      "options": ["sweet", "sour", "salty", "bitter"],
+      "correct_answer": "bitter",
+      "explanation": "Sô-cô-la đen không đường thường có vị đắng (bitter)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -3.0,
+    "context": "Weather",
+    "output": {
+      "question": "The sun is shining. It is a ___ day.",
+      "options": ["rainy", "sunny", "cloudy", "windy"],
+      "correct_answer": "sunny",
+      "explanation": "Mặt trời chiếu sáng nghĩa là một ngày nắng (sunny)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -2.8,
+    "context": "Weather",
+    "output": {
+      "question": "I need an umbrella. It is ___.",
+      "options": ["sunny", "rainy", "windy", "hot"],
+      "correct_answer": "rainy",
+      "explanation": "Cần ô khi trời mưa (rainy)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -2.5,
+    "context": "Weather",
+    "output": {
+      "question": "There are many clouds in the sky. It is ___.",
+      "options": ["sunny", "cloudy", "rainy", "hot"],
+      "correct_answer": "cloudy",
+      "explanation": "Nhiều mây nghĩa là trời nhiều mây (cloudy)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -2.2,
+    "context": "Weather",
+    "output": {
+      "question": "My hat flies away! It is very ___.",
+      "options": ["sunny", "windy", "rainy", "cold"],
+      "correct_answer": "windy",
+      "explanation": "Mũ bị bay mất cho thấy trời có gió mạnh (windy)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -2.0,
+    "context": "Weather",
+    "output": {
+      "question": "I wear a coat and gloves. It is ___.",
+      "options": ["hot", "cold", "sunny", "warm"],
+      "correct_answer": "cold",
+      "explanation": "Mặc áo khoác và đeo găng tay khi trời lạnh (cold)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -1.8,
+    "context": "Weather",
+    "output": {
+      "question": "I want to swim in the pool. The weather is ___.",
+      "options": ["cold", "rainy", "hot", "windy"],
+      "correct_answer": "hot",
+      "explanation": "Muốn đi bơi khi thời tiết nóng (hot)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -3.0,
+    "context": "Physical - Size",
+    "output": {
+      "question": "A mouse is ___ , but a lion is big.",
+      "options": ["tall", "small", "long", "fat"],
+      "correct_answer": "small",
+      "explanation": "Chuột nhỏ (small) đối lập với sư tử lớn (big)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -2.8,
+    "context": "Physical - Height",
+    "output": {
+      "question": "A giraffe is ___ , but a sheep is short.",
+      "options": ["big", "tall", "long", "fat"],
+      "correct_answer": "tall",
+      "explanation": "Hươu cao cổ cao (tall) đối lập với cừu thấp (short)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -2.5,
+    "context": "Physical - Weight",
+    "output": {
+      "question": "A feather is ___ , but a rock is heavy.",
+      "options": ["small", "light", "thin", "short"],
+      "correct_answer": "light",
+      "explanation": "Lông vũ nhẹ (light) đối lập với hòn đá nặng (heavy)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -2.2,
+    "context": "Physical - Build",
+    "output": {
+      "question": "He eats too many cakes. He is ___.",
+      "options": ["thin", "fat", "tall", "small"],
+      "correct_answer": "fat",
+      "explanation": "Ăn quá nhiều bánh khiến một người trở nên mập (fat)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -2.0,
+    "context": "Physical - Build",
+    "output": {
+      "question": "She doesn't eat much. She is very ___.",
+      "options": ["fat", "thin", "big", "heavy"],
+      "correct_answer": "thin",
+      "explanation": "Ít ăn khiến một người trở nên gầy (thin)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -1.8,
+    "context": "Physical - Length",
+    "output": {
+      "question": "A ruler is 30 cm. It is ___.",
+      "options": ["tall", "long", "big", "fat"],
+      "correct_answer": "long",
+      "explanation": "Thước kẻ có chiều dài nên dùng 'long' (dài)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -3.0,
+    "context": "Quality",
+    "output": {
+      "question": "I love this book. It is very ___.",
+      "options": ["bad", "good", "ugly", "difficult"],
+      "correct_answer": "good",
+      "explanation": "Yêu thích một thứ gì đó nghĩa là nó tốt/hay (good)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -2.8,
+    "context": "Quality",
+    "output": {
+      "question": "I hate this movie. It is very ___.",
+      "options": ["good", "bad", "beautiful", "easy"],
+      "correct_answer": "bad",
+      "explanation": "Ghét một bộ phim nghĩa là nó tệ (bad)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -2.5,
+    "context": "Appearance",
+    "output": {
+      "question": "The princess in the story is ___.",
+      "options": ["ugly", "beautiful", "bad", "difficult"],
+      "correct_answer": "beautiful",
+      "explanation": "Công chúa thường được mô tả là xinh đẹp (beautiful)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -2.2,
+    "context": "Appearance",
+    "output": {
+      "question": "The witch is ___ . Everyone is afraid of her.",
+      "options": ["beautiful", "ugly", "happy", "small"],
+      "correct_answer": "ugly",
+      "explanation": "Phù thủy thường được mô tả là xấu xí (ugly)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -2.0,
+    "context": "Complexity",
+    "output": {
+      "question": "A baby's puzzle is ___ .",
+      "options": ["difficult", "hard", "easy", "heavy"],
+      "correct_answer": "easy",
+      "explanation": "Trò chơi xếp hình cho trẻ em thường rất dễ (easy)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -1.8,
+    "context": "Complexity",
+    "output": {
+      "question": "This math homework is very ___ . I can't do it.",
+      "options": ["easy", "difficult", "small", "good"],
+      "correct_answer": "difficult",
+      "explanation": "Không thể làm được nghĩa là bài tập đó khó (difficult)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -3.0,
+    "context": "Sound",
+    "output": {
+      "question": "The library is very ___ . Please don't talk.",
+      "options": ["noisy", "quiet", "busy", "loud"],
+      "correct_answer": "quiet",
+      "explanation": "Thư viện là nơi yên tĩnh (quiet)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -2.8,
+    "context": "Sound",
+    "output": {
+      "question": "The city center is very ___ . There are many cars.",
+      "options": ["quiet", "noisy", "small", "cold"],
+      "correct_answer": "noisy",
+      "explanation": "Trung tâm thành phố nhiều xe cộ nên ồn ào (noisy)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -2.5,
+    "context": "Sound",
+    "output": {
+      "question": "The music is too ___ . I can't hear you.",
+      "options": ["quiet", "loud", "soft", "small"],
+      "correct_answer": "loud",
+      "explanation": "Âm nhạc quá lớn (loud) khiến ta không nghe thấy người khác nói."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -2.2,
+    "context": "Appearance",
+    "output": {
+      "question": "There are many people and shops. The street is ___.",
+      "options": ["quiet", "busy", "small", "slow"],
+      "correct_answer": "busy",
+      "explanation": "Đường phố nhiều người và cửa hàng nghĩa là nhộn nhịp (busy)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -2.0,
+    "context": "Physical state",
+    "output": {
+      "question": "I didn't sleep last night. I am very ___.",
+      "options": ["happy", "tired", "excited", "fast"],
+      "correct_answer": "tired",
+      "explanation": "Không ngủ cả đêm khiến chúng ta mệt mỏi (tired)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -1.8,
+    "context": "Physical state",
+    "output": {
+      "question": "I didn't eat anything since morning. I am ___.",
+      "options": ["thirsty", "hungry", "tired", "angry"],
+      "correct_answer": "hungry",
+      "explanation": "Không ăn gì từ sáng khiến chúng ta đói (hungry)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -1.5,
+    "context": "Physical state",
+    "output": {
+      "question": "I ran for 2 kilometers. Now I am ___.",
+      "options": ["hungry", "thirsty", "happy", "slow"],
+      "correct_answer": "thirsty",
+      "explanation": "Chạy bộ nhiều khiến chúng ta khát nước (thirsty)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -3.0,
+    "context": "Quality",
+    "output": {
+      "question": "A diamond is very ___ . It doesn't break easily.",
+      "options": ["soft", "hard", "weak", "small"],
+      "correct_answer": "hard",
+      "explanation": "Kim cương rất cứng (hard)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -2.8,
+    "context": "Quality",
+    "output": {
+      "question": "A pillow is ___ . It is comfortable to sleep on.",
+      "options": ["hard", "soft", "heavy", "loud"],
+      "correct_answer": "soft",
+      "explanation": "Gối mềm (soft) nên thoải mái khi ngủ."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -2.5,
+    "context": "Cleanliness",
+    "output": {
+      "question": "My room is ___ . I need to clean it.",
+      "options": ["clean", "messy", "new", "beautiful"],
+      "correct_answer": "messy",
+      "explanation": "Cần dọn dẹp nghĩa là phòng đang bừa bộn (messy)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -2.2,
+    "context": "Cleanliness",
+    "output": {
+      "question": "I put everything in its place. My room is ___.",
+      "options": ["messy", "neat", "dirty", "big"],
+      "correct_answer": "neat",
+      "explanation": "Để đồ vật đúng chỗ nghĩa là phòng ngăn nắp (neat)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -2.0,
+    "context": "Price",
+    "output": {
+      "question": "I have only 5 dollars. I can't buy this toy. It is too ___.",
+      "options": ["cheap", "expensive", "small", "old"],
+      "correct_answer": "expensive",
+      "explanation": "Không đủ tiền mua nghĩa là món đồ đó quá đắt (expensive)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -1.8,
+    "context": "Price",
+    "output": {
+      "question": "This candy is only 10 cents. It is very ___.",
+      "options": ["expensive", "cheap", "new", "big"],
+      "correct_answer": "cheap",
+      "explanation": "Giá rất thấp nghĩa là món đồ đó rẻ (cheap)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -3.0,
+    "context": "Physical - Shape",
+    "output": {
+      "question": "A ball is ___.",
+      "options": ["square", "round", "triangle", "flat"],
+      "correct_answer": "round",
+      "explanation": "Quả bóng có hình tròn (round)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -2.8,
+    "context": "Physical - Shape",
+    "output": {
+      "question": "A box is usually ___.",
+      "options": ["round", "square", "triangle", "round"],
+      "correct_answer": "square",
+      "explanation": "Chiếc hộp thường có hình vuông/chữ nhật (square)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -2.5,
+    "context": "Tastes",
+    "output": {
+      "question": "Sea water tastes ___.",
+      "options": ["sweet", "sour", "salty", "bitter"],
+      "correct_answer": "salty",
+      "explanation": "Nước biển có vị mặn (salty)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -2.2,
+    "context": "Tastes",
+    "output": {
+      "question": "Honey is very ___.",
+      "options": ["salty", "sour", "sweet", "bitter"],
+      "correct_answer": "sweet",
+      "explanation": "Mật ong có vị ngọt (sweet)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -2.0,
+    "context": "Tastes",
+    "output": {
+      "question": "Vinegar is ___.",
+      "options": ["sweet", "sour", "salty", "bitter"],
+      "correct_answer": "sour",
+      "explanation": "Giấm có vị chua (sour)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -1.8,
+    "context": "Tastes",
+    "output": {
+      "question": "Medicine often tastes ___.",
+      "options": ["sweet", "sour", "salty", "bitter"],
+      "correct_answer": "bitter",
+      "explanation": "Thuốc thường có vị đắng (bitter)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -3.0,
+    "context": "Appearance",
+    "output": {
+      "question": "The sun is ___ .",
+      "options": ["blue", "yellow", "green", "pink"],
+      "correct_answer": "yellow",
+      "explanation": "Mặt trời có màu vàng (yellow)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -2.8,
+    "context": "Appearance",
+    "output": {
+      "question": "The grass is ___ .",
+      "options": ["red", "blue", "green", "yellow"],
+      "correct_answer": "green",
+      "explanation": "Cỏ có màu xanh lá (green)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -2.5,
+    "context": "Appearance",
+    "output": {
+      "question": "The cloud is ___ .",
+      "options": ["white", "black", "red", "green"],
+      "correct_answer": "white",
+      "explanation": "Mây thường có màu trắng (white)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -2.2,
+    "context": "Appearance",
+    "output": {
+      "question": "Coal is ___ .",
+      "options": ["white", "black", "yellow", "blue"],
+      "correct_answer": "black",
+      "explanation": "Than đá có màu đen (black)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -2.0,
+    "context": "Appearance",
+    "output": {
+      "question": "A strawberry is ___ .",
+      "options": ["blue", "red", "green", "yellow"],
+      "correct_answer": "red",
+      "explanation": "Quả dâu tây có màu đỏ (red)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -1.8,
+    "context": "Appearance",
+    "output": {
+      "question": "An orange is ___ .",
+      "options": ["red", "orange", "blue", "green"],
+      "correct_answer": "orange",
+      "explanation": "Quả cam có màu cam (orange)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -3.0,
+    "context": "Physical state",
+    "output": {
+      "question": "I drink water because I am ___.",
+      "options": ["hungry", "thirsty", "tired", "sad"],
+      "correct_answer": "thirsty",
+      "explanation": "Uống nước vì cảm thấy khát (thirsty)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -2.8,
+    "context": "Physical state",
+    "output": {
+      "question": "I eat a sandwich because I am ___.",
+      "options": ["thirsty", "hungry", "tired", "angry"],
+      "correct_answer": "hungry",
+      "explanation": "Ăn bánh mì vì cảm thấy đói (hungry)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -2.5,
+    "context": "Physical state",
+    "output": {
+      "question": "I want to sleep because I am ___.",
+      "options": ["happy", "tired", "excited", "fast"],
+      "correct_answer": "tired",
+      "explanation": "Muốn ngủ vì cảm thấy mệt (tired)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -2.2,
+    "context": "Emotion",
+    "output": {
+      "question": "I see a big spider! I am ___.",
+      "options": ["happy", "scared", "bored", "slow"],
+      "correct_answer": "scared",
+      "explanation": "Thấy nhện lớn khiến chúng ta sợ hãi (scared)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -2.0,
+    "context": "Emotion",
+    "output": {
+      "question": "I can't find my keys. I am ___.",
+      "options": ["happy", "worried", "excited", "fast"],
+      "correct_answer": "worried",
+      "explanation": "Không tìm thấy chìa khóa khiến chúng ta lo lắng (worried)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -1.8,
+    "context": "Emotion",
+    "output": {
+      "question": "I have a great idea! I am ___.",
+      "options": ["sad", "excited", "tired", "scared"],
+      "correct_answer": "excited",
+      "explanation": "Có ý tưởng tuyệt vời khiến chúng ta hào hứng (excited)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -1.5,
+    "context": "Quality",
+    "output": {
+      "question": "The test was very ___ . I got 10 points!",
+      "options": ["difficult", "hard", "easy", "bad"],
+      "correct_answer": "easy",
+      "explanation": "Đạt 10 điểm nghĩa là bài kiểm tra dễ (easy)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -1.3,
+    "context": "Quality",
+    "output": {
+      "question": "This puzzle is too ___ . I can't solve it.",
+      "options": ["easy", "difficult", "small", "good"],
+      "correct_answer": "difficult",
+      "explanation": "Không giải được nghĩa là bài toán khó (difficult)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -1.1,
+    "context": "Appearance",
+    "output": {
+      "question": "The street is very ___ . There are many cars and people.",
+      "options": ["quiet", "busy", "slow", "small"],
+      "correct_answer": "busy",
+      "explanation": "Nhiều xe và người nghĩa là đường phố nhộn nhịp (busy)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -3.0,
+    "context": "Appearance - Age",
+    "output": {
+      "question": "A baby is very ___.",
+      "options": ["old", "young", "tall", "big"],
+      "correct_answer": "young",
+      "explanation": "Em bé thì còn nhỏ/trẻ (young)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -2.8,
+    "context": "Appearance - Age",
+    "output": {
+      "question": "My grandfather is ___ . He is 80 years old.",
+      "options": ["young", "old", "short", "small"],
+      "correct_answer": "old",
+      "explanation": "80 tuổi là người già (old)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -2.5,
+    "context": "Appearance - Height",
+    "output": {
+      "question": "A basketball player is usually ___.",
+      "options": ["short", "tall", "fat", "small"],
+      "correct_answer": "tall",
+      "explanation": "Cầu thủ bóng rổ thường cao (tall)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -2.2,
+    "context": "Appearance - Height",
+    "output": {
+      "question": "The small boy is ___ . He cannot reach the shelf.",
+      "options": ["tall", "short", "long", "big"],
+      "correct_answer": "short",
+      "explanation": "Không với tới kệ sách vì cậu bé thấp (short)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -2.0,
+    "context": "Personality",
+    "output": {
+      "question": "She always helps other people. She is very ___.",
+      "options": ["mean", "kind", "shy", "angry"],
+      "correct_answer": "kind",
+      "explanation": "Luôn giúp đỡ người khác là người tử tế (kind)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -1.8,
+    "context": "Personality",
+    "output": {
+      "question": "He has many friends because he is very ___.",
+      "options": ["shy", "friendly", "sad", "quiet"],
+      "correct_answer": "friendly",
+      "explanation": "Có nhiều bạn vì là người thân thiện (friendly)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -1.6,
+    "context": "Personality",
+    "output": {
+      "question": "She doesn't like talking to strangers. She is ___.",
+      "options": ["friendly", "kind", "shy", "happy"],
+      "correct_answer": "shy",
+      "explanation": "Không thích nói chuyện với người lạ là người nhút nhát (shy)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -1.4,
+    "context": "Personality",
+    "output": {
+      "question": "He never shares his toys. He is ___.",
+      "options": ["kind", "friendly", "mean", "happy"],
+      "correct_answer": "mean",
+      "explanation": "Không bao giờ chia sẻ đồ chơi là người ích kỷ/xấu tính (mean)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -3.0,
+    "context": "Physical state",
+    "output": {
+      "question": "I didn't eat breakfast. I am ___ now.",
+      "options": ["thirsty", "hungry", "tired", "angry"],
+      "correct_answer": "hungry",
+      "explanation": "Không ăn sáng nên cảm thấy đói (hungry)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -2.8,
+    "context": "Physical state",
+    "output": {
+      "question": "I ran for 30 minutes. I am very ___.",
+      "options": ["hungry", "thirsty", "happy", "slow"],
+      "correct_answer": "thirsty",
+      "explanation": "Chạy bộ nhiều khiến ta cảm thấy khát (thirsty)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -2.5,
+    "context": "Physical state",
+    "output": {
+      "question": "I worked all day. I want to go to bed. I am ___.",
+      "options": ["excited", "tired", "angry", "hungry"],
+      "correct_answer": "tired",
+      "explanation": "Làm việc cả ngày và muốn đi ngủ là trạng thái mệt mỏi (tired)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -2.2,
+    "context": "Emotion",
+    "output": {
+      "question": "I see a big spider! I am ___.",
+      "options": ["happy", "scared", "bored", "friendly"],
+      "correct_answer": "scared",
+      "explanation": "Thấy nhện lớn khiến ta sợ hãi (scared)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -2.0,
+    "context": "Emotion",
+    "output": {
+      "question": "My favorite toy is broken. I am ___.",
+      "options": ["happy", "sad", "excited", "kind"],
+      "correct_answer": "sad",
+      "explanation": "Đồ chơi yêu thích bị hỏng khiến ta buồn (sad)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -1.8,
+    "context": "Emotion",
+    "output": {
+      "question": "I have a great idea! I am so ___!",
+      "options": ["sad", "excited", "bored", "tired"],
+      "correct_answer": "excited",
+      "explanation": "Có ý tưởng tuyệt vời khiến ta hào hứng (excited)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -1.6,
+    "context": "Emotion",
+    "output": {
+      "question": "The baby is crying. He is ___.",
+      "options": ["happy", "unhappy", "friendly", "tall"],
+      "correct_answer": "unhappy",
+      "explanation": "Em bé đang khóc nghĩa là em không vui/buồn (unhappy)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -3.0,
+    "context": "Appearance - Color",
+    "output": {
+      "question": "A banana is ___.",
+      "options": ["red", "blue", "yellow", "green"],
+      "correct_answer": "yellow",
+      "explanation": "Chuối có màu vàng (yellow)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -2.8,
+    "context": "Appearance - Color",
+    "output": {
+      "question": "The grass is ___.",
+      "options": ["blue", "red", "green", "yellow"],
+      "correct_answer": "green",
+      "explanation": "Cỏ có màu xanh lá (green)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -2.5,
+    "context": "Appearance - Color",
+    "output": {
+      "question": "A strawberry is ___.",
+      "options": ["yellow", "blue", "red", "green"],
+      "correct_answer": "red",
+      "explanation": "Dâu tây có màu đỏ (red)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -2.2,
+    "context": "Appearance - Color",
+    "output": {
+      "question": "Coal is ___.",
+      "options": ["white", "black", "red", "blue"],
+      "correct_answer": "black",
+      "explanation": "Than đá có màu đen (black)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -2.0,
+    "context": "Appearance - Color",
+    "output": {
+      "question": "The clouds are ___ on a sunny day.",
+      "options": ["black", "white", "red", "green"],
+      "correct_answer": "white",
+      "explanation": "Mây ngày nắng thường có màu trắng (white)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -1.8,
+    "context": "Appearance - Color",
+    "output": {
+      "question": "An orange is ___.",
+      "options": ["yellow", "orange", "red", "blue"],
+      "correct_answer": "orange",
+      "explanation": "Quả cam có màu cam (orange)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -3.0,
+    "context": "Quality",
+    "output": {
+      "question": "This cake is very ___ . I love it!",
+      "options": ["bad", "good", "ugly", "difficult"],
+      "correct_answer": "good",
+      "explanation": "Yêu thích một thứ gì đó nghĩa là nó tốt/ngon (good)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -2.8,
+    "context": "Quality",
+    "output": {
+      "question": "This movie is ___ . I don't like it.",
+      "options": ["good", "bad", "beautiful", "easy"],
+      "correct_answer": "bad",
+      "explanation": "Không thích nghĩa là nó tệ (bad)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -2.5,
+    "context": "Appearance",
+    "output": {
+      "question": "The flower is ___ . It looks wonderful.",
+      "options": ["ugly", "beautiful", "bad", "small"],
+      "correct_answer": "beautiful",
+      "explanation": "Nhìn tuyệt vời nghĩa là đẹp (beautiful)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -2.2,
+    "context": "Appearance",
+    "output": {
+      "question": "The monster is ___ . It is not beautiful.",
+      "options": ["beautiful", "ugly", "happy", "tall"],
+      "correct_answer": "ugly",
+      "explanation": "Không đẹp nghĩa là xấu xí (ugly)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -2.0,
+    "context": "Complexity",
+    "output": {
+      "question": "1 + 1 = 2. This is ___ .",
+      "options": ["difficult", "hard", "easy", "big"],
+      "correct_answer": "easy",
+      "explanation": "Phép tính 1+1 là rất dễ (easy)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -1.8,
+    "context": "Complexity",
+    "output": {
+      "question": "I can't do this math problem. It is ___ .",
+      "options": ["easy", "difficult", "small", "good"],
+      "correct_answer": "difficult",
+      "explanation": "Không làm được nghĩa là bài toán khó (difficult)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -3.0,
+    "context": "Physical Property",
+    "output": {
+      "question": "A rock is ___ .",
+      "options": ["soft", "hard", "light", "small"],
+      "correct_answer": "hard",
+      "explanation": "Hòn đá thì cứng (hard)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -2.8,
+    "context": "Physical Property",
+    "output": {
+      "question": "A pillow is ___ .",
+      "options": ["hard", "soft", "heavy", "loud"],
+      "correct_answer": "soft",
+      "explanation": "Cái gối thì mềm (soft)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -2.5,
+    "context": "Weight",
+    "output": {
+      "question": "A feather is ___ , but a rock is heavy.",
+      "options": ["big", "light", "thin", "small"],
+      "correct_answer": "light",
+      "explanation": "Lông vũ nhẹ (light) đối lập với nặng (heavy)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -2.2,
+    "context": "Weight",
+    "output": {
+      "question": "The suitcase is full of books. It is ___.",
+      "options": ["light", "heavy", "small", "thin"],
+      "correct_answer": "heavy",
+      "explanation": "Vali đầy sách nên rất nặng (heavy)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -2.0,
+    "context": "Cleanliness",
+    "output": {
+      "question": "I didn't wash my car for a month. Now it is ___.",
+      "options": ["clean", "dirty", "new", "beautiful"],
+      "correct_answer": "dirty",
+      "explanation": "Một tháng không rửa xe nên xe bị bẩn (dirty)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -1.8,
+    "context": "Cleanliness",
+    "output": {
+      "question": "I clean my room every day. My room is ___.",
+      "options": ["dirty", "clean", "old", "big"],
+      "correct_answer": "clean",
+      "explanation": "Dọn phòng mỗi ngày nên phòng sạch sẽ (clean)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -1.6,
+    "context": "Condition",
+    "output": {
+      "question": "I just bought this dress. It is ___.",
+      "options": ["old", "new", "dirty", "ugly"],
+      "correct_answer": "new",
+      "explanation": "Vừa mới mua nên là đồ mới (new)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -1.4,
+    "context": "Condition",
+    "output": {
+      "question": "This car is from 1950. It is very ___.",
+      "options": ["new", "old", "clean", "fast"],
+      "correct_answer": "old",
+      "explanation": "Xe từ năm 1950 nên là xe cũ (old)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -3.0,
+    "context": "Price",
+    "output": {
+      "question": "This candy is only 10 cents. It is ___.",
+      "options": ["expensive", "cheap", "big", "new"],
+      "correct_answer": "cheap",
+      "explanation": "10 cents là giá rẻ (cheap)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -2.8,
+    "context": "Price",
+    "output": {
+      "question": "This diamond ring is 10,000 dollars. It is ___.",
+      "options": ["cheap", "expensive", "small", "old"],
+      "correct_answer": "expensive",
+      "explanation": "10,000 đô la là giá đắt (expensive)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -2.5,
+    "context": "Taste",
+    "output": {
+      "question": "Honey is very ___.",
+      "options": ["salty", "sour", "sweet", "bitter"],
+      "correct_answer": "sweet",
+      "explanation": "Mật ong có vị ngọt (sweet)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -2.2,
+    "context": "Taste",
+    "output": {
+      "question": "Vinegar is ___.",
+      "options": ["sweet", "sour", "salty", "bitter"],
+      "correct_answer": "sour",
+      "explanation": "Giấm có vị chua (sour)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -2.0,
+    "context": "Taste",
+    "output": {
+      "question": "Sea water tastes ___.",
+      "options": ["sweet", "sour", "salty", "bitter"],
+      "correct_answer": "salty",
+      "explanation": "Nước biển có vị mặn (salty)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -1.8,
+    "context": "Taste",
+    "output": {
+      "question": "Coffee without sugar is often ___.",
+      "options": ["sweet", "sour", "salty", "bitter"],
+      "correct_answer": "bitter",
+      "explanation": "Cà phê không đường thường có vị đắng (bitter)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -3.0,
+    "context": "Weather",
+    "output": {
+      "question": "The sun is shining. It is a ___ day.",
+      "options": ["rainy", "sunny", "cloudy", "windy"],
+      "correct_answer": "sunny",
+      "explanation": "Mặt trời chiếu sáng là ngày nắng (sunny)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -2.8,
+    "context": "Weather",
+    "output": {
+      "question": "I have an umbrella. It is ___.",
+      "options": ["sunny", "rainy", "windy", "hot"],
+      "correct_answer": "rainy",
+      "explanation": "Dùng ô khi trời mưa (rainy)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -2.5,
+    "context": "Weather",
+    "output": {
+      "question": "The sky is grey. It is ___.",
+      "options": ["sunny", "cloudy", "rainy", "hot"],
+      "correct_answer": "cloudy",
+      "explanation": "Bầu trời màu xám nghĩa là nhiều mây (cloudy)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -2.2,
+    "context": "Weather",
+    "output": {
+      "question": "The leaves are moving. It is ___.",
+      "options": ["sunny", "windy", "rainy", "cold"],
+      "correct_answer": "windy",
+      "explanation": "Lá cây rung rinh cho thấy trời có gió (windy)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -2.0,
+    "context": "Weather",
+    "output": {
+      "question": "I wear a sweater. It is ___.",
+      "options": ["hot", "cold", "sunny", "warm"],
+      "correct_answer": "cold",
+      "explanation": "Mặc áo len khi trời lạnh (cold)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -1.8,
+    "context": "Weather",
+    "output": {
+      "question": "I want an ice cream. The weather is ___.",
+      "options": ["cold", "rainy", "hot", "windy"],
+      "correct_answer": "hot",
+      "explanation": "Muốn ăn kem khi thời tiết nóng (hot)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -3.0,
+    "context": "Sound",
+    "output": {
+      "question": "A library is a ___ place.",
+      "options": ["noisy", "quiet", "busy", "loud"],
+      "correct_answer": "quiet",
+      "explanation": "Thư viện là nơi yên tĩnh (quiet)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -2.8,
+    "context": "Sound",
+    "output": {
+      "question": "The market is very ___ . There are many people.",
+      "options": ["quiet", "noisy", "small", "cold"],
+      "correct_answer": "noisy",
+      "explanation": "Chợ nhiều người nên ồn ào (noisy)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -2.5,
+    "context": "Sound",
+    "output": {
+      "question": "The music is too ___ . Please turn it down.",
+      "options": ["quiet", "loud", "soft", "small"],
+      "correct_answer": "loud",
+      "explanation": "Yêu cầu vặn nhỏ lại vì nhạc quá lớn (loud)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -2.2,
+    "context": "Sound",
+    "output": {
+      "question": "The street is ___ . There are many cars.",
+      "options": ["quiet", "busy", "small", "slow"],
+      "correct_answer": "busy",
+      "explanation": "Đường phố nhiều xe cộ là nhộn nhịp/bận rộn (busy)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -2.0,
+    "context": "Physical state",
+    "output": {
+      "question": "I didn't drink water all day. I am ___.",
+      "options": ["hungry", "thirsty", "tired", "angry"],
+      "correct_answer": "thirsty",
+      "explanation": "Không uống nước cả ngày nên cảm thấy khát (thirsty)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -1.8,
+    "context": "Physical state",
+    "output": {
+      "question": "I can't stop yawning. I am ___.",
+      "options": ["happy", "tired", "excited", "fast"],
+      "correct_answer": "tired",
+      "explanation": "Ngáp liên tục cho thấy trạng thái mệt mỏi/buồn ngủ (tired)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -1.6,
+    "context": "Physical state",
+    "output": {
+      "question": "My stomach is making noise. I am ___.",
+      "options": ["thirsty", "hungry", "tired", "angry"],
+      "correct_answer": "hungry",
+      "explanation": "Bụng kêu là dấu hiệu của việc bị đói (hungry)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -3.0,
+    "context": "Physical Property",
+    "output": {
+      "question": "A ball is ___.",
+      "options": ["square", "round", "triangle", "flat"],
+      "correct_answer": "round",
+      "explanation": "Quả bóng có hình tròn (round)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -2.8,
+    "context": "Physical Property",
+    "output": {
+      "question": "A book is usually ___.",
+      "options": ["round", "square", "triangle", "round"],
+      "correct_answer": "square",
+      "explanation": "Cuốn sách thường có dạng hình vuông/chữ nhật (square)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -2.5,
+    "context": "Quality",
+    "output": {
+      "question": "This puzzle is ___ . I finished it in one minute.",
+      "options": ["difficult", "hard", "easy", "big"],
+      "correct_answer": "easy",
+      "explanation": "Xong trong một phút nghĩa là rất dễ (easy)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -2.2,
+    "context": "Quality",
+    "output": {
+      "question": "This puzzle is ___ . I can't finish it.",
+      "options": ["easy", "difficult", "small", "good"],
+      "correct_answer": "difficult",
+      "explanation": "Không thể hoàn thành nghĩa là khó (difficult)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -2.0,
+    "context": "Appearance",
+    "output": {
+      "question": "The movie star is very ___ .",
+      "options": ["ugly", "beautiful", "bad", "small"],
+      "correct_answer": "beautiful",
+      "explanation": "Ngôi sao điện ảnh thường được mô tả là xinh đẹp (beautiful)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -1.8,
+    "context": "Appearance",
+    "output": {
+      "question": "The monster is ___ . It looks scary.",
+      "options": ["beautiful", "ugly", "happy", "tall"],
+      "correct_answer": "ugly",
+      "explanation": "Quái vật trông đáng sợ và xấu xí (ugly)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -1.6,
+    "context": "Personality",
+    "output": {
+      "question": "He always shares his food with others. He is ___.",
+      "options": ["mean", "kind", "shy", "angry"],
+      "correct_answer": "kind",
+      "explanation": "Chia sẻ thức ăn là biểu hiện của sự tử tế (kind)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -1.4,
+    "context": "Personality",
+    "output": {
+      "question": "She smiles at everyone. She is very ___.",
+      "options": ["shy", "friendly", "sad", "quiet"],
+      "correct_answer": "friendly",
+      "explanation": "Mỉm cười với mọi người là người thân thiện (friendly)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -1.2,
+    "context": "Personality",
+    "output": {
+      "question": "He is afraid to speak in front of the class. He is ___.",
+      "options": ["friendly", "kind", "shy", "happy"],
+      "correct_answer": "shy",
+      "explanation": "Sợ nói trước lớp là người nhút nhát (shy)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -1.1,
+    "context": "Physical state",
+    "output": {
+      "question": "I stayed up late to study. Now I am ___.",
+      "options": ["happy", "tired", "excited", "fast"],
+      "correct_answer": "tired",
+      "explanation": "Thức khuya học bài khiến ta mệt mỏi (tired)."
+    }
+  },
+  {
+    "topic": "Categorization - Family",
+    "difficulty": -2.5,
+    "context": "Odd one out",
+    "output": {
+      "question": "Which word is DIFFERENT from the others?",
+      "options": ["mother", "father", "sister", "teacher"],
+      "correct_answer": "teacher",
+      "explanation": "Mother, father, sister là thành viên gia đình; teacher là nghề nghiệp."
+    }
+  },
+  {
+    "topic": "Categorization - Colors",
+    "difficulty": -3.0,
+    "context": "Odd one out",
+    "output": {
+      "question": "Which word is DIFFERENT from the others?",
+      "options": ["red", "blue", "green", "big"],
+      "correct_answer": "big",
+      "explanation": "Red, blue, green là màu sắc; big là tính từ chỉ kích thước."
+    }
+  },
+  {
+    "topic": "Categorization - Objects",
+    "difficulty": -2.2,
+    "context": "Odd one out",
+    "output": {
+      "question": "Which word is DIFFERENT from the others?",
+      "options": ["pen", "pencil", "ruler", "apple"],
+      "correct_answer": "apple",
+      "explanation": "Pen, pencil, ruler là đồ dùng học tập; apple là trái cây."
+    }
+  },
+  {
+    "topic": "Categorization - Places",
+    "difficulty": -2.0,
+    "context": "Odd one out",
+    "output": {
+      "question": "Which word is DIFFERENT from the others?",
+      "options": ["school", "hospital", "cinema", "bedroom"],
+      "correct_answer": "bedroom",
+      "explanation": "School, hospital, cinema là địa điểm công cộng; bedroom là phòng trong nhà."
+    }
+  },
+  {
+    "topic": "Categorization - Adjectives",
+    "difficulty": -1.8,
+    "context": "Odd one out",
+    "output": {
+      "question": "Which word is DIFFERENT from the others?",
+      "options": ["happy", "sad", "angry", "tall"],
+      "correct_answer": "tall",
+      "explanation": "Happy, sad, angry là cảm xúc; tall là đặc điểm ngoại hình."
+    }
+  },
+  {
+    "topic": "Word Association - School",
+    "difficulty": -2.8,
+    "context": "Matching concepts",
+    "output": {
+      "question": "School $\rightarrow$ Teacher. Library $\rightarrow$ ___.",
+      "options": ["doctor", "books", "chef", "pilot"],
+      "correct_answer": "books",
+      "explanation": "Trường học đi với giáo viên, thư viện đi với sách (books)."
+    }
+  },
+  {
+    "topic": "Word Association - Health",
+    "difficulty": -2.5,
+    "context": "Matching concepts",
+    "output": {
+      "question": "Hospital $\rightarrow$ Doctor. School $\rightarrow$ ___.",
+      "options": ["nurse", "student", "patient", "driver"],
+      "correct_answer": "student",
+      "explanation": "Bệnh viện đi với bác sĩ, trường học đi với học sinh (student)."
+    }
+  },
+  {
+    "topic": "Word Association - Nature",
+    "difficulty": -2.2,
+    "context": "Matching concepts",
+    "output": {
+      "question": "Sky $\rightarrow$ Blue. Grass $\rightarrow$ ___.",
+      "options": ["red", "yellow", "green", "white"],
+      "correct_answer": "green",
+      "explanation": "Bầu trời màu xanh dương, cỏ màu xanh lá (green)."
+    }
+  },
+  {
+    "topic": "Word Association - Home",
+    "difficulty": -2.0,
+    "context": "Matching concepts",
+    "output": {
+      "question": "Bed $\rightarrow$ Bedroom. Fridge $\rightarrow$ ___.",
+      "options": ["bathroom", "living room", "kitchen", "garden"],
+      "correct_answer": "kitchen",
+      "explanation": "Giường ở phòng ngủ, tủ lạnh ở nhà bếp (kitchen)."
+    }
+  },
+  {
+    "topic": "Word Association - Time",
+    "difficulty": -1.7,
+    "context": "Matching concepts",
+    "output": {
+      "question": "Monday $\rightarrow$ Week. January $\rightarrow$ ___.",
+      "options": ["day", "month", "year", "hour"],
+      "correct_answer": "month",
+      "explanation": "Thứ Hai thuộc về tuần, tháng Một thuộc về tháng (month)."
+    }
+  },
+  {
+    "topic": "Function - Objects",
+    "difficulty": -3.0,
+    "context": "Usage",
+    "output": {
+      "question": "What do you use to tell the time?",
+      "options": ["phone", "clock", "book", "pen"],
+      "correct_answer": "clock",
+      "explanation": "Dùng đồng hồ (clock) để xem giờ."
+    }
+  },
+  {
+    "topic": "Function - Objects",
+    "difficulty": -2.8,
+    "context": "Usage",
+    "output": {
+      "question": "What do you use to wash your hair?",
+      "options": ["soap", "shampoo", "toothpaste", "towel"],
+      "correct_answer": "shampoo",
+      "explanation": "Dùng dầu gội (shampoo) để gội đầu."
+    }
+  },
+  {
+    "topic": "Function - Objects",
+    "difficulty": -2.5,
+    "context": "Usage",
+    "output": {
+      "question": "What do you use to cut paper?",
+      "options": ["ruler", "scissors", "pencil", "eraser"],
+      "correct_answer": "scissors",
+      "explanation": "Dùng kéo (scissors) để cắt giấy."
+    }
+  },
+  {
+    "topic": "Function - Objects",
+    "difficulty": -2.2,
+    "context": "Usage",
+    "output": {
+      "question": "What do you use to dry your body?",
+      "options": ["blanket", "pillow", "towel", "sheet"],
+      "correct_answer": "towel",
+      "explanation": "Dùng khăn (towel) để lau khô người."
+    }
+  },
+  {
+    "topic": "Function - Objects",
+    "difficulty": -2.0,
+    "context": "Usage",
+    "output": {
+      "question": "What do you use to keep your money?",
+      "options": ["bag", "wallet", "box", "pocket"],
+      "correct_answer": "wallet",
+      "explanation": "Dùng ví (wallet) để đựng tiền."
+    }
+  },
+  {
+    "topic": "Function - Objects",
+    "difficulty": -1.7,
+    "context": "Usage",
+    "output": {
+      "question": "What do you use to remove pencil mistakes?",
+      "options": ["ruler", "sharpener", "eraser", "pen"],
+      "correct_answer": "eraser",
+      "explanation": "Dùng tẩy (eraser) để xóa vết bút chì."
+    }
+  },
+  {
+    "topic": "Common Places",
+    "difficulty": -3.0,
+    "context": "City",
+    "output": {
+      "question": "I want to buy some bread. Where should I go?",
+      "options": ["hospital", "bakery", "cinema", "bank"],
+      "correct_answer": "bakery",
+      "explanation": "Mua bánh mì ở tiệm bánh (bakery)."
+    }
+  },
+  {
+    "topic": "Common Places",
+    "difficulty": -2.8,
+    "context": "City",
+    "output": {
+      "question": "I need to send a letter. Where should I go?",
+      "options": ["post office", "school", "park", "library"],
+      "correct_answer": "post office",
+      "explanation": "Gửi thư ở bưu điện (post office)."
+    }
+  },
+  {
+    "topic": "Common Places",
+    "difficulty": -2.5,
+    "context": "City",
+    "output": {
+      "question": "I want to borrow a book. Where should I go?",
+      "options": ["supermarket", "library", "cinema", "hospital"],
+      "correct_answer": "library",
+      "explanation": "Mượn sách ở thư viện (library)."
+    }
+  },
+  {
+    "topic": "Common Places",
+    "difficulty": -2.2,
+    "context": "City",
+    "output": {
+      "question": "I feel very sick. Where should I go?",
+      "options": ["park", "hospital", "school", "cinema"],
+      "correct_answer": "hospital",
+      "explanation": "Bị ốm thì đến bệnh viện (hospital)."
+    }
+  },
+  {
+    "topic": "Common Places",
+    "difficulty": -2.0,
+    "context": "City",
+    "output": {
+      "question": "I want to watch a movie. Where should I go?",
+      "options": ["library", "cinema", "school", "bank"],
+      "correct_answer": "cinema",
+      "explanation": "Xem phim ở rạp chiếu phim (cinema)."
+    }
+  },
+  {
+    "topic": "Common Places",
+    "difficulty": -1.8,
+    "context": "City",
+    "output": {
+      "question": "I want to see wild animals. Where should I go?",
+      "options": ["zoo", "park", "market", "pharmacy"],
+      "correct_answer": "zoo",
+      "explanation": "Xem động vật hoang dã ở vườn thú (zoo)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -3.0,
+    "context": "Opposites",
+    "output": {
+      "question": "A stone is hard. A pillow is ___.",
+      "options": ["big", "soft", "heavy", "loud"],
+      "correct_answer": "soft",
+      "explanation": "Đối lập với 'hard' (cứng) là 'soft' (mềm)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -2.8,
+    "context": "Opposites",
+    "output": {
+      "question": "A rabbit is fast. A turtle is ___.",
+      "options": ["slow", "short", "small", "bad"],
+      "correct_answer": "slow",
+      "explanation": "Đối lập với 'fast' (nhanh) là 'slow' (chậm)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -2.5,
+    "context": "Opposites",
+    "output": {
+      "question": "Ice is cold. Fire is ___.",
+      "options": ["warm", "hot", "red", "big"],
+      "correct_answer": "hot",
+      "explanation": "Đối lập với 'cold' (lạnh) là 'hot' (nóng)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -2.2,
+    "context": "Opposites",
+    "output": {
+      "question": "An elephant is big. An ant is ___.",
+      "options": ["short", "small", "thin", "light"],
+      "correct_answer": "small",
+      "explanation": "Đối lập với 'big' (lớn) là 'small' (nhỏ)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -2.0,
+    "context": "Opposites",
+    "output": {
+      "question": "The street is noisy. The library is ___.",
+      "options": ["quiet", "small", "cold", "slow"],
+      "correct_answer": "quiet",
+      "explanation": "Đối lập với 'noisy' (ồn ào) là 'quiet' (yên tĩnh)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -1.8,
+    "context": "Opposites",
+    "output": {
+      "question": "This task is easy. That task is ___.",
+      "options": ["bad", "difficult", "small", "heavy"],
+      "correct_answer": "difficult",
+      "explanation": "Đối lập với 'easy' (dễ) là 'difficult' (khó)."
+    }
+  },
+  {
+    "topic": "Categorization - Food",
+    "difficulty": -2.5,
+    "context": "Odd one out",
+    "output": {
+      "question": "Which word is DIFFERENT from the others?",
+      "options": ["apple", "banana", "carrot", "orange"],
+      "correct_answer": "carrot",
+      "explanation": "Apple, banana, orange là trái cây; carrot là rau củ."
+    }
+  },
+  {
+    "topic": "Categorization - Time",
+    "difficulty": -2.2,
+    "context": "Odd one out",
+    "output": {
+      "question": "Which word is DIFFERENT from the others?",
+      "options": ["Monday", "Tuesday", "Friday", "January"],
+      "correct_answer": "January",
+      "explanation": "Monday, Tuesday, Friday là thứ trong tuần; January là tháng."
+    }
+  },
+  {
+    "topic": "Categorization - Body",
+    "difficulty": -2.8,
+    "context": "Odd one out",
+    "output": {
+      "question": "Which word is DIFFERENT from the others?",
+      "options": ["eye", "nose", "ear", "hand"],
+      "correct_answer": "hand",
+      "explanation": "Eye, nose, ear là các bộ phận trên mặt; hand là bộ phận chi."
+    }
+  },
+  {
+    "topic": "Word Association - Animals",
+    "difficulty": -2.5,
+    "context": "Matching concepts",
+    "output": {
+      "question": "Dog $\rightarrow$ Bark. Cat $\rightarrow$ ___.",
+      "options": ["sing", "meow", "roar", "fly"],
+      "correct_answer": "meow",
+      "explanation": "Chó sủa (bark), mèo kêu (meow)."
+    }
+  },
+  {
+    "topic": "Word Association - Color",
+    "difficulty": -2.8,
+    "context": "Matching concepts",
+    "output": {
+      "question": "Tomato $\rightarrow$ Red. Banana $\rightarrow$ ___.",
+      "options": ["blue", "yellow", "green", "pink"],
+      "correct_answer": "yellow",
+      "explanation": "Cà chua màu đỏ, chuối màu vàng (yellow)."
+    }
+  },
+  {
+    "topic": "Word Association - Place",
+    "difficulty": -2.2,
+    "context": "Matching concepts",
+    "output": {
+      "question": "Kitchen $\rightarrow$ Cook. Bedroom $\rightarrow$ ___.",
+      "options": ["study", "sleep", "wash", "eat"],
+      "correct_answer": "sleep",
+      "explanation": "Nhà bếp để nấu ăn (cook), phòng ngủ để ngủ (sleep)."
+    }
+  },
+  {
+    "topic": "Function - Clothing",
+    "difficulty": -3.0,
+    "context": "Usage",
+    "output": {
+      "question": "What do you wear on your head?",
+      "options": ["shoe", "hat", "shirt", "sock"],
+      "correct_answer": "hat",
+      "explanation": "Đội mũ (hat) trên đầu."
+    }
+  },
+  {
+    "topic": "Function - Clothing",
+    "difficulty": -2.8,
+    "context": "Usage",
+    "output": {
+      "question": "What do you wear on your feet?",
+      "options": ["hat", "shoes", "gloves", "shirt"],
+      "correct_answer": "shoes",
+      "explanation": "Đi giày (shoes) dưới chân."
+    }
+  },
+  {
+    "topic": "Function - Clothing",
+    "difficulty": -2.5,
+    "context": "Usage",
+    "output": {
+      "question": "What do you wear when it is very cold?",
+      "options": ["T-shirt", "jacket", "dress", "shorts"],
+      "correct_answer": "jacket",
+      "explanation": "Mặc áo khoác (jacket) khi trời lạnh."
+    }
+  },
+  {
+    "topic": "Function - Clothing",
+    "difficulty": -2.0,
+    "context": "Usage",
+    "output": {
+      "question": "What do you wear to school?",
+      "options": ["pajamas", "uniform", "swimsuit", "costume"],
+      "correct_answer": "uniform",
+      "explanation": "Mặc đồng phục (uniform) đi học."
+    }
+  },
+  {
+    "topic": "Categorization - Electronics",
+    "difficulty": -2.5,
+    "context": "Odd one out",
+    "output": {
+      "question": "Which word is DIFFERENT from the others?",
+      "options": ["computer", "television", "phone", "book"],
+      "correct_answer": "book",
+      "explanation": "Computer, television, phone là đồ điện tử; book là đồ vật truyền thống."
+    }
+  },
+  {
+    "topic": "Categorization - Nature",
+    "difficulty": -2.2,
+    "context": "Odd one out",
+    "output": {
+      "question": "Which word is DIFFERENT from the others?",
+      "options": ["mountain", "forest", "beach", "cinema"],
+      "correct_answer": "cinema",
+      "explanation": "Mountain, forest, beach là thiên nhiên; cinema là công trình nhân tạo."
+    }
+  },
+  {
+    "topic": "Categorization - Taste",
+    "difficulty": -1.8,
+    "context": "Odd one out",
+    "output": {
+      "question": "Which word is DIFFERENT from the others?",
+      "options": ["sweet", "sour", "salty", "big"],
+      "correct_answer": "big",
+      "explanation": "Sweet, sour, salty là vị giác; big là kích thước."
+    }
+  },
+  {
+    "topic": "Word Association - Jobs",
+    "difficulty": -2.8,
+    "context": "Matching concepts",
+    "output": {
+      "question": "School $\rightarrow$ Teacher. Hospital $\rightarrow$ ___.",
+      "options": ["farmer", "doctor", "driver", "singer"],
+      "correct_answer": "doctor",
+      "explanation": "Trường học có giáo viên, bệnh viện có bác sĩ (doctor)."
+    }
+  },
+  {
+    "topic": "Word Association - City",
+    "difficulty": -2.5,
+    "context": "Matching concepts",
+    "output": {
+      "question": "Bank $\rightarrow$ Money. Bakery $\rightarrow$ ___.",
+      "options": ["books", "bread", "medicine", "movies"],
+      "correct_answer": "bread",
+      "explanation": "Ngân hàng liên quan đến tiền, tiệm bánh liên quan đến bánh mì (bread)."
+    }
+  },
+  {
+    "topic": "Word Association - Time",
+    "difficulty": -2.2,
+    "context": "Matching concepts",
+    "output": {
+      "question": "Morning $\rightarrow$ Breakfast. Evening $\rightarrow$ ___.",
+      "options": ["lunch", "dinner", "snack", "breakfast"],
+      "correct_answer": "dinner",
+      "explanation": "Buổi sáng ăn sáng, buổi tối ăn tối (dinner)."
+    }
+  },
+  {
+    "topic": "Function - Kitchen",
+    "difficulty": -3.0,
+    "context": "Usage",
+    "output": {
+      "question": "What do you use to eat soup?",
+      "options": ["fork", "knife", "spoon", "glass"],
+      "correct_answer": "spoon",
+      "explanation": "Ăn súp bằng thìa (spoon)."
+    }
+  },
+  {
+    "topic": "Function - Kitchen",
+    "difficulty": -2.8,
+    "context": "Usage",
+    "output": {
+      "question": "What do you use to cut meat?",
+      "options": ["spoon", "fork", "knife", "plate"],
+      "correct_answer": "knife",
+      "explanation": "Cắt thịt bằng dao (knife)."
+    }
+  },
+  {
+    "topic": "Function - Kitchen",
+    "difficulty": -2.5,
+    "context": "Usage",
+    "output": {
+      "question": "What do you use to pick up food?",
+      "options": ["knife", "fork", "glass", "spoon"],
+      "correct_answer": "fork",
+      "explanation": "Gắp thức ăn bằng nĩa (fork)."
+    }
+  },
+  {
+    "topic": "Function - Kitchen",
+    "difficulty": -2.2,
+    "context": "Usage",
+    "output": {
+      "question": "Where do you put your food to eat?",
+      "options": ["glass", "plate", "knife", "spoon"],
+      "correct_answer": "plate",
+      "explanation": "Để thức ăn lên đĩa (plate) để ăn."
+    }
+  },
+  {
+    "topic": "Common Places",
+    "difficulty": -3.0,
+    "context": "City",
+    "output": {
+      "question": "I want to buy some stamps. Where should I go?",
+      "options": ["bank", "post office", "school", "hospital"],
+      "correct_answer": "post office",
+      "explanation": "Mua tem ở bưu điện (post office)."
+    }
+  },
+  {
+    "topic": "Common Places",
+    "difficulty": -2.8,
+    "context": "City",
+    "output": {
+      "question": "I want to see old things. Where should I go?",
+      "options": ["cinema", "museum", "supermarket", "park"],
+      "correct_answer": "museum",
+      "explanation": "Xem đồ cổ/lịch sử ở bảo tàng (museum)."
+    }
+  },
+  {
+    "topic": "Common Places",
+    "difficulty": -2.5,
+    "context": "City",
+    "output": {
+      "question": "I want to buy fresh vegetables. Where should I go?",
+      "options": ["bakery", "market", "cinema", "bank"],
+      "correct_answer": "market",
+      "explanation": "Mua rau tươi ở chợ (market)."
+    }
+  },
+  {
+    "topic": "Common Places",
+    "difficulty": -2.2,
+    "context": "City",
+    "output": {
+      "question": "I want to save some money. Where should I go?",
+      "options": ["post office", "bank", "school", "library"],
+      "correct_answer": "bank",
+      "explanation": "Gửi tiền ở ngân hàng (bank)."
+    }
+  },
+  {
+    "topic": "Common Places",
+    "difficulty": -2.0,
+    "context": "City",
+    "output": {
+      "question": "I want to catch a train. Where should I go?",
+      "options": ["airport", "railway station", "bus stop", "port"],
+      "correct_answer": "railway station",
+      "explanation": "Bắt tàu hỏa ở nhà ga (railway station)."
+    }
+  },
+  {
+    "topic": "Common Places",
+    "difficulty": -1.8,
+    "context": "City",
+    "output": {
+      "question": "I want to catch a plane. Where should I go?",
+      "options": ["railway station", "airport", "bus stop", "port"],
+      "correct_answer": "airport",
+      "explanation": "Bắt máy bay ở sân bay (airport)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -3.0,
+    "context": "Opposites",
+    "output": {
+      "question": "A rock is hard. A sponge is ___.",
+      "options": ["big", "soft", "heavy", "loud"],
+      "correct_answer": "soft",
+      "explanation": "Đối lập với 'hard' (cứng) là 'soft' (mềm)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -2.8,
+    "context": "Opposites",
+    "output": {
+      "question": "A plane is fast. A snail is ___.",
+      "options": ["slow", "short", "small", "bad"],
+      "correct_answer": "slow",
+      "explanation": "Đối lập với 'fast' (nhanh) là 'slow' (chậm)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -2.5,
+    "context": "Opposites",
+    "output": {
+      "question": "Ice cream is cold. Soup is ___.",
+      "options": ["white", "hot", "sweet", "big"],
+      "correct_answer": "hot",
+      "explanation": "Đối lập với 'cold' (lạnh) là 'hot' (nóng)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -2.2,
+    "context": "Opposites",
+    "output": {
+      "question": "An elephant is big. A bee is ___.",
+      "options": ["short", "small", "thin", "light"],
+      "correct_answer": "small",
+      "explanation": "Đối lập với 'big' (lớn) là 'small' (nhỏ)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -2.0,
+    "context": "Opposites",
+    "output": {
+      "question": "The street is noisy. The forest is ___.",
+      "options": ["quiet", "small", "cold", "slow"],
+      "correct_answer": "quiet",
+      "explanation": "Đối lập với 'noisy' (ồn ào) là 'quiet' (yên tĩnh)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -1.8,
+    "context": "Opposites",
+    "output": {
+      "question": "This puzzle is easy. That puzzle is ___.",
+      "options": ["bad", "difficult", "small", "heavy"],
+      "correct_answer": "difficult",
+      "explanation": "Đối lập với 'easy' (dễ) là 'difficult' (khó)."
+    }
+  },
+  {
+    "topic": "Categorization - Body",
+    "difficulty": -2.5,
+    "context": "Odd one out",
+    "output": {
+      "question": "Which word is DIFFERENT from the others?",
+      "options": ["arm", "leg", "foot", "nose"],
+      "correct_answer": "nose",
+      "explanation": "Arm, leg, foot là các chi; nose là bộ phận trên mặt."
+    }
+  },
+  {
+    "topic": "Categorization - Food",
+    "difficulty": -2.2,
+    "context": "Odd one out",
+    "output": {
+      "question": "Which word is DIFFERENT from the others?",
+      "options": ["milk", "water", "juice", "bread"],
+      "correct_answer": "bread",
+      "explanation": "Milk, water, juice là đồ uống; bread là đồ ăn."
+    }
+  },
+  {
+    "topic": "Word Association - Time",
+    "difficulty": -2.8,
+    "context": "Matching concepts",
+    "output": {
+      "question": "Hour $\rightarrow$ Minute. Year $\rightarrow$ ___.",
+      "options": ["day", "month", "week", "hour"],
+      "correct_answer": "month",
+      "explanation": "Giờ chia thành phút, năm chia thành tháng (month)."
+    }
+  },
+  {
+    "topic": "Word Association - Place",
+    "difficulty": -2.5,
+    "context": "Matching concepts",
+    "output": {
+      "question": "Cinema $\rightarrow$ Movie. Library $\rightarrow$ ___.",
+      "options": ["book", "food", "money", "medicine"],
+      "correct_answer": "book",
+      "explanation": "Rạp phim gắn với phim, thư viện gắn với sách (book)."
+    }
+  },
+  {
+    "topic": "Function - Objects",
+    "difficulty": -3.0,
+    "context": "Usage",
+    "output": {
+      "question": "What do you use to open a door?",
+      "options": ["pen", "key", "book", "phone"],
+      "correct_answer": "key",
+      "explanation": "Dùng chìa khóa (key) để mở cửa."
+    }
+  },
+  {
+    "topic": "Function - Objects",
+    "difficulty": -2.8,
+    "context": "Usage",
+    "output": {
+      "question": "What do you use to write on a board?",
+      "options": ["pencil", "chalk", "pen", "eraser"],
+      "correct_answer": "chalk",
+      "explanation": "Dùng phấn (chalk) để viết lên bảng."
+    }
+  },
+  {
+    "topic": "Function - Objects",
+    "difficulty": -2.5,
+    "context": "Usage",
+    "output": {
+      "question": "What do you use to keep your money?",
+      "options": ["bag", "wallet", "box", "pocket"],
+      "correct_answer": "wallet",
+      "explanation": "Dùng ví (wallet) để đựng tiền."
+    }
+  },
+  {
+    "topic": "Function - Objects",
+    "difficulty": -2.2,
+    "context": "Usage",
+    "output": {
+      "question": "What do you use to clean your teeth?",
+      "options": ["comb", "toothbrush", "soap", "towel"],
+      "correct_answer": "toothbrush",
+      "explanation": "Dùng bàn chải (toothbrush) để đánh răng."
+    }
+  },
+  {
+    "topic": "Common Places",
+    "difficulty": -3.0,
+    "context": "City",
+    "output": {
+      "question": "I want to buy some stamps. Where should I go?",
+      "options": ["bank", "post office", "school", "hospital"],
+      "correct_answer": "post office",
+      "explanation": "Mua tem ở bưu điện (post office)."
+    }
+  },
+  {
+    "topic": "Common Places",
+    "difficulty": -2.8,
+    "context": "City",
+    "output": {
+      "question": "I want to see a movie. Where should I go?",
+      "options": ["library", "cinema", "hospital", "school"],
+      "correct_answer": "cinema",
+      "explanation": "Xem phim ở rạp chiếu phim (cinema)."
+    }
+  },
+  {
+    "topic": "Common Places",
+    "difficulty": -2.5,
+    "context": "City",
+    "output": {
+      "question": "I want to borrow a book. Where should I go?",
+      "options": ["school", "library", "supermarket", "park"],
+      "correct_answer": "library",
+      "explanation": "Mượn sách ở thư viện (library)."
+    }
+  },
+  {
+    "topic": "Common Places",
+    "difficulty": -2.2,
+    "context": "City",
+    "output": {
+      "question": "I want to exercise. Where should I go?",
+      "options": ["cinema", "gym", "bakery", "bank"],
+      "correct_answer": "gym",
+      "explanation": "Tập thể dục ở phòng gym (gym)."
+    }
+  },
+  {
+    "topic": "Common Places",
+    "difficulty": -2.0,
+    "context": "City",
+    "output": {
+      "question": "I want to buy bread. Where should I go?",
+      "options": ["pharmacy", "bakery", "museum", "gym"],
+      "correct_answer": "bakery",
+      "explanation": "Mua bánh mì ở tiệm bánh (bakery)."
+    }
+  },
+  {
+    "topic": "Common Places",
+    "difficulty": -1.8,
+    "context": "City",
+    "output": {
+      "question": "I want to buy medicine. Where should I go?",
+      "options": ["bakery", "pharmacy", "bank", "cinema"],
+      "correct_answer": "pharmacy",
+      "explanation": "Mua thuốc ở nhà thuốc (pharmacy)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -3.0,
+    "context": "Opposites",
+    "output": {
+      "question": "A rock is hard. A pillow is ___.",
+      "options": ["big", "soft", "heavy", "loud"],
+      "correct_answer": "soft",
+      "explanation": "Đối lập với 'hard' (cứng) là 'soft' (mềm)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -2.8,
+    "context": "Opposites",
+    "output": {
+      "question": "A plane is fast. A snail is ___.",
+      "options": ["slow", "short", "small", "bad"],
+      "correct_answer": "slow",
+      "explanation": "Đối lập với 'fast' (nhanh) là 'slow' (chậm)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -2.5,
+    "context": "Opposites",
+    "output": {
+      "question": "Ice cream is cold. Soup is ___.",
+      "options": ["white", "hot", "sweet", "big"],
+      "correct_answer": "hot",
+      "explanation": "Đối lập với 'cold' (lạnh) là 'hot' (nóng)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -2.2,
+    "context": "Opposites",
+    "output": {
+      "question": "An elephant is big. A bee is ___.",
+      "options": ["short", "small", "thin", "light"],
+      "correct_answer": "small",
+      "explanation": "Đối lập với 'big' (lớn) là 'small' (nhỏ)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -2.0,
+    "context": "Opposites",
+    "output": {
+      "question": "The street is noisy. The library is ___.",
+      "options": ["quiet", "small", "cold", "slow"],
+      "correct_answer": "quiet",
+      "explanation": "Đối lập với 'noisy' (ồn ào) là 'quiet' (yên tĩnh)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -1.8,
+    "context": "Opposites",
+    "output": {
+      "question": "This puzzle is easy. That puzzle is ___.",
+      "options": ["bad", "difficult", "small", "heavy"],
+      "correct_answer": "difficult",
+      "explanation": "Đối lập với 'easy' (dễ) là 'difficult' (khó)."
+    }
+  },
+  {
+    "topic": "Colors",
+    "difficulty": -3.0,
+    "context": "Nature",
+    "output": {
+      "question": "The sun is yellow, but the sky is ___.",
+      "options": ["red", "green", "blue", "pink"],
+      "correct_answer": "blue",
+      "explanation": "Bầu trời có màu xanh dương (blue)."
+    }
+  },
+  {
+    "topic": "Family",
+    "difficulty": -2.8,
+    "context": "Family relations",
+    "output": {
+      "question": "My father's father is my ___.",
+      "options": ["uncle", "grandfather", "grandmother", "brother"],
+      "correct_answer": "grandfather",
+      "explanation": "Bố của bố là ông nội (grandfather)."
+    }
+  },
+  {
+    "topic": "Personal Info",
+    "difficulty": -2.6,
+    "context": "Nationalities",
+    "output": {
+      "question": "I am from Japan. I speak ___.",
+      "options": ["Japan", "Japanese", "Japanish", "Japanian"],
+      "correct_answer": "Japanese",
+      "explanation": "Ngôn ngữ của nước Nhật là tiếng Nhật (Japanese)."
+    }
+  },
+  {
+    "topic": "Numbers",
+    "difficulty": -2.4,
+    "context": "Basic math",
+    "output": {
+      "question": "I have five apples. I eat two. Now I have ___ apples.",
+      "options": ["three", "four", "six", "seven"],
+      "correct_answer": "three",
+      "explanation": "5 - 2 = 3 (three)."
+    }
+  },
+  {
+    "topic": "Time",
+    "difficulty": -2.2,
+    "context": "Days of the week",
+    "output": {
+      "question": "Today is Wednesday. Tomorrow is ___.",
+      "options": ["Tuesday", "Thursday", "Friday", "Monday"],
+      "correct_answer": "Thursday",
+      "explanation": "Ngày sau thứ Tư là thứ Năm (Thursday)."
+    }
+  },
+  {
+    "topic": "Common Objects",
+    "difficulty": -2.0,
+    "context": "School supplies",
+    "output": {
+      "question": "I have a pencil, but I don't have a ___. I can't erase the mistake.",
+      "options": ["ruler", "eraser", "bag", "book"],
+      "correct_answer": "eraser",
+      "explanation": "Để xóa lỗi sai (erase the mistake), ta cần cục tẩy (eraser)."
+    }
+  },
+  {
+    "topic": "Common Places",
+    "difficulty": -1.8,
+    "context": "City services",
+    "output": {
+      "question": "I want to buy a new cake for my birthday. I go to the ___.",
+      "options": ["pharmacy", "bakery", "bank", "museum"],
+      "correct_answer": "bakery",
+      "explanation": "Mua bánh ngọt ở tiệm bánh (bakery)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -1.6,
+    "context": "Opposites - Size",
+    "output": {
+      "question": "A mouse is small, but an elephant is ___.",
+      "options": ["short", "big", "thin", "light"],
+      "correct_answer": "big",
+      "explanation": "Đối lập với 'small' (nhỏ) là 'big' (lớn)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -1.4,
+    "context": "Physical states",
+    "output": {
+      "question": "I didn't drink water all morning. Now I am ___.",
+      "options": ["hungry", "thirsty", "tired", "sad"],
+      "correct_answer": "thirsty",
+      "explanation": "Không uống nước dẫn đến cảm giác khát (thirsty)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -1.2,
+    "context": "Personality",
+    "output": {
+      "question": "He always says 'please' and 'thank you'. He is very ___.",
+      "options": ["mean", "polite", "shy", "angry"],
+      "correct_answer": "polite",
+      "explanation": "Luôn nói 'làm ơn' và 'cảm ơn' là người lịch sự (polite)."
+    }
+  },
+  {
+    "topic": "Family",
+    "difficulty": -3.0,
+    "context": "Basic relations",
+    "output": {
+      "question": "My mother's daughter is my ___.",
+      "options": ["brother", "sister", "aunt", "cousin"],
+      "correct_answer": "sister",
+      "explanation": "Con gái của mẹ là chị/em gái (sister)."
+    }
+  },
+  {
+    "topic": "Common Objects",
+    "difficulty": -2.8,
+    "context": "Bedroom",
+    "output": {
+      "question": "I put my head on a ___ when I sleep.",
+      "options": ["blanket", "pillow", "sheet", "bed"],
+      "correct_answer": "pillow",
+      "explanation": "Đặt đầu lên gối (pillow) khi ngủ."
+    }
+  },
+  {
+    "topic": "Common Places",
+    "difficulty": -2.6,
+    "context": "Public places",
+    "output": {
+      "question": "I go to the ___ to see a movie with popcorn.",
+      "options": ["library", "cinema", "hospital", "school"],
+      "correct_answer": "cinema",
+      "explanation": "Xem phim và ăn bắp rang bơ ở rạp chiếu phim (cinema)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -2.4,
+    "context": "Opposites - Temperature",
+    "output": {
+      "question": "The ice cream is cold, but the coffee is ___.",
+      "options": ["sweet", "hot", "cold", "bitter"],
+      "correct_answer": "hot",
+      "explanation": "Đối lập với 'cold' (lạnh) là 'hot' (nóng)."
+    }
+  },
+  {
+    "topic": "Time",
+    "difficulty": -2.2,
+    "context": "Clock time",
+    "output": {
+      "question": "It is 12:00. It is ___.",
+      "options": ["morning", "noon", "midnight", "evening"],
+      "correct_answer": "noon",
+      "explanation": "12 giờ trưa được gọi là 'noon'."
+    }
+  },
+  {
+    "topic": "Personal Info",
+    "difficulty": -2.0,
+    "context": "Job",
+    "output": {
+      "question": "He works in a hospital and helps sick people. He is a ___.",
+      "options": ["teacher", "doctor", "pilot", "chef"],
+      "correct_answer": "doctor",
+      "explanation": "Làm việc ở bệnh viện giúp người ốm là bác sĩ (doctor)."
+    }
+  },
+  {
+    "topic": "Common Objects",
+    "difficulty": -1.8,
+    "context": "Bathroom",
+    "output": {
+      "question": "I use a ___ to wash my hands with soap.",
+      "options": ["towel", "sink", "mirror", "comb"],
+      "correct_answer": "sink",
+      "explanation": "Rửa tay với xà phòng trong bồn rửa (sink)."
+    }
+  },
+  {
+    "topic": "Common Places",
+    "difficulty": -1.6,
+    "context": "City services",
+    "output": {
+      "question": "I want to buy some stamps. I go to the ___.",
+      "options": ["bank", "post office", "museum", "gym"],
+      "correct_answer": "post office",
+      "explanation": "Mua tem ở bưu điện (post office)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -1.4,
+    "context": "Physical states",
+    "output": {
+      "question": "I didn't eat anything since morning. I am ___.",
+      "options": ["thirsty", "hungry", "tired", "angry"],
+      "correct_answer": "hungry",
+      "explanation": "Không ăn gì từ sáng khiến ta đói (hungry)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -1.2,
+    "context": "Personality",
+    "output": {
+      "question": "She always smiles and talks to everyone. She is ___.",
+      "options": ["shy", "friendly", "mean", "sad"],
+      "correct_answer": "friendly",
+      "explanation": "Mỉm cười và nói chuyện với mọi người là người thân thiện (friendly)."
+    }
+  },
+  {
+    "topic": "Family",
+    "difficulty": -3.0,
+    "context": "Basic relations",
+    "output": {
+      "question": "My mother's husband is my ___.",
+      "options": ["uncle", "father", "brother", "grandfather"],
+      "correct_answer": "father",
+      "explanation": "Chồng của mẹ là bố (father)."
+    }
+  },
+  {
+    "topic": "Common Objects",
+    "difficulty": -2.8,
+    "context": "Kitchen",
+    "output": {
+      "question": "I use a ___ to eat soup.",
+      "options": ["fork", "knife", "spoon", "glass"],
+      "correct_answer": "spoon",
+      "explanation": "Ăn súp bằng thìa (spoon)."
+    }
+  },
+  {
+    "topic": "Common Places",
+    "difficulty": -2.6,
+    "context": "Nature",
+    "output": {
+      "question": "I go to the ___ to swim in the sea.",
+      "options": ["forest", "beach", "mountain", "park"],
+      "correct_answer": "beach",
+      "explanation": "Bơi ở biển là ở bãi biển (beach)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -2.4,
+    "context": "Opposites - Price",
+    "output": {
+      "question": "A diamond is expensive, but a plastic ring is ___.",
+      "options": ["big", "cheap", "new", "heavy"],
+      "correct_answer": "cheap",
+      "explanation": "Đối lập với 'expensive' (đắt) là 'cheap' (rẻ)."
+    }
+  },
+  {
+    "topic": "Time",
+    "difficulty": -2.2,
+    "context": "Days of the week",
+    "output": {
+      "question": "Saturday and ___ are the weekend.",
+      "options": ["Monday", "Friday", "Sunday", "Thursday"],
+      "correct_answer": "Sunday",
+      "explanation": "Thứ Bảy và Chủ Nhật là cuối tuần."
+    }
+  },
+  {
+    "topic": "Personal Info",
+    "difficulty": -2.0,
+    "context": "Job",
+    "output": {
+      "question": "I fly planes in the sky. I am a ___.",
+      "options": ["doctor", "pilot", "teacher", "chef"],
+      "correct_answer": "pilot",
+      "explanation": "Lái máy bay trên bầu trời là phi công (pilot)."
+    }
+  },
+  {
+    "topic": "Common Objects",
+    "difficulty": -1.8,
+    "context": "General items",
+    "output": {
+      "question": "I use a ___ to open the door of my house.",
+      "options": ["coin", "key", "pen", "ring"],
+      "correct_answer": "key",
+      "explanation": "Dùng chìa khóa (key) để mở cửa."
+    }
+  },
+  {
+    "topic": "Common Places",
+    "difficulty": -1.6,
+    "context": "City services",
+    "output": {
+      "question": "I want to buy some medicine. I go to the ___.",
+      "options": ["bakery", "pharmacy", "bank", "museum"],
+      "correct_answer": "pharmacy",
+      "explanation": "Mua thuốc ở nhà thuốc (pharmacy)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -1.4,
+    "context": "Condition",
+    "output": {
+      "question": "I just washed my car. Now it is ___.",
+      "options": ["dirty", "clean", "old", "expensive"],
+      "correct_answer": "clean",
+      "explanation": "Vừa rửa xe xong nên xe sạch sẽ (clean)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -1.2,
+    "context": "Personality",
+    "output": {
+      "question": "She is afraid to talk to new people. She is ___.",
+      "options": ["friendly", "kind", "shy", "happy"],
+      "correct_answer": "shy",
+      "explanation": "Sợ nói chuyện với người mới là người nhút nhát (shy)."
+    }
+  },
+  {
+    "topic": "Family",
+    "difficulty": -3.0,
+    "context": "Basic relations",
+    "output": {
+      "question": "My father's sister is my ___.",
+      "options": ["uncle", "aunt", "grandmother", "cousin"],
+      "correct_answer": "aunt",
+      "explanation": "Chị/em gái của bố là cô/dì (aunt)."
+    }
+  },
+  {
+    "topic": "Common Objects",
+    "difficulty": -2.8,
+    "context": "Living room",
+    "output": {
+      "question": "I sit on the ___ to watch TV.",
+      "options": ["table", "sofa", "desk", "shelf"],
+      "correct_answer": "sofa",
+      "explanation": "Ngồi trên ghế sofa (sofa) để xem TV."
+    }
+  },
+  {
+    "topic": "Common Places",
+    "difficulty": -2.6,
+    "context": "Housing",
+    "output": {
+      "question": "I live with my family in a ___.",
+      "options": ["school", "house", "cinema", "hospital"],
+      "correct_answer": "house",
+      "explanation": "Sống trong một ngôi nhà (house)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -2.4,
+    "context": "Opposites - Weight",
+    "output": {
+      "question": "A rock is heavy, but a leaf is ___.",
+      "options": ["small", "light", "thin", "short"],
+      "correct_answer": "light",
+      "explanation": "Đối lập với 'heavy' (nặng) là 'light' (nhẹ)."
+    }
+  },
+  {
+    "topic": "Time",
+    "difficulty": -2.2,
+    "context": "Parts of the day",
+    "output": {
+      "question": "I have dinner in the ___.",
+      "options": ["morning", "afternoon", "evening", "noon"],
+      "correct_answer": "evening",
+      "explanation": "Ăn tối vào buổi tối (evening)."
+    }
+  },
+  {
+    "topic": "Personal Info",
+    "difficulty": -2.0,
+    "context": "Job",
+    "output": {
+      "question": "I cook delicious food in a restaurant. I am a ___.",
+      "options": ["doctor", "chef", "teacher", "pilot"],
+      "correct_answer": "chef",
+      "explanation": "Nấu ăn trong nhà hàng là đầu bếp (chef)."
+    }
+  },
+  {
+    "topic": "Common Objects",
+    "difficulty": -1.8,
+    "context": "School supplies",
+    "output": {
+      "question": "I use a ___ to draw straight lines.",
+      "options": ["pen", "ruler", "book", "bag"],
+      "correct_answer": "ruler",
+      "explanation": "Dùng thước kẻ (ruler) để vẽ đường thẳng."
+    }
+  },
+  {
+    "topic": "Common Places",
+    "difficulty": -1.6,
+    "context": "City services",
+    "output": {
+      "question": "I want to save my money. I go to the ___.",
+      "options": ["bank", "post office", "museum", "gym"],
+      "correct_answer": "bank",
+      "explanation": "Gửi tiền tiết kiệm ở ngân hàng (bank)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -1.4,
+    "context": "Opposites - Sound",
+    "output": {
+      "question": "The city is noisy, but the village is ___.",
+      "options": ["busy", "quiet", "loud", "big"],
+      "correct_answer": "quiet",
+      "explanation": "Đối lập với 'noisy' (ồn ào) là 'quiet' (yên tĩnh)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -1.2,
+    "context": "Personality",
+    "output": {
+      "question": "He never shares his toys. He is ___.",
+      "options": ["kind", "friendly", "mean", "happy"],
+      "correct_answer": "mean",
+      "explanation": "Không chia sẻ đồ chơi là người ích kỷ/xấu tính (mean)."
+    }
+  },
+  {
+    "topic": "Family",
+    "difficulty": -3.0,
+    "context": "Basic relations",
+    "output": {
+      "question": "My mother's mother is my ___.",
+      "options": ["grandfather", "grandmother", "aunt", "uncle"],
+      "correct_answer": "grandmother",
+      "explanation": "Mẹ của mẹ là bà ngoại (grandmother)."
+    }
+  },
+  {
+    "topic": "Common Objects",
+    "difficulty": -2.8,
+    "context": "Bathroom",
+    "output": {
+      "question": "I use a ___ to clean my teeth.",
+      "options": ["comb", "toothbrush", "soap", "towel"],
+      "correct_answer": "toothbrush",
+      "explanation": "Đánh răng bằng bàn chải (toothbrush)."
+    }
+  },
+  {
+    "topic": "Common Places",
+    "difficulty": -2.6,
+    "context": "Nature",
+    "output": {
+      "question": "I go to the ___ to see many tall trees and animals.",
+      "options": ["beach", "forest", "mountain", "park"],
+      "correct_answer": "forest",
+      "explanation": "Thấy nhiều cây cao và động vật ở rừng (forest)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -2.4,
+    "context": "Opposites - Appearance",
+    "output": {
+      "question": "The flower is beautiful, but the monster is ___.",
+      "options": ["big", "ugly", "happy", "small"],
+      "correct_answer": "ugly",
+      "explanation": "Đối lập với 'beautiful' (đẹp) là 'ugly' (xấu xí)."
+    }
+  },
+  {
+    "topic": "Time",
+    "difficulty": -2.2,
+    "context": "Parts of the day",
+    "output": {
+      "question": "I have lunch in the ___.",
+      "options": ["morning", "afternoon", "evening", "night"],
+      "correct_answer": "afternoon",
+      "explanation": "Ăn trưa vào buổi trưa/chiều (afternoon)."
+    }
+  },
+  {
+    "topic": "Personal Info",
+    "difficulty": -2.0,
+    "context": "Job",
+    "output": {
+      "question": "I teach students in a school. I am a ___.",
+      "options": ["doctor", "teacher", "pilot", "chef"],
+      "correct_answer": "teacher",
+      "explanation": "Dạy học sinh ở trường là giáo viên (teacher)."
+    }
+  },
+  {
+    "topic": "Common Objects",
+    "difficulty": -1.8,
+    "context": "Kitchen",
+    "output": {
+      "question": "I use a ___ to cut meat.",
+      "options": ["spoon", "fork", "knife", "plate"],
+      "correct_answer": "knife",
+      "explanation": "Cắt thịt bằng dao (knife)."
+    }
+  },
+  {
+    "topic": "Common Places",
+    "difficulty": -1.6,
+    "context": "City services",
+    "output": {
+      "question": "I want to watch a new movie. I go to the ___.",
+      "options": ["library", "cinema", "school", "bank"],
+      "correct_answer": "cinema",
+      "explanation": "Xem phim ở rạp chiếu phim (cinema)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -1.4,
+    "context": "Physical states",
+    "output": {
+      "question": "I drank a lot of water. Now I am not ___.",
+      "options": ["hungry", "thirsty", "tired", "sad"],
+      "correct_answer": "thirsty",
+      "explanation": "Uống nước xong thì không còn khát (thirsty) nữa."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -1.2,
+    "context": "Personality",
+    "output": {
+      "question": "He is afraid to speak in front of people. He is ___.",
+      "options": ["friendly", "kind", "shy", "happy"],
+      "correct_answer": "shy",
+      "explanation": "Sợ nói trước mọi người là người nhút nhát (shy)."
+    }
+  },
+  {
+    "topic": "Family",
+    "difficulty": -3.0,
+    "context": "Basic relations",
+    "output": {
+      "question": "My mother's brother is my ___.",
+      "options": ["uncle", "aunt", "grandfather", "cousin"],
+      "correct_answer": "uncle",
+      "explanation": "Anh/em trai của mẹ là chú/bác (uncle)."
+    }
+  },
+  {
+    "topic": "Common Objects",
+    "difficulty": -2.8,
+    "context": "Bedroom",
+    "output": {
+      "question": "I use a ___ to keep warm at night.",
+      "options": ["pillow", "blanket", "curtain", "sheet"],
+      "correct_answer": "blanket",
+      "explanation": "Dùng chăn (blanket) để giữ ấm."
+    }
+  },
+  {
+    "topic": "Common Places",
+    "difficulty": -2.6,
+    "context": "Public places",
+    "output": {
+      "question": "I go to the ___ to borrow some books.",
+      "options": ["school", "library", "supermarket", "park"],
+      "correct_answer": "library",
+      "explanation": "Mượn sách ở thư viện (library)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -2.4,
+    "context": "Opposites - Complexity",
+    "output": {
+      "question": "1+1=2 is easy, but this math problem is ___.",
+      "options": ["small", "difficult", "good", "cheap"],
+      "correct_answer": "difficult",
+      "explanation": "Đối lập với 'easy' (dễ) là 'difficult' (khó)."
+    }
+  },
+  {
+    "topic": "Time",
+    "difficulty": -2.2,
+    "context": "Clock time",
+    "output": {
+      "question": "It is 7:00. It is seven ___.",
+      "options": ["hour", "minute", "o'clock", "time"],
+      "correct_answer": "o'clock",
+      "explanation": "Dùng 'o'clock' cho giờ đúng."
+    }
+  },
+  {
+    "topic": "Personal Info",
+    "difficulty": -2.0,
+    "context": "Job",
+    "output": {
+      "question": "I help sick people in a hospital. I am a ___.",
+      "options": ["teacher", "nurse", "pilot", "chef"],
+      "correct_answer": "nurse",
+      "explanation": "Giúp người ốm trong bệnh viện là y tá (nurse)."
+    }
+  },
+  {
+    "topic": "Common Objects",
+    "difficulty": -1.8,
+    "context": "Bathroom",
+    "output": {
+      "question": "I look at my face in the ___.",
+      "options": ["mirror", "toilet", "soap", "towel"],
+      "correct_answer": "mirror",
+      "explanation": "Nhìn mặt trong gương (mirror)."
+    }
+  },
+  {
+    "topic": "Common Places",
+    "difficulty": -1.6,
+    "context": "City services",
+    "output": {
+      "question": "I want to buy some fresh fish. I go to the ___.",
+      "options": ["bakery", "market", "cinema", "bank"],
+      "correct_answer": "market",
+      "explanation": "Mua cá tươi ở chợ (market)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -1.4,
+    "context": "Physical states",
+    "output": {
+      "question": "I didn't sleep last night. Now I am ___.",
+      "options": ["happy", "tired", "excited", "fast"],
+      "correct_answer": "tired",
+      "explanation": "Không ngủ khiến ta mệt mỏi (tired)."
+    }
+  },
+  {
+    "topic": "Basic Adjectives",
+    "difficulty": -1.2,
+    "context": "Personality",
+    "output": {
+      "question": "He never shares his things. He is very ___.",
+      "options": ["kind", "friendly", "mean", "happy"],
+      "correct_answer": "mean",
+      "explanation": "Không chia sẻ là người ích kỷ/xấu tính (mean)."
+    }
+  }
+]

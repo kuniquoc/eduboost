@@ -1,0 +1,12 @@
+[
+  {
+    "question": "Khi nào dùng thì Hiện tại đơn để nói về tương lai?",
+    "expected_context": "Hiện tại đơn được dùng để nói về tương lai khi nói về lịch trình, thời khóa biểu cố định như giờ tàu chạy, giờ bay.",
+    "ground_truth": "Dùng cho lịch trình, thời khóa biểu cố định."
+  },
+  {
+    "question": "Phân biệt since và for trong thì Hiện tại hoàn thành",
+    "expected_context": "Since được dùng với một mốc thời gian, trong khi For được dùng với một khoảng thời gian.",
+    "ground_truth": "Since cho mốc thời gian, For cho khoảng thời gian."
+  }
+]

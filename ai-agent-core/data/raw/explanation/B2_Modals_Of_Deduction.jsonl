@@ -1,0 +1,856 @@
+[
+  {
+    "topic": "Modals of Deduction",
+    "level": "B2",
+    "student_input": "He has three Ferraris and a private jet, so he can't be rich.",
+    "correct_answer": "He has three Ferraris and a private jet, so he must be rich.",
+    "explanation": "Hãy nhìn vào các bằng chứng: 'ba chiếc Ferrari' và 'một chiếc chuyên cơ'. Những bằng chứng này dẫn bạn đến kết luận nào về tình trạng tài chính của anh ấy? Bạn đang dùng 'can't be' (chắc chắn không), liệu nó có logic với bằng chứng trên không?"
+  },
+  {
+    "topic": "Modals of Deduction",
+    "level": "B2",
+    "student_input": "The lights are off and no one is answering the door, so they must be at home.",
+    "correct_answer": "The lights are off and no one is answering the door, so they can't be at home.",
+    "explanation": "Hãy phân tích tình huống: 'đèn tắt' và 'không ai trả lời cửa'. Nếu bạn thấy những dấu hiệu này, bạn sẽ suy luận rằng họ ĐANG ở nhà hay KHÔNG THỂ ở nhà? Bạn nên dùng modal verb nào để thể hiện sự chắc chắn về một điều không thể?"
+  },
+  {
+    "topic": "Modals of Deduction",
+    "level": "B2",
+    "student_input": "I'm not sure where Sarah is. She must be in the library, but I haven't checked yet.",
+    "correct_answer": "I'm not sure where Sarah is. She might be in the library, but I haven't checked yet.",
+    "explanation": "Hãy chú ý cụm từ 'I'm not sure' (Tôi không chắc). 'Must be' dùng khi bạn gần như chắc chắn 90-100%. Khi bạn chỉ đang 'đoán' và không chắc chắn, bạn nên dùng modal verb nào để thể hiện khả năng thấp hơn?"
+  },
+  {
+    "topic": "Modals of Deduction",
+    "level": "B2",
+    "student_input": "That man looks exactly like your father. He must be your brother!",
+    "correct_answer": "That man looks exactly like your father. He could be your brother!",
+    "explanation": "Việc 'trông giống' là một bằng chứng mạnh, nhưng nó không đủ để khẳng định 100% về mối quan hệ huyết thống. Trong trường hợp này, dùng 'must' có vẻ quá khẳng định. Bạn có thể dùng modal verb nào để diễn đạt một 'khả năng có thể xảy ra' (possibility) thay vì một 'kết luận chắc chắn' (deduction)?"
+  },
+  {
+    "topic": "Modals of Deduction",
+    "level": "B2",
+    "student_input": "She's been speaking Japanese fluently, so she can't have lived in Tokyo.",
+    "correct_answer": "She's been speaking Japanese fluently, so she must have lived in Tokyo.",
+    "explanation": "Hãy nhìn vào khả năng 'nói tiếng Nhật lưu loát'. Đây là kết quả của việc gì? Việc 'sống ở Tokyo' là một nguyên nhân hợp lý hay không hợp lý cho kết quả này? Hãy điều chỉnh modal verb để thể hiện một suy luận logic tích cực."
+  },
+  {
+    "topic": "Modals of Deduction",
+    "level": "B2",
+    "student_input": "He is wearing a professional suit and carrying a briefcase, so he must be a doctor.",
+    "correct_answer": "He is wearing a professional suit and carrying a briefcase, so he might be a doctor.",
+    "explanation": "Hãy phân tích: 'mặc suit' và 'cầm cặp táp' là đặc điểm của nhiều nghề nghiệp (luật sư, doanh nhân, tư vấn viên...), không chỉ riêng bác sĩ. Khi bằng chứng không đủ để kết luận duy nhất một nghề nghiệp, bạn nên dùng 'must' hay một modal verb chỉ khả năng?"
+  },
+  {
+    "topic": "Modals of Deduction",
+    "level": "B2",
+    "student_input": "The phone is ringing, but it must not be Mary because she is in a meeting.",
+    "correct_answer": "The phone is ringing, but it can't be Mary because she is in a meeting.",
+    "explanation": "Trong tiếng Anh, để diễn đạt một suy luận phủ định chắc chắn (gần như 100% không thể), chúng ta không dùng 'must not'. Bạn hãy nhớ lại xem modal verb nào thường được dùng để thay thế 'must not' trong các câu suy luận (deduction)?"
+  },
+  {
+    "topic": "Modals of Deduction",
+    "level": "B2",
+    "student_input": "They've been traveling for 20 hours straight, so they can't be exhausted.",
+    "correct_answer": "They've been traveling for 20 hours straight, so they must be exhausted.",
+    "explanation": "Hãy suy nghĩ về logic: Di chuyển liên tục 20 giờ $\rightarrow$ trạng thái cơ thể sẽ như thế nào? 'Can't be' nghĩa là 'không thể nào'. Điều này có phù hợp với thực tế không?"
+  },
+  {
+    "topic": "Modals of Deduction",
+    "level": "B2",
+    "student_input": "The sky is getting very dark and the wind is picking up, so it must rain soon.",
+    "correct_answer": "The sky is getting very dark and the wind is picking up, so it might rain soon.",
+    "explanation": "Hãy nhìn vào từ 'soon' (sắp tới). Bạn đang dự đoán về thời tiết. Trong tiếng Anh, khi dự đoán một sự việc có khả năng xảy ra nhưng không thể chắc chắn tuyệt đối, chúng ta dùng 'must' hay 'might/may'?"
+  },
+  {
+    "topic": "Modals of Deduction",
+    "level": "B2",
+    "student_input": "She has a very expensive taste in clothes, so she can be a fashion designer.",
+    "correct_answer": "She has a very expensive taste in clothes, so she could be a fashion designer.",
+    "explanation": "Bạn đang đưa ra một giả thuyết dựa trên sở thích của cô ấy. 'Can' thường dùng để nói về khả năng chung (ability) hoặc sự cho phép. Để đưa ra một suy luận về một khả năng có thể đúng, bạn nên dùng modal verb nào (ví dụ: could, might, may)?"
+  },
+  {
+    "topic": "Modals of Deduction",
+    "level": "B2",
+    "student_input": "He doesn't know how to use a computer, so he must be a software engineer.",
+    "correct_answer": "He doesn't know how to use a computer, so he can't be a software engineer.",
+    "explanation": "Hãy đối chiếu: 'không biết dùng máy tính' $\leftrightarrow$ 'kỹ sư phần mềm'. Hai điều này có mâu thuẫn không? Nếu mâu thuẫn, bạn cần một modal verb thể hiện sự phủ định chắc chắn. Đó là từ nào?"
+  },
+  {
+    "topic": "Modals of Deduction",
+    "level": "B2",
+    "student_input": "The cake is gone! The dog must be eating it while we were out.",
+    "correct_answer": "The cake is gone! The dog must have eaten it while we were out.",
+    "explanation": "Hãy nhìn vào vế 'while we were out' (trong khi chúng tôi đi vắng). Đây là một sự việc đã xảy ra trong quá khứ. Bạn đang dùng 'must be eating' (đang xảy ra hiện tại). Để suy luận về một hành động đã hoàn tất trong quá khứ, cấu trúc của 'must' cần đi kèm với cụm từ nào?"
+  },
+  {
+    "topic": "Modals of Deduction",
+    "level": "B2",
+    "student_input": "You've been working for 12 hours without a break. You must to be exhausted.",
+    "correct_answer": "You've been working for 12 hours without a break. You must be exhausted.",
+    "explanation": "Hãy nhìn vào cụm 'must to be'. Modal verbs như must, can, might, should... có bao giờ đi kèm với 'to' trước động từ chính không? Bạn hãy thử lược bỏ 'to' xem câu văn có tự nhiên hơn không."
+  },
+  {
+    "topic": "Modals of Deduction",
+    "level": "B2",
+    "student_input": "He is always on time. He can't be late today, can he?",
+    "correct_answer": "He is always on time. He can't be late today, can he?",
+    "explanation": "Câu này chính xác về ngữ pháp và logic. Bạn đang dùng 'can't be' cho một suy luận phủ định chắc chắn. Thử thách: Nếu bạn không chắc chắn lắm và muốn nói 'Có lẽ anh ấy sẽ muộn', bạn sẽ thay 'can't be' bằng từ nào?"
+  },
+  {
+    "topic": "Modals of Deduction",
+    "level": "B2",
+    "student_input": "She is wearing a wedding ring, so she must be married.",
+    "correct_answer": "She is wearing a wedding ring, so she must be married.",
+    "explanation": "Câu này đúng. Việc 'đeo nhẫn cưới' là bằng chứng rất mạnh dẫn đến kết luận 'đã kết hôn'. Nếu tôi thay 'wedding ring' bằng 'a beautiful ring', liệu bạn còn dùng 'must' được không? Tại sao?"
+  },
+  {
+    "topic": "Modals of Deduction",
+    "level": "B2",
+    "student_input": "She's not answering her phone and her car is gone, so she must be working at the moment.",
+    "correct_answer": "She's not answering her phone and her car is gone, so she might be working at the moment.",
+    "explanation": "Hãy xem xét các bằng chứng: 'không nghe máy' và 'xe không có ở nhà'. Điều này có chắc chắn 100% là cô ấy ĐANG đi làm không? Cô ấy có thể đang đi siêu thị hoặc đi dạo không? Khi có nhiều khả năng xảy ra, bạn nên dùng 'must' hay một modal verb chỉ sự dự đoán?"
+  },
+  {
+    "topic": "Modals of Deduction",
+    "level": "B2",
+    "student_input": "He's wearing a lab coat and holding a stethoscope, so he must not be a doctor.",
+    "correct_answer": "He's wearing a lab coat and holding a stethoscope, so he must be a doctor.",
+    "explanation": "Hãy nhìn vào các vật dụng: 'áo blouse' và 'ống nghe'. Những thứ này là đặc trưng của nghề nghiệp nào? Kết luận 'must not be a doctor' (chắc chắn không phải bác sĩ) có logic với bằng chứng này không?"
+  },
+  {
+    "topic": "Modals of Deduction",
+    "level": "B2",
+    "student_input": "The company's stocks are plummeting, so the management must be doing a great job.",
+    "correct_answer": "The company's stocks are plummeting, so the management can't be doing a great job.",
+    "explanation": "Hãy phân tích từ 'plummeting' (sụt giảm nghiêm trọng). Nếu cổ phiếu giảm mạnh, liệu việc ban quản lý 'đang làm tốt' có phải là một kết luận hợp lý không? Bạn nên dùng modal verb nào để thể hiện một sự phủ định chắc chắn?"
+  },
+  {
+    "topic": "Modals of Deduction",
+    "level": "B2",
+    "student_input": "I can smell something burning in the kitchen. It must be the toast, but it could also be the curtains!",
+    "correct_answer": "I can smell something burning in the kitchen. It might be the toast, but it could also be the curtains!",
+    "explanation": "Bạn đang liệt kê hai khả năng: 'bánh mì' hoặc 'rèm cửa'. Khi bạn không chắc chắn cái nào đúng và đưa ra các lựa chọn, liệu dùng 'must' (chắc chắn) cho lựa chọn đầu tiên có làm mất đi sự phân vân của bạn không?"
+  },
+  {
+    "topic": "Modals of Deduction",
+    "level": "B2",
+    "student_input": "She has a perfect accent and knows all the local customs, so she can be from London.",
+    "correct_answer": "She has a perfect accent and knows all the local customs, so she must be from London.",
+    "explanation": "Bằng chứng 'accent hoàn hảo' và 'biết hết phong tục' là rất mạnh. 'Can' thường dùng để nói về khả năng chung. Để đưa ra một kết luận logic gần như chắc chắn dựa trên bằng chứng, bạn nên dùng modal verb nào?"
+  },
+  {
+    "topic": "Modals of Deduction",
+    "level": "B2",
+    "student_input": "The house is completely silent and the mail is piling up, so they must be on vacation.",
+    "correct_answer": "The house is completely silent and the mail is piling up, so they might be on vacation.",
+    "explanation": "Hãy suy nghĩ: Ngoài việc 'đi nghỉ', còn lý do nào khác khiến nhà im lặng và thư tích tụ không (ví dụ: họ bị ốm, hoặc chuyển nhà)? Khi có nhiều giả thuyết, 'must' có quá khẳng định không? Bạn nên dùng từ nào để diễn tả một khả năng?"
+  },
+  {
+    "topic": "Modals of Deduction",
+    "level": "B2",
+    "student_input": "He's yawning every two minutes, so he must to be tired.",
+    "correct_answer": "He's yawning every two minutes, so he must be tired.",
+    "explanation": "Hãy nhìn vào cụm 'must to be'. Bạn có nhớ quy tắc về động từ đi sau các modal verbs (must, can, should, might...) không? Chúng ta có dùng 'to' trước động từ chính không?"
+  },
+  {
+    "topic": "Modals of Deduction",
+    "level": "B2",
+    "student_input": "They are arguing loudly in the next room, so they must not be having a friendly conversation.",
+    "correct_answer": "They are arguing loudly in the next room, so they can't be having a friendly conversation.",
+    "explanation": "Bạn đang suy luận một điều chắc chắn là KHÔNG THỂ xảy ra (không thể là cuộc trò chuyện thân thiện). Hãy nhớ lại: trong suy luận phủ định chắc chắn, chúng ta dùng 'must not' hay 'can't'?"
+  },
+  {
+    "topic": "Modals of Deduction",
+    "level": "B2",
+    "student_input": "The street is flooded and people are using boats, so it must rain heavily right now.",
+    "correct_answer": "The street is flooded and people are using boats, so it must be raining heavily right now.",
+    "explanation": "Hãy nhìn vào bằng chứng 'đang dùng thuyền'. Điều này cho thấy hành động mưa đang diễn ra tại thời điểm này. Để suy luận về một hành động ĐANG diễn ra, bạn nên dùng 'must rain' (thói quen/sự thật) hay 'must be raining' (tiếp diễn)?"
+  },
+  {
+    "topic": "Modals of Deduction",
+    "level": "B2",
+    "student_input": "She's wearing a very expensive diamond ring, so she can be wealthy.",
+    "correct_answer": "She's wearing a very expensive diamond ring, so she could be wealthy.",
+    "explanation": "Một chiếc nhẫn kim cương đắt tiền là bằng chứng cho thấy cô ấy 'có thể' giàu, nhưng không khẳng định 100% (vì có thể là đồ mượn hoặc quà tặng). Trong suy luận, để chỉ một khả năng, chúng ta dùng 'can' hay 'could/might'?"
+  },
+  {
+    "topic": "Modals of Deduction",
+    "level": "B2",
+    "student_input": "He's been staring at that map for ten minutes with a confused look, so he must be a tourist.",
+    "correct_answer": "He's been staring at that map for ten minutes with a confused look, so he might be a tourist.",
+    "explanation": "Hãy phân tích: 'nhìn bản đồ' và 'vẻ mặt bối rối'. Đây là dấu hiệu điển hình của khách du lịch, nhưng cũng có thể là một người mới chuyển đến thành phố này. Liệu 'must' có quá tuyệt đối không? Bạn nên dùng từ nào để mở ra các khả năng khác?"
+  },
+  {
+    "topic": "Modals of Deduction",
+    "level": "B2",
+    "student_input": "The baby is crying uncontrollably, so she must be hungry or sleepy.",
+    "correct_answer": "The baby is crying uncontrollably, so she must be hungry or sleepy.",
+    "explanation": "Câu này đúng về ngữ pháp. Bạn đang đưa ra kết luận logic nhất từ bằng chứng. Thử thách: Nếu bạn không chắc chắn và muốn nói 'Có lẽ đứa bé đang đói', bạn sẽ thay 'must' bằng từ nào?"
+  },
+  {
+    "topic": "Modals of Deduction",
+    "level": "B2",
+    "student_input": "He speaks five languages fluently, so he must be a linguist.",
+    "correct_answer": "He speaks five languages fluently, so he could be a linguist.",
+    "explanation": "Việc nói 5 thứ tiếng là một khả năng tuyệt vời, nhưng không nhất thiết người đó phải là 'nhà ngôn ngữ học' (linguist) - họ có thể là một nhà ngoại giao hoặc người thích học tiếng. Khi kết luận về nghề nghiệp mà không có bằng chứng chính thức, bạn nên dùng 'must' hay 'could/might'?"
+  },
+  {
+    "topic": "Modals of Deduction",
+    "level": "B2",
+    "student_input": "The fridge is completely empty, so we must not be going shopping today.",
+    "correct_answer": "The fridge is completely empty, so we must be going shopping today.",
+    "explanation": "Hãy suy nghĩ về logic: 'Tủ lạnh trống rỗng' $\rightarrow$ 'Hành động cần làm'. Việc nói 'chúng ta chắc chắn không đi mua sắm' có phù hợp với tình trạng tủ lạnh không? Bạn nên dùng khẳng định hay phủ định ở đây?"
+  },
+  {
+    "topic": "Modals of Deduction",
+    "level": "B2",
+    "student_input": "The gym is packed with people, so it must be the start of the New Year's resolutions.",
+    "correct_answer": "The gym is packed with people, so it must be the start of the New Year's resolutions.",
+    "explanation": "Câu này chính xác. Bạn đã kết nối bằng chứng (phòng gym đông) với một hiện tượng xã hội phổ biến. Thử thách: Nếu bạn chỉ đoán vu vơ mà không có cơ sở chắc chắn, bạn sẽ thay 'must' bằng từ nào?"
+  },
+  {
+    "topic": "Modals of Deduction",
+    "level": "B2",
+    "student_input": "She is wearing a very formal gown and diamonds, so she can't be going to a casual dinner.",
+    "correct_answer": "She is wearing a very formal gown and diamonds, so she can't be going to a casual dinner.",
+    "explanation": "Câu này đúng. 'Váy dạ hội và kim cương' $\rightarrow$ không thể là 'bữa tối bình thường'. Bạn đã dùng 'can't' cho suy luận phủ định chắc chắn rất tốt. Thử thách: Chuyển câu này sang thể khẳng định (Cô ấy chắc chắn đang đi dự tiệc sang trọng), bạn sẽ dùng modal verb nào?"
+  },
+  {
+    "topic": "Modals of Deduction",
+    "level": "B2",
+    "student_input": "He has never been to Asia, so he must not be knowing anything about Japanese culture.",
+    "correct_answer": "He has never been to Asia, so he can't know anything about Japanese culture.",
+    "explanation": "Có hai vấn đề ở đây. Thứ nhất: 'Must not' không dùng cho suy luận phủ định chắc chắn. Thứ hai: 'Know' là động từ trạng thái (stative verb), không dùng dạng tiếp diễn 'be knowing'. Bạn hãy thay 'must not be knowing' bằng 'can't + V-bare' xem sao."
+  },
+  {
+    "topic": "Modals of Deduction",
+    "level": "B2",
+    "student_input": "The dog is wagging its tail and jumping around, so it must be happy to see you.",
+    "correct_answer": "The dog is wagging its tail and jumping around, so it must be happy to see you.",
+    "explanation": "Câu này đúng. Hành động của con chó là bằng chứng rõ ràng cho cảm xúc của nó. Thử thách: Nếu con chó chỉ hơi vẫy đuôi một chút và bạn không chắc, bạn sẽ thay 'must' bằng từ nào?"
+  },
+  {
+    "topic": "Modals of Deduction",
+    "level": "B2",
+    "student_input": "The wind is howling and the trees are bending, so it must be a storm outside.",
+    "correct_answer": "The wind is howling and the trees are bending, so it must be a storm outside.",
+    "explanation": "Câu này chính xác. Bằng chứng mạnh $\rightarrow$ Kết luận chắc chắn. Thử thách: Chuyển câu này sang dạng suy luận về một hành động ĐANG diễn ra (Ví dụ: 'Trời chắc chắn đang bão'), bạn sẽ dùng cấu trúc 'must be + V-ing' như thế nào?"
+  },
+  {
+    "topic": "Modals of Deduction",
+    "level": "B2",
+    "student_input": "She is always meticulous with her work, so she can't have made such a basic mistake.",
+    "correct_answer": "She is always meticulous with her work, so she can't have made such a basic mistake.",
+    "explanation": "Câu này đúng. Bạn đã kết hợp đặc điểm tính cách (meticulous) để suy luận một việc không thể xảy ra trong quá khứ (can't have V3). Thử thách: Nếu bạn chỉ nghi ngờ (không chắc chắn 100%), bạn sẽ thay 'can't have' bằng cụm từ nào (ví dụ: might not have)?"
+  },
+  {
+    "topic": "Modals of Deduction",
+    "level": "B2",
+    "student_input": "The alarm is going off, so someone must be breaking into the house.",
+    "correct_answer": "The alarm is going off, so someone might be breaking into the house.",
+    "explanation": "Hãy suy nghĩ: Chuông báo động kêu có thể do nguyên nhân nào khác không (ví dụ: lỗi hệ thống, con mèo làm đổ đồ)? Khi có những khả năng khác, việc dùng 'must' (chắc chắn) có thể gây hoảng loạn không cần thiết. Bạn nên dùng modal verb nào để chỉ một khả năng?"
+  },
+  {
+    "topic": "Modals of Deduction",
+    "level": "B2",
+    "student_input": "He is wearing glasses and reading a thick academic book, so he must to be a professor.",
+    "correct_answer": "He is wearing glasses and reading a thick academic book, so he might be a professor.",
+    "explanation": "Có hai lỗi. Một là lỗi hình thái: 'must to be'. Hai là lỗi logic: 'đeo kính và đọc sách' không đủ để khẳng định 100% là giáo sư. Bạn hãy sửa 'must to be' thành một modal verb chỉ khả năng và bỏ 'to' đi."
+  },
+  {
+    "topic": "Modals of Deduction",
+    "level": "B2",
+    "student_input": "They are both laughing and hugging, so they must be enemies.",
+    "correct_answer": "They are both laughing and hugging, so they can't be enemies.",
+    "explanation": "Hãy phân tích: 'cười' và 'ôm nhau' $\rightarrow$ 'kẻ thù'. Điều này có logic không? Bạn cần một modal verb thể hiện sự phủ định chắc chắn ở đây."
+  },
+  {
+    "topic": "Modals of Deduction",
+    "level": "B2",
+    "student_input": "I can't find my keys anywhere. They must be in the car, but I'm not sure.",
+    "correct_answer": "I can't find my keys anywhere. They might be in the car, but I'm not sure.",
+    "explanation": "Hãy chú ý cụm 'but I'm not sure' (nhưng tôi không chắc). Nó mâu thuẫn trực tiếp với 'must' (chắc chắn). Để phù hợp với vế sau, bạn nên dùng modal verb nào để diễn tả sự không chắc chắn?"
+  },
+  {
+    "topic": "Modals of Deduction",
+    "level": "B2",
+    "student_input": "The room is filled with balloons and a cake is on the table, so it must be a party.",
+    "correct_answer": "The room is filled with balloons and a cake is on the table, so it must be a party.",
+    "explanation": "Câu này chính xác. Bằng chứng quá rõ ràng $\rightarrow$ Kết luận chắc chắn. Thử thách: Viết lại câu này bằng cách dùng 'can't' để nói về việc đây KHÔNG THỂ là một cuộc họp công việc."
+  },
+  {
+    "topic": "Modals of Deduction",
+    "level": "B2",
+    "student_input": "The ground is soaking wet this morning, so it must rain heavily last night.",
+    "correct_answer": "The ground is soaking wet this morning, so it must have rained heavily last night.",
+    "explanation": "Hãy nhìn vào mốc thời gian 'last night'. Bạn đang đưa ra một kết luận chắc chắn về một sự việc ĐÃ xảy ra. Cấu trúc 'must + V-bare' dùng cho hiện tại, vậy để suy luận về quá khứ, bạn cần thêm thành phần nào vào giữa 'must' và động từ chính?"
+  },
+  {
+    "topic": "Modals of Deduction",
+    "level": "B2",
+    "student_input": "He was in New York during the robbery, so he must not have committed the crime in London.",
+    "correct_answer": "He was in New York during the robbery, so he can't have committed the crime in London.",
+    "explanation": "Hãy phân tích logic: Nếu một người đang ở New York, việc họ gây án ở London là 'không thể'. Trong suy luận phủ định chắc chắn ở quá khứ, chúng ta dùng 'must not have' hay 'can't have'?"
+  },
+  {
+    "topic": "Modals of Deduction",
+    "level": "B2",
+    "student_input": "I can't find my keys. I should have left them at the office, but I'm not sure.",
+    "correct_answer": "I can't find my keys. I might have left them at the office, but I'm not sure.",
+    "explanation": "Hãy chú ý cụm 'but I'm not sure'. 'Should have' dùng để nói về một việc 'lẽ ra nên làm nhưng đã không làm'. Ở đây bạn đang 'đoán' về một khả năng. Bạn nên dùng modal verb nào để thể hiện sự không chắc chắn trong quá khứ?"
+  },
+  {
+    "topic": "Modals of Deduction",
+    "level": "B2",
+    "student_input": "She looks absolutely exhausted. She must worked all night.",
+    "correct_answer": "She looks absolutely exhausted. She must have worked all night.",
+    "explanation": "Bạn đang suy luận về nguyên nhân dẫn đến trạng thái 'kiệt sức' hiện tại $\rightarrow$ hành động làm việc đã diễn ra trong quá khứ. Bạn đang dùng 'must + V2'. Bạn có nhớ cấu trúc chuẩn của suy luận quá khứ là 'Modal + ____ + V3' không?"
+  },
+  {
+    "topic": "Modals of Deduction",
+    "level": "B2",
+    "student_input": "They didn't answer the phone, so they might not heard it.",
+    "correct_answer": "They didn't answer the phone, so they might not have heard it.",
+    "explanation": "Hãy nhìn vào vế 'might not heard'. 'Heard' là V2/V3. Để tạo thành một cấu trúc suy luận về khả năng trong quá khứ, bạn không thể đặt V3 ngay sau 'might not'. Bạn còn thiếu trợ động từ nào ở giữa?"
+  },
+  {
+    "topic": "Modals of Deduction",
+    "level": "B2",
+    "student_input": "The window is broken and the jewelry is gone. Someone must’ve break in last night.",
+    "correct_answer": "The window is broken and the jewelry is gone. Someone must’ve broken in last night.",
+    "explanation": "Bạn đã dùng đúng 'must've' (viết tắt của must have). Tuy nhiên, hãy kiểm tra lại động từ 'break'. Sau 'have' trong cấu trúc suy luận quá khứ, động từ phải ở dạng nào?"
+  },
+  {
+    "topic": "Modals of Deduction",
+    "level": "B2",
+    "student_input": "He's a vegetarian, so he can't have eat the steak I left on the table.",
+    "correct_answer": "He's a vegetarian, so he can't have eaten the steak I left on the table.",
+    "explanation": "Logic của bạn rất tốt: 'ăn chay' $\rightarrow$ 'không thể ăn bít tết'. Nhưng hãy nhìn vào 'can't have eat'. Bạn hãy chia động từ 'eat' về dạng phân từ hai (V3) để hoàn thiện câu này."
+  },
+  {
+    "topic": "Modals of Deduction",
+    "level": "B2",
+    "student_input": "I don't see any luggage in his room. He must’ve be traveling light.",
+    "correct_answer": "I don't see any luggage in his room. He must have been traveling light.",
+    "explanation": "Bạn đang suy luận về một trạng thái/hành động kéo dài trong chuyến đi vừa qua. Cấu trúc 'must have' cần đi kèm với V3. Dạng V3 của động từ 'be' là gì? Và nếu bạn muốn nhấn mạnh việc 'đang đi' (tiếp diễn), bạn sẽ thêm gì sau 'been'?"
+  },
+  {
+    "topic": "Modals of Deduction",
+    "level": "B2",
+    "student_input": "She didn't recognize me. She must forgot who I was.",
+    "correct_answer": "She didn't recognize me. She must have forgotten who I was.",
+    "explanation": "Việc 'không nhận ra' xảy ra vì trước đó cô ấy 'đã quên'. Bạn đang dùng 'must + V1'. Bạn hãy áp dụng công thức 'Modal + have + V3' để đưa suy luận này về quá khứ."
+  },
+  {
+    "topic": "Modals of Deduction",
+    "level": "B2",
+    "student_input": "The evidence is clear. The suspect must not have lied to the police.",
+    "correct_answer": "The evidence is clear. The suspect can't have lied to the police.",
+    "explanation": "Hãy phân tích: 'Bằng chứng rõ ràng' $\rightarrow$ 'Việc nói dối là không thể'. Một lần nữa, hãy nhớ lại: để diễn tả một sự phủ định chắc chắn (impossibility) trong quá khứ, chúng ta dùng 'must not have' hay 'can't have'?"
+  },
+  {
+    "topic": "Modals of Deduction",
+    "level": "B2",
+    "student_input": "I can't find my umbrella. I could leave it on the bus yesterday.",
+    "correct_answer": "I can't find my umbrella. I could have left it on the bus yesterday.",
+    "explanation": "Bạn đang nói về một khả năng đã xảy ra 'yesterday'. 'Could + V-bare' thường dùng cho khả năng chung hoặc xin phép. Để nói về một giả thuyết trong quá khứ, bạn cần cấu trúc 'Could + ____ + V3'?"
+  },
+  {
+    "topic": "Modals of Deduction",
+    "level": "B2",
+    "student_input": "He failed the exam. He must not have studied enough.",
+    "correct_answer": "He failed the exam. He might not have studied enough.",
+    "explanation": "Hãy cân nhắc mức độ chắc chắn. 'Trượt kỳ thi' có chắc chắn 100% là do 'không học bài' không? Có thể anh ấy đã học nhưng bị ốm lúc thi? Khi bạn chỉ đưa ra một giả thuyết có khả năng xảy ra, bạn nên dùng 'must not' hay 'might not'?"
+  },
+  {
+    "topic": "Modals of Deduction",
+    "level": "B2",
+    "student_input": "They arrived two hours early. They must have take the wrong train.",
+    "correct_answer": "They arrived two hours early. They must have taken the wrong train.",
+    "explanation": "Bạn đã dùng đúng 'must have' cho suy luận quá khứ. Tuy nhiên, hãy kiểm tra lại động từ 'take'. Dạng V3 của 'take' là gì?"
+  },
+  {
+    "topic": "Modals of Deduction",
+    "level": "B2",
+    "student_input": "The cake is gone! The kids must’ve ate it while I was sleeping.",
+    "correct_answer": "The cake is gone! The kids must’ve eaten it while I was sleeping.",
+    "explanation": "Hãy nhìn vào 'must've ate'. 'Ate' là V2 (Quá khứ đơn). Trong cấu trúc Perfect Modal (Modal + have + V3), bạn phải dùng dạng phân từ hai của 'eat' là gì?"
+  },
+  {
+    "topic": "Modals of Deduction",
+    "level": "B2",
+    "student_input": "She didn't call me back. She should have been too busy to notice my message.",
+    "correct_answer": "She didn't call me back. She must have been too busy to notice my message.",
+    "explanation": "Hãy phân tích ý nghĩa: Bạn đang 'suy luận' lý do cô ấy không gọi lại (có lẽ vì bận). 'Should have' dùng để chỉ một bổn phận hoặc điều lẽ ra nên xảy ra. Để đưa ra kết luận logic từ bằng chứng, bạn nên dùng modal verb nào?"
+  },
+  {
+    "topic": "Modals of Deduction",
+    "level": "B2",
+    "student_input": "He looks confused. He might have not understood the instructions.",
+    "correct_answer": "He looks confused. He might not have understood the instructions.",
+    "explanation": "Hãy nhìn vào vị trí của từ 'not'. Trong cấu trúc 'Modal + have + V3', từ 'not' phải đứng ở đâu để câu văn đúng ngữ pháp? Bạn hãy thử đặt 'not' ngay sau modal verb xem sao."
+  },
+  {
+    "topic": "Modals of Deduction",
+    "level": "B2",
+    "student_input": "The movie was terrible. We could have not wasted our time going to the cinema.",
+    "correct_answer": "The movie was terrible. We shouldn't have wasted our time going to the cinema.",
+    "explanation": "Đây là một trường hợp đặc biệt. Bạn không đang 'suy luận' (deduction) mà đang 'hối tiếc' (regret) vì một việc đã làm. Để diễn đạt 'Lẽ ra chúng tôi không nên...', bạn dùng 'could not have' hay 'should not have'?"
+  },
+  {
+    "topic": "Modals of Deduction",
+    "level": "B2",
+    "student_input": "I saw her at the airport, so she must’ve fly to Paris.",
+    "correct_answer": "I saw her at the airport, so she must have flown to Paris.",
+    "explanation": "Bạn đã dùng 'must've' cho suy luận quá khứ rất tốt. Tuy nhiên, hãy nhìn động từ 'fly'. Dạng V3 của 'fly' là gì?"
+  },
+  {
+    "topic": "Modals of Deduction",
+    "level": "B2",
+    "student_input": "The car is still in the garage, so he can't have gone to work.",
+    "correct_answer": "The car is still in the garage, so he can't have gone to work.",
+    "explanation": "Câu này chính xác về cả logic lẫn ngữ pháp. Bạn đã dùng 'can't have V3' cho một suy luận phủ định chắc chắn. Thử thách: Nếu bạn muốn nói 'Có lẽ anh ấy đã đi bộ đi làm', bạn sẽ dùng modal verb nào thay cho 'can't'?"
+  },
+  {
+    "topic": "Modals of Deduction",
+    "level": "B2",
+    "student_input": "She spoke perfect Italian. She must’ve be living in Italy for a long time.",
+    "correct_answer": "She spoke perfect Italian. She must have lived in Italy for a long time.",
+    "explanation": "Hãy nhìn vào 'must've be living'. Bạn đang muốn nói về một sự thật trong quá khứ. Nếu bạn dùng 'must have lived', câu sẽ gọn hơn. Nếu bạn muốn dùng dạng tiếp diễn để nhấn mạnh quá trình, bạn cần 'must have been living'. Bạn hãy chọn một trong hai cách và điều chỉnh lại động từ 'be' cho đúng."
+  },
+  {
+    "topic": "Modals of Deduction",
+    "level": "B2",
+    "student_input": "The grass is still wet, but it's not raining now. It must have been rain all night.",
+    "correct_answer": "The grass is still wet, but it's not raining now. It must have been raining all night.",
+    "explanation": "Hãy nhìn vào cụm 'must have been rain'. Bạn đang muốn nói về một hành động kéo dài suốt đêm (all night). Để diễn tả một hành động tiếp diễn trong quá khứ dưới dạng suy luận, bạn nên dùng 'been' đi kèm với dạng động từ nào?"
+  },
+  {
+    "topic": "Modals of Deduction",
+    "level": "B2",
+    "student_input": "The window was broken from the inside, so the thief must have been let in by someone.",
+    "correct_answer": "The window was broken from the inside, so the thief must have been let in by someone.",
+    "explanation": "Câu này chính xác. Bạn đã kết hợp thành công suy luận quá khứ và thể bị động. Thử thách: Nếu bạn không chắc chắn và muốn nói 'Có lẽ tên trộm đã được ai đó cho vào', bạn sẽ thay 'must' bằng từ nào?"
+  },
+  {
+    "topic": "Modals of Deduction",
+    "level": "B2",
+    "student_input": "She's a world-class athlete, so she must not have struggled with the training regime.",
+    "correct_answer": "She's a world-class athlete, so she can't have struggled with the training regime.",
+    "explanation": "Hãy phân tích: 'Vận động viên đẳng cấp thế giới' $\rightarrow$ 'Việc gặp khó khăn với chế độ tập luyện là không thể'. Một lần nữa, hãy nhớ lại: Để diễn tả một sự phủ định chắc chắn trong quá khứ, chúng ta dùng 'must not have' hay 'can't have'?"
+  },
+  {
+    "topic": "Modals of Deduction",
+    "level": "B2",
+    "student_input": "I can't find my phone. I might’ve leave it in the taxi, but I'm not entirely sure.",
+    "correct_answer": "I can't find my phone. I might’ve left it in the taxi, but I'm not entirely sure.",
+    "explanation": "Bạn dùng 'might've' để chỉ một khả năng rất tốt. Tuy nhiên, hãy kiểm tra lại động từ 'leave'. Trong cấu trúc Perfect Modal, động từ chính phải ở dạng phân từ hai (V3). Dạng V3 của 'leave' là gì?"
+  },
+  {
+    "topic": "Modals of Deduction",
+    "level": "B2",
+    "student_input": "The documents were shredded, so the manager must have be trying to hide the evidence.",
+    "correct_answer": "The documents were shredded, so the manager must have been trying to hide the evidence.",
+    "explanation": "Hãy nhìn vào 'must have be trying'. Bạn đang suy luận về một hành động kéo dài (cố gắng che giấu). Để tạo thành dạng Perfect Continuous (Modal + have + been + V-ing), bạn cần chia động từ 'be' ở dạng nào?"
+  },
+  {
+    "topic": "Modals of Deduction",
+    "level": "B2",
+    "student_input": "He arrived at the party soaking wet. It must have rain while he was walking.",
+    "correct_answer": "He arrived at the party soaking wet. It must have rained while he was walking.",
+    "explanation": "Hãy đối chiếu: 'đến bữa tiệc trong tình trạng ướt sũng' $\rightarrow$ 'việc mưa đã xảy ra trước đó'. Bạn đang dùng 'must have rain' (V1). Bạn hãy chia động từ 'rain' về dạng V3 để hoàn thiện câu suy luận quá khứ."
+  },
+  {
+    "topic": "Modals of Deduction",
+    "level": "B2",
+    "student_input": "The safe was opened without any signs of forced entry. The robber must have know the code.",
+    "correct_answer": "The safe was opened without any signs of forced entry. The robber must have known the code.",
+    "explanation": "Bạn đã dùng đúng 'must have' cho kết luận logic. Tuy nhiên, hãy kiểm tra lại động từ 'know'. Bạn cần dùng dạng phân từ hai (V3) của 'know' để đúng với cấu trúc ngữ pháp."
+  },
+  {
+    "topic": "Modals of Deduction",
+    "level": "B2",
+    "student_input": "She didn't recognize the song, so she must not have heard it before.",
+    "correct_answer": "She didn't recognize the song, so she can't have heard it before.",
+    "explanation": "Hãy phân tích: 'không nhận ra bài hát' $\rightarrow$ 'việc đã nghe trước đó là không thể'. Trong suy luận phủ định chắc chắn ở quá khứ, modal verb nào là lựa chọn chính xác nhất thay cho 'must not'?"
+  },
+  {
+    "topic": "Modals of Deduction",
+    "level": "B2",
+    "student_input": "The painting is a masterpiece. It could have been paint by Da Vinci himself.",
+    "correct_answer": "The painting is a masterpiece. It could have been painted by Da Vinci himself.",
+    "explanation": "Bạn đang dùng 'could have been' để chỉ một khả năng trong quá khứ ở dạng bị động. Rất tốt! Tuy nhiên, hãy nhìn động từ 'paint'. Sau 'been' trong câu bị động, động từ phải ở dạng nào?"
+  },
+  {
+    "topic": "Modals of Deduction",
+    "level": "B2",
+    "student_input": "He failed the driving test for the third time. He should have practiced more.",
+    "correct_answer": "He failed the driving test for the third time. He should have practiced more.",
+    "explanation": "Câu này đúng về ngữ pháp. Nhưng hãy chú ý: đây là một lời khuyên/sự hối tiếc (Regret), không phải là một suy luận (Deduction). Nếu tôi muốn bạn 'suy luận' rằng anh ấy chắc chắn đã không luyện tập đủ, bạn sẽ thay 'should' bằng từ nào?"
+  },
+  {
+    "topic": "Modals of Deduction",
+    "level": "B2",
+    "student_input": "The lights are still on in the office. The staff must have been work late.",
+    "correct_answer": "The lights are still on in the office. The staff must have been working late.",
+    "explanation": "Hãy nhìn vào 'must have been work'. Bạn đang suy luận về một hành động kéo dài (làm việc muộn). Để tạo thành cấu trúc 'Modal + have been + V-ing', bạn cần thay đổi 'work' thành dạng nào?"
+  },
+  {
+    "topic": "Modals of Deduction",
+    "level": "B2",
+    "student_input": "I can't find my wallet. I must have lost it, or maybe I’ve just misplaced it.",
+    "correct_answer": "I can't find my wallet. I must have lost it, or maybe I’ve just misplaced it.",
+    "explanation": "Câu này hoàn toàn chính xác. Bạn đã phân biệt được sự chắc chắn ('must have') và khả năng ('maybe'). Thử thách: Hãy thay 'must have lost' bằng 'might have lost'. Sắc thái về mức độ tin tưởng của bạn thay đổi như thế nào?"
+  },
+  {
+    "topic": "Modals of Deduction",
+    "level": "B2",
+    "student_input": "The suspects had no motive to kill the victim, so they can't have been involved in the crime.",
+    "correct_answer": "The suspects had no motive to kill the victim, so they can't have been involved in the crime.",
+    "explanation": "Câu này đúng. Bạn đã dùng 'can't have been' để phủ định chắc chắn một trạng thái trong quá khứ. Thử thách: Chuyển câu này thành 'It is believed that the suspects can't have been involved...'. Bạn sẽ thay đổi cấu trúc như thế nào?"
+  },
+  {
+    "topic": "Modals of Deduction",
+    "level": "B2",
+    "student_input": "She speaks with a slight accent, so she must have be born in another country.",
+    "correct_answer": "She speaks with a slight accent, so she must have been born in another country.",
+    "explanation": "Hãy nhìn vào 'must have be born'. Việc 'sinh ra' là một trạng thái bị động trong quá khứ. Bạn cần chia động từ 'be' về dạng V3 là gì để đúng cấu trúc 'must have + V3'?"
+  },
+  {
+    "topic": "Modals of Deduction",
+    "level": "B2",
+    "student_input": "They arrived late and looked disheveled. They could have been fighting on the way here.",
+    "correct_answer": "They arrived late and looked disheveled. They might have been fighting on the way here.",
+    "explanation": "Hãy cân nhắc: 'could have been fighting' thường ám chỉ một khả năng có thể xảy ra nhưng thực tế là KHÔNG xảy ra. Ở đây bạn đang 'đoán' lý do họ trông nhếch nhác. Để chỉ một khả năng có thể đã xảy ra, 'might' hay 'could' sẽ tự nhiên hơn?"
+  },
+  {
+    "topic": "Modals of Deduction",
+    "level": "B2",
+    "student_input": "The car is still here, so he must not have gone to the airport.",
+    "correct_answer": "The car is still here, so he can't have gone to the airport.",
+    "explanation": "Một lần nữa, hãy phân tích logic: 'Xe vẫn ở đây' $\rightarrow$ 'Việc đi sân bay là không thể'. Hãy nhớ lại quy tắc vàng của B2: Trong suy luận phủ định chắc chắn, chúng ta thay 'must not' bằng từ nào?"
+  },
+  {
+    "topic": "Modals of Deduction",
+    "level": "B2",
+    "student_input": "The company went bankrupt. They must have made some huge mistakes in their strategy.",
+    "correct_answer": "The company went bankrupt. They must have made some huge mistakes in their strategy.",
+    "explanation": "Câu này đúng. Bạn đã kết nối kết quả (phá sản) với một nguyên nhân chắc chắn (sai lầm chiến lược). Thử thách: Nếu bạn muốn nói 'Có lẽ họ đã gặp vận đen' (không chắc chắn), bạn sẽ thay 'must' bằng từ nào?"
+  },
+  {
+    "topic": "Modals of Deduction",
+    "level": "B2",
+    "student_input": "He didn't answer the email. He might’ve forget to check his inbox.",
+    "correct_answer": "He didn't answer the email. He might’ve forgotten to check his inbox.",
+    "explanation": "Hãy nhìn vào 'might've forget'. Bạn đã dùng đúng modal cho sự không chắc chắn. Tuy nhiên, hãy chia động từ 'forget' về dạng V3 để hoàn tất cấu trúc Perfect Modal."
+  },
+  {
+    "topic": "Modals of Deduction",
+    "level": "B2",
+    "student_input": "The cake tastes strange. You must have put too much salt in it.",
+    "correct_answer": "The cake tastes strange. You must have put too much salt in it.",
+    "explanation": "Câu này đúng. 'Tastes strange' là bằng chứng $\rightarrow$ 'Put too much salt' là kết luận logic. Thử thách: Chuyển câu này sang dạng nghi vấn để hỏi đối phương: 'Có phải bạn đã cho quá nhiều muối vào không?'"
+  },
+  {
+    "topic": "Modals of Deduction",
+    "level": "B2",
+    "student_input": "The students' scores were all very low. The exam must have be too difficult.",
+    "correct_answer": "The students' scores were all very low. The exam must have been too difficult.",
+    "explanation": "Hãy nhìn vào 'must have be'. 'Difficult' là một tính từ. Để diễn tả trạng thái 'đã quá khó' trong quá khứ, bạn cần chia động từ 'be' ở dạng V3 là gì?"
+  },
+  {
+    "topic": "Modals of Deduction",
+    "level": "B2",
+    "student_input": "If he hadn't lied to us, we must have trusted him.",
+    "correct_answer": "If he hadn't lied to us, we would have trusted him.",
+    "explanation": "Hãy phân tích cấu trúc câu. Đây là một câu điều kiện loại 3 (giả định một điều trái ngược quá khứ). Trong mệnh đề kết quả của câu điều kiện, chúng ta dùng 'would' để nói về kết quả giả định, hay dùng 'must' để suy luận logic từ bằng chứng? Bạn đang muốn nói về một 'kết quả tất yếu' hay một 'kết luận từ bằng chứng'?"
+  },
+  {
+    "topic": "Modals of Deduction",
+    "level": "B2",
+    "student_input": "The suspect must have been questioned for hours, but he didn't confess.",
+    "correct_answer": "The suspect must have been questioned for hours, but he didn't confess.",
+    "explanation": "Câu này hoàn toàn chính xác. Bạn đã kết hợp thành công suy luận quá khứ và thể bị động. Thử thách: Nếu bạn muốn nói 'Có lẽ anh ta đã bị thẩm vấn' (mức độ chắc chắn thấp hơn), bạn sẽ thay 'must' bằng modal verb nào?"
+  },
+  {
+    "topic": "Modals of Deduction",
+    "level": "B2",
+    "student_input": "The project failed. We could have not planned it better.",
+    "correct_answer": "The project failed. We couldn't have planned it better.",
+    "explanation": "Hãy nhìn vào cụm 'could have not planned'. Trong tiếng Anh, khi muốn nói 'không thể nào làm tốt hơn được nữa' (nhấn mạnh sự tối đa), chúng ta dùng 'could not have V3' hay 'could have not V3'? Hãy thử điều chỉnh vị trí của 'not'."
+  },
+  {
+    "topic": "Modals of Deduction",
+    "level": "B2",
+    "student_input": "He is a genius. He must to have discovered the solution in minutes.",
+    "correct_answer": "He is a genius. He must have discovered the solution in minutes.",
+    "explanation": "Một lỗi nhỏ về hình thái: Bạn lại dùng 'must to have'. Hãy nhớ lại quy tắc về modal verbs: Chúng ta có dùng 'to' sau 'must' không? Bạn hãy lược bỏ nó để câu văn tự nhiên hơn."
+  },
+  {
+    "topic": "Modals of Deduction",
+    "level": "B2",
+    "student_input": "The report is full of errors. It might have been wrote by an intern.",
+    "correct_answer": "The report is full of errors. It might have been written by an intern.",
+    "explanation": "Bạn đã dùng đúng 'might have been' cho một suy luận bị động trong quá khứ. Tuy nhiên, hãy nhìn động từ 'wrote'. Sau 'been' trong câu bị động, bạn cần dạng V3 của 'write' là gì?"
+  },
+  {
+    "topic": "Modals of Deduction",
+    "level": "B2",
+    "student_input": "If the alarm had gone off, the thief must have been scared away.",
+    "correct_answer": "If the alarm had gone off, the thief would have been scared away.",
+    "explanation": "Hãy cẩn thận với sự nhầm lẫn giữa 'Suy luận' và 'Giả định'. 'Must have been' dùng khi bạn thấy bằng chứng (ví dụ: tên trộm bỏ chạy). Nhưng ở đây bạn dùng 'If' (Nếu... thì), tức là bạn đang giả định một kịch bản. Trong câu điều kiện loại 3, mệnh đề kết quả dùng modal verb nào?"
+  },
+  {
+    "topic": "Modals of Deduction",
+    "level": "B2",
+    "student_input": "He could have won the race if he hadn't tripped, but he didn't.",
+    "correct_answer": "He could have won the race if he hadn't tripped, but he didn't.",
+    "explanation": "Câu này chính xác. Bạn dùng 'could have won' để chỉ một khả năng có thể xảy ra trong quá khứ nhưng thực tế đã KHÔNG xảy ra. Đây là sắc thái rất quan trọng của B2. Thử thách: Nếu bạn dùng 'might have won', sắc thái về mức độ chắc chắn sẽ thay đổi như thế nào?"
+  },
+  {
+    "topic": "Modals of Deduction",
+    "level": "B2",
+    "student_input": "The ancient ruins must have been build using advanced technology.",
+    "correct_answer": "The ancient ruins must have been built using advanced technology.",
+    "explanation": "Hãy nhìn vào 'must have been build'. Bạn đang suy luận bị động trong quá khứ. Động từ 'build' cần được chia ở dạng V3 là gì?"
+  },
+  {
+    "topic": "Modals of Deduction",
+    "level": "B2",
+    "student_input": "She didn't answer my email. She can't have saw it yet.",
+    "correct_answer": "She didn't answer my email. She can't have seen it yet.",
+    "explanation": "Bạn đã dùng 'can't have' cho một suy luận phủ định chắc chắn rất tốt. Tuy nhiên, hãy kiểm tra lại động từ 'saw'. Sau 'have' trong cấu trúc Perfect Modal, bạn phải dùng V3 của 'see' là gì?"
+  },
+  {
+    "topic": "Modals of Deduction",
+    "level": "B2",
+    "student_input": "I'm not sure why the meeting was cancelled. The boss must have had an emergency.",
+    "correct_answer": "I'm not sure why the meeting was cancelled. The boss might have had an emergency.",
+    "explanation": "Hãy đối chiếu: 'I'm not sure' (Tôi không chắc) và 'must have' (chắc chắn đã). Hai điều này có mâu thuẫn không? Để phù hợp với sự không chắc chắn, bạn nên thay 'must' bằng modal verb nào?"
+  },
+  {
+    "topic": "Modals of Deduction",
+    "level": "B2",
+    "student_input": "The painting is so detailed. The artist must have spent years on it.",
+    "correct_answer": "The painting is so detailed. The artist must have spent years on it.",
+    "explanation": "Câu này đúng. Bằng chứng (detailed) $\rightarrow$ Kết luận (must have spent). Thử thách: Nếu bạn muốn nói 'Có lẽ họa sĩ đã dùng một kỹ thuật đặc biệt' (không chắc chắn), bạn sẽ viết như thế nào?"
+  },
+  {
+    "topic": "Modals of Deduction",
+    "level": "B2",
+    "student_input": "He was so pale. He must have be feeling sick.",
+    "correct_answer": "He was so pale. He must have been feeling sick.",
+    "explanation": "Hãy nhìn vào 'must have be feeling'. Bạn đang muốn nói về một trạng thái kéo dài trong quá khứ (tiếp diễn). Bạn thiếu từ gì giữa 'have' và 'feeling' để tạo thành dạng Perfect Continuous?"
+  },
+  {
+    "topic": "Modals of Deduction",
+    "level": "B2",
+    "student_input": "The laws must have been change several times since the 19th century.",
+    "correct_answer": "The laws must have been changed several times since the 19th century.",
+    "explanation": "Hãy chú ý 'must have been change'. Luật pháp được thay đổi (bị động). Bạn hãy chia động từ 'change' sang dạng V3 để hoàn tất cấu trúc."
+  },
+  {
+    "topic": "Modals of Deduction",
+    "level": "B2",
+    "student_input": "He’s not here. He might not’ve known about the change in schedule.",
+    "correct_answer": "He’s not here. He might not have known about the change in schedule.",
+    "explanation": "Cách viết 'not've' không phổ biến trong văn viết. Bạn hãy viết đầy đủ 'might not have known' để câu văn chuyên nghiệp hơn. Ngoài ra, hãy tự hỏi: 'might not have' và 'can't have' khác nhau thế nào về mức độ chắc chắn?"
+  },
+  {
+    "topic": "Modals of Deduction",
+    "level": "B2",
+    "student_input": "If the medicine had worked, the patient must have recovered by now.",
+    "correct_answer": "If the medicine had worked, the patient would have recovered by now.",
+    "explanation": "Một lần nữa, hãy phân biệt 'Giả định' và 'Suy luận'. Câu bắt đầu bằng 'If' (Nếu... thì). Bạn đang nói về một kết quả giả định trong quá khứ, vậy 'must have' hay 'would have' là lựa chọn đúng cho mệnh đề kết quả của câu điều kiện loại 3?"
+  },
+  {
+    "topic": "Modals of Deduction",
+    "level": "B2",
+    "student_input": "The safe is empty. The thief must have been known the combination.",
+    "correct_answer": "The safe is empty. The thief must have known the combination.",
+    "explanation": "Hãy nhìn vào 'must have been known'. 'Known' là biết. Tên trộm 'biết' mật mã (chủ động) hay 'được biết' (bị động)? Bạn có cần dùng 'been' ở đây không?"
+  },
+  {
+    "topic": "Modals of Deduction",
+    "level": "B2",
+    "student_input": "She speaks like a native. She can have lived in the UK for decades.",
+    "correct_answer": "She speaks like a native. She must have lived in the UK for decades.",
+    "explanation": "Bằng chứng 'nói như người bản xứ' là rất mạnh. 'Can have V3' không được dùng để đưa ra suy luận khẳng định chắc chắn trong quá khứ. Bạn nên dùng modal verb nào để thể hiện một kết luận logic mạnh mẽ?"
+  },
+  {
+    "topic": "Modals of Deduction",
+    "level": "B2",
+    "student_input": "They didn't arrive on time. There must’ve be a traffic jam on the highway.",
+    "correct_answer": "They didn't arrive on time. There must’ve been a traffic jam on the highway.",
+    "explanation": "Hãy nhìn vào 'must've be'. Bạn đang suy luận về sự tồn tại của một sự việc trong quá khứ. Bạn cần chia động từ 'be' sang dạng V3 là gì?"
+  },
+  {
+    "topic": "Modals of Deduction",
+    "level": "B2",
+    "student_input": "The company's profits fell. They could have not overestimated the market demand.",
+    "correct_answer": "The company's profits fell. They must have overestimated the market demand.",
+    "explanation": "Hãy phân tích logic: 'Lợi nhuận giảm' $\rightarrow$ 'Đã đánh giá quá cao nhu cầu thị trường'. Đây là một suy luận logic rất mạnh. 'Could have not' nghĩa là 'đã không thể'. Liệu điều này có khớp với kết quả 'lợi nhuận giảm' không? Bạn nên dùng 'must have' hay 'could have not'?"
+  },
+  {
+    "topic": "Modals of Deduction",
+    "level": "B2",
+    "student_input": "He looks happy. He must have been winning the lottery last night.",
+    "correct_answer": "He looks happy. He must have won the lottery last night.",
+    "explanation": "Việc 'trúng số' là một sự kiện xảy ra tức thời, không phải một quá trình kéo dài. 'Must have been winning' (tiếp diễn) không phù hợp ở đây. Bạn hãy dùng dạng đơn giản của Perfect Modal: 'must have + V3'."
+  },
+  {
+    "topic": "Modals of Deduction",
+    "level": "B2",
+    "student_input": "I’m not sure if he’s coming. He might have forgotten about the meeting.",
+    "correct_answer": "I’m not sure if he’s coming. He might have forgotten about the meeting.",
+    "explanation": "Câu này chính xác. 'I'm not sure' $\rightarrow$ 'might have'. Thử thách: Nếu bạn thấy anh ấy đang đi hướng ngược lại với văn phòng, bạn sẽ thay 'might' bằng từ nào để thể hiện sự chắc chắn hơn?"
+  },
+  {
+    "topic": "Modals of Deduction",
+    "level": "B2",
+    "student_input": "The car was stolen. The alarm must not have worked.",
+    "correct_answer": "The car was stolen. The alarm can't have worked.",
+    "explanation": "Một lần nữa, hãy nhớ quy tắc: Để diễn tả một sự phủ định chắc chắn (không thể nào xảy ra) trong quá khứ, chúng ta dùng 'must not have' hay 'can't have'?"
+  },
+  {
+    "topic": "Modals of Deduction",
+    "level": "B2",
+    "student_input": "She has a gold medal. She must’ve be training very hard.",
+    "correct_answer": "She has a gold medal. She must have been training very hard.",
+    "explanation": "Hãy nhìn vào 'must've be training'. Bạn đang nói về một quá trình tập luyện kéo dài dẫn đến kết quả hiện tại. Bạn cần cấu trúc Perfect Continuous: 'must have been + V-ing'. Bạn hãy điều chỉnh lại động từ 'be'."
+  },
+  {
+    "topic": "Modals of Deduction",
+    "level": "B2",
+    "student_input": "The window is open. Someone must’ve open it to let the air in.",
+    "correct_answer": "The window is open. Someone must’ve opened it to let the air in.",
+    "explanation": "Hãy kiểm tra lại động từ 'open'. Trong cấu trúc 'must've + V3', bạn cần dạng phân từ hai của 'open' là gì?"
+  },
+  {
+    "topic": "Modals of Deduction",
+    "level": "B2",
+    "student_input": "He’s always been a liar, so he could have lied about his credentials.",
+    "correct_answer": "He’s always been a liar, so he must have lied about his credentials.",
+    "explanation": "Bằng chứng 'luôn là kẻ nói dối' là rất mạnh. Khi kết luận từ một đặc điểm tính cách rõ ràng, 'could' (có thể) có vẻ quá nhẹ. Bạn nên dùng modal verb nào để thể hiện một suy luận logic mạnh mẽ?"
+  },
+  {
+    "topic": "Modals of Deduction",
+    "level": "B2",
+    "student_input": "The dinner was cold. The waiter must have forget to bring it immediately.",
+    "correct_answer": "The dinner was cold. The waiter must have forgotten to bring it immediately.",
+    "explanation": "Hãy chia động từ 'forget' về dạng V3 để hoàn tất cấu trúc suy luận quá khứ."
+  },
+  {
+    "topic": "Modals of Deduction",
+    "level": "B2",
+    "student_input": "The evidence was tampered with. It must have been do by someone inside the police department.",
+    "correct_answer": "The evidence was tampered with. It must have been done by someone inside the police department.",
+    "explanation": "Hãy nhìn vào 'must have been do'. Bằng chứng 'bị làm giả' (tampered with) $\rightarrow$ 'phải được thực hiện' bởi ai đó. Bạn cần chia động từ 'do' sang dạng V3 là gì?"
+  },
+  {
+    "topic": "Modals of Deduction",
+    "level": "B2",
+    "student_input": "If I had known he was coming, I must’ve prepared the guest room.",
+    "correct_answer": "If I had known he was coming, I would have prepared the guest room.",
+    "explanation": "Hãy phân biệt một lần nữa: 'Must have prepared' là suy luận (Tôi chắc là tôi đã chuẩn bị). 'Would have prepared' là giả định (Tôi sẽ chuẩn bị nếu tôi biết). Trong câu 'If...', bạn đang nói về kịch bản giả định hay suy luận logic?"
+  },
+  {
+    "topic": "Modals of Deduction",
+    "level": "B2",
+    "student_input": "The baby is sleeping. He must have been fed just now.",
+    "correct_answer": "The baby is sleeping. He must have been fed just now.",
+    "explanation": "Câu này đúng. Bằng chứng (đang ngủ) $\rightarrow$ Suy luận bị động quá khứ (đã được cho ăn). Thử thách: Nếu em bé đang khóc, bạn sẽ thay 'must have been fed' thành 'can't have been fed' hay 'might not have been fed'?"
+  },
+  {
+    "topic": "Modals of Deduction",
+    "level": "B2",
+    "student_input": "He’s lapped the whole track in record time. He must’ve be practicing every day.",
+    "correct_answer": "He’s lapped the whole track in record time. He must have been practicing every day.",
+    "explanation": "Hãy nhìn vào 'must've be practicing'. Bạn đang suy luận về một thói quen tập luyện kéo dài trong quá khứ. Bạn hãy sửa lại thành cấu trúc Perfect Continuous: 'must have been + V-ing'."
+  },
+  {
+    "topic": "Modals of Deduction",
+    "level": "B2",
+    "student_input": "I don't see any footprints in the snow. No one must have walked here.",
+    "correct_answer": "I don't see any footprints in the snow. No one can have walked here.",
+    "explanation": "Hãy phân tích: 'không có dấu chân' $\rightarrow$ 'việc có người đi qua là không thể'. Để diễn đạt một sự phủ định chắc chắn trong quá khứ, chúng ta dùng 'must not' hay 'can't'?"
+  },
+  {
+    "topic": "Modals of Deduction",
+    "level": "B2",
+    "student_input": "The phone is dead. The battery must have run out of power.",
+    "correct_answer": "The phone is dead. The battery must have run out of power.",
+    "explanation": "Câu này chính xác. 'Run' là V1 $\rightarrow$ 'Ran' (V2) $\rightarrow$ 'Run' (V3). Bạn đã dùng đúng V3. Thử thách: Nếu bạn không chắc chắn, bạn sẽ thay 'must' bằng từ nào?"
+  },
+  {
+    "topic": "Modals of Deduction",
+    "level": "B2",
+    "student_input": "She's not at the party. She might have been feeling unwell.",
+    "correct_answer": "She's not at the party. She might have been feeling unwell.",
+    "explanation": "Câu này đúng. Bạn dùng 'might have been feeling' để chỉ một khả năng về một trạng thái trong quá khứ. Thử thách: Chuyển câu này sang dạng 'chắc chắn' (must) và 'không thể nào' (can't)."
+  },
+  {
+    "topic": "Modals of Deduction",
+    "level": "B2",
+    "student_input": "The vault was locked from the inside. The thief must’ve be trapped inside.",
+    "correct_answer": "The vault was locked from the inside. The thief must have been trapped inside.",
+    "explanation": "Hãy nhìn vào 'must've be trapped'. 'Trapped' là V3. Bạn đang suy luận về một trạng thái bị động trong quá khứ. Bạn thiếu từ gì giữa 'have' và 'trapped'?"
+  },
+  {
+    "topic": "Modals of Deduction",
+    "level": "B2",
+    "student_input": "He’s a professional chef. He can have used the finest ingredients for this dish.",
+    "correct_answer": "He’s a professional chef. He must have used the finest ingredients for this dish.",
+    "explanation": "Bằng chứng 'đầu bếp chuyên nghiệp' $\rightarrow$ 'sử dụng nguyên liệu cao cấp'. 'Can' không dùng cho suy luận khẳng định chắc chắn. Bạn hãy thay bằng modal verb nào mạnh hơn?"
+  },
+  {
+    "topic": "Modals of Deduction",
+    "level": "B2",
+    "student_input": "The car is making a strange noise. It should have been serviced last month.",
+    "correct_answer": "The car is making a strange noise. It should have been serviced last month.",
+    "explanation": "Câu này đúng. Đây là một lời trách móc/hối tiếc (Regret). Thử thách: Nếu bạn muốn 'suy luận' rằng 'Chắc chắn là nó đã không được bảo dưỡng tháng trước', bạn sẽ dùng modal verb nào?"
+  },
+  {
+    "topic": "Modals of Deduction",
+    "level": "B2",
+    "student_input": "They are all smiling. The news must have been received well.",
+    "correct_answer": "They are all smiling. The news must have been received well.",
+    "explanation": "Câu này chính xác. Bằng chứng (mỉm cười) $\rightarrow$ Suy luận bị động (tin tức được đón nhận). Thử thách: Chuyển câu này sang dạng ' la lùng/tức giận' và thay đổi modal verb tương ứng."
+  },
+  {
+    "topic": "Modals of Deduction",
+    "level": "B2",
+    "student_input": "I saw him entering the building. He must've be going to the meeting.",
+    "correct_answer": "I saw him entering the building. He must have been going to the meeting.",
+    "explanation": "Hãy nhìn vào 'must've be going'. Bạn đang suy luận về một hành động đang diễn ra tại thời điểm bạn nhìn thấy. Bạn cần cấu trúc Perfect Continuous: 'must have been + V-ing'."
+  },
+  {
+    "topic": "Modals of Deduction",
+    "level": "B2",
+    "student_input": "The cake is burnt. You must have’t set the timer.",
+    "correct_answer": "The cake is burnt. You must not have set the timer.",
+    "explanation": "Hãy nhìn vào 'must have't'. Cách viết này sai ngữ pháp. Để nói về một suy luận phủ định chắc chắn trong quá khứ, bạn nên dùng 'must not have' hoặc 'can't have'. Bạn hãy thử sửa lại."
+  },
+  {
+    "topic": "Modals of Deduction",
+    "level": "B2",
+    "student_input": "He’s not talking to anyone. He might have been offend by something I said.",
+    "correct_answer": "He’s not talking to anyone. He might have been offended by something I said.",
+    "explanation": "Bạn dùng 'might have been' cho một suy luận bị động rất tốt. Tuy nhiên, hãy chia động từ 'offend' sang dạng V3 để hoàn tất câu."
+  },
+  {
+    "topic": "Modals of Deduction",
+    "level": "B2",
+    "student_input": "The window is open and the curtains are fluttering. Someone must’ve forgot to close it.",
+    "correct_answer": "The window is open and the curtains are fluttering. Someone must’ve forgotten to close it.",
+    "explanation": "Hãy chia động từ 'forget' về dạng V3 để đúng với cấu trúc Perfect Modal."
+  },
+  {
+    "topic": "Modals of Deduction",
+    "level": "B2",
+    "student_input": "He lapped the pool in 30 seconds. He must’ve be training since he was five.",
+    "correct_answer": "He lapped the pool in 30 seconds. He must have been training since he was five.",
+    "explanation": "Hãy nhìn vào 'must've be training'. 'Since he was five' chỉ một quá trình kéo dài. Bạn hãy áp dụng cấu trúc Perfect Continuous: 'must have been + V-ing'."
+  }
+]

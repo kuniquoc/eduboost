@@ -1,0 +1,667 @@
+[
+  {
+    "topic": "Present Perfect",
+    "level": "A2",
+    "student_input": "I has visited London twice.",
+    "correct_answer": "I have visited London twice.",
+    "explanation": "Trong thì Hiện tại hoàn thành, chúng ta dùng 'have' hay 'has' cho chủ ngữ 'I' nhỉ? Em hãy kiểm tra lại nhé."
+  },
+  {
+    "topic": "Present Perfect",
+    "level": "A2",
+    "student_input": "She have seen that movie already.",
+    "correct_answer": "She has seen that movie already.",
+    "explanation": "Hãy nhìn vào chủ ngữ 'She'. Với He/She/It, trợ động từ 'have' phải chuyển thành từ gì em nhỉ?"
+  },
+  {
+    "topic": "Present Perfect",
+    "level": "A2",
+    "student_input": "I have went to the supermarket.",
+    "correct_answer": "I have gone to the supermarket.",
+    "explanation": "Trong thì Hiện tại hoàn thành, chúng ta không dùng V2 (went) mà phải dùng V3 (Past Participle). Em hãy chuyển 'went' sang dạng V3 của nó nhé."
+  },
+  {
+    "topic": "Present Perfect",
+    "level": "A2",
+    "student_input": "He has ate all the cake.",
+    "correct_answer": "He has eaten all the cake.",
+    "explanation": "Em dùng 'has' rất đúng! Tuy nhiên, 'ate' mới chỉ là V2. Em hãy tìm dạng V3 (quá khứ phân từ) của động từ 'eat' để hoàn thiện câu này nhé."
+  },
+  {
+    "topic": "Present Perfect",
+    "level": "A2",
+    "student_input": "They has lived here for ten years.",
+    "correct_answer": "They have lived here for ten years.",
+    "explanation": "Hãy chú ý chủ ngữ 'They'. Chúng ta dùng 'has' hay 'have' cho chủ ngữ số nhiều này em nhỉ?"
+  },
+  {
+    "topic": "Present Perfect",
+    "level": "A2",
+    "student_input": "I visited Japan three times.",
+    "correct_answer": "I have visited Japan three times.",
+    "explanation": "Em đang muốn nói về một trải nghiệm (số lần làm gì đó) mà không nói rõ thời gian chính xác. Trong trường hợp này, chúng ta dùng Quá khứ đơn hay Hiện tại hoàn thành? Em hãy thêm trợ động từ cần thiết nhé."
+  },
+  {
+    "topic": "Present Perfect",
+    "level": "A2",
+    "student_input": "She has broke her leg.",
+    "correct_answer": "She has broken her leg.",
+    "explanation": "Hãy kiểm tra lại động từ 'broke'. 'Broke' là V2, nhưng sau 'has', chúng ta cần V3. Em có nhớ V3 của 'break' là gì không?"
+  },
+  {
+    "topic": "Present Perfect",
+    "level": "A2",
+    "student_input": "We have know each other since childhood.",
+    "correct_answer": "We have known each other since childhood.",
+    "explanation": "Em đã dùng đúng 'have'. Tuy nhiên, động từ 'know' cần được chia ở dạng V3. Em hãy thêm đuôi '-n' vào để tạo thành dạng phân từ nhé."
+  },
+  {
+    "topic": "Present Perfect",
+    "level": "A2",
+    "student_input": "He have finish his homework.",
+    "correct_answer": "He has finished his homework.",
+    "explanation": "Câu này có hai lỗi: Một là trợ động từ đi với 'He', hai là động từ 'finish' chưa được chia ở dạng V3. Em hãy sửa lại cả hai nhé."
+  },
+  {
+    "topic": "Present Perfect",
+    "level": "A2",
+    "student_input": "Have you ever eat sushi?",
+    "correct_answer": "Have you ever eaten sushi?",
+    "explanation": "Câu hỏi 'Have you ever...' yêu cầu động từ chính phải ở dạng V3. Em hãy chuyển 'eat' sang dạng phân từ quá khứ nhé."
+  },
+  {
+    "topic": "Present Perfect",
+    "level": "A2",
+    "student_input": "I have lived here since two years.",
+    "correct_answer": "I have lived here for two years.",
+    "explanation": "Em hãy nhìn vào cụm 'two years'. Đây là một mốc thời gian chính xác hay là một khoảng thời gian kéo dài? Với một khoảng thời gian, chúng ta dùng 'since' hay 'for' nhỉ?"
+  },
+  {
+    "topic": "Present Perfect",
+    "level": "A2",
+    "student_input": "She has been a teacher for 2015.",
+    "correct_answer": "She has been a teacher since 2015.",
+    "explanation": "2015 là một năm cụ thể - tức là một mốc thời gian. Em có nhớ khi nói về một mốc bắt đầu, chúng ta nên dùng 'for' hay 'since' không?"
+  },
+  {
+    "topic": "Present Perfect",
+    "level": "A2",
+    "student_input": "We have known each other since a long time.",
+    "correct_answer": "We have known each other for a long time.",
+    "explanation": "Cụm 'a long time' (một thời gian dài) chỉ một khoảng thời gian hay một điểm thời gian cụ thể? Em hãy thử thay 'since' bằng từ phù hợp hơn nhé."
+  },
+  {
+    "topic": "Present Perfect",
+    "level": "A2",
+    "student_input": "They have worked here since six months.",
+    "correct_answer": "They have worked here for six months.",
+    "explanation": "Hãy phân tích 'six months'. Đây là độ dài của thời gian. Vậy trong trường hợp này, em nên dùng 'since' hay 'for'?"
+  },
+  {
+    "topic": "Present Perfect",
+    "level": "A2",
+    "student_input": "I have had this phone for last Christmas.",
+    "correct_answer": "I have had this phone since last Christmas.",
+    "explanation": "'Last Christmas' là một thời điểm cụ thể trong quá khứ. Để chỉ mốc thời gian bắt đầu, em hãy chọn giữa 'since' và 'for' nhé."
+  },
+  {
+    "topic": "Present Perfect",
+    "level": "A2",
+    "student_input": "He has played guitar since five years.",
+    "correct_answer": "He has played guitar for five years.",
+    "explanation": "Em hãy nhìn vào 'five years'. Nó cho biết hành động này kéo dài bao lâu, hay bắt đầu từ khi nào? Hãy chọn giới từ đúng cho khoảng thời gian nhé."
+  },
+  {
+    "topic": "Present Perfect",
+    "level": "A2",
+    "student_input": "I haven't seen him for Monday.",
+    "correct_answer": "I haven't seen him since Monday.",
+    "explanation": "Thứ Hai (Monday) là một điểm mốc thời gian. Vậy chúng ta nên dùng 'for' hay 'since' để nói về mốc thời gian này nhỉ?"
+  },
+  {
+    "topic": "Present Perfect",
+    "level": "A2",
+    "student_input": "We have been married since 20 years.",
+    "correct_answer": "We have been married for 20 years.",
+    "explanation": "20 năm là một khoảng thời gian (duration). Em hãy kiểm tra lại xem 'since' có dùng cho khoảng thời gian không, hay mình cần dùng từ khác?"
+  },
+  {
+    "topic": "Present Perfect",
+    "level": "A2",
+    "student_input": "She has lived in London for she was a child.",
+    "correct_answer": "She has lived in London since she was a child.",
+    "explanation": "Ở đây, 'she was a child' là một mệnh đề chỉ thời điểm bắt đầu. Khi theo sau là một mệnh đề chỉ mốc thời gian, em nên dùng 'for' hay 'since'?"
+  },
+  {
+    "topic": "Present Perfect",
+    "level": "A2",
+    "student_input": "I have studied English for I started school.",
+    "correct_answer": "I have studied English since I started school.",
+    "explanation": "Hãy nhìn vào vế 'I started school'. Đây là một sự kiện đánh dấu điểm bắt đầu. Em hãy chọn giới từ chính xác để nối mốc thời gian này với thì Hiện tại hoàn thành nhé."
+  },
+  {
+    "topic": "Present Perfect",
+    "level": "A2",
+    "student_input": "They have been friends for a decade.",
+    "correct_answer": "They have been friends for a decade.",
+    "explanation": "Câu này chính xác! 'A decade' (một thập kỷ) là một khoảng thời gian, và em đã dùng 'for' rất đúng. Tiếp tục phát huy nhé!"
+  },
+  {
+    "topic": "Present Perfect",
+    "level": "A2",
+    "student_input": "I have been here since three hours.",
+    "correct_answer": "I have been here for three hours.",
+    "explanation": "Ba tiếng đồng hồ là một khoảng thời gian. Em hãy thử thay 'since' bằng một giới từ khác phù hợp hơn cho khoảng thời gian nhé."
+  },
+  {
+    "topic": "Present Perfect",
+    "level": "A2",
+    "student_input": "He hasn't eaten anything for yesterday.",
+    "correct_answer": "He hasn't eaten anything since yesterday.",
+    "explanation": "Hôm qua (yesterday) là một mốc thời gian cụ thể. Em hãy nhớ lại xem mốc thời gian thì đi với 'for' hay 'since'?"
+  },
+  {
+    "topic": "Present Perfect",
+    "level": "A2",
+    "student_input": "We have waited for you since 30 minutes.",
+    "correct_answer": "We have waited for you for 30 minutes.",
+    "explanation": "30 phút là một độ dài thời gian. Em hãy sửa lại giới từ 'since' thành giới từ dùng cho khoảng thời gian nhé."
+  },
+  {
+    "topic": "Present Perfect",
+    "level": "A2",
+    "student_input": "I have been a fan of this band for 2010.",
+    "correct_answer": "I have been a fan of this band since 2010.",
+    "explanation": "2010 là năm bắt đầu. Để chỉ một mốc thời gian, em hãy dùng 'since' thay vì 'for' nhé. Thử sửa lại xem nào!"
+  },
+  {
+    "topic": "Present Perfect",
+    "level": "A2",
+    "student_input": "Have you never been to Paris?",
+    "correct_answer": "Have you ever been to Paris?",
+    "explanation": "Trong câu hỏi về trải nghiệm 'Bạn đã bao giờ... chưa?', chúng ta thường dùng 'ever' thay vì 'never'. Em hãy thử thay đổi từ này xem sao?"
+  },
+  {
+    "topic": "Present Perfect",
+    "level": "A2",
+    "student_input": "I have been never to Japan.",
+    "correct_answer": "I have never been to Japan.",
+    "explanation": "Hãy nhìn vào vị trí của từ 'never'. Trong thì Hiện tại hoàn thành, trạng từ này thường đứng giữa trợ động từ 'have/has' và động từ chính (V3). Em hãy sắp xếp lại vị trí của 'never' nhé."
+  },
+  {
+    "topic": "Present Perfect",
+    "level": "A2",
+    "student_input": "I have finished my homework yet.",
+    "correct_answer": "I have already finished my homework.",
+    "explanation": "Em đang dùng câu khẳng định (đã làm xong). 'Yet' thường chỉ dùng trong câu phủ định hoặc nghi vấn. Để nói việc gì đó đã hoàn thành sớm hơn dự kiến trong câu khẳng định, em nên dùng từ gì nhỉ?"
+  },
+  {
+    "topic": "Present Perfect",
+    "level": "A2",
+    "student_input": "She hasn't finished her report already.",
+    "correct_answer": "She hasn't finished her report yet.",
+    "explanation": "Đây là một câu phủ định ('hasn't'). Trong câu phủ định, để nói một việc 'vẫn chưa' xảy ra, chúng ta dùng 'already' hay 'yet' ở cuối câu em nhỉ?"
+  },
+  {
+    "topic": "Present Perfect",
+    "level": "A2",
+    "student_input": "Has he already arrived yet?",
+    "correct_answer": "Has he arrived yet?",
+    "explanation": "Trong một câu hỏi, em không nên dùng cả 'already' và 'yet' cùng một lúc. Để hỏi xem một việc đã xảy ra hay chưa, em chỉ cần dùng 'yet' ở cuối câu thôi. Thử bỏ 'already' đi xem sao?"
+  },
+  {
+    "topic": "Present Perfect",
+    "level": "A2",
+    "student_input": "I already have seen this movie.",
+    "correct_answer": "I have already seen this movie.",
+    "explanation": "Vị trí của 'already' thường là đứng sau 'have/has' và trước V3. Em hãy thử di chuyển 'already' vào giữa 'have' và 'seen' nhé."
+  },
+  {
+    "topic": "Present Perfect",
+    "level": "A2",
+    "student_input": "They have yet visited the museum.",
+    "correct_answer": "They have already visited the museum.",
+    "explanation": "Câu này là câu khẳng định. 'Yet' không đứng ở vị trí này và không dùng cho câu khẳng định. Em hãy thay 'yet' bằng 'already' và đặt nó sau 'have' nhé."
+  },
+  {
+    "topic": "Present Perfect",
+    "level": "A2",
+    "student_input": "Have you already eaten yet?",
+    "correct_answer": "Have you eaten yet?",
+    "explanation": "Khi đặt câu hỏi về một việc vừa mới xảy ra, em chỉ cần dùng 'yet' ở cuối câu. Việc dùng cả 'already' và 'yet' sẽ làm câu bị thừa. Em hãy bỏ 'already' đi nhé."
+  },
+  {
+    "topic": "Present Perfect",
+    "level": "A2",
+    "student_input": "I have never saw a whale in real life.",
+    "correct_answer": "I have never seen a whale in real life.",
+    "explanation": "Em đặt vị trí 'never' rất đúng! Nhưng hãy nhìn vào động từ 'saw'. Đây là V2, nhưng sau 'have never', chúng ta cần V3. Dạng V3 của 'see' là gì em nhỉ?"
+  },
+  {
+    "topic": "Present Perfect",
+    "level": "A2",
+    "student_input": "She has ever gone to Italy.",
+    "correct_answer": "She has already gone to Italy.",
+    "explanation": "Từ 'ever' thường chỉ dùng trong câu hỏi. Trong câu khẳng định này, để nói cô ấy 'đã' đi Ý rồi, em nên dùng 'already'. Em thử sửa lại xem."
+  },
+  {
+    "topic": "Present Perfect",
+    "level": "A2",
+    "student_input": "We haven't decided where to go already.",
+    "correct_answer": "We haven't decided where to go yet.",
+    "explanation": "Câu phủ định 'haven't decided' (vẫn chưa quyết định) cần một từ kết thúc câu để chỉ sự chờ đợi. Đó là 'already' hay 'yet' nhỉ?"
+  },
+  {
+    "topic": "Present Perfect",
+    "level": "A2",
+    "student_input": "Have you ever visited New York?",
+    "correct_answer": "Have you ever visited New York?",
+    "explanation": "Hoàn hảo! Em đã dùng 'Have you ever + V3' chính xác để hỏi về trải nghiệm. Rất tốt!"
+  },
+  {
+    "topic": "Present Perfect",
+    "level": "A2",
+    "student_input": "I have already readed the book.",
+    "correct_answer": "I have already read the book.",
+    "explanation": "Vị trí 'already' của em rất chuẩn. Tuy nhiên, động từ 'read' là bất quy tắc, nó không thêm '-ed'. Em hãy viết lại dạng V3 của 'read' nhé (viết giống V1 nhưng đọc là /red/)."
+  },
+  {
+    "topic": "Present Perfect",
+    "level": "A2",
+    "student_input": "He has never play football.",
+    "correct_answer": "He has never played football.",
+    "explanation": "Em đã dùng đúng 'has never'. Nhưng động từ 'play' cần phải chia ở dạng V3 (thêm -ed) để đúng cấu trúc thì Hiện tại hoàn thành. Em sửa lại nhé."
+  },
+  {
+    "topic": "Present Perfect",
+    "level": "A2",
+    "student_input": "I haven't spoke to him yet.",
+    "correct_answer": "I haven't spoken to him yet.",
+    "explanation": "Em dùng 'yet' cuối câu phủ định rất chính xác. Tuy nhiên, 'spoke' là V2, em cần V3 của động từ 'speak' cho câu này. Em có nhớ V3 của nó là gì không?"
+  },
+  {
+    "topic": "Present Perfect",
+    "level": "A2",
+    "student_input": "She have lived in this city since five years and she already visit all the museums.",
+    "correct_answer": "She has lived in this city for five years and she has already visited all the museums.",
+    "explanation": "Câu này có 3 điểm cần lưu ý: 1. Trợ động từ đi với 'She'. 2. Giới từ dùng cho 'five years'. 3. Cấu trúc của vế sau với 'already'. Em hãy thử sửa lại từng điểm một nhé!"
+  },
+  {
+    "topic": "Present Perfect",
+    "level": "A2",
+    "student_input": "I has known him for I was a child, but I haven't saw him yet.",
+    "correct_answer": "I have known him since I was a child, but I haven't seen him yet.",
+    "explanation": "Hãy nhìn vào hai vế của câu: Vế đầu em nhầm trợ động từ của 'I' và giới từ đi với mệnh đề 'I was a child'. Vế sau, động từ sau 'haven't' cần ở dạng V3. Em hãy điều chỉnh lại nhé."
+  },
+  {
+    "topic": "Present Perfect",
+    "level": "A2",
+    "student_input": "They has already finish their dinner, but they haven't drink any water since an hour.",
+    "correct_answer": "They have already finished their dinner, but they haven't drunk any water for an hour.",
+    "explanation": "Có 3 lỗi ở đây: Trợ động từ cho 'They', dạng V3 của 'finish', và giới từ cho 'an hour'. Em hãy kiểm tra lại từng phần xem sao?"
+  },
+  {
+    "topic": "Present Perfect",
+    "level": "A2",
+    "student_input": "Have you ever went to Italy? I have went there since two years ago.",
+    "correct_answer": "Have you ever been to Italy? I went there two years ago.",
+    "explanation": "Ở câu hỏi, em dùng 'went' (V2) thay vì V3. Ở câu trả lời, vì có 'two years ago' (thời gian xác định), chúng ta không dùng Present Perfect mà dùng thì nào em nhỉ?"
+  },
+  {
+    "topic": "Present Perfect",
+    "level": "A2",
+    "student_input": "My cat have sleep for 10 hours already, but it hasn't woke up yet.",
+    "correct_answer": "My cat has slept for 10 hours already, but it hasn't woken up yet.",
+    "explanation": "Hãy chú ý chủ ngữ 'My cat' (số ít). Đồng thời, cả hai động từ 'sleep' và 'wake' đều cần được chia ở dạng V3. Em hãy sửa lại nhé."
+  },
+  {
+    "topic": "Present Perfect",
+    "level": "A2",
+    "student_input": "We has been friends since a long time, but we haven't meet for months.",
+    "correct_answer": "We have been friends for a long time, but we haven't met for months.",
+    "explanation": "Em hãy kiểm tra lại trợ động từ đi với 'We', giới từ cho 'a long time' và dạng V3 của động từ 'meet'. Thử sửa lại xem nào!"
+  },
+  {
+    "topic": "Present Perfect",
+    "level": "A2",
+    "student_input": "She hasn't wrote the email for she arrived at the office.",
+    "correct_answer": "She hasn't written the email since she arrived at the office.",
+    "explanation": "Có hai điểm cần sửa: Dạng V3 của động từ 'write' và giới từ dùng để nối với mốc thời gian 'she arrived'. Em hãy chỉnh lại nhé."
+  },
+  {
+    "topic": "Present Perfect",
+    "level": "A2",
+    "student_input": "I have already readed this book since two weeks.",
+    "correct_answer": "I have already read this book for two weeks.",
+    "explanation": "Hãy nhìn vào động từ 'readed' (nhớ lại xem 'read' là có quy tắc hay bất quy tắc?) và giới từ 'since' đi với 'two weeks'. Em hãy sửa lại cả hai nhé."
+  },
+  {
+    "topic": "Present Perfect",
+    "level": "A2",
+    "student_input": "He have never be to London, but he has want to go since years.",
+    "correct_answer": "He has never been to London, but he has wanted to go for years.",
+    "explanation": "Hãy kiểm tra trợ động từ cho 'He', dạng V3 của 'be' và giới từ dùng cho 'years'. Em hãy thử sửa lại xem."
+  },
+  {
+    "topic": "Present Perfect",
+    "level": "A2",
+    "student_input": "Has you ever eat something strange for you visited Asia?",
+    "correct_answer": "Have you ever eaten something strange since you visited Asia?",
+    "explanation": "Câu này có 3 lỗi: Trợ động từ cho 'you', dạng V3 của 'eat', và giới từ 'for' dùng cho mốc thời gian 'you visited Asia'. Em hãy sửa lại nhé."
+  },
+  {
+    "topic": "Present Perfect vs Past Simple",
+    "level": "A2",
+    "student_input": "I have seen that movie yesterday.",
+    "correct_answer": "I saw that movie yesterday.",
+    "explanation": "Em hãy nhìn vào từ 'yesterday'. Đây là một thời điểm xác định trong quá khứ. Khi có thời gian cụ thể, chúng ta dùng Hiện tại hoàn thành hay Quá khứ đơn nhỉ?"
+  },
+  {
+    "topic": "Present Perfect vs Past Simple",
+    "level": "A2",
+    "student_input": "She went to Paris three times in her life.",
+    "correct_answer": "She has been to Paris three times in her life.",
+    "explanation": "Khi nói về một trải nghiệm (số lần làm gì đó) mà không nêu rõ thời gian chính xác, chúng ta nên dùng thì nào để nhấn mạnh kết quả/trải nghiệm em nhỉ?"
+  },
+  {
+    "topic": "Present Perfect vs Past Simple",
+    "level": "A2",
+    "student_input": "I have lived here in 2010.",
+    "correct_answer": "I lived here in 2010.",
+    "explanation": "'In 2010' là một mốc thời gian đã kết thúc trong quá khứ. Vậy em nên dùng 'have lived' hay chỉ đơn giản là 'lived'?"
+  },
+  {
+    "topic": "Present Perfect vs Past Simple",
+    "level": "A2",
+    "student_input": "They have finished their homework two hours ago.",
+    "correct_answer": "They finished their homework two hours ago.",
+    "explanation": "Hãy chú ý cụm 'two hours ago'. Đây là dấu hiệu điển hình của thì nào? Em hãy bỏ trợ động từ 'have' đi và chia lại động từ nhé."
+  },
+  {
+    "topic": "Present Perfect vs Past Simple",
+    "level": "A2",
+    "student_input": "I didn't see him since last week.",
+    "correct_answer": "I haven't seen him since last week.",
+    "explanation": "Khi em thấy từ 'since' (kể từ khi), hành động này kéo dài từ quá khứ đến hiện tại. Vậy chúng ta dùng 'didn't' (Quá khứ đơn) hay 'haven't' (Hiện tại hoàn thành)?"
+  },
+  {
+    "topic": "Present Perfect vs Past Simple",
+    "level": "A2",
+    "student_input": "We have played football last Sunday.",
+    "correct_answer": "We played football last Sunday.",
+    "explanation": "'Last Sunday' là một mốc thời gian xác định. Em hãy nhớ lại xem, khi có mốc thời gian cụ thể, mình có dùng 'have' không?"
+  },
+  {
+    "topic": "Present Perfect vs Past Simple",
+    "level": "A2",
+    "student_input": "I have known her for five years and we met in college.",
+    "correct_answer": "I have known her for five years and we met in college.",
+    "explanation": "Câu này hoàn toàn chính xác! Vế đầu nói về khoảng thời gian kéo dài đến nay (Present Perfect), vế sau nói về một sự kiện cụ thể trong quá khứ (Past Simple). Rất tốt!"
+  },
+  {
+    "topic": "Present Perfect vs Past Simple",
+    "level": "A2",
+    "student_input": "He has lost his keys yesterday morning.",
+    "correct_answer": "He lost his keys yesterday morning.",
+    "explanation": "Vì em đã nói rõ là 'yesterday morning' (sáng hôm qua), nên hành động này đã xảy ra và kết thúc tại thời điểm đó. Em hãy chia lại động từ 'lose' ở thì Quá khứ đơn nhé."
+  },
+  {
+    "topic": "Present Perfect vs Past Simple",
+    "level": "A2",
+    "student_input": "Did you ever eat snails?",
+    "correct_answer": "Have you ever eaten snails?",
+    "explanation": "Khi hỏi về trải nghiệm 'có bao giờ... chưa' mà không quan tâm thời điểm nào, chúng ta dùng 'Did you...' hay 'Have you ever...?'"
+  },
+  {
+    "topic": "Present Perfect vs Past Simple",
+    "level": "A2",
+    "student_input": "I've been to the gym this morning, and now I'm tired.",
+    "correct_answer": "I've been to the gym this morning, and now I'm tired.",
+    "explanation": "Chính xác! Vì 'this morning' vẫn còn trong ngày hôm nay và kết quả là 'bây giờ tôi mệt', nên dùng Hiện tại hoàn thành ở đây là rất hợp lý."
+  },
+  {
+    "topic": "Present Perfect vs Past Simple",
+    "level": "A2",
+    "student_input": "She has graduated from university in 2018.",
+    "correct_answer": "She graduated from university in 2018.",
+    "explanation": "Năm 2018 là một mốc thời gian đã qua. Em hãy bỏ 'has' và dùng dạng V2 của động từ 'graduate' nhé."
+  },
+  {
+    "topic": "Present Perfect vs Past Simple",
+    "level": "A2",
+    "student_input": "I have read that book last month.",
+    "correct_answer": "I read that book last month.",
+    "explanation": "Hãy nhìn vào 'last month'. Đây là thời gian xác định, vậy em nên dùng thì Hiện tại hoàn thành hay Quá khứ đơn?"
+  },
+  {
+    "topic": "Present Perfect vs Past Simple",
+    "level": "A2",
+    "student_input": "We haven't seen a movie for a long time.",
+    "correct_answer": "We haven't seen a movie for a long time.",
+    "explanation": "Chuẩn rồi! 'For a long time' chỉ một khoảng thời gian kéo dài đến hiện tại, nên dùng Present Perfect là chính xác."
+  },
+  {
+    "topic": "Present Perfect vs Past Simple",
+    "level": "A2",
+    "student_input": "They have moved to New York three years ago.",
+    "correct_answer": "They moved to New York three years ago.",
+    "explanation": "Cụm 'three years ago' là dấu hiệu không thể nhầm lẫn của thì nào em nhỉ? Hãy bỏ 'have' đi và chia lại động từ nhé."
+  },
+  {
+    "topic": "Present Perfect vs Past Simple",
+    "level": "A2",
+    "student_input": "I have just finished my lunch.",
+    "correct_answer": "I have just finished my lunch.",
+    "explanation": "Chính xác! 'Just' dùng để chỉ một hành động vừa mới xảy ra, đi kèm với Hiện tại hoàn thành là hoàn toàn đúng."
+  },
+  {
+    "topic": "Present Perfect",
+    "level": "A2",
+    "student_input": "Where is Tom? He has been to the cinema.",
+    "correct_answer": "Where is Tom? He has gone to the cinema.",
+    "explanation": "Hãy chú ý câu hỏi 'Where is Tom?' (Tom đâu rồi?). Điều này có nghĩa là Tom hiện không có ở đây. Vậy em nên dùng 'been' (đi rồi quay về) hay 'gone' (đi và chưa quay về) để mô tả trạng thái của Tom?"
+  },
+  {
+    "topic": "Present Perfect",
+    "level": "A2",
+    "student_input": "I have gone to Japan twice in my life.",
+    "correct_answer": "I have been to Japan twice in my life.",
+    "explanation": "Em đang kể về trải nghiệm cuộc đời mình và hiện tại em đang ở đây để nói chuyện với thầy/cô. Vậy em nên dùng 'gone' (đi và vẫn ở đó) hay 'been' (đi rồi đã quay về)?"
+  },
+  {
+    "topic": "Present Perfect",
+    "level": "A2",
+    "student_input": "My parents have gone to Italy last year, and they are home now.",
+    "correct_answer": "My parents have been to Italy last year, and they are home now.",
+    "explanation": "Vế sau em nói 'they are home now' (họ đang ở nhà). Vậy ở vế trước, việc họ đi Ý là một trải nghiệm đã hoàn tất. Em nên dùng 'gone' hay 'been' cho trường hợp này?"
+  },
+  {
+    "topic": "Present Perfect",
+    "level": "A2",
+    "student_input": "A: Is the food ready? B: Yes, I have just finish cooking.",
+    "correct_answer": "Yes, I have just finished cooking.",
+    "explanation": "Em dùng 'just' để chỉ hành động vừa mới xảy ra là rất chính xác. Tuy nhiên, hãy nhìn lại động từ 'finish'. Trong cấu trúc 'have just...', động từ phải ở dạng nào em nhỉ?"
+  },
+  {
+    "topic": "Present Perfect",
+    "level": "A2",
+    "student_input": "A: Do you want to see 'Avatar'? B: No, I saw it already.",
+    "correct_answer": "No, I have already seen it.",
+    "explanation": "Trong giao tiếp, khi trả lời về một trải nghiệm mà không nói rõ thời gian, chúng ta nên dùng thì nào để tự nhiên hơn? Em hãy thử thêm trợ động từ và đặt 'already' vào vị trí đúng nhé."
+  },
+  {
+    "topic": "Present Perfect",
+    "level": "A2",
+    "student_input": "A: Have you finished the report? B: No, I haven't finish it already.",
+    "correct_answer": "No, I haven't finished it yet.",
+    "explanation": "Ở câu trả lời phủ định 'haven't', để nói một việc 'vẫn chưa' hoàn thành, chúng ta dùng 'already' hay 'yet' ở cuối câu em nhỉ?"
+  },
+  {
+    "topic": "Present Perfect",
+    "level": "A2",
+    "student_input": "A: Look! The bus has already come yet!",
+    "correct_answer": "Look! The bus has already come!",
+    "explanation": "Em đang dùng cả 'already' và 'yet' trong một câu khẳng định. 'Yet' chỉ dùng cho câu phủ định hoặc câu hỏi. Em hãy bỏ 'yet' đi xem câu có tự nhiên hơn không?"
+  },
+  {
+    "topic": "Present Perfect",
+    "level": "A2",
+    "student_input": "I have’ve just seen a UFO!",
+    "correct_answer": "I have just seen a UFO!",
+    "explanation": "Em đang bị lặp trợ động từ: 'have' và '’ve' thực chất là một. Em hãy chọn một trong hai để câu gọn gàng hơn nhé."
+  },
+  {
+    "topic": "Present Perfect",
+    "level": "A2",
+    "student_input": "A: Where is your sister? B: She has gone to the store, she'll be back in 10 minutes.",
+    "correct_answer": "She has gone to the store, she'll be back in 10 minutes.",
+    "explanation": "Tuyệt vời! Em đã phân biệt đúng 'gone' vì chị em hiện vẫn đang ở cửa hàng và chưa quay về. Rất tốt!"
+  },
+  {
+    "topic": "Present Perfect",
+    "level": "A2",
+    "student_input": "A: Have you ever eat durian? B: Yes, I have eat it many times.",
+    "correct_answer": "A: Have you ever eaten durian? B: Yes, I have eaten it many times.",
+    "explanation": "Cả câu hỏi và câu trả lời đều dùng thì Hiện tại hoàn thành. Em hãy kiểm tra lại dạng V3 của động từ 'eat' cho cả hai vế nhé."
+  },
+  {
+    "topic": "Present Perfect",
+    "level": "A2",
+    "student_input": "I have already did my homework, so I can play games now.",
+    "correct_answer": "I have already done my homework, so I can play games now.",
+    "explanation": "Em đặt 'already' rất đúng vị trí. Nhưng hãy nhìn vào từ 'did'. Đây là V2, còn sau 'have', chúng ta cần V3. V3 của 'do' là gì em nhỉ?"
+  },
+  {
+    "topic": "Present Perfect",
+    "level": "A2",
+    "student_input": "She’s just went out, so she can't hear the phone.",
+    "correct_answer": "She's just gone out, so she can't hear the phone.",
+    "explanation": "Từ 'She's' ở đây là viết tắt của 'She has'. Vậy động từ 'went' (V2) cần được chuyển sang dạng V3. Em hãy sửa lại nhé."
+  },
+  {
+    "topic": "Present Perfect",
+    "level": "A2",
+    "student_input": "We have never been’t to the USA.",
+    "correct_answer": "We have never been to the USA.",
+    "explanation": "Trong tiếng Anh, 'never' đã mang nghĩa phủ định rồi, nên chúng ta không dùng 'not' (n't) đi kèm nữa. Em hãy bỏ 'n't' ở từ 'been' đi nhé."
+  },
+  {
+    "topic": "Present Perfect",
+    "level": "A2",
+    "student_input": "A: Is he here? B: No, he has’n't been to the office yet.",
+    "correct_answer": "No, he hasn't been to the office yet.",
+    "explanation": "Em dùng 'yet' và 'hasn't' rất chuẩn. Tuy nhiên, cách viết tắt 'has’n't' bị thừa dấu nháy. Em hãy viết lại thành 'hasn't' cho đúng chính tả nhé."
+  },
+  {
+    "topic": "Present Perfect",
+    "level": "A2",
+    "student_input": "I have just took a shower, I feel fresh now.",
+    "correct_answer": "I have just taken a shower, I feel fresh now.",
+    "explanation": "Hãy nhìn vào động từ 'took'. Đây là dạng quá khứ (V2). Để đi cùng với 'have just', em cần dùng dạng phân từ (V3). V3 của 'take' là gì nhỉ?"
+  },
+  {
+    "topic": "Present Perfect vs Past Simple",
+    "level": "A2",
+    "student_input": "I have visited France. I go there in 2019 and I stay in Paris for a week.",
+    "correct_answer": "I have visited France. I went there in 2019 and I stayed in Paris for a week.",
+    "explanation": "Câu đầu tiên em dùng Present Perfect để giới thiệu trải nghiệm là rất chuẩn. Nhưng ở câu sau, em đã nêu rõ thời gian là 'in 2019', vậy hai động từ 'go' và 'stay' phải được chia ở thì nào?"
+  },
+  {
+    "topic": "Present Perfect vs Past Simple",
+    "level": "A2",
+    "student_input": "She has lost her wallet. She drop it on the bus this morning.",
+    "correct_answer": "She has lost her wallet. She dropped it on the bus this morning.",
+    "explanation": "Vế đầu 'has lost' rất đúng vì nhấn mạnh kết quả là bây giờ cô ấy không có ví. Nhưng vế sau mô tả chi tiết 'rơi trên xe bus sáng nay', vậy 'drop' cần được chia như thế nào?"
+  },
+  {
+    "topic": "Present Perfect vs Past Simple",
+    "level": "A2",
+    "student_input": "We have been to that restaurant. The food was’ve great when we ate there.",
+    "correct_answer": "We have been to that restaurant. The food was great when we ate there.",
+    "explanation": "Em dùng 'have been' rất tốt. Tuy nhiên, ở câu sau, em đang mô tả cảm nhận tại thời điểm ăn (quá khứ), nên chỉ cần dùng 'was' là đủ. Em hãy bỏ '’ve' đi nhé."
+  },
+  {
+    "topic": "Present Perfect vs Past Simple",
+    "level": "A2",
+    "student_input": "I have known my best friend for 10 years. We have meet in primary school.",
+    "correct_answer": "I have known my best friend for 10 years. We met in primary school.",
+    "explanation": "Vế đầu nói về một tình bạn kéo dài đến nay $\rightarrow$ Present Perfect (Đúng!). Nhưng 'gặp nhau ở trường tiểu học' là một sự kiện xảy ra một lần duy nhất trong quá khứ, vậy em dùng 'have meet' hay chỉ cần 'met'?"
+  },
+  {
+    "topic": "Present Perfect vs Past Simple",
+    "level": "A2",
+    "student_input": "He has worked here since 2020. He start as an intern.",
+    "correct_answer": "He has worked here since 2020. He started as an intern.",
+    "explanation": "Việc 'bắt đầu làm thực tập sinh' là hành động xảy ra tại một thời điểm cụ thể trong quá khứ. Em hãy chia lại động từ 'start' cho đúng thì quá khứ đơn nhé."
+  },
+  {
+    "topic": "Present Perfect vs Past Simple",
+    "level": "A2",
+    "student_input": "A: Have you ever tried skiing? B: Yes, I have tried it last winter.",
+    "correct_answer": "Yes, I tried it last winter.",
+    "explanation": "Trong câu hỏi, 'Have you ever...' là chính xác. Nhưng trong câu trả lời, em đã dùng 'last winter' (mùa đông năm ngoái). Khi có thời gian cụ thể, em có nên dùng 'have tried' không?"
+  },
+  {
+    "topic": "Present Perfect vs Past Simple",
+    "level": "A2",
+    "student_input": "I've lived in Hanoi for 5 years, but I move here from Hue in 2018.",
+    "correct_answer": "I've lived in Hanoi for 5 years, but I moved here from Hue in 2018.",
+    "explanation": "Hãy nhìn vào hai mốc thời gian. 'For 5 years' (kéo dài đến nay) $\rightarrow$ Hiện tại hoàn thành (Đúng!). 'In 2018' (thời điểm xác định) $\rightarrow$ vậy 'move' phải chia thế nào?"
+  },
+  {
+    "topic": "Present Perfect vs Past Simple",
+    "level": "A2",
+    "student_input": "My dad has been a driver for a long time. He buy his first car in 1990.",
+    "correct_answer": "My dad has been a driver for a long time. He bought his first car in 1990.",
+    "explanation": "Vế đầu rất tốt. Vế sau nói về việc 'mua xe' vào năm 1990. Em hãy chuyển động từ 'buy' sang dạng quá khứ (V2) nhé."
+  },
+  {
+    "topic": "Present Perfect vs Past Simple",
+    "level": "A2",
+    "student_input": "I have just finished the book. I read it in two days.",
+    "correct_answer": "I have just finished the book. I read it in two days.",
+    "explanation": "Câu này hoàn toàn chính xác! 'Have just finished' cho kết quả hiện tại, và 'read' (V2) kể về quá trình đọc sách. Rất tuyệt!"
+  },
+  {
+    "topic": "Present Perfect vs Past Simple",
+    "level": "A2",
+    "student_input": "She’s been sick since Monday. She felt a headache on Sunday night.",
+    "correct_answer": "She’s been sick since Monday. She felt a headache on Sunday night.",
+    "explanation": "Chính xác! Em đã phân biệt đúng: dùng 'since Monday' cho trạng thái kéo dài và 'on Sunday night' cho một sự kiện cụ thể."
+  },
+  {
+    "topic": "Present Perfect vs Past Simple",
+    "level": "A2",
+    "student_input": "I haven't seen him for ages. The last time I see him was 2 years ago.",
+    "correct_answer": "I haven't seen him for ages. The last time I saw him was 2 years ago.",
+    "explanation": "Vế đầu 'haven't seen' rất chuẩn. Nhưng vế sau nói về 'lần cuối cùng', tức là một thời điểm trong quá khứ. Em hãy sửa 'see' thành dạng V2 nhé."
+  },
+  {
+    "topic": "Present Perfect vs Past Simple",
+    "level": "A2",
+    "student_input": "They have traveled a lot. They visited Korea last month.",
+    "correct_answer": "They have traveled a lot. They visited Korea last month.",
+    "explanation": "Hoàn hảo! Em dùng Present Perfect để nói về kinh nghiệm chung và Past Simple để nói về chuyến đi cụ thể tháng trước."
+  },
+  {
+    "topic": "Present Perfect vs Past Simple",
+    "level": "A2",
+    "student_input": "I have broken my arm. I fall off my bike yesterday.",
+    "correct_answer": "I have broken my arm. I fell off my bike yesterday.",
+    "explanation": "Kết quả hiện tại là 'cánh tay bị gãy' (Present Perfect - Đúng). Nhưng nguyên nhân 'ngã xe' xảy ra 'yesterday'. Em hãy chia lại động từ 'fall' sang V2 nhé."
+  },
+  {
+    "topic": "Present Perfect vs Past Simple",
+    "level": "A2",
+    "student_input": "We've already eaten. We had lunch at 12 o'clock.",
+    "correct_answer": "We've already eaten. We had lunch at 12 o'clock.",
+    "explanation": "Rất tốt! 'Already eaten' nhấn mạnh việc đã xong, và 'had lunch at 12' cung cấp chi tiết thời gian. Em làm rất chuẩn!"
+  },
+  {
+    "topic": "Present Perfect vs Past Simple",
+    "level": "A2",
+    "student_input": "She has’n't visited her grandparents for a year. She last visit them in 2022.",
+    "correct_answer": "She hasn't visited her grandparents for a year. She last visited them in 2022.",
+    "explanation": "Hãy nhìn vào vế sau: 'in 2022'. Đây là mốc thời gian xác định, vậy động từ 'visit' cần phải thêm đuôi gì để đúng thì quá khứ đơn?"
+  }
+]

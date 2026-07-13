@@ -1,0 +1,231 @@
+CONDITIONAL SENTENCES IN ENGLISH
+
+CHAPTER 1: INTRODUCTION TO CONDITIONAL SENTENCES
+
+Conditional sentences, also known as "if" sentences, express a condition and its result. They are essential for discussing possibilities, hypothetical situations, and cause-and-effect relationships. English has four main types of conditional sentences, each serving a different purpose.
+
+Every conditional sentence has two parts:
+- The IF clause (condition): states the condition
+- The MAIN clause (result): states the result or consequence
+
+The order of the clauses can be reversed. When the IF clause comes first, a comma separates the two clauses. When the main clause comes first, no comma is needed.
+
+If it rains, I will stay home. (IF clause first → comma)
+I will stay home if it rains. (Main clause first → no comma)
+
+
+CHAPTER 2: ZERO CONDITIONAL (TYPE 0)
+
+2.1 Form
+
+If + present simple, present simple
+
+2.2 Usage
+
+The Zero Conditional is used for general truths, scientific facts, and things that are always true when the condition is met. The result always happens whenever the condition is true.
+
+Examples:
+- If you heat water to 100°C, it boils.
+- If you mix red and blue, you get purple.
+- If babies are hungry, they cry.
+- If the sun goes down, it gets dark.
+- If you press this button, the machine starts.
+
+2.3 Important Notes
+
+In Zero Conditional, you can replace "if" with "when" without changing the meaning, because the result always happens:
+- When you heat water to 100°C, it boils.
+- When the sun goes down, it gets dark.
+
+The Zero Conditional is also used for instructions and routines:
+- If you feel tired, take a break.
+- If customers complain, apologize and offer help.
+
+
+CHAPTER 3: FIRST CONDITIONAL (TYPE 1)
+
+3.1 Form
+
+If + present simple, will + base verb
+
+3.2 Usage
+
+The First Conditional is used for real and likely situations in the future. The speaker believes the condition is possible and may actually happen.
+
+Examples:
+- If it rains tomorrow, I will take an umbrella.
+- If she studies hard, she will pass the exam.
+- If we leave now, we will arrive on time.
+- If the weather is nice this weekend, we will go to the beach.
+- If you don't hurry, you will miss the bus.
+
+3.3 Variations
+
+Instead of "will," you can use other modal verbs:
+- If you finish early, you can leave. (permission)
+- If he calls, I might answer. (possibility)
+- If it snows, we should stay inside. (advice)
+- If you eat too much, you may feel sick. (possibility)
+
+You can also use imperatives in the result clause:
+- If you see John, tell him to call me.
+- If you need help, ask your teacher.
+
+3.4 Important Notes
+
+Never use "will" in the IF clause of a First Conditional:
+Incorrect: If it will rain, I will take an umbrella.
+Correct: If it rains, I will take an umbrella.
+
+Exception: "If you will" can be used as a polite request:
+- If you will wait here, I'll get the manager. (polite)
+
+
+CHAPTER 4: SECOND CONDITIONAL (TYPE 2)
+
+4.1 Form
+
+If + past simple, would + base verb
+
+4.2 Usage
+
+The Second Conditional is used for unreal, imaginary, or hypothetical situations in the present or future. The speaker considers the condition unlikely or impossible.
+
+Examples:
+- If I had a million dollars, I would travel around the world.
+- If she spoke French, she would apply for the job in Paris.
+- If I were taller, I would play basketball.
+- If we lived near the ocean, we would go surfing every day.
+- If he knew the answer, he would tell you.
+
+4.3 Special Note: "Were" for All Subjects
+
+In formal English, "were" is used for all subjects in the Second Conditional, instead of "was." This is called the subjunctive mood:
+- If I were rich, I would buy a mansion. (formal, preferred)
+- If he were here, he would help us. (formal, preferred)
+- If she were the president, she would change the law. (formal, preferred)
+
+In informal spoken English, "was" is also accepted:
+- If I was rich, I would buy a mansion. (informal, acceptable)
+
+4.4 Variations
+
+You can use "could" or "might" instead of "would":
+- If I had more time, I could learn another language. (ability)
+- If we won the lottery, we might move abroad. (possibility)
+
+4.5 Important Notes
+
+The past tense in the IF clause does NOT refer to the past. It signals an unreal or imaginary situation:
+- If I spoke Japanese... (I don't speak Japanese now — unreal present)
+- If she had more money... (She doesn't have more money — unreal present)
+
+
+CHAPTER 5: THIRD CONDITIONAL (TYPE 3)
+
+5.1 Form
+
+If + past perfect (had + V3), would have + past participle (V3)
+
+5.2 Usage
+
+The Third Conditional is used for unreal situations in the past. It describes things that did NOT happen and imagines a different result. It is often used to express regret or to analyze past decisions.
+
+Examples:
+- If I had studied harder, I would have passed the exam. (I didn't study hard. I didn't pass.)
+- If she had left earlier, she would have caught the train. (She didn't leave early. She missed the train.)
+- If we had known about the traffic, we would have taken a different route. (We didn't know. We didn't take a different route.)
+- If he had listened to the advice, he wouldn't have made that mistake. (He didn't listen. He made the mistake.)
+- If it hadn't rained, we would have had the picnic outside. (It rained. We didn't have the picnic outside.)
+
+5.3 Variations
+
+Use "could have" or "might have" instead of "would have":
+- If I had taken that job, I could have earned more money. (ability)
+- If we had arrived sooner, we might have found good seats. (possibility)
+
+5.4 Contractions
+
+In spoken English, contractions are common:
+- If I'd known, I'd have told you. (If I had known, I would have told you.)
+- If she'd called, I'd have answered. (If she had called, I would have answered.)
+
+
+CHAPTER 6: SUMMARY TABLE
+
+Type 0 (General Truth):
+  IF clause: present simple
+  MAIN clause: present simple
+  Example: If you heat ice, it melts.
+
+Type 1 (Real Future):
+  IF clause: present simple
+  MAIN clause: will + base verb
+  Example: If it rains, I will stay home.
+
+Type 2 (Unreal Present/Future):
+  IF clause: past simple
+  MAIN clause: would + base verb
+  Example: If I had time, I would exercise.
+
+Type 3 (Unreal Past):
+  IF clause: past perfect
+  MAIN clause: would have + V3
+  Example: If I had known, I would have helped.
+
+
+CHAPTER 7: COMMON ERRORS
+
+Error 1: Using "will" in the IF clause (Type 1)
+Incorrect: If it will be sunny, we will go out.
+Correct: If it is sunny, we will go out.
+
+Error 2: Using "would" in the IF clause (Type 2)
+Incorrect: If I would have more money, I would travel.
+Correct: If I had more money, I would travel.
+
+Error 3: Mixing conditional types
+Incorrect: If I studied harder, I will pass the exam.
+Correct: If I study harder, I will pass the exam. (Type 1)
+Correct: If I studied harder, I would pass the exam. (Type 2)
+
+Error 4: Using "would have" in the IF clause (Type 3)
+Incorrect: If I would have known, I would have called.
+Correct: If I had known, I would have called.
+
+Error 5: Confusing Type 2 and Type 3
+Type 2 (now/future): If I had a car, I would drive to work. (I don't have a car now.)
+Type 3 (past): If I had had a car, I would have driven to work. (I didn't have a car then.)
+
+Error 6: Forgetting "have" in Type 3
+Incorrect: If I had known, I would told you.
+Correct: If I had known, I would have told you.
+
+
+CHAPTER 8: PRACTICE SENTENCES
+
+Complete the conditional sentences with the correct verb forms:
+
+1. If you _____ (heat) water to 100°C, it _____ (boil). [Type 0]
+   Answer: heat / boils
+
+2. If she _____ (study) tonight, she _____ (do) well on the test. [Type 1]
+   Answer: studies / will do
+
+3. If I _____ (be) you, I _____ (accept) the offer. [Type 2]
+   Answer: were / would accept
+
+4. If they _____ (arrive) earlier, they _____ (see) the opening ceremony. [Type 3]
+   Answer: had arrived / would have seen
+
+5. If it _____ (rain) tomorrow, we _____ (cancel) the picnic. [Type 1]
+   Answer: rains / will cancel
+
+6. If I _____ (have) wings, I _____ (fly) everywhere. [Type 2]
+   Answer: had / would fly
+
+7. If she _____ (not miss) the bus, she _____ (not be) late for work. [Type 3]
+   Answer: hadn't missed / wouldn't have been
+
+8. If you _____ (press) this switch, the light _____ (turn) on. [Type 0]
+   Answer: press / turns

@@ -1,0 +1,352 @@
+[
+  {
+    "topic": "Modal Verbs",
+    "level": "A2",
+    "student_input": "I can to swim very fast.",
+    "correct_answer": "I can swim very fast.",
+    "explanation": "Hãy nhìn vào cụm 'can to swim'. Trong tiếng Anh, sau động từ khuyết thiếu 'can', chúng ta dùng động từ nguyên mẫu có 'to' hay không có 'to' em nhỉ? Em hãy thử bỏ từ 'to' đi xem sao."
+  },
+  {
+    "topic": "Modal Verbs",
+    "level": "A2",
+    "student_input": "You should to eat more vegetables.",
+    "correct_answer": "You should eat more vegetables.",
+    "explanation": "Em dùng 'should' để đưa ra lời khuyên là rất chính xác. Tuy nhiên, sau 'should', chúng ta không dùng 'to'. Em hãy sửa lại cụm 'should to eat' nhé."
+  },
+  {
+    "topic": "Modal Verbs",
+    "level": "A2",
+    "student_input": "He cans speak three languages.",
+    "correct_answer": "He can speak three languages.",
+    "explanation": "Hãy chú ý từ 'cans'. Động từ khuyết thiếu (như can, could, should) có bao giờ thêm 's' khi đi với He/She/It không em? Hãy đưa nó về dạng nguyên bản nhé."
+  },
+  {
+    "topic": "Modal Verbs",
+    "level": "A2",
+    "student_input": "She shoulds go to the doctor.",
+    "correct_answer": "She should go to the doctor.",
+    "explanation": "Tương tự như 'can', từ 'should' là một động từ khuyết thiếu nên không bao giờ chia theo chủ ngữ. Em hãy bỏ chữ 's' ở từ 'shoulds' đi nhé."
+  },
+  {
+    "topic": "Modal Verbs",
+    "level": "A2",
+    "student_input": "We could to play football when we were young.",
+    "correct_answer": "We could play football when we were young.",
+    "explanation": "Khi dùng 'could' để nói về khả năng trong quá khứ, chúng ta vẫn áp dụng quy tắc của động từ khuyết thiếu: không dùng 'to' phía sau. Em hãy sửa lại cụm 'could to play' nhé."
+  },
+  {
+    "topic": "Modal Verbs",
+    "level": "A2",
+    "student_input": "You can to use my pen if you want.",
+    "correct_answer": "You can use my pen if you want.",
+    "explanation": "Em đang cho phép ai đó dùng bút, dùng 'can' là đúng rồi. Nhưng hãy kiểm tra lại động từ sau 'can'. Chúng ta có cần từ 'to' ở đây không nhỉ?"
+  },
+  {
+    "topic": "Modal Verbs",
+    "level": "A2",
+    "student_input": "My cat can to jump very high.",
+    "correct_answer": "My cat can jump very high.",
+    "explanation": "Một lần nữa, em hãy nhớ quy tắc: Modal Verb + Verb (bare infinitive). 'To jump' nên được sửa thành gì để đúng quy tắc này?"
+  },
+  {
+    "topic": "Modal Verbs",
+    "level": "A2",
+    "student_input": "It shoulds be sunny tomorrow.",
+    "correct_answer": "It should be sunny tomorrow.",
+    "explanation": "Hãy nhìn vào chủ ngữ 'It'. Dù là ngôi thứ 3 số ít, nhưng 'should' không bao giờ thêm 's'. Em hãy bỏ chữ 's' đi nhé."
+  },
+  {
+    "topic": "Modal Verbs",
+    "level": "A2",
+    "student_input": "I could to read when I was four years old.",
+    "correct_answer": "I could read when I was four years old.",
+    "explanation": "Em đang nói về khả năng trong quá khứ. Hãy nhớ là sau 'could', chúng ta dùng động từ nguyên mẫu không có 'to'. Em sửa lại 'could to read' nhé."
+  },
+  {
+    "topic": "Modal Verbs",
+    "level": "A2",
+    "student_input": "They should to study harder for the exam.",
+    "correct_answer": "They should study harder for the exam.",
+    "explanation": "Lời khuyên của em rất hay, nhưng cấu trúc 'should to study' bị dư một từ. Em hãy bỏ từ 'to' đi để câu tự nhiên hơn."
+  },
+  {
+    "topic": "Modal Verbs",
+    "level": "A2",
+    "student_input": "He can to drive a car now.",
+    "correct_answer": "He can drive a car now.",
+    "explanation": "Hãy kiểm tra lại động từ sau 'can'. Trong tiếng Anh, chúng ta nói 'can drive' hay 'can to drive' nhỉ?"
+  },
+  {
+    "topic": "Modal Verbs",
+    "level": "A2",
+    "student_input": "She can’s speak French.",
+    "correct_answer": "She can't speak French.",
+    "explanation": "Có vẻ em đang nhầm lẫn cách viết tắt. Để phủ định 'can', chúng ta dùng 'cannot' hoặc viết tắt là 'can't'. 'Can’s' không tồn tại trong tiếng Anh. Em sửa lại nhé."
+  },
+  {
+    "topic": "Modal Verbs",
+    "level": "A2",
+    "student_input": "You should to be more careful.",
+    "correct_answer": "You should be more careful.",
+    "explanation": "Hãy nhớ quy tắc 'không to' sau modal verbs. Em hãy bỏ từ 'to' trước từ 'be' để câu chính xác hơn."
+  },
+  {
+    "topic": "Modal Verbs",
+    "level": "A2",
+    "student_input": "The children shoulds sleep early.",
+    "correct_answer": "The children should sleep early.",
+    "explanation": "Hãy nhìn lại từ 'shoulds'. Động từ khuyết thiếu không bao giờ thay đổi hình thái theo chủ ngữ. Em hãy bỏ chữ 's' đi nhé."
+  },
+  {
+    "topic": "Modal Verbs",
+    "level": "A2",
+    "student_input": "I can to help you with your homework.",
+    "correct_answer": "I can help you with your homework.",
+    "explanation": "Một lời đề nghị giúp đỡ rất tuyệt! Nhưng về ngữ pháp, em hãy bỏ từ 'to' sau 'can' để câu đúng chuẩn nhé."
+  },
+  {
+    "topic": "Modal Verbs",
+    "level": "A2",
+    "student_input": "I have a toothache. I can go to the dentist.",
+    "correct_answer": "I have a toothache. I should go to the dentist.",
+    "explanation": "Em đang bị đau răng, vì vậy việc đi nha sĩ là một 'lời khuyên' hoặc một 'việc cần làm'. 'Can' nói về khả năng (tôi có thể đi), còn từ nào dùng để nói về một lời khuyên hợp lý nhỉ?"
+  },
+  {
+    "topic": "Modal Verbs",
+    "level": "A2",
+    "student_input": "Can you open the window, please? (Speaking to a teacher)",
+    "correct_answer": "Could you open the window, please?",
+    "explanation": "Câu của em không sai ngữ pháp, nhưng khi nói chuyện với thầy cô giáo, chúng ta cần sự lịch sự hơn. Thay vì dùng 'Can', em hãy dùng từ nào nghe nhẹ nhàng và trang trọng hơn nhỉ?"
+  },
+  {
+    "topic": "Modal Verbs",
+    "level": "A2",
+    "student_input": "When I was five, I should ride a bike.",
+    "correct_answer": "When I was five, I could ride a bike.",
+    "explanation": "Hãy nhìn vào mốc thời gian 'When I was five' (Khi tôi 5 tuổi). Em đang nói về 'khả năng trong quá khứ'. Vậy em nên dùng 'should' (lời khuyên) hay 'could' (có thể trong quá khứ)?"
+  },
+  {
+    "topic": "Modal Verbs",
+    "level": "A2",
+    "student_input": "It's raining outside. You can take an umbrella.",
+    "correct_answer": "It's raining outside. You should take an umbrella.",
+    "explanation": "Trời đang mưa, nên việc mang ô là một 'lời khuyên' tốt cho người đối diện. Để đưa ra lời khuyên, em dùng 'can' hay 'should'?"
+  },
+  {
+    "topic": "Modal Verbs",
+    "level": "A2",
+    "student_input": "Could you speak English when you were a child?",
+    "correct_answer": "Could you speak English when you were a child?",
+    "explanation": "Hoàn hảo! Em đã dùng 'Could' chính xác để hỏi về khả năng trong quá khứ. Rất tốt!"
+  },
+  {
+    "topic": "Modal Verbs",
+    "level": "A2",
+    "student_input": "I'm lost. I can ask for help.",
+    "correct_answer": "I'm lost. I should ask for help.",
+    "explanation": "Khi bị lạc, việc hỏi đường là hành động đúng đắn nhất nên làm lúc này. Em hãy dùng từ mang nghĩa 'nên' thay vì từ mang nghĩa 'có thể' nhé."
+  },
+  {
+    "topic": "Modal Verbs",
+    "level": "A2",
+    "student_input": "Should you lend me your pen, please?",
+    "correct_answer": "Could you lend me your pen, please?",
+    "explanation": "Em đang muốn mượn bút của bạn một cách lịch sự. 'Should' dùng để khuyên bảo, còn để đưa ra một yêu cầu, em nên dùng từ nào nhỉ?"
+  },
+  {
+    "topic": "Modal Verbs",
+    "level": "A2",
+    "student_input": "She is very smart. She should speak four languages.",
+    "correct_answer": "She is very smart. She can speak four languages.",
+    "explanation": "Việc nói được 4 ngôn ngữ là một 'khả năng' (ability). Em hãy dùng từ 'can' thay vì 'should' (nên) để khen ngợi khả năng của cô ấy nhé."
+  },
+  {
+    "topic": "Modal Verbs",
+    "level": "A2",
+    "student_input": "You could study harder if you want to pass the exam.",
+    "correct_answer": "You should study harder if you want to pass the exam.",
+    "explanation": "Đây là một lời khuyên mạnh mẽ để giúp bạn vượt qua kỳ thi. Mặc dù 'could' có thể dùng cho gợi ý nhẹ, nhưng trong trường hợp này, dùng từ nào để nhấn mạnh việc 'nên' làm sẽ tốt hơn?"
+  },
+  {
+    "topic": "Modal Verbs",
+    "level": "A2",
+    "student_input": "Can I use your phone for a minute? (Speaking to a friend)",
+    "correct_answer": "Can I use your phone for a minute?",
+    "explanation": "Chính xác! Với bạn bè thân thiết, dùng 'Can' để xin phép là rất tự nhiên và phù hợp. Rất tốt!"
+  },
+  {
+    "topic": "Modal Verbs",
+    "level": "A2",
+    "student_input": "I can't swim when I was a baby.",
+    "correct_answer": "I couldn't swim when I was a baby.",
+    "explanation": "Hãy chú ý 'when I was a baby'. Đây là quá khứ. Vậy dạng phủ định của 'can' trong quá khứ phải là từ gì em nhỉ?"
+  },
+  {
+    "topic": "Modal Verbs",
+    "level": "A2",
+    "student_input": "You can stop smoking. It's bad for your health.",
+    "correct_answer": "You should stop smoking. It's bad for your health.",
+    "explanation": "Vì hút thuốc có hại cho sức khỏe, nên đây là một lời khuyên khẩn thiết. Em hãy dùng từ mang nghĩa 'nên' thay vì 'có thể' nhé."
+  },
+  {
+    "topic": "Modal Verbs",
+    "level": "A2",
+    "student_input": "Could you tell me the way to the station, please?",
+    "correct_answer": "Could you tell me the way to the station, please?",
+    "explanation": "Tuyệt vời! Em dùng 'Could' để yêu cầu thông tin từ người lạ một cách lịch sự. Rất chính xác."
+  },
+  {
+    "topic": "Modal Verbs",
+    "level": "A2",
+    "student_input": "He is a great cook. He should make a delicious cake.",
+    "correct_answer": "He is a great cook. He can make a delicious cake.",
+    "explanation": "Vì anh ấy là đầu bếp giỏi, nên anh ấy 'có khả năng' làm bánh ngon. Em hãy thay 'should' (nên) bằng 'can' (có thể) nhé."
+  },
+  {
+    "topic": "Modal Verbs",
+    "level": "A2",
+    "student_input": "You should open the door for me, please?",
+    "correct_answer": "Could you open the door for me, please?",
+    "explanation": "Câu này là một yêu cầu lịch sự, không phải là lời khuyên. Em hãy dùng 'Could' thay cho 'Should' nhé."
+  },
+  {
+    "topic": "Modal Verbs",
+    "level": "A2",
+    "student_input": "Do you can help me with this box?",
+    "correct_answer": "Can you help me with this box?",
+    "explanation": "Hãy nhìn vào trợ động từ 'Do' ở đầu câu. Động từ khuyết thiếu như 'can' có cần mượn 'do/does' để đặt câu hỏi không em? Em hãy thử bỏ 'Do' và đảo 'Can' lên đầu câu nhé."
+  },
+  {
+    "topic": "Modal Verbs",
+    "level": "A2",
+    "student_input": "I don't should eat too many sweets.",
+    "correct_answer": "I shouldn't eat too many sweets.",
+    "explanation": "Em đang muốn nói 'không nên', điều này rất tốt. Tuy nhiên, 'should' là động từ khuyết thiếu, nó không đi cùng với 'don't'. Em hãy thử thêm 'not' trực tiếp vào sau 'should' và viết tắt nó xem sao."
+  },
+  {
+    "topic": "Modal Verbs",
+    "level": "A2",
+    "student_input": "Does she can speak English?",
+    "correct_answer": "Can she speak English?",
+    "explanation": "Tương tự như với 'can', chúng ta không dùng 'does' để hỏi. Em hãy bỏ 'Does' và đưa 'Can' lên vị trí đầu câu nhé."
+  },
+  {
+    "topic": "Modal Verbs",
+    "level": "A2",
+    "student_input": "We don't could find the hotel yesterday.",
+    "correct_answer": "We couldn't find the hotel yesterday.",
+    "explanation": "Hãy chú ý từ 'could' (khả năng trong quá khứ). Nó là một modal verb, nên không dùng 'don't' hay 'didn't'. Em hãy dùng dạng phủ định của chính nó là 'couldn't' nhé."
+  },
+  {
+    "topic": "Modal Verbs",
+    "level": "A2",
+    "student_input": "Should I to call her now?",
+    "correct_answer": "Should I call her now?",
+    "explanation": "Câu hỏi của em rất đúng cấu trúc đảo ngữ. Tuy nhiên, hãy nhìn lại động từ 'to call'. Sau 'should', chúng ta dùng động từ nguyên mẫu có 'to' hay không có 'to' nhỉ?"
+  },
+  {
+    "topic": "Modal Verbs",
+    "level": "A2",
+    "student_input": "She not can come to the party.",
+    "correct_answer": "She can't come to the party.",
+    "explanation": "Trong tiếng Anh, để phủ định cho 'can', chúng ta không đặt 'not' đứng trước. Em hãy đặt 'not' ngay sau 'can' (viết tắt là can't). Thử sửa lại xem nào!"
+  },
+  {
+    "topic": "Modal Verbs",
+    "level": "A2",
+    "student_input": "Do we should go home now?",
+    "correct_answer": "Should we go home now?",
+    "explanation": "Hãy nhớ: Modal Verbs là những 'siêu động từ', chúng tự làm câu hỏi mà không cần 'do/does'. Em hãy bỏ 'Do' và bắt đầu câu bằng 'Should' nhé."
+  },
+  {
+    "topic": "Modal Verbs",
+    "level": "A2",
+    "student_input": "Why you can't come to my house?",
+    "correct_answer": "Why can't you come to my house?",
+    "explanation": "Trong câu hỏi có từ để hỏi (Why, What, Where...), động từ khuyết thiếu 'can't' phải đứng trước chủ ngữ 'you'. Em hãy đảo vị trí của 'you' và 'can't' nhé."
+  },
+  {
+    "topic": "Modal Verbs",
+    "level": "A2",
+    "student_input": "I can't to drive a car.",
+    "correct_answer": "I can't drive a car.",
+    "explanation": "Phủ định 'can't' của em là chính xác. Nhưng hãy nhìn lại 'to drive'. Sau một modal verb, kể cả ở dạng phủ định, chúng ta có dùng 'to' không em?"
+  },
+  {
+    "topic": "Modal Verbs",
+    "level": "A2",
+    "student_input": "Does he should study more?",
+    "correct_answer": "Should he study more?",
+    "explanation": "Lại là lỗi dùng 'does' với modal verb rồi. Em hãy nhớ quy tắc: Bỏ 'does' và đưa 'Should' lên đầu câu để tạo câu hỏi nhé."
+  },
+  {
+    "topic": "Modal Verbs",
+    "level": "A2",
+    "student_input": "They not should shout in the library.",
+    "correct_answer": "They shouldn't shout in the library.",
+    "explanation": "Để nói 'không nên', em đừng dùng 'not should'. Hãy kết hợp chúng lại thành 'should not' hoặc viết tắt là 'shouldn't'. Em thử sửa lại xem."
+  },
+  {
+    "topic": "Modal Verbs",
+    "level": "A2",
+    "student_input": "Could you to open the door for me?",
+    "correct_answer": "Could you open the door for me?",
+    "explanation": "Lời yêu cầu của em rất lịch sự! Nhưng hãy kiểm tra lại 'could to open'. Chúng ta có cần từ 'to' sau 'could' không nhỉ?"
+  },
+  {
+    "topic": "Modal Verbs",
+    "level": "A2",
+    "student_input": "Do you could speak English when you were five?",
+    "correct_answer": "Could you speak English when you were five?",
+    "explanation": "Em đang hỏi về khả năng trong quá khứ. 'Could' chính là trợ động từ rồi, nên em không cần dùng 'Do' nữa. Hãy bỏ 'Do' và bắt đầu bằng 'Could' nhé."
+  },
+  {
+    "topic": "Modal Verbs",
+    "level": "A2",
+    "student_input": "Where I should go for my holiday?",
+    "correct_answer": "Where should I go for my holiday?",
+    "explanation": "Trong câu hỏi, động từ khuyết thiếu 'should' phải đứng trước chủ ngữ 'I'. Em hãy đảo vị trí hai từ này để câu đúng ngữ pháp nhé."
+  },
+  {
+    "topic": "Modal Verbs",
+    "level": "A2",
+    "student_input": "He doesn't can swim.",
+    "correct_answer": "He can't swim.",
+    "explanation": "Hãy nhớ: 'can' không bao giờ đi với 'doesn't'. Để phủ định, em chỉ cần dùng 'cannot' hoặc 'can't'. Em sửa lại giúp thầy/cô nhé."
+  },
+  {
+    "topic": "Modal Verbs",
+    "level": "A2",
+    "student_input": "Should we to start the meeting now?",
+    "correct_answer": "Should we start the meeting now?",
+    "explanation": "Câu hỏi đảo ngữ 'Should we' rất chuẩn. Lỗi duy nhất là từ 'to start'. Em hãy bỏ 'to' đi để động từ trở về dạng nguyên mẫu nhé."
+  },
+  {
+    "topic": "Modal Verbs",
+    "level": "A2",
+    "student_input": "I don't can't find my keys.",
+    "correct_answer": "I can't find my keys.",
+    "explanation": "Em đang dùng hai lần phủ định ('don't' và 'can't') trong một câu. Điều này làm câu bị sai. Em chỉ cần dùng duy nhất từ 'can't' là đủ rồi. Thử bỏ 'don't' đi xem sao."
+  },
+  {
+    "topic": "Modal Verbs",
+    "level": "A2",
+    "student_input": "Can you’re tell me the time?",
+    "correct_answer": "Can you tell me the time?",
+    "explanation": "Hãy nhìn vào 'you’re'. Đây là viết tắt của 'you are'. Trong câu hỏi với 'Can', chúng ta dùng chủ ngữ 'you' chứ không dùng 'you are'. Em hãy bỏ '’re' đi nhé."
+  },
+  {
+    "topic": "Modal Verbs",
+    "level": "A2",
+    "student_input": "What should to do if I'm sick?",
+    "correct_answer": "What should I do if I'm sick?",
+    "explanation": "Câu này thiếu mất chủ ngữ! Em đang hỏi 'Tôi nên làm gì', vậy em cần thêm 'I' vào sau 'should' và bỏ từ 'to' đi. Em thử viết lại nhé."
+  },
+  {
+    "topic": "Modal Verbs",
+    "level": "A2",
+    "student_input": "Could you lend me some money, please?",
+    "correct_answer": "Could you lend me some money, please?",
+    "explanation": "Tuyệt vời! Em đã dùng 'Could' để đưa ra lời yêu cầu lịch sự một cách chính xác. Không có lỗi nào ở đây cả!"
+  }
+]

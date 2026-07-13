@@ -1,0 +1,625 @@
+[
+  {
+    "topic": "Plural Nouns",
+    "level": "A1",
+    "student_input": "I have two apple",
+    "correct_answer": "I have two apples",
+    "explanation": "Chào em, hãy nhìn vào số lượng 'two' (hai). Vì có nhiều hơn một quả táo, danh từ 'apple' cần được chuyển sang dạng số nhiều. Em nhớ mình phải thêm chữ cái gì vào cuối từ không?"
+  },
+  {
+    "topic": "Plural Nouns",
+    "level": "A1",
+    "student_input": "There are three bus on the street",
+    "correct_answer": "There are three buses on the street",
+    "explanation": "Em dùng 'There are' cho số nhiều là rất tốt. Tuy nhiên, hãy nhìn từ 'bus'. Với những danh từ kết thúc bằng 's', mình chỉ thêm 's' hay phải thêm 'es' để tạo số nhiều em nhỉ?"
+  },
+  {
+    "topic": "Plural Nouns",
+    "level": "A1",
+    "student_input": "I see four box",
+    "correct_answer": "I see four boxes",
+    "explanation": "Hãy nhìn vào số lượng 'four'. Từ 'box' kết thúc bằng chữ 'x'. Em có nhớ quy tắc thêm 's' hay 'es' cho những từ kết thúc bằng 'x' không?"
+  },
+  {
+    "topic": "Plural Nouns",
+    "level": "A1",
+    "student_input": "Many city in Vietnam are beautiful",
+    "correct_answer": "Many cities in Vietnam are beautiful",
+    "explanation": "Chào em, từ 'Many' (nhiều) yêu cầu danh từ theo sau phải ở dạng số nhiều. Với từ 'city' kết thúc bằng 'phụ âm + y', em nhớ mình phải đổi 'y' thành gì rồi mới thêm 'es' không?"
+  },
+  {
+    "topic": "Plural Nouns",
+    "level": "A1",
+    "student_input": "Two boy are playing soccer",
+    "correct_answer": "Two boys are playing soccer",
+    "explanation": "Hãy nhìn từ 'boy'. Nó kết thúc bằng 'nguyên âm + y'. Trong trường hợp này, mình chỉ cần thêm 's' hay phải đổi 'y' thành 'ies' em nhỉ?"
+  },
+  {
+    "topic": "Plural Nouns",
+    "level": "A1",
+    "student_input": "I have two child",
+    "correct_answer": "I have two children",
+    "explanation": "Chào em, từ 'child' là một danh từ bất quy tắc. Chúng ta không thêm 's' vào sau từ này. Em có nhớ dạng số nhiều đặc biệt của 'child' là gì không?"
+  },
+  {
+    "topic": "Plural Nouns",
+    "level": "A1",
+    "student_input": "There are many watch in the store",
+    "correct_answer": "There are many watches in the store",
+    "explanation": "Hãy nhìn vào từ 'watch' (đồng hồ). Từ này kết thúc bằng đuôi 'ch'. Em hãy nhớ lại xem với đuôi 'ch', mình thêm 's' hay 'es' để tạo số nhiều nhé."
+  },
+  {
+    "topic": "Plural Nouns",
+    "level": "A1",
+    "student_input": "Five dish on the table",
+    "correct_answer": "Five dishes on the table",
+    "explanation": "Số lượng là 'five' (năm), nên 'dish' phải ở dạng số nhiều. Vì 'dish' kết thúc bằng 'sh', em sẽ thêm đuôi gì vào sau từ này nhỉ?"
+  },
+  {
+    "topic": "Plural Nouns",
+    "level": "A1",
+    "student_input": "The babys are crying",
+    "correct_answer": "The babies are crying",
+    "explanation": "Em đã chia 'are' cho số nhiều rất tốt. Nhưng hãy nhìn lại từ 'babys'. Với danh từ kết thúc bằng 'phụ âm + y', mình có được thêm 's' trực tiếp không, hay phải đổi 'y' thành 'ies'?"
+  },
+  {
+    "topic": "Plural Nouns",
+    "level": "A1",
+    "student_input": "There are many man in the room",
+    "correct_answer": "There are many men in the room",
+    "explanation": "Từ 'man' là một danh từ bất quy tắc. Thay vì thêm 's', chúng ta sẽ thay đổi nguyên âm bên trong từ. Em nhớ 'man' số nhiều chuyển thành từ gì không?"
+  },
+  {
+    "topic": "Plural Nouns",
+    "level": "A1",
+    "student_input": "She has three brush",
+    "correct_answer": "She has three brushes",
+    "explanation": "Hãy nhìn vào từ 'brush' (cây cọ/bàn chải). Từ này kết thúc bằng 'sh'. Em hãy nhớ lại quy tắc thêm 's' hay 'es' cho những từ kết thúc bằng 'sh' nhé."
+  },
+  {
+    "topic": "Plural Nouns",
+    "level": "A1",
+    "student_input": "The butterflys are colorful",
+    "correct_answer": "The butterflies are colorful",
+    "explanation": "Chào em, hãy nhìn từ 'butterflys'. Từ 'butterfly' kết thúc bằng 'phụ âm + y'. Em nhớ mình phải biến đổi chữ 'y' như thế nào trước khi thêm 'es' không?"
+  },
+  {
+    "topic": "Plural Nouns",
+    "level": "A1",
+    "student_input": "I have two candy",
+    "correct_answer": "I have two candies",
+    "explanation": "Số lượng là 'two', nên 'candy' cần ở dạng số nhiều. Em hãy kiểm tra lại đuôi của từ 'candy' xem đã được chia đúng quy tắc 'y $\rightarrow$ ies' chưa nhé."
+  },
+  {
+    "topic": "Plural Nouns",
+    "level": "A1",
+    "student_input": "There are many woman in the office",
+    "correct_answer": "There are many women in the office",
+    "explanation": " 'Woman' là danh từ bất quy tắc. Tương tự như 'man', mình sẽ thay đổi nguyên âm để tạo số nhiều. Em nhớ dạng số nhiều của 'woman' là gì không?"
+  },
+  {
+    "topic": "Plural Nouns",
+    "level": "A1",
+    "student_input": "I see two fox",
+    "correct_answer": "I see two foxes",
+    "explanation": "Hãy nhìn vào từ 'fox'. Nó kết thúc bằng chữ 'x'. Em hãy nhớ lại xem với những từ kết thúc bằng 'x', mình thêm 's' hay 'es' nhỉ?"
+  },
+  {
+    "topic": "Plural Nouns",
+    "level": "A1",
+    "student_input": "Ten key on the table",
+    "correct_answer": "Ten keys on the table",
+    "explanation": "Số lượng là 'ten' (mười), nên 'key' phải ở dạng số nhiều. Vì 'key' kết thúc bằng 'nguyên âm + y', em chỉ cần thêm chữ cái gì vào cuối từ thôi nhỉ?"
+  },
+  {
+    "topic": "Plural Nouns",
+    "level": "A1",
+    "student_input": "My friends have many toy",
+    "correct_answer": "My friends have many toys",
+    "explanation": "Từ 'many' đi với danh từ số nhiều. 'Toy' kết thúc bằng 'nguyên âm + y', vậy em hãy thêm đuôi phù hợp cho từ này nhé."
+  },
+  {
+    "topic": "Plural Nouns",
+    "level": "A1",
+    "student_input": "Three sandwich for lunch",
+    "correct_answer": "Three sandwiches for lunch",
+    "explanation": "Chào em, từ 'sandwich' kết thúc bằng 'ch'. Em hãy nhớ lại quy tắc: với đuôi 'ch', mình thêm 's' hay 'es' để tạo số nhiều?"
+  },
+  {
+    "topic": "Plural Nouns",
+    "level": "A1",
+    "student_input": "I have two foot",
+    "correct_answer": "I have two feet",
+    "explanation": "Từ 'foot' (bàn chân) là một danh từ bất quy tắc. Mình không thêm 's' mà thay đổi nguyên âm 'oo'. Em có nhớ 'foot' số nhiều là gì không?"
+  },
+  {
+    "topic": "Plural Nouns",
+    "level": "A1",
+    "student_input": "Four glass on the shelf",
+    "correct_answer": "Four glasses on the shelf",
+    "explanation": " Hãy nhìn từ 'glass' (cái ly). Vì nó kết thúc bằng 's', em hãy nhớ lại xem mình cần thêm 's' hay 'es' để thành số nhiều nhé."
+  },
+  {
+    "topic": "Plural Nouns",
+    "level": "A1",
+    "student_input": "There are many story in the book",
+    "correct_answer": "There are many stories in the book",
+    "explanation": "Từ 'story' kết thúc bằng 'phụ âm + y'. Khi chuyển sang số nhiều, em nhớ mình phải làm gì với chữ 'y' trước khi thêm 'es' không?"
+  },
+  {
+    "topic": "Plural Nouns",
+    "level": "A1",
+    "student_input": "Two monkey are climbing",
+    "correct_answer": "Two monkeys are climbing",
+    "explanation": " 'Monkey' kết thúc bằng 'nguyên âm + y'. Trong trường hợp này, mình chỉ cần thêm 's' hay phải đổi thành 'ies' em nhỉ?"
+  },
+  {
+    "topic": "Plural Nouns",
+    "level": "A1",
+    "student_input": "I have two tooth",
+    "correct_answer": "I have two teeth",
+    "explanation": " 'Tooth' (chiếc răng) là danh từ bất quy tắc. Giống như từ 'foot', mình sẽ thay đổi nguyên âm 'oo' thành gì để tạo số nhiều em nhỉ?"
+  },
+  {
+    "topic": "Plural Nouns",
+    "level": "A1",
+    "student_input": "Three church in the city",
+    "correct_answer": "Three churches in the city",
+    "explanation": "Từ 'church' (nhà thờ) kết thúc bằng 'ch'. Em hãy nhớ lại quy tắc thêm 's' hay 'es' cho các từ có đuôi này nhé."
+  },
+  {
+    "topic": "Plural Nouns",
+    "level": "A1",
+    "student_input": "The puppys are cute",
+    "correct_answer": "The puppies are cute",
+    "explanation": " Hãy nhìn lại từ 'puppys'. 'Puppy' kết thúc bằng 'phụ âm + y', vậy em có nhớ mình phải chuyển 'y' thành gì rồi mới thêm 'es' không?"
+  },
+  {
+    "topic": "Plural Nouns",
+    "level": "A1",
+    "student_input": "Many country in Asia",
+    "correct_answer": "Many countries in Asia",
+    "explanation": "Chào em, 'country' kết thúc bằng 'phụ âm + y'. Khi đi với 'many', từ này cần ở dạng số nhiều. Em hãy chia lại từ này cho đúng quy tắc nhé."
+  },
+  {
+    "topic": "Plural Nouns",
+    "level": "A1",
+    "student_input": "There are two mouse in the kitchen",
+    "correct_answer": "There are two mice in the kitchen",
+    "explanation": "Từ 'mouse' (con chuột) là một danh từ bất quy tắc hoàn toàn. Nó không thêm 's' mà biến đổi thành một từ khác. Em có nhớ đó là từ gì không?"
+  },
+  {
+    "topic": "Plural Nouns",
+    "level": "A1",
+    "student_input": "Three tax for this service",
+    "correct_answer": "Three taxes for this service",
+    "explanation": "Hãy nhìn từ 'tax' (thuế). Nó kết thúc bằng 'x'. Em hãy nhớ lại quy tắc thêm đuôi cho số nhiều của các từ kết thúc bằng 'x' nhé."
+  },
+  {
+    "topic": "Plural Nouns",
+    "level": "A1",
+    "student_input": "Two strawberry in the bowl",
+    "correct_answer": "Two strawberries in the bowl",
+    "explanation": " 'Strawberry' kết thúc bằng 'phụ âm + y'. Để tạo số nhiều, em nhớ mình phải đổi 'y' thành chữ gì trước khi thêm 'es' không?"
+  },
+  {
+    "topic": "Plural Nouns",
+    "level": "A1",
+    "student_input": "Many lady at the party",
+    "correct_answer": "Many ladies at the party",
+    "explanation": "Chào em, 'lady' kết thúc bằng 'phụ âm + y'. Khi đi với 'many', từ này cần chia số nhiều. Em hãy thử áp dụng quy tắc 'y $\rightarrow$ ies' xem sao."
+  },
+  {
+    "topic": "Plural Nouns",
+    "level": "A1",
+    "student_input": "Five beach in this city",
+    "correct_answer": "Five beaches in this city",
+    "explanation": "Hãy nhìn từ 'beach' (bãi biển). Nó kết thúc bằng 'ch'. Em hãy nhớ lại xem mình thêm 's' hay 'es' cho những từ có đuôi này?"
+  },
+  {
+    "topic": "Plural Nouns",
+    "level": "A1",
+    "student_input": "I see two person",
+    "correct_answer": "I see two people",
+    "explanation": " 'Person' (một người) là danh từ bất quy tắc. Khi nói về 'hai người' hoặc nhiều hơn, chúng ta dùng từ gì thay vì thêm 's' em nhỉ?"
+  },
+  {
+    "topic": "Plural Nouns",
+    "level": "A1",
+    "student_input": "Ten cherry on the cake",
+    "correct_answer": "Ten cherries on the cake",
+    "explanation": " 'Cherry' kết thúc bằng 'phụ âm + y'. Em hãy chia lại từ này sang số nhiều theo đúng quy tắc 'y $\rightarrow$ ies' nhé."
+  },
+  {
+    "topic": "Plural Nouns",
+    "level": "A1",
+    "student_input": "Four lunch box",
+    "correct_answer": "Four lunch boxes",
+    "explanation": "Hãy nhìn vào từ 'box'. Vì số lượng là 'four', danh từ 'box' cần ở dạng số nhiều. Em hãy nhớ lại quy tắc thêm đuôi cho từ kết thúc bằng 'x' nhé."
+  },
+  {
+    "topic": "Plural Nouns",
+    "level": "A1",
+    "student_input": "The flys are annoying",
+    "correct_answer": "The flies are annoying",
+    "explanation": "Chào em, 'fly' (con ruồi) kết thúc bằng 'phụ âm + y'. Em hãy xem lại từ 'flys' xem đã đúng quy tắc biến đổi 'y' thành 'ies' chưa?"
+  },
+  {
+    "topic": "Plural Nouns",
+    "level": "A1",
+    "student_input": "Two baby in the room",
+    "correct_answer": "Two babies in the room",
+    "explanation": "Số lượng là 'two', nên 'baby' cần ở dạng số nhiều. Em hãy kiểm tra lại quy tắc chia số nhiều cho từ kết thúc bằng 'phụ âm + y' nhé."
+  },
+  {
+    "topic": "Plural Nouns",
+    "level": "A1",
+    "student_input": "Five match in the box",
+    "correct_answer": "Five matches in the box",
+    "explanation": "Hãy nhìn từ 'match' (que diêm). Nó kết thúc bằng 'ch'. Em hãy nhớ lại xem mình thêm 's' hay 'es' cho các danh từ có đuôi này?"
+  },
+  {
+    "topic": "Plural Nouns",
+    "level": "A1",
+    "student_input": "The dogs are playing",
+    "correct_answer": "The dogs are playing",
+    "explanation": "Câu này hoàn toàn chính xác! Em đã thêm 's' vào 'dog' để tạo số nhiều và dùng 'are' rất đúng. Chúc mừng em!"
+  },
+  {
+    "topic": "Plural Nouns",
+    "level": "A1",
+    "student_input": "I have three cat",
+    "correct_answer": "I have three cats",
+    "explanation": "Hãy nhìn vào số lượng 'three'. Em hãy thêm đuôi cho 'cat' để chuyển nó sang dạng số nhiều nhé."
+  },
+  {
+    "topic": "Plural Nouns",
+    "level": "A1",
+    "student_input": "Six glass of water",
+    "correct_answer": "Six glasses of water",
+    "explanation": "Từ 'glass' kết thúc bằng 's'. Em hãy nhớ lại quy tắc thêm đuôi cho số nhiều của các từ kết thúc bằng 's' xem sao."
+  },
+  {
+    "topic": "Plural Nouns",
+    "level": "A1",
+    "student_input": "I want some waters, please",
+    "correct_answer": "I want some water, please",
+    "explanation": "Chào em, hãy nhìn vào từ 'waters'. Trong tiếng Anh, 'water' (nước) là danh từ không đếm được. Em có nhớ quy tắc: danh từ không đếm được có bao giờ được thêm 's' để thành số nhiều không nhỉ?"
+  },
+  {
+    "topic": "Plural Nouns",
+    "level": "A1",
+    "student_input": "The books is very interesting",
+    "correct_answer": "The books are very interesting",
+    "explanation": "Hãy nhìn vào chủ ngữ 'The books'. Đây là danh từ số nhiều. Vậy động từ to-be đi kèm nên là 'is' hay 'are' cho phù hợp em nhỉ?"
+  },
+  {
+    "topic": "Plural Nouns",
+    "level": "A1",
+    "student_input": "I have many moneys",
+    "correct_answer": "I have a lot of money / much money",
+    "explanation": "Em hãy xem lại từ 'moneys'. 'Money' (tiền) là danh từ không đếm được. Theo quy tắc, chúng ta có thêm 's' vào sau những từ không đếm được không ta?"
+  },
+  {
+    "topic": "Plural Nouns",
+    "level": "A1",
+    "student_input": "There are two sheeps in the field",
+    "correct_answer": "There are two sheep in the field",
+    "explanation": "Chào em, từ 'sheep' (con cừu) là một trường hợp rất đặc biệt. Dạng số ít và số nhiều của nó giống hệt nhau. Vậy mình có cần thêm 's' vào sau từ này không em?"
+  },
+  {
+    "topic": "Plural Nouns",
+    "level": "A1",
+    "student_input": "Too much students are in the class",
+    "correct_answer": "Too many students are in the class",
+    "explanation": "Hãy nhìn vào từ 'students'. Đây là danh từ đếm được số nhiều. Em hãy nhớ lại xem, với danh từ đếm được, mình dùng 'much' hay 'many' để chỉ số lượng nhiều nhỉ?"
+  },
+  {
+    "topic": "Plural Nouns",
+    "level": "A1",
+    "student_input": "I bought two furnitures",
+    "correct_answer": "I bought two pieces of furniture",
+    "explanation": "Chào em, 'furniture' (đồ nội thất) là danh từ không đếm được. Vì vậy, mình không thể thêm 's' vào sau nó. Để đếm đồ nội thất, em nhớ mình phải dùng cụm từ 'piece of...' đúng không? Em thử sửa lại xem sao."
+  },
+  {
+    "topic": "Plural Nouns",
+    "level": "A1",
+    "student_input": "The fishs are swimming",
+    "correct_answer": "The fish are swimming",
+    "explanation": "Tương tự như từ 'sheep', từ 'fish' (con cá) thường có dạng số ít và số nhiều giống nhau. Vậy em có cần thêm 's' vào sau từ này không?"
+  },
+  {
+    "topic": "Plural Nouns",
+    "level": "A1",
+    "student_input": "These apple are red",
+    "correct_answer": "These apples are red",
+    "explanation": "Em dùng 'These' và 'are' cho số nhiều là chính xác rồi. Nhưng hãy nhìn từ 'apple'. Nó đã ở dạng số nhiều để phù hợp với 'These' chưa em?"
+  },
+  {
+    "topic": "Plural Nouns",
+    "level": "A1",
+    "student_input": "I have some advices for you",
+    "correct_answer": "I have some advice for you",
+    "explanation": "Hãy chú ý từ 'advices'. 'Advice' (lời khuyên) là danh từ không đếm được trong tiếng Anh. Vậy mình có thêm 's' vào sau từ này không nhỉ?"
+  },
+  {
+    "topic": "Plural Nouns",
+    "level": "A1",
+    "student_input": "The childrens are playing",
+    "correct_answer": "The children are playing",
+    "explanation": "Chào em, 'children' đã là dạng số nhiều của 'child' rồi. Vì nó đã là số nhiều, chúng ta có cần thêm 's' vào sau nó nữa không em?"
+  },
+  {
+    "topic": "Plural Nouns",
+    "level": "A1",
+    "student_input": "My hairs are long",
+    "correct_answer": "My hair is long",
+    "explanation": "Thông thường, 'hair' (tóc) được coi là danh từ không đếm được khi nói về mái tóc. Vậy mình nên dùng 'hairs are' hay 'hair is' cho tự nhiên em nhỉ?"
+  },
+  {
+    "topic": "Plural Nouns",
+    "level": "A1",
+    "student_input": "Many informations are useful",
+    "correct_answer": "Much information is useful / A lot of information is useful",
+    "explanation": "Hãy nhìn từ 'informations'. 'Information' (thông tin) là danh từ không đếm được. Em hãy nhớ lại: danh từ không đếm được thì không thêm 's' và đi với động từ số ít hay số nhiều nhỉ?"
+  },
+  {
+    "topic": "Plural Nouns",
+    "level": "A1",
+    "student_input": "I see three mouses",
+    "correct_answer": "I see three mice",
+    "explanation": "Chào em, từ 'mouse' (con chuột) có dạng số nhiều bất quy tắc. Em có nhớ từ 'mouses' có tồn tại không, hay mình phải dùng từ 'mice' nhỉ?"
+  },
+  {
+    "topic": "Plural Nouns",
+    "level": "A1",
+    "student_input": "The keys is on the table",
+    "correct_answer": "The keys are on the table",
+    "explanation": "Hãy nhìn chủ ngữ 'The keys'. Đây là số nhiều, vậy động từ 'is' đã chính xác chưa em?"
+  },
+  {
+    "topic": "Plural Nouns",
+    "level": "A1",
+    "student_input": "Two person are here",
+    "correct_answer": "Two people are here",
+    "explanation": " 'Person' là số ít. Khi có số lượng là 'Two', em hãy dùng dạng số nhiều của 'person' là gì nhỉ?"
+  },
+  {
+    "topic": "Plural Nouns",
+    "level": "A1",
+    "student_input": "There are many rice in the bowl",
+    "correct_answer": "There is much rice in the bowl / There is a lot of rice in the bowl",
+    "explanation": " 'Rice' (gạo/cơm) là danh từ không đếm được. Vì vậy, mình dùng 'There are many' hay 'There is much/a lot of' cho đúng em nhỉ?"
+  },
+  {
+    "topic": "Plural Nouns",
+    "level": "A1",
+    "student_input": "I have two tooths",
+    "correct_answer": "I have two teeth",
+    "explanation": "Chào em, 'tooth' là danh từ bất quy tắc. Mình không thêm 's' mà thay đổi nguyên âm. Em nhớ 'tooth' số nhiều là gì không?"
+  },
+  {
+    "topic": "Plural Nouns",
+    "level": "A1",
+    "student_input": "These man are tall",
+    "correct_answer": "These men are tall",
+    "explanation": "Em dùng 'These' và 'are' rất đúng. Nhưng 'man' là số ít, em hãy chuyển nó sang dạng số nhiều để phù hợp với câu nhé."
+  },
+  {
+    "topic": "Plural Nouns",
+    "level": "A1",
+    "student_input": "The boxs are heavy",
+    "correct_answer": "The boxes are heavy",
+    "explanation": "Hãy nhìn lại cách viết từ 'boxs'. Với những từ kết thúc bằng 'x', mình chỉ thêm 's' hay phải thêm 'es' em nhỉ?"
+  },
+  {
+    "topic": "Plural Nouns",
+    "level": "A1",
+    "student_input": "I need some sugars",
+    "correct_answer": "I need some sugar",
+    "explanation": " 'Sugar' (đường) là danh từ không đếm được. Em hãy nhớ lại xem danh từ không đếm được có được thêm 's' không?"
+  },
+  {
+    "topic": "Plural Nouns",
+    "level": "A1",
+    "student_input": "Five woman are singing",
+    "correct_answer": "Five women are singing",
+    "explanation": " 'Woman' là số ít. Với số lượng là 'Five', em hãy chuyển nó sang dạng số nhiều bất quy tắc xem nào."
+  },
+  {
+    "topic": "Plural Nouns",
+    "level": "A1",
+    "student_input": "The cats is sleeping",
+    "correct_answer": "The cats are sleeping",
+    "explanation": "Hãy nhìn chủ ngữ 'The cats'. Vì là số nhiều, em nên dùng 'is' hay 'are' cho đúng?"
+  },
+  {
+    "topic": "Plural Nouns",
+    "level": "A1",
+    "student_input": "Two liffes are short",
+    "correct_answer": "Two lives are short",
+    "explanation": "Chào em, hãy nhìn từ 'liffes'. Động từ 'life' (cuộc đời) kết thúc bằng 'phụ âm + fe'. Em nhớ quy tắc đổi 'fe' thành 'v' rồi thêm 'es' không?"
+  },
+  {
+    "topic": "Plural Nouns",
+    "level": "A1",
+    "student_input": "There are many breads on the table",
+    "correct_answer": "There is much bread on the table / There are many loaves of bread",
+    "explanation": " 'Bread' (bánh mì) thường được coi là danh từ không đếm được. Vậy mình có thêm 's' vào sau nó không, hay dùng 'much bread' em nhỉ?"
+  },
+  {
+    "topic": "Plural Nouns",
+    "level": "A1",
+    "student_input": "Ten baby is crying",
+    "correct_answer": "Ten babies are crying",
+    "explanation": "Câu này có hai lỗi: Một là dạng số nhiều của 'baby', hai là động từ to-be đi với số lượng 'Ten'. Em thử sửa cả hai nhé."
+  },
+  {
+    "topic": "Plural Nouns",
+    "level": "A1",
+    "student_input": "I have two knifes",
+    "correct_answer": "I have two knives",
+    "explanation": "Hãy nhìn từ 'knifes'. Với những danh từ kết thúc bằng 'fe', mình có thêm 's' trực tiếp không hay phải đổi 'fe' thành 'ves' em nhỉ?"
+  },
+  {
+    "topic": "Plural Nouns",
+    "level": "A1",
+    "student_input": "Much books are on the shelf",
+    "correct_answer": "Many books are on the shelf",
+    "explanation": " 'Books' là danh từ đếm được số nhiều. Em hãy nhớ lại xem mình dùng 'much' hay 'many' cho danh từ đếm được nhỉ?"
+  },
+  {
+    "topic": "Plural Nouns",
+    "level": "A1",
+    "student_input": "Two deer s are running",
+    "correct_answer": "Two deer are running",
+    "explanation": "Chào em, từ 'deer' (con nai) giống như 'sheep' và 'fish', nó có dạng số ít và số nhiều giống hệt nhau. Vậy em có cần thêm 's' không?"
+  },
+  {
+    "topic": "Plural Nouns",
+    "level": "A1",
+    "student_input": "These citys are big",
+    "correct_answer": "These cities are big",
+    "explanation": "Hãy nhìn từ 'citys'. Vì 'city' kết thúc bằng 'phụ âm + y', em nhớ mình phải đổi 'y' thành gì rồi thêm 'es' không?"
+  },
+  {
+    "topic": "Plural Nouns",
+    "level": "A1",
+    "student_input": "The childrens are happy",
+    "correct_answer": "The children are happy",
+    "explanation": "Nhắc em một chút: 'children' đã là số nhiều rồi, nên mình không cần thêm 's' nữa. Em thử viết lại xem sao."
+  },
+  {
+    "topic": "Plural Nouns",
+    "level": "A1",
+    "student_input": "Three leaf are falling",
+    "correct_answer": "Three leaves are falling",
+    "explanation": " 'Leaf' (chiếc lá) kết thúc bằng 'f'. Em nhớ quy tắc đổi 'f' thành 'v' rồi thêm 'es' để tạo số nhiều không?"
+  },
+  {
+    "topic": "Plural Nouns",
+    "level": "A1",
+    "student_input": "The dogs are bark",
+    "correct_answer": "The dogs are barking",
+    "explanation": "Về danh từ 'dogs' là chính xác. Nhưng em hãy nhìn động từ sau 'are'. Để diễn tả hành động đang xảy ra, em cần thêm đuôi gì cho động từ 'bark'?"
+  },
+  {
+    "topic": "Plural Nouns",
+    "level": "A1",
+    "student_input": "I have many luggage",
+    "correct_answer": "I have much luggage / a lot of luggage",
+    "explanation": " 'Luggage' (hành lý) là danh từ không đếm được. Em hãy nhớ lại xem mình dùng 'many' hay 'much' cho danh từ không đếm được nhỉ?"
+  },
+  {
+    "topic": "Plural Nouns",
+    "level": "A1",
+    "student_input": "These woman is beautiful",
+    "correct_answer": "These women are beautiful",
+    "explanation": "Câu này có hai lỗi: Một là 'woman' cần chuyển sang số nhiều để đi với 'These', hai là động từ to-be phải phù hợp với số nhiều. Em thử sửa nhé."
+  },
+  {
+    "topic": "Plural Nouns",
+    "level": "A1",
+    "student_input": "Two shelf are full",
+    "correct_answer": "Two shelves are full",
+    "explanation": " 'Shelf' (cái kệ) kết thúc bằng 'f'. Em nhớ quy tắc biến đổi 'f' thành 'v' trước khi thêm 'es' không?"
+  },
+  {
+    "topic": "Plural Nouns",
+    "level": "A1",
+    "student_input": "The boxes is small",
+    "correct_answer": "The boxes are small",
+    "explanation": "Hãy nhìn chủ ngữ 'The boxes' (số nhiều). Vậy động từ 'is' đã chính xác chưa em?"
+  },
+  {
+    "topic": "Plural Nouns",
+    "level": "A1",
+    "student_input": "Some news are bad",
+    "correct_answer": "Some news is bad",
+    "explanation": "Chào em, từ 'news' (tin tức) tuy có chữ 's' ở cuối nhưng nó là danh từ không đếm được và luôn đi với động từ số ít. Vậy mình dùng 'are' hay 'is' cho đúng?"
+  },
+  {
+    "topic": "Plural Nouns",
+    "level": "A1",
+    "student_input": "I have three puppy",
+    "correct_answer": "I have three puppies",
+    "explanation": "Số lượng là 'three', nên 'puppy' phải ở dạng số nhiều. Em hãy áp dụng quy tắc 'y $\rightarrow$ ies' xem sao."
+  },
+  {
+    "topic": "Plural Nouns",
+    "level": "A1",
+    "student_input": "The children are playing",
+    "correct_answer": "The children are playing",
+    "explanation": "Câu này hoàn toàn chính xác! Em đã dùng đúng danh từ bất quy tắc 'children' và động từ 'are'. Rất tốt!"
+  },
+  {
+    "topic": "Plural Nouns",
+    "level": "A1",
+    "student_input": "Many people is here",
+    "correct_answer": "Many people are here",
+    "explanation": " 'People' là danh từ số nhiều của 'person'. Vậy động từ to-be đi kèm nên là 'is' hay 'are' em nhỉ?"
+  },
+  {
+    "topic": "Plural Nouns",
+    "level": "A1",
+    "student_input": "I see four wolfs",
+    "correct_answer": "I see four wolves",
+    "explanation": " 'Wolf' (con sói) kết thúc bằng 'f'. Em hãy nhớ quy tắc đổi 'f' thành 'v' rồi thêm 'es' để tạo số nhiều nhé."
+  },
+  {
+    "topic": "Plural Nouns",
+    "level": "A1",
+    "student_input": "The cakes are delicious",
+    "correct_answer": "The cakes are delicious",
+    "explanation": "Câu này chính xác rồi! 'Cakes' số nhiều đi với 'are'. Chúc mừng em!"
+  },
+  {
+    "topic": "Plural Nouns",
+    "level": "A1",
+    "student_input": "I have some salts",
+    "correct_answer": "I have some salt",
+    "explanation": " 'Salt' (muối) là danh từ không đếm được. Em có nhớ chúng ta có thêm 's' vào sau những từ không đếm được không?"
+  },
+  {
+    "topic": "Plural Nouns",
+    "level": "A1",
+    "student_input": "Two mouses is eating",
+    "correct_answer": "Two mice are eating",
+    "explanation": "Câu này có hai lỗi: Một là dạng số nhiều của 'mouse', hai là động từ to-be đi với số lượng 'Two'. Em thử sửa lại nhé."
+  },
+  {
+    "topic": "Plural Nouns",
+    "level": "A1",
+    "student_input": "Ten box on the table",
+    "correct_answer": "Ten boxes on the table",
+    "explanation": "Số lượng là 'Ten', nên 'box' phải ở dạng số nhiều. Em hãy nhớ lại quy tắc thêm đuôi cho từ kết thúc bằng 'x' nhé."
+  },
+  {
+    "topic": "Plural Nouns",
+    "level": "A1",
+    "student_input": "The babys are cute",
+    "correct_answer": "The babies are cute",
+    "explanation": "Chào em, 'baby' kết thúc bằng 'phụ âm + y'. Em nhớ mình phải đổi 'y' thành gì rồi thêm 'es' không?"
+  },
+  {
+    "topic": "Plural Nouns",
+    "level": "A1",
+    "student_input": "Those man are my teachers",
+    "correct_answer": "Those men are my teachers",
+    "explanation": " 'Those' dùng cho số nhiều. Em hãy chuyển từ 'man' sang dạng số nhiều tương ứng nhé."
+  },
+  {
+    "topic": "Plural Nouns",
+    "level": "A1",
+    "student_input": "I have much books",
+    "correct_answer": "I have many books",
+    "explanation": " 'Books' là danh từ đếm được. Em hãy nhớ lại xem, với danh từ đếm được số nhiều, mình dùng 'much' hay 'many'?"
+  },
+  {
+    "topic": "Plural Nouns",
+    "level": "A1",
+    "student_input": "The sheep is white",
+    "correct_answer": "The sheep is white",
+    "explanation": "Câu này chính xác! 'Sheep' có thể là số ít hoặc số nhiều. Ở đây em dùng như số ít với 'is' là hoàn toàn đúng."
+  }
+]

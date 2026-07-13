@@ -1,0 +1,513 @@
+[
+  {
+    "topic": "Gerunds vs Infinitives",
+    "level": "B1",
+    "student_input": "I enjoy to read books in my free time.",
+    "correct_answer": "I enjoy reading books in my free time.",
+    "explanation": "Chào em, hãy nhìn vào động từ 'enjoy'. Đây là một động từ chỉ sở thích. Trong tiếng Anh, sau 'enjoy', chúng ta dùng 'To-V' hay 'V-ing' để nói về một hoạt động mà mình yêu thích nhỉ?"
+  },
+  {
+    "topic": "Gerunds vs Infinitives",
+    "level": "B1",
+    "student_input": "She avoids to go to the city center during rush hour.",
+    "correct_answer": "She avoids going to the city center during rush hour.",
+    "explanation": "Động từ 'avoid' (tránh) là một từ đặc biệt. Sau 'avoid', chúng ta không dùng 'To-V' mà phải dùng dạng động từ nào để diễn tả hành động bị tránh né em nhỉ?"
+  },
+  {
+    "topic": "Gerunds vs Infinitives",
+    "level": "B1",
+    "student_input": "They suggested to visit the museum on Sunday.",
+    "correct_answer": "They suggested visiting the museum on Sunday.",
+    "explanation": "Hãy chú ý từ 'suggest' (gợi ý). Khi chúng ta gợi ý một hành động nào đó, động từ theo sau 'suggest' phải ở dạng 'To-V' hay 'V-ing' mới chính xác?"
+  },
+  {
+    "topic": "Gerunds vs Infinitives",
+    "level": "B1",
+    "student_input": "I finished to do my homework an hour ago.",
+    "correct_answer": "I finished doing my homework an hour ago.",
+    "explanation": "Động từ 'finish' (hoàn thành) dùng để nói về việc kết thúc một hành động. Em hãy nhớ lại xem, sau 'finish' chúng ta dùng 'To-V' hay 'V-ing'?"
+  },
+  {
+    "topic": "Gerunds vs Infinitives",
+    "level": "B1",
+    "student_input": "Do you mind to open the window, please?",
+    "correct_answer": "Do you mind opening the window, please?",
+    "explanation": "Khi dùng cấu trúc 'Do you mind...' để yêu cầu ai đó làm gì một cách lịch sự, động từ theo sau 'mind' phải ở dạng nào em nhỉ?"
+  },
+  {
+    "topic": "Gerunds vs Infinitives",
+    "level": "B1",
+    "student_input": "Can you imagine to live on Mars?",
+    "correct_answer": "Can you imagine living on Mars?",
+    "explanation": "Hãy nhìn vào từ 'imagine' (tưởng tượng). Khi chúng ta tưởng tượng về một trạng thái hoặc hành động, chúng ta dùng 'To-V' hay 'V-ing' sau từ này?"
+  },
+  {
+    "topic": "Gerunds vs Infinitives",
+    "level": "B1",
+    "student_input": "He keeps to talk while the teacher is explaining.",
+    "correct_answer": "He keeps talking while the teacher is explaining.",
+    "explanation": "Động từ 'keep' khi mang nghĩa 'tiếp tục làm gì đó' yêu cầu động từ theo sau nó ở dạng nào em nhỉ? Hãy thử thay 'to talk' bằng dạng V-ing nhé."
+  },
+  {
+    "topic": "Gerunds vs Infinitives",
+    "level": "B1",
+    "student_input": "The boy denied to steal the money from the shop.",
+    "correct_answer": "The boy denied stealing the money from the shop.",
+    "explanation": "Hãy chú ý từ 'deny' (phủ nhận). Khi phủ nhận đã làm một việc gì đó, động từ theo sau 'deny' phải là 'To-V' hay 'V-ing'?"
+  },
+  {
+    "topic": "Gerunds vs Infinitives",
+    "level": "B1",
+    "student_input": "I practice to speak English every day.",
+    "correct_answer": "I practice speaking English every day.",
+    "explanation": "Động từ 'practice' (luyện tập) yêu cầu một dạng động từ cụ thể theo sau. Em hãy nhớ lại xem mình dùng 'To-V' hay 'V-ing' sau 'practice' nhỉ?"
+  },
+  {
+    "topic": "Gerunds vs Infinitives",
+    "level": "B1",
+    "student_input": "I dislike to wake up early on weekends.",
+    "correct_answer": "I dislike waking up early on weekends.",
+    "explanation": "Tương tự như 'enjoy', 'dislike' (không thích) cũng là một động từ chỉ cảm xúc. Em hãy thử dùng dạng 'V-ing' thay vì 'To-V' cho câu này xem sao."
+  },
+  {
+    "topic": "Gerunds vs Infinitives",
+    "level": "B1",
+    "student_input": "I enjoy swiming in the pool during summer.",
+    "correct_answer": "I enjoy swimming in the pool during summer.",
+    "explanation": "Em dùng dạng V-ing sau 'enjoy' là rất chính xác! Tuy nhiên, hãy nhìn kỹ chính tả của từ 'swiming'. Với động từ 'swim', khi thêm đuôi '-ing', chúng ta cần xử lý chữ 'm' như thế nào nhỉ?"
+  },
+  {
+    "topic": "Gerunds vs Infinitives",
+    "level": "B1",
+    "student_input": "He avoids talk to his boss about the problem.",
+    "correct_answer": "He avoids talking to his boss about the problem.",
+    "explanation": "Em đã chọn đúng động từ 'avoids', nhưng động từ 'talk' theo sau nó đang ở dạng nguyên mẫu. Hãy nhớ quy tắc sau 'avoid' là phải dùng dạng gì nhé!"
+  },
+  {
+    "topic": "Gerunds vs Infinitives",
+    "level": "B1",
+    "student_input": "I suggest to go to the beach this afternoon.",
+    "correct_answer": "I suggest going to the beach this afternoon.",
+    "explanation": "Hãy nhớ lại: 'Suggest' là một trong những động từ điển hình yêu cầu V-ing. Em hãy sửa 'to go' thành dạng đúng nhé."
+  },
+  {
+    "topic": "Gerunds vs Infinitives",
+    "level": "B1",
+    "student_input": "Stop keeping to ask me the same question!",
+    "correct_answer": "Stop keeping asking me the same question!",
+    "explanation": "Trong câu này em dùng 'keeping'. Như thầy/cô đã nói, sau 'keep' chúng ta không dùng 'to'. Em hãy chuyển 'to ask' sang dạng V-ing nhé."
+  },
+  {
+    "topic": "Gerunds vs Infinitives",
+    "level": "B1",
+    "student_input": "I imagine to be a millionaire in the future.",
+    "correct_answer": "I imagine being a millionaire in the future.",
+    "explanation": "Khi 'tưởng tượng' (imagine), chúng ta đang nghĩ về một trạng thái. Hãy thử thay 'to be' bằng dạng V-ing của động từ To-be xem câu có tự nhiên hơn không."
+  },
+  {
+    "topic": "Gerunds vs Infinitives",
+    "level": "B1",
+    "student_input": "Would you mind to move your car a little bit?",
+    "correct_answer": "Would you mind moving your car a little bit?",
+    "explanation": "Hãy nhớ cụm 'Would you mind...'. Đây là lời yêu cầu lịch sự và nó bắt buộc động từ theo sau phải ở dạng nào em nhỉ?"
+  },
+  {
+    "topic": "Gerunds vs Infinitives",
+    "level": "B1",
+    "student_input": "She practices playing the piano every evening.",
+    "correct_answer": "She practices playing the piano every evening.",
+    "explanation": "Hoàn hảo! Em đã dùng đúng 'practices playing'. V-ing sau 'practice' là hoàn toàn chính xác. Rất tốt!"
+  },
+  {
+    "topic": "Gerunds vs Infinitives",
+    "level": "B1",
+    "student_input": "I avoid to eat fast food to stay healthy.",
+    "correct_answer": "I avoid eating fast food to stay healthy.",
+    "explanation": "Hãy kiểm tra lại động từ sau 'avoid'. Em hãy thay 'to eat' bằng dạng V-ing để đúng với quy tắc của động từ này nhé."
+  },
+  {
+    "topic": "Gerunds vs Infinitives",
+    "level": "B1",
+    "student_input": "We enjoy to travel together during the holidays.",
+    "correct_answer": "We enjoy traveling together during the holidays.",
+    "explanation": "Động từ 'enjoy' luôn đi kèm với dạng động từ nào nhỉ? Em hãy sửa 'to travel' sang dạng V-ing nhé."
+  },
+  {
+    "topic": "Gerunds vs Infinitives",
+    "level": "B1",
+    "student_input": "Have you finished to read that book yet?",
+    "correct_answer": "Have you finished reading that book yet?",
+    "explanation": "Hãy nhìn vào từ 'finished'. Khi hỏi về việc hoàn thành một hành động, chúng ta dùng 'To-V' hay 'V-ing' sau 'finish'?"
+  },
+  {
+    "topic": "Gerunds vs Infinitives",
+    "level": "B1",
+    "student_input": "I want going to the cinema tonight.",
+    "correct_answer": "I want to go to the cinema tonight.",
+    "explanation": "Hãy nhìn vào động từ 'want'. Đây là từ dùng để diễn tả một mong muốn hoặc mục tiêu. Trong tiếng Anh, sau 'want', chúng ta dùng 'V-ing' hay 'To-V' nhỉ?"
+  },
+  {
+    "topic": "Gerunds vs Infinitives",
+    "level": "B1",
+    "student_input": "She decided buying a new laptop last week.",
+    "correct_answer": "She decided to buy a new laptop last week.",
+    "explanation": "Động từ 'decide' (quyết định) nói về một lựa chọn cho một hành động sắp tới. Với những động từ chỉ quyết định như thế này, em nên dùng 'V-ing' hay 'To-V'?"
+  },
+  {
+    "topic": "Gerunds vs Infinitives",
+    "level": "B1",
+    "student_input": "I hope seeing you again soon.",
+    "correct_answer": "I hope to see you again soon.",
+    "explanation": "Hãy chú ý từ 'hope' (hy vọng). Hy vọng là hướng về một điều gì đó trong tương lai. Em hãy nhớ lại xem sau 'hope' chúng ta dùng dạng động từ nào?"
+  },
+  {
+    "topic": "Gerunds vs Infinitives",
+    "level": "B1",
+    "student_input": "They agreed helping us with the project.",
+    "correct_answer": "They agreed to help us with the project.",
+    "explanation": "Khi 'agree' (đồng ý) làm một việc gì đó, hành động đó thường là một cam kết cho tương lai. Em hãy thử thay 'helping' bằng dạng 'To-V' xem câu có tự nhiên hơn không."
+  },
+  {
+    "topic": "Gerunds vs Infinitives",
+    "level": "B1",
+    "student_input": "We plan visiting Japan next summer.",
+    "correct_answer": "We plan to visit Japan next summer.",
+    "explanation": "Hãy nhìn vào từ 'plan' (lên kế hoạch). Lập kế hoạch là định hướng cho một mục tiêu. Theo em, sau 'plan' chúng ta nên dùng 'V-ing' hay 'To-V'?"
+  },
+  {
+    "topic": "Gerunds vs Infinitives",
+    "level": "B1",
+    "student_input": "He refused paying the fine.",
+    "correct_answer": "He refused to pay the fine.",
+    "explanation": "Động từ 'refuse' (từ chối) dùng để nói về việc không đồng ý thực hiện một hành động. Em hãy thử chuyển 'paying' sang dạng 'To-V' nhé."
+  },
+  {
+    "topic": "Gerunds vs Infinitives",
+    "level": "B1",
+    "student_input": "I learned speaking English when I was a child.",
+    "correct_answer": "I learned to speak English when I was a child.",
+    "explanation": "Học một kỹ năng là một quá trình hướng tới một mục tiêu. Với động từ 'learn', em nên dùng 'V-ing' hay 'To-V' để diễn tả điều này?"
+  },
+  {
+    "topic": "Gerunds vs Infinitives",
+    "level": "B1",
+    "student_input": "I promise calling you as soon as I arrive.",
+    "correct_answer": "I promise to call you as soon as I arrive.",
+    "explanation": "Hãy chú ý từ 'promise' (hứa). Một lời hứa là một cam kết cho hành động tương lai. Em hãy sửa 'calling' thành dạng 'To-V' nhé."
+  },
+  {
+    "topic": "Gerunds vs Infinitives",
+    "level": "B1",
+    "student_input": "I can't afford buying that expensive car.",
+    "correct_answer": "I can't afford to buy that expensive car.",
+    "explanation": " 'Afford' (có đủ khả năng chi trả) thường đi kèm với một hành động cụ thể mà mình muốn thực hiện. Em hãy nhớ lại xem sau 'afford' là 'V-ing' hay 'To-V' nhỉ?"
+  },
+  {
+    "topic": "Gerunds vs Infinitives",
+    "level": "B1",
+    "student_input": "I managed finding the hotel after two hours.",
+    "correct_answer": "I managed to find the hotel after two hours.",
+    "explanation": "Khi 'manage' mang nghĩa là 'xoay xở để làm được việc gì đó' (đạt được mục tiêu), em nên dùng dạng động từ nào theo sau?"
+  },
+  {
+    "topic": "Gerunds vs Infinitives",
+    "level": "B1",
+    "student_input": "She pretended sleeping when her mom entered.",
+    "correct_answer": "She pretended to sleep when her mom entered.",
+    "explanation": " 'Pretend' (giả vờ) là hành động tạo ra một vẻ ngoài không có thật. Em hãy thử thay 'sleeping' bằng 'To-V' xem câu có đúng ngữ pháp hơn không."
+  },
+  {
+    "topic": "Gerunds vs Infinitives",
+    "level": "B1",
+    "student_input": "He failed passing the driving test twice.",
+    "correct_answer": "He failed to pass the driving test twice.",
+    "explanation": "Động từ 'fail' (thất bại/không làm được) nói về việc không đạt được mục tiêu. Em hãy chuyển 'passing' sang dạng 'To-V' nhé."
+  },
+  {
+    "topic": "Gerunds vs Infinitives",
+    "level": "B1",
+    "student_input": "You seem being tired today.",
+    "correct_answer": "You seem to be tired today.",
+    "explanation": " 'Seem' (có vẻ như) dùng để đưa ra một nhận định/ấn tượng. Em hãy thay 'being' bằng dạng 'To-V' của động từ to-be nhé."
+  },
+  {
+    "topic": "Gerunds vs Infinitives",
+    "level": "B1",
+    "student_input": "They offered helping me with the luggage.",
+    "correct_answer": "They offered to help me with the luggage.",
+    "explanation": "Khi 'offer' (đề nghị) làm điều gì đó cho ai, chúng ta đang đưa ra một lời đề nghị cho tương lai. Em nên dùng 'V-ing' hay 'To-V'?"
+  },
+  {
+    "topic": "Gerunds vs Infinitives",
+    "level": "B1",
+    "student_input": "I want go home now.",
+    "correct_answer": "I want to go home now.",
+    "explanation": "Em dùng 'want' là đúng, nhưng em đang thiếu một 'chiếc cầu nối' quan trọng giữa 'want' và 'go'. Đó là từ gì nhỉ?"
+  },
+  {
+    "topic": "Gerunds vs Infinitives",
+    "level": "B1",
+    "student_input": "She decided not going to the party.",
+    "correct_answer": "She decided not to go to the party.",
+    "explanation": "Khi phủ định một quyết định ('quyết định không làm gì'), em hãy đặt 'not' trước dạng 'To-V'. Em hãy sửa 'not going' thành dạng đúng nhé."
+  },
+  {
+    "topic": "Gerunds vs Infinitives",
+    "level": "B1",
+    "student_input": "I hope winning the competition.",
+    "correct_answer": "I hope to win the competition.",
+    "explanation": "Hy vọng là một mong muốn hướng về tương lai. Hãy nhớ lại quy tắc: Sau 'hope' là 'To-V' hay 'V-ing'?"
+  },
+  {
+    "topic": "Gerunds vs Infinitives",
+    "level": "B1",
+    "student_input": "We plan traveling to France next year.",
+    "correct_answer": "We plan to travel to France next year.",
+    "explanation": "Lên kế hoạch là xác định mục tiêu. Em hãy thử thay 'traveling' bằng 'To-V' xem sao."
+  },
+  {
+    "topic": "Gerunds vs Infinitives",
+    "level": "B1",
+    "student_input": "He promised helping me with the homework.",
+    "correct_answer": "He promised to help me with the homework.",
+    "explanation": "Hãy nhìn vào từ 'promised'. Một lời hứa luôn đi kèm với một hành động trong tương lai. Em nên dùng 'V-ing' hay 'To-V'?"
+  },
+  {
+    "topic": "Gerunds vs Infinitives",
+    "level": "B1",
+    "student_input": "I can't afford buying a new phone.",
+    "correct_answer": "I can't afford to buy a new phone.",
+    "explanation": " 'Afford' (đủ khả năng chi trả) yêu cầu động từ theo sau ở dạng nào em nhỉ? Hãy sửa 'buying' thành 'To-V' nhé."
+  },
+  {
+    "topic": "Gerunds vs Infinitives",
+    "level": "B1",
+    "student_input": "They agreed to start the meeting at 9.",
+    "correct_answer": "They agreed to start the meeting at 9.",
+    "explanation": "Hoàn hảo! Em đã dùng 'agreed to start' một cách chính xác. Rất tốt!"
+  },
+  {
+    "topic": "Gerunds vs Infinitives",
+    "level": "B1",
+    "student_input": "She failed to finish the race.",
+    "correct_answer": "She failed to finish the race.",
+    "explanation": "Chính xác! 'Failed to finish' được dùng đúng để nói về việc không đạt được mục tiêu. Rất tuyệt!"
+  },
+  {
+    "topic": "Gerunds vs Infinitives",
+    "level": "B1",
+    "student_input": "I want to learn speaking Japanese.",
+    "correct_answer": "I want to learn to speak Japanese.",
+    "explanation": "Câu này có hai động từ đi liền nhau: 'want' và 'learn'. Cả hai đều là động từ chỉ mục tiêu/mong muốn. Vậy sau 'learn', chúng ta dùng 'V-ing' hay 'To-V'?"
+  },
+  {
+    "topic": "Gerunds vs Infinitives",
+    "level": "B1",
+    "student_input": "He pretends knowing the answer.",
+    "correct_answer": "He pretends to know the answer.",
+    "explanation": " Hãy nhớ lại: 'Pretend' (giả vờ) yêu cầu dạng động từ nào theo sau? Em hãy thay 'knowing' bằng 'To-V' nhé."
+  },
+  {
+    "topic": "Gerunds vs Infinitives",
+    "level": "B1",
+    "student_input": "We managed to book the tickets.",
+    "correct_answer": "We managed to book the tickets.",
+    "explanation": "Hoàn hảo! 'Managed to book' được dùng đúng để nói về việc xoay xở thành công. Rất tốt!"
+  },
+  {
+    "topic": "Gerunds vs Infinitives",
+    "level": "B1",
+    "student_input": "I stopped to smoke because it's bad for my health.",
+    "correct_answer": "I stopped smoking because it's bad for my health.",
+    "explanation": "Hãy phân tích ý nghĩa: Em muốn nói là em 'dừng lại để hút thuốc' hay em 'từ bỏ thói quen hút thuốc' để bảo vệ sức khỏe? Nếu là từ bỏ một thói quen, em nên dùng 'To-V' hay 'V-ing' sau 'stop'?"
+  },
+  {
+    "topic": "Gerunds vs Infinitives",
+    "level": "B1",
+    "student_input": "I was walking home, and I stopped smoking a photo of a beautiful house.",
+    "correct_answer": "I was walking home, and I stopped to take a photo of a beautiful house.",
+    "explanation": "Câu này hơi lạ nhỉ! Em đang đi bộ và muốn 'dừng hành động đi bộ' để 'thực hiện hành động chụp ảnh'. Khi dừng một việc này để làm việc kia, em dùng 'V-ing' hay 'To-V' sau 'stop'?"
+  },
+  {
+    "topic": "Gerunds vs Infinitives",
+    "level": "B1",
+    "student_input": "He stopped to talk to his boss, so he can't finish the report on time.",
+    "correct_answer": "He stopped talking to his boss, so he can't finish the report on time.",
+    "explanation": "Hãy nhìn vào kết quả: 'không thể hoàn thành báo cáo'. Điều này có nghĩa là anh ấy đã 'dành quá nhiều thời gian nói chuyện' và không chịu dừng việc đó lại. Vậy em nên dùng 'stop + To-V' (dừng lại để nói) hay 'stop + V-ing' (ngừng nói chuyện)?"
+  },
+  {
+    "topic": "Gerunds vs Infinitives",
+    "level": "B1",
+    "student_input": "I remember to lock the door before I left the house yesterday.",
+    "correct_answer": "I remember locking the door before I left the house yesterday.",
+    "explanation": "Hãy chú ý mốc thời gian 'yesterday'. Em đang nói về một 'kỷ niệm/ký ức' (việc đã làm xong) hay một 'nhiệm vụ' phải làm? Khi nhớ lại một hành động đã xảy ra trong quá khứ, em dùng 'To-V' hay 'V-ing' sau 'remember'?"
+  },
+  {
+    "topic": "Gerunds vs Infinitives",
+    "level": "B1",
+    "student_input": "Please remember locking the door when you leave tonight.",
+    "correct_answer": "Please remember to lock the door when you leave tonight.",
+    "explanation": "Hãy nhìn vào 'tonight' (tối nay). Đây là một việc em 'cần phải làm' trong tương lai, không phải là một ký ức. Với một nhiệm vụ phải thực hiện, em dùng 'V-ing' hay 'To-V' sau 'remember'?"
+  },
+  {
+    "topic": "Gerunds vs Infinitives",
+    "level": "B1",
+    "student_input": "I'll never forget visiting the Eiffel Tower for the first time.",
+    "correct_answer": "I'll never forget visiting the Eiffel Tower for the first time.",
+    "explanation": "Hoàn hảo! Em đang nói về một kỷ niệm đẹp trong quá khứ, nên dùng 'forget + V-ing' là hoàn toàn chính xác. Rất tốt!"
+  },
+  {
+    "topic": "Gerunds vs Infinitives",
+    "level": "B1",
+    "student_input": "Don't forget visiting your grandmother this weekend!",
+    "correct_answer": "Don't forget to visit your grandmother this weekend!",
+    "explanation": "Hãy phân tích: 'this weekend' là tương lai. Đây là lời nhắc nhở thực hiện một nhiệm vụ, không phải là nhắc về một kỷ niệm. Vậy em dùng 'V-ing' hay 'To-V' sau 'forget'?"
+  },
+  {
+    "topic": "Gerunds vs Infinitives",
+    "level": "B1",
+    "student_input": "I forgot to call my mom yesterday, and she was very angry.",
+    "correct_answer": "I forgot to call my mom yesterday, and she was very angry.",
+    "explanation": "Chính xác! 'Forgot to call' nghĩa là em đã quên mất nhiệm vụ phải gọi điện. Em đã vận dụng đúng cấu trúc này!"
+  },
+  {
+    "topic": "Gerunds vs Infinitives",
+    "level": "B1",
+    "student_input": "I will never forget to meet the President last year.",
+    "correct_answer": "I will never forget meeting the President last year.",
+    "explanation": "Hãy nhìn cụm 'last year'. Đây là một trải nghiệm đã xảy ra. Khi nói về việc 'không bao giờ quên một kỷ niệm', em dùng 'To-V' hay 'V-ing' sau 'forget'?"
+  },
+  {
+    "topic": "Gerunds vs Infinitives",
+    "level": "B1",
+    "student_input": "I tried to add more salt to the soup, but it still tasted bland.",
+    "correct_answer": "I tried adding more salt to the soup, but it still tasted bland.",
+    "explanation": "Hãy phân tích: Việc 'thêm muối' ở đây là một 'phương pháp/thử nghiệm' để xem hương vị có cải thiện không, chứ không phải là một nỗ lực khó khăn (như leo núi). Khi 'thử một giải pháp', em dùng 'To-V' hay 'V-ing' sau 'try'?"
+  },
+  {
+    "topic": "Gerunds vs Infinitives",
+    "level": "B1",
+    "student_input": "I tried adding the heavy box to the top shelf, but it was too heavy for me.",
+    "correct_answer": "I tried to lift the heavy box to the top shelf, but it was too heavy for me.",
+    "explanation": "Ở đây em đang nói về một 'nỗ lực' vượt qua khó khăn (chiếc hộp quá nặng). Khi cố gắng hết sức để làm một việc khó, em nên dùng 'V-ing' (thử nghiệm) hay 'To-V' (nỗ lực)?"
+  },
+  {
+    "topic": "Gerunds vs Infinitives",
+    "level": "B1",
+    "student_input": "If you can't sleep, try to drink some warm milk.",
+    "correct_answer": "If you can't sleep, try drinking some warm milk.",
+    "explanation": "Đây là một 'lời khuyên/gợi ý' thử một phương pháp mới để xem có hiệu quả không. Trong trường hợp 'thử một giải pháp', em nên dùng 'To-V' hay 'V-ing' sau 'try'?"
+  },
+  {
+    "topic": "Gerunds vs Infinitives",
+    "level": "B1",
+    "student_input": "I tried drinking the milk, but it didn't help me sleep.",
+    "correct_answer": "I tried drinking the milk, but it didn't help me sleep.",
+    "explanation": "Hoàn hảo! Em đã dùng 'try + V-ing' để nói về một cuộc thử nghiệm. Rất chính xác!"
+  },
+  {
+    "topic": "Gerunds vs Infinitives",
+    "level": "B1",
+    "student_input": "He tried to open the window, but it was stuck.",
+    "correct_answer": "He tried to open the window, but it was stuck.",
+    "explanation": "Chính xác! 'Tried to open' thể hiện một sự nỗ lực vượt qua trở ngại (cửa sổ bị kẹt). Rất tốt!"
+  },
+  {
+    "topic": "Gerunds vs Infinitives",
+    "level": "B1",
+    "student_input": "I stopped to talk to my friend, and then I continued walking.",
+    "correct_answer": "I stopped to talk to my friend, and then I continued walking.",
+    "explanation": "Tuyệt vời! Em đã dùng đúng 'stopped to talk' (dừng lại để nói chuyện). Sự phân biệt giữa hai hành động rất rõ ràng. Rất tốt!"
+  },
+  {
+    "topic": "Gerunds vs Infinitives",
+    "level": "B1",
+    "student_input": "I remember to visit the Louvre museum when I was a child.",
+    "correct_answer": "I remember visiting the Louvre museum when I was a child.",
+    "explanation": "Hãy nhìn cụm 'when I was a child'. Đây là một ký ức từ quá khứ. Khi nhớ về một sự kiện đã xảy ra, em dùng 'To-V' hay 'V-ing' sau 'remember'?"
+  },
+  {
+    "topic": "Gerunds vs Infinitives",
+    "level": "B1",
+    "student_input": "I forgot locking the door, so I had to go back home to check.",
+    "correct_answer": "I forgot to lock the door, so I had to go back home to check.",
+    "explanation": "Hãy phân tích: Em 'quên thực hiện nhiệm vụ khóa cửa', nên giờ em phải quay lại kiểm tra. Vậy đây là 'quên một kỷ niệm' hay 'quên một trách nhiệm'? Em nên dùng 'V-ing' hay 'To-V'?"
+  },
+  {
+    "topic": "Gerunds vs Infinitives",
+    "level": "B1",
+    "student_input": "I tried to take a taxi, but there were none available.",
+    "correct_answer": "I tried to take a taxi, but there were none available.",
+    "explanation": "Chính xác! 'Tried to take' thể hiện nỗ lực tìm taxi nhưng không thành công. Rất tốt!"
+  },
+  {
+    "topic": "Gerunds vs Infinitives",
+    "level": "B1",
+    "student_input": "I stop to eat sweets because I want to lose weight.",
+    "correct_answer": "I stopped eating sweets because I want to lose weight.",
+    "explanation": "Hãy nhìn vào mục đích 'muốn giảm cân'. Vậy em 'dừng lại để ăn kẹo' hay 'từ bỏ việc ăn kẹo'? Em hãy sửa lại giới từ sau 'stop' cho đúng nghĩa nhé."
+  },
+  {
+    "topic": "Gerunds vs Infinitives",
+    "level": "B1",
+    "student_input": "Remember to call your mom on her birthday!",
+    "correct_answer": "Remember to call your mom on her birthday!",
+    "explanation": "Hoàn hảo! Đây là một lời nhắc nhở về nhiệm vụ trong tương lai. 'Remember to call' là hoàn toàn chính xác."
+  },
+  {
+    "topic": "Gerunds vs Infinitives",
+    "level": "B1",
+    "student_input": "I'll never forget to see the Northern Lights last winter.",
+    "correct_answer": "I'll never forget seeing the Northern Lights last winter.",
+    "explanation": "Hãy nhìn cụm 'last winter'. Đây là một trải nghiệm tuyệt vời đã xảy ra. Khi nói 'không bao giờ quên một kỷ niệm', em dùng 'To-V' hay 'V-ing'?"
+  },
+  {
+    "topic": "Gerunds vs Infinitives",
+    "level": "B1",
+    "student_input": "I tried to use a different password, but it still didn't work.",
+    "correct_answer": "I tried using a different password, but it still didn't work.",
+    "explanation": "Việc 'dùng mật khẩu khác' là một giải pháp em thử nghiệm để xem có vào được tài khoản không. Với một 'thử nghiệm phương pháp', em dùng 'To-V' hay 'V-ing'?"
+  },
+  {
+    "topic": "Gerunds vs Infinitives",
+    "level": "B1",
+    "student_input": "I stopped to smoke for two years, so now I feel much healthier.",
+    "correct_answer": "I stopped smoking for two years, so now I feel much healthier.",
+    "explanation": "Hãy phân tích: 'cảm thấy khỏe mạnh hơn' chứng tỏ em đã từ bỏ thuốc lá trong 2 năm. Vậy em nên dùng 'stop + To-V' (dừng lại để hút) hay 'stop + V-ing' (bỏ hút)?"
+  },
+  {
+    "topic": "Gerunds vs Infinitives",
+    "level": "B1",
+    "student_input": "I remember to meet him for the first time in 2010.",
+    "correct_answer": "I remember meeting him for the first time in 2010.",
+    "explanation": "Hãy nhìn mốc 'in 2010'. Đây là một ký ức về lần đầu gặp mặt. Em hãy thay 'To-V' bằng 'V-ing' để diễn tả một kỷ niệm nhé."
+  },
+  {
+    "topic": "Gerunds vs Infinitives",
+    "level": "B1",
+    "student_input": "He forgot to bring his passport, so he couldn't fly to New York.",
+    "correct_answer": "He forgot to bring his passport, so he couldn't fly to New York.",
+    "explanation": "Chính xác! 'Forgot to bring' nghĩa là quên thực hiện một việc cần thiết. Rất tốt!"
+  },
+  {
+    "topic": "Gerunds vs Infinitives",
+    "level": "B1",
+    "student_input": "I tried to reach the top of the mountain, but I was too tired.",
+    "correct_answer": "I tried to reach the top of the mountain, but I was too tired.",
+    "explanation": "Hoàn hảo! 'Tried to reach' thể hiện một sự nỗ lực vượt qua khó khăn. Rất chính xác!"
+  },
+  {
+    "topic": "Gerunds vs Infinitives",
+    "level": "B1",
+    "student_input": "He stopped to work at 5 PM every day.",
+    "correct_answer": "He stops working at 5 PM every day.",
+    "explanation": "Câu này có thể đúng nếu anh ấy 'dừng việc đang làm để bắt đầu làm việc'. Nhưng thường thì 5 giờ chiều là lúc 'kết thúc công việc'. Nếu ý em là 'ngừng làm việc' để về nhà, em nên dùng 'V-ing' hay 'To-V'?"
+  },
+  {
+    "topic": "Gerunds vs Infinitives",
+    "level": "B1",
+    "student_input": "I remember to turn off the lights before I went to sleep last night.",
+    "correct_answer": "I remember turning off the lights before I went to sleep last night.",
+    "explanation": "Hãy nhìn 'last night'. Em đang nhớ lại một hành động em đã thực hiện xong. Vậy em dùng 'To-V' (nhiệm vụ) hay 'V-ing' (kỷ niệm/hành động đã qua)?"
+  }
+]

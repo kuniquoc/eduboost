@@ -1,0 +1,225 @@
+RELATIVE CLAUSES IN ENGLISH
+
+CHAPTER 1: INTRODUCTION TO RELATIVE CLAUSES
+
+A relative clause is a type of subordinate clause that gives more information about a noun in the main clause. Relative clauses are introduced by relative pronouns (who, which, that, whose, whom) or relative adverbs (where, when, why). They are essential for combining sentences and providing additional details in a natural way.
+
+Example without relative clause:
+- I met a woman. The woman speaks five languages.
+
+Example with relative clause:
+- I met a woman who speaks five languages.
+
+The relative clause "who speaks five languages" gives more information about "a woman."
+
+
+CHAPTER 2: RELATIVE PRONOUNS
+
+Each relative pronoun is used for a specific type of noun:
+
+WHO — used for people (subject)
+- The teacher who taught me English was very patient.
+- I have a friend who lives in Australia.
+- The man who called you is my father.
+
+WHICH — used for things and animals
+- The book which I bought yesterday is fascinating.
+- She has a cat which has blue eyes.
+- The car which is parked outside belongs to my neighbor.
+
+THAT — used for both people and things (in defining clauses only)
+- The movie that we watched last night was excellent.
+- The person that answered the phone was very helpful.
+- The restaurant that serves Italian food is on Main Street.
+
+WHOSE — used to show possession (for people and things)
+- The student whose grades improved received an award.
+- I know the man whose car was stolen.
+- That is the company whose products are famous worldwide.
+
+WHOM — used for people (as an object, formal)
+- The colleague whom I called didn't answer.
+- The person whom you met at the party is my cousin.
+- The teacher to whom I spoke was very helpful.
+
+Note: In modern English, "whom" is often replaced by "who" in everyday speech:
+- The person who you met at the party is my cousin. (informal, widely accepted)
+
+
+CHAPTER 3: RELATIVE ADVERBS
+
+WHERE — used for places
+- This is the restaurant where we had dinner last week.
+- The city where I was born is very small.
+- I remember the park where we used to play as children.
+
+WHEN — used for times
+- I will never forget the day when I graduated.
+- Summer is the season when people go on vacation.
+- Do you remember the year when we first met?
+
+WHY — used for reasons (usually after "the reason")
+- Tell me the reason why you were late.
+- I don't understand the reason why she quit her job.
+- That is the reason why I chose this university.
+
+Note: "Why" can often be omitted:
+- Tell me the reason you were late. (also correct)
+
+
+CHAPTER 4: DEFINING RELATIVE CLAUSES
+
+Defining relative clauses (also called restrictive relative clauses) provide essential information to identify which person or thing we are talking about. Without the relative clause, the sentence would be incomplete or unclear.
+
+Key rules:
+- No commas around the clause
+- "That" can replace "who" or "which"
+- The relative pronoun can be omitted if it is the object of the clause
+
+Examples:
+- The woman who lives next door is a doctor. (Which woman? The one who lives next door.)
+- I need the file that you sent me yesterday. (Which file? The one you sent.)
+- The students who passed the exam will graduate in June. (Which students? Those who passed.)
+
+4.1 Omitting the Relative Pronoun
+
+In defining relative clauses, the relative pronoun can be omitted when it functions as the OBJECT of the clause (not the subject).
+
+Object (can omit):
+- The book (that/which) I read was interesting. → "I" is the subject, "that/which" is the object → can omit
+- The man (who/whom/that) she married is a pilot. → "she" is the subject, "who" is the object → can omit
+
+Subject (cannot omit):
+- The woman who lives next door is a doctor. → "who" is the subject → CANNOT omit
+- The car that broke down is being repaired. → "that" is the subject → CANNOT omit
+
+How to tell the difference:
+- If there is another subject after the relative pronoun (I, she, they, we, etc.), the pronoun is the object and can be omitted.
+- If there is a verb directly after the relative pronoun, the pronoun is the subject and cannot be omitted.
+
+
+CHAPTER 5: NON-DEFINING RELATIVE CLAUSES
+
+Non-defining relative clauses (also called non-restrictive relative clauses) provide extra, non-essential information. The sentence is complete and clear without them. They simply add interesting or additional details.
+
+Key rules:
+- Always use commas around the clause
+- "That" CANNOT be used (only who, which, whose, whom, where, when)
+- The relative pronoun CANNOT be omitted
+- These clauses can be removed without changing the core meaning
+
+Examples:
+- My brother, who lives in London, is visiting us next week.
+  (I only have one brother. The clause gives extra information.)
+  
+- The Eiffel Tower, which is located in Paris, was built in 1889.
+  (There's only one Eiffel Tower. The clause adds a detail.)
+  
+- Mr. Johnson, whose daughter goes to my school, is a famous author.
+  (The clause adds extra information about Mr. Johnson.)
+  
+- We stayed at the Grand Hotel, which was recommended by a friend.
+  (The clause adds a detail about the hotel.)
+
+5.1 Comparing Defining and Non-defining
+
+Defining (essential — changes meaning):
+- My sister who lives in Paris is a designer. (I have more than one sister. This specifies which one.)
+
+Non-defining (extra — doesn't change meaning):
+- My sister, who lives in Paris, is a designer. (I have one sister. The clause just adds information.)
+
+Another comparison:
+- The students who studied hard passed the exam. (Only some students studied hard, and those passed.)
+- The students, who studied hard, passed the exam. (All the students studied hard, and all passed.)
+
+
+CHAPTER 6: WHICH PRONOUN TO USE — QUICK REFERENCE
+
+For people (subject): who, that
+For people (object): who, whom, that (or omit in defining clauses)
+For people (possession): whose
+For things (subject): which, that
+For things (object): which, that (or omit in defining clauses)
+For things (possession): whose
+For places: where (or which/that + preposition)
+For times: when (or which/that + preposition)
+For reasons: why
+
+Special cases with prepositions:
+- Informal: The hotel that we stayed at was lovely.
+- Formal: The hotel at which we stayed was lovely.
+- With "where": The hotel where we stayed was lovely.
+
+
+CHAPTER 7: COMMON MISTAKES
+
+Mistake 1: Using "that" in non-defining clauses
+Incorrect: My mother, that is a teacher, loves reading.
+Correct: My mother, who is a teacher, loves reading.
+
+Mistake 2: Using "what" instead of "that/which"
+Incorrect: The thing what I like most is chocolate.
+Correct: The thing that I like most is chocolate.
+
+Mistake 3: Forgetting commas in non-defining clauses
+Incorrect: Paris which is the capital of France is beautiful.
+Correct: Paris, which is the capital of France, is beautiful.
+
+Mistake 4: Adding unnecessary commas in defining clauses
+Incorrect: The man, who stole the car, was arrested.
+Correct: The man who stole the car was arrested. (If we need the clause to identify which man.)
+
+Mistake 5: Omitting the subject relative pronoun
+Incorrect: The girl sits next to me is my friend.
+Correct: The girl who sits next to me is my friend.
+
+Mistake 6: Using double subjects
+Incorrect: The woman who she works here is my aunt.
+Correct: The woman who works here is my aunt.
+
+Mistake 7: Using "who" for things
+Incorrect: The car who is parked outside is mine.
+Correct: The car which is parked outside is mine.
+
+Mistake 8: Confusing "whose" and "who's"
+"whose" = possession (The man whose dog ran away.)
+"who's" = who is / who has (The man who's standing there.)
+
+Incorrect: The student who's essay won the prize was happy.
+Correct: The student whose essay won the prize was happy.
+
+
+CHAPTER 8: PRACTICE SENTENCES
+
+Complete the sentences with the correct relative pronoun:
+
+1. The woman _____ answered the phone was very polite.
+   Answer: who/that
+
+2. I bought a laptop _____ has a very fast processor.
+   Answer: which/that
+
+3. She is the teacher _____ class I enjoy the most.
+   Answer: whose
+
+4. London, _____ is the capital of the UK, has many museums.
+   Answer: which (non-defining, cannot use "that")
+
+5. The hotel _____ we stayed was near the beach.
+   Answer: where
+
+6. Is this the book _____ you were looking for?
+   Answer: that/which (or omit: "Is this the book you were looking for?")
+
+7. The man _____ you spoke to is my uncle.
+   Answer: who/whom/that (or omit)
+
+8. Do you remember the day _____ we first met?
+   Answer: when
+
+9. My best friend, _____ I've known since childhood, is getting married.
+   Answer: whom/who (non-defining)
+
+10. The company _____ employees are happiest won the award.
+    Answer: whose

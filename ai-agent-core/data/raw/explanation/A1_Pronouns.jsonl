@@ -1,0 +1,562 @@
+[
+  {
+    "topic": "Pronouns",
+    "level": "A1",
+    "student_input": "Me love music",
+    "correct_answer": "I love music",
+    "explanation": "Chào em, hãy nhìn vào từ 'Me'. 'Me' là đại từ tân ngữ, thường đứng sau động từ. Nhưng ở đây, em đang cần một đại từ đứng ở đầu câu để làm chủ ngữ thực hiện hành động 'love'. Vậy em nên dùng 'Me' hay 'I' nhỉ?"
+  },
+  {
+    "topic": "Pronouns",
+    "level": "A1",
+    "student_input": "I love he",
+    "correct_answer": "I love him",
+    "explanation": "Trong câu này, 'I' là chủ ngữ, còn người nhận tình cảm là tân ngữ đứng sau động từ 'love'. Với ngôi thứ 3 số ít (nam), mình dùng 'he' hay 'him' khi nó đóng vai trò là tân ngữ em nhỉ?"
+  },
+  {
+    "topic": "Pronouns",
+    "level": "A1",
+    "student_input": "This is my book, it is my",
+    "correct_answer": "This is my book, it is mine",
+    "explanation": "Em dùng 'my book' ở vế đầu là chính xác. Nhưng ở vế sau, khi em không muốn nhắc lại từ 'book' nữa, em cần một 'đại từ sở hữu' đứng một mình. Em có nhớ từ thay thế cho 'my + noun' là gì không?"
+  },
+  {
+    "topic": "Pronouns",
+    "level": "A1",
+    "student_input": "She gave it to I",
+    "correct_answer": "She gave it to me",
+    "explanation": "Hãy chú ý từ đứng sau giới từ 'to'. Sau giới từ, chúng ta phải dùng đại từ chủ ngữ (I, he, she) hay đại từ tân ngữ (me, him, her) em nhỉ?"
+  },
+  {
+    "topic": "Pronouns",
+    "level": "A1",
+    "student_input": "Him is my best friend",
+    "correct_answer": "He is my best friend",
+    "explanation": "Hãy nhìn vào từ 'Him'. 'Him' là đại từ tân ngữ, nhưng ở đây em đang cần một đại từ đứng trước động từ 'is' để làm chủ ngữ. Vậy em nên dùng 'Him' hay 'He'?"
+  },
+  {
+    "topic": "Pronouns",
+    "level": "A1",
+    "student_input": "The cat is cute. I like she",
+    "correct_answer": "The cat is cute. I like it",
+    "explanation": "Em dùng 'I like' là đúng rồi. Nhưng 'The cat' là một con vật, vậy khi thay thế bằng một đại từ làm tân ngữ, mình nên dùng 'she', 'he' hay 'it' em nhỉ?"
+  },
+  {
+    "topic": "Pronouns",
+    "level": "A1",
+    "student_input": "Is this your pen? Yes, it is my",
+    "correct_answer": "Is this your pen? Yes, it is mine",
+    "explanation": "Ở câu trả lời, em đang dùng 'my'. 'My' là tính từ sở hữu nên bắt buộc phải có một danh từ theo sau (ví dụ: my pen). Nếu em muốn nói 'nó là của tôi' mà không nhắc lại từ 'pen', em dùng từ gì nhỉ?"
+  },
+  {
+    "topic": "Pronouns",
+    "level": "A1",
+    "student_input": "He and me are students",
+    "correct_answer": "He and I are students",
+    "explanation": "Hãy nhìn vào cụm 'He and me'. Cả hai người này đều là chủ ngữ của câu (đứng trước 'are'). Vậy 'me' (tân ngữ) có phù hợp ở vị trí chủ ngữ không? Em hãy thay bằng đại từ chủ ngữ tương ứng nhé."
+  },
+  {
+    "topic": "Pronouns",
+    "level": "A1",
+    "student_input": "Can you help I?",
+    "correct_answer": "Can you help me?",
+    "explanation": "Hãy xem vị trí của từ 'I'. Nó đứng sau động từ 'help', đóng vai trò là người nhận hành động (tân ngữ). Vậy mình dùng 'I' hay 'me' mới chính xác?"
+  },
+  {
+    "topic": "Pronouns",
+    "level": "A1",
+    "student_input": "The cake is hers, and the cookie is her",
+    "correct_answer": "The cake is hers, and the cookie is hers",
+    "explanation": "Vế đầu 'is hers' em làm rất tốt. Vế sau 'is her', từ 'her' ở đây là tính từ sở hữu (cần danh từ theo sau). Để nói 'cái bánh quy là của cô ấy' mà không có danh từ, em dùng từ gì nhỉ?"
+  },
+  {
+    "topic": "Pronouns",
+    "level": "A1",
+    "student_input": "They gave we a gift",
+    "correct_answer": "They gave us a gift",
+    "explanation": "Hãy nhìn vào từ 'we'. 'We' là chủ ngữ, nhưng ở đây nó đứng sau động từ 'gave' và nhận quà. Vậy em hãy chuyển 'we' sang dạng tân ngữ xem nào."
+  },
+  {
+    "topic": "Pronouns",
+    "level": "A1",
+    "student_input": "This is he car",
+    "correct_answer": "This is his car",
+    "explanation": "Em đang muốn nói về 'chiếc xe của anh ấy'. 'He' là đại từ chủ ngữ. Để chỉ sở hữu (của anh ấy), em cần dùng tính từ sở hữu là gì nhỉ?"
+  },
+  {
+    "topic": "Pronouns",
+    "level": "A1",
+    "student_input": "Her is a doctor",
+    "correct_answer": "She is a doctor",
+    "explanation": "Hãy xem lại từ 'Her'. 'Her' thường dùng làm tân ngữ hoặc tính từ sở hữu. Ở đầu câu, làm chủ ngữ cho động từ 'is', mình phải dùng từ gì em nhỉ?"
+  },
+  {
+    "topic": "Pronouns",
+    "level": "A1",
+    "student_input": "I see they in the park",
+    "correct_answer": "I see them in the park",
+    "explanation": "Hãy nhìn từ 'they'. Nó đứng sau động từ 'see', đóng vai trò là tân ngữ. Em hãy nhớ lại xem dạng tân ngữ của 'they' là gì nhé."
+  },
+  {
+    "topic": "Pronouns",
+    "level": "A1",
+    "student_input": "Your are very kind",
+    "correct_answer": "You are very kind",
+    "explanation": "Chào em, 'Your' là tính từ sở hữu (ví dụ: your book). Ở đây em cần một đại từ chủ ngữ đứng trước 'are'. Vậy em nên dùng 'Your' hay 'You'?"
+  },
+  {
+    "topic": "Pronouns",
+    "level": "A1",
+    "student_input": "The ball is our",
+    "correct_answer": "The ball is ours",
+    "explanation": "Em dùng 'our' là tính từ sở hữu, nó cần có một danh từ theo sau. Nếu em muốn nói 'Quả bóng là của chúng tôi' mà không nhắc lại từ 'ball', em dùng đại từ sở hữu nào nhỉ?"
+  },
+  {
+    "topic": "Pronouns",
+    "level": "A1",
+    "student_input": "Listen to I!",
+    "correct_answer": "Listen to me!",
+    "explanation": "Hãy chú ý giới từ 'to'. Sau giới từ, mình dùng đại từ chủ ngữ 'I' hay đại từ tân ngữ 'me' em nhỉ?"
+  },
+  {
+    "topic": "Pronouns",
+    "level": "A1",
+    "student_input": "She is my friend. I like she very much",
+    "correct_answer": "She is my friend. I like her very much",
+    "explanation": "Vế đầu em làm đúng rồi. Ở vế sau, hãy nhìn từ 'she'. Nó đứng sau động từ 'like', đóng vai trò tân ngữ. Em hãy chuyển 'she' sang dạng tân ngữ nhé."
+  },
+  {
+    "topic": "Pronouns",
+    "level": "A1",
+    "student_input": "This is their house. It is their",
+    "correct_answer": "This is their house. It is theirs",
+    "explanation": "Em dùng 'their house' rất chính xác. Nhưng ở vế sau, để nói 'nó là của họ' mà không lặp lại từ 'house', em cần dùng đại từ sở hữu. Em nhớ từ đó là gì không?"
+  },
+  {
+    "topic": "Pronouns",
+    "level": "A1",
+    "student_input": "Me and my brother go to school",
+    "correct_answer": "My brother and I go to school",
+    "explanation": "Có hai lưu ý ở đây: Một là trong tiếng Anh, người ta thường đặt bản thân mình ('I') ra sau người khác để lịch sự. Hai là vì đây là chủ ngữ của câu, em dùng 'me' hay 'I' mới đúng?"
+  },
+  {
+    "topic": "Pronouns",
+    "level": "A1",
+    "student_input": "Is that she bag?",
+    "correct_answer": "Is that her bag?",
+    "explanation": "Chào em, em đang muốn nói 'cái túi của cô ấy'. 'She' là đại từ chủ ngữ, còn để chỉ sở hữu, mình phải dùng tính từ sở hữu. Em nhớ từ đó là gì không?"
+  },
+  {
+    "topic": "Pronouns",
+    "level": "A1",
+    "student_input": "The students are tired. He want to go home",
+    "correct_answer": "The students are tired. They want to go home",
+    "explanation": "Hãy nhìn vào từ 'The students' (số nhiều). Vậy ở câu sau, khi thay thế bằng một đại từ chủ ngữ, mình dùng 'He' (số ít) hay 'They' (số nhiều) cho phù hợp?"
+  },
+  {
+    "topic": "Pronouns",
+    "level": "A1",
+    "student_input": "Please tell we the truth",
+    "correct_answer": "Please tell us the truth",
+    "explanation": "Hãy nhìn từ 'we'. Nó đứng sau động từ 'tell' và là đối tượng nhận thông tin. Em hãy chuyển 'we' sang dạng tân ngữ nhé."
+  },
+  {
+    "topic": "Pronouns",
+    "level": "A1",
+    "student_input": "This is mine phone",
+    "correct_answer": "This is my phone",
+    "explanation": "Em dùng 'mine' là đại từ sở hữu (đứng một mình). Nhưng ở đây, em có danh từ 'phone' đi kèm phía sau. Vậy em nên dùng 'mine' hay tính từ sở hữu 'my'?"
+  },
+  {
+    "topic": "Pronouns",
+    "level": "A1",
+    "student_input": "Him and his father are tall",
+    "correct_answer": "He and his father are tall",
+    "explanation": "Hãy nhìn vào từ 'Him'. Nó đang đóng vai trò làm chủ ngữ đứng trước động từ 'are'. Em hãy chuyển 'Him' về dạng đại từ chủ ngữ nhé."
+  },
+  {
+    "topic": "Pronouns",
+    "level": "A1",
+    "student_input": "Can you give I the pen?",
+    "correct_answer": "Can you give me the pen?",
+    "explanation": "Trong câu này, người nhận cái bút là tân ngữ đứng sau động từ 'give'. Vậy mình dùng 'I' hay 'me' em nhỉ?"
+  },
+  {
+    "topic": "Pronouns",
+    "level": "A1",
+    "student_input": "It is a dog. It is he toy",
+    "correct_answer": "It is a dog. It is its toy",
+    "explanation": "Chào em, 'The dog' là con vật. Để nói 'đồ chơi của nó', em cần một tính từ sở hữu dành cho vật/động vật. Em nhớ từ đó là gì không? (Lưu ý: không có dấu phẩy nhé)."
+  },
+  {
+    "topic": "Pronouns",
+    "level": "A1",
+    "student_input": "I like you, and you like I",
+    "correct_answer": "I like you, and you like me",
+    "explanation": "Vế đầu 'I like you' rất chính xác. Vế sau 'you like I', hãy nhìn từ 'I'. Nó đứng sau động từ 'like', đóng vai trò tân ngữ. Em hãy sửa lại cho đúng nhé."
+  },
+  {
+    "topic": "Pronouns",
+    "level": "A1",
+    "student_input": "The books are mine, and the pens are my",
+    "correct_answer": "The books are mine, and the pens are mine",
+    "explanation": "Vế đầu 'are mine' đúng rồi. Vế sau 'are my', từ 'my' không thể đứng một mình ở cuối câu như vậy. Em cần dùng đại từ sở hữu tương ứng là gì nhỉ?"
+  },
+  {
+    "topic": "Pronouns",
+    "level": "A1",
+    "student_input": "Us are going to the park",
+    "correct_answer": "We are going to the park",
+    "explanation": "Hãy nhìn từ 'Us'. 'Us' là đại từ tân ngữ, nhưng ở đây em đang cần một chủ ngữ đứng trước 'are'. Em hãy chuyển 'Us' về dạng chủ ngữ nhé."
+  },
+  {
+    "topic": "Pronouns",
+    "level": "A1",
+    "student_input": "Is this yours book?",
+    "correct_answer": "Is this your book?",
+    "explanation": "Em dùng 'yours' là đại từ sở hữu (đứng một mình). Nhưng vì ở đây có danh từ 'book' đi kèm, em cần dùng tính từ sở hữu. Em nhớ từ đó là gì không?"
+  },
+  {
+    "topic": "Pronouns",
+    "level": "A1",
+    "student_input": "The teacher called she",
+    "correct_answer": "The teacher called her",
+    "explanation": "Hãy nhìn từ 'she'. Nó đứng sau động từ 'called' và là người bị gọi. Em hãy chuyển 'she' sang dạng tân ngữ nhé."
+  },
+  {
+    "topic": "Pronouns",
+    "level": "A1",
+    "student_input": "My car is blue, and your is red",
+    "correct_answer": "My car is blue, and yours is red",
+    "explanation": "Chào em, ở vế sau, 'your' là tính từ sở hữu nên cần có danh từ 'car' theo sau. Nếu em muốn nói 'của bạn' mà không lặp lại từ 'car', em dùng từ gì nhỉ?"
+  },
+  {
+    "topic": "Pronouns",
+    "level": "A1",
+    "student_input": "The children are happy. He are playing",
+    "correct_answer": "The children are happy. They are playing",
+    "explanation": "Hãy nhìn từ 'The children' (số nhiều). Khi thay thế bằng một đại từ làm chủ ngữ ở câu sau, mình dùng 'He' hay 'They' cho chính xác?"
+  },
+  {
+    "topic": "Pronouns",
+    "level": "A1",
+    "student_input": "I can't find my keys. Where are they?",
+    "correct_answer": "I can't find my keys. Where are they?",
+    "explanation": "Câu này hoàn toàn chính xác! Em đã dùng 'my' cho sở hữu và 'they' để thay thế cho 'keys' (số nhiều). Rất tốt!"
+  },
+  {
+    "topic": "Pronouns",
+    "level": "A1",
+    "student_input": "Tell he to come here",
+    "correct_answer": "Tell him to come here",
+    "explanation": "Hãy nhìn từ 'he'. Nó đứng sau động từ 'tell', đóng vai trò là tân ngữ. Em hãy chuyển 'he' sang dạng tân ngữ nhé."
+  },
+  {
+    "topic": "Pronouns",
+    "level": "A1",
+    "student_input": "Those shoes are my",
+    "correct_answer": "Those shoes are mine",
+    "explanation": " 'My' là tính từ sở hữu, không thể đứng một mình cuối câu. Em hãy dùng đại từ sở hữu tương ứng để nói 'những đôi giày này là của tôi' nhé."
+  },
+  {
+    "topic": "Pronouns",
+    "level": "A1",
+    "student_input": "She and I is friends",
+    "correct_answer": "She and I are friends",
+    "explanation": "Về đại từ 'She and I' là chính xác. Nhưng em hãy nhìn động từ 'is'. Với chủ ngữ là hai người (số nhiều), mình dùng 'is' hay 'are' nhỉ?"
+  },
+  {
+    "topic": "Pronouns",
+    "level": "A1",
+    "student_input": "I like the dress. I want it",
+    "correct_answer": "I like the dress. I want it",
+    "explanation": "Câu này hoàn toàn chính xác! Em đã dùng 'it' để thay thế cho 'the dress' (số ít) rất đúng. Chúc mừng em!"
+  },
+  {
+    "topic": "Pronouns",
+    "level": "A1",
+    "student_input": "The dog is hungry. Give she some food",
+    "correct_answer": "The dog is hungry. Give it some food",
+    "explanation": "Hãy nhìn từ 'she'. 'The dog' là một con vật, vậy khi đóng vai trò là tân ngữ nhận thức ăn, mình nên dùng 'she' hay 'it' em nhỉ?"
+  },
+  {
+    "topic": "Pronouns",
+    "level": "A1",
+    "student_input": "I cut me with a knife",
+    "correct_answer": "I cut myself with a knife",
+    "explanation": "Chào em, trong câu này, người thực hiện hành động 'cắt' là 'I', và người bị cắt cũng chính là 'I'. Khi chủ ngữ và tân ngữ là cùng một người, mình dùng 'me' hay một đại từ phản thân kết thúc bằng '-self' nhỉ?"
+  },
+  {
+    "topic": "Pronouns",
+    "level": "A1",
+    "student_input": "She looks at she in the mirror",
+    "correct_answer": "She looks at herself in the mirror",
+    "explanation": "Em hãy nhìn vào chủ ngữ 'She'. Cô ấy nhìn vào chính mình trong gương, vậy khi tân ngữ là chính chủ ngữ, mình dùng 'she' hay 'herself' em nhỉ?"
+  },
+  {
+    "topic": "Pronouns",
+    "level": "A1",
+    "student_input": "The dog wagged it's tail",
+    "correct_answer": "The dog wagged its tail",
+    "explanation": "Hãy chú ý từ 'it's'. 'It's' (có dấu phẩy) là viết tắt của 'It is' (Nó là). Ở đây em muốn nói 'cái đuôi của nó' (sở hữu), vậy mình dùng 'it's' hay 'its' mới đúng?"
+  },
+  {
+    "topic": "Pronouns",
+    "level": "A1",
+    "student_input": "The boy is sad. She is crying",
+    "correct_answer": "The boy is sad. He is crying",
+    "explanation": "Hãy nhìn vào danh từ 'The boy' (cậu bé). Ở câu sau, em dùng đại từ 'She' để thay thế. 'She' dùng cho nam hay nữ nhỉ? Em hãy chọn đại từ phù hợp cho 'The boy' nhé."
+  },
+  {
+    "topic": "Pronouns",
+    "level": "A1",
+    "student_input": "My name is me",
+    "correct_answer": "My name is [Name]",
+    "explanation": "Chào em, 'me' là đại từ tân ngữ. Khi giới thiệu tên, mình thường dùng tên riêng hoặc 'My name is...'. Em không thể dùng 'me' để thay cho tên của mình được. Em thử viết lại câu này với tên của em xem sao?"
+  },
+  {
+    "topic": "Pronouns",
+    "level": "A1",
+    "student_input": "They did it by theirselves",
+    "correct_answer": "They did it by themselves",
+    "explanation": "Em dùng đại từ phản thân cho 'They' là đúng hướng rồi. Nhưng em hãy kiểm tra lại chính tả: 'theirselves' hay 'themselves' mới là từ chính xác trong tiếng Anh nhỉ?"
+  },
+  {
+    "topic": "Pronouns",
+    "level": "A1",
+    "student_input": "He talks to him every day",
+    "correct_answer": "He talks to himself every day",
+    "explanation": "Nếu 'He' đang tự nói chuyện với chính mình, thì thay vì dùng 'him', mình nên dùng đại từ phản thân nào để nhấn mạnh việc tự làm hành động đó nhỉ?"
+  },
+  {
+    "topic": "Pronouns",
+    "level": "A1",
+    "student_input": "This is a book. It's cover is red",
+    "correct_answer": "This is a book. Its cover is red",
+    "explanation": "Hãy nhìn từ 'It's cover'. Nếu đọc là 'It is cover' (Nó là cái bìa) thì có hợp lý không? Em đang muốn nói 'bìa của nó' (sở hữu), vậy mình dùng 'it's' hay 'its'?"
+  },
+  {
+    "topic": "Pronouns",
+    "level": "A1",
+    "student_input": "We cleaned the room by us",
+    "correct_answer": "We cleaned the room by ourselves",
+    "explanation": "Khi muốn nói 'tự chúng tôi làm' (không có ai giúp), mình dùng 'by us' hay dùng đại từ phản thân 'by ourselves' em nhỉ?"
+  },
+  {
+    "topic": "Pronouns",
+    "level": "A1",
+    "student_input": "The girls are happy. He are laughing",
+    "correct_answer": "The girls are happy. They are laughing",
+    "explanation": "Hãy nhìn chủ ngữ 'The girls' (số nhiều). Ở câu sau, em dùng 'He' (số ít). Em hãy tìm một đại từ số nhiều phù hợp để thay thế cho 'The girls' nhé."
+  },
+  {
+    "topic": "Pronouns",
+    "level": "A1",
+    "student_input": "I can do it by me",
+    "correct_answer": "I can do it by myself",
+    "explanation": "Để nói 'Tôi có thể tự làm điều đó', em nên dùng 'by me' hay dùng đại từ phản thân 'by myself' nhỉ?"
+  },
+  {
+    "topic": "Pronouns",
+    "level": "A1",
+    "student_input": "The cat cleaned it's fur",
+    "correct_answer": "The cat cleaned its fur",
+    "explanation": "Một lần nữa, em hãy phân biệt 'it's' (nó là) và 'its' (của nó). Ở đây là 'bộ lông của con mèo', vậy mình dùng từ nào?"
+  },
+  {
+    "topic": "Pronouns",
+    "level": "A1",
+    "student_input": "He told I a secret",
+    "correct_answer": "He told me a secret",
+    "explanation": "Hãy nhìn vị trí của 'I'. Nó đứng sau động từ 'told' và là người nhận thông tin. Em hãy chuyển 'I' sang dạng tân ngữ nhé."
+  },
+  {
+    "topic": "Pronouns",
+    "level": "A1",
+    "student_input": "The baby is crying. She is hungry",
+    "correct_answer": "The baby is crying. He/She is hungry",
+    "explanation": "Câu này đúng nếu em biết chắc em bé là con gái. Nhưng nếu không biết giới tính, chúng ta thường dùng đại từ nào để thay thế cho 'baby' (một đứa trẻ) nhỉ?"
+  },
+  {
+    "topic": "Pronouns",
+    "level": "A1",
+    "student_input": "You should take care of you",
+    "correct_answer": "You should take care of yourself",
+    "explanation": "Khi em khuyên ai đó hãy tự chăm sóc chính họ, mình dùng 'take care of you' hay 'take care of yourself' em nhỉ?"
+  },
+  {
+    "topic": "Pronouns",
+    "level": "A1",
+    "student_input": "The birds are small. It are blue",
+    "correct_answer": "The birds are small. They are blue",
+    "explanation": "Hãy chú ý 'The birds' là số nhiều. Vậy ở câu sau, em dùng 'It' (số ít) hay 'They' (số nhiều) để thay thế cho những chú chim này?"
+  },
+  {
+    "topic": "Pronouns",
+    "level": "A1",
+    "student_input": "This pen is my's",
+    "correct_answer": "This pen is mine",
+    "explanation": "Chào em, để nói 'của tôi' mà đứng một mình cuối câu, mình dùng đại từ sở hữu là 'mine'. Em có cần thêm dấu phẩy và chữ 's' vào sau 'my' không nhỉ?"
+  },
+  {
+    "topic": "Pronouns",
+    "level": "A1",
+    "student_input": "He did the homework by himself",
+    "correct_answer": "He did the homework by himself",
+    "explanation": "Câu này hoàn toàn chính xác! Em đã dùng đúng đại từ phản thân 'himself' để chỉ việc cậu ấy tự làm bài tập. Rất tốt!"
+  },
+  {
+    "topic": "Pronouns",
+    "level": "A1",
+    "student_input": "The house is they's",
+    "correct_answer": "The house is theirs",
+    "explanation": "Để nói 'của họ' mà đứng một mình làm đại từ sở hữu, mình dùng 'theirs'. Em có cần thêm dấu phẩy (' ') vào giữa không nhỉ?"
+  },
+  {
+    "topic": "Pronouns",
+    "level": "A1",
+    "student_input": "Give the book to she",
+    "correct_answer": "Give the book to her",
+    "explanation": "Hãy nhìn giới từ 'to'. Sau giới từ, mình dùng đại từ chủ ngữ 'she' hay đại từ tân ngữ 'her' em nhỉ?"
+  },
+  {
+    "topic": "Pronouns",
+    "level": "A1",
+    "student_input": "I am proud of me",
+    "correct_answer": "I am proud of myself",
+    "explanation": "Khi em tự hào về chính bản thân mình, mình dùng 'proud of me' hay 'proud of myself'?"
+  },
+  {
+    "topic": "Pronouns",
+    "level": "A1",
+    "student_input": "The car is fast. Its is red",
+    "correct_answer": "The car is fast. It is red",
+    "explanation": "Hãy nhìn từ 'Its'. 'Its' là tính từ sở hữu (cần danh từ theo sau). Ở đây em muốn nói 'Nó thì màu đỏ', vậy em cần dùng đại từ chủ ngữ 'It' hay tính từ sở hữu 'Its'?"
+  },
+  {
+    "topic": "Pronouns",
+    "level": "A1",
+    "student_input": "We can see us in the water",
+    "correct_answer": "We can see ourselves in the water",
+    "explanation": "Chào em, chủ ngữ là 'We' và chúng ta nhìn thấy chính mình. Vậy em hãy thay 'us' bằng đại từ phản thân tương ứng của 'We' nhé."
+  },
+  {
+    "topic": "Pronouns",
+    "level": "A1",
+    "student_input": "The phone is her's",
+    "correct_answer": "The phone is hers",
+    "explanation": "Đại từ sở hữu 'hers' không cần dấu phẩy trên. Em hãy thử viết lại từ này xem sao."
+  },
+  {
+    "topic": "Pronouns",
+    "level": "A1",
+    "student_input": "I like my new shoes. They is very comfortable",
+    "correct_answer": "I like my new shoes. They are very comfortable",
+    "explanation": "Về đại từ 'They' thay cho 'shoes' là chính xác. Nhưng hãy nhìn động từ 'is'. Với chủ ngữ 'They' (số nhiều), mình dùng 'is' hay 'are'?"
+  },
+  {
+    "topic": "Pronouns",
+    "level": "A1",
+    "student_input": "Can she help me by her",
+    "correct_answer": "Can she help me by herself",
+    "explanation": "Khi muốn nói cô ấy 'tự mình' làm gì đó, mình dùng 'by her' hay 'by herself' em nhỉ?"
+  },
+  {
+    "topic": "Pronouns",
+    "level": "A1",
+    "student_input": "The computer is old. Its is slow",
+    "correct_answer": "The computer is old. It is slow",
+    "explanation": "Em hãy phân biệt: 'Its' dùng để chỉ sở hữu (ví dụ: its screen). Còn khi muốn nói 'Nó thì chậm', em dùng 'Its' hay 'It'?"
+  },
+  {
+    "topic": "Pronouns",
+    "level": "A1",
+    "student_input": "My friends are nice. I like he",
+    "correct_answer": "My friends are nice. I like them",
+    "explanation": "Hãy nhìn vào từ 'My friends' (số nhiều). Ở câu sau, em dùng 'he' (số ít) để thay thế. Em hãy chọn một đại từ tân ngữ số nhiều phù hợp nhé."
+  },
+  {
+    "topic": "Pronouns",
+    "level": "A1",
+    "student_input": "The cake is for we",
+    "correct_answer": "The cake is for us",
+    "explanation": "Hãy nhìn giới từ 'for'. Sau giới từ, mình dùng 'we' hay 'us' em nhỉ?"
+  },
+  {
+    "topic": "Pronouns",
+    "level": "A1",
+    "student_input": "He blames him for the mistake",
+    "correct_answer": "He blames himself for the mistake",
+    "explanation": "Nếu anh ấy tự trách chính mình, em hãy dùng đại từ phản thân thay cho 'him' để câu rõ nghĩa hơn nhé."
+  },
+  {
+    "topic": "Pronouns",
+    "level": "A1",
+    "student_input": "Their is a big city",
+    "correct_answer": "There is a big city",
+    "explanation": "Chào em, 'Their' là tính từ sở hữu (của họ). Nhưng ở đây em đang muốn nói 'Có một thành phố lớn', vậy em nên dùng 'Their' hay từ 'There'?"
+  },
+  {
+    "topic": "Pronouns",
+    "level": "A1",
+    "student_input": "The dog is cute. Its' name is Max",
+    "correct_answer": "The dog is cute. Its name is Max",
+    "explanation": "Hãy nhìn từ 'Its''. Dấu phẩy đặt ở sau chữ 's' là không chính xác. Để nói 'tên của nó', mình chỉ cần dùng 'Its' thôi em nhé."
+  },
+  {
+    "topic": "Pronouns",
+    "level": "A1",
+    "student_input": "I bought a gift for myself",
+    "correct_answer": "I bought a gift for myself",
+    "explanation": "Câu này hoàn toàn chính xác! Em đã dùng đúng đại từ phản thân 'myself' vì người mua và người nhận là một. Tuyệt vời!"
+  },
+  {
+    "topic": "Pronouns",
+    "level": "A1",
+    "student_input": "She is taller than me",
+    "correct_answer": "She is taller than I (am) / me",
+    "explanation": "Câu này trong giao tiếp thông thường là chấp nhận được. Tuy nhiên, trong ngữ pháp trang trọng, sau 'than' thường là một chủ ngữ. Em có muốn thử dùng 'than I am' không?"
+  },
+  {
+    "topic": "Pronouns",
+    "level": "A1",
+    "student_input": "Our house is big, and their is small",
+    "correct_answer": "Our house is big, and theirs is small",
+    "explanation": "Hãy nhìn từ 'their'. Nó là tính từ sở hữu, cần có danh từ 'house' theo sau. Nếu em muốn nói 'của họ' mà không lặp lại từ 'house', em dùng đại từ sở hữu nào?"
+  },
+  {
+    "topic": "Pronouns",
+    "level": "A1",
+    "student_input": "The students did the project by theirselves",
+    "correct_answer": "The students did the project by themselves",
+    "explanation": "Hãy kiểm tra lại chính tả của đại từ phản thân số nhiều. Mình dùng 'theirselves' hay 'themselves' em nhỉ?"
+  },
+  {
+    "topic": "Pronouns",
+    "level": "A1",
+    "student_input": "Is this your's?",
+    "correct_answer": "Is this yours?",
+    "explanation": "Đại từ sở hữu 'yours' không bao giờ có dấu phẩy trên. Em hãy viết lại từ này cho đúng nhé."
+  },
+  {
+    "topic": "Pronouns",
+    "level": "A1",
+    "student_input": "I can't help you, do it by you",
+    "correct_answer": "I can't help you, do it by yourself",
+    "explanation": "Khi bảo ai đó 'hãy tự làm đi', mình dùng 'by you' hay 'by yourself' em nhỉ?"
+  },
+  {
+    "topic": "Pronouns",
+    "level": "A1",
+    "student_input": "The cat is hungry. Give it's some food",
+    "correct_answer": "The cat is hungry. Give it some food",
+    "explanation": "Chào em, 'it's' là viết tắt của 'it is'. Ở đây em cần một đại từ tân ngữ để nhận thức ăn. Em dùng 'it's' hay 'it'?"
+  },
+  {
+    "topic": "Pronouns",
+    "level": "A1",
+    "student_input": "Me and him are friends",
+    "correct_answer": "He and I are friends",
+    "explanation": "Hai lưu ý cho em: Một là vị trí chủ ngữ phải dùng 'I' và 'He' thay vì 'Me' và 'Him'. Hai là nên đặt 'I' ở cuối để lịch sự. Em thử sửa lại nhé."
+  }
+]

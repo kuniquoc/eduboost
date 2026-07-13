@@ -1,0 +1,702 @@
+[
+  {
+    "topic": "Subjunctive Mood",
+    "level": "B2",
+    "student_input": "The doctor recommended that he stops smoking immediately to improve his health.",
+    "correct_answer": "The doctor recommended that he stop smoking immediately to improve his health.",
+    "explanation": "Hãy nhìn vào mệnh đề sau 'recommended that'. Bạn đang diễn đạt một lời khuyên/yêu cầu, không phải là một sự thật hiển nhiên. Trong tiếng Anh, khi dùng các động từ như 'recommend', 'suggest' hay 'insist', động từ ở mệnh đề 'that' phải ở dạng nào (chia theo chủ ngữ hay dùng dạng nguyên mẫu)?"
+  },
+  {
+    "topic": "Subjunctive Mood",
+    "level": "B2",
+    "student_input": "The manager insisted that the employee arrives on time for the board meeting.",
+    "correct_answer": "The manager insisted that the employee arrive on time for the board meeting.",
+    "explanation": "Bạn đang dùng 'insisted that' để thể hiện một yêu cầu bắt buộc. Hãy tự hỏi: Đây là một lời thông báo về việc nhân viên đó 'thường xuyên đến đúng giờ' hay là một 'yêu cầu' rằng họ phải đến đúng giờ? Với thể giả định (subjunctive mood), động từ 'arrive' có cần thêm 's' cho chủ ngữ số ít không?"
+  },
+  {
+    "topic": "Subjunctive Mood",
+    "level": "B2",
+    "student_input": "I suggest that she takes a short break before continuing the presentation.",
+    "correct_answer": "I suggest that she take a short break before continuing the presentation.",
+    "explanation": "Hãy chú ý cụm 'suggest that she takes'. Khi bạn đưa ra một lời đề nghị, động từ trong mệnh đề 'that' không chia theo thì hay theo chủ ngữ mà dùng dạng nguyên mẫu (base form). Bạn hãy thử bỏ 's' ở động từ 'take' xem câu văn có đúng chuẩn thể giả định chưa?"
+  },
+  {
+    "topic": "Subjunctive Mood",
+    "level": "B2",
+    "student_input": "The committee proposed that the new policy is implemented starting next month.",
+    "correct_answer": "The committee proposed that the new policy be implemented starting next month.",
+    "explanation": "Bạn đang dùng 'proposed that' để đề xuất một hành động. Tuy nhiên, bạn lại dùng 'is implemented' (thì hiện tại đơn). Trong thể giả định, đối với động từ 'to be', chúng ta dùng 'is/am/are' hay dùng dạng nguyên mẫu 'be' cho tất cả các ngôi?"
+  },
+  {
+    "topic": "Subjunctive Mood",
+    "level": "B2",
+    "student_input": "It is requested that every participant fills out the feedback form.",
+    "correct_answer": "It is requested that every participant fill out the feedback form.",
+    "explanation": "Hãy nhìn vào 'requested that'. Đây là một yêu cầu chính thức. Trong cấu trúc này, động từ 'fill' đứng sau chủ ngữ số ít 'every participant'. Theo quy tắc của Subjunctive Mood, bạn có nên chia động từ này không?"
+  },
+  {
+    "topic": "Subjunctive Mood",
+    "level": "B2",
+    "student_input": "The board of directors demanded that the CEO resigns immediately.",
+    "correct_answer": "The board of directors demanded that the CEO resign immediately.",
+    "explanation": "Hãy phân tích từ 'demanded' (yêu cầu mạnh mẽ). Khi một hành động được yêu cầu thực hiện, động từ trong mệnh đề 'that' phải ở dạng nguyên mẫu. Bạn hãy thử điều chỉnh động từ 'resigns' để nó không còn chia theo chủ ngữ 'the CEO'."
+  },
+  {
+    "topic": "Subjunctive Mood",
+    "level": "B2",
+    "student_input": "I propose that the meeting be postponed until next Friday.",
+    "correct_answer": "I propose that the meeting be postponed until next Friday.",
+    "explanation": "Câu này hoàn toàn chính xác. Bạn đã dùng 'be postponed' (dạng nguyên mẫu của to be) cho thể giả định. Thử thách: Nếu bạn thay 'propose' bằng 'think', liệu bạn có còn dùng 'be postponed' được không, hay phải dùng 'is postponed'?"
+  },
+  {
+    "topic": "Subjunctive Mood",
+    "level": "B2",
+    "student_input": "The company recommends that each candidate prepares a portfolio before the interview.",
+    "correct_answer": "The company recommends that each candidate prepare a portfolio before the interview.",
+    "explanation": "Hãy nhìn vào 'recommends that'. Đây là một lời khuyên. Đối với thể giả định, động từ 'prepare' theo sau chủ ngữ số ít 'each candidate' sẽ có dạng như thế nào? Bạn có cần thêm 's' vào không?"
+  },
+  {
+    "topic": "Subjunctive Mood",
+    "level": "B2",
+    "student_input": "The law requires that every citizen pays their taxes on time.",
+    "correct_answer": "The law requires that every citizen pay their taxes on time.",
+    "explanation": "Từ 'requires' (yêu cầu) dẫn dắt một mệnh đề giả định. Hãy nhớ lại quy tắc: trong thể giả định, động từ chính luôn ở dạng nguyên mẫu. Bạn hãy thử sửa 'pays' thành 'pay' và xem câu văn có trở nên trang trọng hơn không."
+  },
+  {
+    "topic": "Subjunctive Mood",
+    "level": "B2",
+    "student_input": "My lawyer suggested that I don't sign the contract until it is reviewed.",
+    "correct_answer": "My lawyer suggested that I not sign the contract until it is reviewed.",
+    "explanation": "Bạn đang dùng dạng phủ định của thể giả định. Thông thường chúng ta dùng 'don't' hoặc 'doesn't', nhưng trong Subjunctive Mood, để phủ định, chúng ta chỉ cần đặt từ 'not' ngay trước động từ nguyên mẫu. Bạn hãy thử bỏ 'do' trong 'don't sign' xem sao."
+  },
+  {
+    "topic": "Subjunctive Mood",
+    "level": "B2",
+    "student_input": "The teacher insisted that the students hands in their assignments by noon.",
+    "correct_answer": "The teacher insisted that the students hand in their assignments by noon.",
+    "explanation": "Hãy chú ý 'insisted that'. Mặc dù chủ ngữ 'the students' là số nhiều (nên 'hand' không có 's'), nhưng nếu chủ ngữ là 'the student' (số ít), bạn có thêm 's' vào không? Hãy nhớ quy tắc nguyên mẫu của thể giả định."
+  },
+  {
+    "topic": "Subjunctive Mood",
+    "level": "B2",
+    "student_input": "It is suggested that the government increases the budget for education.",
+    "correct_answer": "It is suggested that the government increase the budget for education.",
+    "explanation": "Cấu trúc 'It is suggested that...' dẫn dắt một lời đề nghị. Bạn hãy kiểm tra lại động từ 'increases'. Trong thể giả định, liệu động từ có được chia theo chủ ngữ 'the government' không?"
+  },
+  {
+    "topic": "Subjunctive Mood",
+    "level": "B2",
+    "student_input": "The judge ordered that the prisoner be release immediately.",
+    "correct_answer": "The judge ordered that the prisoner be released immediately.",
+    "explanation": "Bạn đã dùng đúng 'be' cho thể giả định. Tuy nhiên, tù nhân không tự 'release' (thả) mà là 'được thả' (bị động). Trong cấu trúc 'be + V', bạn cần dùng dạng động từ nào để thể hiện ý bị động?"
+  },
+  {
+    "topic": "Subjunctive Mood",
+    "level": "B2",
+    "student_input": "The treaty proposes that each nation reduces its carbon emissions.",
+    "correct_answer": "The treaty proposes that each nation reduce its carbon emissions.",
+    "explanation": "Hãy phân tích động từ 'proposes'. Đây là một đề xuất chính thức. Động từ 'reduces' đi sau chủ ngữ 'each nation' cần được đưa về dạng nào để phù hợp với quy tắc của Subjunctive Mood?"
+  },
+  {
+    "topic": "Subjunctive Mood",
+    "level": "B2",
+    "student_input": "The coach demanded that he practices harder if he wants to be a starter.",
+    "correct_answer": "The coach demanded that he practice harder if he wants to be a starter.",
+    "explanation": "Hãy nhìn vào 'demanded that he practices'. Khi một huấn luyện viên yêu cầu điều gì đó, chúng ta dùng thể giả định. Bạn hãy thử bỏ 's' ở động từ 'practices' và xem câu văn có đúng chuẩn ngữ pháp nâng cao không."
+  },
+  {
+    "topic": "Subjunctive Mood",
+    "level": "B2",
+    "student_input": "The organization urges that the government adopts a more sustainable energy policy.",
+    "correct_answer": "The organization urges that the government adopt a more sustainable energy policy.",
+    "explanation": "Hãy nhìn vào động từ 'urges' (thúc giục). Đây là một lời kêu gọi hành động. Trong thể giả định, động từ ở mệnh đề 'that' có chia theo chủ ngữ 'the government' không, hay phải dùng dạng nguyên mẫu?"
+  },
+  {
+    "topic": "Subjunctive Mood",
+    "level": "B2",
+    "student_input": "The client demanded that the contractor finishes the project by the end of the month.",
+    "correct_answer": "The client demanded that the contractor finish the project by the end of the month.",
+    "explanation": "Bạn đang dùng 'demanded that' để thể hiện một yêu cầu bắt buộc. Hãy nhớ lại quy tắc của Subjunctive Mood: khi một hành động được yêu cầu, động từ chính phải ở dạng nào cho tất cả các ngôi?"
+  },
+  {
+    "topic": "Subjunctive Mood",
+    "level": "B2",
+    "student_input": "I suggest that the old building is demolished to make room for a park.",
+    "correct_answer": "I suggest that the old building be demolished to make room for a park.",
+    "explanation": "Bạn đang đề xuất một hành động ở thể bị động (tòa nhà được phá dỡ). Trong thể giả định, đối với động từ 'to be', chúng ta dùng 'is/am/are' hay dùng dạng nguyên mẫu 'be'?"
+  },
+  {
+    "topic": "Subjunctive Mood",
+    "level": "B2",
+    "student_input": "The guidelines recommend that a passenger doesn't carry liquids over 100ml.",
+    "correct_answer": "The guidelines recommend that a passenger not carry liquids over 100ml.",
+    "explanation": "Bạn đang dùng dạng phủ định của thể giả định. Hãy nhớ lại: để phủ định một động từ trong mệnh đề giả định, chúng ta dùng 'don't/doesn't' hay chỉ đơn giản là đặt 'not' trước động từ nguyên mẫu?"
+  },
+  {
+    "topic": "Subjunctive Mood",
+    "level": "B2",
+    "student_input": "The supervisor proposed that each employee submits a weekly progress report.",
+    "correct_answer": "The supervisor proposed that each employee submit a weekly progress report.",
+    "explanation": "Hãy chú ý cụm 'proposed that'. Khi đưa ra một đề xuất chính thức, động từ 'submits' đi sau chủ ngữ số ít 'each employee' cần được chuyển về dạng nào để đúng với thể giả định?"
+  },
+  {
+    "topic": "Subjunctive Mood",
+    "level": "B2",
+    "student_input": "I insist that he is innocent of all charges.",
+    "correct_answer": "I insist that he is innocent of all charges.",
+    "explanation": "Câu này thực chất là ĐÚNG. Hãy phân tích: ở đây 'insist' mang nghĩa là 'khẳng định một sự thật' (fact), chứ không phải 'yêu cầu' (request). Khi 'insist' dùng để khẳng định sự thật, chúng ta dùng thể giả định hay dùng thì hiện tại bình thường (indicative)?"
+  },
+  {
+    "topic": "Subjunctive Mood",
+    "level": "B2",
+    "student_input": "I insist that he be released from prison immediately.",
+    "correct_answer": "I insist that he be released from prison immediately.",
+    "explanation": "Câu này cũng ĐÚNG. Hãy so sánh với câu trước. Ở đây 'insist' mang nghĩa là một 'yêu cầu' (demand). Vì vậy, bạn đã dùng 'be released' thay vì 'is released'. Bạn có thấy sự khác biệt về ý nghĩa và cách chia động từ không?"
+  },
+  {
+    "topic": "Subjunctive Mood",
+    "level": "B2",
+    "student_input": "The captain commanded that the sailors cleans the deck immediately.",
+    "correct_answer": "The captain commanded that the sailors clean the deck immediately.",
+    "explanation": "Động từ 'commanded' (ra lệnh) kích hoạt thể giả định. Mặc dù 'the sailors' là số nhiều, nhưng hãy nhớ quy tắc chung của Subjunctive Mood: động từ luôn ở dạng nào, bất kể chủ ngữ là gì?"
+  },
+  {
+    "topic": "Subjunctive Mood",
+    "level": "B2",
+    "student_input": "The decree mandates that every citizen carries an ID card at all times.",
+    "correct_answer": "The decree mandates that every citizen carry an ID card at all times.",
+    "explanation": "Hãy nhìn vào 'mandates' (bắt buộc). Đây là một yêu cầu pháp lý. Bạn hãy thử bỏ 's' ở động từ 'carries' để biến nó thành dạng nguyên mẫu của thể giả định xem sao."
+  },
+  {
+    "topic": "Subjunctive Mood",
+    "level": "B2",
+    "student_input": "It is recommended that the patient doesn't engage in strenuous exercise.",
+    "correct_answer": "It is recommended that the patient not engage in strenuous exercise.",
+    "explanation": "Bạn đang dùng thể phủ định sau 'recommended that'. Trong thể giả định, chúng ta không mượn trợ động từ 'do/does'. Bạn hãy thử đặt 'not' trực tiếp trước động từ 'engage' xem sao."
+  },
+  {
+    "topic": "Subjunctive Mood",
+    "level": "B2",
+    "student_input": "The board requested that the budget is reviewed by an independent auditor.",
+    "correct_answer": "The board requested that the budget be reviewed by an independent auditor.",
+    "explanation": "Bạn đang dùng thể bị động cho ngân sách (được xem xét). Trong thể giả định, thay vì dùng 'is reviewed', bạn nên dùng dạng nguyên mẫu nào của động từ 'to be'?"
+  },
+  {
+    "topic": "Subjunctive Mood",
+    "level": "B2",
+    "student_input": "My parents suggest that my brother studies harder for his finals.",
+    "correct_answer": "My parents suggest that my brother study harder for his finals.",
+    "explanation": "Hãy nhìn vào 'suggest that'. Đây là một lời khuyên. Bạn hãy kiểm tra lại động từ 'studies'. Với thể giả định, bạn có nên chia động từ theo chủ ngữ 'my brother' không?"
+  },
+  {
+    "topic": "Subjunctive Mood",
+    "level": "B2",
+    "student_input": "The director demanded that the actress be’s more emotional in this scene.",
+    "correct_answer": "The director demanded that the actress be more emotional in this scene.",
+    "explanation": "Bạn đã dùng 'be' cho thể giả định, nhưng lại thêm 's' vào sau đó ('be's'). Hãy nhớ rằng 'be' là dạng nguyên mẫu duy nhất cho tất cả các ngôi trong Subjunctive Mood. Bạn hãy bỏ 's' đi nhé."
+  },
+  {
+    "topic": "Subjunctive Mood",
+    "level": "B2",
+    "student_input": "The treaty proposes that the border be’s monitored by both nations.",
+    "correct_answer": "The treaty proposes that the border be monitored by both nations.",
+    "explanation": "Tương tự như câu trước, bạn đang dùng 'be' cho thể giả định nhưng lại chia nó. Hãy nhớ: 'be' trong Subjunctive Mood không bao giờ thay đổi hình thái cho dù chủ ngữ là số ít hay số nhiều."
+  },
+  {
+    "topic": "Subjunctive Mood",
+    "level": "B2",
+    "student_input": "I suggest that the team not spends too much time on the introduction.",
+    "correct_answer": "I suggest that the team not spend too much time on the introduction.",
+    "explanation": "Hãy nhìn vào 'not spends'. Bạn đã dùng 'not' đúng cho thể giả định, nhưng động từ theo sau 'not' phải ở dạng nào? Bạn hãy đưa 'spends' về dạng nguyên mẫu."
+  },
+  {
+    "topic": "Subjunctive Mood",
+    "level": "B2",
+    "student_input": "The law requires that a driver wears a seatbelt at all times.",
+    "correct_answer": "The law requires that a driver wear a seatbelt at all times.",
+    "explanation": "Hãy nhìn vào 'requires that'. Đây là một yêu cầu pháp lý. Bạn hãy thử bỏ 's' ở động từ 'wears' để tuân thủ quy tắc dạng nguyên mẫu của thể giả định."
+  },
+  {
+    "topic": "Subjunctive Mood",
+    "level": "B2",
+    "student_input": "The general commanded that the troops retreats to the base.",
+    "correct_answer": "The general commanded that the troops retreat to the base.",
+    "explanation": "Hãy chú ý động từ 'commanded'. Trong mệnh đề 'that', động từ 'retreats' đang được chia theo chủ ngữ. Bạn hãy chuyển nó về dạng nguyên mẫu để đúng với thể giả định."
+  },
+  {
+    "topic": "Subjunctive Mood",
+    "level": "B2",
+    "student_input": "I propose that the current system is replaced by a more efficient one.",
+    "correct_answer": "I propose that the current system be replaced by a more efficient one.",
+    "explanation": "Bạn đang đề xuất một sự thay đổi ở thể bị động. Thay vì dùng 'is replaced' (hiện tại đơn), bạn hãy dùng dạng nguyên mẫu 'be' để thể hiện đây là một đề xuất (subjunctive)."
+  },
+  {
+    "topic": "Subjunctive Mood",
+    "level": "B2",
+    "student_input": "The physician recommended that the patient not takes any medication for a week.",
+    "correct_answer": "The physician recommended that the patient not take any medication for a week.",
+    "explanation": "Hãy nhìn vào 'not takes'. Bạn đã dùng 'not' đúng cho thể giả định, nhưng động từ chính phải ở dạng nguyên mẫu. Bạn hãy bỏ 's' ở từ 'takes' xem sao."
+  },
+  {
+    "topic": "Subjunctive Mood",
+    "level": "B2",
+    "student_input": "The manager insisted that the report is sent to him by 5 PM.",
+    "correct_answer": "The manager insisted that the report be sent to him by 5 PM.",
+    "explanation": "Hãy phân tích: 'insisted that' ở đây là một yêu cầu bắt buộc. Bạn đang dùng 'is sent' (hiện tại đơn). Để diễn đạt yêu cầu này một cách trang trọng, bạn nên dùng dạng nguyên mẫu 'be' thay vì 'is'."
+  },
+  {
+    "topic": "Subjunctive Mood",
+    "level": "B2",
+    "student_input": "I suggest that he not’s be late for the interview.",
+    "correct_answer": "I suggest that he not be late for the interview.",
+    "explanation": "Bạn đang cố gắng phủ định động từ 'be' trong thể giả định. Cấu trúc đơn giản nhất là: 'not' + 'be'. Bạn hãy thử bỏ 's' và dấu phẩy trong 'not's' để câu trở nên chính xác."
+  },
+  {
+    "topic": "Subjunctive Mood",
+    "level": "B2",
+    "student_input": "The company mandates that every employee wears a badge in the office.",
+    "correct_answer": "The company mandates that every employee wear a badge in the office.",
+    "explanation": "Hãy nhìn vào 'mandates that'. Đây là một quy định bắt buộc. Bạn hãy kiểm tra lại động từ 'wears' và chuyển nó về dạng nguyên mẫu."
+  },
+  {
+    "topic": "Subjunctive Mood",
+    "level": "B2",
+    "student_input": "The professor recommended that the students writes a longer essay.",
+    "correct_answer": "The professor recommended that the students write a longer essay.",
+    "explanation": "Trong mệnh đề 'that' sau 'recommended', động từ 'writes' đang bị chia sai. Cho dù chủ ngữ là số ít hay số nhiều, động từ trong thể giả định luôn ở dạng nào?"
+  },
+  {
+    "topic": "Subjunctive Mood",
+    "level": "B2",
+    "student_input": "It is requested that the music be’s turned down.",
+    "correct_answer": "It is requested that the music be turned down.",
+    "explanation": "Bạn lại thêm 's' vào sau 'be'. Hãy nhớ: trong Subjunctive Mood, 'be' là bất biến cho mọi ngôi. Bạn hãy bỏ 's' đi."
+  },
+  {
+    "topic": "Subjunctive Mood",
+    "level": "B2",
+    "student_input": "The court ordered that the witness not tells any lies during the trial.",
+    "correct_answer": "The court ordered that the witness not tell any lies during the trial.",
+    "explanation": "Hãy nhìn vào 'not tells'. Bạn đã dùng 'not' đúng, nhưng động từ 'tell' phải ở dạng nguyên mẫu. Bạn hãy bỏ 's' ở từ 'tells' để hoàn tất câu."
+  },
+  {
+    "topic": "Subjunctive Mood",
+    "level": "B2",
+    "student_input": "It is essential that he arrives at the airport two hours before the flight.",
+    "correct_answer": "It is essential that he arrive at the airport two hours before the flight.",
+    "explanation": "Hãy nhìn vào cụm 'It is essential that'. Đây là cấu trúc diễn tả một yêu cầu cấp thiết. Trong thể giả định (subjunctive), động từ ở mệnh đề 'that' có chia theo chủ ngữ số ít 'he' không, hay phải dùng dạng nguyên mẫu cho mọi ngôi?"
+  },
+  {
+    "topic": "Subjunctive Mood",
+    "level": "B2",
+    "student_input": "It is imperative that the document is signed by the director today.",
+    "correct_answer": "It is imperative that the document be signed by the director today.",
+    "explanation": "Bạn đang dùng 'imperative' để nhấn mạnh sự bắt buộc. Hãy chú ý vế 'the document is signed'. Trong thể giả định, khi muốn dùng thể bị động, chúng ta dùng 'is/am/are + V3' hay dùng dạng nguyên mẫu 'be + V3'?"
+  },
+  {
+    "topic": "Subjunctive Mood",
+    "level": "B2",
+    "student_input": "It is crucial that she doesn't miss the deadline for the scholarship application.",
+    "correct_answer": "It is crucial that she not miss the deadline for the scholarship application.",
+    "explanation": "Bạn đang dùng dạng phủ định sau 'It is crucial that'. Hãy nhớ lại quy tắc đặc biệt của thể giả định: Để phủ định, chúng ta mượn trợ động từ 'doesn't' hay chỉ cần đặt 'not' trực tiếp trước động từ nguyên mẫu?"
+  },
+  {
+    "topic": "Subjunctive Mood",
+    "level": "B2",
+    "student_input": "It is vital that every member of the team contributes to the project.",
+    "correct_answer": "It is vital that every member of the team contribute to the project.",
+    "explanation": "Hãy chú ý chủ ngữ 'every member of the team'. Đây là chủ ngữ số ít. Tuy nhiên, vì câu này bắt đầu bằng 'It is vital that' (một yêu cầu quan trọng), bạn có nên thêm 's' vào động từ 'contribute' không?"
+  },
+  {
+    "topic": "Subjunctive Mood",
+    "level": "B2",
+    "student_input": "It is necessary that the candidate has a valid passport to apply for the visa.",
+    "correct_answer": "It is necessary that the candidate have a valid passport to apply for the visa.",
+    "explanation": "Hãy nhìn vào 'It is necessary that'. Đây là một điều kiện bắt buộc. Trong thể giả định, động từ 'has' (chia theo chủ ngữ số ít) nên được đưa về dạng nguyên mẫu nào?"
+  },
+  {
+    "topic": "Subjunctive Mood",
+    "level": "B2",
+    "student_input": "It is urgent that the leak be’s fixed before the basement floods.",
+    "correct_answer": "It is urgent that the leak be fixed before the basement floods.",
+    "explanation": "Bạn đã dùng 'be' cho thể giả định, nhưng lại thêm 's' vào sau đó ('be's'). Hãy nhớ rằng 'be' là dạng nguyên mẫu bất biến cho mọi ngôi trong Subjunctive Mood. Bạn hãy bỏ 's' đi nhé."
+  },
+  {
+    "topic": "Subjunctive Mood",
+    "level": "B2",
+    "student_input": "It is advisable that a student takes a gap year to gain work experience.",
+    "correct_answer": "It is advisable that a student take a gap year to gain work experience.",
+    "explanation": "Cụm 'It is advisable' đưa ra một lời khuyên trang trọng. Trong mệnh đề 'that' theo sau, động từ 'takes' đang được chia theo chủ ngữ 'a student'. Bạn hãy chuyển nó về dạng nguyên mẫu để đúng với thể giả định."
+  },
+  {
+    "topic": "Subjunctive Mood",
+    "level": "B2",
+    "student_input": "It is desirable that the new office is located near the city center.",
+    "correct_answer": "It is desirable that the new office be located near the city center.",
+    "explanation": "Bạn đang diễn đạt một mong muốn (desirable). Hãy nhìn vế 'the new office is located'. Để biến câu này thành thể giả định, bạn nên thay 'is' bằng dạng nguyên mẫu nào của động từ 'to be'?"
+  },
+  {
+    "topic": "Subjunctive Mood",
+    "level": "B2",
+    "student_input": "It is essential that the truth not is hidden from the public.",
+    "correct_answer": "It is essential that the truth not be hidden from the public.",
+    "explanation": "Bạn đang dùng thể phủ định và bị động: 'Sự thật không được bị che giấu'. Trong thể giả định, cấu trúc phủ định là 'not + V-bare'. Vậy bạn nên dùng 'not is' hay 'not be'?"
+  },
+  {
+    "topic": "Subjunctive Mood",
+    "level": "B2",
+    "student_input": "It is imperative that he stop smoking for his health.",
+    "correct_answer": "It is imperative that he stop smoking for his health.",
+    "explanation": "Câu này hoàn toàn chính xác. Bạn đã dùng 'stop' (dạng nguyên mẫu) thay vì 'stops'. Thử thách: Nếu tôi thay 'imperative' bằng 'likely' (có khả năng), bạn có còn dùng 'stop' không, hay phải dùng 'stops'?"
+  },
+  {
+    "topic": "Subjunctive Mood",
+    "level": "B2",
+    "student_input": "It is crucial that the software is updated to the latest version.",
+    "correct_answer": "It is crucial that the software be updated to the latest version.",
+    "explanation": "Hãy phân tích: 'phần mềm được cập nhật' là một yêu cầu quan trọng. Trong thể giả định, đối với câu bị động, chúng ta dùng 'is updated' hay 'be updated'?"
+  },
+  {
+    "topic": "Subjunctive Mood",
+    "level": "B2",
+    "student_input": "It is vital that she doesn't forget to bring the contract.",
+    "correct_answer": "It is vital that she not forget to bring the contract.",
+    "explanation": "Hãy chú ý cụm 'she doesn't forget'. Trong thể giả định, chúng ta không mượn trợ động từ 'do/does' để phủ định. Bạn hãy thử đặt 'not' trực tiếp trước động từ 'forget' xem sao."
+  },
+  {
+    "topic": "Subjunctive Mood",
+    "level": "B2",
+    "student_input": "It is necessary that he is told the truth immediately.",
+    "correct_answer": "It is necessary that he be told the truth immediately.",
+    "explanation": "Bạn đang dùng thể bị động 'he is told'. Vì đây là một yêu cầu cần thiết (necessary), bạn hãy chuyển 'is' sang dạng nguyên mẫu để phù hợp với Subjunctive Mood."
+  },
+  {
+    "topic": "Subjunctive Mood",
+    "level": "B2",
+    "student_input": "It is urgent that every employee submits the form by noon.",
+    "correct_answer": "It is urgent that every employee submit the form by noon.",
+    "explanation": "Hãy nhìn vào 'every employee submits'. Đây là một yêu cầu khẩn cấp. Trong thể giả định, động từ có chia theo chủ ngữ số ít không? Bạn hãy thử bỏ 's' ở động từ 'submits'."
+  },
+  {
+    "topic": "Subjunctive Mood",
+    "level": "B2",
+    "student_input": "It is advisable that the patient not takes any medicine before the surgery.",
+    "correct_answer": "It is advisable that the patient not take any medicine before the surgery.",
+    "explanation": "Bạn dùng 'not' đúng cho thể giả định, nhưng hãy nhìn động từ 'takes'. Sau 'not' trong Subjunctive Mood, động từ phải ở dạng nào?"
+  },
+  {
+    "topic": "Subjunctive Mood",
+    "level": "B2",
+    "student_input": "It is essential that the meeting be’s postponed.",
+    "correct_answer": "It is essential that the meeting be postponed.",
+    "explanation": "Bạn lại thêm 's' vào sau 'be'. Hãy nhớ rằng 'be' là dạng nguyên mẫu duy nhất cho mọi ngôi trong thể giả định. Hãy bỏ 's' đi nhé."
+  },
+  {
+    "topic": "Subjunctive Mood",
+    "level": "B2",
+    "student_input": "It is imperative that the suspect is questioned by the police.",
+    "correct_answer": "It is imperative that the suspect be questioned by the police.",
+    "explanation": "Đây là một yêu cầu bắt buộc (imperative). Hãy nhìn vế 'the suspect is questioned'. Bạn hãy thay 'is' bằng dạng nguyên mẫu của 'to be' để đúng với thể giả định."
+  },
+  {
+    "topic": "Subjunctive Mood",
+    "level": "B2",
+    "student_input": "It is crucial that he doesn't arrive late for the interview.",
+    "correct_answer": "It is crucial that he not arrive late for the interview.",
+    "explanation": "Hãy nhớ lại: trong thể giả định, chúng ta không dùng 'don't/doesn't' để phủ định. Bạn hãy thử dùng 'not + V-bare' cho cụm 'doesn't arrive'."
+  },
+  {
+    "topic": "Subjunctive Mood",
+    "level": "B2",
+    "student_input": "It is vital that the company’s secrets is not leaked to the press.",
+    "correct_answer": "It is vital that the company’s secrets not be leaked to the press.",
+    "explanation": "Câu này có hai vấn đề: 1. Dùng 'is' thay vì 'be' cho thể giả định. 2. Vị trí của 'not'. Cấu trúc đúng là 'not + be + V3'. Bạn hãy sắp xếp lại cụm 'is not leaked' xem sao."
+  },
+  {
+    "topic": "Subjunctive Mood",
+    "level": "B2",
+    "student_input": "It is necessary that she be more professional in her emails.",
+    "correct_answer": "It is necessary that she be more professional in her emails.",
+    "explanation": "Câu này chính xác. Bạn đã dùng 'be' làm dạng nguyên mẫu cho chủ ngữ 'she'. Thử thách: Nếu tôi thay 'necessary' bằng 'important', câu này còn đúng không? Nếu tôi thay bằng 'clear' (rõ ràng), bạn sẽ dùng 'be' hay 'is'?"
+  },
+  {
+    "topic": "Subjunctive Mood",
+    "level": "B2",
+    "student_input": "It is urgent that the rescue team reaches the victims as soon as possible.",
+    "correct_answer": "It is urgent that the rescue team reach the victims as soon as possible.",
+    "explanation": "Hãy nhìn vào 'the rescue team reaches'. Vì đây là tình huống khẩn cấp (urgent), bạn hãy đưa động từ 'reaches' về dạng nguyên mẫu."
+  },
+  {
+    "topic": "Subjunctive Mood",
+    "level": "B2",
+    "student_input": "It is advisable that he not be late for the first day of work.",
+    "correct_answer": "It is advisable that he not be late for the first day of work.",
+    "explanation": "Câu này hoàn toàn chính xác. Bạn đã dùng 'not be' cho thể giả định. Thử thách: Viết lại câu này bằng cách dùng 'suggest' thay cho 'It is advisable that'."
+  },
+  {
+    "topic": "Subjunctive Mood",
+    "level": "B2",
+    "student_input": "It is desirable that the new project starts next month.",
+    "correct_answer": "It is desirable that the new project start next month.",
+    "explanation": "Hãy chú ý 'It is desirable'. Đây là một mong muốn. Động từ 'starts' đi sau chủ ngữ số ít 'the new project' cần được chuyển về dạng nào để đúng với Subjunctive Mood?"
+  },
+  {
+    "topic": "Subjunctive Mood",
+    "level": "B2",
+    "student_input": "It is essential that the data is checked for any discrepancies.",
+    "correct_answer": "It is essential that the data be checked for any discrepancies.",
+    "explanation": "Hãy nhìn vế 'the data is checked'. Đây là một yêu cầu quan trọng. Bạn hãy thay 'is' bằng dạng nguyên mẫu 'be' để tạo thành câu bị động trong thể giả định."
+  },
+  {
+    "topic": "Subjunctive Mood",
+    "level": "B2",
+    "student_input": "It is imperative that she not spends too much money on the trip.",
+    "correct_answer": "It is imperative that she not spend too much money on the trip.",
+    "explanation": "Bạn dùng 'not' đúng, nhưng hãy nhìn động từ 'spends'. Trong thể giả định, động từ sau 'not' phải ở dạng nào?"
+  },
+  {
+    "topic": "Subjunctive Mood",
+    "level": "B2",
+    "student_input": "It is crucial that a professional be's consulted before making a decision.",
+    "correct_answer": "It is crucial that a professional be consulted before making a decision.",
+    "explanation": "Bạn lại thêm 's' vào sau 'be'. Hãy nhớ rằng 'be' trong Subjunctive Mood là bất biến. Bạn hãy bỏ 's' đi nhé."
+  },
+  {
+    "topic": "Subjunctive Mood",
+    "level": "B2",
+    "student_input": "It is vital that the government provide more support for small businesses.",
+    "correct_answer": "It is vital that the government provide more support for small businesses.",
+    "explanation": "Câu này chính xác. Bạn đã dùng 'provide' thay vì 'provides'. Thử thách: Nếu bạn dùng 'the government' như một tập hợp nhiều cá nhân (số nhiều), câu này có thay đổi gì không? Và nếu dùng 'is' thay cho 'vital', câu này có còn là thể giả định không?"
+  },
+  {
+    "topic": "Subjunctive Mood",
+    "level": "B2",
+    "student_input": "It is necessary that the patient stays in bed for a few days.",
+    "correct_answer": "It is necessary that the patient stay in bed for a few days.",
+    "explanation": "Hãy nhìn vào 'the patient stays'. Vì đây là một yêu cầu cần thiết, bạn hãy đưa động từ 'stays' về dạng nguyên mẫu."
+  },
+  {
+    "topic": "Subjunctive Mood",
+    "level": "B2",
+    "student_input": "It is urgent that the evidence not be destroyed.",
+    "correct_answer": "It is urgent that the evidence not be destroyed.",
+    "explanation": "Câu này chính xác. Bạn đã kết hợp thành công phủ định và bị động trong thể giả định ('not be destroyed'). Thử thách: Chuyển câu này sang dùng động từ 'demand' (ví dụ: The lawyer demanded that...)."
+  },
+  {
+    "topic": "Subjunctive Mood",
+    "level": "B2",
+    "student_input": "It is advisable that he’s be more careful with his spending.",
+    "correct_answer": "It is advisable that he be more careful with his spending.",
+    "explanation": "Hãy nhìn vào 'he's be'. Bạn đang nhầm lẫn giữa 'he is' và 'he be'. Trong thể giả định, chúng ta dùng 'be' làm động từ chính cho mọi ngôi. Bạn hãy bỏ 's' ở 'he's' đi xem sao."
+  },
+  {
+    "topic": "Subjunctive Mood",
+    "level": "B2",
+    "student_input": "God saves the King!",
+    "correct_answer": "God save the King!",
+    "explanation": "Bạn đang dùng một cụm từ truyền thống để bày tỏ một lời chúc hoặc lời cầu nguyện. Trong những cụm từ cố định mang tính nghi lễ như thế này, chúng ta dùng thì hiện tại đơn (saves) hay dùng thể giả định (save) để diễn tả một mong ước?"
+  },
+  {
+    "topic": "Subjunctive Mood",
+    "level": "B2",
+    "student_input": "Far is it from me to criticize your decision, but I think you should reconsider.",
+    "correct_answer": "Far be it from me to criticize your decision, but I think you should reconsider.",
+    "explanation": "Hãy nhìn vào cụm 'Far is it from me'. Đây là một thành ngữ trang trọng dùng để nói 'Tôi không dám/không muốn...'. Trong thành ngữ này, chúng ta dùng động từ 'is' để mô tả sự thật hay dùng 'be' để thể hiện một trạng thái giả định/mong muốn?"
+  },
+  {
+    "topic": "Subjunctive Mood",
+    "level": "B2",
+    "student_input": "Is that as it may, we still need to find a more sustainable solution.",
+    "correct_answer": "Be that as it may, we still need to find a more sustainable solution.",
+    "explanation": "Cụm từ bạn đang dùng có nghĩa là 'Dù cho điều đó có là như vậy'. Đây là một cụm từ cố định (fixed expression). Bạn hãy thử thay 'Is' bằng dạng nguyên mẫu của động từ 'to be' để câu văn đúng với phong cách trang trọng của thể giả định xem sao."
+  },
+  {
+    "topic": "Subjunctive Mood",
+    "level": "B2",
+    "student_input": "Heaven forbids that such a tragedy should happen again.",
+    "correct_answer": "Heaven forbid that such a tragedy should happen again.",
+    "explanation": "Hãy chú ý cụm 'Heaven forbids'. Đây là một lời cầu khẩn (a prayer). Trong các cụm từ cố định mang tính tâm linh hoặc cầu nguyện, động từ có chia theo chủ ngữ 'Heaven' hay dùng dạng nguyên mẫu (base form)?"
+  },
+  {
+    "topic": "Subjunctive Mood",
+    "level": "B2",
+    "student_input": "So is it!",
+    "correct_answer": "So be it!",
+    "explanation": "Bạn đang dùng cụm từ này để chấp nhận một tình huống không mong muốn (có nghĩa là 'Cứ để nó như vậy đi'). Đây là một cụm từ cố định trong thể giả định. Bạn hãy thử thay 'is' bằng dạng nguyên mẫu 'be' xem câu văn có tự nhiên hơn không?"
+  },
+  {
+    "topic": "Subjunctive Mood",
+    "level": "B2",
+    "student_input": "Long lives the Queen!",
+    "correct_answer": "Long live the Queen!",
+    "explanation": "Tương tự như 'God save the King', đây là một lời chúc tụng. Trong những câu chúc mang tính nghi lễ, động từ 'live' có nên thêm 's' cho chủ ngữ số ít không, hay phải giữ ở dạng nguyên mẫu?"
+  },
+  {
+    "topic": "Subjunctive Mood",
+    "level": "B2",
+    "student_input": "I wish I was taller so I could play basketball professionally.",
+    "correct_answer": "I wish I were taller so I could play basketball professionally.",
+    "explanation": "Bạn đang diễn tả một điều ước trái với thực tế ở hiện tại. Trong văn viết chuẩn mực (formal English), khi dùng 'I wish', chúng ta dùng 'was' hay dùng 'were' cho tất cả các ngôi để nhấn mạnh tính giả định?"
+  },
+  {
+    "topic": "Subjunctive Mood",
+    "level": "B2",
+    "student_input": "He talks as if he is the owner of the company.",
+    "correct_answer": "He talks as if he were the owner of the company.",
+    "explanation": "Hãy phân tích: Anh ấy có thực sự là chủ công ty không? Không, đây là một sự so sánh giả định. Khi dùng 'as if' hoặc 'as though' để nói về một điều không có thật, bạn nên dùng 'is' hay 'were' để thể hiện rõ sắc thái giả định?"
+  },
+  {
+    "topic": "Subjunctive Mood",
+    "level": "B2",
+    "student_input": "If I was you, I would apologize immediately.",
+    "correct_answer": "If I were you, I would apologize immediately.",
+    "explanation": "Đây là câu điều kiện loại 2. Mặc dù trong văn nói thân mật người ta đôi khi dùng 'was', nhưng trong chuẩn ngữ pháp B2, để nhấn mạnh việc 'tôi không thể là bạn' (giả định), bạn nên dùng từ nào thay cho 'was'?"
+  },
+  {
+    "topic": "Subjunctive Mood",
+    "level": "B2",
+    "student_input": "Suppose he is a spy, what would we do?",
+    "correct_answer": "Suppose he were a spy, what would we do?",
+    "explanation": "Từ 'Suppose' ở đây dùng để đưa ra một giả thuyết không có thật. Để đồng nhất với vế sau 'would we do' (loại 2), vế giả định nên dùng 'is' hay 'were' để thể hiện đúng tính chất không thực tế?"
+  },
+  {
+    "topic": "Subjunctive Mood",
+    "level": "B2",
+    "student_input": "Far is it from me to tell you how to raise your children.",
+    "correct_answer": "Far be it from me to tell you how to raise your children.",
+    "explanation": "Hãy nhìn lại cụm 'Far is it from me'. Như tôi đã nhắc ở mẫu trước, đây là một thành ngữ cố định dùng để thể hiện sự khiêm tốn/lịch sự. Bạn hãy thay 'is' bằng dạng nguyên mẫu của động từ 'to be' xem sao."
+  },
+  {
+    "topic": "Subjunctive Mood",
+    "level": "B2",
+    "student_input": "Be that as it may, the facts remain unchanged.",
+    "correct_answer": "Be that as it may, the facts remain unchanged.",
+    "explanation": "Câu này hoàn toàn chính xác. Bạn đã dùng đúng cụm từ cố định 'Be that as it may'. Thử thách: Bạn có thể thay cụm này bằng một từ nối khác (ví dụ: Nevertheless hoặc Regardless) mà vẫn giữ nguyên ý nghĩa không?"
+  },
+  {
+    "topic": "Subjunctive Mood",
+    "level": "B2",
+    "student_input": "I wish the weather was better today.",
+    "correct_answer": "I wish the weather were better today.",
+    "explanation": "Bạn đang ước về một điều trái thực tế ở hiện tại. Để câu văn trở nên trang trọng và đúng chuẩn ngữ pháp giả định, bạn nên dùng 'was' hay 'were' cho chủ ngữ 'the weather'?"
+  },
+  {
+    "topic": "Subjunctive Mood",
+    "level": "B2",
+    "student_input": "She behaves as though she was the boss around here.",
+    "correct_answer": "She behaves as though she were the boss around here.",
+    "explanation": "Hãy nhìn vào 'as though she was'. Việc cô ấy là sếp là sự thật hay là một giả định? Khi diễn tả một sự việc trái ngược với thực tế, bạn hãy thay 'was' bằng từ nào để nhấn mạnh thể giả định?"
+  },
+  {
+    "topic": "Subjunctive Mood",
+    "level": "B2",
+    "student_input": "God blesses you for your kindness!",
+    "correct_answer": "God bless you for your kindness!",
+    "explanation": "Đây là một lời chúc. Trong các câu chúc hoặc cầu nguyện (optative mood), động từ không chia theo chủ ngữ. Bạn hãy thử bỏ 'es' ở động từ 'blesses' xem câu văn có tự nhiên hơn không?"
+  },
+  {
+    "topic": "Subjunctive Mood",
+    "level": "B2",
+    "student_input": "If he was more flexible, we could have reached an agreement.",
+    "correct_answer": "If he were more flexible, we could have reached an agreement.",
+    "explanation": "Bạn đang giả định một đặc điểm tính cách trái ngược với thực tế. Trong câu điều kiện loại 2, để nhấn mạnh tính giả định, bạn nên dùng 'was' hay 'were' cho chủ ngữ 'he'?"
+  },
+  {
+    "topic": "Subjunctive Mood",
+    "level": "B2",
+    "student_input": "So is it, we must accept the consequences.",
+    "correct_answer": "So be it, we must accept the consequences.",
+    "explanation": "Hãy xem xét cụm 'So is it'. Như đã thảo luận, đây là một cụm từ cố định mang nghĩa chấp nhận số phận. Bạn hãy thử thay 'is' bằng 'be' để biến nó thành một câu giả định đúng chuẩn."
+  },
+  {
+    "topic": "Subjunctive Mood",
+    "level": "B2",
+    "student_input": "I wish I was able to help you with your research.",
+    "correct_answer": "I wish I were able to help you with your research.",
+    "explanation": "Bạn đang ước về một khả năng mà bạn không có ở hiện tại. Trong văn viết chuẩn mực, hãy thay 'was' bằng từ nào để thể hiện đúng thể giả định?"
+  },
+  {
+    "topic": "Subjunctive Mood",
+    "level": "B2",
+    "student_input": "He acts as if he were a king, but he is just an employee.",
+    "correct_answer": "He acts as if he were a king, but he is just an employee.",
+    "explanation": "Câu này hoàn toàn chính xác. Bạn đã dùng 'were' để chỉ một trạng thái giả định. Thử thách: Nếu bạn thay 'as if' bằng 'because', bạn sẽ chia động từ 'were' như thế nào cho đúng với sự thật?"
+  },
+  {
+    "topic": "Subjunctive Mood",
+    "level": "B2",
+    "student_input": "Heaven forbids that the war should break out again.",
+    "correct_answer": "Heaven forbid that the war should break out again.",
+    "explanation": "Một lần nữa, hãy chú ý cụm 'Heaven forbids'. Đây là lời cầu nguyện. Hãy nhớ lại quy tắc: trong các câu cầu nguyện, động từ có chia theo chủ ngữ không? Bạn hãy bỏ 's' ở từ 'forbids' xem sao."
+  },
+  {
+    "topic": "Subjunctive Mood",
+    "level": "B2",
+    "student_input": "Far is it from me to judge your lifestyle, but I disagree with some of your choices.",
+    "correct_answer": "Far be it from me to judge your lifestyle, but I disagree with some of your choices.",
+    "explanation": "Hãy nhớ lại cụm từ cố định 'Far be it from me'. Bạn đang dùng 'is', nhưng đây là một thành ngữ dùng thể giả định. Bạn hãy thay 'is' bằng 'be' để câu văn đúng phong cách B2."
+  },
+  {
+    "topic": "Subjunctive Mood",
+    "level": "B2",
+    "student_input": "Long lives the memory of our ancestors!",
+    "correct_answer": "Long live the memory of our ancestors!",
+    "explanation": "Hãy nhìn vào 'Long lives'. Đây là một lời chúc cho sự trường tồn. Tương tự như 'God save...', bạn hãy đưa động từ 'live' về dạng nguyên mẫu."
+  },
+  {
+    "topic": "Subjunctive Mood",
+    "level": "B2",
+    "student_input": "I wish my boss was less demanding.",
+    "correct_answer": "I wish my boss were less demanding.",
+    "explanation": "Bạn đang ước một điều trái ngược với thực tế hiện tại. Để câu văn mang sắc thái trang trọng và đúng ngữ pháp giả định, bạn hãy thay 'was' bằng 'were'."
+  },
+  {
+    "topic": "Subjunctive Mood",
+    "level": "B2",
+    "student_input": "He speaks as though he knows everything about the subject.",
+    "correct_answer": "He speaks as though he knew everything about the subject.",
+    "explanation": "Hãy phân tích: Anh ấy có thực sự biết tất cả không? Nếu bạn muốn nói anh ấy 'tưởng như/cứ như là' biết hết (nhưng thực tế thì không), bạn nên dùng thì hiện tại 'knows' hay dùng thì quá khứ 'knew' để tạo khoảng cách giả định?"
+  },
+  {
+    "topic": "Subjunctive Mood",
+    "level": "B2",
+    "student_input": "If the world was a better place, we wouldn't need such strict laws.",
+    "correct_answer": "If the world were a better place, we wouldn't need such strict laws.",
+    "explanation": "Đây là giả định về một thế giới không có thật ở hiện tại. Trong câu điều kiện loại 2, bạn hãy thay 'was' bằng 'were' để nhấn mạnh tính giả định này."
+  },
+  {
+    "topic": "Subjunctive Mood",
+    "level": "B2",
+    "student_input": "Is that as it may, the report still contains several errors.",
+    "correct_answer": "Be that as it may, the report still contains several errors.",
+    "explanation": "Hãy xem lại cụm 'Is that as it may'. Đây là một cụm từ cố định dùng để chuyển ý (concession). Bạn hãy thay 'Is' bằng 'Be' để đúng với cấu trúc Subjunctive."
+  },
+  {
+    "topic": "Subjunctive Mood",
+    "level": "B2",
+    "student_input": "I wish I was more confident when speaking in public.",
+    "correct_answer": "I wish I were more confident when speaking in public.",
+    "explanation": "Bạn đang ước về một đặc điểm bản thân không có ở hiện tại. Hãy áp dụng quy tắc 'I wish + S + were' để câu văn chuẩn xác hơn."
+  },
+  {
+    "topic": "Subjunctive Mood",
+    "level": "B2",
+    "student_input": "So is it, I will accept the terms of the agreement.",
+    "correct_answer": "So be it, I will accept the terms of the agreement.",
+    "explanation": "Hãy nhìn vào cụm 'So is it'. Để diễn đạt sự chấp nhận cam chịu một sự thật, hãy dùng cụm từ cố định 'So be it'."
+  },
+  {
+    "topic": "Subjunctive Mood",
+    "level": "B2",
+    "student_input": "God saves the children of the world!",
+    "correct_answer": "God save the children of the world!",
+    "explanation": "Đây là một lời cầu nguyện. Bạn hãy đưa động từ 'saves' về dạng nguyên mẫu 'save' để tuân thủ phong cách của thể giả định trong lời chúc."
+  },
+  {
+    "topic": "Subjunctive Mood",
+    "level": "B2",
+    "student_input": "Far is it from me to criticize, but the design is a bit outdated.",
+    "correct_answer": "Far be it from me to criticize, but the design is a bit outdated.",
+    "explanation": "Một lần nữa, hãy nhớ lại thành ngữ 'Far be it from me'. Bạn hãy thay 'is' bằng 'be' để câu văn đúng chuẩn phong cách B2."
+  }
+]

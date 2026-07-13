@@ -1,0 +1,352 @@
+[
+  {
+    "topic": "Quantifiers",
+    "level": "B1",
+    "student_input": "I have a little friends, so I'm never lonely.",
+    "correct_answer": "I have a few friends, so I'm never lonely.",
+    "explanation": "Hãy nhìn vào từ 'friends'. Đây là danh từ đếm được hay không đếm được nhỉ? Với danh từ đếm được số nhiều, chúng ta dùng 'a little' hay 'a few'?"
+  },
+  {
+    "topic": "Quantifiers",
+    "level": "B1",
+    "student_input": "I have few money, so I can buy a small gift for you.",
+    "correct_answer": "I have a little money, so I can buy a small gift for you.",
+    "explanation": "Hãy phân tích sắc thái: 'Tôi có thể mua một món quà nhỏ' $\rightarrow$ đây là một điều tích cực (vẫn còn một ít tiền). Khi muốn nói 'có một chút, đủ để dùng', chúng ta dùng 'few/little' hay 'a few/a little'?"
+  },
+  {
+    "topic": "Quantifiers",
+    "level": "B1",
+    "student_input": "There are a little cookies left in the jar.",
+    "correct_answer": "There are a few cookies left in the jar.",
+    "explanation": "Hãy kiểm tra từ 'cookies'. Em có thể đếm 1, 2, 3 chiếc bánh không? Với danh từ đếm được, em nên dùng 'a little' hay 'a few'?"
+  },
+  {
+    "topic": "Quantifiers",
+    "level": "B1",
+    "student_input": "I have a few knowledge about this topic, so I can't help you.",
+    "correct_answer": "I have little knowledge about this topic, so I can't help you.",
+    "explanation": "Có một sự mâu thuẫn ở đây: 'a few' mang nghĩa tích cực (có một chút), nhưng vế sau em lại nói 'không thể giúp bạn' (tiêu cực). Để diễn tả việc 'quá ít, không đủ để làm gì', em nên bỏ mạo từ 'a' đi hay giữ lại?"
+  },
+  {
+    "topic": "Quantifiers",
+    "level": "B1",
+    "student_input": "Can I have a few water, please?",
+    "correct_answer": "Can I have a little water, please?",
+    "explanation": "Hãy nghĩ về 'water'. Nước là chất lỏng, không đếm được. Vậy em nên dùng 'a few' (cho danh từ đếm được) hay 'a little' (cho danh từ không đếm được)?"
+  },
+  {
+    "topic": "Quantifiers",
+    "level": "B1",
+    "student_input": "Unfortunately, I have a little time to finish the report.",
+    "correct_answer": "Unfortunately, I have little time to finish the report.",
+    "explanation": "Hãy chú ý từ 'Unfortunately' (Thật không may). Điều này cho thấy việc có ít thời gian là một điều tiêu cực/không đủ. Trong trường hợp này, em nên dùng 'a little' (có một chút) hay 'little' (quá ít, không đủ)?"
+  },
+  {
+    "topic": "Quantifiers",
+    "level": "B1",
+    "student_input": "I have few books, so I can share some with you.",
+    "correct_answer": "I have a few books, so I can share some with you.",
+    "explanation": "Hãy nhìn vào vế sau: 'có thể chia sẻ với bạn' $\rightarrow$ đây là ý nghĩa tích cực. 'Few' (không có mạo từ 'a') nghĩa là gần như không có gì. Để nói 'có một vài' (đủ để chia sẻ), em nên thêm từ gì vào trước 'few'?"
+  },
+  {
+    "topic": "Quantifiers",
+    "level": "B1",
+    "student_input": "There is a few milk in the fridge, enough for your coffee.",
+    "correct_answer": "There is a little milk in the fridge, enough for your coffee.",
+    "explanation": "Hãy kiểm tra từ 'milk'. Sữa không đếm được, vậy dùng 'a few' có phù hợp không? Em hãy thay bằng lượng từ tương ứng cho danh từ không đếm được nhé."
+  },
+  {
+    "topic": "Quantifiers",
+    "level": "B1",
+    "student_input": "He is very lonely because he has a few friends.",
+    "correct_answer": "He is very lonely because he has few friends.",
+    "explanation": "Hãy phân tích cảm xúc: 'He is very lonely' (Anh ấy rất cô đơn). Điều này có nghĩa là số lượng bạn bè của anh ấy 'quá ít, không đủ' để hết cô đơn. Vậy em nên dùng 'a few' (tích cực) hay 'few' (tiêu cực)?"
+  },
+  {
+    "topic": "Quantifiers",
+    "level": "B1",
+    "student_input": "I have a little patience left, so please be quiet.",
+    "correct_answer": "I have a little patience left, so please be quiet.",
+    "explanation": "Hoàn hảo! 'Patience' (sự kiên nhẫn) không đếm được và em dùng 'a little' để nói rằng vẫn còn một chút (đủ để nhắc nhở). Rất chính xác!"
+  },
+  {
+    "topic": "Quantifiers",
+    "level": "B1",
+    "student_input": "I have little friends, so I'm very sad.",
+    "correct_answer": "I have few friends, so I'm very sad.",
+    "explanation": "Em dùng 'little' để chỉ sự thiếu hụt (tiêu cực) là đúng hướng rồi. Tuy nhiên, 'friends' là danh từ đếm được. Em hãy thay 'little' bằng từ tương ứng dành cho danh từ đếm được nhé."
+  },
+  {
+    "topic": "Quantifiers",
+    "level": "B1",
+    "student_input": "We have a few sugar, so we can make a small cake.",
+    "correct_answer": "We have a little sugar, so we can make a small cake.",
+    "explanation": "Hãy nhìn vào 'sugar'. Đường là danh từ không đếm được. Em hãy chọn giữa 'a few' và 'a little' để phù hợp với loại danh từ này nhé."
+  },
+  {
+    "topic": "Quantifiers",
+    "level": "B1",
+    "student_input": "I have a few money, but it's not enough for the ticket.",
+    "correct_answer": "I have a little money, but it's not enough for the ticket.",
+    "explanation": "Hai lỗi ở đây: 1. 'Money' không đếm được $\rightarrow$ không dùng 'a few'. 2. Vế sau nói 'không đủ' $\rightarrow$ nên dùng 'little' thay vì 'a little'. Em thử sửa cả hai nhé."
+  },
+  {
+    "topic": "Quantifiers",
+    "level": "B1",
+    "student_input": "She speaks a little English, so she can communicate basic things.",
+    "correct_answer": "She speaks a little English, so she can communicate basic things.",
+    "explanation": "Chính xác! 'A little' dùng cho danh từ không đếm được và mang nghĩa tích cực (có một chút, đủ để giao tiếp cơ bản). Rất tốt!"
+  },
+  {
+    "topic": "Quantifiers",
+    "level": "B1",
+    "student_input": "There are few people at the party, so it's very boring.",
+    "correct_answer": "There are few people at the party, so it's very boring.",
+    "explanation": "Hoàn hảo! 'Few people' (quá ít người) dẫn đến kết quả 'boring' (nhàm chán) $\rightarrow$ Sắc thái tiêu cực được dùng chính xác. Rất tuyệt!"
+  },
+  {
+    "topic": "Quantifiers",
+    "level": "B1",
+    "student_input": "I have a few information about the project.",
+    "correct_answer": "I have a little information about the project.",
+    "explanation": "Hãy nhớ lại: 'Information' (thông tin) là danh từ không đếm được. Vì vậy, em không thể dùng 'a few'. Em hãy thay bằng từ phù hợp cho danh từ không đếm được nhé."
+  },
+  {
+    "topic": "Quantifiers",
+    "level": "B1",
+    "student_input": "We have a few time before the train leaves, let's grab a coffee.",
+    "correct_answer": "We have a little time before the train leaves, let's grab a coffee.",
+    "explanation": "Hãy kiểm tra từ 'time'. Trong ngữ cảnh này, thời gian là danh từ không đếm được. Em nên dùng 'a few' hay 'a little'?"
+  },
+  {
+    "topic": "Quantifiers",
+    "level": "B1",
+    "student_input": "The desert is very dry because there is a little rain.",
+    "correct_answer": "The desert is very dry because there is little rain.",
+    "explanation": "Hãy phân tích: 'Sa mạc rất khô' chứng tỏ lượng mưa là 'quá ít, không đủ'. Khi mang nghĩa tiêu cực như vậy, em nên dùng 'a little' hay 'little'?"
+  },
+  {
+    "topic": "Quantifiers",
+    "level": "B1",
+    "student_input": "I have few ideas for the party, so I need your help.",
+    "correct_answer": "I have few ideas for the party, so I need your help.",
+    "explanation": "Tuyệt vời! Em đã dùng 'few ideas' (quá ít ý tưởng) để giải thích lý do tại sao cần sự giúp đỡ. Rất chính xác!"
+  },
+  {
+    "topic": "Quantifiers",
+    "level": "B1",
+    "student_input": "She has a little problems with her new car.",
+    "correct_answer": "She has a few problems with her new car.",
+    "explanation": "Hãy nhìn vào từ 'problems'. Đây là danh từ đếm được số nhiều. Em hãy chọn lượng từ 'a little' hay 'a few' cho phù hợp nhé."
+  },
+  {
+    "topic": "Quantifiers",
+    "level": "B1",
+    "student_input": "I'm sorry, I have little help to offer you.",
+    "correct_answer": "I'm sorry, I have little help to offer you.",
+    "explanation": "Chính xác! 'Little help' mang nghĩa tiêu cực (không có nhiều sự trợ giúp), phù hợp với lời xin lỗi 'I'm sorry'. Rất tốt!"
+  },
+  {
+    "topic": "Quantifiers",
+    "level": "B1",
+    "student_input": "I have a few energy left, so I can finish this last page.",
+    "correct_answer": "I have a little energy left, so I can finish this last page.",
+    "explanation": "Hãy kiểm tra từ 'energy'. Năng lượng không đếm được, vậy dùng 'a few' có đúng không? Em hãy thay bằng lượng từ dành cho danh từ không đếm được nhé."
+  },
+  {
+    "topic": "Quantifiers",
+    "level": "B1",
+    "student_input": "He has a few experience in this field, so he is a great candidate.",
+    "correct_answer": "He has a little experience in this field, so he is a great candidate.",
+    "explanation": "Hãy nhìn vào từ 'experience' (kinh nghiệm). Đây là danh từ không đếm được. Em hãy thay 'a few' bằng 'a little' để câu chính xác hơn."
+  },
+  {
+    "topic": "Quantifiers",
+    "level": "B1",
+    "student_input": "I have few salt, I need to buy more.",
+    "correct_answer": "I have little salt, I need to buy more.",
+    "explanation": "Muối (salt) là danh từ không đếm được. Em dùng 'few' (cho danh từ đếm được) là chưa chính xác. Em hãy thay bằng 'little' để chỉ sự thiếu hụt nhé."
+  },
+  {
+    "topic": "Quantifiers",
+    "level": "B1",
+    "student_input": "There are a few people who agree with me.",
+    "correct_answer": "There are a few people who agree with me.",
+    "explanation": "Hoàn hảo! 'A few people' (có một vài người) được dùng đúng cho danh từ đếm được và mang nghĩa tích cực. Rất tốt!"
+  },
+  {
+    "topic": "Quantifiers",
+    "level": "B1",
+    "student_input": "Each student have a different project.",
+    "correct_answer": "Each student has a different project.",
+    "explanation": "Hãy nhìn vào từ 'Each'. Mặc dù 'Each' nói về nhiều học sinh, nhưng nó nhấn mạnh vào 'từng cá nhân một'. Trong tiếng Anh, sau 'Each' + danh từ số ít, chúng ta chia động từ ở dạng số ít hay số nhiều em nhỉ?"
+  },
+  {
+    "topic": "Quantifiers",
+    "level": "B1",
+    "student_input": "Every students in my class are friendly.",
+    "correct_answer": "Every student in my class is friendly.",
+    "explanation": "Có hai lỗi nhỏ ở đây: 1. Sau 'Every', danh từ phải ở dạng số ít hay số nhiều? 2. Khi dùng 'Every', động từ đi kèm phải chia ở dạng số ít hay số nhiều? Em hãy sửa cả 'students' và 'are' nhé."
+  },
+  {
+    "topic": "Quantifiers",
+    "level": "B1",
+    "student_input": "I have two brothers and all of them are tall.",
+    "correct_answer": "I have two brothers and both of them are tall.",
+    "explanation": "Hãy chú ý số lượng: Em có 'two brothers' (2 người). Khi chúng ta nói về chính xác hai đối tượng, chúng ta dùng 'all' hay 'both' để tự nhiên hơn?"
+  },
+  {
+    "topic": "Quantifiers",
+    "level": "B1",
+    "student_input": "Both of my parents is teachers.",
+    "correct_answer": "Both of my parents are teachers.",
+    "explanation": "Từ 'Both' dùng để chỉ hai người. Vậy 'Both of my parents' là chủ ngữ số ít hay số nhiều? Em hãy chia lại động từ to-be cho phù hợp nhé."
+  },
+  {
+    "topic": "Quantifiers",
+    "level": "B1",
+    "student_input": "All of the information are correct.",
+    "correct_answer": "All of the information is correct.",
+    "explanation": "Hãy kiểm tra từ 'information'. Đây là danh từ đếm được hay không đếm được? Với danh từ không đếm được, dù dùng 'All', chúng ta vẫn phải chia động từ ở dạng số ít hay số nhiều?"
+  },
+  {
+    "topic": "Quantifiers",
+    "level": "B1",
+    "student_input": "Every of the players was exhausted.",
+    "correct_answer": "Each of the players was exhausted.",
+    "explanation": "Hãy cẩn thận: Chúng ta không dùng 'Every of...'. Khi muốn nói 'mỗi một trong số...', em phải dùng từ nào thay cho 'Every'? (Gợi ý: bắt đầu bằng chữ 'E' nhưng không phải 'Every')."
+  },
+  {
+    "topic": "Quantifiers",
+    "level": "B1",
+    "student_input": "All the children likes the new playground.",
+    "correct_answer": "All the children like the new playground.",
+    "explanation": "Hãy nhìn vào chủ ngữ 'All the children' (tất cả trẻ em). Đây là chủ ngữ số nhiều, vậy động từ 'likes' có cần thêm 's' không? Em hãy sửa lại nhé."
+  },
+  {
+    "topic": "Quantifiers",
+    "level": "B1",
+    "student_input": "Each of the books are interesting.",
+    "correct_answer": "Each of the books is interesting.",
+    "explanation": "Đây là lỗi rất phổ biến! 'Books' là số nhiều, nhưng chủ ngữ chính của câu là 'Each' (mỗi một cuốn). Vì 'Each' luôn đi với động từ số ít, em hãy thay 'are' bằng từ gì nhỉ?"
+  },
+  {
+    "topic": "Quantifiers",
+    "level": "B1",
+    "student_input": "Both the cake and the cookies is delicious.",
+    "correct_answer": "Both the cake and the cookies are delicious.",
+    "explanation": "Khi dùng 'Both A and B', chúng ta có hai đối tượng. Vậy chủ ngữ này là số ít hay số nhiều? Em hãy chia lại động từ 'is' nhé."
+  },
+  {
+    "topic": "Quantifiers",
+    "level": "B1",
+    "student_input": "All students in this school has to wear uniforms.",
+    "correct_answer": "All students in this school have to wear uniforms.",
+    "explanation": "Hãy nhìn vào 'All students'. Đây là chủ ngữ số nhiều. Vậy trợ động từ 'has' nên được chuyển thành từ nào cho đúng?"
+  },
+  {
+    "topic": "Quantifiers",
+    "level": "B1",
+    "student_input": "Every morning I wake up early.",
+    "correct_answer": "Every morning I wake up early.",
+    "explanation": "Hoàn hảo! 'Every morning' dùng để chỉ tần suất lặp lại, và em chia động từ 'wake up' chính xác với chủ ngữ 'I'. Rất tốt!"
+  },
+  {
+    "topic": "Quantifiers",
+    "level": "B1",
+    "student_input": "Each house in this street are painted white.",
+    "correct_answer": "Each house in this street is painted white.",
+    "explanation": "Hãy nhớ quy tắc của 'Each': Mỗi một ngôi nhà (số ít). Vậy động từ 'are' nên được chuyển thành dạng số ít là gì?"
+  },
+  {
+    "topic": "Quantifiers",
+    "level": "B1",
+    "student_input": "I have three cats and all of them is grey.",
+    "correct_answer": "I have three cats and all of them are grey.",
+    "explanation": "Em có 'three cats' (3 con mèo) $\rightarrow$ số nhiều. Vậy khi dùng 'all of them', động từ to-be phải là 'is' hay 'are'?"
+  },
+  {
+    "topic": "Quantifiers",
+    "level": "B1",
+    "student_input": "Both the red dress and the blue dress costs $50.",
+    "correct_answer": "Both the red dress and the blue dress cost $50.",
+    "explanation": "Vì có hai chiếc váy ('Both'), chủ ngữ trở thành số nhiều. Động từ 'costs' có nên thêm 's' nữa không em? Hãy sửa lại nhé."
+  },
+  {
+    "topic": "Quantifiers",
+    "level": "B1",
+    "student_input": "Every of my friends lives in the same city.",
+    "correct_answer": "Each of my friends lives in the same city.",
+    "explanation": "Hãy nhớ lại: Chúng ta không dùng 'Every of'. Để nói 'mỗi một trong số những người bạn', em hãy dùng từ nào thay thế cho 'Every'?"
+  },
+  {
+    "topic": "Quantifiers",
+    "level": "B1",
+    "student_input": "All the water in the bottles are dirty.",
+    "correct_answer": "All the water in the bottles is dirty.",
+    "explanation": "Hãy chú ý: 'Water' là danh từ không đếm được. Với danh từ không đếm được, dù có dùng 'All', động từ luôn chia ở dạng số ít hay số nhiều nhỉ?"
+  },
+  {
+    "topic": "Quantifiers",
+    "level": "B1",
+    "student_input": "Both my father and my mother is from Hue.",
+    "correct_answer": "Both my father and my mother are from Hue.",
+    "explanation": " 'Both A and B' tạo thành một chủ ngữ số nhiều. Em hãy thay 'is' bằng 'are' để câu đúng ngữ pháp nhé."
+  },
+  {
+    "topic": "Quantifiers",
+    "level": "B1",
+    "student_input": "Each of us have a different opinion.",
+    "correct_answer": "Each of us has a different opinion.",
+    "explanation": "Đừng bị đánh lừa bởi 'us' (số nhiều). Chủ ngữ chính của câu là 'Each' (mỗi người). Vì 'Each' đi với động từ số ít, em hãy sửa 'have' thành từ gì?"
+  },
+  {
+    "topic": "Quantifiers",
+    "level": "B1",
+    "student_input": "Every children likes ice cream.",
+    "correct_answer": "Every child likes ice cream.",
+    "explanation": "Hãy nhìn vào 'Every children'. 'Children' là danh từ số nhiều, nhưng sau 'Every', chúng ta bắt buộc phải dùng danh từ số ít. Em hãy chuyển 'children' thành số ít là gì nhỉ?"
+  },
+  {
+    "topic": "Quantifiers",
+    "level": "B1",
+    "student_input": "All my friends is coming to the party.",
+    "correct_answer": "All my friends are coming to the party.",
+    "explanation": " 'All my friends' là chủ ngữ số nhiều. Em hãy thay động từ 'is' bằng 'are' để hòa hợp với chủ ngữ nhé."
+  },
+  {
+    "topic": "Quantifiers",
+    "level": "B1",
+    "student_input": "Both my books was lost.",
+    "correct_answer": "Both my books were lost.",
+    "explanation": " 'Both' chỉ hai cuốn sách $\rightarrow$ số nhiều. Vậy trong quá khứ, chúng ta dùng 'was' hay 'were' cho chủ ngữ số nhiều?"
+  },
+  {
+    "topic": "Quantifiers",
+    "level": "B1",
+    "student_input": "Each day bring new opportunities.",
+    "correct_answer": "Each day brings new opportunities.",
+    "explanation": " 'Each day' là chủ ngữ số ít. Vậy động từ 'bring' cần phải được chia như thế nào cho đúng với chủ ngữ số ít ở hiện tại đơn?"
+  },
+  {
+    "topic": "Quantifiers",
+    "level": "B1",
+    "student_input": "Every employee in the company are required to attend the meeting.",
+    "correct_answer": "Every employee in the company is required to attend the meeting.",
+    "explanation": "Hãy nhớ quy tắc: 'Every + danh từ số ít + động từ số ít'. Em hãy sửa 'are' thành 'is' nhé."
+  },
+  {
+    "topic": "Quantifiers",
+    "level": "B1",
+    "student_input": "Both of the cars is red.",
+    "correct_answer": "Both of the cars are red.",
+    "explanation": " 'Both of the cars' là hai chiếc xe $\rightarrow$ số nhiều. Em hãy sửa 'is' thành 'are' nhé."
+  },
+  {
+    "topic": "Quantifiers",
+    "level": "B1",
+    "student_input": "All the information provide in the brochure is useful.",
+    "correct_answer": "All the information provided in the brochure is useful.",
+    "explanation": "Câu này có một lỗi về dạng từ. 'Information' được 'cung cấp' (bị động), nên em cần dùng V3 'provided' thay vì 'provide'. Phần chia động từ 'is' cho danh từ không đếm được là rất chính xác!"
+  }
+]

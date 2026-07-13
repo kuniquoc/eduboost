@@ -1,0 +1,1066 @@
+[
+  {
+    "topic": "Present Simple",
+    "level": "A1",
+    "student_input": "She like chocolate",
+    "correct_answer": "She likes chocolate",
+    "explanation": "Chào em, hãy quan sát chủ ngữ 'She'. Trong thì hiện tại đơn, với các chủ ngữ ngôi thứ 3 số ít (He, She, It), động từ cần có thay đổi gì ở phía sau nhỉ?"
+  },
+  {
+    "topic": "Present Simple",
+    "level": "A1",
+    "student_input": "They plays soccer on Sundays",
+    "correct_answer": "They play soccer on Sundays",
+    "explanation": "Em hãy nhìn lại chủ ngữ 'They'. Đây là chủ ngữ số nhiều, vậy chúng ta có cần thêm 's' vào sau động từ 'play' không ta?"
+  },
+  {
+    "topic": "Present Simple",
+    "level": "A1",
+    "student_input": "Do he speak English?",
+    "correct_answer": "Does he speak English?",
+    "explanation": "Trong câu hỏi với chủ ngữ là 'he', em hãy nhớ lại xem chúng ta dùng trợ động từ 'Do' hay 'Does' mới chính xác nhỉ?"
+  },
+  {
+    "topic": "Present Simple",
+    "level": "A1",
+    "student_input": "I doesn't like fish",
+    "correct_answer": "I don't like fish",
+    "explanation": "Em hãy kiểm tra lại trợ động từ đi với chủ ngữ 'I'. 'Doesn't' thường dùng cho He/She/It, vậy với 'I' thì mình dùng từ gì em nhỉ?"
+  },
+  {
+    "topic": "Present Simple",
+    "level": "A1",
+    "student_input": "Where you live?",
+    "correct_answer": "Where do you live?",
+    "explanation": "Câu này là một câu hỏi, nhưng em hình như đang thiếu một 'trợ động từ' đứng trước chủ ngữ 'you'. Em có nhớ đó là từ gì không?"
+  },
+  {
+    "topic": "Present Simple",
+    "level": "A1",
+    "student_input": "He study English every night",
+    "correct_answer": "He studies English every night",
+    "explanation": "Với chủ ngữ 'He', động từ 'study' cần được chia. Em nhớ quy tắc khi động từ kết thúc bằng một phụ âm + 'y' thì mình sẽ chuyển 'y' thành gì rồi thêm 'es' không?"
+  },
+  {
+    "topic": "Present Simple",
+    "level": "A1",
+    "student_input": "My cat drink milk",
+    "correct_answer": "My cat drinks milk",
+    "explanation": " 'My cat' tương đương với ngôi 'It' (số ít). Vậy động từ 'drink' trong câu này cần được thêm đuôi gì để đúng ngữ pháp nhỉ?"
+  },
+  {
+    "topic": "Present Simple",
+    "level": "A1",
+    "student_input": "Does she likes apples?",
+    "correct_answer": "Does she like apples?",
+    "explanation": "Một lưu ý nhỏ cho em: Khi trong câu đã có trợ động từ 'Does', thì động từ chính 'like' có cần phải thêm 's' nữa không nhỉ?"
+  },
+  {
+    "topic": "Present Simple",
+    "level": "A1",
+    "student_input": "We doesn't have a car",
+    "correct_answer": "We don't have a car",
+    "explanation": "Hãy nhìn vào chủ ngữ 'We'. Đây là chủ ngữ số nhiều, em hãy thử chọn lại giữa 'doesn't' và 'don't' xem từ nào phù hợp hơn nhé."
+  },
+  {
+    "topic": "Present Simple",
+    "level": "A1",
+    "student_input": "The sun rise in the East",
+    "correct_answer": "The sun rises in the East",
+    "explanation": " 'The sun' là một vật duy nhất (số ít). Em hãy xem lại động từ 'rise' xem đã được chia đúng cho chủ ngữ số ít chưa nhé."
+  },
+  {
+    "topic": "Present Simple",
+    "level": "A1",
+    "student_input": "Do your father work here?",
+    "correct_answer": "Does your father work here?",
+    "explanation": " 'Your father' là một người (ông ấy - He). Vậy ở đầu câu hỏi, mình nên dùng 'Do' hay 'Does' cho phù hợp với chủ ngữ này em nhỉ?"
+  },
+  {
+    "topic": "Present Simple",
+    "level": "A1",
+    "student_input": "I am play tennis",
+    "correct_answer": "I play tennis",
+    "explanation": "Trong câu này, em đang dùng cả động từ to-be 'am' và động từ thường 'play'. Ở thì hiện tại đơn, khi nói về một thói quen, chúng ta có cần dùng 'am' ở đây không?"
+  },
+  {
+    "topic": "Present Simple",
+    "level": "A1",
+    "student_input": "She don't know the answer",
+    "correct_answer": "She doesn't know the answer",
+    "explanation": "Hãy nhìn chủ ngữ 'She'. Với ngôi thứ 3 số ít trong câu phủ định, em nên dùng 'don't' hay 'doesn't' nhỉ?"
+  },
+  {
+    "topic": "Present Simple",
+    "level": "A1",
+    "student_input": "My friends goes to the cinema",
+    "correct_answer": "My friends go to the cinema",
+    "explanation": "Em hãy chú ý từ 'friends' có chữ 's' ở cuối, nghĩa là số nhiều. Vậy động từ 'goes' có cần giữ nguyên chữ 'es' không ta?"
+  },
+  {
+    "topic": "Present Simple",
+    "level": "A1",
+    "student_input": "What does you do?",
+    "correct_answer": "What do you do?",
+    "explanation": "Em hãy xem lại trợ động từ 'does'. Nó chỉ đi với He/She/It, còn với chủ ngữ 'you', mình phải dùng từ gì nhỉ?"
+  },
+  {
+    "topic": "Present Simple",
+    "level": "A1",
+    "student_input": "He have a big dog",
+    "correct_answer": "He has a big dog",
+    "explanation": "Động từ 'have' là một trường hợp đặc biệt. Khi đi với 'He/She/It', 'have' sẽ biến đổi thành từ gì em nhỉ?"
+  },
+  {
+    "topic": "Present Simple",
+    "level": "A1",
+    "student_input": "Do she study hard?",
+    "correct_answer": "Does she study hard?",
+    "explanation": "Hãy kiểm tra lại chủ ngữ 'she'. Trong câu hỏi, em hãy nhớ lại xem trợ động từ nào đi kèm với ngôi thứ 3 số ít nhé."
+  },
+  {
+    "topic": "Present Simple",
+    "level": "A1",
+    "student_input": "It rain a lot in winter",
+    "correct_answer": "It rains a lot in winter",
+    "explanation": "Chủ ngữ 'It' là số ít, vậy động từ 'rain' cần phải thêm đuôi gì để đúng với quy tắc thì hiện tại đơn nhỉ?"
+  },
+  {
+    "topic": "Present Simple",
+    "level": "A1",
+    "student_input": "You speaks English very well",
+    "correct_answer": "You speak English very well",
+    "explanation": "Hãy nhìn lại chủ ngữ 'You'. Theo quy tắc, chúng ta chỉ thêm 's/es' vào động từ cho He/She/It. Vậy từ 'speaks' có cần chữ 's' không em?"
+  },
+  {
+    "topic": "Present Simple",
+    "level": "A1",
+    "student_input": "Does they live in Hanoi?",
+    "correct_answer": "Do they live in Hanoi?",
+    "explanation": " 'They' là chủ ngữ số nhiều. Em hãy nhớ lại xem trong câu hỏi, số nhiều đi với trợ động từ 'Do' hay 'Does' nhé."
+  },
+  {
+    "topic": "Present Simple",
+    "level": "A1",
+    "student_input": "He watchs TV every evening",
+    "correct_answer": "He watches TV every evening",
+    "explanation": "Em hãy nhìn vào động từ 'watch'. Theo quy tắc, những động từ kết thúc bằng đuôi 'ch', 'sh', 'x', 's' thì khi đi với He/She/It, chúng ta phải thêm 's' hay 'es' nhỉ?"
+  },
+  {
+    "topic": "Present Simple",
+    "level": "A1",
+    "student_input": "She flys to London once a year",
+    "correct_answer": "She flies to London once a year",
+    "explanation": "Hãy chú ý động từ 'fly'. Khi động từ kết thúc bằng một phụ âm + 'y', em nhớ mình phải đổi 'y' thành chữ cái gì trước khi thêm 'es' không?"
+  },
+  {
+    "topic": "Present Simple",
+    "level": "A1",
+    "student_input": "What time the bus arrive?",
+    "correct_answer": "What time does the bus arrive?",
+    "explanation": "Câu này là một câu hỏi, nhưng em đang thiếu 'trợ động từ' đứng trước chủ ngữ 'the bus'. Với một chiếc xe bus (số ít), em sẽ dùng 'do' hay 'does'?"
+  },
+  {
+    "topic": "Present Simple",
+    "level": "A1",
+    "student_input": "Does she likes coffee?",
+    "correct_answer": "Does she like coffee?",
+    "explanation": "Một lưu ý quan trọng: Khi trong câu đã có trợ động từ 'Does' làm nhiệm vụ chia thì, thì động từ chính 'like' có cần thêm 's' nữa không em?"
+  },
+  {
+    "topic": "Present Simple",
+    "level": "A1",
+    "student_input": "My parents lives in a big house",
+    "correct_answer": "My parents live in a big house",
+    "explanation": "Em hãy nhìn lại chủ ngữ 'My parents'. Có chữ 's' ở cuối nghĩa là số nhiều. Vậy động từ 'lives' có cần giữ chữ 's' không ta?"
+  },
+  {
+    "topic": "Present Simple",
+    "level": "A1",
+    "student_input": "I am go to the gym on Mondays",
+    "correct_answer": "I go to the gym on Mondays",
+    "explanation": "Trong câu này, 'go' là động từ chỉ hành động. Khi nói về thói quen ở thì hiện tại đơn, chúng ta có cần dùng 'am' đi kèm với 'go' không nhỉ?"
+  },
+  {
+    "topic": "Present Simple",
+    "level": "A1",
+    "student_input": "She don't have any siblings",
+    "correct_answer": "She doesn't have any siblings",
+    "explanation": "Hãy xem lại chủ ngữ 'She'. Trong câu phủ định, với ngôi thứ 3 số ít, em nên dùng 'don't' hay 'doesn't' mới đúng?"
+  },
+  {
+    "topic": "Present Simple",
+    "level": "A1",
+    "student_input": "Why you cry?",
+    "correct_answer": "Why do you cry?",
+    "explanation": "Đây là câu hỏi 'Why'. Em hình như đã quên một trợ động từ đứng trước chủ ngữ 'you' rồi. Em có nhớ đó là từ gì không?"
+  },
+  {
+    "topic": "Present Simple",
+    "level": "A1",
+    "student_input": "He do not like carrots",
+    "correct_answer": "He does not like carrots",
+    "explanation": "Với chủ ngữ 'He', trợ động từ ở dạng phủ định phải là 'do not' hay 'does not' em nhỉ?"
+  },
+  {
+    "topic": "Present Simple",
+    "level": "A1",
+    "student_input": "The train leave at 8 AM",
+    "correct_answer": "The train leaves at 8 AM",
+    "explanation": " 'The train' là danh từ số ít. Em hãy xem lại động từ 'leave' xem đã được chia đúng theo quy tắc He/She/It chưa nhé."
+  },
+  {
+    "topic": "Present Simple",
+    "level": "A1",
+    "student_input": "Do your brother play guitar?",
+    "correct_answer": "Does your brother play guitar?",
+    "explanation": " 'Your brother' là một người (số ít). Vậy ở đầu câu hỏi, mình nên dùng trợ động từ 'Do' hay 'Does' cho phù hợp?"
+  },
+  {
+    "topic": "Present Simple",
+    "level": "A1",
+    "student_input": "She is study English",
+    "correct_answer": "She studies English",
+    "explanation": "Ở đây em đang dùng 'is' (to-be) và 'study' (động từ thường) cùng lúc. Để nói về một sự thật hoặc thói quen, em chỉ cần chia động từ 'study' cho chủ ngữ 'She' thôi. Em thử làm lại xem sao?"
+  },
+  {
+    "topic": "Present Simple",
+    "level": "A1",
+    "student_input": "We doesn't play video games",
+    "correct_answer": "We don't play video games",
+    "explanation": "Hãy nhìn vào chủ ngữ 'We'. Đây là chủ ngữ số nhiều, vậy em hãy chọn lại giữa 'doesn't' và 'don't' xem từ nào chính xác hơn."
+  },
+  {
+    "topic": "Present Simple",
+    "level": "A1",
+    "student_input": "The dogs barks loudly",
+    "correct_answer": "The dogs bark loudly",
+    "explanation": "Em hãy chú ý từ 'dogs' (số nhiều). Khi chủ ngữ là số nhiều, động từ 'bark' có cần thêm 's' ở cuối không nhỉ?"
+  },
+  {
+    "topic": "Present Simple",
+    "level": "A1",
+    "student_input": "What does they want?",
+    "correct_answer": "What do they want?",
+    "explanation": "Hãy kiểm tra lại trợ động từ 'does'. Nó chỉ đi với He/She/It, còn với 'they', mình phải dùng từ gì em nhỉ?"
+  },
+  {
+    "topic": "Present Simple",
+    "level": "A1",
+    "student_input": "He has a car and he drive it to work",
+    "correct_answer": "He has a car and he drives it to work",
+    "explanation": "Trong câu này có hai vế. Vế đầu 'He has' đã chia đúng, nhưng vế sau 'he drive' thì sao nhỉ? Em hãy kiểm tra lại động từ 'drive' cho chủ ngữ 'he' nhé."
+  },
+  {
+    "topic": "Present Simple",
+    "level": "A1",
+    "student_input": "Do she speak French?",
+    "correct_answer": "Does she speak French?",
+    "explanation": "Hãy nhớ lại quy tắc chọn trợ động từ cho câu hỏi. Với chủ ngữ 'she', mình dùng 'Do' hay 'Does'?"
+  },
+  {
+    "topic": "Present Simple",
+    "level": "A1",
+    "student_input": "It rain every day in July",
+    "correct_answer": "It rains every day in July",
+    "explanation": "Chủ ngữ là 'It' (số ít), vậy động từ 'rain' cần được thêm đuôi gì để đúng ngữ pháp thì hiện tại đơn?"
+  },
+  {
+    "topic": "Present Simple",
+    "level": "A1",
+    "student_input": "You speaks too fast",
+    "correct_answer": "You speak too fast",
+    "explanation": "Hãy nhìn lại chủ ngữ 'You'. Chúng ta chỉ thêm 's/es' cho He/She/It. Vậy từ 'speaks' có cần chữ 's' không em?"
+  },
+  {
+    "topic": "Present Simple",
+    "level": "A1",
+    "student_input": "Does they go to the gym?",
+    "correct_answer": "Do they go to the gym?",
+    "explanation": " 'They' là số nhiều. Em hãy nhớ lại xem trong câu hỏi, số nhiều đi với trợ động từ 'Do' hay 'Does' nhé."
+  },
+  {
+    "topic": "Present Simple",
+    "level": "A1",
+    "student_input": "She finishs her homework early",
+    "correct_answer": "She finishes her homework early",
+    "explanation": "Hãy xem lại động từ 'finish'. Với những động từ kết thúc bằng 'sh', mình sẽ thêm 's' hay 'es' khi đi với 'She' nhỉ?"
+  },
+  {
+    "topic": "Present Simple",
+    "level": "A1",
+    "student_input": "My brother don't like spicy food",
+    "correct_answer": "My brother doesn't like spicy food",
+    "explanation": " 'My brother' là một người (He). Vậy trong câu phủ định, mình nên dùng 'don't' hay 'doesn't' cho phù hợp?"
+  },
+  {
+    "topic": "Present Simple",
+    "level": "A1",
+    "student_input": "Where do your sister work?",
+    "correct_answer": "Where does your sister work?",
+    "explanation": " Hãy nhìn vào chủ ngữ 'your sister' (số ít). Trợ động từ 'do' ở đầu câu đã chính xác cho chủ ngữ này chưa em?"
+  },
+  {
+    "topic": "Present Simple",
+    "level": "A1",
+    "student_input": "I am not like apples",
+    "correct_answer": "I don't like apples",
+    "explanation": "Khi muốn phủ định một động từ thường như 'like', chúng ta dùng 'am not' hay dùng trợ động từ 'do not/don't' nhỉ?"
+  },
+  {
+    "topic": "Present Simple",
+    "level": "A1",
+    "student_input": "The cat sleep on the sofa",
+    "correct_answer": "The cat sleeps on the sofa",
+    "explanation": " 'The cat' là số ít. Em hãy xem lại động từ 'sleep' xem đã được chia đúng cho chủ ngữ số ít chưa nhé."
+  },
+  {
+    "topic": "Present Simple",
+    "level": "A1",
+    "student_input": "Do he have a pen?",
+    "correct_answer": "Does he have a pen?",
+    "explanation": "Với chủ ngữ 'he', em hãy nhớ lại xem chúng ta bắt đầu câu hỏi bằng 'Do' hay 'Does'?"
+  },
+  {
+    "topic": "Present Simple",
+    "level": "A1",
+    "student_input": "She doesn't plays piano",
+    "correct_answer": "She doesn't play piano",
+    "explanation": "Một lần nữa, em hãy nhớ: khi đã có 'doesn't' trong câu, động từ 'play' có cần thêm 's' nữa không?"
+  },
+  {
+    "topic": "Present Simple",
+    "level": "A1",
+    "student_input": "They doesn't know the way",
+    "correct_answer": "They don't know the way",
+    "explanation": "Hãy nhìn chủ ngữ 'They' (số nhiều). Em hãy chọn lại giữa 'doesn't' và 'don't' xem từ nào đúng nhé."
+  },
+  {
+    "topic": "Present Simple",
+    "level": "A1",
+    "student_input": "Water boil at 100 degrees",
+    "correct_answer": "Water boils at 100 degrees",
+    "explanation": " 'Water' là danh từ không đếm được (tương đương số ít). Vậy động từ 'boil' cần được thêm đuôi gì cho đúng?"
+  },
+  {
+    "topic": "Present Simple",
+    "level": "A1",
+    "student_input": "Why does you think so?",
+    "correct_answer": "Why do you think so?",
+    "explanation": "Hãy xem lại trợ động từ 'does'. Nó chỉ đi với He/She/It, vậy với 'you', mình phải dùng từ gì nhỉ?"
+  },
+  {
+    "topic": "Present Simple",
+    "level": "A1",
+    "student_input": "I go always to the park on Sundays",
+    "correct_answer": "I always go to the park on Sundays",
+    "explanation": "Chào em, em hãy nhìn vào từ 'always'. Trong tiếng Anh, các trạng từ chỉ tần suất như 'always', 'usually' thường đứng TRƯỚC hay SAU động từ thường nhỉ?"
+  },
+  {
+    "topic": "Present Simple",
+    "level": "A1",
+    "student_input": "My father and my mother works in a hospital",
+    "correct_answer": "My father and my mother work in a hospital",
+    "explanation": "Hãy nhìn vào chủ ngữ 'My father and my mother'. Đây là hai người (số nhiều), vậy động từ 'works' có cần thêm 's' không em?"
+  },
+  {
+    "topic": "Present Simple",
+    "level": "A1",
+    "student_input": "Are you like pizza?",
+    "correct_answer": "Do you like pizza?",
+    "explanation": "Trong câu này, 'like' là một động từ chỉ hành động. Khi đặt câu hỏi với động từ thường, mình dùng 'Are' hay dùng trợ động từ 'Do/Does' nhỉ?"
+  },
+  {
+    "topic": "Present Simple",
+    "level": "A1",
+    "student_input": "She is not work here",
+    "correct_answer": "She doesn't work here",
+    "explanation": "Em đang dùng 'is not' cho động từ 'work'. Nhưng 'work' là động từ thường, vậy trong câu phủ định, mình cần dùng 'is not' hay 'doesn't' em nhỉ?"
+  },
+  {
+    "topic": "Present Simple",
+    "level": "A1",
+    "student_input": "The students in my class speaks English",
+    "correct_answer": "The students in my class speak English",
+    "explanation": "Em hãy xác định xem chủ ngữ chính của câu này là gì? Là 'my class' hay là 'The students'? Từ đó em hãy xem lại động từ 'speaks' có cần chữ 's' không nhé."
+  },
+  {
+    "topic": "Present Simple",
+    "level": "A1",
+    "student_input": "Do she always arrive late?",
+    "correct_answer": "Does she always arrive late?",
+    "explanation": "Hãy nhìn vào chủ ngữ 'she'. Trong câu hỏi, với ngôi thứ 3 số ít, mình nên dùng trợ động từ 'Do' hay 'Does' nhỉ?"
+  },
+  {
+    "topic": "Present Simple",
+    "level": "A1",
+    "student_input": "I am usually happy",
+    "correct_answer": "I am usually happy",
+    "explanation": "Câu này hoàn toàn chính xác! Em đã đặt trạng từ 'usually' đúng vị trí sau động từ to-be rồi đấy."
+  },
+  {
+    "topic": "Present Simple",
+    "level": "A1",
+    "student_input": "They is from Vietnam",
+    "correct_answer": "They are from Vietnam",
+    "explanation": "Hãy kiểm tra lại động từ to-be đi với chủ ngữ 'They'. Mình dùng 'is', 'am' hay 'are' cho số nhiều em nhỉ?"
+  },
+  {
+    "topic": "Present Simple",
+    "level": "A1",
+    "student_input": "Does you have a sister?",
+    "correct_answer": "Do you have a sister?",
+    "explanation": "Hãy nhìn vào chủ ngữ 'you'. Trợ động từ 'Does' chỉ đi với He/She/It, vậy với 'you' mình dùng từ gì?"
+  },
+  {
+    "topic": "Present Simple",
+    "level": "A1",
+    "student_input": "My brother usually play games after school",
+    "correct_answer": "My brother usually plays games after school",
+    "explanation": "Chào em, hãy nhìn chủ ngữ 'My brother' (số ít). Dù có từ 'usually' ở giữa, thì động từ 'play' vẫn cần được chia theo chủ ngữ. Em nhớ xem cần thêm đuôi gì không?"
+  },
+  {
+    "topic": "Present Simple",
+    "level": "A1",
+    "student_input": "The movie start at 7 PM",
+    "correct_answer": "The movie starts at 7 PM",
+    "explanation": " 'The movie' là danh từ số ít. Vậy động từ 'start' trong câu này cần thay đổi như thế nào cho đúng ngữ pháp nhỉ?"
+  },
+  {
+    "topic": "Present Simple",
+    "level": "A1",
+    "student_input": "I doesn't speak Japanese",
+    "correct_answer": "I don't speak Japanese",
+    "explanation": "Hãy xem lại chủ ngữ 'I'. Trong câu phủ định, 'I' đi với 'doesn't' hay 'don't' em nhỉ?"
+  },
+  {
+    "topic": "Present Simple",
+    "level": "A1",
+    "student_input": "Is they students?",
+    "correct_answer": "Are they students?",
+    "explanation": "Hãy kiểm tra lại động từ to-be ở đầu câu. Với chủ ngữ 'they' (số nhiều), mình dùng 'Is' hay 'Are'?"
+  },
+  {
+    "topic": "Present Simple",
+    "level": "A1",
+    "student_input": "She always is tired",
+    "correct_answer": "She is always tired",
+    "explanation": "Một lưu ý nhỏ về vị trí: Khi trong câu có động từ to-be (am/is/are), trạng từ chỉ tần suất như 'always' sẽ đứng trước hay đứng sau to-be nhỉ?"
+  },
+  {
+    "topic": "Present Simple",
+    "level": "A1",
+    "student_input": "We plays basketball together",
+    "correct_answer": "We play basketball together",
+    "explanation": "Hãy nhìn vào chủ ngữ 'We'. Đây là chủ ngữ số nhiều, vậy động từ 'plays' có cần chữ 's' không em?"
+  },
+  {
+    "topic": "Present Simple",
+    "level": "A1",
+    "student_input": "Where does your parents live?",
+    "correct_answer": "Where do your parents live?",
+    "explanation": "Hãy chú ý chủ ngữ 'your parents' (số nhiều). Trợ động từ 'does' đã phù hợp với chủ ngữ số nhiều chưa em?"
+  },
+  {
+    "topic": "Present Simple",
+    "level": "A1",
+    "student_input": "He don't likes milk",
+    "correct_answer": "He doesn't like milk",
+    "explanation": "Câu này có hai điểm cần xem lại: Một là trợ động từ đi với 'He', hai là khi đã có trợ động từ thì động từ 'like' có cần thêm 's' không? Em thử sửa lại xem sao."
+  },
+  {
+    "topic": "Present Simple",
+    "level": "A1",
+    "student_input": "It not rain in summer",
+    "correct_answer": "It doesn't rain in summer",
+    "explanation": "Trong câu phủ định của thì hiện tại đơn, mình không dùng 'not' đứng một mình trước động từ. Em hãy nhớ lại xem mình cần thêm trợ động từ nào vào trước 'not' nhỉ?"
+  },
+  {
+    "topic": "Present Simple",
+    "level": "A1",
+    "student_input": "Do your dog bark a lot?",
+    "correct_answer": "Does your dog bark a lot?",
+    "explanation": " 'Your dog' là một chú chó (số ít). Vậy ở đầu câu hỏi, mình nên dùng 'Do' hay 'Does'?"
+  },
+  {
+    "topic": "Present Simple",
+    "level": "A1",
+    "student_input": "My friend and I goes to the beach",
+    "correct_answer": "My friend and I go to the beach",
+    "explanation": "Hãy nhìn chủ ngữ 'My friend and I'. Tổng cộng là hai người (chúng tôi - We). Vậy động từ 'goes' có cần giữ đuôi 'es' không em?"
+  },
+  {
+    "topic": "Present Simple",
+    "level": "A1",
+    "student_input": "She have two cats",
+    "correct_answer": "She has two cats",
+    "explanation": "Động từ 'have' khi đi với chủ ngữ 'She' sẽ biến đổi thành từ gì em nhỉ?"
+  },
+  {
+    "topic": "Present Simple",
+    "level": "A1",
+    "student_input": "I am not study on Sundays",
+    "correct_answer": "I don't study on Sundays",
+    "explanation": "Em đang dùng 'am not' với động từ 'study'. Hãy nhớ lại xem: với động từ thường, để phủ định mình dùng 'am not' hay dùng 'don't'?"
+  },
+  {
+    "topic": "Present Simple",
+    "level": "A1",
+    "student_input": "The children plays in the garden",
+    "correct_answer": "The children play in the garden",
+    "explanation": "Em hãy chú ý từ 'children'. Đây là dạng số nhiều của 'child'. Vậy động từ 'plays' có cần thêm 's' không?"
+  },
+  {
+    "topic": "Present Simple",
+    "level": "A1",
+    "student_input": "Does the train leaves at 9?",
+    "correct_answer": "Does the train leave at 9?",
+    "explanation": "Hãy nhớ lại quy tắc: khi đã dùng trợ động từ 'Does' trong câu hỏi, động từ chính 'leave' có còn cần thêm 's' nữa không em?"
+  },
+  {
+    "topic": "Present Simple",
+    "level": "A1",
+    "student_input": "I often am late for school",
+    "correct_answer": "I am often late for school",
+    "explanation": "Khi trong câu có động từ to-be 'am', trạng từ 'often' nên đứng trước hay đứng sau 'am' nhỉ?"
+  },
+  {
+    "topic": "Present Simple",
+    "level": "A1",
+    "student_input": "He do not have a car",
+    "correct_answer": "He doesn't have a car",
+    "explanation": "Với chủ ngữ 'He', trợ động từ phủ định phải là 'do not' hay 'does not' mới chính xác?"
+  },
+  {
+    "topic": "Present Simple",
+    "level": "A1",
+    "student_input": "Why she cry?",
+    "correct_answer": "Why does she cry?",
+    "explanation": "Câu hỏi 'Why' này đang thiếu một trợ động từ đứng trước chủ ngữ 'she'. Em hãy nhớ lại xem với 'she' mình dùng trợ động từ nào nhé."
+  },
+  {
+    "topic": "Present Simple",
+    "level": "A1",
+    "student_input": "My dog always sleep on my bed",
+    "correct_answer": "My dog always sleeps on my bed",
+    "explanation": "Hãy nhìn chủ ngữ 'My dog' (số ít). Động từ 'sleep' cần được chia như thế nào để phù hợp với chủ ngữ này em nhỉ?"
+  },
+  {
+    "topic": "Present Simple",
+    "level": "A1",
+    "student_input": "Are you like reading books?",
+    "correct_answer": "Do you like reading books?",
+    "explanation": "Em hãy xem lại từ 'like'. Vì nó là một động từ thường, nên câu hỏi phải bắt đầu bằng 'Are' hay 'Do'?"
+  },
+  {
+    "topic": "Present Simple",
+    "level": "A1",
+    "student_input": "The baby cry every night",
+    "correct_answer": "The baby cries every night",
+    "explanation": " 'The baby' là số ít. Với động từ 'cry' kết thúc bằng phụ âm + y, em nhớ mình phải đổi 'y' thành gì rồi thêm 'es' không?"
+  },
+  {
+    "topic": "Present Simple",
+    "level": "A1",
+    "student_input": "We doesn't want to go",
+    "correct_answer": "We don't want to go",
+    "explanation": "Hãy nhìn chủ ngữ 'We'. Đây là số nhiều, vậy mình nên dùng 'doesn't' hay 'don't' em nhỉ?"
+  },
+  {
+    "topic": "Present Simple",
+    "level": "A1",
+    "student_input": "Does he likes swimming?",
+    "correct_answer": "Does he like swimming?",
+    "explanation": "Một lần nữa, hãy nhớ: khi đã có 'Does' ở đầu câu, động từ 'like' có cần thêm 's' nữa không?"
+  },
+  {
+    "topic": "Present Simple",
+    "level": "A1",
+    "student_input": "I not am a teacher",
+    "correct_answer": "I am not a teacher",
+    "explanation": "Hãy xem lại trật tự từ trong câu phủ định với to-be. 'Not' đứng trước hay đứng sau 'am' nhỉ?"
+  },
+  {
+    "topic": "Present Simple",
+    "level": "A1",
+    "student_input": "The sun shine brightly",
+    "correct_answer": "The sun shines brightly",
+    "explanation": " 'The sun' là một vật duy nhất (số ít). Em hãy kiểm tra xem động từ 'shine' đã được chia đúng chưa nhé."
+  },
+  {
+    "topic": "Present Simple",
+    "level": "A1",
+    "student_input": "Do she speak English?",
+    "correct_answer": "Does she speak English?",
+    "explanation": "Hãy nhìn chủ ngữ 'she'. Trợ động từ 'Do' đã chính xác cho ngôi thứ 3 số ít chưa em?"
+  },
+  {
+    "topic": "Present Simple",
+    "level": "A1",
+    "student_input": "They doesn't live here",
+    "correct_answer": "They don't live here",
+    "explanation": "Hãy xem lại chủ ngữ 'They'. Số nhiều thì đi với 'doesn't' hay 'don't' em nhỉ?"
+  },
+  {
+    "topic": "Present Simple",
+    "level": "A1",
+    "student_input": "I usually am late",
+    "correct_answer": "I am usually late",
+    "explanation": "Em hãy nhớ quy tắc: trạng từ chỉ tần suất (usually) đứng sau động từ to-be hay đứng trước?"
+  },
+  {
+    "topic": "Present Simple",
+    "level": "A1",
+    "student_input": "He watch TV every day",
+    "correct_answer": "He watches TV every day",
+    "explanation": "Hãy nhìn chủ ngữ 'He'. Động từ 'watch' kết thúc bằng đuôi 'ch', em nhớ mình phải thêm 's' hay 'es'?"
+  },
+  {
+    "topic": "Present Simple",
+    "level": "A1",
+    "student_input": "What do she do?",
+    "correct_answer": "What does she do?",
+    "explanation": "Trong câu hỏi này, chủ ngữ là 'she'. Em hãy kiểm tra lại trợ động từ 'do' xem đã đúng với 'she' chưa nhé."
+  },
+  {
+    "topic": "Present Simple",
+    "level": "A1",
+    "student_input": "My cat like fish",
+    "correct_answer": "My cat likes fish",
+    "explanation": " 'My cat' là số ít (It). Vậy động từ 'like' cần thêm gì ở cuối để đúng ngữ pháp?"
+  },
+  {
+    "topic": "Present Simple",
+    "level": "A1",
+    "student_input": "We is happy",
+    "correct_answer": "We are happy",
+    "explanation": "Hãy kiểm tra lại động từ to-be đi với chủ ngữ 'We'. Mình dùng 'is' hay 'are' cho số nhiều em nhỉ?"
+  },
+  {
+    "topic": "Present Simple",
+    "level": "A1",
+    "student_input": "Does you know him?",
+    "correct_answer": "Do you know him?",
+    "explanation": "Hãy nhìn chủ ngữ 'you'. Trợ động từ 'Does' chỉ dành cho He/She/It, vậy với 'you' mình dùng từ gì?"
+  },
+  {
+    "topic": "Present Simple",
+    "level": "A1",
+    "student_input": "She don't likes tea",
+    "correct_answer": "She doesn't like tea",
+    "explanation": "Câu này có hai lỗi: một là trợ động từ đi với 'She', và hai là động từ 'likes' khi đã có trợ động từ. Em thử sửa cả hai xem sao."
+  },
+  {
+    "topic": "Present Simple",
+    "level": "A1",
+    "student_input": "He study hard",
+    "correct_answer": "He studies hard",
+    "explanation": "Với chủ ngữ 'He', động từ 'study' cần được chia. Em nhớ quy tắc đổi 'y' thành 'i' rồi thêm 'es' không?"
+  },
+  {
+    "topic": "Present Simple",
+    "level": "A1",
+    "student_input": "I am not go to school",
+    "correct_answer": "I don't go to school",
+    "explanation": " 'Go' là động từ thường. Khi muốn nói 'không làm gì đó' ở hiện tại đơn, mình dùng 'am not' hay 'don't'?"
+  },
+  {
+    "topic": "Present Simple",
+    "level": "A1",
+    "student_input": "The dogs barks",
+    "correct_answer": "The dogs bark",
+    "explanation": "Hãy nhìn chủ ngữ 'The dogs' (số nhiều). Động từ 'barks' có cần chữ 's' không em?"
+  },
+  {
+    "topic": "Present Simple",
+    "level": "A1",
+    "student_input": "Does your mother cook?",
+    "correct_answer": "Does your mother cook?",
+    "explanation": "Câu này hoàn toàn chính xác! Em đã dùng trợ động từ 'Does' cho chủ ngữ số ít và giữ nguyên động từ 'cook'. Rất tốt!"
+  },
+  {
+    "topic": "Present Simple",
+    "level": "A1",
+    "student_input": "I always play soccer",
+    "correct_answer": "I always play soccer",
+    "explanation": "Câu này chính xác rồi! Trạng từ 'always' đứng trước động từ thường 'play'. Chúc mừng em!"
+  },
+  {
+    "topic": "Present Simple",
+    "level": "A1",
+    "student_input": "Where do she live?",
+    "correct_answer": "Where does she live?",
+    "explanation": "Hãy nhìn chủ ngữ 'she'. Trợ động từ 'do' ở đây đã chính xác chưa, hay mình cần dùng 'does' nhỉ?"
+  },
+  {
+    "topic": "Present Simple",
+    "level": "A1",
+    "student_input": "It don't work",
+    "correct_answer": "It doesn't work",
+    "explanation": "Hãy kiểm tra lại chủ ngữ 'It'. Với ngôi thứ 3 số ít, mình dùng 'don't' hay 'doesn't'?"
+  },
+  {
+    "topic": "Present Simple",
+    "level": "A1",
+    "student_input": "She is always late",
+    "correct_answer": "She is always late",
+    "explanation": "Câu này hoàn toàn chính xác! Trạng từ 'always' đứng sau động từ to-be 'is'. Tuyệt vời!"
+  },
+  {
+    "topic": "Present Simple",
+    "level": "A1",
+    "student_input": "I am agree with you",
+    "correct_answer": "I agree with you",
+    "explanation": "Chào em, 'agree' là một động từ chỉ hành động (đồng ý). Trong thì hiện tại đơn, khi dùng động từ thường, chúng ta có cần dùng 'am' đứng trước không nhỉ?"
+  },
+  {
+    "topic": "Present Simple",
+    "level": "A1",
+    "student_input": "People is very friendly here",
+    "correct_answer": "People are very friendly here",
+    "explanation": "Em hãy chú ý từ 'People'. Đây là dạng số nhiều của 'Person'. Vậy với một chủ ngữ số nhiều, mình dùng 'is' hay 'are' mới chính xác?"
+  },
+  {
+    "topic": "Present Simple",
+    "level": "A1",
+    "student_input": "The water boil at 100 degrees",
+    "correct_answer": "The water boils at 100 degrees",
+    "explanation": " 'Water' là danh từ không đếm được, trong tiếng Anh, danh từ không đếm được được coi là số ít. Vậy động từ 'boil' cần thêm đuôi gì em nhỉ?"
+  },
+  {
+    "topic": "Present Simple",
+    "level": "A1",
+    "student_input": "Do she has a car?",
+    "correct_answer": "Does she have a car?",
+    "explanation": "Câu này có hai điểm cần lưu ý: Một là trợ động từ đi với 'she', hai là khi đã có trợ động từ thì 'has' phải quay về dạng nguyên mẫu là gì nhỉ?"
+  },
+  {
+    "topic": "Present Simple",
+    "level": "A1",
+    "student_input": "My money are in the bag",
+    "correct_answer": "My money is in the bag",
+    "explanation": "Hãy nhìn từ 'money'. Đây là danh từ đếm được hay không đếm được? Với danh từ không đếm được, mình dùng to-be 'is' hay 'are'?"
+  },
+  {
+    "topic": "Present Simple",
+    "level": "A1",
+    "student_input": "He don't has a dog",
+    "correct_answer": "He doesn't have a dog",
+    "explanation": "Em hãy xem lại hai chỗ: Trợ động từ đi với 'He' là gì, và sau 'doesn't' thì động từ 'has' phải chuyển thành từ nào?"
+  },
+  {
+    "topic": "Present Simple",
+    "level": "A1",
+    "student_input": "The children plays in the park",
+    "correct_answer": "The children play in the park",
+    "explanation": " 'Children' là số nhiều của 'child'. Vậy động từ 'plays' có cần chữ 's' ở cuối không em?"
+  },
+  {
+    "topic": "Present Simple",
+    "level": "A1",
+    "student_input": "Does your parents like music?",
+    "correct_answer": "Do your parents like music?",
+    "explanation": "Hãy nhìn chủ ngữ 'your parents' (số nhiều). Trợ động từ 'Does' đã phù hợp với chủ ngữ số nhiều chưa em?"
+  },
+  {
+    "topic": "Present Simple",
+    "level": "A1",
+    "student_input": "I am not think so",
+    "correct_answer": "I don't think so",
+    "explanation": " 'Think' là một động từ thường. Để phủ định một động từ thường ở thì hiện tại đơn, mình dùng 'am not' hay 'don't' nhỉ?"
+  },
+  {
+    "topic": "Present Simple",
+    "level": "A1",
+    "student_input": "She always go to bed late",
+    "correct_answer": "She always goes to bed late",
+    "explanation": "Chào em, hãy nhìn chủ ngữ 'She'. Dù có từ 'always' ở giữa, thì động từ 'go' vẫn phải chia theo chủ ngữ. Em nhớ xem cần thêm đuôi gì không?"
+  },
+  {
+    "topic": "Present Simple",
+    "level": "A1",
+    "student_input": "The police is coming",
+    "correct_answer": "The police are coming",
+    "explanation": "Một điểm đặc biệt: từ 'Police' luôn được coi là danh từ số nhiều. Vậy mình dùng 'is' hay 'are' cho từ này em nhỉ?"
+  },
+  {
+    "topic": "Present Simple",
+    "level": "A1",
+    "student_input": "He speak English and French",
+    "correct_answer": "He speaks English and French",
+    "explanation": "Hãy kiểm tra lại động từ 'speak'. Với chủ ngữ 'He', em hãy nhớ lại quy tắc thêm đuôi cho động từ nhé."
+  },
+  {
+    "topic": "Present Simple",
+    "level": "A1",
+    "student_input": "Do you understands me?",
+    "correct_answer": "Do you understand me?",
+    "explanation": "Trong câu hỏi, khi đã có trợ động từ 'Do', động từ chính 'understands' có cần giữ chữ 's' không ta?"
+  },
+  {
+    "topic": "Present Simple",
+    "level": "A1",
+    "student_input": "It not rain much here",
+    "correct_answer": "It doesn't rain much here",
+    "explanation": "Trong câu phủ định, chúng ta không dùng 'not' đứng một mình. Với chủ ngữ 'It', em cần thêm trợ động từ nào vào trước 'not' nhỉ?"
+  },
+  {
+    "topic": "Present Simple",
+    "level": "A1",
+    "student_input": "My sister is work in a bank",
+    "correct_answer": "My sister works in a bank",
+    "explanation": "Em đang dùng 'is' (to-be) đi cùng với 'work' (động từ thường). Để nói về công việc hằng ngày, em chỉ cần chia động từ 'work' theo chủ ngữ 'My sister' thôi. Thử lại xem sao?"
+  },
+  {
+    "topic": "Present Simple",
+    "level": "A1",
+    "student_input": "They doesn't have any money",
+    "correct_answer": "They don't have any money",
+    "explanation": "Hãy nhìn chủ ngữ 'They' (số nhiều). Em hãy chọn lại giữa 'doesn't' và 'don't' xem từ nào đúng nhé."
+  },
+  {
+    "topic": "Present Simple",
+    "level": "A1",
+    "student_input": "Where do your brother live?",
+    "correct_answer": "Where does your brother live?",
+    "explanation": "Hãy nhìn vào chủ ngữ 'your brother' (số ít). Trợ động từ 'do' ở đây đã chính xác chưa em?"
+  },
+  {
+    "topic": "Present Simple",
+    "level": "A1",
+    "student_input": "I don't knows the answer",
+    "correct_answer": "I don't know the answer",
+    "explanation": "Hãy nhớ lại: khi trong câu đã có trợ động từ 'don't', thì động từ 'knows' có cần thêm 's' nữa không?"
+  },
+  {
+    "topic": "Present Simple",
+    "level": "A1",
+    "student_input": "She doesn't likes fish",
+    "correct_answer": "She doesn't like fish",
+    "explanation": "Tương tự câu trước, khi đã có 'doesn't', động từ 'likes' nên được viết như thế nào cho đúng nhỉ?"
+  },
+  {
+    "topic": "Present Simple",
+    "level": "A1",
+    "student_input": "He have a sister",
+    "correct_answer": "He has a sister",
+    "explanation": "Động từ 'have' khi đi với chủ ngữ 'He/She/It' sẽ biến đổi thành từ gì em nhỉ?"
+  },
+  {
+    "topic": "Present Simple",
+    "level": "A1",
+    "student_input": "The train leave at 6 AM",
+    "correct_answer": "The train leaves at 6 AM",
+    "explanation": " 'The train' là số ít. Em hãy xem lại động từ 'leave' xem đã được chia đúng chưa nhé."
+  },
+  {
+    "topic": "Present Simple",
+    "level": "A1",
+    "student_input": "Does they play football?",
+    "correct_answer": "Do they play football?",
+    "explanation": "Hãy kiểm tra lại trợ động từ 'Does'. Với chủ ngữ 'they', mình dùng 'Do' hay 'Does'?"
+  },
+  {
+    "topic": "Present Simple",
+    "level": "A1",
+    "student_input": "I am always happy",
+    "correct_answer": "I am always happy",
+    "explanation": "Câu này chính xác! Em đã đặt trạng từ 'always' đúng vị trí sau động từ to-be rồi."
+  },
+  {
+    "topic": "Present Simple",
+    "level": "A1",
+    "student_input": "My cat sleep all day",
+    "correct_answer": "My cat sleeps all day",
+    "explanation": " 'My cat' là số ít. Em hãy chia lại động từ 'sleep' cho phù hợp với chủ ngữ này nhé."
+  },
+  {
+    "topic": "Present Simple",
+    "level": "A1",
+    "student_input": "We doesn't like coffee",
+    "correct_answer": "We don't like coffee",
+    "explanation": "Hãy nhìn chủ ngữ 'We'. Số nhiều thì đi với 'doesn't' hay 'don't' em nhỉ?"
+  },
+  {
+    "topic": "Present Simple",
+    "level": "A1",
+    "student_input": "Why does you say that?",
+    "correct_answer": "Why do you say that?",
+    "explanation": "Hãy xem lại trợ động từ 'does'. Nó chỉ đi với He/She/It, vậy với 'you', mình phải dùng từ gì?"
+  },
+  {
+    "topic": "Present Simple",
+    "level": "A1",
+    "student_input": "She is love her dog",
+    "correct_answer": "She loves her dog",
+    "explanation": " 'Love' là động từ thường. Khi nói về một cảm xúc bền vững ở hiện tại đơn, mình dùng 'is love' hay chỉ cần chia động từ 'loves' thôi em?"
+  },
+  {
+    "topic": "Present Simple",
+    "level": "A1",
+    "student_input": "Do he study English?",
+    "correct_answer": "Does he study English?",
+    "explanation": "Hãy nhìn chủ ngữ 'he'. Trợ động từ 'Do' ở đây đã chính xác chưa, hay mình cần dùng 'does'?"
+  },
+  {
+    "topic": "Present Simple",
+    "level": "A1",
+    "student_input": "The dogs runs fast",
+    "correct_answer": "The dogs run fast",
+    "explanation": "Hãy chú ý 'The dogs' là số nhiều. Động từ 'runs' có cần chữ 's' không em?"
+  },
+  {
+    "topic": "Present Simple",
+    "level": "A1",
+    "student_input": "I not have a pen",
+    "correct_answer": "I don't have a pen",
+    "explanation": "Trong câu phủ định của động từ thường, mình không dùng 'not' đứng một mình. Em cần thêm trợ động từ nào vào trước 'not' nhỉ?"
+  },
+  {
+    "topic": "Present Simple",
+    "level": "A1",
+    "student_input": "My father work hard",
+    "correct_answer": "My father works hard",
+    "explanation": " 'My father' là ngôi thứ 3 số ít. Em hãy xem lại động từ 'work' xem đã được chia đúng chưa nhé."
+  },
+  {
+    "topic": "Present Simple",
+    "level": "A1",
+    "student_input": "Does she speak English?",
+    "correct_answer": "Does she speak English?",
+    "explanation": "Câu này hoàn toàn chính xác! Em đã dùng đúng trợ động từ cho chủ ngữ 'she' và giữ nguyên động từ 'speak'."
+  },
+  {
+    "topic": "Present Simple",
+    "level": "A1",
+    "student_input": "They is not students",
+    "correct_answer": "They are not students",
+    "explanation": "Hãy kiểm tra lại động từ to-be đi với chủ ngữ 'They'. Mình dùng 'is' hay 'are'?"
+  },
+  {
+    "topic": "Present Simple",
+    "level": "A1",
+    "student_input": "The sun rise in the East",
+    "correct_answer": "The sun rises in the East",
+    "explanation": " 'The sun' là duy nhất (số ít). Em hãy chia lại động từ 'rise' cho đúng quy tắc nhé."
+  },
+  {
+    "topic": "Present Simple",
+    "level": "A1",
+    "student_input": "Where do she go?",
+    "correct_answer": "Where does she go?",
+    "explanation": "Hãy nhìn chủ ngữ 'she'. Trợ động từ 'do' ở đây đã chính xác chưa em?"
+  },
+  {
+    "topic": "Present Simple",
+    "level": "A1",
+    "student_input": "I don't like apple",
+    "correct_answer": "I don't like apples",
+    "explanation": "Câu này đúng về thì, nhưng hãy nhìn từ 'apple'. Khi nói về việc không thích một loại quả nói chung, mình nên dùng danh từ số ít hay số nhiều nhỉ?"
+  },
+  {
+    "topic": "Present Simple",
+    "level": "A1",
+    "student_input": "She have a big house",
+    "correct_answer": "She has a big house",
+    "explanation": "Động từ 'have' khi đi với 'She' sẽ chuyển thành từ gì em nhỉ?"
+  },
+  {
+    "topic": "Present Simple",
+    "level": "A1",
+    "student_input": "Do they lives in Hanoi?",
+    "correct_answer": "Do they live in Hanoi?",
+    "explanation": "Hãy nhớ lại: khi trong câu hỏi đã có trợ động từ 'Do', thì động từ 'lives' có cần giữ chữ 's' không?"
+  },
+  {
+    "topic": "Present Simple",
+    "level": "A1",
+    "student_input": "He am a doctor",
+    "correct_answer": "He is a doctor",
+    "explanation": "Hãy kiểm tra lại động từ to-be đi với chủ ngữ 'He'. Mình dùng 'am', 'is' hay 'are'?"
+  },
+  {
+    "topic": "Present Simple",
+    "level": "A1",
+    "student_input": "My friends plays soccer",
+    "correct_answer": "My friends play soccer",
+    "explanation": " 'My friends' là số nhiều. Động từ 'plays' có cần chữ 's' không em?"
+  },
+  {
+    "topic": "Present Simple",
+    "level": "A1",
+    "student_input": "I often go to the cinema",
+    "correct_answer": "I often go to the cinema",
+    "explanation": "Câu này chính xác! Trạng từ 'often' đứng trước động từ 'go'. Rất tốt!"
+  },
+  {
+    "topic": "Present Simple",
+    "level": "A1",
+    "student_input": "Does he like read books?",
+    "correct_answer": "Does he like reading books?",
+    "explanation": "Sau động từ 'like', động từ theo sau nó thường ở dạng gì nhỉ? Em thử xem lại 'read' nhé."
+  },
+  {
+    "topic": "Present Simple",
+    "level": "A1",
+    "student_input": "The cat drinks milk",
+    "correct_answer": "The cat drinks milk",
+    "explanation": "Câu này hoàn toàn chính xác! 'The cat' (số ít) đi với 'drinks'. Chúc mừng em!"
+  },
+  {
+    "topic": "Present Simple",
+    "level": "A1",
+    "student_input": "They doesn't play tennis",
+    "correct_answer": "They don't play tennis",
+    "explanation": "Hãy nhìn chủ ngữ 'They'. Mình dùng 'doesn't' hay 'don't' cho số nhiều nhỉ?"
+  },
+  {
+    "topic": "Present Simple",
+    "level": "A1",
+    "student_input": "She is a teacher and she work hard",
+    "correct_answer": "She is a teacher and she works hard",
+    "explanation": "Vế đầu 'She is' đã đúng, nhưng vế sau 'she work' thì sao? Em hãy kiểm tra lại động từ 'work' cho chủ ngữ 'she' nhé."
+  },
+  {
+    "topic": "Present Simple",
+    "level": "A1",
+    "student_input": "Does you know the way?",
+    "correct_answer": "Do you know the way?",
+    "explanation": "Hãy nhìn chủ ngữ 'you'. Trợ động từ 'Does' có phù hợp không, hay mình nên dùng 'Do'?"
+  },
+  {
+    "topic": "Present Simple",
+    "level": "A1",
+    "student_input": "I not am happy",
+    "correct_answer": "I am not happy",
+    "explanation": "Hãy xem lại vị trí của từ 'not' khi đi với động từ to-be 'am'. 'Not' đứng trước hay đứng sau nhỉ?"
+  },
+  {
+    "topic": "Present Simple",
+    "level": "A1",
+    "student_input": "He don't speak English",
+    "correct_answer": "He doesn't speak English",
+    "explanation": "Hãy kiểm tra lại trợ động từ phủ định đi với 'He'. Mình dùng 'don't' hay 'doesn't'?"
+  },
+  {
+    "topic": "Present Simple",
+    "level": "A1",
+    "student_input": "What time do the shop open?",
+    "correct_answer": "What time does the shop open?",
+    "explanation": " 'The shop' là một cửa hàng (số ít). Trợ động từ 'do' đã chính xác cho chủ ngữ này chưa em?"
+  },
+  {
+    "topic": "Present Simple",
+    "level": "A1",
+    "student_input": "She always is happy",
+    "correct_answer": "She is always happy",
+    "explanation": "Hãy nhớ quy tắc: trạng từ chỉ tần suất (always) đứng trước hay đứng sau động từ to-be?"
+  },
+  {
+    "topic": "Present Simple",
+    "level": "A1",
+    "student_input": "He likes play soccer",
+    "correct_answer": "He likes playing soccer",
+    "explanation": "Chào em, sau động từ 'likes', chúng ta thường dùng động từ thêm -ing hay giữ nguyên mẫu nhỉ?"
+  }
+]

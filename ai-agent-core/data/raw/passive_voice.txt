@@ -1,0 +1,294 @@
+PASSIVE VOICE IN ENGLISH
+
+CHAPTER 1: INTRODUCTION TO PASSIVE VOICE
+
+In English, sentences can be written in two voices: active voice and passive voice.
+
+Active voice: The subject performs the action.
+- The cat ate the fish.
+
+Passive voice: The subject receives the action.
+- The fish was eaten by the cat.
+
+The passive voice is formed with the verb "to be" + past participle (V3).
+
+General formula:
+Active: Subject + verb + object
+Passive: Object (becomes new subject) + "to be" + past participle + (by + agent)
+
+
+CHAPTER 2: PASSIVE VOICE IN DIFFERENT TENSES
+
+2.1 Present Simple Passive
+
+Active: Subject + verb(s/es) + object
+Passive: Subject + am/is/are + past participle
+
+Examples:
+Active: The company produces cars.
+Passive: Cars are produced by the company.
+
+Active: She cleans the office every day.
+Passive: The office is cleaned every day.
+
+Active: They speak English in many countries.
+Passive: English is spoken in many countries.
+
+Active: The teacher corrects the homework.
+Passive: The homework is corrected by the teacher.
+
+2.2 Past Simple Passive
+
+Active: Subject + verb (V2) + object
+Passive: Subject + was/were + past participle
+
+Examples:
+Active: Shakespeare wrote Romeo and Juliet.
+Passive: Romeo and Juliet was written by Shakespeare.
+
+Active: They built the bridge in 1990.
+Passive: The bridge was built in 1990.
+
+Active: Someone stole my bicycle yesterday.
+Passive: My bicycle was stolen yesterday.
+
+Active: The police arrested the suspect.
+Passive: The suspect was arrested by the police.
+
+2.3 Present Perfect Passive
+
+Active: Subject + have/has + past participle + object
+Passive: Subject + have/has + been + past participle
+
+Examples:
+Active: The government has approved the new law.
+Passive: The new law has been approved by the government.
+
+Active: Scientists have discovered a new species.
+Passive: A new species has been discovered by scientists.
+
+Active: Someone has broken the window.
+Passive: The window has been broken.
+
+Active: They have cancelled the flight.
+Passive: The flight has been cancelled.
+
+2.4 Future Simple Passive
+
+Active: Subject + will + verb + object
+Passive: Subject + will be + past participle
+
+Examples:
+Active: They will announce the results tomorrow.
+Passive: The results will be announced tomorrow.
+
+Active: The team will complete the project next month.
+Passive: The project will be completed next month.
+
+Active: The company will deliver the package on Monday.
+Passive: The package will be delivered on Monday.
+
+2.5 Present Continuous Passive
+
+Active: Subject + am/is/are + verb-ing + object
+Passive: Subject + am/is/are + being + past participle
+
+Examples:
+Active: They are renovating the building.
+Passive: The building is being renovated.
+
+Active: The mechanic is repairing my car.
+Passive: My car is being repaired.
+
+2.6 Past Continuous Passive
+
+Active: Subject + was/were + verb-ing + object
+Passive: Subject + was/were + being + past participle
+
+Examples:
+Active: The workers were painting the walls.
+Passive: The walls were being painted.
+
+Active: She was preparing the presentation.
+Passive: The presentation was being prepared.
+
+2.7 Modal Verbs in Passive
+
+Active: Subject + modal + verb + object
+Passive: Subject + modal + be + past participle
+
+Examples:
+Active: You must submit the report by Friday.
+Passive: The report must be submitted by Friday.
+
+Active: They can solve this problem easily.
+Passive: This problem can be solved easily.
+
+Active: We should inform the customers.
+Passive: The customers should be informed.
+
+Active: You may use this room for meetings.
+Passive: This room may be used for meetings.
+
+
+CHAPTER 3: WHEN TO USE PASSIVE VOICE
+
+The passive voice is not just a grammatical structure; it serves specific communication purposes.
+
+3.1 When the Agent is Unknown
+- My wallet was stolen. (We don't know who stole it.)
+- The window was broken. (We don't know who broke it.)
+- A new hospital has been built downtown. (The builders are not important.)
+
+3.2 When the Agent is Obvious
+- The suspect was arrested. (Obviously by the police.)
+- The patient was examined carefully. (Obviously by the doctor.)
+- The mail is delivered every morning. (Obviously by the mail carrier.)
+
+3.3 When the Action is More Important Than the Agent
+- The Mona Lisa was painted in the early 16th century.
+- Penicillin was discovered in 1928.
+- The Olympic Games are held every four years.
+
+3.4 In Formal, Scientific, and Academic Writing
+- The experiment was conducted under controlled conditions.
+- The data were analyzed using statistical methods.
+- It has been proven that exercise reduces stress.
+- The results are presented in Table 3.
+
+3.5 In News Reports
+- Three people were injured in the accident.
+- The new law was passed by parliament yesterday.
+- A historic agreement has been reached between the two countries.
+
+3.6 To Be Polite or Tactful
+- A mistake was made. (Avoids blaming someone directly.)
+- The deadline was missed. (More diplomatic than "You missed the deadline.")
+- The vase was broken. (Instead of "You broke the vase.")
+
+
+CHAPTER 4: "BY" + AGENT
+
+The agent (the person or thing performing the action) is introduced with "by." The agent is included only when it provides important or relevant information.
+
+Include the agent when:
+- The agent is important or surprising: The novel was written by a 12-year-old girl.
+- The agent provides new information: The award was presented by the president herself.
+- The agent needs to be identified: The project was managed by Ms. Chen.
+
+Omit the agent when:
+- The agent is unknown: My car was stolen. (By whom? Unknown.)
+- The agent is obvious: The suspect was arrested. (By the police — obvious.)
+- The agent is unimportant: English is spoken worldwide. (By people — not important.)
+- The agent is general: Rice is grown in Asia. (By farmers — general.)
+
+
+CHAPTER 5: CHANGING ACTIVE TO PASSIVE — STEP BY STEP
+
+Step 1: Identify the subject, verb, and object in the active sentence.
+Step 2: Move the object to the subject position.
+Step 3: Change the verb to the appropriate passive form (to be + past participle).
+Step 4: Move the original subject to the end with "by" (optional).
+
+Example:
+Active: The chef (subject) prepared (verb) a delicious meal (object).
+Step 1: Subject = The chef, Verb = prepared, Object = a delicious meal
+Step 2: A delicious meal...
+Step 3: A delicious meal was prepared...
+Step 4: A delicious meal was prepared by the chef.
+
+Example with Present Perfect:
+Active: Scientists have discovered a new planet.
+Passive: A new planet has been discovered by scientists.
+
+Example with Future:
+Active: The company will launch the product next month.
+Passive: The product will be launched next month.
+
+
+CHAPTER 6: COMMON MISTAKES
+
+Mistake 1: Forgetting the past participle
+Incorrect: The letter was write yesterday.
+Correct: The letter was written yesterday.
+
+Mistake 2: Using the wrong form of "to be"
+Incorrect: The cars is manufactured in Germany.
+Correct: The cars are manufactured in Germany.
+
+Mistake 3: Using passive with intransitive verbs
+Intransitive verbs (verbs without an object) cannot be made passive.
+Incorrect: The accident was happened yesterday.
+Correct: The accident happened yesterday.
+Other intransitive verbs: arrive, go, come, die, sleep, exist, appear, fall
+
+Mistake 4: Double passive
+Incorrect: The project was been completed.
+Correct: The project has been completed. (Present Perfect Passive)
+Correct: The project was completed. (Past Simple Passive)
+
+Mistake 5: Confusing active and passive meaning
+Active: The teacher surprised the students. (Teacher = doer)
+Passive: The students were surprised by the teacher. (Students = receiver)
+Wrong interpretation: "The students were surprised" does NOT mean the students did the surprising.
+
+Mistake 6: Forgetting "been" in perfect passive
+Incorrect: The work has finished.
+Correct: The work has been finished.
+(Note: "The work has finished" is grammatically possible if "finish" is intransitive, but the meaning changes.)
+
+Mistake 7: Using "by" unnecessarily
+Weak: The email was sent by someone.
+Better: The email was sent.
+
+Mistake 8: Overusing passive voice
+While passive voice is useful, overusing it makes writing unclear and wordy. Use active voice when the doer of the action is important and known.
+
+
+CHAPTER 7: PASSIVE VOICE SUMMARY TABLE
+
+Tense                  | Active                    | Passive
+Present Simple         | She writes emails.        | Emails are written.
+Past Simple            | She wrote emails.         | Emails were written.
+Present Perfect        | She has written emails.    | Emails have been written.
+Future Simple          | She will write emails.     | Emails will be written.
+Present Continuous     | She is writing emails.     | Emails are being written.
+Past Continuous        | She was writing emails.    | Emails were being written.
+Modal (can)            | She can write emails.      | Emails can be written.
+Modal (must)           | She must write emails.     | Emails must be written.
+Modal (should)         | She should write emails.   | Emails should be written.
+
+
+CHAPTER 8: PRACTICE SENTENCES
+
+Change the following sentences from active to passive:
+
+1. Active: The students completed the assignment.
+   Passive: The assignment was completed by the students.
+
+2. Active: Someone has stolen my phone.
+   Passive: My phone has been stolen.
+
+3. Active: They will publish the results next week.
+   Passive: The results will be published next week.
+
+4. Active: The government is building a new highway.
+   Passive: A new highway is being built by the government.
+
+5. Active: People speak Portuguese in Brazil.
+   Passive: Portuguese is spoken in Brazil.
+
+6. Active: They must finish the report by Friday.
+   Passive: The report must be finished by Friday.
+
+7. Active: Alexander Fleming discovered penicillin in 1928.
+   Passive: Penicillin was discovered by Alexander Fleming in 1928.
+
+8. Active: The company has offered her a job.
+   Passive: She has been offered a job by the company.
+
+9. Active: Nobody can solve this problem.
+   Passive: This problem cannot be solved.
+
+10. Active: The waiter was serving dinner when the fire alarm rang.
+    Passive: Dinner was being served when the fire alarm rang.

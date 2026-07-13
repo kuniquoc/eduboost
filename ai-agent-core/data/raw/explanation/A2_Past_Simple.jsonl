@@ -1,0 +1,982 @@
+[
+  {
+    "topic": "Past Simple",
+    "level": "A2",
+    "student_input": "I visit my grandma yesterday",
+    "correct_answer": "I visited my grandma yesterday",
+    "explanation": "Chào em, hãy nhìn vào từ 'yesterday' (hôm qua). Đây là dấu hiệu của một hành động đã kết thúc trong quá khứ. Vậy động từ 'visit' cần được thay đổi như thế nào để thể hiện điều này nhỉ?"
+  },
+  {
+    "topic": "Past Simple",
+    "level": "A2",
+    "student_input": "He goed to the cinema last night",
+    "correct_answer": "He went to the cinema last night",
+    "explanation": "Em đã nhớ chia động từ ở quá khứ, rất tốt! Tuy nhiên, động từ 'go' là một động từ bất quy tắc, nó không thêm đuôi '-ed'. Em có nhớ dạng quá khứ (V2) của 'go' là gì không?"
+  },
+  {
+    "topic": "Past Simple",
+    "level": "A2",
+    "student_input": "They was at home two hours ago",
+    "correct_answer": "They were at home two hours ago",
+    "explanation": "Hãy nhìn vào chủ ngữ 'They' (số nhiều). Ở thì quá khứ, động từ to-be có hai dạng là 'was' và 'were'. Với chủ ngữ số nhiều, mình dùng từ nào em nhỉ?"
+  },
+  {
+    "topic": "Past Simple",
+    "level": "A2",
+    "student_input": "I eat a big sandwich for lunch",
+    "correct_answer": "I ate a big sandwich for lunch",
+    "explanation": "Chào em, câu này đang kể về bữa trưa (đã diễn ra). Động từ 'eat' là động từ bất quy tắc. Em hãy thử nhớ lại xem dạng quá khứ của 'eat' được viết như thế nào nhé."
+  },
+  {
+    "topic": "Past Simple",
+    "level": "A2",
+    "student_input": "She stoped the car suddenly",
+    "correct_answer": "She stopped the car suddenly",
+    "explanation": "Em chia quá khứ cho 'stop' là chính xác rồi. Nhưng có một quy tắc chính tả: với động từ một âm tiết kết thúc bằng 'phụ âm - nguyên âm - phụ âm', mình có cần gấp đôi phụ âm cuối trước khi thêm '-ed' không em?"
+  },
+  {
+    "topic": "Past Simple",
+    "level": "A2",
+    "student_input": "We play soccer last Sunday",
+    "correct_answer": "We played soccer last Sunday",
+    "explanation": "Hãy chú ý cụm 'last Sunday'. Hành động này đã xảy ra rồi, vậy động từ 'play' (động từ có quy tắc) cần thêm đuôi gì để đúng ngữ pháp nhỉ?"
+  },
+  {
+    "topic": "Past Simple",
+    "level": "A2",
+    "student_input": "I seed a beautiful bird this morning",
+    "correct_answer": "I saw a beautiful bird this morning",
+    "explanation": "Chào em, em đang muốn dùng thì quá khứ cho động từ 'see'. Tuy nhiên, 'see' là động từ bất quy tắc, nên không thêm '-ed'. Em có nhớ V2 của 'see' là gì không?"
+  },
+  {
+    "topic": "Past Simple",
+    "level": "A2",
+    "student_input": "The weather were very cold last week",
+    "correct_answer": "The weather was very cold last week",
+    "explanation": "Hãy nhìn chủ ngữ 'The weather' (thời tiết). Đây là danh từ không đếm được, được coi là số ít. Vậy mình dùng 'was' hay 'were' cho phù hợp?"
+  },
+  {
+    "topic": "Past Simple",
+    "level": "A2",
+    "student_input": "He drinked all the juice",
+    "correct_answer": "He drank all the juice",
+    "explanation": "Em đã nhớ chia thì quá khứ, nhưng 'drink' là một động từ bất quy tắc. Thay vì thêm '-ed', mình phải thay đổi nguyên âm trong từ. Em nhớ 'drink' chuyển thành gì ở quá khứ không?"
+  },
+  {
+    "topic": "Past Simple",
+    "level": "A2",
+    "student_input": "I buyed a new phone yesterday",
+    "correct_answer": "I bought a new phone yesterday",
+    "explanation": "Chào em, động từ 'buy' là một trường hợp bất quy tắc. Em hãy thử tra lại hoặc nhớ lại xem V2 của 'buy' được viết như thế nào nhé."
+  },
+  {
+    "topic": "Past Simple",
+    "level": "A2",
+    "student_input": "She was go to the beach",
+    "correct_answer": "She went to the beach",
+    "explanation": "Trong câu này, em đang dùng cả 'was' (to-be) và 'go' (động từ thường). Khi nói về một hành động trong quá khứ, mình chỉ cần chia động từ chính 'go' sang dạng V2 thôi. Em thử bỏ 'was' và chia lại 'go' xem sao?"
+  },
+  {
+    "topic": "Past Simple",
+    "level": "A2",
+    "student_input": "They’re at the cinema last night",
+    "correct_answer": "They were at the cinema last night",
+    "explanation": "Hãy nhìn vào 'They’re' (They are). 'Are' là thì hiện tại, nhưng 'last night' lại là quá khứ. Em hãy chuyển 'are' sang dạng quá khứ cho chủ ngữ số nhiều nhé."
+  },
+  {
+    "topic": "Past Simple",
+    "level": "A2",
+    "student_input": "I’m born in 2010",
+    "correct_answer": "I was born in 2010",
+    "explanation": "Chào em, việc mình 'được sinh ra' luôn là một sự kiện đã xảy ra trong quá khứ. Vì vậy, động từ to-be 'am' phải được chuyển sang dạng quá khứ. Với 'I', mình dùng từ gì nhỉ?"
+  },
+  {
+    "topic": "Past Simple",
+    "level": "A2",
+    "student_input": "We’ve a great time last summer",
+    "correct_answer": "We had a great time last summer",
+    "explanation": " 'We’ve' là viết tắt của 'We have' (hiện tại). Nhưng 'last summer' yêu cầu thì quá khứ. Em có nhớ dạng quá khứ của động từ 'have' là gì không?"
+  },
+  {
+    "topic": "Past Simple",
+    "level": "A2",
+    "student_input": "He runned very fast to catch the bus",
+    "correct_answer": "He ran very fast to catch the bus",
+    "explanation": "Em đã chia thì quá khứ, nhưng 'run' là động từ bất quy tắc. Em hãy nhớ lại xem V2 của 'run' là gì nhỉ?"
+  },
+  {
+    "topic": "Past Simple",
+    "level": "A2",
+    "student_input": "I was sleep early last night",
+    "correct_answer": "I slept early last night",
+    "explanation": "Ở đây em dùng 'was' (to-be) đi kèm với 'sleep' (động từ thường). Để diễn tả hành động 'đã ngủ', em chỉ cần chia 'sleep' sang dạng quá khứ thôi. Em có nhớ 'sleep' chuyển thành gì không?"
+  },
+  {
+    "topic": "Past Simple",
+    "level": "A2",
+    "student_input": "She make a cake two days ago",
+    "correct_answer": "She made a cake two days ago",
+    "explanation": "Hãy nhìn cụm 'two days ago' (hai ngày trước). Đây là quá khứ. Động từ 'make' là bất quy tắc, em hãy thử nhớ lại dạng V2 của nó nhé."
+  },
+  {
+    "topic": "Past Simple",
+    "level": "A2",
+    "student_input": "The movie was start at 8 PM",
+    "correct_answer": "The movie started at 8 PM",
+    "explanation": "Chào em, 'start' là một động từ thường. Để nói bộ phim 'đã bắt đầu', em chỉ cần chia 'start' ở quá khứ là đủ, không cần dùng 'was' ở phía trước. Em hãy thử sửa lại xem."
+  },
+  {
+    "topic": "Past Simple",
+    "level": "A2",
+    "student_input": "I was very happy when I see her",
+    "correct_answer": "I was very happy when I saw her",
+    "explanation": "Vế đầu 'I was' em làm đúng rồi. Nhưng vế sau 'I see her' cũng phải ở thì quá khứ để đồng nhất. Em hãy chuyển 'see' sang dạng V2 nhé."
+  },
+  {
+    "topic": "Past Simple",
+    "level": "A2",
+    "student_input": "They builded this house in 1990",
+    "correct_answer": "They built this house in 1990",
+    "explanation": "Hãy chú ý từ 'builded'. Động từ 'build' là bất quy tắc, nó không thêm '-ed'. Em có nhớ dạng quá khứ của nó kết thúc bằng chữ cái gì không?"
+  },
+  {
+    "topic": "Past Simple",
+    "level": "A2",
+    "student_input": "We was very tired after the trip",
+    "correct_answer": "We were very tired after the trip",
+    "explanation": "Hãy nhìn lại chủ ngữ 'We' (số nhiều). Trong quá khứ, mình dùng 'was' hay 'were' cho số nhiều em nhỉ?"
+  },
+  {
+    "topic": "Past Simple",
+    "level": "A2",
+    "student_input": "I’ve lapped my room yesterday",
+    "correct_answer": "I cleaned my room yesterday",
+    "explanation": "Chào em, có vẻ em đang dùng một từ không chính xác cho việc dọn dẹp ('lapped'). Ngoài ra, 'I've' là hiện tại hoàn thành. Với 'yesterday', mình nên dùng thì quá khứ đơn. Em hãy thử dùng động từ 'clean' ở dạng quá khứ xem sao."
+  },
+  {
+    "topic": "Past Simple",
+    "level": "A2",
+    "student_input": "He’s a baby ten years ago",
+    "correct_answer": "He was a baby ten years ago",
+    "explanation": " 'He’s' là viết tắt của 'He is' (hiện tại). Nhưng 'ten years ago' là quá khứ. Em hãy chuyển 'is' sang dạng quá khứ cho số ít nhé."
+  },
+  {
+    "topic": "Past Simple",
+    "level": "A2",
+    "student_input": "I write a letter to my friend last week",
+    "correct_answer": "I wrote a letter to my friend last week",
+    "explanation": "Hãy nhìn cụm 'last week'. Động từ 'write' cần được chia ở quá khứ. Vì đây là động từ bất quy tắc, em hãy nhớ lại dạng V2 của nó nhé."
+  },
+  {
+    "topic": "Past Simple",
+    "level": "A2",
+    "student_input": "She’s at school yesterday",
+    "correct_answer": "She was at school yesterday",
+    "explanation": " 'She’s' (She is) là thì hiện tại. Để phù hợp với 'yesterday', em cần dùng động từ to-be ở quá khứ cho 'She'. Đó là từ gì nhỉ?"
+  },
+  {
+    "topic": "Past Simple",
+    "level": "A2",
+    "student_input": "We took a taxi, then we arrived at the hotel",
+    "correct_answer": "We took a taxi, then we arrived at the hotel",
+    "explanation": "Câu này hoàn toàn chính xác! Em đã dùng đúng V2 cho cả 'take' (took) và 'arrive' (arrived). Rất tốt!"
+  },
+  {
+    "topic": "Past Simple",
+    "level": "A2",
+    "student_input": "I swimmed in the ocean last summer",
+    "correct_answer": "I swam in the ocean last summer",
+    "explanation": "Chào em, em đã nhớ chia thì quá khứ, nhưng 'swim' là một động từ bất quy tắc. Em hãy nhớ lại xem V2 của 'swim' là gì nhé."
+  },
+  {
+    "topic": "Past Simple",
+    "level": "A2",
+    "student_input": "He bringed some snacks to the party",
+    "correct_answer": "He brought some snacks to the party",
+    "explanation": " Hãy chú ý từ 'bringed'. Động từ 'bring' không thêm '-ed' ở quá khứ. Em có nhớ dạng V2 của 'bring' là gì không?"
+  },
+  {
+    "topic": "Past Simple",
+    "level": "A2",
+    "student_input": "They was very surprised",
+    "correct_answer": "They were very surprised",
+    "explanation": "Hãy nhìn chủ ngữ 'They' (số nhiều). Em hãy chọn lại động từ to-be ở quá khứ cho phù hợp với số nhiều nhé."
+  },
+  {
+    "topic": "Past Simple",
+    "level": "A2",
+    "student_input": "I sended an email to my boss",
+    "correct_answer": "I sent an email to my boss",
+    "explanation": "Chào em, động từ 'send' là bất quy tắc. Thay vì thêm '-ed', mình sẽ thay đổi đuôi của từ. Em nhớ V2 của 'send' là gì không?"
+  },
+  {
+    "topic": "Past Simple",
+    "level": "A2",
+    "student_input": "Did you went to the party last night?",
+    "correct_answer": "Did you go to the party last night?",
+    "explanation": "Chào em, em đã dùng trợ động từ 'Did' để đặt câu hỏi quá khứ, điều này rất tốt. Tuy nhiên, có một quy tắc: khi 'Did' đã xuất hiện để gánh vác thì quá khứ, thì động từ chính phải quay trở về dạng nguyên mẫu. Em có nhớ dạng nguyên mẫu của 'went' là gì không?"
+  },
+  {
+    "topic": "Past Simple",
+    "level": "A2",
+    "student_input": "I didn't played soccer yesterday",
+    "correct_answer": "I didn't play soccer yesterday",
+    "explanation": "Hãy nhìn vào cụm 'didn't played'. Tương tự như trong câu hỏi, khi em dùng 'didn't' để phủ định, động từ chính không cần thêm đuôi '-ed' nữa. Em hãy thử bỏ đuôi '-ed' của từ 'played' xem sao."
+  },
+  {
+    "topic": "Past Simple",
+    "level": "A2",
+    "student_input": "I didn't be happy with the result",
+    "correct_answer": "I wasn't happy with the result",
+    "explanation": "Chào em, một lưu ý quan trọng: Động từ to-be (was/were) là một động từ 'mạnh', nó không cần trợ động từ 'did' để tạo câu phủ định. Em hãy thử dùng dạng phủ định của 'was' cho chủ ngữ 'I' xem sao."
+  },
+  {
+    "topic": "Past Simple",
+    "level": "A2",
+    "student_input": "You visited the museum last week?",
+    "correct_answer": "Did you visit the museum last week?",
+    "explanation": "Câu này của em đang có trật tự của một câu khẳng định. Để biến nó thành một câu hỏi đúng ngữ pháp trong thì quá khứ, em cần thêm trợ động từ nào vào đầu câu nhỉ?"
+  },
+  {
+    "topic": "Past Simple",
+    "level": "A2",
+    "student_input": "Where you did go for your holiday?",
+    "correct_answer": "Where did you go for your holiday?",
+    "explanation": "Hãy nhìn vào vị trí của từ 'did'. Trong câu hỏi Wh-, trật tự đúng phải là: Từ để hỏi $\rightarrow$ Trợ động từ $\rightarrow$ Chủ ngữ $\rightarrow$ Động từ. Em hãy thử đổi chỗ 'you' và 'did' xem sao."
+  },
+  {
+    "topic": "Past Simple",
+    "level": "A2",
+    "student_input": "Did she saw the movie?",
+    "correct_answer": "Did she see the movie?",
+    "explanation": "Chào em, em đã dùng 'Did' rất chính xác. Nhưng hãy nhìn lại động từ 'saw'. Vì đã có 'Did' đứng đầu câu, động từ chính phải ở dạng nguyên mẫu. Em nhớ dạng nguyên mẫu của 'saw' là gì không?"
+  },
+  {
+    "topic": "Past Simple",
+    "level": "A2",
+    "student_input": "We didn't ate breakfast this morning",
+    "correct_answer": "We didn't eat breakfast this morning",
+    "explanation": "Hãy quan sát cụm 'didn't ate'. Khi có trợ động từ 'didn't', động từ 'ate' (V2) phải quay về dạng nguyên mẫu (V1). Em hãy sửa lại từ này nhé."
+  },
+  {
+    "topic": "Past Simple",
+    "level": "A2",
+    "student_input": "They didn't were at home",
+    "correct_answer": "They weren't at home",
+    "explanation": "Chào em, tương tự như câu trước, với động từ to-be 'were', chúng ta không dùng 'didn't'. Em chỉ cần thêm 'not' vào sau 'were' là đủ. Em thử viết lại xem nào."
+  },
+  {
+    "topic": "Past Simple",
+    "level": "A2",
+    "student_input": "Did they bought a new car?",
+    "correct_answer": "Did they buy a new car?",
+    "explanation": "Hãy nhìn vào từ 'bought'. Trong câu hỏi có 'Did', động từ chính phải được đưa về dạng nguyên mẫu. Em có nhớ V1 của 'bought' là gì không?"
+  },
+  {
+    "topic": "Past Simple",
+    "level": "A2",
+    "student_input": "When she arrived?",
+    "correct_answer": "When did she arrive?",
+    "explanation": "Chào em, trong câu hỏi Wh- ở thì quá khứ, em không thể chỉ dùng động từ chia V2 mà cần một trợ động từ đứng trước chủ ngữ 'she'. Em hãy thêm 'did' vào vị trí đúng nhé."
+  },
+  {
+    "topic": "Past Simple",
+    "level": "A2",
+    "student_input": "I didn't’t go to school",
+    "correct_answer": "I didn't go to school",
+    "explanation": "Hình như em bị gõ nhầm một chút ở từ 'didn't’t'. Em hãy kiểm tra lại chính tả của từ phủ định này nhé."
+  },
+  {
+    "topic": "Past Simple",
+    "level": "A2",
+    "student_input": "Did he spoke to you?",
+    "correct_answer": "Did he speak to you?",
+    "explanation": " hãy nhìn từ 'spoke'. Vì câu hỏi đã bắt đầu bằng 'Did', động từ 'spoke' cần quay về dạng nguyên mẫu. Em nhớ 'speak' hay 'spoke' mới là nguyên mẫu nhỉ?"
+  },
+  {
+    "topic": "Past Simple",
+    "level": "A2",
+    "student_input": "We didn't had any money",
+    "correct_answer": "We didn't have any money",
+    "explanation": "Chào em, hãy chú ý cụm 'didn't had'. Khi đã có trợ động từ 'didn't', động từ 'had' (V2) phải chuyển về dạng nguyên mẫu. Em hãy sửa lại xem sao."
+  },
+  {
+    "topic": "Past Simple",
+    "level": "A2",
+    "student_input": "Was you at the party?",
+    "correct_answer": "Were you at the party?",
+    "explanation": "Hãy nhìn chủ ngữ 'you'. Trong quá khứ, động từ to-be đi với 'you' là 'was' hay 'were' em nhỉ?"
+  },
+  {
+    "topic": "Past Simple",
+    "level": "A2",
+    "student_input": "What did you saw yesterday?",
+    "correct_answer": "What did you see yesterday?",
+    "explanation": "Em dùng 'did' trong câu hỏi là rất chuẩn. Nhưng hãy nhìn lại động từ 'saw'. Vì có 'did', động từ này phải ở dạng nguyên mẫu. Em thử sửa lại nhé."
+  },
+  {
+    "topic": "Past Simple",
+    "level": "A2",
+    "student_input": "She didn't came to the meeting",
+    "correct_answer": "She didn't come to the meeting",
+    "explanation": "Chào em, hãy nhìn từ 'came'. Trong câu phủ định với 'didn't', động từ 'came' phải quay về dạng nguyên mẫu. Em nhớ dạng V1 của 'came' là gì không?"
+  },
+  {
+    "topic": "Past Simple",
+    "level": "A2",
+    "student_input": "Did it rained last night?",
+    "correct_answer": "Did it rain last night?",
+    "explanation": " Hãy quan sát từ 'rained'. Trong câu hỏi có 'Did', mình có cần thêm đuôi '-ed' vào động từ nữa không, hay đưa nó về nguyên mẫu em nhỉ?"
+  },
+  {
+    "topic": "Past Simple",
+    "level": "A2",
+    "student_input": "Why you didn't call me?",
+    "correct_answer": "Why didn't you call me?",
+    "explanation": "Chào em, trong câu hỏi Wh- phủ định, trợ động từ 'didn't' phải đứng trước chủ ngữ 'you'. Em hãy thử đảo vị trí của chúng xem sao."
+  },
+  {
+    "topic": "Past Simple",
+    "level": "A2",
+    "student_input": "I didn't felt well",
+    "correct_answer": "I didn't feel well",
+    "explanation": "Hãy nhìn từ 'felt'. 'Felt' là dạng quá khứ của 'feel'. Nhưng vì trong câu có 'didn't', em phải dùng dạng nào: nguyên mẫu hay quá khứ?"
+  },
+  {
+    "topic": "Past Simple",
+    "level": "A2",
+    "student_input": "Did they played basketball?",
+    "correct_answer": "Did they play basketball?",
+    "explanation": "Chào em, một lần nữa, hãy nhớ quy tắc: 'Did' + chủ ngữ + động từ nguyên mẫu. Vậy từ 'played' nên được viết lại như thế nào?"
+  },
+  {
+    "topic": "Past Simple",
+    "level": "A2",
+    "student_input": "She didn't was at home",
+    "correct_answer": "She wasn't at home",
+    "explanation": "Hãy nhớ lại: Với động từ to-be (was/were), mình không dùng trợ động từ 'did'. Em hãy dùng dạng phủ định trực tiếp của 'was' cho chủ ngữ 'she' nhé."
+  },
+  {
+    "topic": "Past Simple",
+    "level": "A2",
+    "student_input": "Do you went to the park yesterday?",
+    "correct_answer": "Did you go to the park yesterday?",
+    "explanation": "Câu này có hai điểm cần sửa: Một là trợ động từ 'Do' dùng cho hiện tại, em cần chuyển nó sang quá khứ. Hai là sau trợ động từ, động từ 'went' phải ở dạng nguyên mẫu. Em thử sửa cả hai nhé."
+  },
+  {
+    "topic": "Past Simple",
+    "level": "A2",
+    "student_input": "What did he wrote?",
+    "correct_answer": "What did he write?",
+    "explanation": "Chào em, em dùng 'did' đúng rồi. Nhưng hãy nhìn từ 'wrote'. Vì đã có 'did' trong câu hỏi, động từ 'wrote' phải quay về dạng nguyên mẫu. Em nhớ V1 của 'wrote' là gì không?"
+  },
+  {
+    "topic": "Past Simple",
+    "level": "A2",
+    "student_input": "I didn't sleeped well",
+    "correct_answer": "I didn't sleep well",
+    "explanation": "Hãy nhìn cụm 'didn't sleeped'. Trong câu phủ định, động từ không được chia quá khứ nữa vì 'didn't' đã làm việc đó rồi. Em hãy bỏ đuôi '-ed' đi nhé."
+  },
+  {
+    "topic": "Past Simple",
+    "level": "A2",
+    "student_input": "Was they late for school?",
+    "correct_answer": "Were they late for school?",
+    "explanation": "Hãy nhìn chủ ngữ 'they' (số nhiều). Ở quá khứ, mình dùng 'was' hay 'were' cho số nhiều em nhỉ?"
+  },
+  {
+    "topic": "Past Simple",
+    "level": "A2",
+    "student_input": "Did you had lunch?",
+    "correct_answer": "Did you have lunch?",
+    "explanation": "Chào em, hãy chú ý từ 'had'. Trong câu hỏi có 'Did', mình phải dùng dạng nguyên mẫu của động từ. Em hãy chuyển 'had' về nguyên mẫu xem nào."
+  },
+  {
+    "topic": "Past Simple",
+    "level": "A2",
+    "student_input": "We didn't saw the accident",
+    "correct_answer": "We didn't see the accident",
+    "explanation": "Hãy quan sát từ 'saw'. Vì có 'didn't' đứng trước, động từ 'saw' phải quay về dạng nguyên mẫu. Em hãy sửa lại nhé."
+  },
+  {
+    "topic": "Past Simple",
+    "level": "A2",
+    "student_input": "How did you felt?",
+    "correct_answer": "How did you feel?",
+    "explanation": "Chào em, hãy nhìn từ 'felt'. Tương tự các câu trên, vì đã có 'did' trong câu hỏi, em cần dùng dạng nguyên mẫu của động từ. Em nhớ 'felt' nguyên mẫu là gì không?"
+  },
+  {
+    "topic": "Past Simple",
+    "level": "A2",
+    "student_input": "Did it stoped raining?",
+    "correct_answer": "Did it stop raining?",
+    "explanation": "Hãy nhìn từ 'stoped'. Trong câu hỏi có 'Did', mình không thêm đuôi '-ed' vào động từ. Em hãy đưa nó về nguyên mẫu nhé."
+  },
+  {
+    "topic": "Past Simple",
+    "level": "A2",
+    "student_input": "I didn't go to the cinema last night",
+    "correct_answer": "I didn't go to the cinema last night",
+    "explanation": "Câu này hoàn toàn chính xác! Em đã dùng 'didn't' và động từ nguyên mẫu 'go' rất chuẩn. Rất tốt!"
+  },
+  {
+    "topic": "Past Simple",
+    "level": "A2",
+    "student_input": "You visited the museum yesterday, don't you?",
+    "correct_answer": "You visited the museum yesterday, didn't you?",
+    "explanation": "Câu hỏi đuôi phải hòa hợp với thì của mệnh đề chính. Em hãy nhìn động từ 'visited' đang ở thì nào? Vậy trợ động từ ở phần đuôi nên là 'don't' hay 'didn't' nhỉ?"
+  },
+  {
+    "topic": "Past Simple",
+    "level": "A2",
+    "student_input": "She bought a new car, doesn't she?",
+    "correct_answer": "She bought a new car, didn't she?",
+    "explanation": "Hãy quan sát động từ 'bought' (quá khứ của buy). Để đặt câu hỏi đuôi cho một hành động đã xảy ra trong quá khứ, chúng ta dùng trợ động từ nào em nhỉ?"
+  },
+  {
+    "topic": "Past Simple",
+    "level": "A2",
+    "student_input": "They were happy, didn't they?",
+    "correct_answer": "They were happy, weren't they?",
+    "explanation": "Khi mệnh đề chính sử dụng động từ to-be 'were', phần câu hỏi đuôi cũng phải sử dụng chính động từ to-be đó thay vì dùng trợ động từ 'did'. Em thử sửa lại xem sao?"
+  },
+  {
+    "topic": "Past Simple",
+    "level": "A2",
+    "student_input": "He didn't arrive on time, did he?",
+    "correct_answer": "He didn't arrive on time, did he?",
+    "explanation": "Câu này của em hoàn toàn chính xác! Em đã áp dụng đúng quy tắc: mệnh đề chính phủ định thì câu hỏi đuôi khẳng định và dùng đúng trợ động từ 'did' cho thì quá khứ."
+  },
+  {
+    "topic": "Past Simple",
+    "level": "A2",
+    "student_input": "We played football, aren't we?",
+    "correct_answer": "We played football, didn't we?",
+    "explanation": "Hãy nhìn vào động từ 'played'. Đây là một động từ hành động ở thì quá khứ, không phải động từ to-be. Vậy chúng ta nên dùng 'aren't' hay 'didn't' để hỏi đuôi cho câu này?"
+  },
+  {
+    "topic": "Past Simple",
+    "level": "A2",
+    "student_input": "Now I live in Hanoi, but before I live in Hue.",
+    "correct_answer": "Now I live in Hanoi, but before I lived in Hue.",
+    "explanation": "Câu này có sự đối lập giữa 'bây giờ' (now) và 'trước đây' (before). Vế đầu em dùng hiện tại đơn là đúng, nhưng vế sau nói về quá khứ, vậy động từ 'live' cần được chia như thế nào?"
+  },
+  {
+    "topic": "Past Simple",
+    "level": "A2",
+    "student_input": "I am a student now, but two years ago I am a child.",
+    "correct_answer": "I am a student now, but two years ago I was a child.",
+    "explanation": "Em hãy chú ý cụm từ 'two years ago'. Khi nói về trạng thái của bản thân trong quá khứ, động từ to-be 'am' sẽ chuyển thành từ gì nhỉ?"
+  },
+  {
+    "topic": "Past Simple",
+    "level": "A2",
+    "student_input": "She is a teacher now, but she study Art in college.",
+    "correct_answer": "She is a teacher now, but she studied Art in college.",
+    "explanation": "Việc 'học đại học' (study in college) đã xảy ra và kết thúc trong quá khứ. Em hãy chia lại động từ 'study' cho đúng với thời điểm này nhé."
+  },
+  {
+    "topic": "Past Simple",
+    "level": "A2",
+    "student_input": "My father works in a bank now, but he work in a factory before.",
+    "correct_answer": "My father works in a bank now, but he worked in a factory before.",
+    "explanation": "Hãy nhìn vào từ 'before'. Nó cho thấy hành động làm việc ở nhà máy đã xảy ra trong quá khứ. Động từ 'work' cần được thay đổi như thế nào cho đúng thì quá khứ đơn?"
+  },
+  {
+    "topic": "Past Simple",
+    "level": "A2",
+    "student_input": "It is sunny today, but yesterday it is rainy.",
+    "correct_answer": "It is sunny today, but yesterday it was rainy.",
+    "explanation": "Em đã dùng 'is' cho 'today', rất tốt. Nhưng với 'yesterday', chúng ta cần dạng quá khứ của to-be đi với chủ ngữ 'it'. Đó là từ gì nhỉ?"
+  },
+  {
+    "topic": "Past Simple",
+    "level": "A2",
+    "student_input": "I have a cat now, but I have a dog last year.",
+    "correct_answer": "I have a cat now, but I had a dog last year.",
+    "explanation": "Hãy chú ý mốc thời gian 'last year'. Động từ 'have' là một động từ bất quy tắc, em có nhớ dạng quá khứ của nó là gì không?"
+  },
+  {
+    "topic": "Past Simple",
+    "level": "A2",
+    "student_input": "A few days ago, I go to the cinema with my friends.",
+    "correct_answer": "A few days ago, I went to the cinema with my friends.",
+    "explanation": "Cụm từ 'A few days ago' (vài ngày trước) là dấu hiệu của thì nào nhỉ? Em hãy chuyển động từ 'go' sang dạng quá khứ nhé."
+  },
+  {
+    "topic": "Past Simple",
+    "level": "A2",
+    "student_input": "The movie started a few minutes ago, but I arrive late.",
+    "correct_answer": "The movie started a few minutes ago, but I arrived late.",
+    "explanation": "Cả hai hành động 'phim bắt đầu' và 'tôi đến' đều đã xảy ra. Em đã chia đúng từ 'started', vậy từ 'arrive' thì sao?"
+  },
+  {
+    "topic": "Past Simple",
+    "level": "A2",
+    "student_input": "I didn't see him since a long time ago.",
+    "correct_answer": "I didn't see him a long time ago.",
+    "explanation": "Trong thì quá khứ đơn, để chỉ một thời điểm trong quá khứ, chúng ta dùng 'a long time ago' thay vì dùng 'since'. Em thử bỏ từ 'since' đi xem câu có tự nhiên hơn không?"
+  },
+  {
+    "topic": "Past Simple",
+    "level": "A2",
+    "student_input": "Did you finish the homework two days ago?",
+    "correct_answer": "Did you finish the homework two days ago?",
+    "explanation": "Chính xác! Em đã dùng trợ động từ 'Did' và giữ động từ chính 'finish' ở dạng nguyên mẫu. Rất tốt!"
+  },
+  {
+    "topic": "Past Simple",
+    "level": "A2",
+    "student_input": "She didn't spoke to me the whole day yesterday.",
+    "correct_answer": "She didn't speak to me the whole day yesterday.",
+    "explanation": "Hãy nhớ quy tắc 'Double Past' mà chúng ta đã học: khi đã có trợ động từ 'didn't' gánh vác thì quá khứ, động từ chính 'spoke' nên trở về dạng nào nhỉ?"
+  },
+  {
+    "topic": "Past Simple",
+    "level": "A2",
+    "student_input": "Where did you went for your last vacation?",
+    "correct_answer": "Where did you go for your last vacation?",
+    "explanation": "Trong câu hỏi dùng 'did', động từ chính không được chia ở quá khứ nữa. Em hãy chuyển 'went' về dạng nguyên mẫu nhé."
+  },
+  {
+    "topic": "Past Simple",
+    "level": "A2",
+    "student_input": "I was very tired, so I sleep for 10 hours last night.",
+    "correct_answer": "I was very tired, so I slept for 10 hours last night.",
+    "explanation": "Vế đầu 'I was' đã ở thì quá khứ. Vế sau nói về việc ngủ 'last night', vậy động từ 'sleep' cần chia như thế nào cho đồng nhất?"
+  },
+  {
+    "topic": "Past Simple",
+    "level": "A2",
+    "student_input": "We didn't knew the answer to the question.",
+    "correct_answer": "We didn't know the answer to the question.",
+    "explanation": "Hãy nhìn vào từ 'didn't'. Khi có 'didn't', động từ 'knew' phải được 'giải phóng' về dạng nguyên mẫu. Em hãy sửa lại từ này nhé."
+  },
+  {
+    "topic": "Past Simple",
+    "level": "A2",
+    "student_input": "My sister was born in 2005, she is 19 years old then.",
+    "correct_answer": "My sister was born in 2005, she was 19 years old then.",
+    "explanation": "Từ 'then' (khi đó) ám chỉ một thời điểm trong quá khứ. Vì vậy, động từ 'is' ở vế sau không phù hợp. Em nên dùng từ gì thay thế?"
+  },
+  {
+    "topic": "Past Simple",
+    "level": "A2",
+    "student_input": "Yesterday I woke up early. I didn't brushed my teeth. Did you brushed yours?",
+    "correct_answer": "Yesterday I woke up early. I didn't brush my teeth. Did you brush yours?",
+    "explanation": "Trong đoạn này, em chia 'woke up' rất đúng. Tuy nhiên, ở câu phủ định và câu hỏi, em đang bị lỗi 'Double Past' (dùng cả did và -ed). Em hãy đưa các động từ sau 'didn't' và 'did' về nguyên mẫu nhé."
+  },
+  {
+    "topic": "Past Simple",
+    "level": "A2",
+    "student_input": "I went to the beach, but I didn't swam in the ocean.",
+    "correct_answer": "I went to the beach, but I didn't swim in the ocean.",
+    "explanation": "Hãy nhìn vào cụm 'didn't swam'. Em có nhớ là sau trợ động từ phủ định 'didn't', động từ phải ở dạng nào không? 'Swam' là quá khứ, vậy nguyên mẫu của nó là gì?"
+  },
+  {
+    "topic": "Past Simple",
+    "level": "A2",
+    "student_input": "Last summer, we travel to Da Lat and we stay there for a week.",
+    "correct_answer": "Last summer, we traveled to Da Lat and we stayed there for a week.",
+    "explanation": "Cả hai hành động 'travel' và 'stay' đều xảy ra vào 'last summer'. Em hãy chia cả hai động từ này sang thì quá khứ đơn nhé."
+  },
+  {
+    "topic": "Past Simple",
+    "level": "A2",
+    "student_input": "Did they played the guitar at the party last night?",
+    "correct_answer": "Did they play the guitar at the party last night?",
+    "explanation": "Câu hỏi này đã có trợ động từ 'Did' đứng đầu. Vậy động từ 'played' có cần thiết phải thêm đuôi '-ed' nữa không em?"
+  },
+  {
+    "topic": "Past Simple",
+    "level": "A2",
+    "student_input": "I was at home, so I didn't went to the party.",
+    "correct_answer": "I was at home, so I didn't go to the party.",
+    "explanation": "Lại là lỗi 'Double Past' rồi! 'Didn't' đã chỉ thì quá khứ, nên động từ 'went' cần được đưa về dạng nguyên mẫu. Em thử sửa lại xem."
+  },
+  {
+    "topic": "Past Simple",
+    "level": "A2",
+    "student_input": "The weather was bad, so we didn't had a picnic.",
+    "correct_answer": "The weather was bad, so we didn't have a picnic.",
+    "explanation": "Trong câu phủ định 'didn't had', động từ 'had' đang ở dạng quá khứ. Em hãy chuyển nó về dạng nguyên mẫu của nó là gì nhỉ?"
+  },
+  {
+    "topic": "Past Simple",
+    "level": "A2",
+    "student_input": "When I was a child, I play with dolls every day.",
+    "correct_answer": "When I was a child, I played with dolls every day.",
+    "explanation": "Cụm 'When I was a child' cho thấy đây là một thói quen trong quá khứ. Vậy động từ 'play' cần được chia như thế nào cho đúng?"
+  },
+  {
+    "topic": "Past Simple",
+    "level": "A2",
+    "student_input": "I read a great book last week, but I don't liked the ending.",
+    "correct_answer": "I read a great book last week, but I didn't like the ending.",
+    "explanation": "Vế đầu 'I read' (phát âm là /red/) đã ở quá khứ. Vế sau nói về cảm xúc đối với cái kết của cuốn sách đó (trong quá khứ), vậy thay vì dùng 'don't', em nên dùng trợ động từ nào?"
+  },
+  {
+    "topic": "Past Simple",
+    "level": "A2",
+    "student_input": "Did you saw the eclipse yesterday?",
+    "correct_answer": "Did you see the eclipse yesterday?",
+    "explanation": "Hãy kiểm tra lại động từ 'saw'. Trong câu hỏi với 'Did', động từ chính phải ở dạng nguyên mẫu. Dạng nguyên mẫu của 'saw' là gì em nhỉ?"
+  },
+  {
+    "topic": "Past Simple",
+    "level": "A2",
+    "student_input": "I didn't felt well yesterday, so I stayed in bed.",
+    "correct_answer": "I didn't feel well yesterday, so I stayed in bed.",
+    "explanation": "Em đã chia đúng 'stayed', nhưng hãy nhìn vào 'didn't felt'. Khi có 'didn't', động từ 'felt' cần được đưa về dạng nguyên mẫu. Em sửa lại giúp thầy/cô nhé."
+  },
+  {
+    "topic": "Past Simple",
+    "level": "A2",
+    "student_input": "I buyed a beautiful dress for the party last week.",
+    "correct_answer": "I bought a beautiful dress for the party last week.",
+    "explanation": "Em hãy kiểm tra lại động từ 'buy'. Đây là một động từ bất quy tắc, nên chúng ta không thêm '-ed'. Em có nhớ dạng quá khứ của 'buy' là gì không?"
+  },
+  {
+    "topic": "Past Simple",
+    "level": "A2",
+    "student_input": "She thinked about the problem for a long time yesterday.",
+    "correct_answer": "She thought about the problem for a long time yesterday.",
+    "explanation": "Từ 'think' không tuân theo quy tắc thêm '-ed' khi chuyển sang quá khứ. Em thử tra lại bảng động từ bất quy tắc xem 'think' chuyển thành từ gì nhé!"
+  },
+  {
+    "topic": "Past Simple",
+    "level": "A2",
+    "student_input": "We bringed some snacks to the picnic last Sunday.",
+    "correct_answer": "We brought some snacks to the picnic last Sunday.",
+    "explanation": "Động từ 'bring' là một trường hợp bất quy tắc. Em không thể dùng 'bringed'. Em hãy nhớ lại xem dạng V2 của nó là gì nào?"
+  },
+  {
+    "topic": "Past Simple",
+    "level": "A2",
+    "student_input": "He catched the ball during the game.",
+    "correct_answer": "He caught the ball during the game.",
+    "explanation": "Hãy nhìn vào từ 'catched'. Trong tiếng Anh, động từ 'catch' khi chuyển sang quá khứ sẽ thay đổi cách viết chứ không thêm '-ed'. Em thử sửa lại xem sao?"
+  },
+  {
+    "topic": "Past Simple",
+    "level": "A2",
+    "student_input": "I feelled very sad when my dog died.",
+    "correct_answer": "I felt very sad when my dog died.",
+    "explanation": "Em đã chia đúng 'died', nhưng từ 'feelled' thì chưa chính xác. Động từ 'feel' là động từ bất quy tắc, em hãy tìm dạng quá khứ đúng của nó nhé."
+  },
+  {
+    "topic": "Past Simple",
+    "level": "A2",
+    "student_input": "They builded this house fifty years ago.",
+    "correct_answer": "They built this house fifty years ago.",
+    "explanation": "Hãy chú ý động từ 'build'. Khi nói về việc xây dựng trong quá khứ, chúng ta không dùng 'builded'. Em có biết dạng đúng của nó là gì không?"
+  },
+  {
+    "topic": "Past Simple",
+    "level": "A2",
+    "student_input": "The teacher teached us a new lesson yesterday.",
+    "correct_answer": "The teacher taught us a new lesson yesterday.",
+    "explanation": "Động từ 'teach' có dạng quá khứ rất đặc biệt, không phải là 'teached'. Em hãy thử nhớ lại xem nó biến đổi thành từ gì nhỉ?"
+  },
+  {
+    "topic": "Past Simple",
+    "level": "A2",
+    "student_input": "I sleeped for 10 hours because I was exhausted.",
+    "correct_answer": "I slept for 10 hours because I was exhausted.",
+    "explanation": "Em dùng 'was' rất chính xác! Tuy nhiên, động từ 'sleep' là động từ bất quy tắc. Em hãy bỏ đuôi '-ed' và chuyển nó sang dạng quá khứ đúng nhé."
+  },
+  {
+    "topic": "Past Simple",
+    "level": "A2",
+    "student_input": "She keeped the secret for many years.",
+    "correct_answer": "She kept the secret for many years.",
+    "explanation": "Hãy kiểm tra lại động từ 'keep'. Đây là một động từ bất quy tắc. Em hãy thử thay thế 'keeped' bằng dạng V2 chính xác của nó."
+  },
+  {
+    "topic": "Past Simple",
+    "level": "A2",
+    "student_input": "We spended all our money on the trip.",
+    "correct_answer": "We spent all our money on the trip.",
+    "explanation": "Động từ 'spend' (tiêu xài/dành thời gian) không thêm '-ed'. Em có nhớ dạng quá khứ của 'spend' là gì không?"
+  },
+  {
+    "topic": "Past Simple",
+    "level": "A2",
+    "student_input": "Was you at home when I called you?",
+    "correct_answer": "Were you at home when I called you?",
+    "explanation": "Em đã dùng đúng thì quá khứ, nhưng hãy nhìn vào chủ ngữ 'you'. Với 'you', chúng ta dùng 'was' hay 'were' cho động từ to-be nhỉ?"
+  },
+  {
+    "topic": "Past Simple",
+    "level": "A2",
+    "student_input": "The cakes was delicious, but the coffee was bitter.",
+    "correct_answer": "The cakes were delicious, but the coffee was bitter.",
+    "explanation": "Hãy nhìn vào chủ ngữ 'The cakes'. Đây là danh từ số nhiều, vậy động từ to-be đi kèm phải là 'was' hay 'were' mới chính xác?"
+  },
+  {
+    "topic": "Past Simple",
+    "level": "A2",
+    "student_input": "Did she was happy with the result?",
+    "correct_answer": "Was she happy with the result?",
+    "explanation": "Đây là một lỗi rất phổ biến! Khi trong câu có tính từ 'happy', chúng ta cần động từ to-be. Trong quá khứ, to-be tự đứng một mình để làm câu hỏi, không cần trợ động từ 'did'. Em thử bỏ 'did' và chia lại to-be xem."
+  },
+  {
+    "topic": "Past Simple",
+    "level": "A2",
+    "student_input": "I didn't was at school yesterday.",
+    "correct_answer": "I wasn't at school yesterday.",
+    "explanation": "Hãy nhớ: 'was/were' là một hệ thống riêng, không đi cùng với 'did/didn't'. Để phủ định 'I was', em chỉ cần thêm 'not' vào sau 'was'. Em hãy sửa lại nhé."
+  },
+  {
+    "topic": "Past Simple",
+    "level": "A2",
+    "student_input": "Were they go to the park last Sunday?",
+    "correct_answer": "Did they go to the park last Sunday?",
+    "explanation": "Trong câu này, 'go' là một động từ hành động. Để đặt câu hỏi với động từ hành động ở quá khứ, chúng ta dùng trợ động từ nào thay cho 'were' nhỉ?"
+  },
+  {
+    "topic": "Past Simple",
+    "level": "A2",
+    "student_input": "I was read a book when the phone rang.",
+    "correct_answer": "I read a book when the phone rang.",
+    "explanation": "Em đang dùng cả 'was' (to-be) và 'read' (động từ hành động) cùng một lúc. Nếu em muốn nói về một hành động đơn giản trong quá khứ, em chỉ cần dùng động từ chia ở V2 thôi. Em thử bỏ 'was' đi xem?"
+  },
+  {
+    "topic": "Past Simple",
+    "level": "A2",
+    "student_input": "She didn't had any breakfast this morning.",
+    "correct_answer": "She didn't have any breakfast this morning.",
+    "explanation": "Hãy áp dụng quy tắc 'giải phóng động từ': khi đã có 'didn't' gánh vác thì quá khứ, động từ 'had' phải quay về dạng nguyên mẫu. Dạng nguyên mẫu của 'had' là gì em nhỉ?"
+  },
+  {
+    "topic": "Past Simple",
+    "level": "A2",
+    "student_input": "We was very tired after the long walk.",
+    "correct_answer": "We were very tired after the long walk.",
+    "explanation": "Em hãy nhìn vào chủ ngữ 'We'. Trong thì quá khứ, 'We' đi với 'was' hay 'were' nhỉ?"
+  },
+  {
+    "topic": "Past Simple",
+    "level": "A2",
+    "student_input": "Did you saw the movie I told you about?",
+    "correct_answer": "Did you see the movie I told you about?",
+    "explanation": "Trong câu hỏi có 'did', động từ 'saw' không được để ở dạng quá khứ. Em hãy chuyển nó về dạng nguyên mẫu nhé."
+  },
+  {
+    "topic": "Past Simple",
+    "level": "A2",
+    "student_input": "I write a letter to my grandmother last month.",
+    "correct_answer": "I wrote a letter to my grandmother last month.",
+    "explanation": "Cụm từ 'last month' cho biết hành động này đã xảy ra. Động từ 'write' là bất quy tắc, em hãy chuyển nó sang dạng quá khứ nào."
+  },
+  {
+    "topic": "Past Simple",
+    "level": "A2",
+    "student_input": "He didn't’ felt the pain at first.",
+    "correct_answer": "He didn't feel the pain at first.",
+    "explanation": "Lỗi 'Double Past' lại xuất hiện rồi! Sau 'didn't', động từ 'felt' phải ở dạng nguyên mẫu. Em hãy sửa lại nhé."
+  },
+  {
+    "topic": "Past Simple",
+    "level": "A2",
+    "student_input": "The children runned very fast to the playground.",
+    "correct_answer": "The children ran very fast to the playground.",
+    "explanation": "Động từ 'run' không thêm '-ed' khi chia quá khứ. Em có nhớ dạng V2 của 'run' là gì không?"
+  },
+  {
+    "topic": "Past Simple",
+    "level": "A2",
+    "student_input": "I forgot my keys, so I openned the window.",
+    "correct_answer": "I forgot my keys, so I opened the window.",
+    "explanation": "Em chia 'forgot' rất đúng! Nhưng hãy nhìn từ 'openned', động từ 'open' chỉ cần thêm một chữ 'd' thôi, không cần gấp đôi chữ 'n'. Em sửa lại chút nhé."
+  },
+  {
+    "topic": "Past Simple",
+    "level": "A2",
+    "student_input": "She was win the competition last year.",
+    "correct_answer": "She won the competition last year.",
+    "explanation": "Em không cần dùng 'was' ở đây vì 'win' là một động từ hành động. Em chỉ cần chia 'win' sang dạng quá khứ (V2) là đủ. Thử xem nào!"
+  },
+  {
+    "topic": "Past Simple",
+    "level": "A2",
+    "student_input": "Did they’ve a good time at the party?",
+    "correct_answer": "Did they have a good time at the party?",
+    "explanation": "Khi dùng trợ động từ 'did' để hỏi, chúng ta không dùng dạng viết tắt '’ve' (have) như vậy. Em hãy viết đầy đủ động từ nguyên mẫu 'have' nhé."
+  },
+  {
+    "topic": "Past Simple",
+    "level": "A2",
+    "student_input": "I drinked a glass of milk before bed last night.",
+    "correct_answer": "I drank a glass of milk before bed last night.",
+    "explanation": "Hãy kiểm tra lại động từ 'drink'. Đây là động từ bất quy tắc, không phải 'drinked'. Dạng quá khứ của nó là gì em nhỉ?"
+  },
+  {
+    "topic": "Past Simple",
+    "level": "A2",
+    "student_input": "We didn't went to the beach because it rained.",
+    "correct_answer": "We didn't go to the beach because it rained.",
+    "explanation": "Em chia 'rained' rất tốt! Tuy nhiên, vế trước 'didn't went' lại bị lỗi 'Double Past'. Em hãy đưa 'went' về nguyên mẫu nhé."
+  },
+  {
+    "topic": "Past Simple",
+    "level": "A2",
+    "student_input": "My mom make a delicious cake for my birthday.",
+    "correct_answer": "My mom made a delicious cake for my birthday.",
+    "explanation": "Sinh nhật này đã diễn ra rồi, nên động từ 'make' cần chia ở quá khứ. Em có nhớ 'make' chuyển thành gì không?"
+  },
+  {
+    "topic": "Past Simple",
+    "level": "A2",
+    "student_input": "I was go to the library yesterday afternoon.",
+    "correct_answer": "I went to the library yesterday afternoon.",
+    "explanation": "Lại là lỗi kết hợp 'was' + 'động từ'. Em hãy bỏ 'was' và chia động từ 'go' sang dạng quá khứ nhé."
+  },
+  {
+    "topic": "Past Simple",
+    "level": "A2",
+    "student_input": "Did you’re at the meeting this morning?",
+    "correct_answer": "Were you at the meeting this morning?",
+    "explanation": "Khi muốn hỏi ai đó 'có ở đâu đó không' trong quá khứ, chúng ta dùng 'Were you...?' chứ không dùng 'Did you’re'. Em thử sửa lại xem."
+  },
+  {
+    "topic": "Past Simple",
+    "level": "A2",
+    "student_input": "Last weekend was great. I go to the beach and I didn't felt sick like last time.",
+    "correct_answer": "Last weekend was great. I went to the beach and I didn't feel sick like last time.",
+    "explanation": "Đoạn văn của em có khởi đầu rất tốt với 'was'. Tuy nhiên, có hai lỗi ở vế sau: một động từ chưa chia quá khứ và một lỗi 'Double Past'. Em hãy kiểm tra lại từ 'go' và 'didn't felt' nhé!"
+  },
+  {
+    "topic": "Past Simple",
+    "level": "A2",
+    "student_input": "Yesterday, I woke up at 7. I eat breakfast and then I go to work.",
+    "correct_answer": "Yesterday, I woke up at 7. I ate breakfast and then I went to work.",
+    "explanation": "Em đã chia đúng 'woke up'. Nhưng để câu chuyện đồng nhất về thời gian, hai động từ 'eat' và 'go' cũng cần được chuyển sang dạng quá khứ. Em có nhớ dạng V2 của hai từ này là gì không?"
+  },
+  {
+    "topic": "Past Simple",
+    "level": "A2",
+    "student_input": "Did you saw the movie? I did, but I didn't liked it.",
+    "correct_answer": "Did you see the movie? I did, but I didn't like it.",
+    "explanation": "Câu này em mắc lỗi 'Double Past' ở cả hai vế: sau 'Did' và sau 'didn't'. Em hãy đưa cả hai động từ 'saw' và 'liked' về dạng nguyên mẫu nhé."
+  },
+  {
+    "topic": "Past Simple",
+    "level": "A2",
+    "student_input": "When I was young, I live in a small village. It were very quiet.",
+    "correct_answer": "When I was young, I lived in a small village. It was very quiet.",
+    "explanation": "Em có hai lỗi nhỏ: Động từ 'live' cần được chia quá khứ, và động từ to-be đi với chủ ngữ 'It' phải là 'was' hay 'were' nhỉ?"
+  },
+  {
+    "topic": "Past Simple",
+    "level": "A2",
+    "student_input": "I didn't knew that you were here yesterday.",
+    "correct_answer": "I didn't know that you were here yesterday.",
+    "explanation": "Em dùng 'were' rất chính xác. Tuy nhiên, hãy nhìn vào 'didn't knew'. Khi đã có trợ động từ 'didn't', động từ chính phải ở dạng nào em nhỉ?"
+  },
+  {
+    "topic": "Past Simple",
+    "level": "A2",
+    "student_input": "We was at the party, but we didn't danced.",
+    "correct_answer": "We were at the party, but we didn't dance.",
+    "explanation": "Có hai điểm cần sửa: Một là to-be đi với 'We', hai là động từ sau 'didn't'. Em hãy điều chỉnh lại 'was' và 'danced' nhé."
+  },
+  {
+    "topic": "Past Simple",
+    "level": "A2",
+    "student_input": "He’s a doctor now, but he study history ten years ago.",
+    "correct_answer": "He’s a doctor now, but he studied history ten years ago.",
+    "explanation": "Sự đối lập giữa 'now' và 'ten years ago' yêu cầu em phải chia thì cho vế sau. Động từ 'study' nên được viết lại như thế nào cho đúng thì quá khứ?"
+  },
+  {
+    "topic": "Past Simple",
+    "level": "A2",
+    "student_input": "Did you had a good sleep last night?",
+    "correct_answer": "Did you have a good sleep last night?",
+    "explanation": "Hãy nhớ quy tắc: Trong câu hỏi với 'Did', động từ chính không được chia ở quá khứ. Em hãy chuyển 'had' về dạng nguyên mẫu nhé."
+  },
+  {
+    "topic": "Past Simple",
+    "level": "A2",
+    "student_input": "I write a poem and then I readed it to the class.",
+    "correct_answer": "I wrote a poem and then I read it to the class.",
+    "explanation": "Cả hai động từ 'write' và 'read' đều là bất quy tắc. 'Write' chuyển thành 'wrote', vậy còn 'readed' thì sao? (Gợi ý: từ này viết giống hệt nhưng phát âm khác)."
+  },
+  {
+    "topic": "Past Simple",
+    "level": "A2",
+    "student_input": "The weather was cold, so we didn't went out.",
+    "correct_answer": "The weather was cold, so we didn't go out.",
+    "explanation": "Vế đầu 'was' rất chuẩn. Nhưng vế sau em lại mắc lỗi 'Double Past' với 'didn't went'. Em hãy đưa 'went' về nguyên mẫu nhé."
+  },
+  {
+    "topic": "Past Simple",
+    "level": "A2",
+    "student_input": "Why you were late for the meeting yesterday?",
+    "correct_answer": "Why were you late for the meeting yesterday?",
+    "explanation": "Trong câu hỏi với động từ to-be, em cần đảo vị trí của to-be lên trước chủ ngữ. Em hãy thử đảo 'were' và 'you' xem sao."
+  },
+  {
+    "topic": "Past Simple",
+    "level": "A2",
+    "student_input": "I’m tired now because I work hard yesterday.",
+    "correct_answer": "I’m tired now because I worked hard yesterday.",
+    "explanation": "Vì lý do khiến em mệt là việc 'work' đã xảy ra 'yesterday', nên động từ này cần được chia ở thì quá khứ đơn. Em hãy sửa lại nhé."
+  },
+  {
+    "topic": "Past Simple",
+    "level": "A2",
+    "student_input": "She didn't came to the party, did she?",
+    "correct_answer": "She didn't come to the party, did she?",
+    "explanation": "Phần câu hỏi đuôi 'did she' của em rất chính xác! Nhưng hãy nhìn lại 'didn't came'. Sau 'didn't', động từ 'came' phải ở dạng nào nhỉ?"
+  },
+  {
+    "topic": "Past Simple",
+    "level": "A2",
+    "student_input": "They was very happy when they win the game.",
+    "correct_answer": "They were very happy when they won the game.",
+    "explanation": "Câu này có hai lỗi: to-be đi với 'They' và dạng quá khứ của động từ 'win'. Em hãy sửa lại cả hai nhé."
+  },
+  {
+    "topic": "Past Simple",
+    "level": "A2",
+    "student_input": "I forgot my umbrella, so I get wet.",
+    "correct_answer": "I forgot my umbrella, so I got wet.",
+    "explanation": "Em đã chia 'forgot' đúng rồi. Hành động 'get wet' (bị ướt) cũng xảy ra trong quá khứ, vậy em hãy chia 'get' sang V2 nhé."
+  },
+  {
+    "topic": "Past Simple",
+    "level": "A2",
+    "student_input": "Did she’s at the cinema last night?",
+    "correct_answer": "Was she at the cinema last night?",
+    "explanation": "Khi muốn hỏi về vị trí/trạng thái trong quá khứ, em dùng 'Was/Were' làm trợ động từ luôn, không dùng 'Did'. Em hãy thay 'Did she’s' bằng 'Was she' nhé."
+  },
+  {
+    "topic": "Past Simple",
+    "level": "A2",
+    "student_input": "I was go to bed late, so I was tired this morning.",
+    "correct_answer": "I went to bed late, so I was tired this morning.",
+    "explanation": "Em bị nhầm lẫn giữa to-be và động từ hành động. 'Go' là hành động, nên em không dùng 'was go'. Hãy chuyển 'go' sang dạng quá khứ nhé."
+  },
+  {
+    "topic": "Past Simple",
+    "level": "A2",
+    "student_input": "We didn't spend much money, but we buyed a lot of souvenirs.",
+    "correct_answer": "We didn't spend much money, but we bought a lot of souvenirs.",
+    "explanation": "Vế đầu em chia 'didn't spend' rất tốt. Tuy nhiên, 'buyed' là sai vì 'buy' là động từ bất quy tắc. Em hãy sửa lại từ này."
+  },
+  {
+    "topic": "Past Simple",
+    "level": "A2",
+    "student_input": "Where did you stayed in Paris?",
+    "correct_answer": "Where did you stay in Paris?",
+    "explanation": "Hãy nhớ lại quy tắc 'giải phóng động từ': khi có 'did' trong câu hỏi, động từ 'stayed' nên trở về dạng nào?"
+  },
+  {
+    "topic": "Past Simple",
+    "level": "A2",
+    "student_input": "I seed a ghost in my dream last night!",
+    "correct_answer": "I saw a ghost in my dream last night!",
+    "explanation": "Động từ 'see' là bất quy tắc, nên chúng ta không thêm '-ed'. Em hãy tra lại dạng V2 của 'see' nhé."
+  }
+]

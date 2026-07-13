@@ -54,7 +54,7 @@ desktop.ini
 docker-volumes/
 
 # AI datasets, outputs, model artifacts and runtime state
-data/
+# data/
 outputs/
 responses/
 results/

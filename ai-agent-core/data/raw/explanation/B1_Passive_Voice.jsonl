@@ -1,0 +1,317 @@
+[
+  {
+    "topic": "Passive Voice",
+    "level": "B1",
+    "student_input": "The window broke by the wind.",
+    "correct_answer": "The window was broken by the wind.",
+    "explanation": "Hãy nhìn vào chủ ngữ 'The window'. Chiếc cửa sổ có thể tự 'làm vỡ' chính nó không, hay nó 'bị' gió làm vỡ? Trong câu bị động, chúng ta cần một trợ động từ 'to-be' đứng trước động từ chính. Em hãy thêm to-be phù hợp vào nhé."
+  },
+  {
+    "topic": "Passive Voice",
+    "level": "B1",
+    "student_input": "This song was sing by Adele.",
+    "correct_answer": "This song was sung by Adele.",
+    "explanation": "Em dùng 'was' là chính xác để tạo câu bị động. Tuy nhiên, hãy nhìn lại động từ 'sing'. Trong cấu trúc bị động (To-be + V3), chúng ta dùng dạng V2 hay V3 của động từ nhỉ? Em hãy tra lại dạng phân từ II của 'sing' nhé."
+  },
+  {
+    "topic": "Passive Voice",
+    "level": "B1",
+    "student_input": "Letters are deliver every morning.",
+    "correct_answer": "Letters are delivered every morning.",
+    "explanation": "Em đã dùng 'are' cho chủ ngữ số nhiều, rất tốt. Nhưng hãy kiểm tra lại động từ 'deliver'. Để hoàn tất cấu trúc bị động, động từ này cần được chia ở dạng nào (V1, V2 hay V3)?"
+  },
+  {
+    "topic": "Passive Voice",
+    "level": "B1",
+    "student_input": "The cake eaten by my sister.",
+    "correct_answer": "The cake was eaten by my sister.",
+    "explanation": "Câu này của em đang thiếu một thành phần cực kỳ quan trọng. 'The cake' không thể tự 'ăn', nên đây là câu bị động. Em có nhớ công thức câu bị động là 'To-be + V3' không? Em hãy thêm to-be vào nhé."
+  },
+  {
+    "topic": "Passive Voice",
+    "level": "B1",
+    "student_input": "The room was clean yesterday.",
+    "correct_answer": "The room was cleaned yesterday.",
+    "explanation": "Hãy cẩn thận nhé! Từ 'clean' ở đây có thể là một tính từ, nhưng em đang muốn nói về hành động 'được dọn dẹp'. Để tạo thành câu bị động, động từ 'clean' cần phải được chia ở dạng V3. Em hãy thêm đuôi gì vào sau nó nhỉ?"
+  },
+  {
+    "topic": "Passive Voice",
+    "level": "B1",
+    "student_input": "The car was stole last night.",
+    "correct_answer": "The car was stolen last night.",
+    "explanation": "Em dùng 'was' rất chuẩn. Tuy nhiên, hãy nhìn vào từ 'stole'. Đây là dạng V2 (quá khứ đơn). Trong câu bị động, chúng ta bắt buộc phải dùng dạng V3. V3 của 'steal' là gì em nhỉ?"
+  },
+  {
+    "topic": "Passive Voice",
+    "level": "B1",
+    "student_input": "English is speak all over the world.",
+    "correct_answer": "English is spoken all over the world.",
+    "explanation": "Tiếng Anh không thể tự 'nói', mà 'được nói' bởi con người. Em đã có 'is', nhưng động từ 'speak' hiện đang ở dạng nguyên mẫu. Em hãy chuyển nó sang dạng V3 để đúng cấu trúc bị động nhé."
+  },
+  {
+    "topic": "Passive Voice",
+    "level": "B1",
+    "student_input": "The mistake was make by the manager.",
+    "correct_answer": "The mistake was made by the manager.",
+    "explanation": "Hãy kiểm tra lại động từ 'make'. Trong câu bị động, chúng ta dùng 'be + V3'. 'Make' là động từ bất quy tắc, vậy dạng V3 của nó là gì em nhỉ?"
+  },
+  {
+    "topic": "Passive Voice",
+    "level": "B1",
+    "student_input": "The documents are send via email.",
+    "correct_answer": "The documents are sent via email.",
+    "explanation": "Em dùng 'are' cho số nhiều là chính xác. Nhưng hãy nhìn vào từ 'send'. Để tạo thành câu bị động, em cần dùng dạng phân từ II (V3) của 'send'. Em thử sửa lại xem sao."
+  },
+  {
+    "topic": "Passive Voice",
+    "level": "B1",
+    "student_input": "My bike was fix by my dad.",
+    "correct_answer": "My bike was fixed by my dad.",
+    "explanation": "Hãy nhìn vào động từ 'fix'. Trong câu bị động, động từ chính phải được chia ở dạng V3. Em hãy thêm đuôi '-ed' vào sau 'fix' để hoàn thiện câu nhé."
+  },
+  {
+    "topic": "Passive Voice",
+    "level": "B1",
+    "student_input": "The dinner is cook by my mom.",
+    "correct_answer": "The dinner is cooked by my mom.",
+    "explanation": "Bữa tối không thể tự 'nấu', nên đây là câu bị động. Em đã có 'is', nhưng 'cook' đang ở dạng nguyên mẫu. Em hãy chuyển nó sang dạng V3 nhé."
+  },
+  {
+    "topic": "Passive Voice",
+    "level": "B1",
+    "student_input": "The book was wrote in 1920.",
+    "correct_answer": "The book was written in 1920.",
+    "explanation": "Hãy chú ý từ 'wrote'. Đây là dạng V2 của động từ 'write'. Nhưng quy tắc của câu bị động là 'To-be + V3'. Em có nhớ dạng V3 của 'write' là gì không?"
+  },
+  {
+    "topic": "Passive Voice",
+    "level": "B1",
+    "student_input": "The trash is collect every Tuesday.",
+    "correct_answer": "The trash is collected every Tuesday.",
+    "explanation": "Hãy nhìn vào 'is collect'. Để diễn tả hành động 'được thu gom', em cần chuyển động từ 'collect' sang dạng V3. Em hãy thêm đuôi '-ed' vào nhé."
+  },
+  {
+    "topic": "Passive Voice",
+    "level": "B1",
+    "student_input": "These photos were took in Paris.",
+    "correct_answer": "These photos were taken in Paris.",
+    "explanation": "Em dùng 'were' cho số nhiều là rất tốt. Tuy nhiên, hãy nhìn vào từ 'took'. Đây là dạng V2. Trong câu bị động, chúng ta cần V3 của 'take'. Em thử sửa lại xem nào."
+  },
+  {
+    "topic": "Passive Voice",
+    "level": "B1",
+    "student_input": "The project was finish on time.",
+    "correct_answer": "The project was finished on time.",
+    "explanation": "Dự án 'được hoàn thành' $\rightarrow$ Câu bị động. Em đã có 'was', nhưng 'finish' hiện đang ở dạng nguyên mẫu. Em hãy chia nó sang dạng V3 nhé."
+  },
+  {
+    "topic": "Passive Voice",
+    "level": "B1",
+    "student_input": "The report is being write at the moment.",
+    "correct_answer": "The report is being written at the moment.",
+    "explanation": "Em đã dùng 'is being' cho thì hiện tại tiếp diễn rất chính xác! Tuy nhiên, hãy nhìn lại động từ 'write'. Trong mọi câu bị động, bất kể là thì nào, động từ chính phải ở dạng gì em nhỉ? Em hãy chuyển 'write' sang V3 nhé."
+  },
+  {
+    "topic": "Passive Voice",
+    "level": "B1",
+    "student_input": "The house is painted right now.",
+    "correct_answer": "The house is being painted right now.",
+    "explanation": "Hãy chú ý cụm 'right now' (ngay bây giờ). Em đang muốn nói ngôi nhà 'đang được' sơn (tiếp diễn). Trong câu bị động của thì tiếp diễn, chúng ta cần thêm một từ gì đứng sau 'is' để thể hiện sự tiếp diễn nhỉ?"
+  },
+  {
+    "topic": "Passive Voice",
+    "level": "B1",
+    "student_input": "The letters have delivered already.",
+    "correct_answer": "The letters have been delivered already.",
+    "explanation": "Hãy phân tích: 'The letters' (những bức thư) không thể tự 'giao', mà phải 'được giao'. Em đang dùng thì Hiện tại hoàn thành, vậy để tạo câu bị động cho thì này, em cần thêm từ gì vào giữa 'have' và 'delivered'?"
+  },
+  {
+    "topic": "Passive Voice",
+    "level": "B1",
+    "student_input": "The project has finished by the team.",
+    "correct_answer": "The project has been finished by the team.",
+    "explanation": "Câu này của em hiện đang mang nghĩa chủ động: 'Dự án đã hoàn thành (tự nó làm)'. Để chuyển sang nghĩa 'được hoàn thành', em cần thêm trợ động từ nào của To-be vào sau 'has' để đúng cấu trúc bị động của thì hoàn thành?"
+  },
+  {
+    "topic": "Passive Voice",
+    "level": "B1",
+    "student_input": "The bridge will build next year.",
+    "correct_answer": "The bridge will be built next year.",
+    "explanation": "Hãy nhìn vào thì tương lai với 'will'. Trong câu bị động, sau 'will' chúng ta không dùng động từ nguyên mẫu mà phải có một cấu trúc gồm 'To-be nguyên mẫu + V3'. Em hãy thêm từ gì vào sau 'will' và chia lại động từ 'build' nhé."
+  },
+  {
+    "topic": "Passive Voice",
+    "level": "B1",
+    "student_input": "The dinner will be cook by my father tomorrow.",
+    "correct_answer": "The dinner will be cooked by my father tomorrow.",
+    "explanation": "Em đã dùng 'will be' cho tương lai bị động rất chuẩn! Nhưng hãy nhìn lại động từ 'cook'. Em hãy nhớ quy tắc 'vàng' của câu bị động: Động từ chính luôn phải ở dạng nào?"
+  },
+  {
+    "topic": "Passive Voice",
+    "level": "B1",
+    "student_input": "The room was cleaning when I arrived.",
+    "correct_answer": "The room was being cleaned when I arrived.",
+    "explanation": "Khi em 'đến' (arrived), việc 'dọn phòng' đang diễn ra. Đây là bị động của thì Quá khứ tiếp diễn. Để diễn tả hành động 'đang được làm' trong quá khứ, em cần thêm từ gì vào sau 'was' nhỉ?"
+  },
+  {
+    "topic": "Passive Voice",
+    "level": "B1",
+    "student_input": "The car was being fix yesterday afternoon.",
+    "correct_answer": "The car was being fixed yesterday afternoon.",
+    "explanation": "Em dùng 'was being' để chỉ sự tiếp diễn trong quá khứ là rất tốt. Tuy nhiên, động từ 'fix' cần phải được chia ở dạng phân từ II (V3) để hoàn tất cấu trúc bị động. Em sửa lại nhé."
+  },
+  {
+    "topic": "Passive Voice",
+    "level": "B1",
+    "student_input": "The cake had been eat before the party started.",
+    "correct_answer": "The cake had been eaten before the party started.",
+    "explanation": "Em dùng 'had been' cho thì Quá khứ hoàn thành bị động là chính xác. Nhưng hãy kiểm tra lại động từ 'eat'. V3 của 'eat' là gì em nhỉ? Em hãy thay 'eat' bằng dạng đúng nhé."
+  },
+  {
+    "topic": "Passive Voice",
+    "level": "B1",
+    "student_input": "The window had broken before we noticed.",
+    "correct_answer": "The window had been broken before we noticed.",
+    "explanation": "Hãy phân tích: Chiếc cửa sổ 'bị vỡ' trước khi chúng ta nhận ra. Em đang dùng thì Quá khứ hoàn thành, nhưng lại thiếu trợ động từ To-be để tạo thành câu bị động. Em hãy thêm từ gì vào sau 'had'?"
+  },
+  {
+    "topic": "Passive Voice",
+    "level": "B1",
+    "student_input": "The meeting should be organize next week.",
+    "correct_answer": "The meeting should be organized next week.",
+    "explanation": "Với Modal Verb 'should', cấu trúc bị động là 'should + be + V3'. Em đã có 'should be', nhưng 'organize' vẫn đang ở dạng nguyên mẫu. Em hãy chia nó sang V3 nhé."
+  },
+  {
+    "topic": "Passive Voice",
+    "level": "B1",
+    "student_input": "The problem can solve easily.",
+    "correct_answer": "The problem can be solved easily.",
+    "explanation": "Vấn đề không thể 'tự giải quyết' mà phải 'được giải quyết'. Em đang dùng 'can' (Modal Verb), vậy cấu trúc bị động cho 'can' sẽ là 'can + ... + V3'. Em hãy thêm To-be nguyên mẫu vào giữa nhé."
+  },
+  {
+    "topic": "Passive Voice",
+    "level": "B1",
+    "student_input": "The movie is being watch by millions of people.",
+    "correct_answer": "The movie is being watched by millions of people.",
+    "explanation": "Em dùng 'is being' cho thì hiện tại tiếp diễn rất chuẩn. Tuy nhiên, động từ 'watch' cần được chia ở dạng V3. Em hãy thêm đuôi '-ed' vào nhé."
+  },
+  {
+    "topic": "Passive Voice",
+    "level": "B1",
+    "student_input": "My bike has steal!",
+    "correct_answer": "My bike has been stolen!",
+    "explanation": "Câu này mang nghĩa 'Xe tôi bị trộm rồi!'. Em đang dùng thì Hiện tại hoàn thành. Để tạo câu bị động cho thì này, em cần cấu trúc 'has + ... + V3'. Em hãy thêm trợ động từ To-be phù hợp và sửa 'steal' thành V3 nhé."
+  },
+  {
+    "topic": "Passive Voice",
+    "level": "B1",
+    "student_input": "The flowers were be watered every morning.",
+    "correct_answer": "The flowers were watered every morning.",
+    "explanation": "Hãy nhìn vào 'were be'. 'Were' đã là động từ To-be của thì Quá khứ đơn rồi, em không cần thêm 'be' nữa. Em chỉ cần 'To-be + V3' là đủ. Em hãy bỏ 'be' đi và kiểm tra lại 'watered' nhé."
+  },
+  {
+    "topic": "Passive Voice",
+    "level": "B1",
+    "student_input": "My bike was stolen by someone last night.",
+    "correct_answer": "My bike was stolen last night.",
+    "explanation": "Câu của em đúng ngữ pháp, nhưng hãy suy nghĩ: Khi một chiếc xe bị trộm, chúng ta thường có biết chính xác 'ai' (someone) đã lấy nó không? Khi tác nhân là không xác định hoặc không quan trọng, em nên làm gì với cụm 'by someone' để câu tự nhiên hơn?"
+  },
+  {
+    "topic": "Passive Voice",
+    "level": "B1",
+    "student_input": "The thief was arrested by the police.",
+    "correct_answer": "The thief was arrested.",
+    "explanation": "Em dùng cấu trúc bị động rất chuẩn. Tuy nhiên, trong thực tế, ai là người có nhiệm vụ bắt tội phạm? Vì 'cảnh sát' là tác nhân hiển nhiên, chúng ta có cần thiết phải viết 'by the police' vào câu không? Em thử lược bỏ nó xem sao."
+  },
+  {
+    "topic": "Passive Voice",
+    "level": "B1",
+    "student_input": "A famous artist painted this picture in 1890.",
+    "correct_answer": "This picture was painted in 1890 (by a famous artist).",
+    "explanation": "Câu chủ động của em đúng, nhưng nếu em muốn nhấn mạnh vào 'bức tranh' (đối tượng quý giá) thay vì người họa sĩ, em nên chuyển câu này sang dạng nào? Hãy thử đưa 'This picture' lên làm chủ ngữ xem."
+  },
+  {
+    "topic": "Passive Voice",
+    "level": "B1",
+    "student_input": "The cake was eaten by me.",
+    "correct_answer": "I ate the cake.",
+    "explanation": "Về ngữ pháp thì đúng, nhưng hãy cảm nhận: Khi em là người ăn chiếc bánh, việc dùng bị động 'was eaten by me' làm câu trở nên rất nặng nề và không tự nhiên. Trong trường hợp này, dùng câu chủ động hay bị động sẽ hiệu quả hơn?"
+  },
+  {
+    "topic": "Passive Voice",
+    "level": "B1",
+    "student_input": "People say that he is a great leader.",
+    "correct_answer": "It is said that he is a great leader. / He is said to be a great leader.",
+    "explanation": "Câu 'People say' thường dùng trong văn nói. Để câu nói mang tính khách quan và trang trọng hơn (như trong báo cáo hoặc tin tức), em hãy thử dùng cấu trúc bị động với chủ ngữ giả 'It'. Em có nhớ công thức 'It + is + V3 + that...' không?"
+  },
+  {
+    "topic": "Passive Voice",
+    "level": "B1",
+    "student_input": "My house was cleaned by a cleaning service.",
+    "correct_answer": "My house was cleaned.",
+    "explanation": "Khi em nói 'nhà tôi đã được dọn dẹp', người nghe thường chỉ quan tâm đến kết quả là 'nhà sạch'. Việc 'một dịch vụ dọn dẹp' làm việc đó là điều hiển nhiên. Em có thể lược bỏ phần 'by...' để câu gọn gàng hơn không?"
+  },
+  {
+    "topic": "Passive Voice",
+    "level": "B1",
+    "student_input": "Someone has broken the window.",
+    "correct_answer": "The window has been broken.",
+    "explanation": "Em đang dùng câu chủ động với 'Someone'. Nhưng nếu em muốn thông báo cho mọi người về tình trạng của chiếc cửa sổ (điều quan trọng nhất), em nên chuyển đối tượng 'The window' lên đầu câu. Em hãy thử viết lại ở dạng bị động nhé."
+  },
+  {
+    "topic": "Passive Voice",
+    "level": "B1",
+    "student_input": "The law was passed by the government last month.",
+    "correct_answer": "The law was passed last month.",
+    "explanation": "Trong chính trị, việc 'chính phủ thông qua luật' là điều hiển nhiên. Để nhấn mạnh vào 'đạo luật' vừa được ban hành, em nên làm gì với cụm 'by the government' để câu chuyên nghiệp hơn?"
+  },
+  {
+    "topic": "Passive Voice",
+    "level": "B1",
+    "student_input": "I was given a present by my friend.",
+    "correct_answer": "My friend gave me a present.",
+    "explanation": "Câu bị động này không sai, nhưng nó khiến câu trở nên xa cách. Khi nói về một hành động tình cảm giữa bạn bè, dùng câu chủ động sẽ ấm áp và tự nhiên hơn. Em hãy thử chuyển về 'My friend...' xem sao."
+  },
+  {
+    "topic": "Passive Voice",
+    "level": "B1",
+    "student_input": "Many people believe that the earth is round.",
+    "correct_answer": "It is believed that the earth is round.",
+    "explanation": "Để biến một quan điểm phổ biến thành một lời khẳng định khách quan và trang trọng, em hãy thử dùng cấu trúc bị động với 'It'. Em hãy thử thay 'Many people believe' bằng 'It is...' nhé."
+  },
+  {
+    "topic": "Passive Voice",
+    "level": "B1",
+    "student_input": "The mistake was discovered by me.",
+    "correct_answer": "I discovered the mistake.",
+    "explanation": "Hãy suy nghĩ về sự tự tin: Khi em phát hiện ra một lỗi sai, dùng câu chủ động 'I discovered...' sẽ thể hiện sự chủ động và rõ ràng hơn là dùng bị động. Em hãy thử sửa lại nhé."
+  },
+  {
+    "topic": "Passive Voice",
+    "level": "B1",
+    "student_input": "The road is repaired by the workers.",
+    "correct_answer": "The road is being repaired. / The road is repaired.",
+    "explanation": "Ai là người sửa đường? Chắc chắn là công nhân rồi. Khi tác nhân quá hiển nhiên, việc viết 'by the workers' là dư thừa. Em hãy bỏ nó đi để câu súc tích hơn nhé."
+  },
+  {
+    "topic": "Passive Voice",
+    "level": "B1",
+    "student_input": "The decision was made by the committee.",
+    "correct_answer": "The decision was made.",
+    "explanation": "Trong văn phong hành chính, chúng ta thường chỉ quan tâm đến 'quyết định' thay vì 'ai ra quyết định'. Em hãy thử lược bỏ 'by the committee' để câu mang sắc thái chuyên nghiệp hơn xem sao."
+  },
+  {
+    "topic": "Passive Voice",
+    "level": "B1",
+    "student_input": "A new bridge will be built by the city council.",
+    "correct_answer": "A new bridge will be built.",
+    "explanation": "Việc xây cầu thường do chính quyền thành phố thực hiện. Để nhấn mạnh vào công trình 'cây cầu mới', em có thể bỏ phần tác nhân 'by...' không? Thử xem câu sẽ gọn hơn thế nào nhé."
+  },
+  {
+    "topic": "Passive Voice",
+    "level": "B1",
+    "student_input": "I have been told that the movie is great.",
+    "correct_answer": "I have been told that the movie is great.",
+    "explanation": "Hoàn hảo! Em dùng bị động ở đây rất chính xác vì em không biết chính xác ai đã nói với mình, hoặc điều đó không quan trọng. Em chỉ quan tâm đến thông tin 'bộ phim rất hay'. Rất tốt!"
+  }
+]

@@ -1,0 +1,317 @@
+[
+  {
+    "topic": "Past Continuous",
+    "level": "B1",
+    "student_input": "I was sleep when the phone rang.",
+    "correct_answer": "I was sleeping when the phone rang.",
+    "explanation": "Chào em, em đã dùng 'was' để chỉ quá khứ, rất tốt. Tuy nhiên, hành động 'ngủ' đang diễn ra trong một khoảng thời gian thì tiếng chuông điện thoại vang lên cắt ngang. Để diễn tả một hành động 'đang xảy ra', em cần thêm đuôi gì vào sau động từ 'sleep' nhỉ?"
+  },
+  {
+    "topic": "Past Continuous",
+    "level": "B1",
+    "student_input": "While I cooked dinner, the lights went out.",
+    "correct_answer": "While I was cooking dinner, the lights went out.",
+    "explanation": "Hãy nhìn vào từ 'While' (Trong khi). Nó thường dùng để dẫn dắt một hành động kéo dài. Việc 'nấu ăn' diễn ra trong bao lâu trước khi điện tắt? Em hãy chia lại động từ 'cooked' sang dạng 'đang xảy ra' nhé."
+  },
+  {
+    "topic": "Past Continuous",
+    "level": "B1",
+    "student_input": "They played football when it started to rain.",
+    "correct_answer": "They were playing football when it started to rain.",
+    "explanation": "Em hãy phân tích trình tự: Họ đang chơi bóng $\rightarrow$ Trời mưa. Hành động chơi bóng là hành động nền (đang diễn ra), còn trời mưa là hành động xen vào. Vậy 'played' nên được chuyển sang thì nào để thể hiện sự tiếp diễn?"
+  },
+  {
+    "topic": "Past Continuous",
+    "level": "B1",
+    "student_input": "What did you do at 8 PM last night?",
+    "correct_answer": "What were you doing at 8 PM last night?",
+    "explanation": "Hãy chú ý mốc thời gian 'at 8 PM' (vào đúng 8 giờ tối). Đây là một thời điểm cực kỳ cụ thể. Khi hỏi về một hành động đang diễn ra tại một thời điểm chính xác trong quá khứ, chúng ta dùng 'did you do' hay 'were you doing'?"
+  },
+  {
+    "topic": "Past Continuous",
+    "level": "B1",
+    "student_input": "I was watching TV while my mom was cooking dinner.",
+    "correct_answer": "I was watching TV while my mom was cooking dinner.",
+    "explanation": "Tuyệt vời! Em đã dùng chính xác hai vế Past Continuous để diễn tả hai hành động xảy ra song song cùng lúc trong quá khứ. Rất tốt!"
+  },
+  {
+    "topic": "Past Continuous",
+    "level": "B1",
+    "student_input": "She was walk to school when she met an old friend.",
+    "correct_answer": "She was walking to school when she met an old friend.",
+    "explanation": "Em đã dùng 'was' để chỉ quá khứ tiếp diễn, nhưng hãy nhìn lại động từ 'walk'. Để tạo thành thì tiếp diễn, động từ chính cần phải có dạng gì em nhỉ?"
+  },
+  {
+    "topic": "Past Continuous",
+    "level": "B1",
+    "student_input": "While they were dancing, the music stopped.",
+    "correct_answer": "While they were dancing, the music stopped.",
+    "explanation": "Hoàn hảo! Em đã phân biệt đúng: hành động đang diễn ra (were dancing) và hành động xen vào (stopped). Tiếp tục phát huy nhé!"
+  },
+  {
+    "topic": "Past Continuous",
+    "level": "B1",
+    "student_input": "The students talked when the teacher entered the room.",
+    "correct_answer": "The students were talking when the teacher entered the room.",
+    "explanation": "Hãy suy nghĩ về ngữ cảnh: Các học sinh 'đang nói chuyện' thì giáo viên 'bước vào'. Hành động 'nói chuyện' là hành động nền kéo dài. Em hãy chia lại động từ 'talked' cho đúng với tính chất này nhé."
+  },
+  {
+    "topic": "Past Continuous",
+    "level": "B1",
+    "student_input": "I was listening to music, so I didn't hear the doorbell.",
+    "correct_answer": "I was listening to music, so I didn't hear the doorbell.",
+    "explanation": "Chính xác! Em dùng Past Continuous để giải thích lý do (đang làm việc này nên không nhận ra việc kia). Rất logic!"
+  },
+  {
+    "topic": "Past Continuous",
+    "level": "B1",
+    "student_input": "We was driving to the airport when we had a flat tire.",
+    "correct_answer": "We were driving to the airport when we had a flat tire.",
+    "explanation": "Em đã nắm đúng cấu trúc thì tiếp diễn. Tuy nhiên, hãy nhìn lại chủ ngữ 'We'. Với 'We', chúng ta dùng 'was' hay 'were' cho động từ to-be nhỉ?"
+  },
+  {
+    "topic": "Past Continuous",
+    "level": "B1",
+    "student_input": "I read a book while it was raining outside.",
+    "correct_answer": "I was reading a book while it was raining outside.",
+    "explanation": "Hãy nhìn vào vế sau 'while it was raining'. Vế trước cũng là một hành động diễn ra song song với cơn mưa. Vậy 'I read' nên được chia lại như thế nào để đồng nhất với vế sau?"
+  },
+  {
+    "topic": "Past Continuous",
+    "level": "B1",
+    "student_input": "What was you doing when I called you?",
+    "correct_answer": "What were you doing when I called you?",
+    "explanation": "Câu hỏi của em rất đúng cấu trúc. Nhưng hãy kiểm tra lại sự hòa hợp giữa chủ ngữ 'you' và động từ to-be. 'You' đi với 'was' hay 'were' em nhỉ?"
+  },
+  {
+    "topic": "Past Continuous",
+    "level": "B1",
+    "student_input": "She didn't sleeping when the baby cried.",
+    "correct_answer": "She wasn't sleeping when the baby cried.",
+    "explanation": "Em đang muốn nói 'Cô ấy đã không đang ngủ'. Với thì quá khứ tiếp diễn, để phủ định, chúng ta không dùng 'didn't' mà dùng 'was not' hoặc 'were not'. Em hãy thử sửa lại nhé."
+  },
+  {
+    "topic": "Past Continuous",
+    "level": "B1",
+    "student_input": "The dog was barking while the cat was sleeping.",
+    "correct_answer": "The dog was barking while the cat was sleeping.",
+    "explanation": "Hoàn hảo! Hai hành động xảy ra song song, cả hai đều được chia ở Past Continuous. Rất chuẩn!"
+  },
+  {
+    "topic": "Past Continuous",
+    "level": "B1",
+    "student_input": "I was eat dinner when you arrived.",
+    "correct_answer": "I was eating dinner when you arrived.",
+    "explanation": "Hãy nhìn vào cụm 'I was eat'. Để diễn tả một hành động đang diễn ra trong quá khứ, động từ 'eat' cần phải ở dạng nào sau 'was'?"
+  },
+  {
+    "topic": "Past Perfect",
+    "level": "B1",
+    "student_input": "By the time I arrived at the cinema, the movie started.",
+    "correct_answer": "By the time I arrived at the cinema, the movie had started.",
+    "explanation": "Hãy phân tích hai hành động: 'tôi đến rạp' và 'phim bắt đầu'. Hành động nào xảy ra trước nhỉ? Khi một việc đã hoàn tất trước một mốc thời gian khác trong quá khứ, chúng ta dùng thì nào để nhấn mạnh trình tự này?"
+  },
+  {
+    "topic": "Past Perfect",
+    "level": "B1",
+    "student_input": "I had went to the store before it started to rain.",
+    "correct_answer": "I had gone to the store before it started to rain.",
+    "explanation": "Em dùng 'had' để chỉ hành động xảy ra trước là rất chính xác. Tuy nhiên, hãy nhìn lại động từ 'went'. Trong cấu trúc Past Perfect (had + V3), chúng ta dùng dạng V2 hay V3 của động từ 'go'?"
+  },
+  {
+    "topic": "Past Perfect",
+    "level": "B1",
+    "student_input": "After she had finished her work, she goes home.",
+    "correct_answer": "After she had finished her work, she went home.",
+    "explanation": "Vế đầu em dùng 'had finished' để nói về việc hoàn thành công việc $\rightarrow$ Rất tốt! Nhưng toàn bộ câu chuyện này đang kể về quá khứ, vậy động từ 'goes' ở vế sau cần được chia lại như thế nào cho đồng nhất?"
+  },
+  {
+    "topic": "Past Perfect",
+    "level": "B1",
+    "student_input": "When we got to the station, the train has left.",
+    "correct_answer": "When we got to the station, the train had left.",
+    "explanation": "Hãy nhìn vào cụm 'the train has left'. Em đang dùng thì Hiện tại hoàn thành, nhưng toàn bộ ngữ cảnh là 'When we got' (Quá khứ đơn). Để nói về một việc xảy ra trước một mốc quá khứ, chúng ta dùng trợ động từ 'has' hay 'had'?"
+  },
+  {
+    "topic": "Past Perfect",
+    "level": "B1",
+    "student_input": "I didn't recognize him because he grew a beard.",
+    "correct_answer": "I didn't recognize không sai, nhưng chính xác hơn là: I didn't recognize him because he had grown a beard.",
+    "explanation": "Việc 'mọc râu' xảy ra trước thời điểm 'tôi không nhận ra anh ấy'. Để làm rõ rằng việc mọc râu là nguyên nhân dẫn đến kết quả sau đó, em nên chia động từ 'grow' ở thì nào để thể hiện sự hoàn tất trước đó?"
+  },
+  {
+    "topic": "Past Perfect",
+    "level": "B1",
+    "student_input": "I had already ate dinner when they invited me.",
+    "correct_answer": "I had already eaten dinner when they invited me.",
+    "explanation": "Em dùng 'had already' rất chuẩn để chỉ một việc hoàn thành trước. Tuy nhiên, hãy kiểm tra lại động từ 'ate'. Đây là dạng V2, nhưng sau 'had' chúng ta cần V3. V3 của 'eat' là gì em nhỉ?"
+  },
+  {
+    "topic": "Past Perfect",
+    "level": "B1",
+    "student_input": "The grass was yellow because it didn't rain for weeks.",
+    "correct_answer": "The grass was yellow because it hadn't rained for weeks.",
+    "explanation": "Hãy nhìn vào mốc thời gian: 'cỏ bị vàng' (quá khứ). Việc 'không mưa' xảy ra trước đó và kéo dài cho đến lúc cỏ bị vàng. Vậy 'didn't rain' nên được chuyển sang thì nào để thể hiện một khoảng thời gian kéo dài trước một mốc quá khứ?"
+  },
+  {
+    "topic": "Past Perfect",
+    "level": "B1",
+    "student_input": "She had study English before she moved to London.",
+    "correct_answer": "She had studied English before she moved to London.",
+    "explanation": "Em đã dùng 'had' để chỉ hành động xảy ra trước $\rightarrow$ Chính xác! Nhưng hãy nhìn lại động từ 'study'. Em đang thiếu đuôi gì để biến nó thành dạng V3 (Past Participle)?"
+  },
+  {
+    "topic": "Past Perfect",
+    "level": "B1",
+    "student_input": "I had’ve seen that movie before.",
+    "correct_answer": "I had seen that movie before.",
+    "explanation": "Có vẻ em đang bị nhầm lẫn giữa 'have' và 'had'. Trong thì Quá khứ hoàn thành, chúng ta chỉ dùng một trợ động từ duy nhất là 'had'. Em hãy bỏ '’ve' đi nhé."
+  },
+  {
+    "topic": "Past Perfect",
+    "level": "B1",
+    "student_input": "After I had read the book, I watch the film.",
+    "correct_answer": "After I had read the book, I watched the film.",
+    "explanation": "Vế đầu em dùng Past Perfect rất tốt. Nhưng vế sau 'I watch' lại ở thì hiện tại. Vì hành động xem phim xảy ra sau khi đọc sách (trong quá khứ), em hãy chia lại động từ 'watch' cho đúng thì nhé."
+  },
+  {
+    "topic": "Past Perfect",
+    "level": "B1",
+    "student_input": "By the time the police arrived, the thief escaped.",
+    "correct_answer": "By the time the police arrived, the thief had escaped.",
+    "explanation": "Hãy suy nghĩ: Tên trộm chạy thoát trước hay cảnh sát đến trước? Vì tên trộm đã chạy thoát xong rồi cảnh sát mới đến, nên hành động 'escaped' cần được chia ở thì nào để thể hiện sự hoàn tất trước đó?"
+  },
+  {
+    "topic": "Past Perfect",
+    "level": "B1",
+    "student_input": "He told me that he has lived there for years.",
+    "correct_answer": "He told me that he had lived there for years.",
+    "explanation": "Đây là câu gián tiếp. Hành động 'told' (nói) ở quá khứ, và việc 'sống ở đó' đã xảy ra trước khi anh ấy nói. Theo quy tắc lùi thì, 'has lived' sẽ chuyển thành gì em nhỉ?"
+  },
+  {
+    "topic": "Past Perfect",
+    "level": "B1",
+    "student_input": "I had just woken up when the phone ringed.",
+    "correct_answer": "I had just woken up when the phone rang.",
+    "explanation": "Vế đầu em dùng 'had just woken' rất chuẩn. Nhưng hãy nhìn vào 'ringed'. Động từ 'ring' là bất quy tắc, em có nhớ dạng V2 của nó là gì không? (Gợi ý: không phải thêm -ed)."
+  },
+  {
+    "topic": "Past Perfect",
+    "level": "B1",
+    "student_input": "She was sad because she lose her phone.",
+    "correct_answer": "She was sad because she had lost her phone.",
+    "explanation": "Vì sao cô ấy buồn? Vì cô ấy 'đã làm mất' điện thoại trước đó. Để chỉ nguyên nhân xảy ra trước một trạng thái trong quá khứ, em nên dùng thì nào thay cho 'lose'?"
+  },
+  {
+    "topic": "Past Perfect",
+    "level": "B1",
+    "student_input": "I had cleaned the house before my guests arrived.",
+    "correct_answer": "I had cleaned the house before my guests arrived.",
+    "explanation": "Hoàn hảo! Em đã sử dụng chính xác Past Perfect cho hành động xảy ra trước và Past Simple cho hành động xảy ra sau. Rất logic!"
+  },
+  {
+    "topic": "Mixed Past Tenses",
+    "level": "B1",
+    "student_input": "Yesterday I came home and saw that someone stole my bike. I was looking for it everywhere, but it was gone.",
+    "correct_answer": "Yesterday I came home and saw that someone had stolen my bike. I looked for it everywhere, but it was gone.",
+    "explanation": "Hãy phân tích trình tự: Việc 'chiếc xe bị trộm' xảy ra trước hay sau khi em 'về nhà'? Vì việc trộm xe đã hoàn tất trước khi em nhìn thấy, nên 'stole' cần chuyển sang thì nào để chỉ 'quá khứ của quá khứ' nhỉ? Ngoài ra, việc 'tìm kiếm' là một chuỗi hành động nối tiếp, em nên dùng thì đơn hay thì tiếp diễn?"
+  },
+  {
+    "topic": "Mixed Past Tenses",
+    "level": "B1",
+    "student_input": "While I walked to work, I realized that I forgot my wallet at home.",
+    "correct_answer": "While I was walking to work, I realized that I had forgotten my wallet at home.",
+    "explanation": "Câu này có hai điểm cần lưu ý: 1. 'Walked' là hành động nền đang diễn ra $\rightarrow$ em nên dùng thì nào? 2. Việc 'quên ví' xảy ra trước khi em 'nhận ra'. Vậy 'forgot' nên được chia ở thì nào để làm rõ trình tự này?"
+  },
+  {
+    "topic": "Mixed Past Tenses",
+    "level": "B1",
+    "student_input": "The teacher entered the room. The students talked loudly because they had not studied for the test.",
+    "correct_answer": "When the teacher entered the room, the students were talking loudly because they hadn't studied for the test.",
+    "explanation": "Hãy hình dung khung cảnh: Khi giáo viên bước vào, trạng thái của học sinh lúc đó là 'đang nói chuyện' (hành động nền). Em hãy chia lại 'talked' sang thì tiếp diễn nhé. Vế sau em dùng 'had not studied' là hoàn toàn chính xác vì việc không học xảy ra trước đó!"
+  },
+  {
+    "topic": "Mixed Past Tenses",
+    "level": "B1",
+    "student_input": "I was sleeping deeply when the alarm clock rang, but I had not set it correctly.",
+    "correct_answer": "I was sleeping deeply when the alarm clock rang, but I hadn't set it correctly.",
+    "explanation": "Câu này của em gần như hoàn hảo! 'Was sleeping' (hành động nền) và 'rang' (hành động cắt ngang) rất chuẩn. Vế cuối em dùng 'had not set' để nói về sai lầm xảy ra trước đó $\rightarrow$ Rất logic! Câu này chính xác rồi."
+  },
+  {
+    "topic": "Mixed Past Tenses",
+    "level": "B1",
+    "student_input": "When I opened the fridge, I saw that my roommate ate all the cake.",
+    "correct_answer": "When I opened the fridge, I saw that my roommate had eaten all the cake.",
+    "explanation": "Hãy suy nghĩ: Chiếc bánh biến mất trước hay sau khi em mở tủ lạnh? Vì hành động 'ăn bánh' đã hoàn tất trước đó, em hãy chuyển 'ate' sang thì nào để nhấn mạnh sự hoàn tất này?"
+  },
+  {
+    "topic": "Mixed Past Tenses",
+    "level": "B1",
+    "student_input": "I was driving home when I saw an accident. A car hit a tree because the driver slept.",
+    "correct_answer": "I was driving home when I saw an accident. A car had hit a tree because the driver had fallen asleep.",
+    "explanation": "Vế đầu 'was driving' và 'saw' rất chuẩn. Nhưng hãy nhìn vế sau: Việc 'xe đâm vào cây' và 'tài xế ngủ quên' đã xảy ra TRƯỚC khi em nhìn thấy vụ tai nạn. Em hãy chia lại hai động từ này ở thì nào để thể hiện đúng trình tự thời gian?"
+  },
+  {
+    "topic": "Mixed Past Tenses",
+    "level": "B1",
+    "student_input": "She was very nervous during the interview because she never had an interview before.",
+    "correct_answer": "She was very nervous during the interview because she had never had an interview before.",
+    "explanation": "Hãy phân tích: 'She was nervous' (Quá khứ đơn). Việc 'chưa bao giờ phỏng vấn' xảy ra suốt thời gian trước đó. Vậy 'never had' cần được thêm trợ động từ nào để trở thành thì Quá khứ hoàn thành?"
+  },
+  {
+    "topic": "Mixed Past Tenses",
+    "level": "B1",
+    "student_input": "While we waited for the bus, it started to rain. We didn't have an umbrella because we leave it at home.",
+    "correct_answer": "While we were waiting for the bus, it started to rain. We didn't have an umbrella because we had left it at home.",
+    "explanation": "Câu này có hai lỗi: 1. 'Waited' là hành động nền kéo dài $\rightarrow$ em dùng thì nào? 2. Việc 'để quên ô' xảy ra trước khi trời mưa $\rightarrow$ 'leave' nên được chia ở thì nào?"
+  },
+  {
+    "topic": "Mixed Past Tenses",
+    "level": "B1",
+    "student_input": "I’m so tired today because I didn't sleep well last night. I was thinking about a problem that I had not solved yet.",
+    "correct_answer": "I’m so tired today because I didn't sleep well last night. I was thinking about a problem that I hadn't solved yet.",
+    "explanation": "Em chia 'didn't sleep' và 'was thinking' rất tốt. Tuy nhiên, vấn đề 'không giải quyết được' đã tồn tại từ trước khi em nằm suy nghĩ. Hãy kiểm tra lại 'had not solved' xem em đã chia đúng dạng V3 của 'solve' chưa nhé."
+  },
+  {
+    "topic": "Mixed Past Tenses",
+    "level": "B1",
+    "student_input": "When I arrived at the party, everyone was dancing. I felt shy because I didn't know anyone.",
+    "correct_answer": "When I arrived at the party, everyone was dancing. I felt shy because I didn't know anyone.",
+    "explanation": "Tuyệt vời! Em đã phối hợp rất tốt: 'arrived' (Sự kiện chính) $\rightarrow$ 'was dancing' (Hành động nền) $\rightarrow$ 'felt/didn't know' (Trạng thái). Câu này hoàn toàn chính xác!"
+  },
+  {
+    "topic": "Mixed Past Tenses",
+    "level": "B1",
+    "student_input": "I was walking in the park when I found a wallet. I looked inside and saw that the owner had put a phone number there.",
+    "correct_answer": "I was walking in the park when I found a wallet. I looked inside and saw that the owner had put a phone number there.",
+    "explanation": "Hoàn hảo! Em đã vận dụng đúng: Past Continuous cho hành động nền, Past Simple cho chuỗi sự kiện chính, và Past Perfect cho hành động xảy ra trước đó. Rất logic!"
+  },
+  {
+    "topic": "Mixed Past Tenses",
+    "level": "B1",
+    "student_input": "He failed the test because he didn't study, although he had a lot of time.",
+    "correct_answer": "He failed the test because he hadn't studied, although he had had a lot of time.",
+    "explanation": "Hãy phân tích: Việc 'không học' xảy ra trước khi 'thi trượt'. Vậy 'didn't study' nên chuyển sang thì nào? Và việc 'có nhiều thời gian' cũng là một trạng thái có trước đó, em hãy thử chia nó ở thì Quá khứ hoàn thành xem sao."
+  },
+  {
+    "topic": "Mixed Past Tenses",
+    "level": "B1",
+    "student_input": "While I was cleaning the house, I found a letter that my grandfather wrote to me years ago.",
+    "correct_answer": "While I was cleaning the house, I found a letter that my grandfather had written to me years ago.",
+    "explanation": "Vế đầu 'was cleaning' và 'found' rất chuẩn. Nhưng hãy nhìn lại 'wrote'. Bức thư được viết từ nhiều năm trước, tức là trước khi em tìm thấy nó. Vậy 'wrote' nên được chia ở thì nào?"
+  },
+  {
+    "topic": "Mixed Past Tenses",
+    "level": "B1",
+    "student_input": "I had just finished my homework when my friend called me. We decided to go out, but it started to rain.",
+    "correct_answer": "I had just finished my homework when my friend called me. We decided to go out, but it started to rain.",
+    "explanation": "Câu này hoàn toàn chính xác! Em đã sử dụng 'had just finished' để chỉ một việc vừa mới hoàn thành xong thì có sự kiện khác xen vào. Rất tốt!"
+  },
+  {
+    "topic": "Mixed Past Tenses",
+    "level": "B1",
+    "student_input": "I was watching a movie. Suddenly, the power went out. I realized that I didn't save my work on the computer.",
+    "correct_answer": "I was watching a movie. Suddenly, the power went out. I realized that I hadn't saved my work on the computer.",
+    "explanation": "Hai câu đầu rất tốt. Nhưng hãy nhìn câu cuối: Việc 'không lưu bài' xảy ra TRƯỚC khi điện tắt và TRƯỚC khi em nhận ra. Vậy 'didn't save' nên được chia lại ở thì nào để làm rõ trình tự này?"
+  }
+]

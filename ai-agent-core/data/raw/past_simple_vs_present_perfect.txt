@@ -1,0 +1,229 @@
+PAST SIMPLE VS PRESENT PERFECT
+
+CHAPTER 1: PAST SIMPLE TENSE
+
+1.1 Form and Structure
+
+The Past Simple tense describes completed actions in the past.
+
+Affirmative: Subject + verb in past form (V2)
+- Regular verbs: add -ed (worked, played, studied)
+- Irregular verbs: use the second form (went, saw, bought, wrote)
+
+Negative: Subject + did not (didn't) + base verb
+- I didn't go to the party last night.
+- She didn't finish her homework yesterday.
+
+Question: Did + subject + base verb?
+- Did you see the movie last weekend?
+- Did he call you yesterday?
+
+Spelling rules for regular verbs:
+- Most verbs: add -ed (work → worked, clean → cleaned, rain → rained)
+- Verbs ending in -e: add -d (live → lived, decide → decided, hope → hoped)
+- Verbs ending in consonant + y: change y to i and add -ed (study → studied, carry → carried, try → tried)
+- Short verbs ending in consonant-vowel-consonant: double the last consonant and add -ed (stop → stopped, plan → planned, drop → dropped)
+
+Common irregular verbs (must be memorized):
+- go → went, come → came, see → saw, do → did, have → had
+- make → made, take → took, give → gave, get → got, know → knew
+- think → thought, buy → bought, bring → brought, teach → taught
+- write → wrote, read → read, speak → spoke, eat → ate, drink → drank
+- begin → began, break → broke, choose → chose, drive → drove, fall → fell
+- find → found, fly → flew, forget → forgot, grow → grew, hide → hid
+- leave → left, lose → lost, meet → met, pay → paid, run → ran
+- say → said, sell → sold, send → sent, sit → sat, sleep → slept
+- spend → spent, stand → stood, swim → swam, tell → told, win → won
+
+1.2 Usage
+
+The Past Simple is used for:
+
+a) Completed actions at a specific time in the past:
+- I visited my grandmother last Sunday.
+- They moved to Canada in 2019.
+- She graduated from university three years ago.
+
+b) A series of completed actions in the past:
+- I woke up, took a shower, and had breakfast.
+- He arrived at the office, turned on his computer, and started working.
+
+c) Past habits (often with "used to"):
+- When I was young, I played outside every day.
+- She lived in Paris for five years.
+
+d) Past states:
+- The weather was beautiful yesterday.
+- I knew the answer but I didn't say anything.
+
+1.3 Signal Words
+
+Common time expressions: yesterday, last night, last week, last month, last year, ago (two days ago, a week ago), in 2020, in the 1990s, when I was a child, on Monday, the day before yesterday, this morning (if morning is over).
+
+
+CHAPTER 2: PRESENT PERFECT TENSE
+
+2.1 Form and Structure
+
+The Present Perfect connects the past to the present.
+
+Affirmative: Subject + have/has + past participle (V3)
+- I/You/We/They have finished the project.
+- He/She/It has finished the project.
+
+Negative: Subject + have/has + not + past participle
+- I haven't seen that movie.
+- She hasn't arrived yet.
+
+Question: Have/Has + subject + past participle?
+- Have you ever been to Japan?
+- Has she called you today?
+
+Note: For regular verbs, V2 and V3 are the same (worked, played, studied). For irregular verbs, V3 may be different from V2 (go → went → gone, see → saw → seen, write → wrote → written).
+
+Common irregular past participles (V3):
+- be → been, begin → begun, break → broken, choose → chosen, do → done
+- drink → drunk, drive → driven, eat → eaten, fall → fallen, fly → flown
+- forget → forgotten, give → given, go → gone, grow → grown, hide → hidden
+- know → known, ride → ridden, run → run, see → seen, speak → spoken
+- swim → swum, take → taken, wear → worn, write → written
+
+2.2 Usage
+
+The Present Perfect is used for:
+
+a) Life experiences (without specifying when):
+- I have visited Paris three times.
+- She has never eaten sushi.
+- Have you ever seen a shooting star?
+
+b) Recent actions with present results:
+- I have lost my keys. (I can't find them now.)
+- He has broken his leg. (His leg is broken now.)
+- She has just finished her exam. (The exam is freshly completed.)
+
+c) Unfinished time periods (today, this week, this year):
+- I have drunk three cups of coffee today.
+- We have had two meetings this week.
+- She has read ten books this year.
+
+d) Actions that started in the past and continue to the present (with for/since):
+- I have lived here for ten years. (I still live here.)
+- She has worked at this company since 2018. (She still works there.)
+- We have known each other since childhood. (We still know each other.)
+
+e) Changes over time:
+- My English has improved a lot recently.
+- The city has changed dramatically over the past decade.
+
+2.3 Signal Words
+
+Common time expressions: ever, never, just, already, yet, recently, lately, so far, up to now, until now, since (since Monday, since 2020, since I was a child), for (for two years, for a long time, for ages), today, this week, this month, this year, how long, still.
+
+Important distinctions:
+- "since" marks a starting point in time (since 2010, since Monday)
+- "for" indicates a duration of time (for three hours, for two weeks)
+- "already" is used in affirmative sentences (I have already eaten.)
+- "yet" is used in negatives and questions (Have you finished yet? I haven't finished yet.)
+- "just" means a very short time ago (She has just arrived.)
+
+
+CHAPTER 3: KEY DIFFERENCES
+
+The critical difference between Past Simple and Present Perfect is the connection to the present.
+
+3.1 Specific Time vs No Specific Time
+
+Past Simple (specific time): I saw that movie last Friday.
+Present Perfect (no specific time): I have seen that movie. (When is not important.)
+
+Past Simple: She visited London in 2022.
+Present Perfect: She has visited London. (At some point in her life.)
+
+3.2 Finished vs Unfinished Time
+
+Past Simple (finished time period): I ate two apples yesterday. (Yesterday is finished.)
+Present Perfect (unfinished time period): I have eaten two apples today. (Today is not finished.)
+
+Past Simple: She wrote three emails this morning. (It is now afternoon.)
+Present Perfect: She has written three emails this morning. (It is still morning.)
+
+3.3 Past Situation vs Present Result
+
+Past Simple (focus on past): I lost my wallet. (Telling a story about the past.)
+Present Perfect (focus on present result): I have lost my wallet. (I need help finding it now.)
+
+Past Simple: She broke her arm. (Describing what happened.)
+Present Perfect: She has broken her arm. (Her arm is currently broken.)
+
+3.4 Completed vs Ongoing
+
+Past Simple (action is finished): I lived in Tokyo for three years. (I don't live there anymore.)
+Present Perfect (action continues): I have lived in Tokyo for three years. (I still live there now.)
+
+
+CHAPTER 4: COMMON MISTAKES
+
+Mistake 1: Using Present Perfect with a specific past time
+Incorrect: I have seen that movie yesterday.
+Correct: I saw that movie yesterday.
+
+Mistake 2: Using Past Simple for experiences without time
+Incorrect: Did you ever visit Paris?
+Correct: Have you ever visited Paris?
+
+Mistake 3: Confusing "for" and "since"
+Incorrect: I have lived here since five years.
+Correct: I have lived here for five years.
+Correct: I have lived here since 2020.
+
+Mistake 4: Using Past Simple for unfinished time periods
+Incorrect: I ate three meals so far today.
+Correct: I have eaten three meals so far today.
+
+Mistake 5: Using wrong past participle form
+Incorrect: I have went to the store.
+Correct: I have gone to the store.
+
+Mistake 6: Forgetting have/has
+Incorrect: She already finished her work.
+Correct: She has already finished her work.
+
+Mistake 7: Using Present Perfect when the time period is clearly over
+Incorrect: I have seen a great movie last night.
+Correct: I saw a great movie last night.
+
+
+CHAPTER 5: PRACTICE SENTENCES
+
+Choose the correct tense (Past Simple or Present Perfect):
+
+1. I _____ (visit) my grandparents last weekend.
+   Answer: visited (specific past time)
+
+2. She _____ (never / try) Indian food before.
+   Answer: has never tried (life experience)
+
+3. We _____ (live) in this house since 2015.
+   Answer: have lived (started in past, continues now)
+
+4. He _____ (break) his phone yesterday.
+   Answer: broke (specific past time)
+
+5. _____ you _____ (finish) your homework yet?
+   Answer: Have you finished (yet = present perfect)
+
+6. They _____ (get) married in 2018.
+   Answer: got (specific past year)
+
+7. I _____ (just / receive) an email from my boss.
+   Answer: have just received (recent action)
+
+8. When _____ you _____ (start) learning English?
+   Answer: did you start (asking about specific time)
+
+9. She _____ (work) at this company for ten years.
+   Answer: has worked (still working there)
+
+10. I _____ (read) three books this month.
+    Answer: have read (this month is not finished)

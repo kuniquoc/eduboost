@@ -228,7 +228,8 @@ export function AdminDashboardPage() {
             <DialogTitle>Xóa tài khoản</DialogTitle>
             <DialogDescription>
               Bạn có chắc muốn xóa tài khoản <strong>{deleteTarget?.name}</strong> (
-              {deleteTarget?.email})? Hành động này không thể hoàn tác.
+              {deleteTarget?.email})? Đây là thao tác vĩnh viễn và không thể hoàn tác. Toàn bộ
+              lớp học, nội dung, bài nộp và lịch sử học tập liên quan cũng sẽ bị xóa.
             </DialogDescription>
           </DialogHeader>
           <DialogFooter>

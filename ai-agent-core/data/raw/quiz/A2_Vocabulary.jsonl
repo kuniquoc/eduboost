@@ -1,0 +1,4634 @@
+[
+  {
+    "topic": "Vocabulary - Work & Education",
+    "difficulty": -1.0,
+    "context": "Occupations",
+    "output": {
+      "question": "A _______ is a person who helps sick people in a hospital.",
+      "options": ["teacher", "doctor", "chef", "driver"],
+      "correct_answer": "doctor",
+      "explanation": "Người giúp đỡ bệnh nhân trong bệnh viện là bác sĩ (doctor)."
+    }
+  },
+  {
+    "topic": "Vocabulary - Work & Education",
+    "difficulty": -0.9,
+    "context": "Occupations",
+    "output": {
+      "question": "A _______ works in a kitchen and prepares professional meals.",
+      "options": ["waiter", "manager", "chef", "nurse"],
+      "correct_answer": "chef",
+      "explanation": "Người làm việc trong bếp và chuẩn bị các bữa ăn chuyên nghiệp là đầu bếp (chef)."
+    }
+  },
+  {
+    "topic": "Vocabulary - Work & Education",
+    "difficulty": -0.8,
+    "context": "Occupations",
+    "output": {
+      "question": "If you want to fly a plane, you need to become a _______.",
+      "options": ["sailor", "pilot", "engineer", "mechanic"],
+      "correct_answer": "pilot",
+      "explanation": "Người điều khiển máy bay là phi công (pilot)."
+    }
+  },
+  {
+    "topic": "Vocabulary - Work & Education",
+    "difficulty": -0.7,
+    "context": "Occupations",
+    "output": {
+      "question": "A _______ designs buildings and bridges.",
+      "options": ["artist", "lawyer", "architect", "scientist"],
+      "correct_answer": "architect",
+      "explanation": "Người thiết kế tòa nhà và cầu đường là kiến trúc sư (architect)."
+    }
+  },
+  {
+    "topic": "Vocabulary - Work & Education",
+    "difficulty": -0.6,
+    "context": "Occupations",
+    "output": {
+      "question": "The _______ welcomed the guests at the hotel front desk.",
+      "options": ["receptionist", "accountant", "secretary", "janitor"],
+      "correct_answer": "receptionist",
+      "explanation": "Người đón khách tại quầy lễ tân khách sạn là nhân viên lễ tân (receptionist)."
+    }
+  },
+  {
+    "topic": "Vocabulary - Work & Education",
+    "difficulty": -0.5,
+    "context": "Occupations",
+    "output": {
+      "question": "A _______ is someone who fixes cars and engines.",
+      "options": ["plumber", "electrician", "mechanic", "carpenter"],
+      "correct_answer": "mechanic",
+      "explanation": "Người sửa chữa ô tô và động cơ là thợ cơ khí (mechanic)."
+    }
+  },
+  {
+    "topic": "Vocabulary - Work & Education",
+    "difficulty": -0.4,
+    "context": "Occupations",
+    "output": {
+      "question": "A _______ represents people in court and gives legal advice.",
+      "options": ["judge", "lawyer", "police officer", "manager"],
+      "correct_answer": "lawyer",
+      "explanation": "Người đại diện cho khách hàng tại tòa và tư vấn pháp luật là luật sư (lawyer)."
+    }
+  },
+  {
+    "topic": "Vocabulary - Work & Education",
+    "difficulty": -0.3,
+    "context": "Occupations",
+    "output": {
+      "question": "The _______ is responsible for managing the company's finances.",
+      "options": ["employee", "accountant", "intern", "assistant"],
+      "correct_answer": "accountant",
+      "explanation": "Người chịu trách nhiệm quản lý tài chính công ty là kế toán (accountant)."
+    }
+  },
+  {
+    "topic": "Vocabulary - Work & Education",
+    "difficulty": -0.2,
+    "context": "Occupations",
+    "output": {
+      "question": "A _______ studies plants, animals, and the natural world.",
+      "options": ["historian", "biologist", "philosopher", "economist"],
+      "correct_answer": "biologist",
+      "explanation": "Người nghiên cứu thực vật, động vật và thế giới tự nhiên là nhà sinh vật học (biologist)."
+    }
+  },
+  {
+    "topic, ": "Vocabulary - Work & Education",
+    "difficulty": -0.1,
+    "context": "Occupations",
+    "output": {
+      "question": "A _______ is someone who works for another person or company for a salary.",
+      "options": ["employer", "employee", "entrepreneur", "owner"],
+      "correct_answer": "employee",
+      "explanation": "Người làm thuê cho người khác hoặc công ty để nhận lương là nhân viên (employee)."
+    }
+  },
+  {
+    "topic": "Vocabulary - Work & Education",
+    "difficulty": 0.0,
+    "context": "Occupations",
+    "output": {
+      "question": "An _______ is a person who is learning a job by working for a short time, often without pay.",
+      "options": ["expert", "intern", "executive", "apprentice"],
+      "correct_answer": "intern",
+      "explanation": "Người học việc trong thời gian ngắn (thường không lương) để lấy kinh nghiệm là thực tập sinh (intern)."
+    }
+  },
+  {
+    "topic": "Vocabulary - Work & Education",
+    "difficulty": -1.0,
+    "context": "Workplaces",
+    "output": {
+      "question": "Doctors and nurses work in a _______.",
+      "options": ["school", "factory", "hospital", "library"],
+      "correct_answer": "hospital",
+      "explanation": "Bác sĩ và y tá làm việc trong bệnh viện (hospital)."
+    }
+  },
+  {
+    "topic": "Vocabulary - Work & Education",
+    "difficulty": -0.9,
+    "context": "Workplaces",
+    "output": {
+      "question": "Most office workers spend their day in an _______.",
+      "options": ["apartment", "office", "airport", "arena"],
+      "correct_answer": "office",
+      "explanation": "Nhân viên văn phòng làm việc trong một văn phòng (office)."
+    }
+  },
+  {
+    "topic": "Vocabulary - Work & Education",
+    "difficulty": -0.8,
+    "context": "Workplaces",
+    "output": {
+      "question": "Goods like cars and phones are often produced in a _______.",
+      "options": ["clinic", "factory", "studio", "gym"],
+      "correct_answer": "factory",
+      "explanation": "Hàng hóa như ô tô, điện thoại thường được sản xuất trong nhà máy (factory)."
+    }
+  },
+  {
+    "topic": "Vocabulary - Work & Education",
+    "difficulty": -0.7,
+    "context": "Workplaces",
+    "output": {
+      "question": "Scientists often conduct experiments in a _______.",
+      "options": ["gallery", "laboratory", "warehouse", "department store"],
+      "correct_answer": "laboratory",
+      "explanation": "Các nhà khoa học thực hiện thí nghiệm trong phòng thí nghiệm (laboratory)."
+    }
+  },
+  {
+    "topic": "Vocabulary - Work & Education",
+    "difficulty": -0.6,
+    "context": "Workplaces",
+    "output": {
+      "question": "You can borrow books and study quietly in the _______.",
+      "options": ["canteen", "library", "auditorium", "locker room"],
+      "correct_answer": "library",
+      "explanation": "Nơi mượn sách và học yên tĩnh là thư viện (library)."
+    }
+  },
+  {
+    "topic": "Vocabulary - Work & Education",
+    "difficulty": -0.5,
+    "context": "Workplaces",
+    "output": {
+      "question": "A _______ is a place where you can buy a variety of goods in one building.",
+      "options": ["pharmacy", "department store", "boutique", "kiosk"],
+      "correct_answer": "department store",
+      "explanation": "Nơi bán đa dạng hàng hóa trong một tòa nhà là cửa hàng bách hóa (department store)."
+    }
+  },
+  {
+    "topic": "Vocabulary - Work & Education",
+    "difficulty": -0.4,
+    "context": "Workplaces",
+    "output": {
+      "question": "The _______ is where the company's main decisions are made.",
+      "options": ["headquarters", "branch", "warehouse", "workshop"],
+      "correct_answer": "headquarters",
+      "explanation": "Trụ sở chính (headquarters) là nơi đưa ra các quyết định quan trọng của công ty."
+    }
+  },
+  {
+    "topic": "Vocabulary - Work & Education",
+    "difficulty": -0.3,
+    "context": "Workplaces",
+    "output": {
+      "question": "The _______ is a place where goods are stored before they are sent to shops.",
+      "options": ["studio", "warehouse", "factory", "showroom"],
+      "correct_answer": "warehouse",
+      "explanation": "Nơi lưu trữ hàng hóa trước khi gửi đến cửa hàng là kho hàng (warehouse)."
+    }
+  },
+  {
+    "topic": "Vocabulary - Work & Education",
+    "difficulty": -0.2,
+    "context": "Workplaces",
+    "output": {
+      "question": "A _______ is a small medical clinic where people go for basic health checks.",
+      "options": ["pharmacy", "surgery", "hospital", "ward"],
+      "correct_answer": "surgery",
+      "explanation": "Trong tiếng Anh-Anh, 'surgery' dùng để chỉ phòng khám tư của bác sĩ."
+    }
+  },
+  {
+    "topic": "Vocabulary - Work & Education",
+    "difficulty": -0.1,
+    "context": "Workplaces",
+    "output": {
+      "question": "The _______ is the area in a school where students eat their lunch.",
+      "options": ["classroom", "canteen", "gymnasium", "laboratory"],
+      "correct_answer": "canteen",
+      "explanation": "Nơi học sinh ăn trưa trong trường là căn tin (canteen)."
+    }
+  },
+  {
+    "topic": "Vocabulary - Work & Education",
+    "difficulty": 0.0,
+    "context": "Workplaces",
+    "output": {
+      "question": "The _______ is the place where a company displays its products for customers to see.",
+      "options": ["factory", "warehouse", "showroom", "studio"],
+      "correct_answer": "showroom",
+      "explanation": "Nơi trưng bày sản phẩm cho khách xem là phòng trưng bày (showroom)."
+    }
+  },
+  {
+    "topic": "Vocabulary - Work & Education",
+    "difficulty": -1.0,
+    "context": "Education - Subjects",
+    "output": {
+      "question": "In _______ class, we learn about numbers, shapes, and equations.",
+      "options": ["History", "Geography", "Math", "Biology"],
+      "correct_answer": "Math",
+      "explanation": "Môn học về số, hình khối và phương trình là Toán học (Math)."
+    }
+  },
+  {
+    "topic": "Vocabulary - Work & Education",
+    "difficulty": -0.9,
+    "context": "Education - Subjects",
+    "output": {
+      "question": "We study the past and famous people in _______ class.",
+      "options": ["Physics", "History", "Chemistry", "Art"],
+      "correct_answer": "History",
+      "explanation": "Môn học về quá khứ và những người nổi tiếng là Lịch sử (History)."
+    }
+  },
+  {
+    "topic": "Vocabulary - Work & Education",
+    "difficulty": -0.8,
+    "context": "Education - Subjects",
+    "output": {
+      "question": "In _______ class, we learn about different countries, mountains, and oceans.",
+      "options": ["Math", "Geography", "Music", "Literature"],
+      "correct_answer": "Geography",
+      "explanation": "Môn học về các quốc gia, núi và đại dương là Địa lý (Geography)."
+    }
+  },
+  {
+    "topic": "Vocabulary - Work & Education",
+    "difficulty": -0.7,
+    "context": "Education - Subjects",
+    "output": {
+      "question": "We learn how to paint and draw in _______ class.",
+      "options": ["Science", "Art", "History", "IT"],
+      "correct_answer": "Art",
+      "explanation": "Môn học vẽ và sơn là Mỹ thuật (Art)."
+    }
+  },
+  {
+    "topic": "Vocabulary - Work & Education",
+    "difficulty": -0.6,
+    "context": "Education - Subjects",
+    "output": {
+      "question": "In _______ class, we use computers and learn how to code.",
+      "options": ["Physics", "Biology", "IT", "Geography"],
+      "correct_answer": "IT",
+      "explanation": "Môn học sử dụng máy tính và lập trình là Công nghệ thông tin (IT)."
+    }
+  },
+  {
+    "topic": "Vocabulary - Work & Education",
+    "difficulty": -0.5,
+    "context": "Education - Subjects",
+    "output": {
+      "question": "We learn about chemical reactions in _______ class.",
+      "options": ["Biology", "Physics", "Chemistry", "Math"],
+      "correct_answer": "Chemistry",
+      "explanation": "Môn học về phản ứng hóa học là Hóa học (Chemistry)."
+    }
+  },
+  {
+    "topic": "Vocabulary - Work & Education",
+    "difficulty": -0.4,
+    "context": "Education - Subjects",
+    "output": {
+      "question": "In _______ class, we study books, poems, and plays.",
+      "options": ["History", "Literature", "Geography", "Art"],
+      "correct_answer": "Literature",
+      "explanation": "Môn học nghiên cứu sách, thơ và kịch là Văn học (Literature)."
+    }
+  },
+  {
+    "topic": "Vocabulary - Work & Education",
+    "difficulty": -0.3,
+    "context": "Education - Subjects",
+    "output": {
+      "question": "We study the laws of nature, energy, and motion in _______ class.",
+      "options": ["Chemistry", "Physics", "Biology", "Math"],
+      "correct_answer": "Physics",
+      "explanation": "Môn học về quy luật tự nhiên, năng lượng và chuyển động là Vật lý (Physics)."
+    }
+  },
+  {
+    "topic": "Vocabulary - Work & Education",
+    "difficulty": -0.2,
+    "context": "Education - Subjects",
+    "output": {
+      "question": "In _______ class, we learn how to play instruments and read music.",
+      "options": ["Art", "Literature", "Music", "PE"],
+      "correct_answer": "Music",
+      "explanation": "Môn học chơi nhạc cụ và đọc nhạc là Âm nhạc (Music)."
+    }
+  },
+  {
+    "topic": "Vocabulary - Work & Education",
+    "difficulty": -0.1,
+    "context": "Education - Subjects",
+    "output": {
+      "question": "We do exercise and play sports in _______ class.",
+      "options": ["Art", "IT", "PE", "Science"],
+      "correct_answer": "PE",
+      "explanation": "Môn học thể dục và thể thao là PE (Physical Education)."
+    }
+  },
+  {
+    "topic": "Vocabulary - Work & Education",
+    "difficulty": 0.0,
+    "context": "Education - Subjects",
+    "output": {
+      "question": "I'm taking a _______ in digital marketing to improve my skills.",
+      "options": ["degree", "course", "grade", "diploma"],
+      "correct_answer": "course",
+      "explanation": "Một chương trình học ngắn hạn để cải thiện kỹ năng gọi là khóa học (course)."
+    }
+  },
+  {
+    "topic": "Vocabulary - Work & Education",
+    "difficulty": -1.0,
+    "context": "Education - Terms",
+    "output": {
+      "question": "A _______ is a person who is studying at a school or university.",
+      "options": ["teacher", "student", "principal", "professor"],
+      "correct_answer": "student",
+      "explanation": "Người học tập tại trường học hoặc đại học là học sinh/sinh viên (student)."
+    }
+  },
+  {
+    "topic": "Vocabulary - Work & Education",
+    "difficulty": -0.9,
+    "context": "Education - Terms",
+    "output": {
+      "question": "The _______ is the head of a primary or secondary school.",
+      "options": ["professor", "student", "principal", "tutor"],
+      "correct_answer": "principal",
+      "explanation": "Người đứng đầu một trường tiểu học hoặc trung học là hiệu trưởng (principal)."
+    }
+  },
+  {
+    "topic": "Vocabulary - Work & Education",
+    "difficulty": -0.8,
+    "context": "Education - Terms",
+    "output": {
+      "question": "A _______ is a high-ranking teacher at a university.",
+      "options": ["principal", "professor", "student", "trainee"],
+      "correct_answer": "professor",
+      "explanation": "Giáo viên cấp cao tại đại học là giáo sư (professor)."
+    }
+  },
+  {
+    "topic": "Vocabulary - Work & Education",
+    "difficulty": -0.7,
+    "context": "Education - Terms",
+    "output": {
+      "question": "Students take an _______ at the end of the term to show what they learned.",
+      "options": ["assignment", "exam", "exercise", "lesson"],
+      "correct_answer": "exam",
+      "explanation": "Bài kiểm tra cuối kỳ để đánh giá kiến thức là kỳ thi (exam)."
+    }
+  },
+  {
+    "topic": "Vocabulary - Work & Education",
+    "difficulty": -0.6,
+    "context": "Education - Terms",
+    "output": {
+      "question": "My _______ in Math was an 'A' this semester.",
+      "options": ["degree", "grade", "course", "diploma"],
+      "correct_answer": "grade",
+      "explanation": "Điểm số trong một môn học gọi là 'grade'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Work & Education",
+    "difficulty": -0.5,
+    "context": "Education - Terms",
+    "output": {
+      "question": "After four years of study, he finally received his university _______.",
+      "options": ["grade", "diploma", "degree", "certificate"],
+      "correct_answer": "degree",
+      "explanation": "Bằng cấp sau khi hoàn thành chương trình đại học gọi là bằng cử nhân/thạc sĩ/tiến sĩ (degree)."
+    }
+  },
+  {
+    "topic": "Vocabulary - Work & Education",
+    "difficulty": -0.4,
+    "context": "Education - Terms",
+    "output": {
+      "question": "A _______ is an official document showing that you have completed a course.",
+      "options": ["degree", "diploma", "grade", "syllabus"],
+      "correct_answer": "diploma",
+      "explanation": "Chứng chỉ/Bằng cấp chứng nhận hoàn thành một khóa học gọi là 'diploma'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Work & Education",
+    "difficulty": -0.3,
+    "context": "Education - Terms",
+    "output": {
+      "question": "The _______ is a list of all the topics that will be covered in a course.",
+      "options": ["textbook", "syllabus", "timetable", "assignment"],
+      "correct_answer": "syllabus",
+      "explanation": "Danh sách các chủ đề sẽ học trong một khóa học là đề cương chi tiết (syllabus)."
+    }
+  },
+  {
+    "topic": "Vocabulary - Work & Education",
+    "difficulty": -0.2,
+    "context": "Education - Terms",
+    "output": {
+      "question": "The school _______ tells students when and where their classes are.",
+      "options": ["syllabus", "timetable", "textbook", "grade"],
+      "correct_answer": "timetable",
+      "explanation": "Bảng thời khóa biểu cho biết thời gian và địa điểm học là 'timetable'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Work & Education",
+    "difficulty": -0.1,
+    "context": "Education - Terms",
+    "output": {
+      "question": "The teacher gave us a difficult _______ to complete by next Monday.",
+      "options": ["exam", "assignment", "syllabus", "degree"],
+      "correct_answer": "assignment",
+      "explanation": "Bài tập/nhiệm vụ được giao để hoàn thành gọi là 'assignment'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Work & Education",
+    "difficulty": 0.0,
+    "context": "Education - Terms",
+    "output": {
+      "question": "A _______ is a person who gives private lessons to a student.",
+      "options": ["principal", "professor", "tutor", "trainee"],
+      "correct_answer": "tutor",
+      "explanation": "Người dạy kèm riêng cho học sinh gọi là gia sư (tutor)."
+    }
+  },
+  {
+    "topic": "Vocabulary - Work & Education",
+    "difficulty": -1.0,
+    "context": "Work Activities",
+    "output": {
+      "question": "I have a _______ with my boss at 10 AM to discuss the new project.",
+      "options": ["salary", "meeting", "holiday", "break"],
+      "correct_answer": "meeting",
+      "explanation": "Cuộc gặp gỡ để thảo luận công việc gọi là cuộc họp (meeting)."
+    }
+  },
+  {
+    "topic": "Vocabulary - Work & Education",
+    "difficulty": -0.9,
+    "context": "Work Activities",
+    "output": {
+      "question": "My monthly _______ is enough to pay for my rent and food.",
+      "options": ["bonus", "salary", "tax", "fee"],
+      "correct_answer": "salary",
+      "explanation": "Số tiền nhận được hàng tháng từ công việc là lương (salary)."
+    }
+  },
+  {
+    "topic": "Vocabulary - Work & Education",
+    "difficulty": -0.8,
+    "context": "Work Activities",
+    "output": {
+      "question": "I had a job _______ yesterday, and they asked me many questions about my experience.",
+      "options": ["meeting", "interview", "presentation", "training"],
+      "correct_answer": "interview",
+      "explanation": "Cuộc gặp để nhà tuyển dụng đánh giá ứng viên là phỏng vấn (interview)."
+    }
+  },
+  {
+    "topic": "Vocabulary - Work & Education",
+    "difficulty": -0.7,
+    "context": "Work Activities",
+    "output": {
+      "question": "Sarah is my _______; we work in the same department.",
+      "options": ["boss", "colleague", "client", "competitor"],
+      "correct_answer": "colleague",
+      "explanation": "Người làm cùng cơ quan/phòng ban gọi là đồng nghiệp (colleague)."
+    }
+  },
+  {
+    "topic": "Vocabulary - Work & Education",
+    "difficulty": -0.6,
+    "context": "Work Activities",
+    "output": {
+      "question": "I have to work _______ this week to finish the project on time.",
+      "options": ["part-time", "overtime", "shift", "vacation"],
+      "correct_answer": "overtime",
+      "explanation": "Làm việc thêm giờ ngoài giờ hành chính gọi là làm thêm giờ (overtime)."
+    }
+  },
+  {
+    "topic": "Vocabulary - Work & Education",
+    "difficulty": -0.5,
+    "context": "Work Activities",
+    "output": {
+      "question": "I applied for the job by sending my _______ to the company.",
+      "options": ["diploma", "CV", "salary", "contract"],
+      "correct_answer": "CV",
+      "explanation": "Bản tóm tắt quá trình học tập và làm việc dùng để xin việc là CV (Curriculum Vitae)."
+    }
+  },
+  {
+    "topic": "Vocabulary - Work & Education",
+    "difficulty": -0.4,
+    "context": "Work Activities",
+    "output": {
+      "question": "My boss gave me a _______ because I worked very hard this year.",
+      "options": ["salary", "bonus", "tax", "fine"],
+      "correct_answer": "bonus",
+      "explanation": "Khoản tiền thưởng thêm cho thành tích tốt gọi là tiền thưởng (bonus)."
+    }
+  },
+  {
+    "topic": "Vocabulary - Work & Education",
+    "difficulty": -0.3,
+    "context": "Work Activities",
+    "output": {
+      "question": "I work _______, so I only work 20 hours a week.",
+      "options": ["full-time", "part-time", "overtime", "shift"],
+      "correct_answer": "part-time",
+      "explanation": "Làm việc không toàn thời gian (ít giờ hơn quy định) là part-time."
+    }
+  },
+  {
+    "topic": "Vocabulary - Work & Education",
+    "difficulty": -0.2,
+    "context": "Work Activities",
+    "output": {
+      "question": "He works the night _______, so he sleeps during the day.",
+      "options": ["break", "shift", "overtime", "vacation"],
+      "correct_answer": "shift",
+      "explanation": "Ca làm việc (ví dụ ca đêm) gọi là 'shift'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Work & Education",
+    "difficulty": -0.1,
+    "context": "Work Activities",
+    "output": {
+      "question": "The company offered her a _______ that she had to sign before starting work.",
+      "options": ["CV", "contract", "bonus", "salary"],
+      "correct_answer": "contract",
+      "explanation": "Văn bản thỏa thuận pháp lý giữa người lao động và chủ doanh nghiệp là hợp đồng (contract)."
+    }
+  },
+  {
+    "topic": "Vocabulary - Work & Education",
+    "difficulty": 0.0,
+    "context": "Work Activities",
+    "output": {
+      "question": "I need to _______ from my job because I want to travel the world.",
+      "options": ["apply", "resign", "promote", "hire"],
+      "correct_answer": "resign",
+      "explanation": "Hành động chính thức xin thôi việc gọi là 'resign'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Work & Education",
+    "difficulty": -0.9,
+    "context": "Education",
+    "output": {
+      "question": "I always use a _______ to look up new words in English class.",
+      "options": ["textbook", "dictionary", "notebook", "folder"],
+      "correct_answer": "dictionary",
+      "explanation": "Sách tra cứu nghĩa của từ gọi là từ điển (dictionary)."
+    }
+  },
+  {
+    "topic": "Vocabulary - Work & Education",
+    "difficulty": -0.8,
+    "context": "Education",
+    "output": {
+      "question": "Students write their notes in a _______ during the lecture.",
+      "options": ["textbook", "notebook", "calculator", "dictionary"],
+      "correct_answer": "notebook",
+      "explanation": "Sách để ghi chép bài học gọi là vở/sổ ghi chép (notebook)."
+    }
+  },
+  {
+    "topic": "Vocabulary - Work & Education",
+    "difficulty": -0.7,
+    "context": "Education",
+    "output": {
+      "question": "We need a _______ to solve this complex math problem.",
+      "options": ["ruler", "calculator", "compass", "eraser"],
+      "correct_answer": "calculator",
+      "explanation": "Thiết bị tính toán số học gọi là máy tính bỏ túi (calculator)."
+    }
+  },
+  {
+    "topic": "Vocabulary - Work & Education",
+    "difficulty": -0.6,
+    "context": "Education",
+    "output": {
+      "question": "The teacher wrote the lesson on the _______.",
+      "options": ["desk", "board", "floor", "wall"],
+      "correct_answer": "board",
+      "explanation": "Nơi giáo viên viết bài cho cả lớp xem là cái bảng (board)."
+    }
+  },
+  {
+    "topic": "Vocabulary - Work & Education",
+    "difficulty": -0.5,
+    "context": "Education",
+    "output": {
+      "question": "I forgot to bring my _______, so I can't draw a straight line.",
+      "options": ["eraser", "ruler", "pencil", "pen"],
+      "correct_answer": "ruler",
+      "explanation": "Dụng cụ dùng để kẻ đường thẳng là thước kẻ (ruler)."
+    }
+  },
+  {
+    "topic": "Vocabulary - Work & Education",
+    "difficulty": -0.4,
+    "context": "Education",
+    "output": {
+      "question": "Please open your _______ to page 45.",
+      "options": ["notebook", "textbook", "dictionary", "syllabus"],
+      "correct_answer": "textbook",
+      "explanation": "Sách giáo khoa dùng để học theo chương trình là 'textbook'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Work & Education",
+    "difficulty": -0.3,
+    "context": "Work activities",
+    "output": {
+      "question": "She was _______ to manager after working for the company for five years.",
+      "options": ["hired", "fired", "promoted", "resigned"],
+      "correct_answer": "promoted",
+      "explanation": "Được thăng chức lên vị trí cao hơn gọi là 'promoted'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Work & Education",
+    "difficulty": -0.2,
+    "context": "Work activities",
+    "output": {
+      "question": "The company decided to _______ ten new employees this month.",
+      "options": ["fire", "hire", "resign", "promote"],
+      "correct_answer": "hire",
+      "explanation": "Hành động tuyển dụng người mới vào làm việc gọi là 'hire'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Work & Education",
+    "difficulty": -0.1,
+    "context": "Work activities",
+    "output": {
+      "question": "He was _______ from his job because he was always late.",
+      "options": ["hired", "promoted", "fired", "resigned"],
+      "correct_answer": "fired",
+      "explanation": "Bị sa thải khỏi công việc gọi là 'fired'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Work & Education",
+    "difficulty": 0.0,
+    "context": "General",
+    "output": {
+      "question": "A _______ is a person who starts their own business.",
+      "options": ["employee", "manager", "entrepreneur", "secretary"],
+      "correct_answer": "entrepreneur",
+      "explanation": "Người tự khởi nghiệp/kinh doanh gọi là doanh nhân (entrepreneur)."
+    }
+  },
+  {
+    "topic": "Vocabulary - Travel, Transport & Holidays",
+    "difficulty": -1.0,
+    "context": "Transport",
+    "output": {
+      "question": "A _______ is a large vehicle used for carrying many passengers over long distances by road.",
+      "options": ["bicycle", "coach", "motorbike", "taxi"],
+      "correct_answer": "coach",
+      "explanation": "Xe khách đường dài được gọi là 'coach'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Travel, Transport & Holidays",
+    "difficulty": -0.9,
+    "context": "Transport",
+    "output": {
+      "question": "The _______ is an underground railway system used in big cities like London or New York.",
+      "options": ["ferry", "subway", "tram", "plane"],
+      "correct_answer": "subway",
+      "explanation": "Hệ thống tàu điện ngầm được gọi là 'subway' hoặc 'metro'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Travel, Transport & Holidays",
+    "difficulty": -0.8,
+    "context": "Transport",
+    "output": {
+      "question": "A _______ is a boat that transports people and cars across a short distance of water.",
+      "options": ["yacht", "ship", "ferry", "submarine"],
+      "correct_answer": "ferry",
+      "explanation": "Phà dùng để vận chuyển người và xe qua quãng đường ngắn trên nước gọi là 'ferry'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Travel, Transport & Holidays",
+    "difficulty": -0.7,
+    "context": "Transport",
+    "output": {
+      "question": "I usually take a _______ to the airport because it is faster than a bus.",
+      "options": ["bicycle", "taxi", "tram", "ferry"],
+      "correct_answer": "taxi",
+      "explanation": "Taxi là phương tiện cá nhân nhanh chóng để di chuyển đến sân bay."
+    }
+  },
+  {
+    "topic": "Vocabulary - Travel, Transport & Holidays",
+    "difficulty": -0.6,
+    "context": "Transport",
+    "output": {
+      "question": "The _______ is a vehicle that runs on rails in the streets of some cities.",
+      "options": ["coach", "tram", "subway", "plane"],
+      "correct_answer": "tram",
+      "explanation": "Xe điện chạy trên đường ray trong phố gọi là 'tram'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Travel, Transport & Holidays",
+    "difficulty": -0.5,
+    "context": "Transport",
+    "output": {
+      "question": "If you want to travel across the ocean, you need to take a _______.",
+      "options": ["ferry", "ship", "boat", "canoe"],
+      "correct_answer": "ship",
+      "explanation": "Tàu thủy lớn dùng để đi xuyên đại dương gọi là 'ship'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Travel, Transport & Holidays",
+    "difficulty": -0.4,
+    "context": "Transport",
+    "output": {
+      "question": "Using a _______ is a great way to see the city while exercising.",
+      "options": ["motorbike", "bicycle", "taxi", "coach"],
+      "correct_answer": "bicycle",
+      "explanation": "Xe đạp (bicycle) vừa giúp tham quan vừa là hình thức tập thể dục."
+    }
+  },
+  {
+    "topic": "Vocabulary - Travel, Transport & Holidays",
+    "difficulty": -0.3,
+    "context": "Transport",
+    "output": {
+      "question": "The _______ is the most expensive but fastest way to travel between continents.",
+      "options": ["train", "plane", "ship", "coach"],
+      "correct_answer": "plane",
+      "explanation": "Máy bay (plane) là phương tiện nhanh nhất để đi giữa các châu lục."
+    }
+  },
+  {
+    "topic": "Vocabulary - Travel, Transport & Holidays",
+    "difficulty": -0.2,
+    "context": "Transport",
+    "output": {
+      "question": "I missed the last _______, so I had to walk home from the station.",
+      "options": ["plane", "train", "ferry", "bicycle"],
+      "correct_answer": "train",
+      "explanation": "Từ 'station' thường đi kèm với 'train' (nhà ga tàu hỏa)."
+    }
+  },
+  {
+    "topic": "Vocabulary - Travel, Transport & Holidays",
+    "difficulty": -0.1,
+    "context": "Transport",
+    "output": {
+      "question": "Traffic _______ is a common problem in big cities during rush hour.",
+      "options": ["jam", "flow", "sign", "light"],
+      "correct_answer": "jam",
+      "explanation": "Tắc nghẽn giao thông gọi là 'traffic jam'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Travel, Transport & Holidays",
+    "difficulty": 0.0,
+    "context": "Transport",
+    "output": {
+      "question": "A _______ is a person who drives a taxi for a living.",
+      "options": ["pilot", "captain", "cab driver", "conductor"],
+      "correct_answer": "cab driver",
+      "explanation": "Người lái taxi được gọi là 'cab driver' hoặc 'taxi driver'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Travel, Transport & Holidays",
+    "difficulty": -1.0,
+    "context": "Travel Process",
+    "output": {
+      "question": "You need a _______ to enter another country if you are not a citizen.",
+      "options": ["ticket", "passport", "map", "suitcase"],
+      "correct_answer": "passport",
+      "explanation": "Hộ chiếu (passport) là giấy tờ bắt buộc để nhập cảnh một quốc gia khác."
+    }
+  },
+  {
+    "topic": "Vocabulary - Travel, Transport & Holidays",
+    "difficulty": -0.9,
+    "context": "Travel Process",
+    "output": {
+      "question": "I need to _______ a hotel room before I travel to Paris.",
+      "options": ["buy", "book", "rent", "keep"],
+      "correct_answer": "book",
+      "explanation": "Đặt trước phòng khách sạn dùng động từ 'book' (hoặc reserve)."
+    }
+  },
+  {
+    "topic": "Vocabulary - Travel, Transport & Holidays",
+    "difficulty": -0.8,
+    "context": "Travel Process",
+    "output": {
+      "question": "When you arrive at the airport, you must _______ your luggage first.",
+      "options": ["check-in", "check-out", "board", "depart"],
+      "correct_answer": "check-in",
+      "explanation": "Thủ tục làm thủ tục nhập cảnh/gửi hành lý tại sân bay gọi là 'check-in'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Travel, Transport & Holidays",
+    "difficulty": -0.7,
+    "context": "Travel Process",
+    "output": {
+      "question": "You cannot enter the plane without a _______.",
+      "options": ["passport", "boarding pass", "visa", "receipt"],
+      "correct_answer": "boarding pass",
+      "explanation": "Thẻ lên máy bay gọi là 'boarding pass'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Travel, Transport & Holidays",
+    "difficulty": -0.6,
+    "context": "Travel Process",
+    "output": {
+      "question": "The plane will _______ from Gate 5 at 10:30 AM.",
+      "options": ["arrive", "depart", "land", "stay"],
+      "correct_answer": "depart",
+      "explanation": "Máy bay khởi hành/cất cánh đi khỏi một nơi gọi là 'depart'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Travel, Transport & Holidays",
+    "difficulty": -0.5,
+    "context": "Travel Process",
+    "output": {
+      "question": "My _______ was too heavy, so I had to pay an extra fee.",
+      "options": ["itinerary", "luggage", "passport", "visa"],
+      "correct_answer": "luggage",
+      "explanation": "Hành lý (luggage/baggage) quá cân sẽ phải trả thêm phí."
+    }
+  },
+  {
+    "topic": "Vocabulary - Travel, Transport & Holidays",
+    "difficulty": -0.4,
+    "context": "Travel Process",
+    "output": {
+      "question": "You must show your _______ to the customs officer at the border.",
+      "options": ["boarding pass", "visa", "ticket", "receipt"],
+      "correct_answer": "visa",
+      "explanation": "Thị thực (visa) là giấy phép nhập cảnh do nước đến cấp."
+    }
+  },
+  {
+    "topic": "Vocabulary - Travel, Transport & Holidays",
+    "difficulty": -0.3,
+    "context": "Travel Process",
+    "output": {
+      "question": "I spent an hour at the _______ waiting for my bags after the flight.",
+      "options": ["departure lounge", "baggage reclaim", "check-in desk", "customs"],
+      "correct_answer": "baggage reclaim",
+      "explanation": "Khu vực lấy lại hành lý sau chuyến bay gọi là 'baggage reclaim'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Travel, Transport & Holidays",
+    "difficulty": -0.2,
+    "context": "Travel Process",
+    "output": {
+      "question": "The plane has just _______, and the passengers are getting off.",
+      "options": ["departed", "taken off", "landed", "flown"],
+      "correct_answer": "landed",
+      "explanation": "Máy bay hạ cánh xuống mặt đất gọi là 'landed'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Travel, Transport & Holidays",
+    "difficulty": -0.1,
+    "context": "Travel Process",
+    "output": {
+      "question": "We have a long _______ with a four-hour stop in Dubai.",
+    "options": ["transit", "destination", "departure", "arrival"],
+    "correct_answer": "transit",
+    "explanation": "Việc dừng lại ở một thành phố trung chuyển trước khi đi tiếp gọi là 'transit'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Travel, Transport & Holidays",
+    "difficulty": 0.0,
+    "context": "Travel Process",
+    "output": {
+      "question": "Before we leave, we should check our _______ to see the planned activities.",
+      "options": ["boarding pass", "passport", "itinerary", "visa"],
+      "correct_answer": "itinerary",
+      "explanation": "Lịch trình chi tiết các điểm đến và hoạt động trong chuyến đi gọi là 'itinerary'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Travel, Transport & Holidays",
+    "difficulty": -1.0,
+    "context": "Holiday & Accommodation",
+    "output": {
+      "question": "I prefer staying in a _______ because it's cheaper than a hotel.",
+      "options": ["resort", "hostel", "palace", "villa"],
+      "correct_answer": "hostel",
+      "explanation": "Nhà nghỉ giá rẻ cho khách du lịch bụi gọi là 'hostel'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Travel, Transport & Holidays",
+    "difficulty": -0.9,
+    "context": "Holiday & Accommodation",
+    "output": {
+      "question": "We stayed at a luxury _______ with a private beach and swimming pool.",
+      "options": ["hostel", "resort", "apartment", "tent"],
+      "correct_answer": "resort",
+      "explanation": "Khu nghỉ dưỡng cao cấp thường có bãi biển và hồ bơi gọi là 'resort'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Travel, Transport & Holidays",
+    "difficulty": -0.8,
+    "context": "Holiday & Accommodation",
+    "output": {
+      "question": "I love _______ in a new city and visiting famous museums.",
+      "options": ["camping", "sightseeing", "hiking", "diving"],
+      "correct_answer": "sightseeing",
+      "explanation": "Đi tham quan các địa điểm nổi tiếng gọi là 'sightseeing'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Travel, Transport & Holidays",
+    "difficulty": -0.7,
+    "context": "Holiday & Accommodation",
+    "output": {
+      "question": "I bought a small _______ for my friend to remember my trip to Italy.",
+      "options": ["passport", "souvenir", "ticket", "map"],
+      "correct_answer": "souvenir",
+      "explanation": "Vật kỷ niệm mua khi đi du lịch gọi là 'souvenir'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Travel, Transport & Holidays",
+    "difficulty": -0.6,
+    "context": "Holiday & Accommodation",
+    "output": {
+      "question": "We decided to go _______ in the mountains and sleep in a tent.",
+      "options": ["sightseeing", "camping", "cruising", "diving"],
+      "correct_answer": "camping",
+      "explanation": "Đi cắm trại và ngủ trong lều gọi là 'camping'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Travel, Transport & Holidays",
+    "difficulty": -0.5,
+    "context": "Holiday & Accommodation",
+    "output": {
+      "question": "A _______ is a person who travels to a place for pleasure.",
+      "options": ["resident", "tourist", "citizen", "pilot"],
+      "correct_answer": "tourist",
+      "explanation": "Người đi du lịch để giải trí gọi là 'tourist'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Travel, Transport & Holidays",
+    "difficulty": -0.4,
+    "context": "Holiday & Accommodation",
+    "output": {
+      "question": "We hired a local _______ to explain the history of the ancient city.",
+      "options": ["driver", "guide", "pilot", "receptionist"],
+      "correct_answer": "guide",
+      "explanation": "Người hướng dẫn du lịch gọi là 'guide'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Travel, Transport & Holidays",
+    "difficulty": -0.3,
+    "context": "Holiday & Accommodation",
+    "output": {
+      "question": "I want to book an _______ holiday where all meals and drinks are included.",
+      "options": ["adventure", "all-inclusive", "budget", "independent"],
+      "correct_answer": "all-inclusive",
+      "explanation": "Kỳ nghỉ trọn gói (bao gồm ăn uống, ở) gọi là 'all-inclusive'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Travel, Transport & Holidays",
+    "difficulty": -0.2,
+    "context": "Holiday & Accommodation",
+    "output": {
+      "question": "A _______ is a short trip to a city, usually for a weekend.",
+      "options": ["cruise", "city break", "expedition", "voyage"],
+      "correct_answer": "city break",
+      "explanation": "Chuyến đi ngắn ngày đến một thành phố gọi là 'city break'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Travel, Transport & Holidays",
+    "difficulty": -0.1,
+    "context": "Holiday & Accommodation",
+    "output": {
+      "question": "We took a _______ around the Mediterranean Sea on a large ship.",
+      "options": ["flight", "cruise", "hike", "ride"],
+      "correct_answer": "cruise",
+      "explanation": "Chuyến du ngoạn bằng tàu thủy lớn gọi là 'cruise'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Travel, Transport & Holidays",
+    "difficulty": 0.0,
+    "context": "Holiday & Accommodation",
+    "output": {
+      "question": "The hotel is located in a _______ area, far from the noisy city center.",
+      "options": ["crowded", "residential", "remote", "central"],
+      "correct_answer": "remote",
+      "explanation": "Một nơi xa xôi, hẻo lánh gọi là 'remote'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Travel, Transport & Holidays",
+    "difficulty": -0.9,
+    "context": "Travel Objects",
+    "output": {
+      "question": "I packed my clothes into a large _______ before leaving for the airport.",
+      "options": ["backpack", "suitcase", "folder", "envelope"],
+      "correct_answer": "suitcase",
+      "explanation": "Vali dùng để đựng quần áo khi đi du lịch gọi là 'suitcase'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Travel, Transport & Holidays",
+    "difficulty": -0.8,
+    "context": "Travel Objects",
+    "output": {
+      "question": "I use a _______ to find the correct streets and landmarks in a new city.",
+      "options": ["passport", "map", "boarding pass", "visa"],
+      "correct_answer": "map",
+      "explanation": "Bản đồ (map) dùng để định vị đường đi."
+    }
+  },
+  {
+    "topic": "Vocabulary - Travel, Transport & Holidays",
+    "difficulty": -0.7,
+    "context": "Travel Objects",
+    "output": {
+      "question": "Many young travelers prefer to carry a _______ instead of a heavy suitcase.",
+      "options": ["briefcase", "backpack", "handbag", "trunk"],
+      "correct_answer": "backpack",
+      "explanation": "Balo du lịch gọi là 'backpack'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Travel, Transport & Holidays",
+    "difficulty": -0.6,
+    "context": "Travel Objects",
+    "output": {
+      "question": "I bought a _______ ticket, so I can travel to any city in the country.",
+      "options": ["single", "return", "open", "one-way"],
+      "correct_answer": "open",
+      "explanation": "Vé mở (open ticket) cho phép linh hoạt thời gian và điểm đến."
+    }
+  },
+  {
+    "topic": "Vocabulary - Travel, Transport & Holidays",
+    "difficulty": -0.5,
+    "context": "Travel Objects",
+    "output": {
+      "question": "A _______ ticket allows you to go to a place and come back again.",
+      "options": ["single", "return", "one-way", "boarding"],
+      "correct_answer": "return",
+      "explanation": "Vé khứ hồi gọi là 'return ticket'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Travel, Transport & Holidays",
+    "difficulty": -0.4,
+    "context": "Travel Objects",
+    "output": {
+      "question": "I only bought a _______ ticket because I don't know when I will return.",
+      "options": ["return", "single", "round", "open"],
+      "correct_answer": "single",
+      "explanation": "Vé một chiều gọi là 'single ticket' hoặc 'one-way ticket'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Travel, Transport & Holidays",
+    "difficulty": -0.3,
+    "context": "Travel Objects",
+    "output": {
+      "question": "I need to buy some _______ to use in the foreign country.",
+      "options": ["currency", "credits", "bills", "coins"],
+      "correct_answer": "currency",
+      "explanation": "Tiền tệ của một quốc gia gọi là 'currency'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Travel, Transport & Holidays",
+    "difficulty": -0.2,
+    "context": "Travel Objects",
+    "output": {
+      "question": "The _______ is the final place where you will arrive on your journey.",
+      "options": ["departure", "transit", "destination", "origin"],
+      "correct_answer": "destination",
+      "explanation": "Điểm đến cuối cùng gọi là 'destination'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Travel, Transport & Holidays",
+    "difficulty": -0.1,
+    "context": "Travel Objects",
+    "output": {
+      "question": "We need to check the _______ to see what time our flight departs.",
+    "options": ["itinerary", "timetable", "passport", "visa"],
+    "correct_answer": "timetable",
+    "explanation": "Thời khóa biểu/Lịch trình chạy tàu xe máy bay gọi là 'timetable'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Travel, Transport & Holidays",
+    "difficulty": 0.0,
+    "context": "Travel Objects",
+    "output": {
+      "question": "I usually travel _______ because I enjoy the freedom of not having a fixed plan.",
+      "options": ["independently", "organized", "accompanied", "locally"],
+      "correct_answer": "independently",
+      "explanation": "Đi du lịch tự túc, không theo tour gọi là 'travel independently'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Travel, Transport & Holidays",
+    "difficulty": -0.9,
+    "context": "Travel Verbs",
+    "output": {
+      "question": "I want to _______ the museum and see the old paintings.",
+      "options": ["explore", "visit", "stay", "book"],
+      "correct_answer": "visit",
+      "explanation": "Đến thăm một địa điểm gọi là 'visit'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Travel, Transport & Holidays",
+    "difficulty": -0.8,
+    "context": "Travel Verbs",
+    "output": {
+      "question": "We spent the whole day _______ the old town and its hidden alleys.",
+      "options": ["visiting", "exploring", "booking", "staying"],
+      "correct_answer": "exploring",
+      "explanation": "Khám phá một khu vực mới gọi là 'exploring'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Travel, Transport & Holidays",
+    "difficulty": -0.7,
+    "context": "Travel Verbs",
+    "output": {
+      "question": "You should _______ your suitcase the night before you leave.",
+      "options": ["book", "pack", "check", "load"],
+      "correct_answer": "pack",
+      "explanation": "Sắp xếp đồ đạc vào vali gọi là 'pack'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Travel, Transport & Holidays",
+    "difficulty": -0.6,
+    "context": "Travel Verbs",
+    "output": {
+      "question": "Our plane will _______ in London at 6 PM.",
+      "options": ["depart", "arrive", "take off", "board"],
+      "correct_answer": "arrive",
+      "explanation": "Đến một nơi nào đó gọi là 'arrive'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Travel, Transport & Holidays",
+    "difficulty": -0.5,
+    "context": "Travel Verbs",
+    "output": {
+      "question": "I need to _______ a taxi to get to the railway station.",
+      "options": ["drive", "hire", "ride", "fly"],
+      "correct_answer": "hire",
+      "explanation": "Thuê một phương tiện (taxi, car) gọi là 'hire' (hoặc rent)."
+    }
+  },
+  {
+    "topic": "Vocabulary - Travel, Transport & Holidays",
+    "difficulty": -0.4,
+    "context": "Travel Verbs",
+    "output": {
+      "question": "Passengers are asked to _______ the plane now.",
+      "options": ["land", "board", "depart", "check-in"],
+      "correct_answer": "board",
+      "explanation": "Hành động bước lên máy bay/tàu gọi là 'board'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Travel, Transport & Holidays",
+    "difficulty": -0.3,
+    "context": "Travel Verbs",
+    "output": {
+      "question": "We decided to _______ our holiday for a few days due to the rain.",
+      "options": ["cancel", "postpone", "book", "confirm"],
+      "correct_answer": "postpone",
+      "explanation": "Hoãn một sự kiện/chuyến đi lại gọi là 'postpone'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Travel, Transport & Holidays",
+    "difficulty": -0.2,
+    "context": "Travel Verbs",
+    "output": {
+      "question": "I love to _______ local food when I travel to a new country.",
+      "options": ["cook", "taste", "buy", "sell"],
+      "correct_answer": "taste",
+      "explanation": "Thử/nếm món ăn địa phương gọi là 'taste'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Travel, Transport & Holidays",
+    "difficulty": -0.1,
+    "context": "Travel Verbs",
+    "output": {
+      "question": "You must _______ your passport at the immigration desk.",
+      "options": ["show", "give", "keep", "book"],
+      "correct_answer": "show",
+      "explanation": "Xuất trình hộ chiếu gọi là 'show your passport'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Travel, Transport & Holidays",
+    "difficulty": 0.0,
+    "context": "Travel Verbs",
+    "output": {
+      "question": "I spent the afternoon _______ the local architecture.",
+      "options": ["admiring", "packing", "boarding", "booking"],
+      "correct_answer": "admiring",
+      "explanation": "Chiêm ngưỡng/ngắm nhìn kiến trúc gọi là 'admiring'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Travel, Transport & Holidays",
+    "difficulty": -0.8,
+    "context": "Transport",
+    "output": {
+      "question": "The _______ is the person who checks your tickets on a train.",
+      "options": ["pilot", "conductor", "driver", "guide"],
+      "correct_answer": "conductor",
+      "explanation": "Người soát vé trên tàu hỏa gọi là 'conductor'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Travel, Transport & Holidays",
+    "difficulty": -0.7,
+    "context": "Travel Process",
+    "output": {
+      "question": "You can buy a _______ ticket if you are only going one way.",
+      "options": ["return", "single", "open", "round"],
+      "correct_answer": "single",
+      "explanation": "Vé một chiều gọi là 'single ticket'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Travel, Transport & Holidays",
+    "difficulty": -0.6,
+    "context": "Holiday & Accommodation",
+    "output": {
+      "question": "I prefer a _______ because I can cook my own meals.",
+      "options": ["hotel", "resort", "self-catering apartment", "hostel"],
+      "correct_answer": "self-catering apartment",
+      "explanation": "Căn hộ tự phục vụ (tự nấu ăn) gọi là 'self-catering apartment'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Travel, Transport & Holidays",
+    "difficulty": -0.5,
+    "context": "Transport",
+    "output": {
+      "question": "We took a _______ to get across the river to the other side of the city.",
+      "options": ["coach", "ferry", "subway", "tram"],
+      "correct_answer": "ferry",
+      "explanation": "Dùng 'ferry' để băng qua sông/biển."
+    }
+  },
+  {
+    "topic": "Vocabulary - Travel, Transport & Holidays",
+    "difficulty": -0.4,
+    "context": "Travel Process",
+    "output": {
+      "question": "Please put your _______ in the overhead locker.",
+      "options": ["passport", "hand luggage", "visa", "itinerary"],
+      "correct_answer": "hand luggage",
+      "explanation": "Hành lý xách tay đặt ở ngăn phía trên gọi là 'hand luggage'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Travel, Transport & Holidays",
+    "difficulty": -0.3,
+    "context": "Holiday & Accommodation",
+    "output": {
+      "question": "We went on a _______ tour of the city in a big red bus.",
+      "options": ["private", "guided", "independent", "local"],
+      "correct_answer": "guided",
+      "explanation": "Tour có hướng dẫn viên gọi là 'guided tour'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Travel, Transport & Holidays",
+    "difficulty": -0.2,
+    "context": "Travel Objects",
+    "output": {
+      "question": "You can exchange your money at the _______ at the airport.",
+      "options": ["customs", "currency exchange", "departure lounge", "gate"],
+      "correct_answer": "currency exchange",
+      "explanation": "Nơi đổi tiền gọi là 'currency exchange'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Travel, Transport & Holidays",
+    "difficulty": -0.1,
+    "context": "Travel Process",
+    "output": {
+      "question": "I had to wait in a long line at _______ to declare my goods.",
+      "options": ["the gate", "customs", "check-in", "boarding"],
+      "correct_answer": "customs",
+      "explanation": "Khu vực hải quan nơi khai báo hàng hóa gọi là 'customs'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Travel, Transport & Holidays",
+    "difficulty": 0.0,
+    "context": "Holiday & Accommodation",
+    "output": {
+      "question": "We enjoyed a _______ holiday, where we just relaxed on the beach.",
+      "options": ["sightseeing", "leisure", "adventure", "business"],
+      "correct_answer": "leisure",
+      "explanation": "Kỳ nghỉ thư giãn, giải trí gọi là 'leisure holiday'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Health, Fitness & Body",
+    "difficulty": -1.0,
+    "context": "Body Parts",
+    "output": {
+      "question": "You use your _______ to smell flowers.",
+      "options": ["eyes", "ears", "nose", "mouth"],
+      "correct_answer": "nose",
+      "explanation": "Mũi (nose) là bộ phận cơ thể dùng để ngửi."
+    }
+  },
+  {
+    "topic": "Vocabulary - Health, Fitness & Body",
+    "difficulty": -0.9,
+    "context": "Body Parts",
+    "output": {
+      "question": "Your _______ are the joints that connect your hand to your arm.",
+      "options": ["elbows", "shoulders", "wrists", "ankles"],
+      "correct_answer": "wrists",
+      "explanation": "Cổ tay (wrists) là khớp nối giữa bàn tay và cánh tay."
+    }
+  },
+  {
+    "topic": "Vocabulary - Health, Fitness & Body",
+    "difficulty": -0.8,
+    "context": "Body Parts",
+    "output": {
+      "question": "The _______ is the part of the body where food goes after you swallow it.",
+      "options": ["heart", "stomach", "lung", "liver"],
+      "correct_answer": "stomach",
+      "explanation": "Dạ dày (stomach) là nơi chứa thức ăn sau khi nuốt."
+    }
+  },
+  {
+    "topic": "Vocabulary - Health, Fitness & Body",
+    "difficulty": -0.7,
+    "context": "Body Parts",
+    "output": {
+      "question": "If you have a _______, it might be difficult to speak or swallow.",
+      "options": ["sore throat", "headache", "backache", "toothache"],
+      "correct_answer": "sore throat",
+      "explanation": "Đau họng (sore throat) khiến việc nói hoặc nuốt trở nên khó khăn."
+    }
+  },
+  {
+    "topic": "Vocabulary - Health, Fitness & Body",
+    "difficulty": -0.6,
+    "context": "Body Parts",
+    "output": {
+      "question": "You use your _______ to bend your arm.",
+      "options": ["wrist", "elbow", "shoulder", "finger"],
+      "correct_answer": "elbow",
+      "explanation": "Khuỷu tay (elbow) là khớp giúp cánh tay gập lại."
+    }
+  },
+  {
+    "topic": "Vocabulary - Health, Fitness & Body",
+    "difficulty": -0.5,
+    "context": "Body Parts",
+    "output": {
+      "question": "The _______ is the joint that connects the foot to the leg.",
+      "options": ["knee", "ankle", "wrist", "elbow"],
+      "correct_answer": "ankle",
+      "explanation": "Cổ chân (ankle) là khớp nối giữa bàn chân và cẳng chân."
+    }
+  },
+  {
+    "topic": "Vocabulary - Health, Fitness & Body",
+    "difficulty": -0.4,
+    "context": "Body Parts",
+    "output": {
+      "question": "Your _______ pump blood to all parts of your body.",
+      "options": ["lungs", "kidneys", "heart", "stomach"],
+      "correct_answer": "heart",
+      "explanation": "Tim (heart) có chức năng bơm máu đi khắp cơ thể."
+    }
+  },
+  {
+    "topic": "Vocabulary - Health, Fitness & Body",
+    "difficulty": -0.3,
+    "context": "Body Parts",
+    "output": {
+      "question": "The _______ are the organs you use for breathing.",
+      "options": ["lungs", "heart", "liver", "kidneys"],
+      "correct_answer": "lungs",
+      "explanation": "Phổi (lungs) là cơ quan dùng để hô hấp."
+    }
+  },
+  {
+    "topic": "Vocabulary - Health, Fitness & Body",
+    "difficulty": -0.2,
+    "context": "Body Parts",
+    "output": {
+      "question": "You use your _______ to balance your body when you stand.",
+      "options": ["ears", "eyes", "core", "fingers"],
+      "correct_answer": "core",
+      "explanation": "Vùng cơ lõi (core) giúp cơ thể giữ thăng bằng khi đứng."
+    }
+  },
+  {
+    "topic": "Vocabulary - Health, Fitness & Body",
+    "difficulty": -0.1,
+    "context": "Body Parts",
+    "output": {
+      "question": "The _______ is the hard part of the body that protects the brain.",
+      "options": ["skin", "muscle", "skull", "spine"],
+      "correct_answer": "skull",
+      "explanation": "Hộp sọ (skull) bảo vệ não bộ."
+    }
+  },
+  {
+    "topic": "Vocabulary - Health, Fitness & Body",
+    "difficulty": 0.0,
+    "context": "Body Parts",
+    "output": {
+      "question": "The _______ is the series of bones that protect the spinal cord.",
+      "options": ["ribs", "spine", "skull", "pelvis"],
+      "correct_answer": "spine",
+      "explanation": "Cột sống (spine) bảo vệ tủy sống."
+    }
+  },
+  {
+    "topic": "Vocabulary - Health, Fitness & Body",
+    "difficulty": -1.0,
+    "context": "Symptoms",
+    "output": {
+      "question": "When you have a _______, your body temperature is higher than normal.",
+      "options": ["cough", "cold", "fever", "headache"],
+      "correct_answer": "fever",
+      "explanation": "Sốt (fever) là trạng thái nhiệt độ cơ thể cao hơn bình thường."
+    }
+  },
+  {
+    "topic": "Vocabulary - Health, Fitness & Body",
+    "difficulty": -0.9,
+    "context": "Symptoms",
+    "output": {
+      "question": "I have a _______; I can't stop sneezing and my nose is running.",
+      "options": ["fever", "cold", "stomachache", "broken leg"],
+      "correct_answer": "cold",
+      "explanation": "Cảm lạnh (cold) thường gây hắt hơi và sổ mũi."
+    }
+  },
+  {
+    "topic": "Vocabulary - Health, Fitness & Body",
+    "difficulty": -0.8,
+    "context": "Symptoms",
+    "output": {
+      "question": "She has a _______ because she ate too much spicy food.",
+      "options": ["headache", "stomachache", "earache", "backache"],
+      "correct_answer": "stomachache",
+      "explanation": "Đau bụng (stomachache) thường xảy ra sau khi ăn đồ quá cay hoặc không sạch."
+    }
+  },
+  {
+    "topic": "Vocabulary - Health, Fitness & Body",
+    "difficulty": -0.7,
+    "context": "Symptoms",
+    "output": {
+      "question": "I feel _______; I think I need to sit down before I fall.",
+      "options": ["healthy", "dizzy", "strong", "energetic"],
+      "correct_answer": "dizzy",
+      "explanation": "Choáng váng/chóng mặt (dizzy) khiến người ta có cảm giác muốn ngã."
+    }
+  },
+  {
+    "topic": "Vocabulary - Health, Fitness & Body",
+    "difficulty": -0.6,
+    "context": "Symptoms",
+    "output": {
+      "question": "He has a _______, so he keeps making a loud noise with his throat.",
+      "options": ["fever", "cough", "headache", "sore throat"],
+      "correct_answer": "cough",
+      "explanation": "Ho (cough) tạo ra tiếng động từ cổ họng."
+    }
+  },
+  {
+    "topic": "Vocabulary - Health, Fitness & Body",
+    "difficulty": -0.5,
+    "context": "Symptoms",
+    "output": {
+      "question": "I have a terrible _______; the loud music is making it worse.",
+      "options": ["stomachache", "headache", "toothache", "backache"],
+      "correct_answer": "headache",
+      "explanation": "Đau đầu (headache) thường trở nên tệ hơn khi có tiếng ồn lớn."
+    }
+  },
+  {
+    "topic": "Vocabulary - Health, Fitness & Body",
+    "difficulty": -0.4,
+    "context": "Symptoms",
+    "output": {
+      "question": "She has a _______, so she needs to visit the dentist.",
+      "options": ["headache", "earache", "toothache", "backache"],
+      "correct_answer": "toothache",
+      "explanation": "Đau răng (toothache) cần được điều trị bởi nha sĩ (dentist)."
+    }
+  },
+  {
+    "topic": "Vocabulary - Health, Fitness & Body",
+    "difficulty": -0.3,
+    "context": "Symptoms",
+    "output": {
+      "question": "My back hurts after carrying those heavy boxes. I have a _______.",
+      "options": ["headache", "stomachache", "backache", "sore throat"],
+      "correct_answer": "backache",
+      "explanation": "Đau lưng (backache) xảy ra sau khi bê vác vật nặng."
+    }
+  },
+  {
+    "topic": "Vocabulary - Health, Fitness & Body",
+    "difficulty": -0.2,
+    "context": "Symptoms",
+    "output": {
+      "question": "I feel _______ because I didn't eat anything since morning.",
+      "options": ["full", "light-headed", "strong", "active"],
+      "correct_answer": "light-headed",
+      "explanation": "Choáng nhẹ/nhẹ đầu (light-headed) thường xảy ra khi đói."
+    }
+  },
+  {
+    "topic": "Vocabulary - Health, Fitness & Body",
+    "difficulty": -0.1,
+    "context": "Symptoms",
+    "output": {
+      "question": "He is _______, which means he has no strength and feels very weak.",
+      "options": ["energetic", "exhausted", "fit", "healthy"],
+      "correct_answer": "exhausted",
+      "explanation": "Kiệt sức (exhausted) là trạng thái cực kỳ mệt mỏi và không còn sức lực."
+    }
+  },
+  {
+    "topic": "Vocabulary - Health, Fitness & Body",
+    "difficulty": 0.0,
+    "context": "Symptoms",
+    "output": {
+      "question": "She has _______, which is a condition where she is allergic to pollen.",
+      "options": ["a cold", "hay fever", "the flu", "a cough"],
+      "correct_answer": "hay fever",
+      "explanation": "Sốt cỏ (hay fever) là tình trạng dị ứng với phấn hoa."
+    }
+  },
+  {
+    "topic": "Vocabulary - Health, Fitness & Body",
+    "difficulty": -1.0,
+    "context": "Healthcare",
+    "output": {
+      "question": "You should go to the _______ if you are very sick and need a bed.",
+      "options": ["pharmacy", "hospital", "gym", "library"],
+      "correct_answer": "hospital",
+      "explanation": "Bệnh viện (hospital) là nơi điều trị nội trú cho người bệnh nặng."
+    }
+  },
+  {
+    "topic": "Vocabulary - Health, Fitness & Body",
+    "difficulty": -0.9,
+    "context": "Healthcare",
+    "output": {
+      "question": "I need to go to the _______ to buy some medicine for my cold.",
+      "options": ["hospital", "pharmacy", "clinic", "surgery"],
+      "correct_answer": "pharmacy",
+      "explanation": "Hiệu thuốc (pharmacy) là nơi bán thuốc."
+    }
+  },
+  {
+    "topic": "Vocabulary - Health, Fitness & Body",
+    "difficulty": -0.8,
+    "context": "Healthcare",
+    "output": {
+      "question": "I have an _______ with the doctor at 3 PM today.",
+      "options": ["interview", "appointment", "assignment", "agreement"],
+      "correct_answer": "appointment",
+      "explanation": "Lịch hẹn khám bệnh gọi là 'appointment'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Health, Fitness & Body",
+    "difficulty": -0.7,
+    "context": "Healthcare",
+    "output": {
+      "question": "The doctor wrote a _______ for some antibiotics.",
+      "options": ["bill", "receipt", "prescription", "note"],
+      "correct_answer": "prescription",
+      "explanation": "Đơn thuốc (prescription) là văn bản bác sĩ ghi để mua thuốc."
+    }
+  },
+  {
+    "topic": "Vocabulary - Health, Fitness & Body",
+    "difficulty": -0.6,
+    "context": "Healthcare",
+    "output": {
+      "question": "A _______ is a healthcare professional who assists doctors.",
+      "options": ["pharmacist", "nurse", "surgeon", "dentist"],
+      "correct_answer": "nurse",
+      "explanation": "Y tá (nurse) là người hỗ trợ bác sĩ chăm sóc bệnh nhân."
+    }
+  },
+  {
+    "topic": "Vocabulary - Health, Fitness & Body",
+    "difficulty": -0.5,
+    "context": "Healthcare",
+    "output": {
+      "question": "I need to see a _______ because I have a bad toothache.",
+      "options": ["surgeon", "dentist", "pharmacist", "nurse"],
+      "correct_answer": "dentist",
+      "explanation": "Nha sĩ (dentist) là người chữa các bệnh về răng."
+    }
+  },
+  {
+    "topic": "Vocabulary - Health, Fitness & Body",
+    "difficulty": -0.4,
+    "context": "Healthcare",
+    "output": {
+      "question": "The _______ prepares the medicine for the patients at the pharmacy.",
+      "options": ["doctor", "nurse", "pharmacist", "surgeon"],
+      "correct_answer": "pharmacist",
+      "explanation": "Dược sĩ (pharmacist) là người chuẩn bị và bán thuốc."
+    }
+  },
+  {
+    "topic": "Vocabulary - Health, Fitness & Body",
+    "difficulty": -0.3,
+    "context": "Healthcare",
+    "output": {
+      "question": "A _______ is a doctor who performs operations on patients.",
+      "options": ["physician", "surgeon", "pediatrician", "dentist"],
+      "correct_answer": "surgeon",
+      "explanation": "Bác sĩ phẫu thuật (surgeon) là người thực hiện các ca mổ."
+    }
+  },
+  {
+    "topic": "Vocabulary - Health, Fitness & Body",
+    "difficulty": -0.2,
+    "context": "Healthcare",
+    "output": {
+      "question": "I take one _______ of this medicine every morning after breakfast.",
+      "options": ["tablet", "syrup", "drop", "cream"],
+      "correct_answer": "tablet",
+      "explanation": "Thuốc dạng viên nén gọi là 'tablet'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Health, Fitness & Body",
+    "difficulty": -0.1,
+    "context": "Healthcare",
+    "output": {
+      "question": "You should _______ your temperature if you feel hot.",
+      "options": ["check", "test", "measure", "watch"],
+      "correct_answer": "check",
+      "explanation": "Kiểm tra nhiệt độ cơ thể dùng động từ 'check' hoặc 'take'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Health, Fitness & Body",
+    "difficulty": 0.0,
+    "context": "Healthcare",
+    "output": {
+      "question": "After the surgery, he spent a week in _______ to recover.",
+      "options": ["pharmacy", "ward", "waiting room", "surgery"],
+      "correct_answer": "ward",
+      "explanation": "Phòng bệnh/Khu điều trị trong bệnh viện gọi là 'ward'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Health, Fitness & Body",
+    "difficulty": -1.0,
+    "context": "Fitness",
+    "output": {
+      "question": "I go to the _______ three times a week to lift weights.",
+      "options": ["library", "gym", "cinema", "park"],
+      "correct_answer": "gym",
+      "explanation": "Phòng tập thể hình gọi là 'gym'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Health, Fitness & Body",
+    "difficulty": -0.9,
+    "context": "Fitness",
+    "output": {
+      "question": "Walking and swimming are good forms of _______.",
+      "options": ["diet", "exercise", "illness", "medicine"],
+      "correct_answer": "exercise",
+      "explanation": "Đi bộ và bơi lội là các hình thức tập thể dục (exercise)."
+    }
+  },
+  {
+    "topic": "Vocabulary - Health, Fitness & Body",
+    "difficulty": -0.8,
+    "context": "Fitness",
+    "output": {
+      "question": "A _______ diet includes a variety of fruits, vegetables, and proteins.",
+      "options": ["strict", "balanced", "fast", "heavy"],
+      "correct_answer": "balanced",
+      "explanation": "Chế độ ăn uống cân bằng gọi là 'balanced diet'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Health, Fitness & Body",
+    "difficulty": -0.7,
+    "context": "Fitness",
+    "output": {
+      "question": "I usually do a 10-minute _______ before I start running.",
+      "options": ["workout", "warm-up", "cool-down", "nap"],
+      "correct_answer": "warm-up",
+      "explanation": "Khởi động trước khi tập luyện gọi là 'warm-up'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Health, Fitness & Body",
+    "difficulty": -0.6,
+    "context": "Fitness",
+    "output": {
+      "question": "He is very _______ because he exercises every day and eats healthily.",
+      "options": ["weak", "fit", "sick", "tired"],
+      "correct_answer": "fit",
+      "explanation": "Người có cơ thể khỏe mạnh, cân đối gọi là 'fit'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Health, Fitness & Body",
+    "difficulty": -0.5,
+    "context": "Fitness",
+    "output": {
+      "question": "Doing a morning _______ helps me feel more energetic for the day.",
+      "options": ["workout", "appointment", "prescription", "diet"],
+      "correct_answer": "workout",
+      "explanation": "Một buổi tập luyện thể chất gọi là 'workout'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Health, Fitness & Body",
+    "difficulty": -0.4,
+    "context": "Fitness",
+    "output": {
+      "question": "Drinking enough _______ is essential for your health.",
+      "options": ["soda", "coffee", "water", "juice"],
+      "correct_answer": "water",
+      "explanation": "Uống đủ nước (water) là yếu tố thiết yếu cho sức khỏe."
+    }
+  },
+  {
+    "topic": "Vocabulary - Health, Fitness & Body",
+    "difficulty": -0.3,
+    "context": "Fitness",
+    "output": {
+      "question": "Fruits and vegetables are rich in _______, which protect the body from diseases.",
+      "options": ["fats", "sugars", "vitamins", "proteins"],
+      "correct_answer": "vitamins",
+      "explanation": "Hoa quả và rau củ giàu vitamin giúp bảo vệ cơ thể."
+    }
+  },
+  {
+    "topic": "Vocabulary - Health, Fitness & Body",
+    "difficulty": -0.2,
+    "context": "Fitness",
+    "output": {
+      "question": "He is trying to _______ weight by eating less sugar and exercising more.",
+      "options": ["gain", "lose", "keep", "increase"],
+      "correct_answer": "lose",
+      "explanation": "Giảm cân gọi là 'lose weight'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Health, Fitness & Body",
+    "difficulty": -0.1,
+    "context": "Fitness",
+    "output": {
+      "question": "Yoga helps to improve both your physical _______ and mental health.",
+      "options": ["illness", "flexibility", "weight", "pain"],
+      "correct_answer": "flexibility",
+      "explanation": "Yoga giúp cải thiện sự linh hoạt (flexibility) của cơ thể."
+    }
+  },
+  {
+    "topic": "Vocabulary - Health, Fitness & Body",
+    "difficulty": 0.0,
+    "context": "Fitness",
+    "output": {
+      "question": "A _______ lifestyle includes regular exercise and avoiding smoking.",
+      "options": ["sedentary", "healthy", "stressful", "lazy"],
+      "correct_answer": "healthy",
+      "explanation": "Lối sống lành mạnh (healthy lifestyle) bao gồm tập thể dục và không hút thuốc."
+    }
+  },
+  {
+    "topic": "Vocabulary - Health, Fitness & Body",
+    "difficulty": -0.9,
+    "context": "General Health",
+    "output": {
+      "question": "I feel much _______ now after taking the medicine.",
+      "options": ["worse", "better", "sicker", "weaker"],
+      "correct_answer": "better",
+      "explanation": "Cảm thấy tốt hơn (better) sau khi dùng thuốc."
+    }
+  },
+  {
+    "topic": "Vocabulary - Health, Fitness & Body",
+    "difficulty": -0.8,
+    "context": "General Health",
+    "output": {
+      "question": "You should _______ a doctor if the pain doesn't go away.",
+      "options": ["visit", "call", "see", "both a and c"],
+      "correct_answer": "both a and c",
+      "explanation": "Cả 'visit a doctor' và 'see a doctor' đều được dùng để chỉ việc đi khám bệnh."
+    }
+  },
+  {
+    "topic": "Vocabulary - Health, Fitness & Body",
+    "difficulty": -0.7,
+    "context": "General Health",
+    "output": {
+      "question": "She is _______ from the flu and needs to stay in bed.",
+      "options": ["recovering", "working", "exercising", "studying"],
+      "correct_answer": "recovering",
+      "explanation": "Hồi phục (recovering) sau một đợt bệnh."
+    }
+  },
+  {
+    "topic": "Vocabulary - Health, Fitness & Body",
+    "difficulty": -0.6,
+    "context": "General Health",
+    "output": {
+      "question": "It's important to keep your _______ clean to avoid infections.",
+      "options": ["skin", "blood", "bones", "muscles"],
+      "correct_answer": "skin",
+      "explanation": "Giữ sạch da (skin) để tránh nhiễm trùng."
+    }
+  },
+  {
+    "topic": "Vocabulary - Health, Fitness & Body",
+    "difficulty": -0.5,
+    "context": "General Health",
+    "output": {
+      "question": "He has a _______, so he can't breathe easily.",
+      "options": ["headache", "blocked nose", "toothache", "stomachache"],
+      "correct_answer": "blocked nose",
+      "explanation": "Nghẹt mũi (blocked nose) khiến việc hít thở trở nên khó khăn."
+    }
+  },
+  {
+    "topic": "Vocabulary - Health, Fitness & Body",
+    "difficulty": -0.4,
+    "context": "General Health",
+    "output": {
+      "question": "You should avoid _______ food if you want to stay fit.",
+      "options": ["fresh", "junk", "organic", "healthy"],
+      "correct_answer": "junk",
+      "explanation": "Thức ăn rác/đồ ăn nhanh không tốt cho sức khỏe gọi là 'junk food'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Health, Fitness & Body",
+    "difficulty": -0.3,
+    "context": "General Health",
+    "output": {
+      "question": "If you have a deep cut, you might need _______ to close the wound.",
+      "options": ["tablets", "stitches", "syrup", "bandages"],
+      "correct_answer": "stitches",
+      "explanation": "Khâu vết thương gọi là 'stitches'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Health, Fitness & Body",
+    "difficulty": -0.2,
+    "context": "General Health",
+    "output": {
+      "question": "A _______ is a small piece of plastic or cloth used to cover a cut.",
+      "options": ["prescription", "bandage", "plaster", "tablet"],
+      "correct_answer": "plaster",
+      "explanation": "Miếng dán vết thương nhỏ gọi là 'plaster' (hoặc 'band-aid')."
+    }
+  },
+  {
+    "topic": "Vocabulary - Health, Fitness & Body",
+    "difficulty": -0.1,
+    "context": "General Health",
+    "output": {
+      "question": "Taking a _______ can help you relax and reduce stress.",
+      "options": ["workout", "nap", "medicine", "fever"],
+      "correct_answer": "nap",
+      "explanation": "Một giấc ngủ ngắn (nap) giúp giảm căng thẳng và hồi sức."
+    }
+  },
+  {
+    "topic": "Vocabulary - Health, Fitness & Body",
+    "difficulty": 0.0,
+    "context": "General Health",
+    "output": {
+      "question": "The doctor said my _______ pressure is a bit high, so I should eat less salt.",
+      "options": ["heart", "blood", "muscle", "bone"],
+      "correct_answer": "blood",
+      "explanation": "Huyết áp gọi là 'blood pressure'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Health, Fitness & Body",
+    "difficulty": -0.9,
+    "context": "Healthcare",
+    "output": {
+      "question": "I have a _______, so I can't see clearly without my glasses.",
+      "options": ["headache", "vision problem", "cold", "cough"],
+      "correct_answer": "vision problem",
+      "explanation": "Vấn đề về thị lực (vision problem) khiến việc nhìn không rõ."
+    }
+  },
+  {
+    "topic": "Vocabulary - Health, Fitness & Body",
+    "difficulty": -0.8,
+    "context": "Symptoms",
+    "output": {
+      "question": "My _______ is sore, so it hurts when I swallow food.",
+      "options": ["stomach", "throat", "ear", "nose"],
+      "correct_answer": "throat",
+      "explanation": "Đau họng (sore throat) gây đau khi nuốt."
+    }
+  },
+  {
+    "topic": "Vocabulary - Health, Fitness & Body",
+    "difficulty": -0.7,
+    "context": "Fitness",
+    "output": {
+      "question": "Walking 10,000 _______ a day is a common goal for staying active.",
+      "options": ["meters", "steps", "kilometers", "minutes"],
+      "correct_answer": "steps",
+      "explanation": "Đi bộ 10,000 bước (steps) mỗi ngày là mục tiêu phổ biến."
+    }
+  },
+  {
+    "topic": "Vocabulary - Health, Fitness & Body",
+    "difficulty": -0.6,
+    "context": "Healthcare",
+    "output": {
+      "question": "You should _______ your hands before eating to avoid bacteria.",
+      "options": ["clean", "wash", "brush", "wipe"],
+      "correct_answer": "wash",
+      "explanation": "Rửa tay (wash hands) để đảm bảo vệ sinh."
+    }
+  },
+  {
+    "topic": "Vocabulary - Health, Fitness & Body",
+    "difficulty": -0.5,
+    "context": "Symptoms",
+    "output": {
+      "question": "When you have _______, you feel a lot of pain in your joints.",
+      "options": ["a fever", "arthritis", "a cold", "a cough"],
+      "correct_answer": "arthritis",
+      "explanation": "Viêm khớp (arthritis) gây đau các khớp."
+    }
+  },
+  {
+    "topic": "Vocabulary - Health, Fitness & Body",
+    "difficulty": -0.4,
+    "context": "Healthcare",
+    "output": {
+      "question": "The nurse took my _______ to see if I had a fever.",
+      "options": ["blood pressure", "temperature", "weight", "height"],
+      "correct_answer": "temperature",
+      "explanation": "Đo nhiệt độ (temperature) để kiểm tra sốt."
+    }
+  },
+  {
+    "topic": "Vocabulary - Health, Fitness & Body",
+    "difficulty": -0.3,
+    "context": "General Health",
+    "output": {
+      "question": "Drinking _______ water helps your kidneys work better.",
+      "options": ["little", "enough", "no", "some"],
+      "correct_answer": "enough",
+      "explanation": "Uống đủ nước (enough water) tốt cho thận."
+    }
+  },
+  {
+    "topic": "Vocabulary - Health, Fitness & Body",
+    "difficulty": -0.2,
+    "context": "Healthcare",
+    "output": {
+      "question": "A _______ is a professional who cleans teeth and checks for cavities.",
+      "options": ["doctor", "dentist", "nurse", "surgeon"],
+      "correct_answer": "dentist",
+      "explanation": "Nha sĩ (dentist) chăm sóc răng miệng."
+    }
+  },
+  {
+    "topic": "Vocabulary - Health, Fitness & Body",
+    "difficulty": -0.1,
+    "context": "Fitness",
+    "output": {
+      "question": "People with a _______ lifestyle are more likely to have heart problems.",
+      "options": ["healthy", "sedentary", "active", "balanced"],
+      "correct_answer": "sedentary",
+      "explanation": "Lối sống ít vận động (sedentary lifestyle) gây hại cho tim mạch."
+    }
+  },
+  {
+    "topic": "Vocabulary - Health, Fitness & Body",
+    "difficulty": 0.0,
+    "context": "General Health",
+    "output": {
+      "question": "The doctor gave me a _______ to help me sleep better at night.",
+      "options": ["prescription", "bandage", "plaster", "vitamin"],
+      "correct_answer": "prescription",
+      "explanation": "Đơn thuốc (prescription) giúp điều trị mất ngủ."
+    }
+  },
+  {
+    "topic": "Vocabulary - Shopping, Money & Services",
+    "difficulty": -1.0,
+    "context": "Shopping",
+    "output": {
+      "question": "A _______ is a person who buys goods or services from a shop.",
+      "options": ["cashier", "customer", "manager", "seller"],
+      "correct_answer": "customer",
+      "explanation": "Người mua hàng hóa hoặc dịch vụ từ một cửa hàng gọi là khách hàng (customer)."
+    }
+  },
+  {
+    "topic": "Vocabulary - Shopping, Money & Services",
+    "difficulty": -0.9,
+    "context": "Shopping",
+    "output": {
+      "question": "The _______ is the person who takes the money and gives you the receipt at the shop.",
+      "options": ["customer", "cashier", "clerk", "owner"],
+      "correct_answer": "cashier",
+      "explanation": "Người thu tiền và đưa hóa đơn tại cửa hàng là nhân viên thu ngân (cashier)."
+    }
+  },
+  {
+    "topic": "Vocabulary - Shopping, Money & Services",
+    "difficulty": -0.8,
+    "context": "Shopping",
+    "output": {
+      "question": "The _______ of this shirt is $20.",
+      "options": ["cost", "price", "value", "bill"],
+      "correct_answer": "price",
+      "explanation": "Số tiền niêm yết cho một món hàng gọi là giá cả (price)."
+    }
+  },
+  {
+    "topic": "Vocabulary - Shopping, Money & Services",
+    "difficulty": -0.7,
+    "context": "Shopping",
+    "output": {
+      "question": "I don't have much money, so I'm looking for a _______.",
+      "options": ["luxury", "brand", "bargain", "receipt"],
+      "correct_answer": "bargain",
+      "explanation": "Một món hàng mua được với giá rẻ hơn bình thường gọi là món hời (bargain)."
+    }
+  },
+  {
+    "topic": "Vocabulary - Shopping, Money & Services",
+    "difficulty": -0.6,
+    "context": "Shopping",
+    "output": {
+      "question": "Can I try this dress on in the _______, please?",
+      "options": ["aisle", "fitting room", "department", "counter"],
+      "correct_answer": "fitting room",
+      "explanation": "Nơi thử quần áo trong cửa hàng gọi là phòng thay đồ (fitting room)."
+    }
+  },
+  {
+    "topic": "Vocabulary - Shopping, Money & Services",
+    "difficulty": -0.5,
+    "context": "Shopping",
+    "output": {
+      "question": "I have a _______ for this jacket, so I can return it to the shop.",
+      "options": ["ticket", "receipt", "bill", "invoice"],
+      "correct_answer": "receipt",
+      "explanation": "Hóa đơn mua hàng dùng để chứng minh việc thanh toán và dùng để đổi trả gọi là receipt."
+    }
+  },
+  {
+    "topic": "Vocabulary - Shopping, Money & Services",
+    "difficulty": -0.4,
+    "context": "Shopping",
+    "output": {
+      "question": "The shop is offering a 20% _______ on all winter coats.",
+      "options": ["price", "discount", "fee", "tax"],
+      "correct_answer": "discount",
+      "explanation": "Số tiền được giảm giá gọi là discount."
+    }
+  },
+  {
+    "topic": "Vocabulary - Shopping, Money & Services",
+    "difficulty": -0.3,
+    "context": "Shopping",
+    "output": {
+      "question": "I prefer buying _______ clothes because they last longer than cheap ones.",
+      "options": ["used", "branded", "discounted", "generic"],
+      "correct_answer": "branded",
+      "explanation": "Quần áo có thương hiệu nổi tiếng gọi là branded clothes."
+    }
+  },
+  {
+    "topic": "Vocabulary - Shopping, Money & Services",
+    "difficulty": -0.2,
+    "context": "Shopping",
+    "output": {
+      "question": "The milk and eggs are in the dairy _______ of the supermarket.",
+      "options": ["counter", "aisle", "section", "shelf"],
+      "correct_answer": "aisle",
+      "explanation": "Lối đi giữa các dãy kệ trong siêu thị gọi là aisle."
+    }
+  },
+  {
+    "topic": "Vocabulary - Shopping, Money & Services",
+    "difficulty": -0.1,
+    "context": "Shopping",
+    "output": {
+      "question": "I want to get a _______ because this phone is broken and I cannot fix it.",
+      "options": ["receipt", "refund", "discount", "voucher"],
+      "correct_answer": "refund",
+      "explanation": "Việc hoàn lại tiền khi trả lại hàng hóa gọi là refund."
+    }
+  },
+  {
+    "topic": "Vocabulary - Shopping, Money & Services",
+    "difficulty": 0.0,
+    "context": "Shopping",
+    "output": {
+      "question": "She likes to _______ around several shops before deciding which one to buy.",
+      "options": ["shop", "order", "spend", "afford"],
+      "correct_answer": "shop",
+      "explanation": "Cụm từ 'shop around' có nghĩa là đi xem nhiều nơi để tìm giá tốt nhất."
+    }
+  },
+  {
+    "topic": "Vocabulary - Shopping, Money & Services",
+    "difficulty": -1.0,
+    "context": "Money",
+    "output": {
+      "question": "I don't have a card, so I will pay in _______.",
+      "options": ["credit", "cash", "check", "balance"],
+      "correct_answer": "cash",
+      "explanation": "Thanh toán bằng tiền mặt gọi là 'pay in cash'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Shopping, Money & Services",
+    "difficulty": -0.9,
+    "context": "Money",
+    "output": {
+      "question": "I use my _______ to pay for things online.",
+      "options": ["cash", "credit card", "wallet", "ATM"],
+      "correct_answer": "credit card",
+      "explanation": "Thẻ tín dụng (credit card) dùng để thanh toán không tiền mặt, đặc biệt là mua sắm online."
+    }
+  },
+  {
+    "topic": "Vocabulary - Shopping, Money & Services",
+    "difficulty": -0.8,
+    "context": "Money",
+    "output": {
+      "question": "I need to find an _______ to take some money out of my account.",
+      "options": ["ATM", "office", "agency", "account"],
+      "correct_answer": "ATM",
+      "explanation": "Máy rút tiền tự động gọi là ATM (Automated Teller Machine)."
+    }
+  },
+  {
+    "topic": "Vocabulary - Shopping, Money & Services",
+    "difficulty": -0.7,
+    "context": "Money",
+    "output": {
+      "question": "I opened a _______ at the local bank yesterday.",
+      "options": ["balance", "bank account", "transfer", "currency"],
+      "correct_answer": "bank account",
+      "explanation": "Tài khoản ngân hàng gọi là bank account."
+    }
+  },
+  {
+    "topic": "Vocabulary - Shopping, Money & Services",
+    "difficulty": -0.6,
+    "context": "Money",
+    "output": {
+      "question": "I checked my _______ and I only have $10 left.",
+      "options": ["fee", "balance", "transfer", "tax"],
+      "correct_answer": "balance",
+      "explanation": "Số dư tiền trong tài khoản ngân hàng gọi là balance."
+    }
+  },
+  {
+    "topic": "Vocabulary - Shopping, Money & Services",
+    "difficulty": -0.5,
+    "context": "Money",
+    "output": {
+      "question": "Can you _______ some money to my account, please?",
+      "options": ["spend", "transfer", "save", "cost"],
+      "correct_answer": "transfer",
+      "explanation": "Hành động chuyển tiền từ tài khoản này sang tài khoản khác gọi là transfer."
+    }
+  },
+  {
+    "topic": "Vocabulary - Shopping, Money & Services",
+    "difficulty": -0.4,
+    "context": "Money",
+    "output": {
+      "question": "The bank charges a small _______ for every international transaction.",
+      "options": ["discount", "fee", "balance", "refund"],
+      "correct_answer": "fee",
+      "explanation": "Khoản phí phải trả cho một dịch vụ gọi là fee."
+    }
+  },
+  {
+    "topic": "Vocabulary - Shopping, Money & Services",
+    "difficulty": -0.3,
+    "context": "Money",
+    "output": {
+      "question": "I keep my money and cards in a small leather _______.",
+      "options": ["purse", "wallet", "pocket", "bag"],
+      "correct_answer": "wallet",
+      "explanation": "Ví đựng tiền và thẻ gọi là wallet."
+    }
+  },
+  {
+    "topic": "Vocabulary - Shopping, Money & Services",
+    "difficulty": -0.2,
+    "context": "Money",
+    "output": {
+      "question": "When you travel to Japan, you need to exchange your money for the local _______.",
+      "options": ["cash", "currency", "balance", "fee"],
+      "correct_answer": "currency",
+      "explanation": "Đơn vị tiền tệ của một quốc gia gọi là currency."
+    }
+  },
+  {
+    "topic": "Vocabulary - Shopping, Money & Services",
+    "difficulty": -0.1,
+    "context": "Money",
+    "output": {
+      "question": "I cannot _______ this expensive watch; it costs too much.",
+      "options": ["pay", "afford", "spend", "cost"],
+      "correct_answer": "afford",
+      "explanation": "Có đủ khả năng chi trả cho một món đồ gọi là afford."
+    }
+  },
+  {
+    "topic": "Vocabulary - Shopping, Money & Services",
+    "difficulty": 0.0,
+    "context": "Money",
+    "output": {
+      "question": "How much do you _______ on groceries every month?",
+      "options": ["cost", "spend", "pay", "afford"],
+      "correct_answer": "spend",
+      "explanation": "Sử dụng tiền để mua một thứ gì đó gọi là spend."
+    }
+  },
+  {
+    "topic": "Vocabulary - Shopping, Money & Services",
+    "difficulty": -1.0,
+    "context": "Services",
+    "output": {
+      "question": "I bought a book online, and the _______ will arrive tomorrow.",
+      "options": ["shipping", "delivery", "booking", "refund"],
+      "correct_answer": "delivery",
+      "explanation": "Việc vận chuyển hàng hóa đến tận nhà người mua gọi là delivery."
+    }
+  },
+  {
+    "topic": "Vocabulary - Shopping, Money & Services",
+    "difficulty": -0.9,
+    "context": "Services",
+    "output": {
+      "question": "If you have a problem with your product, you can contact _______.",
+      "options": ["cashier", "customer service", "delivery man", "manager"],
+      "correct_answer": "customer service",
+      "explanation": "Bộ phận hỗ trợ khách hàng giải quyết khiếu nại gọi là customer service."
+    }
+  },
+  {
+    "topic": "Vocabulary - Shopping, Money & Services",
+    "difficulty": -0.8,
+    "context": "Services",
+    "output": {
+      "question": "This fridge has a two-year _______, so it's free to fix if it breaks.",
+      "options": ["receipt", "warranty", "discount", "refund"],
+      "correct_answer": "warranty",
+      "explanation": "Cam kết bảo hành sản phẩm từ nhà sản xuất gọi là warranty."
+    }
+  },
+  {
+    "topic": "Vocabulary - Shopping, Money & Services",
+    "difficulty": -0.7,
+    "context": "Services",
+    "output": {
+      "question": "I have a monthly _______ for Netflix, so I pay every month.",
+      "options": ["warranty", "subscription", "delivery", "booking"],
+      "correct_answer": "subscription",
+      "explanation": "Việc đăng ký thuê bao/dịch vụ định kỳ gọi là subscription."
+    }
+  },
+  {
+    "topic": "Vocabulary - Shopping, Money & Services",
+    "difficulty": -0.6,
+    "context": "Services",
+    "output": {
+      "question": "I need to make a _______ for a table at the restaurant for tonight.",
+      "options": ["booking", "delivery", "subscription", "warranty"],
+      "correct_answer": "booking",
+      "explanation": "Hành động đặt trước chỗ/phòng gọi là booking."
+    }
+  },
+  {
+    "topic": "Vocabulary - Shopping, Money & Services",
+    "difficulty": -0.5,
+    "context": "Services",
+    "output": {
+      "question": "The _______ cost is $5 if you want the item sent by express mail.",
+      "options": ["discount", "shipping", "refund", "balance"],
+      "correct_answer": "shipping",
+      "explanation": "Chi phí vận chuyển hàng hóa gọi là shipping cost."
+    }
+  },
+  {
+    "topic": "Vocabulary - Shopping, Money & Services",
+    "difficulty": -0.4,
+    "context": "Services",
+    "output": {
+      "question": "You can _______ your groceries using a mobile app.",
+      "options": ["spend", "order", "afford", "book"],
+      "correct_answer": "order",
+      "explanation": "Đặt mua hàng (đặc biệt là online) dùng động từ 'order'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Shopping, Money & Services",
+    "difficulty": -0.3,
+    "context": "Services",
+    "output": {
+      "question": "I'm waiting for the _______ to arrive with my new shoes.",
+      "options": ["cashier", "delivery driver", "customer", "manager"],
+      "correct_answer": "delivery driver",
+      "explanation": "Người giao hàng gọi là delivery driver."
+    }
+  },
+  {
+    "topic": "Vocabulary - Shopping, Money & Services",
+    "difficulty": -0.2,
+    "context": "Services",
+    "output": {
+      "question": "The store offers a _______ if you bring the item back within 30 days.",
+      "options": ["discount", "refund", "warranty", "receipt"],
+      "correct_answer": "refund",
+      "explanation": "Hoàn lại tiền cho khách hàng khi trả lại hàng gọi là refund."
+    }
+  },
+  {
+    "topic": "Vocabulary - Shopping, Money & Services",
+    "difficulty": -0.1,
+    "context": "Services",
+    "output": {
+      "question": "I need to _______ my bank account to see how much money I have.",
+      "options": ["transfer", "check", "spend", "afford"],
+      "correct_answer": "check",
+      "explanation": "Kiểm tra số dư tài khoản gọi là 'check your account'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Shopping, Money & Services",
+    "difficulty": 0.0,
+    "context": "Services",
+    "output": {
+      "question": "The store provides a _______ service for people who cannot leave their homes.",
+      "options": ["in-store", "home delivery", "cash-only", "refund"],
+      "correct_answer": "home delivery",
+      "explanation": "Dịch vụ giao hàng tận nhà gọi là home delivery."
+    }
+  },
+  {
+    "topic": "Vocabulary - Shopping, Money & Services",
+    "difficulty": -0.9,
+    "context": "Shopping",
+    "output": {
+      "question": "The _______ is the place where you pay for your items in a store.",
+      "options": ["fitting room", "checkout", "aisle", "shelf"],
+      "correct_answer": "checkout",
+      "explanation": "Quầy thanh toán trong cửa hàng gọi là checkout."
+    }
+  },
+  {
+    "topic": "Vocabulary - Shopping, Money & Services",
+    "difficulty": -0.8,
+    "context": "Money",
+    "output": {
+      "question": "I have a _______ of $50 in my pocket.",
+      "options": ["balance", "bill", "note", "fee"],
+      "correct_answer": "note",
+      "explanation": "Tờ tiền giấy gọi là 'note' (hoặc 'bill' trong tiếng Anh-Mỹ)."
+    }
+  },
+  {
+    "topic": "Vocabulary - Shopping, Money & Services",
+    "difficulty": -0.7,
+    "context": "Shopping",
+    "output": {
+      "question": "I found a really _______ dress at the thrift store for only $5.",
+      "options": ["expensive", "branded", "cheap", "luxury"],
+      "correct_answer": "cheap",
+      "explanation": "Hàng giá rẻ gọi là 'cheap'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Shopping, Money & Services",
+    "difficulty": -0.6,
+    "context": "Money",
+    "output": {
+      "question": "I need to _______ some money from the bank for my trip.",
+      "options": ["withdraw", "deposit", "spend", "transfer"],
+      "correct_answer": "withdraw",
+      "explanation": "Hành động rút tiền từ tài khoản ngân hàng gọi là 'withdraw'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Shopping, Money & Services",
+    "difficulty": -0.5,
+    "context": "Money",
+    "output": {
+      "question": "I want to _______ some money into my savings account.",
+      "options": ["withdraw", "deposit", "spend", "afford"],
+      "correct_answer": "deposit",
+      "explanation": "Hành động gửi tiền vào tài khoản ngân hàng gọi là 'deposit'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Shopping, Money & Services",
+    "difficulty": -0.4,
+    "context": "Shopping",
+    "output": {
+      "question": "The _______ launderer cleans the clothes and returns them the next day.",
+      "options": ["cashier", "dry", "delivery", "customer"],
+      "correct_answer": "dry",
+      "explanation": "Dịch vụ giặt khô gọi là 'dry cleaning'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Shopping, Money & Services",
+    "difficulty": -0.3,
+    "context": "Shopping",
+    "output": {
+      "question": "This store sells _______ goods, which are not made by a famous brand.",
+      "options": ["branded", "generic", "luxury", "expensive"],
+      "correct_answer": "generic",
+      "explanation": "Hàng không nhãn hiệu/hàng phổ thông gọi là generic goods."
+    }
+  },
+  {
+    "topic": "Vocabulary - Shopping, Money & Services",
+    "difficulty": -0.2,
+    "context": "Services",
+    "output": {
+      "question": "I have a _______ for the hotel, so I don't need to worry about a room.",
+      "options": ["receipt", "confirmation", "warranty", "refund"],
+      "correct_answer": "confirmation",
+      "explanation": "Giấy/Email xác nhận đặt chỗ gọi là confirmation."
+    }
+  },
+  {
+    "topic": "Vocabulary - Shopping, Money & Services",
+    "difficulty": -0.1,
+    "context": "Money",
+    "output": {
+      "question": "The _______ for the service is included in the final bill.",
+      "options": ["discount", "fee", "balance", "refund"],
+      "correct_answer": "fee",
+      "explanation": "Phí dịch vụ được tính vào hóa đơn gọi là service fee."
+    }
+  },
+  {
+    "topic": "Vocabulary - Shopping, Money & Services",
+    "difficulty": 0.0,
+    "context": "Money",
+    "output": {
+      "question": "He is very _______; he always saves his money and never spends it on useless things.",
+      "options": ["generous", "frugal", "wealthy", "expensive"],
+      "correct_answer": "frugal",
+      "explanation": "Người chi tiêu tiết kiệm, chừng mực gọi là 'frugal'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Shopping, Money & Services",
+    "difficulty": -0.9,
+    "context": "Shopping",
+    "output": {
+      "question": "I usually buy my groceries at the _______ because it's cheaper than the small shop.",
+      "options": ["department store", "supermarket", "boutique", "pharmacy"],
+      "correct_answer": "supermarket",
+      "explanation": "Siêu thị (supermarket) là nơi bán thực phẩm giá rẻ và đa dạng."
+    }
+  },
+  {
+    "topic": "Vocabulary - Shopping, Money & Services",
+    "difficulty": -0.8,
+    "context": "Money",
+    "output": {
+      "question": "I can't pay for this now, can I pay by _______?",
+      "options": ["cash", "credit card", "note", "balance"],
+      "correct_answer": "credit card",
+      "explanation": "Thanh toán bằng thẻ tín dụng khi không có tiền mặt."
+    }
+  },
+  {
+    "topic": "Vocabulary - Shopping, Money & Services",
+    "difficulty": -0.7,
+    "context": "Shopping",
+    "output": {
+      "question": "I found this dress in the _______ section, and it was 50% off.",
+      "options": ["luxury", "sale", "branded", "generic"],
+      "correct_answer": "sale",
+      "explanation": "Khu vực giảm giá gọi là sale section."
+    }
+  },
+  {
+    "topic": "Vocabulary - Shopping, Money & Services",
+    "difficulty": -0.6,
+    "context": "Money",
+    "output": {
+      "question": "I need to pay the _______ for my electricity and water this month.",
+      "options": ["balance", "bills", "fees", "refunds"],
+      "correct_answer": "bills",
+      "explanation": "Hóa đơn tiện ích (điện, nước) gọi là bills."
+    }
+  },
+  {
+    "topic": "Vocabulary - Shopping, Money & Services",
+    "difficulty": -0.5,
+    "context": "Shopping",
+    "output": {
+      "question": "You can use this _______ to get $10 off your next purchase.",
+      "options": ["receipt", "voucher", "warranty", "bill"],
+      "correct_answer": "voucher",
+      "explanation": "Phiếu giảm giá/mã giảm giá gọi là voucher."
+    }
+  },
+  {
+    "topic": "Vocabulary - Shopping, Money & Services",
+    "difficulty": -0.4,
+    "context": "Services",
+    "output": {
+      "question": "The _______ was very slow, so I had to wait 30 minutes for my food.",
+      "options": ["cashier", "service", "delivery", "warranty"],
+      "correct_answer": "service",
+      "explanation": "Chất lượng phục vụ trong nhà hàng/cửa hàng gọi là service."
+    }
+  },
+  {
+    "topic": "Vocabulary - Shopping, Money & Services",
+    "difficulty": -0.3,
+    "context": "Money",
+    "output": {
+      "question": "I'm trying to _______ some money to buy a new car next year.",
+      "options": ["spend", "save", "waste", "withdraw"],
+      "correct_answer": "save",
+      "explanation": "Hành động tích lũy tiền gọi là save money."
+    }
+  },
+  {
+    "topic": "Vocabulary - Shopping, Money & Services",
+    "difficulty": -0.2,
+    "context": "Shopping",
+    "output": {
+      "question": "I bought a _______ bag, so I can carry a lot of things.",
+      "options": ["small", "spacious", "expensive", "branded"],
+      "correct_answer": "spacious",
+      "explanation": "Một chiếc túi rộng rãi gọi là spacious bag."
+    }
+  },
+  {
+    "topic": "Vocabulary - Shopping, Money & Services",
+    "difficulty": -0.1,
+    "context": "Money",
+    "output": {
+      "question": "The government increases the _______ on cigarettes to discourage people from smoking.",
+      "options": ["discount", "tax", "fee", "balance"],
+      "correct_answer": "tax",
+      "explanation": "Thuế gọi là tax."
+    }
+  },
+  {
+    "topic": "Vocabulary - Shopping, Money & Services",
+    "difficulty": 0.0,
+    "context": "Shopping",
+    "output": {
+      "question": "I prefer _______ shopping because I can compare prices easily without leaving home.",
+      "options": ["in-store", "online", "local", "wholesale"],
+      "correct_answer": "online",
+      "explanation": "Mua sắm trực tuyến gọi là online shopping."
+    }
+  },
+  {
+    "topic": "Vocabulary - Shopping, Money & Services",
+    "difficulty": -0.8,
+    "context": "Shopping",
+    "output": {
+      "question": "I usually buy my makeup at the _______.",
+      "options": ["pharmacy", "bookstore", "bakery", "butcher"],
+      "correct_answer": "pharmacy",
+      "explanation": "Tại nhiều nước, mỹ phẩm cơ bản được bán tại hiệu thuốc (pharmacy/drugstore)."
+    }
+  },
+  {
+    "topic": "Vocabulary - Shopping, Money & Services",
+    "difficulty": -0.7,
+    "context": "Money",
+    "output": {
+      "question": "Could you _______ me $5 until tomorrow?",
+      "options": ["spend", "lend", "borrow", "afford"],
+      "correct_answer": "lend",
+      "explanation": "Cho ai đó mượn tiền gọi là lend. (Ngược lại là borrow: mượn)."
+    }
+  },
+  {
+    "topic": "Vocabulary - Shopping, Money & Services",
+    "difficulty": -0.6,
+    "context": "Money",
+    "output": {
+      "question": "I need to _______ $5 from my friend to buy a coffee.",
+      "options": ["lend", "borrow", "spend", "save"],
+      "correct_answer": "borrow",
+      "explanation": "Mượn tiền từ ai đó gọi là borrow."
+    }
+  },
+  {
+    "topic": "Vocabulary - Shopping, Money & Services",
+    "difficulty": -0.5,
+    "context": "Services",
+    "output": {
+      "question": "The _______ charge is $10 for shipping the item to another city.",
+      "options": ["refund", "delivery", "balance", "discount"],
+      "correct_answer": "delivery",
+      "explanation": "Phí giao hàng gọi là delivery charge."
+    }
+  },
+  {
+    "topic": "Vocabulary - Shopping, Money & Services",
+    "difficulty": -0.4,
+    "context": "Money",
+    "output": {
+      "question": "He is a _______ man; he owns three companies and several houses.",
+      "options": ["frugal", "wealthy", "poor", "cheap"],
+      "correct_answer": "wealthy",
+      "explanation": "Người giàu có gọi là wealthy hoặc rich."
+    }
+  },
+  {
+    "topic": "Vocabulary - Shopping, Money & Services",
+    "difficulty": -0.3,
+    "context": "Shopping",
+    "output": {
+      "question": "This shop only accepts _______, so you cannot pay by card.",
+      "options": ["checks", "cash", "credits", "bills"],
+      "correct_answer": "cash",
+      "explanation": "Chỉ chấp nhận tiền mặt gọi là 'accept cash'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Shopping, Money & Services",
+    "difficulty": -0.2,
+    "context": "Services",
+    "output": {
+      "question": "I'm sorry, this item is _______; we don't have any more in stock.",
+      "options": ["available", "out of stock", "discounted", "branded"],
+      "correct_answer": "out of stock",
+      "explanation": "Hết hàng gọi là out of stock."
+    }
+  },
+  {
+    "topic": "Vocabulary - Shopping, Money & Services",
+    "difficulty": -0.1,
+    "context": "Money",
+    "output": {
+      "question": "The bank _______ is very helpful and explained everything clearly.",
+      "options": ["customer", "clerk", "cashier", "borrower"],
+      "correct_answer": "clerk",
+      "explanation": "Nhân viên ngân hàng làm việc tại quầy gọi là bank clerk."
+    }
+  },
+  {
+    "topic": "Vocabulary - Shopping, Money & Services",
+    "difficulty": 0.0,
+    "context": "Shopping",
+    "output": {
+      "question": "I'm looking for a _______ that sells organic and local produce.",
+      "options": ["supermarket", "boutique", "farmers' market", "department store"],
+      "correct_answer": "farmers' market",
+      "explanation": "Chợ nông sản nơi bán đồ hữu cơ và địa phương gọi là farmers' market."
+    }
+  },
+  {
+    "topic": "Vocabulary - Food, Dining & Cooking",
+    "difficulty": -1.0,
+    "context": "Ingredients",
+    "output": {
+      "question": "A _______ is a yellow fruit that is long and curved.",
+      "options": ["apple", "banana", "orange", "grape"],
+      "correct_answer": "banana",
+      "explanation": "Quả chuối (banana) có đặc điểm là màu vàng, dài và cong."
+    }
+  },
+  {
+    "topic": "Vocabulary - Food, Dining & Cooking",
+    "difficulty": -0.9,
+    "context": "Ingredients",
+    "output": {
+      "question": "We use _______ to make the food taste salty.",
+      "options": ["sugar", "pepper", "salt", "vinegar"],
+      "correct_answer": "salt",
+      "explanation": "Muối (salt) được dùng để tạo vị mặn cho món ăn."
+    }
+  },
+  {
+    "topic": "Vocabulary - Food, Dining & Cooking",
+    "difficulty": -0.8,
+    "context": "Ingredients",
+    "output": {
+      "question": "_______ is a white liquid that comes from cows.",
+      "options": ["Water", "Milk", "Juice", "Oil"],
+      "correct_answer": "Milk",
+      "explanation": "Sữa (milk) là chất lỏng màu trắng lấy từ bò."
+    }
+  },
+  {
+    "topic": "Vocabulary - Food, Dining & Cooking",
+    "difficulty": -0.7,
+    "context": "Ingredients",
+    "output": {
+      "question": "You need _______ and water to make a basic loaf of bread.",
+      "options": ["sugar", "flour", "salt", "pepper"],
+      "correct_answer": "flour",
+      "explanation": "Bột mì (flour) là nguyên liệu chính để làm bánh mì."
+    }
+  },
+  {
+    "topic": "Vocabulary - Food, Dining & Cooking",
+    "difficulty": -0.6,
+    "context": "Ingredients",
+    "output": {
+      "question": "_______ is a vegetable that is often used to make French fries.",
+      "options": ["Carrot", "Onion", "Potato", "Cabbage"],
+      "correct_answer": "Potato",
+      "explanation": "Khoai tây (potato) được dùng để làm khoai tây chiên."
+    }
+  },
+  {
+    "topic": "Vocabulary - Food, Dining & Cooking",
+    "difficulty": -0.5,
+    "context": "Ingredients",
+    "output": {
+      "question": "We use _______ to add a spicy and pungent flavor to the food.",
+      "options": ["sugar", "garlic", "salt", "butter"],
+      "correct_answer": "garlic",
+      "explanation": "Tỏi (garlic) tạo nên hương vị nồng và cay nhẹ."
+    }
+  },
+  {
+    "topic": "Vocabulary - Food, Dining & Cooking",
+    "difficulty": -0.4,
+    "context": "Ingredients",
+    "output": {
+      "question": "_______ is a sweet liquid made from bees.",
+      "options": ["Syrup", "Honey", "Jam", "Oil"],
+      "correct_answer": "Honey",
+      "explanation": "Mật ong (honey) được tạo ra từ loài ong."
+    }
+  },
+  {
+    "topic": "Vocabulary - Food, Dining & Cooking",
+    "difficulty": -0.3,
+    "context": "Ingredients",
+    "output": {
+      "question": "You can use _______ to make the food taste sour.",
+      "options": ["sugar", "vinegar", "salt", "honey"],
+      "correct_answer": "vinegar",
+      "explanation, ": "Giấm (vinegar) tạo ra vị chua cho món ăn."
+    }
+  },
+  {
+    "topic": "Vocabulary - Food, Dining & Cooking",
+    "difficulty": -0.2,
+    "context": "Ingredients",
+    "output": {
+      "question": "_______ is a dairy product made by churning cream.",
+      "options": ["Cheese", "Yogurt", "Butter", "Milk"],
+      "correct_answer": "Butter",
+      "explanation": "Bơ (butter) được làm ra từ việc đánh kem."
+    }
+  },
+  {
+    "topic": "Vocabulary - Food, Dining & Cooking",
+    "difficulty": -0.1,
+    "context": "Ingredients",
+    "output": {
+      "question": "_______ are small, green or black fruits often used on pizzas.",
+      "options": ["Olives", "Grapes", "Berries", "Cherries"],
+      "correct_answer": "Olives",
+      "explanation": "Quả ô liu (olives) thường được dùng làm topping cho pizza."
+    }
+  },
+  {
+    "topic": "Vocabulary - Food, Dining & Cooking",
+    "difficulty": 0.0,
+    "context": "Ingredients",
+    "output": {
+      "question": "_______ is a leaf used as a herb to add flavor to many dishes.",
+      "options": ["Cabbage", "Basil", "Lettuce", "Spinach"],
+      "correct_answer": "Basil",
+      "explanation": "Húng quế (basil) là một loại rau thơm/thảo mộc dùng để tạo hương vị."
+    }
+  },
+  {
+    "topic": "Vocabulary - Food, Dining & Cooking",
+    "difficulty": -1.0,
+    "context": "Cooking Methods",
+    "output": {
+      "question": "To _______ water is to heat it until it bubbles.",
+      "options": ["fry", "boil", "bake", "grill"],
+      "correct_answer": "boil",
+      "explanation": "Đun sôi (boil) là làm nóng chất lỏng đến khi sôi."
+    }
+  },
+  {
+    "topic": "Vocabulary - Food, Dining & Cooking",
+    "difficulty": -0.9,
+    "context": "Cooking Methods",
+    "output": {
+      "question": "To _______ is to cook food in hot oil, like making French fries.",
+      "options": ["boil", "fry", "steam", "bake"],
+      "correct_answer": "fry",
+      "explanation": "Chiên/Rán (fry) là nấu thực phẩm trong dầu nóng."
+    }
+  },
+  {
+    "topic": "Vocabulary - Food, Dining & Cooking",
+    "difficulty": -0.8,
+    "context": "Cooking Methods",
+    "output": {
+      "question": "To _______ a cake, you put the batter in an oven.",
+      "options": ["fry", "boil", "bake", "grill"],
+      "correct_answer": "bake",
+      "explanation": "Nướng bánh (bake) là dùng lò nướng (oven)."
+    }
+  },
+  {
+    "topic": "Vocabulary - Food, Dining & Cooking",
+    "difficulty": -0.7,
+    "context": "Cooking Methods",
+    "output": {
+      "question": "To _______ food is to cook it over direct heat, like a barbecue.",
+      "options": ["steam", "grill", "boil", "bake"],
+      "correct_answer": "grill",
+      "explanation": "Nướng vỉ (grill) là nấu trên lửa trực tiếp, giống như BBQ."
+    }
+  },
+  {
+    "topic": "Vocabulary - Food, Dining & Cooking",
+    "difficulty": -0.6,
+    "context": "Cooking Methods",
+    "output": {
+      "question": "To _______ vegetables is to cook them using the vapor from boiling water.",
+      "options": ["fry", "steam", "roast", "grill"],
+      "correct_answer": "steam",
+      "explanation": "Hấp (steam) là nấu thực phẩm bằng hơi nước."
+    }
+  },
+  {
+    "topic": "Vocabulary - Food, Dining & Cooking",
+    "difficulty": -0.5,
+    "context": "Cooking Methods",
+    "output": {
+      "question": "To _______ meat in the oven for a long time is called roasting.",
+      "options": ["boil", "roast", "steam", "fry"],
+      "correct_answer": "roast",
+      "explanation": "Quay/Nướng chậm (roast) thường dùng cho thịt trong lò nướng."
+    }
+  },
+  {
+    "topic": "Vocabulary - Food, Dining & Cooking",
+    "difficulty": -0.4,
+    "context": "Cooking Methods",
+    "output": {
+      "question": "You should _______ the onions into very small pieces.",
+      "options": ["slice", "chop", "peel", "grate"],
+      "correct_answer": "chop",
+      "explanation": "Băm/thái nhỏ (chop) là cắt thành các miếng nhỏ."
+    }
+  },
+  {
+    "topic": "Vocabulary - Food, Dining & Cooking",
+    "difficulty": -0.3,
+    "context": "Cooking Methods",
+    "output": {
+      "question": "Can you _______ the cucumber into thin circles?",
+      "options": ["chop", "slice", "peel", "boil"],
+      "correct_answer": "slice",
+      "explanation": "Thái lát (slice) là cắt thành các lát mỏng."
+    }
+  },
+  {
+    "topic": "Vocabulary - Food, Dining & Cooking",
+    "difficulty": -0.2,
+    "context": "Cooking Methods",
+    "output": {
+      "question": "You need to _______ the carrots before you start cooking them.",
+      "options": ["slice", "peel", "chop", "fry"],
+      "correct_answer": "peel",
+      "explanation": "Gọt vỏ (peel) là loại bỏ lớp vỏ ngoài của củ/quả."
+    }
+  },
+  {
+    "topic": "Vocabulary - Food, Dining & Cooking",
+    "difficulty": -0.1,
+    "context": "Cooking Methods",
+    "output": {
+      "question": "Use a grater to _______ the cheese for the pasta.",
+      "options": ["slice", "chop", "grate", "peel"],
+      "correct_answer": "grate",
+      "explanation": "Bào/nạo (grate) là dùng dụng cụ bào để làm nhỏ thực phẩm."
+    }
+  },
+  {
+    "topic": "Vocabulary - Food, Dining & Cooking",
+    "difficulty": 0.0,
+    "context": "Cooking Methods",
+    "output": {
+      "question": "To _______ is to mix ingredients together quickly using a spoon or whisk.",
+      "options": ["boil", "stir", "fry", "bake"],
+      "correct_answer": "stir",
+      "explanation": "Khuấy/đảo (stir) là trộn các thành phần bằng thìa hoặc phới."
+    }
+  },
+  {
+    "topic": "Vocabulary - Food, Dining & Cooking",
+    "difficulty": -1.0,
+    "context": "Dining Out",
+    "output": {
+      "question": "The _______ tells you all the food and drinks you can order in a restaurant.",
+      "options": ["bill", "receipt", "menu", "voucher"],
+      "correct_answer": "menu",
+      "explanation": "Thực đơn (menu) liệt kê các món ăn và thức uống."
+    }
+  },
+  {
+    "topic": "Vocabulary - Food, Dining & Cooking",
+    "difficulty": -0.9,
+    "context": "Dining Out",
+    "output": {
+      "question": "The _______ is the person who takes your order and brings the food.",
+      "options": ["chef", "waiter", "manager", "customer"],
+      "correct_answer": "waiter",
+      "explanation": "Người phục vụ nam trong nhà hàng gọi là waiter (nữ là waitress)."
+    }
+  },
+  {
+    "topic": "Vocabulary - Food, Dining & Cooking",
+    "difficulty": -0.8,
+    "context": "Dining Out",
+    "output": {
+      "question": "I would like to _______ a table for two people at 7 PM.",
+      "options": ["book", "order", "pay", "serve"],
+      "correct_answer": "book",
+      "explanation": "Đặt bàn trước gọi là 'book a table' hoặc 'make a reservation'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Food, Dining & Cooking",
+    "difficulty": -0.7,
+    "context": "Dining Out",
+    "output": {
+      "question": "We started our meal with an _______, like a small salad.",
+      "options": ["main course", "appetizer", "dessert", "drink"],
+      "correct_answer": "appetizer",
+      "explanation": "Món khai vị (appetizer/starter) là món ăn nhẹ lúc đầu bữa."
+    }
+  },
+  {
+    "topic": "Vocabulary - Food, Dining & Cooking",
+    "difficulty": -0.6,
+    "context": "Dining Out",
+    "output": {
+      "question": "The steak is the _______ of our dinner tonight.",
+      "options": ["appetizer", "main course", "dessert", "side dish"],
+      "correct_answer": "main course",
+      "explanation": "Món chính trong bữa ăn gọi là 'main course'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Food, Dining & Cooking",
+    "difficulty": -0.5,
+    "context": "Dining Out",
+    "output": {
+      "question": "I love chocolate cake for _______.",
+      "options": ["appetizer", "main course", "dessert", "drink"],
+      "correct_answer": "dessert",
+      "explanation": "Món tráng miệng (dessert) là món ngọt ăn cuối bữa."
+    }
+  },
+  {
+    "topic": "Vocabulary - Food, Dining & Cooking",
+    "difficulty": -0.4,
+    "context": "Dining Out",
+    "output": {
+      "question": "Can we have the _______, please? We are ready to pay.",
+      "options": ["menu", "bill", "receipt", "reservation"],
+      "correct_answer": "bill",
+      "explanation": "Hóa đơn thanh toán tại nhà hàng gọi là 'bill' (hoặc 'check' trong tiếng Anh-Mỹ)."
+    }
+  },
+  {
+    "topic": "Vocabulary - Food, Dining & Cooking",
+    "difficulty": -0.3,
+    "context": "Dining Out",
+    "output": {
+      "question": "We left a small _______ for the waiter because the service was excellent.",
+      "options": ["bill", "tip", "fee", "tax"],
+      "correct_answer": "tip",
+      "explanation": "Tiền típ/tiền boa cho người phục vụ gọi là 'tip'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Food, Dining & Cooking",
+    "difficulty": -0.2,
+    "context": "Dining Out",
+    "output": {
+      "question": "I'll have the _______ of the day, please.",
+      "options": ["bill", "special", "menu", "dessert"],
+      "correct_answer": "special",
+      "explanation": "Món đặc biệt trong ngày gọi là 'the special'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Food, Dining & Cooking",
+    "difficulty": -0.1,
+    "context": "Dining Out",
+    "output": {
+      "question": "Excuse me, can I _______ a glass of water?",
+      "options": ["book", "order", "serve", "pay"],
+      "correct_answer": "order",
+      "explanation": "Gọi món/yêu cầu đồ ăn thức uống dùng động từ 'order'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Food, Dining & Cooking",
+    "difficulty": 0.0,
+    "context": "Dining Out",
+    "output": {
+      "question": "A _______ is a small amount of food served with the main course, like fries.",
+      "options": ["dessert", "side dish", "starter", "beverage"],
+      "correct_answer": "side dish",
+      "explanation": "Món ăn kèm gọi là 'side dish'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Food, Dining & Cooking",
+    "difficulty": -1.0,
+    "context": "Tastes",
+    "output": {
+      "question": "Honey and sugar have a _______ taste.",
+      "options": ["salty", "sour", "sweet", "bitter"],
+      "correct_answer": "sweet",
+      "explanation": "Vị ngọt gọi là 'sweet'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Food, Dining & Cooking",
+    "difficulty": -0.9,
+    "context": "Tastes",
+    "output": {
+      "question": "Lemons and limes have a _______ taste.",
+      "options": ["sweet", "sour", "salty", "bitter"],
+      "correct_answer": "sour",
+      "explanation": "Vị chua gọi là 'sour'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Food, Dining & Cooking",
+    "difficulty": -0.8,
+    "context": "Tastes",
+    "output": {
+      "question": "Sea water and potato chips have a _______ taste.",
+      "options": ["sweet", "sour", "salty", "bitter"],
+      "correct_answer": "salty",
+      "explanation": "Vị mặn gọi là 'salty'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Food, Dining & Cooking",
+    "difficulty": -0.7,
+    "context": "Tastes",
+    "output": {
+      "question": "Dark chocolate and coffee often have a _______ taste.",
+      "options": ["sweet", "sour", "salty", "bitter"],
+      "correct_answer": "bitter",
+      "explanation": "Vị đắng gọi là 'bitter'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Food, Dining & Cooking",
+    "difficulty": -0.6,
+    "context": "Tastes",
+    "output": {
+      "question": "Chili peppers and ginger have a _______ taste.",
+      "options": ["sweet", "sour", "spicy", "bitter"],
+      "correct_answer": "spicy",
+      "explanation": "Vị cay gọi là 'spicy'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Food, Dining & Cooking",
+    "difficulty": -0.5,
+    "context": "Tastes",
+    "output": {
+      "question": "This soup is _______; it needs more salt and pepper.",
+      "options": ["spicy", "bland", "sweet", "sour"],
+      "correct_answer": "bland",
+      "explanation": "Vị nhạt nhẽo, không có hương vị gọi là 'bland'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Food, Dining & Cooking",
+    "difficulty": -0.4,
+    "context": "Tastes",
+    "output": {
+      "question": "I love the _______ flavor of fresh basil in my pasta.",
+      "options": ["bitter", "savory", "sour", "bland"],
+      "correct_answer": "savory",
+      "explanation": "Vị đậm đà, thơm ngon (thường dùng cho món mặn) gọi là 'savory'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Food, Dining & Cooking",
+    "difficulty": -0.3,
+    "context": "Tastes",
+    "output": {
+      "question": "This yogurt is a bit too _______; I can't eat it.",
+      "options": ["sweet", "sour", "salty", "spicy"],
+      "correct_answer": "sour",
+      "explanation": "Vị chua quá mức đối với một số người."
+    }
+  },
+  {
+    "topic": "Vocabulary - Food, Dining & Cooking",
+    "difficulty": -0.2,
+    "context": "Tastes",
+    "output": {
+      "question": "Some people find the taste of olives to be slightly _______.",
+      "options": ["sweet", "bitter", "spicy", "bland"],
+      "correct_answer": "bitter",
+      "explanation": "Quả ô liu có vị hơi đắng (bitter)."
+    }
+  },
+  {
+    "topic": "Vocabulary - Food, Dining & Cooking",
+    "difficulty": -0.1,
+    "context": "Tastes",
+    "output": {
+      "question": "The sauce is very _______, so I need to drink a lot of water.",
+      "options": ["sweet", "sour", "spicy", "bland"],
+      "correct_answer": "spicy",
+      "explanation": "Vị cay nồng khiến người ăn phải uống nhiều nước."
+    }
+  },
+  {
+    "topic": "Vocabulary - Food, Dining & Cooking",
+    "difficulty": 0.0,
+    "context": "Tastes",
+    "output": {
+      "question": "The lemonade is a perfect mix of _______ and sweet.",
+      "options": ["salty", "sour", "bitter", "spicy"],
+      "correct_answer": "sour",
+      "explanation": "Nước chanh là sự kết hợp giữa vị chua và ngọt."
+    }
+  },
+  {
+    "topic": "Vocabulary - Food, Dining & Cooking",
+    "difficulty": -0.9,
+    "context": "Ingredients",
+    "output": {
+      "question": "You can use _______ to make the cake smell and taste like a holiday.",
+      "options": ["salt", "cinnamon", "vinegar", "garlic"],
+      "correct_answer": "cinnamon",
+      "explanation": "Quế (cinnamon) tạo mùi thơm đặc trưng cho các loại bánh."
+    }
+  },
+  {
+    "topic": "Vocabulary - Food, Dining & Cooking",
+    "difficulty": -0.8,
+    "context": "Ingredients",
+    "output": {
+      "question": "_______ is a common ingredient in salads, usually green and crunchy.",
+      "options": ["Potato", "Cucumber", "Onion", "Carrot"],
+      "correct_answer": "Cucumber",
+      "explanation": "Dưa chuột (cucumber) thường dùng trong salad, có màu xanh và giòn."
+    }
+  },
+  {
+    "topic": "Vocabulary - Food, Dining & Cooking",
+    "difficulty": -0.7,
+    "context": "Ingredients",
+    "output": {
+      "question": "We use _______ to make the food creamy and rich.",
+      "options": ["water", "butter", "vinegar", "salt"],
+      "correct_answer": "butter",
+      "explanation": "Bơ (butter) tạo độ béo và ngậy cho món ăn."
+    }
+  },
+  {
+    "topic": "Vocabulary - Food, Dining & Cooking",
+    "difficulty": -0.6,
+    "context": "Ingredients",
+    "output": {
+      "question": "_______ is a root vegetable that is often used in soups and stews.",
+      "options": ["Cabbage", "Celery", "Carrot", "Lettuce"],
+      "correct_answer": "Carrot",
+      "explanation": "Cà rốt (carrot) là loại củ phổ biến trong các món súp."
+    }
+  },
+  {
+    "topic": "Vocabulary - Food, Dining & Cooking",
+    "difficulty": -0.5,
+    "context": "Ingredients",
+    "output": {
+      "question": "To make an omelet, you need to beat the _______ first.",
+      "options": ["milk", "eggs", "flour", "butter"],
+      "correct_answer": "eggs",
+      "explanation": "Trứng (eggs) là nguyên liệu chính để làm omelet."
+    }
+  },
+  {
+    "topic": "Vocabulary - Food, Dining & Cooking",
+    "difficulty": -0.4,
+    "context": "Ingredients",
+    "output": {
+      "question": "_______ is a white powder used to make cakes rise.",
+      "options": ["Sugar", "Salt", "Baking powder", "Flour"],
+      "correct_answer": "Baking powder",
+      "explanation": "Bột nở (baking powder) giúp bánh nở ra khi nướng."
+    }
+  },
+  {
+    "topic": "Vocabulary - Food, Dining & Cooking",
+    "difficulty": -0.3,
+    "context": "Cooking Methods",
+    "output": {
+      "question": "You should _______ the meat for a few minutes before serving it.",
+      "options": ["boil", "rest", "steam", "fry"],
+      "correct_answer": "rest",
+      "explanation": "Để thịt 'nghỉ' (rest) giúp nước thịt thấm ngược lại, làm thịt mềm hơn."
+    }
+  },
+  {
+    "topic": "Vocabulary - Food, Dining & Cooking",
+    "difficulty": -0.2,
+    "context": "Cooking Methods",
+    "output": {
+      "question": "To _______ is to cook food in a small amount of fat over medium heat.",
+      "options": ["boil", "sauté", "bake", "steam"],
+      "correct_answer": "sauté",
+      "explanation": "Áp chảo/xào nhanh (sauté) là nấu với ít chất béo ở nhiệt độ vừa."
+    }
+  },
+  {
+    "topic": "Vocabulary - Food, Dining & Cooking",
+    "difficulty": -0.1,
+    "context": "Dining Out",
+    "output": {
+      "question": "I'd like my steak _______, please; not too rare and not too well-done.",
+      "options": ["raw", "medium", "burnt", "boiled"],
+      "correct_answer": "medium",
+      "explanation": "Độ chín vừa của steak gọi là 'medium'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Food, Dining & Cooking",
+    "difficulty": 0.0,
+    "context": "Dining Out",
+    "output": {
+      "question": "We have a _______ for 8 PM, under the name 'Smith'.",
+      "options": ["reservation", "receipt", "bill", "menu"],
+      "correct_answer": "reservation",
+      "explanation": "Việc đặt bàn trước gọi là 'reservation'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Food, Dining & Cooking",
+    "difficulty": -0.9,
+    "context": "Dining Out",
+    "output": {
+      "question": "Can you bring us some more _______ for the table, please?",
+      "options": ["menus", "napkins", "bills", "reservations"],
+      "correct_answer": "napkins",
+      "explanation": "Khăn ăn gọi là 'napkins'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Food, Dining & Cooking",
+    "difficulty": -0.8,
+    "context": "Dining Out",
+    "output": {
+      "question": "The _______ of the restaurant is very friendly and helpful.",
+      "options": ["menu", "staff", "bill", "appetizer"],
+      "correct_answer": "staff",
+      "explanation": "Đội ngũ nhân viên gọi là 'staff'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Food, Dining & Cooking",
+    "difficulty": -0.7,
+    "context": "Dining Out",
+    "output": {
+      "question": "I'm sorry, this dish is too _______ for me; I can't eat it.",
+      "options": ["sweet", "spicy", "bland", "savory"],
+      "correct_answer": "spicy",
+      "explanation": "Vị quá cay (spicy) khiến một số người không ăn được."
+    }
+  },
+  {
+    "topic": "Vocabulary - Food, Dining & Cooking",
+    "difficulty": -0.6,
+    "context": "Dining Out",
+    "output": {
+      "question": "Do you have any _______ options for vegetarians?",
+      "options": ["meat", "dairy", "dietary", "spicy"],
+      "correct_answer": "dietary",
+      "explanation": "Lựa chọn về chế độ ăn uống gọi là 'dietary options'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Food, Dining & Cooking",
+    "difficulty": -0.5,
+    "context": "Dining Out",
+    "output": {
+      "question": "The _______ is the person in charge of the whole kitchen.",
+      "options": ["waiter", "cashier", "head chef", "customer"],
+      "correct_answer": "head chef",
+      "explanation": "Bếp trưởng gọi là 'head chef'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Food, Dining & Cooking",
+    "difficulty": -0.4,
+    "context": "Dining Out",
+    "output": {
+      "question": "I'll have a _______ of water with lemon, please.",
+      "options": ["plate", "bowl", "glass", "cup"],
+      "correct_answer": "glass",
+      "explanation": "Một ly nước gọi là 'a glass of water'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Food, Dining & Cooking",
+    "difficulty": -0.3,
+    "context": "Dining Out",
+    "output": {
+      "question": "We ordered a _______ of fries to share between us.",
+      "options": ["glass", "plate", "portion", "bowl"],
+      "correct_answer": "portion",
+      "explanation": "Một phần ăn gọi là 'a portion'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Food, Dining & Cooking",
+    "difficulty": -0.2,
+    "context": "Dining Out",
+    "output": {
+      "question": "The _______ was a bit slow today, but the food was great.",
+      "options": ["menu", "service", "bill", "staff"],
+      "correct_answer": "service",
+      "explanation": "Chất lượng phục vụ gọi là 'service'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Food, Dining & Cooking",
+    "difficulty": -0.1,
+    "context": "Dining Out",
+    "output": {
+      "question": "Would you like to see the _______ list for some coffee or tea?",
+      "options": ["main", "beverage", "appetizer", "dessert"],
+      "correct_answer": "beverage",
+      "explanation": "Danh sách đồ uống gọi là 'beverage list'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Food, Dining & Cooking",
+    "difficulty": 0.0,
+    "context": "Dining Out",
+    "output": {
+      "question": "Could we _______ the bill, please? We want to pay separately.",
+      "options": ["join", "split", "share", "divide"],
+      "correct_answer": "split",
+      "explanation": "Chia hóa đơn để trả riêng gọi là 'split the bill'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Environment & Weather",
+    "difficulty": -1.0,
+    "context": "Weather",
+    "output": {
+      "question": "When the sky is _______, there are no clouds and the sun is shining brightly.",
+      "options": ["rainy", "sunny", "cloudy", "windy"],
+      "correct_answer": "sunny",
+      "explanation": "Khi bầu trời không có mây và nắng sáng, ta gọi là 'sunny' (có nắng)."
+    }
+  },
+  {
+    "topic": "Vocabulary - Environment & Weather",
+    "difficulty": -0.9,
+    "context": "Weather",
+    "output": {
+      "question": "It is _______ today; you should take an umbrella so you don't get wet.",
+      "options": ["sunny", "rainy", "windy", "foggy"],
+      "correct_answer": "rainy",
+      "explanation": "Khi cần dùng ô để không bị ướt, nghĩa là trời đang 'rainy' (có mưa)."
+    }
+  },
+  {
+    "topic": "Vocabulary - Environment & Weather",
+    "difficulty": -0.8,
+    "context": "Weather",
+    "output": {
+      "question": "The sky is very _______; I can't see the sun at all.",
+      "options": ["clear", "cloudy", "sunny", "dry"],
+      "correct_answer": "cloudy",
+      "explanation": "Khi không thấy mặt trời vì bị mây che khuất, ta dùng 'cloudy' (nhiều mây)."
+    }
+  },
+  {
+    "topic": "Vocabulary - Environment & Weather",
+    "difficulty": -0.7,
+    "context": "Weather",
+    "output": {
+      "question": "It's very _______ outside; the trees are moving a lot.",
+      "options": ["sunny", "windy", "rainy", "foggy"],
+      "correct_answer": "windy",
+      "explanation": "Khi cây cối rung chuyển mạnh, nghĩa là trời đang 'windy' (có gió)."
+    }
+  },
+  {
+    "topic": "Vocabulary - Environment & Weather",
+    "difficulty": -0.6,
+    "context": "Weather",
+    "output": {
+      "question": "A _______ is a strong wind with heavy rain, often with thunder and lightning.",
+      "options": ["breeze", "storm", "drizzle", "fog"],
+      "correct_answer": "storm",
+      "explanation": "Gió mạnh kèm mưa lớn, sấm và sét gọi là 'storm' (cơn bão)."
+    }
+  },
+  {
+    "topic": "Vocabulary - Environment & Weather",
+    "difficulty": -0.5,
+    "context": "Weather",
+    "output": {
+      "question": "It is very _______ this morning; I can't see the road clearly while driving.",
+      "options": ["sunny", "foggy", "windy", "clear"],
+      "correct_answer": "foggy",
+      "explanation": "Khi tầm nhìn bị hạn chế do sương mù, ta dùng 'foggy'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Environment & Weather",
+    "difficulty": -0.4,
+    "context": "Weather",
+    "output": {
+      "question": "I always check the weather _______ to know what to wear tomorrow.",
+      "options": ["temperature", "forecast", "humidity", "degree"],
+      "correct_answer": "forecast",
+      "explanation": "Dự báo thời tiết gọi là 'weather forecast'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Environment & Weather",
+    "difficulty": -0.3,
+    "context": "Weather",
+    "output": {
+      "question": "The _______ is 25 degrees Celsius today, so it's quite warm.",
+      "options": ["humidity", "temperature", "forecast", "pressure"],
+      "correct_answer": "temperature",
+      "explanation": "Mức độ nóng hay lạnh của không khí gọi là 'temperature' (nhiệt độ)."
+    }
+  },
+  {
+    "topic": "Vocabulary - Environment & Weather",
+    "difficulty": -0.2,
+    "context": "Weather",
+    "output": {
+      "question": "In summer, the _______ is very high, which makes the air feel sticky.",
+      "options": ["temperature", "humidity", "pressure", "breeze"],
+      "correct_answer": "humidity",
+      "explanation": "Độ ẩm trong không khí gọi là 'humidity'. Khi độ ẩm cao, không khí thường gây cảm giác dính/bí."
+    }
+  },
+  {
+    "topic": "Vocabulary - Environment & Weather",
+    "difficulty": -0.1,
+    "context": "Weather",
+    "output": {
+      "question": "I heard a loud _______, and a few seconds later, I saw a flash of lightning.",
+      "options": ["wind", "thunder", "breeze", "fog"],
+      "correct_answer": "thunder",
+      "explanation": "Tiếng động lớn sau tia chớp trong cơn bão gọi là 'thunder' (sấm)."
+    }
+  },
+  {
+    "topic": "Vocabulary - Environment & Weather",
+    "difficulty": 0.0,
+    "context": "Weather",
+    "output": {
+      "question": "A _______ is a gentle, light wind that feels pleasant on a hot day.",
+      "options": ["storm", "hurricane", "breeze", "gale"],
+      "correct_answer": "breeze",
+      "explanation": "Gió nhẹ, dễ chịu gọi là 'breeze'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Environment & Weather",
+    "difficulty": -1.0,
+    "context": "Landscapes",
+    "output": {
+      "question": "A _______ is a very high area of land, often with a peak at the top.",
+      "options": ["valley", "mountain", "island", "plain"],
+      "correct_answer": "mountain",
+      "explanation": "Vùng đất rất cao có đỉnh gọi là 'mountain' (núi)."
+    }
+  },
+  {
+    "topic": "Vocabulary - Environment & Weather",
+    "difficulty": -0.9,
+    "context": "Landscapes",
+    "output": {
+      "question": "A _______ is a piece of land completely surrounded by water.",
+      "options": ["coast", "peninsula", "island", "valley"],
+      "correct_answer": "island",
+      "explanation": "Vùng đất được bao quanh bởi nước gọi là 'island' (đảo)."
+    }
+  },
+  {
+    "topic": "Vocabulary - Environment & Weather",
+    "difficulty": -0.8,
+    "context": "Landscapes",
+    "output": {
+      "question": "A _______ is a large natural stream of water that flows into the sea.",
+      "options": ["lake", "pond", "river", "waterfall"],
+      "correct_answer": "river",
+      "explanation": "Dòng nước tự nhiên chảy ra biển gọi là 'river' (sông)."
+    }
+  },
+  {
+    "topic": "Vocabulary - Environment & Weather",
+    "difficulty": -0.7,
+    "context": "Landscapes",
+    "output": {
+      "question": "A _______ is a low area of land between hills or mountains.",
+      "options": ["peak", "valley", "plateau", "coast"],
+      "correct_answer": "valley",
+      "explanation": "Vùng đất thấp nằm giữa các ngọn núi gọi là 'valley' (thung lũng)."
+    }
+  },
+  {
+    "topic": "Vocabulary - Environment & Weather",
+    "difficulty": -0.6,
+    "context": "Landscapes",
+    "output": {
+      "question": "The _______ is the area where the land meets the sea.",
+      "options": ["border", "coast", "valley", "desert"],
+      "correct_answer": "coast",
+      "explanation": "Vùng đất giáp với biển gọi là 'coast' (bờ biển)."
+    }
+  },
+  {
+    "topic": "Vocabulary - Environment & Weather",
+    "difficulty": -0.5,
+    "context": "Landscapes",
+    "output": {
+      "question": "A _______ is a very dry area of land with very little water and few plants.",
+      "options": ["jungle", "forest", "desert", "plain"],
+      "correct_answer": "desert",
+      "explanation": "Vùng đất khô hạn, ít nước và thực vật gọi là 'desert' (sa mạc)."
+    }
+  },
+  {
+    "topic": "Vocabulary - Environment & Weather",
+    "difficulty": -0.4,
+    "context": "Landscapes",
+    "output": {
+      "question": "A _______ is a thick forest in a tropical area with many tall trees and rain.",
+      "options": ["desert", "jungle", "valley", "coast"],
+      "correct_answer": "jungle",
+      "explanation": "Rừng rậm nhiệt đới gọi là 'jungle'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Environment & Weather",
+    "difficulty": -0.3,
+    "context": "Landscapes",
+    "output": {
+      "question": "A _______ is where water falls from a high place to a lower place.",
+      "options": ["river", "lake", "waterfall", "stream"],
+      "correct_answer": "waterfall",
+      "explanation": "Nước chảy từ trên cao xuống gọi là 'waterfall' (thác nước)."
+    }
+  },
+  {
+    "topic": "Vocabulary - Environment & Weather",
+    "difficulty": -0.2,
+    "context": "Landscapes",
+    "output": {
+      "question": "The _______ is the highest point of a mountain.",
+      "options": ["valley", "slope", "peak", "coast"],
+      "correct_answer": "peak",
+      "explanation": "Điểm cao nhất của núi gọi là 'peak' (đỉnh núi)."
+    }
+  },
+  {
+    "topic": "Vocabulary - Environment & Weather",
+    "difficulty": -0.1,
+    "context": "Landscapes",
+    "output": {
+      "question": "A _______ is a large area of flat land with few trees.",
+      "options": ["plain", "mountain", "jungle", "valley"],
+      "correct_answer": "plain",
+      "explanation": "Vùng đất bằng phẳng, ít cây gọi là 'plain' (đồng bằng)."
+    }
+  },
+  {
+    "topic": "Vocabulary - Environment & Weather",
+    "difficulty": 0.0,
+    "context": "Landscapes",
+    "output": {
+      "question": "A _______ is a small body of still water, smaller than a lake.",
+      "options": ["river", "ocean", "pond", "waterfall"],
+      "correct_answer": "pond",
+      "explanation": "Vùng nước tĩnh, nhỏ hơn hồ gọi là 'pond' (ao)."
+    }
+  },
+  {
+    "topic": "Vocabulary - Environment & Weather",
+    "difficulty": -1.0,
+    "context": "Environment",
+    "output": {
+      "question": "We live on planet _______.",
+      "options": ["Mars", "Venus", "Earth", "Jupiter"],
+      "correct_answer": "Earth",
+      "explanation": "Hành tinh chúng ta đang sống là Trái Đất (Earth)."
+    }
+  },
+  {
+    "topic": "Vocabulary - Environment & Weather",
+    "difficulty": -0.9,
+    "context": "Environment",
+    "output": {
+      "question": "_______ is the natural world, including plants, animals, and landscapes.",
+      "options": ["City", "Nature", "Industry", "Building"],
+      "correct_answer": "Nature",
+      "explanation": "Thế giới tự nhiên gọi là 'Nature'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Environment & Weather",
+    "difficulty": -0.8,
+    "context": "Environment",
+    "output": {
+      "question": "Air _______ is when the air becomes dirty and unhealthy to breathe.",
+      "options": ["protection", "pollution", "recycling", "nature"],
+      "correct_answer": "pollution",
+      "explanation": "Sự ô nhiễm (pollution) làm cho không khí trở nên bẩn và độc hại."
+    }
+  },
+  {
+    "topic": "Vocabulary - Environment & Weather",
+    "difficulty": -0.7,
+    "context": "Environment",
+    "output": {
+      "question": "We should _______ our plastic bottles and paper instead of throwing them away.",
+      "options": ["pollute", "recycle", "waste", "destroy"],
+      "correct_answer": "recycle",
+      "explanation": "Tái chế (recycle) là quá trình biến rác thải thành vật liệu mới."
+    }
+  },
+  {
+    "topic": "Vocabulary - Environment & Weather",
+    "difficulty": -0.6,
+    "context": "Environment",
+    "output": {
+      "question": "We must _______ the environment to keep the planet healthy.",
+      "options": ["pollute", "protect", "waste", "damage"],
+      "correct_answer": "protect",
+      "explanation": "Bảo vệ (protect) môi trường để giữ cho hành tinh khỏe mạnh."
+    }
+  },
+  {
+    "topic": "Vocabulary - Environment & Weather",
+    "difficulty": -0.5,
+    "context": "Environment",
+    "output": {
+      "question": "Too much _______ in the ocean can kill fish and other sea animals.",
+      "options": ["oxygen", "waste", "water", "salt"],
+      "correct_answer": "waste",
+      "explanation": "Chất thải/Rác thải (waste) trong đại dương gây hại cho sinh vật biển."
+    }
+  },
+  {
+    "topic": "Vocabulary - Environment & Weather",
+    "difficulty": -0.4,
+    "context": "Environment",
+    "output": {
+      "question": "The _______ consists of all the animals and plants living in a wild area.",
+      "options": ["pollution", "wildlife", "industry", "city"],
+      "correct_answer": "wildlife",
+      "explanation": "Động thực vật hoang dã gọi là 'wildlife'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Environment & Weather",
+    "difficulty": -0.3,
+    "context": "Environment",
+    "output": {
+      "question": "_______ warming is the increase in the Earth's average temperature.",
+      "options": ["Water", "Global", "Local", "Air"],
+      "correct_answer": "Global",
+      "explanation": "Sự nóng lên toàn cầu gọi là 'Global warming'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Environment & Weather",
+    "difficulty": -0.2,
+    "context": "Environment",
+    "output": {
+      "question": "We should use _______ energy, like wind and solar power, to save the planet.",
+      "options": ["dirty", "renewable", "limited", "expensive"],
+      "correct_answer": "renewable",
+      "explanation": "Năng lượng tái tạo (renewable energy) là năng lượng sạch, không bị cạn kiệt."
+    }
+  },
+  {
+    "topic": "Vocabulary - Environment & Weather",
+    "difficulty": -0.1,
+    "context": "Environment",
+    "output": {
+      "question": "Cutting down too many trees leads to _______, which is bad for the animals.",
+      "options": ["reforestation", "deforestation", "pollution", "recycling"],
+      "correct_answer": "deforestation",
+      "explanation": "Hiện tượng phá rừng gọi là 'deforestation'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Environment & Weather",
+    "difficulty": 0.0,
+    "context": "Environment",
+    "output": {
+      "question": "The _______ of plants and animals is decreasing because of habitat loss.",
+      "options": ["pollution", "biodiversity", "waste", "weather"],
+      "correct_answer": "biodiversity",
+      "explanation": "Đa dạng sinh học (biodiversity) là sự phong phú của các loài sinh vật."
+    }
+  },
+  {
+    "topic": "Vocabulary - Environment & Weather",
+    "difficulty": -0.9,
+    "context": "Environmental Actions",
+    "output": {
+      "question": "To help the environment, we should _______ trees in our garden.",
+      "options": ["cut", "plant", "burn", "destroy"],
+      "correct_answer": "plant",
+      "explanation": "Trồng cây (plant trees) giúp cải thiện không khí và môi trường."
+    }
+  },
+  {
+    "topic": "Vocabulary - Environment & Weather",
+    "difficulty": -0.8,
+    "context": "Environmental Actions",
+    "output": {
+      "question": "We can _______ energy by turning off the lights when we leave a room.",
+      "options": ["waste", "save", "use", "increase"],
+      "correct_answer": "save",
+      "explanation": "Tiết kiệm năng lượng gọi là 'save energy'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Environment & Weather",
+    "difficulty": -0.7,
+    "context": "Environmental Actions",
+    "output": {
+      "question": "Please _______ your rubbish into different bins for plastic, paper, and glass.",
+      "options": ["throw", "sort", "mix", "burn"],
+      "correct_answer": "sort",
+      "explanation": "Phân loại rác gọi là 'sort rubbish'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Environment & Weather",
+    "difficulty": -0.6,
+    "context": "Environmental Actions",
+    "output": {
+      "question": "We should _______ the use of plastic bags to protect the oceans.",
+      "options": ["increase", "reduce", "expand", "promote"],
+      "correct_answer": "reduce",
+      "explanation": "Giảm thiểu (reduce) việc sử dụng túi nilon để bảo vệ đại dương."
+    }
+  },
+  {
+    "topic": "Vocabulary - Environment & Weather",
+    "difficulty": -0.5,
+    "context": "Environmental Actions",
+    "output": {
+      "question": "Using a _______ bottle instead of a plastic one is better for the environment.",
+      "options": ["single-use", "disposable", "reusable", "cheap"],
+      "correct_answer": "reusable",
+      "explanation": "Bình nước tái sử dụng (reusable bottle) giúp giảm rác thải nhựa."
+    }
+  },
+  {
+    "topic": "Vocabulary - Environment & Weather",
+    "difficulty": -0.4,
+    "context": "Environmental Actions",
+    "output": {
+      "question": "Walking or cycling to school is more _______ than going by car.",
+      "options": ["polluting", "eco-friendly", "dangerous", "expensive"],
+      "correct_answer": "eco-friendly",
+      "explanation": "Thân thiện với môi trường gọi là 'eco-friendly'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Environment & Weather",
+    "difficulty": -0.3,
+    "context": "Environmental Actions",
+    "output": {
+      "question": "Solar panels are used to produce _______ electricity from the sun.",
+      "options": ["dirty", "clean", "expensive", "limited"],
+      "correct_answer": "clean",
+      "explanation": "Điện sạch (clean electricity) là điện không gây ô nhiễm."
+    }
+  },
+  {
+    "topic": "Vocabulary - Environment & Weather",
+    "difficulty": -0.2,
+    "context": "Environmental Actions",
+    "output": {
+      "question": "The government is trying to _______ the number of cars in the city center.",
+      "options": ["increase", "limit", "expand", "encourage"],
+      "correct_answer": "limit",
+      "explanation": "Hạn chế (limit) số lượng ô tô để giảm ô nhiễm."
+    }
+  },
+  {
+    "topic": "Vocabulary - Environment & Weather",
+    "difficulty": -0.1,
+    "context": "Environmental Actions",
+    "output": {
+      "question": "A _______ is a person who works to protect the environment.",
+      "options": ["polluter", "conservationist", "developer", "tourist"],
+      "correct_answer": "conservationist",
+      "explanation": "Nhà bảo tồn môi trường gọi là 'conservationist'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Environment & Weather",
+    "difficulty": 0.0,
+    "context": "Environmental Actions",
+    "output": {
+      "question": "We need to stop the _______ of endangered species.",
+      "options": ["protection", "extinction", "growth", "birth"],
+      "correct_answer": "extinction",
+      "explanation": "Sự tuyệt chủng của các loài sinh vật gọi là 'extinction'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Environment & Weather",
+    "difficulty": -0.8,
+    "context": "Weather",
+    "output": {
+      "question": "I love the _______ of spring when flowers start to bloom.",
+      "options": ["winter", "season", "climate", "weather"],
+      "correct_answer": "season",
+      "explanation": "Xuân, Hạ, Thu, Đông được gọi là các mùa (seasons)."
+    }
+  },
+  {
+    "topic": "Vocabulary - Environment & Weather",
+    "difficulty": -0.7,
+    "context": "Weather",
+    "output": {
+      "question": "The _______ in the desert is very dry and hot all year round.",
+      "options": ["weather", "climate", "temperature", "humidity"],
+      "correct_answer": "climate",
+      "explanation": "Đặc điểm thời tiết trung bình của một vùng trong thời gian dài gọi là khí hậu (climate)."
+    }
+  },
+  {
+    "topic": "Vocabulary - Environment & Weather",
+    "difficulty": -0.6,
+    "context": "Weather",
+    "output": {
+      "question": "It's _______ today; there is just a little bit of rain.",
+    "options": ["storming", "drizzling", "pouring", "freezing"],
+    "correct_answer": "drizzling",
+    "explanation": "Mưa phùn/mưa nhỏ gọi là 'drizzling'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Environment & Weather",
+    "difficulty": -0.5,
+    "context": "Weather",
+    "output": {
+      "question": "It is _______ outside; the water is turning into ice.",
+      "options": ["boiling", "freezing", "warm", "mild"],
+      "correct_answer": "freezing",
+      "explanation": "Rất lạnh đến mức đóng băng gọi là 'freezing'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Environment & Weather",
+    "difficulty": -0.4,
+    "context": "Weather",
+    "output": {
+      "question": "The weather is very _______; it changes from sunny to rainy in minutes.",
+      "options": ["stable", "unpredictable", "constant", "clear"],
+      "correct_answer": "unpredictable",
+      "explanation": "Thời tiết không dự đoán trước được gọi là 'unpredictable'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Environment & Weather",
+    "difficulty": -0.3,
+    "context": "Weather",
+    "output": {
+      "question": "The _______ is very strong today, so be careful with your umbrella.",
+      "options": ["breeze", "wind", "fog", "rain"],
+      "correct_answer": "wind",
+      "explanation": "Gió (wind) mạnh có thể làm hỏng ô."
+    }
+  },
+  {
+    "topic": "Vocabulary - Environment & Weather",
+    "difficulty": -0.2,
+    "context": "Weather",
+    "output": {
+      "question": "A _______ is a very large and dangerous storm that forms over the ocean.",
+      "options": ["breeze", "hurricane", "drizzle", "mist"],
+      "correct_answer": "hurricane",
+      "explanation": "Bão lớn hình thành trên đại dương gọi là 'hurricane' hoặc 'typhoon'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Environment & Weather",
+    "difficulty": -0.1,
+    "context": "Weather",
+    "output": {
+      "question": "The air is very _______ after the rain, it feels fresh and clean.",
+      "options": ["dusty", "crisp", "humid", "polluted"],
+      "correct_answer": "crisp",
+      "explanation": "Không khí trong lành, mát mẻ và dễ chịu gọi là 'crisp'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Environment & Weather",
+    "difficulty": 0.0,
+    "context": "Weather",
+    "output": {
+      "question": "A _______ is a light, thin fog that often appears in the morning.",
+      "options": ["storm", "mist", "cloud", "hurricane"],
+      "correct_answer": "mist",
+      "explanation": "Sương mù nhẹ gọi là 'mist'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Feelings & Personality",
+    "difficulty": -1.0,
+    "context": "Basic Emotion",
+    "output": {
+      "question": "When I get a present on my birthday, I feel very _______.",
+      "options": ["sad", "angry", "happy", "bored"],
+      "correct_answer": "happy",
+      "explanation": "Nhận được quà vào ngày sinh nhật khiến một người cảm thấy hạnh phúc (happy)."
+    }
+  },
+  {
+    "topic": "Vocabulary - Feelings & Personality",
+    "difficulty": -0.9,
+    "context": "Basic Emotion",
+    "output": {
+      "question": "She was very _______ when her favorite vase broke into pieces.",
+      "options": ["happy", "sad", "excited", "proud"],
+      "correct_answer": "sad",
+      "explanation": "Khi món đồ yêu thích bị vỡ, một người sẽ cảm thấy buồn (sad)."
+    }
+  },
+  {
+    "topic": "Vocabulary - Feelings & Personality",
+    "difficulty": -0.8,
+    "context": "Basic Emotion",
+    "output": {
+      "question": "My father was _______ when I broke the window with my ball.",
+      "options": ["happy", "angry", "bored", "relaxed"],
+      "correct_answer": "angry",
+      "explanation": "Làm vỡ cửa sổ thường khiến cha mẹ cảm thấy tức giận (angry)."
+    }
+  },
+  {
+    "topic": "Vocabulary - Feelings & Personality",
+    "difficulty": -0.7,
+    "context": "Basic Emotion",
+    "output": {
+      "question": "The movie was too long and not interesting, so I felt _______.",
+      "options": ["excited", "bored", "proud", "surprised"],
+      "correct_answer": "bored",
+      "explanation": "Một bộ phim quá dài và không thú vị khiến người xem cảm thấy chán (bored)."
+    }
+  },
+  {
+    "topic": "Vocabulary - Feelings & Personality",
+    "difficulty": -0.6,
+    "context": "Basic Emotion",
+    "output": {
+      "question": "I am so _______ about our trip to Disneyland next week!",
+      "options": ["nervous", "excited", "worried", "sad"],
+      "correct_answer": "excited",
+      "explanation": "Cảm giác mong chờ, hào hứng trước một chuyến đi thú vị gọi là 'excited'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Feelings & Personality",
+    "difficulty": -0.5,
+    "context": "Basic Emotion",
+    "output": {
+      "question": "I feel _______ before a big exam because I'm afraid I might fail.",
+      "options": ["proud", "nervous", "happy", "relaxed"],
+      "correct_answer": "nervous",
+      "explanation": "Cảm giác lo lắng, hồi hộp trước một sự kiện quan trọng gọi là 'nervous'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Feelings & Personality",
+    "difficulty": -0.4,
+    "context": "Basic Emotion",
+    "output": {
+      "question": "My mother is _______ because I haven't come home yet and it's very late.",
+      "options": ["excited", "worried", "bored", "proud"],
+      "correct_answer": "worried",
+      "explanation": "Khi ai đó về muộn, người thân thường cảm thấy lo lắng (worried)."
+    }
+  },
+  {
+    "topic": "Vocabulary - Feelings & Personality",
+    "difficulty": -0.3,
+    "context": "Basic Emotion",
+    "output": {
+      "question": "He felt very _______ of himself after winning the gold medal.",
+      "options": ["embarrassed", "proud", "confused", "lonely"],
+      "correct_answer": "proud",
+      "explanation": "Cảm giác tự hào về thành tựu của bản thân gọi là 'proud'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Feelings & Personality",
+    "difficulty": -0.2,
+    "context": "Basic Emotion",
+    "output": {
+      "question": "I felt _______ when I realized I was wearing my shirt inside out.",
+      "options": ["proud", "embarrassed", "excited", "relaxed"],
+      "correct_answer": "embarrassed",
+      "explanation": "Cảm giác ngượng ngùng/xấu hổ khi gặp tình huống hớ hênh gọi là 'embarrassed'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Feelings & Personality",
+    "difficulty": -0.1,
+    "context": "Basic Emotion",
+    "output": {
+      "question": "We were _______ when we found out that we won the lottery.",
+      "options": ["bored", "surprised", "worried", "sad"],
+      "correct_answer": "surprised",
+      "explanation": "Cảm giác ngạc nhiên trước một sự việc bất ngờ gọi là 'surprised'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Feelings & Personality",
+    "difficulty": 0.0,
+    "context": "Basic Emotion",
+    "output": {
+      "question": "Since all her friends moved away, she has been feeling very _______.",
+      "options": ["excited", "lonely", "proud", "confident"],
+      "correct_answer": "lonely",
+      "explanation": "Cảm giác cô đơn khi không có bạn bè xung quanh gọi là 'lonely'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Feelings & Personality",
+    "difficulty": -0.9,
+    "context": "Positive Personality",
+    "output": {
+      "question": "Sarah always helps other people. She is very _______.",
+      "options": ["lazy", "kind", "selfish", "rude"],
+      "correct_answer": "kind",
+      "explanation": "Người luôn giúp đỡ người khác là người tốt bụng (kind)."
+    }
+  },
+  {
+    "topic": "Vocabulary - Feelings & Personality",
+    "difficulty": -0.8,
+    "context": "Positive Personality",
+    "output": {
+      "question": "He makes friends easily because he is so _______.",
+      "options": ["shy", "friendly", "serious", "stubborn"],
+      "correct_answer": "friendly",
+      "explanation": "Người dễ kết bạn là người thân thiện (friendly)."
+    }
+  },
+  {
+    "topic": "Vocabulary - Feelings & Personality",
+    "difficulty": -0.7,
+    "context": "Positive Personality",
+    "output": {
+      "question": "You can trust him with your secrets; he is very _______.",
+      "options": ["honest", "selfish", "lazy", "moody"],
+      "correct_answer": "honest",
+      "explanation": "Người trung thực, đáng tin cậy gọi là 'honest'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Feelings & Personality",
+    "difficulty": -0.6,
+    "context": "Positive Personality",
+    "output": {
+      "question": "Even in a scary situation, the firefighter remained _______.",
+      "options": ["shy", "brave", "lazy", "rude"],
+      "correct_answer": "brave",
+      "explanation": "Người không sợ hãi trong tình huống nguy hiểm gọi là dũng cảm (brave)."
+    }
+  },
+  {
+    "topic": "Vocabulary - Feelings & Personality",
+    "difficulty": -0.5,
+    "context": "Positive Personality",
+    "output": {
+      "question": "She can wait for hours without complaining. She is very _______.",
+      "options": ["patient", "stubborn", "selfish", "moody"],
+      "correct_answer": "patient",
+      "explanation": "Người có khả năng chờ đợi mà không phàn nàn là người kiên nhẫn (patient)."
+    }
+  },
+  {
+    "topic": "Vocabulary - Feelings & Personality",
+    "difficulty": -0.4,
+    "context": "Positive Personality",
+    "output": {
+      "question": "He gives a lot of money to charity. He is very _______.",
+      "options": ["greedy", "generous", "selfish", "lazy"],
+      "correct_answer": "generous",
+      "explanation": "Người sẵn lòng cho đi hoặc giúp đỡ về tài chính gọi là hào phóng (generous)."
+    }
+  },
+  {
+    "topic": "Vocabulary - Feelings & Personality",
+    "difficulty": -0.3,
+    "context": "Positive Personality",
+    "output": {
+      "question": "She always finishes her work on time and does it perfectly. She is _______.",
+      "options": ["lazy", "hardworking", "shy", "clumsy"],
+      "correct_answer": "hardworking",
+      "explanation": "Người chăm chỉ làm việc gọi là 'hardworking'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Feelings & Personality",
+    "difficulty": -0.2,
+    "context": "Positive Personality",
+    "output": {
+      "question": "He can solve difficult puzzles very quickly. He is very _______.",
+      "options": ["slow", "clever", "clumsy", "serious"],
+      "correct_answer": "clever",
+      "explanation": "Người thông minh, nhanh nhạy gọi là 'clever' hoặc 'smart'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Feelings & Personality",
+    "difficulty": -0.1,
+    "context": "Positive Personality",
+    "output": {
+      "question": "She isn't afraid to speak in front of a large audience. She is very _______.",
+      "options": ["shy", "confident", "nervous", "quiet"],
+      "correct_answer": "confident",
+      "explanation": "Người tin tưởng vào khả năng của bản thân gọi là tự tin (confident)."
+    }
+  },
+  {
+    "topic": "Vocabulary - Feelings & Personality",
+    "difficulty": 0.0,
+    "context": "Positive Personality",
+    "output": {
+      "question": "He loves meeting new people and going to parties. He is very _______.",
+      "options": ["outgoing", "shy", "serious", "quiet"],
+      "correct_answer": "outgoing",
+      "explanation": "Người cởi mở, hướng ngoại gọi là 'outgoing'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Feelings & Personality",
+    "difficulty": -0.9,
+    "context": "Negative Personality",
+    "output": {
+      "question": "He doesn't like to work or help with the housework. He is very _______.",
+      "options": ["hardworking", "lazy", "kind", "brave"],
+      "correct_answer": "lazy",
+      "explanation": "Người lười biếng, không thích làm việc gọi là 'lazy'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Feelings & Personality",
+    "difficulty": -0.8,
+    "context": "Negative Personality",
+    "output": {
+      "question": "She never shares her toys with other children. She is very _______.",
+      "options": ["generous", "selfish", "friendly", "kind"],
+      "correct_answer": "selfish",
+      "explanation": "Người chỉ nghĩ đến bản thân, không muốn chia sẻ là người ích kỷ (selfish)."
+    }
+  },
+  {
+    "topic": "Vocabulary - Feelings & Personality",
+    "difficulty": -0.7,
+    "context": "Negative Personality",
+    "output": {
+      "question": "Even when we provide evidence, he refuses to change his mind. He is _______.",
+      "options": ["patient", "stubborn", "honest", "clever"],
+      "correct_answer": "stubborn",
+      "explanation": "Người khăng khăng theo ý mình, không chịu thay đổi gọi là cứng đầu (stubborn)."
+    }
+  },
+  {
+    "topic": "Vocabulary - Feelings & Personality",
+    "difficulty": -0.6,
+    "context": "Negative Personality",
+    "output": {
+      "question": "He speaks to people in an unpleasant way. He is very _______.",
+      "options": ["friendly", "rude", "kind", "patient"],
+      "correct_answer": "rude",
+      "explanation": "Người cư xử thiếu lịch sự gọi là thô lỗ (rude)."
+    }
+  },
+  {
+    "topic": "Vocabulary - Feelings & Personality",
+    "difficulty": -0.5,
+    "context": "Negative Personality",
+    "output": {
+      "question": "She feels uncomfortable when she has to talk to strangers. She is very _______.",
+      "options": ["outgoing", "shy", "confident", "brave"],
+      "correct_answer": "shy",
+      "explanation": "Người rụt rè, ngại ngùng khi tiếp xúc với người lạ gọi là 'shy'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Feelings & Personality",
+    "difficulty": -0.4,
+    "context": "Negative Personality",
+    "output": {
+      "question": "One minute he is happy, and the next he is angry. He is very _______.",
+      "options": ["stable", "moody", "patient", "honest"],
+      "correct_answer": "moody",
+      "explanation": "Người có tâm trạng thay đổi thất thường gọi là 'moody'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Feelings & Personality",
+    "difficulty": -0.3,
+    "context": "Negative Personality",
+    "output": {
+      "question": "He doesn't joke and always focuses on the facts. He is very _______.",
+      "options": ["funny", "serious", "outgoing", "lazy"],
+      "correct_answer": "serious",
+      "explanation": "Người nghiêm túc, ít khi đùa giỡn gọi là 'serious'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Feelings & Personality",
+    "difficulty": -0.2,
+    "context": "Negative Personality",
+    "output": {
+      "question": "She often drops things or trips over her own feet. She is quite _______.",
+      "options": ["clever", "clumsy", "brave", "serious"],
+      "correct_answer": "clumsy",
+      "explanation": "Người vụng về, hay làm rơi đồ gọi là 'clumsy'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Feelings & Personality",
+    "difficulty": -0.1,
+    "context": "Negative Personality",
+    "output": {
+      "question": "He thinks he is better and more important than everyone else. He is _______.",
+      "options": ["humble", "arrogant", "shy", "kind"],
+      "correct_answer": "arrogant",
+      "explanation": "Người kiêu ngạo, coi thường người khác gọi là 'arrogant'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Feelings & Personality",
+    "difficulty": 0.0,
+    "context": "Negative Personality",
+    "output": {
+      "question": "She always expects the worst to happen. She is very _______.",
+      "options": ["optimistic", "pessimistic", "confident", "cheerful"],
+      "correct_answer": "pessimistic",
+      "explanation": "Người luôn nhìn vào mặt tiêu cực, bi quan gọi là 'pessimistic'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Feelings & Personality",
+    "difficulty": -1.0,
+    "context": "Emotional State",
+    "output": {
+      "question": "After a long day at work, I just want to sit on the sofa and feel _______.",
+      "options": ["stressed", "relaxed", "angry", "nervous"],
+      "correct_answer": "relaxed",
+      "explanation": "Cảm giác thư giãn, không căng thẳng gọi là 'relaxed'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Feelings & Personality",
+    "difficulty": -0.9,
+    "context": "Emotional State",
+    "output": {
+      "question": "I have too much work and not enough time. I feel very _______.",
+      "options": ["relaxed", "stressed", "happy", "bored"],
+      "correct_answer": "stressed",
+      "explanation": "Cảm giác bị áp lực, căng thẳng gọi là 'stressed'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Feelings & Personality",
+    "difficulty": -0.8,
+    "context": "Emotional State",
+    "output": {
+      "question": "He was _______ after running a full marathon; he couldn't even speak.",
+      "options": ["energetic", "exhausted", "excited", "calm"],
+      "correct_answer": "exhausted",
+      "explanation": "Kiệt sức, cực kỳ mệt mỏi gọi là 'exhausted'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Feelings & Personality",
+    "difficulty": -0.7,
+    "context": "Emotional State",
+    "output": {
+      "question": "The meditation class helps me keep my mind _______ and peaceful.",
+      "options": ["stressed", "calm", "anxious", "angry"],
+      "correct_answer": "calm",
+      "explanation": "Trạng thái bình tĩnh, điềm tĩnh gọi là 'calm'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Feelings & Personality",
+    "difficulty": -0.6,
+    "context": "Emotional State",
+    "output": {
+      "question": "I am _______ about the new project; I want to know everything about it.",
+      "options": ["bored", "curious", "tired", "sad"],
+      "correct_answer": "curious",
+      "explanation": "Cảm giác tò mò, muốn tìm hiểu gọi là 'curious'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Feelings & Personality",
+    "difficulty": -0.5,
+    "context": "Emotional State",
+    "output": {
+      "question": "He feels _______ when he is in a crowd of people he doesn't know.",
+      "options": ["confident", "anxious", "proud", "excited"],
+      "correct_answer": "anxious",
+      "explanation": "Cảm giác lo âu, bất an gọi là 'anxious'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Feelings & Personality",
+    "difficulty": -0.4,
+    "context": "Emotional State",
+    "output": {
+      "question": "I feel _______ that you helped me with my homework. Thank you so much!",
+      "options": ["grateful", "guilty", "jealous", "confused"],
+      "correct_answer": "grateful",
+      "explanation": "Cảm giác biết ơn khi nhận được sự giúp đỡ gọi là 'grateful'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Feelings & Personality",
+    "difficulty": -0.3,
+    "context": "Emotional State",
+    "output": {
+      "question": "She was _______ when she saw the complicated instructions for the game.",
+      "options": ["excited", "confused", "proud", "relaxed"],
+      "correct_answer": "confused",
+      "explanation": "Cảm giác bối rối, không hiểu chuyện gì đang xảy ra gọi là 'confused'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Feelings & Personality",
+    "difficulty": -0.2,
+    "context": "Emotional State",
+    "output": {
+      "question": "He is always _______ and full of energy in the morning.",
+      "options": ["exhausted", "cheerful", "moody", "serious"],
+      "correct_answer": "cheerful",
+      "explanation": "Người luôn tươi tỉnh, vui vẻ gọi là 'cheerful'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Feelings & Personality",
+    "difficulty": -0.1,
+    "context": "Emotional State",
+    "output": {
+      "question": "I feel _______ because I have so many things to do and I don't know where to start.",
+      "options": ["relaxed", "overwhelmed", "bored", "confident"],
+      "correct_answer": "overwhelmed",
+      "explanation": "Cảm giác bị choáng ngợp bởi quá nhiều thứ gọi là 'overwhelmed'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Feelings & Personality",
+    "difficulty": 0.0,
+    "context": "Emotional State",
+    "output": {
+      "question": "He became _______ when the waiter brought the wrong order for the third time.",
+      "options": ["irritable", "patient", "relaxed", "grateful"],
+      "correct_answer": "irritable",
+      "explanation": "Dễ nổi nóng, dễ cáu kỉnh gọi là 'irritable'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Feelings & Personality",
+    "difficulty": -0.9,
+    "context": "Mixed Personality",
+    "output": {
+      "question": "A person who doesn't like to share their things is _______.",
+      "options": ["generous", "selfish", "kind", "friendly"],
+      "correct_answer": "selfish",
+      "explanation": "Người không thích chia sẻ là người ích kỷ (selfish)."
+    }
+  },
+  {
+    "topic": "Vocabulary - Feelings & Personality",
+    "difficulty": -0.8,
+    "context": "Mixed Personality",
+    "output": {
+      "question": "Someone who tells the truth even when it is difficult is _______.",
+      "options": ["honest", "brave", "shy", "clever"],
+      "correct_answer": "honest",
+      "explanation": "Người luôn nói thật là người trung thực (honest)."
+    }
+  },
+  {
+    "topic": "Vocabulary - Feelings & Personality",
+    "difficulty": -0.7,
+    "context": "Mixed Personality",
+    "output": {
+      "question": "A person who is not afraid of danger is _______.",
+      "options": ["shy", "brave", "lazy", "serious"],
+      "correct_answer": "brave",
+      "explanation": "Người không sợ nguy hiểm là người dũng cảm (brave)."
+    }
+  },
+  {
+    "topic": "Vocabulary - Feelings & Personality",
+    "difficulty": -0.6,
+    "context": "Mixed Personality",
+    "output": {
+      "question": "Someone who works very hard to achieve their goals is _______.",
+      "options": ["lazy", "hardworking", "selfish", "moody"],
+      "correct_answer": "hardworking",
+      "explanation": "Người làm việc chăm chỉ gọi là 'hardworking'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Feelings & Personality",
+    "difficulty": -0.5,
+    "context": "Mixed Personality",
+    "output": {
+      "question": "A person who is very quiet and doesn't like talking to others is _______.",
+      "options": ["outgoing", "shy", "rude", "confident"],
+      "correct_answer": "shy",
+      "explanation": "Người trầm tính, rụt rè gọi là 'shy'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Feelings & Personality",
+    "difficulty": -0.4,
+    "context": "Mixed Personality",
+    "output": {
+      "question": "Someone who is always happy and hopes for the best is _______.",
+      "options": ["pessimistic", "optimistic", "serious", "stubborn"],
+      "correct_answer": "optimistic",
+      "explanation": "Người lạc quan gọi là 'optimistic'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Feelings & Personality",
+    "difficulty": -0.3,
+    "context": "Mixed Personality",
+    "output": {
+      "question": "A person who can wait calmly for a long time is _______.",
+      "options": ["patient", "stubborn", "lazy", "rude"],
+      "correct_answer": "patient",
+      "explanation": "Người kiên nhẫn gọi là 'patient'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Feelings & Personality",
+    "difficulty": -0.2,
+    "context": "Mixed Personality",
+    "output": {
+      "question": "Someone who is very good at understanding others' feelings is _______.",
+      "options": ["arrogant", "empathetic", "selfish", "clumsy"],
+      "correct_answer": "empathetic",
+      "explanation": "Người có khả năng thấu cảm gọi là 'empathetic'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Feelings & Personality",
+    "difficulty": -0.1,
+    "context": "Mixed Personality",
+    "output": {
+      "question": "A person who always does what they want, regardless of others, is _______.",
+      "options": ["patient", "stubborn", "kind", "honest"],
+      "correct_answer": "stubborn",
+      "explanation": "Người bướng bỉnh gọi là 'stubborn'."
+    }
+  },
+  {
+    "topic": "Vocabulary - Feelings & Personality",
+    "difficulty": 0.0,
+    "context": "Mixed Personality",
+    "output": {
+      "question": "Someone who thinks they are better than everyone else is _______.",
+      "options": ["humble", "arrogant", "shy", "generous"],
+      "correct_answer": "arrogant",
+      "explanation": "Người kiêu ngạo gọi là 'arrogant'."
+    }
+  }
+]
+

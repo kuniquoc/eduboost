@@ -1,0 +1,716 @@
+[
+  {
+    "topic": "To-be verb",
+    "level": "A1",
+    "student_input": "I is a student",
+    "correct_answer": "I am a student",
+    "explanation": "Chào em, hãy nhìn vào chủ ngữ 'I'. Trong tiếng Anh, động từ to-be đi kèm với 'I' luôn là một từ duy nhất và đặc biệt. Em có nhớ đó là từ gì không?"
+  },
+  {
+    "topic": "To-be verb",
+    "level": "A1",
+    "student_input": "They am happy",
+    "correct_answer": "They are happy",
+    "explanation": "Hãy quan sát chủ ngữ 'They'. Đây là chủ ngữ số nhiều (họ). Vậy mình nên dùng 'am', 'is' hay 'are' cho số nhiều em nhỉ?"
+  },
+  {
+    "topic": "To-be verb",
+    "level": "A1",
+    "student_input": "She are my teacher",
+    "correct_answer": "She is my teacher",
+    "explanation": "Chào em, 'She' là ngôi thứ 3 số ít (một người). Em hãy nhớ lại xem với He/She/It, mình dùng động từ to-be nào cho đúng?"
+  },
+  {
+    "topic": "To-be verb",
+    "level": "A1",
+    "student_input": "I not a doctor",
+    "correct_answer": "I am not a doctor",
+    "explanation": "Trong câu phủ định với động từ to-be, chúng ta không thể dùng 'not' đứng một mình. Em cần một động từ to-be đứng trước 'not'. Với chủ ngữ 'I', đó là từ gì nhỉ?"
+  },
+  {
+    "topic": "To-be verb",
+    "level": "A1",
+    "student_input": "He not is sad",
+    "correct_answer": "He is not sad",
+    "explanation": "Hãy nhìn vào vị trí của từ 'not'. Trong câu phủ định với to-be, 'not' sẽ đứng trước hay đứng sau động từ to-be (am/is/are) em nhỉ?"
+  },
+  {
+    "topic": "To-be verb",
+    "level": "A1",
+    "student_input": "We is friends",
+    "correct_answer": "We are friends",
+    "explanation": "Hãy nhìn chủ ngữ 'We' (chúng tôi). Đây là chủ ngữ số nhiều, vậy mình dùng 'is' hay 'are' cho phù hợp?"
+  },
+  {
+    "topic": "To-be verb",
+    "level": "A1",
+    "student_input": "I have happy today",
+    "correct_answer": "I am happy today",
+    "explanation": "Chào em, 'happy' là một tính từ chỉ cảm xúc. Để nối chủ ngữ với một tính từ, mình dùng động từ 'have' (có) hay dùng động từ to-be (thì, là, ở) em nhỉ?"
+  },
+  {
+    "topic": "To-be verb",
+    "level": "A1",
+    "student_input": "The cat are black",
+    "correct_answer": "The cat is black",
+    "explanation": "Hãy quan sát 'The cat'. Đây là một con mèo (số ít). Vậy động từ to-be 'are' đã chính xác chưa, hay mình cần dùng từ khác?"
+  },
+  {
+    "topic": "To-be verb",
+    "level": "A1",
+    "student_input": "You is very kind",
+    "correct_answer": "You are very kind",
+    "explanation": "Hãy xem lại chủ ngữ 'You'. Dù 'you' có thể là một người hoặc nhiều người, nhưng trong tiếng Anh, 'you' luôn đi với động từ to-be nào em nhỉ?"
+  },
+  {
+    "topic": "To-be verb",
+    "level": "A1",
+    "student_input": "It am a big house",
+    "correct_answer": "It is a big house",
+    "explanation": "Chào em, 'am' chỉ đi kèm với chủ ngữ 'I' thôi. Vậy với chủ ngữ 'It', mình dùng từ to-be nào cho đúng?"
+  },
+  {
+    "topic": "To-be verb",
+    "level": "A1",
+    "student_input": "They is from Japan",
+    "correct_answer": "They are from Japan",
+    "explanation": "Hãy nhìn chủ ngữ 'They' (số nhiều). Em hãy chọn lại giữa 'is' và 'are' xem từ nào phù hợp hơn nhé."
+  },
+  {
+    "topic": "To-be verb",
+    "level": "A1",
+    "student_input": "I am not a student",
+    "correct_answer": "I am not a student",
+    "explanation": "Câu này hoàn toàn chính xác! Em đã dùng đúng 'am not' cho chủ ngữ 'I'. Rất tốt!"
+  },
+  {
+    "topic": "To-be verb",
+    "level": "A1",
+    "student_input": "She am beautiful",
+    "correct_answer": "She is beautiful",
+    "explanation": "Hãy nhớ lại: 'am' chỉ dành cho 'I'. Với 'She', mình dùng 'is' hay 'are' em nhỉ?"
+  },
+  {
+    "topic": "To-be verb",
+    "level": "A1",
+    "student_input": "The books is old",
+    "correct_answer": "The books are old",
+    "explanation": "Hãy nhìn vào từ 'books' (có chữ 's' ở cuối). Vì đây là danh từ số nhiều, em hãy chọn lại động từ to-be cho phù hợp nhé."
+  },
+  {
+    "topic": "To-be verb",
+    "level": "A1",
+    "student_input": "We not are tired",
+    "correct_answer": "We are not tired",
+    "explanation": "Chào em, hãy nhìn lại vị trí của 'not'. Trong câu phủ định, 'not' đứng trước hay đứng sau 'are' em nhỉ?"
+  },
+  {
+    "topic": "To-be verb",
+    "level": "A1",
+    "student_input": "He have a doctor",
+    "correct_answer": "He is a doctor",
+    "explanation": "Em đang muốn nói 'Anh ấy là một bác sĩ'. 'Have' nghĩa là 'có', còn để nói 'là', mình phải dùng động từ to-be. Vậy với 'He', mình dùng từ to-be nào?"
+  },
+  {
+    "topic": "To-be verb",
+    "level": "A1",
+    "student_input": "My mom are a cook",
+    "correct_answer": "My mom is a cook",
+    "explanation": "Hãy nhìn 'My mom'. Đây là một người (số ít). Vậy động từ 'are' đã chính xác chưa, hay mình cần dùng 'is'?"
+  },
+  {
+    "topic": "To-be verb",
+    "level": "A1",
+    "student_input": "I is not hungry",
+    "correct_answer": "I am not hungry",
+    "explanation": "Chào em, hãy kiểm tra lại động từ to-be đi với 'I'. Mình dùng 'is' hay 'am' cho đúng?"
+  },
+  {
+    "topic": "To-be verb",
+    "level": "A1",
+    "student_input": "It are cold today",
+    "correct_answer": "It is cold today",
+    "explanation": "Hãy xem lại chủ ngữ 'It'. Đối với ngôi thứ 3 số ít, mình dùng 'is' hay 'are' em nhỉ?"
+  },
+  {
+    "topic": "To-be verb",
+    "level": "A1",
+    "student_input": "You am my friend",
+    "correct_answer": "You are my friend",
+    "explanation": "Hãy nhớ lại: 'am' chỉ dành cho 'I'. Với chủ ngữ 'You', em dùng 'is' hay 'are'?"
+  },
+  {
+    "topic": "To-be verb",
+    "level": "A1",
+    "student_input": "The children is happy",
+    "correct_answer": "The children are happy",
+    "explanation": " Hãy chú ý từ 'children'. Đây là dạng số nhiều của 'child'. Vậy động từ to-be 'is' có phù hợp với số nhiều không em?"
+  },
+  {
+    "topic": "To-be verb",
+    "level": "A1",
+    "student_input": "I have a student",
+    "correct_answer": "I am a student",
+    "explanation": "Chào em, 'I have a student' nghĩa là 'Tôi có một học sinh'. Nhưng nếu em muốn nói 'Tôi là một học sinh', mình phải dùng động từ to-be. Em hãy thử sửa lại xem sao."
+  },
+  {
+    "topic": "To-be verb",
+    "level": "A1",
+    "student_input": "She is not a nurse",
+    "correct_answer": "She is not a nurse",
+    "explanation": "Câu này hoàn toàn chính xác! Em đã dùng đúng 'is not' cho chủ ngữ 'She'. Rất tốt!"
+  },
+  {
+    "topic": "To-be verb",
+    "level": "A1",
+    "student_input": "They is very tall",
+    "correct_answer": "They are very tall",
+    "explanation": "Hãy nhìn chủ ngữ 'They' (số nhiều). Em hãy chọn lại giữa 'is' và 'are' xem từ nào chính xác hơn."
+  },
+  {
+    "topic": "To-be verb",
+    "level": "A1",
+    "student_input": "He am a pilot",
+    "correct_answer": "He is a pilot",
+    "explanation": "Hãy nhớ lại quy tắc: 'am' chỉ đi với 'I'. Với 'He', mình dùng từ to-be nào em nhỉ?"
+  },
+  {
+    "topic": "To-be verb",
+    "level": "A1",
+    "student_input": "We am from England",
+    "correct_answer": "We are from England",
+    "explanation": "Chào em, 'We' là chủ ngữ số nhiều. Vậy mình dùng 'am', 'is' hay 'are' cho đúng ngữ pháp?"
+  },
+  {
+    "topic": "To-be verb",
+    "level": "A1",
+    "student_input": "The weather are nice",
+    "correct_answer": "The weather is nice",
+    "explanation": "Hãy nhìn từ 'weather' (thời tiết). Đây là danh từ không đếm được (tương đương số ít). Vậy mình dùng 'is' hay 'are'?"
+  },
+  {
+    "topic": "To-be verb",
+    "level": "A1",
+    "student_input": "It not is hot",
+    "correct_answer": "It is not hot",
+    "explanation": "Hãy xem lại vị trí của 'not' và 'is'. Trong câu phủ định, 'not' đứng trước hay đứng sau động từ to-be em nhỉ?"
+  },
+  {
+    "topic": "To-be verb",
+    "level": "A1",
+    "student_input": "You is a good boy",
+    "correct_answer": "You are a good boy",
+    "explanation": "Hãy kiểm tra lại động từ to-be đi với 'You'. Em dùng 'is' đã chính xác chưa?"
+  },
+  {
+    "topic": "To-be verb",
+    "level": "A1",
+    "student_input": "I am a teacher",
+    "correct_answer": "I am a teacher",
+    "explanation": "Câu này hoàn toàn chính xác! Em đã dùng đúng 'am' cho chủ ngữ 'I'. Tuyệt vời!"
+  },
+  {
+    "topic": "To-be verb",
+    "level": "A1",
+    "student_input": "You are a student?",
+    "correct_answer": "Are you a student?",
+    "explanation": "Chào em, câu này em đang dùng trật tự của câu khẳng định. Để biến một câu có động từ to-be thành câu hỏi, em hãy nhớ lại xem mình cần đưa động từ to-be lên trước hay đứng sau chủ ngữ nhỉ?"
+  },
+  {
+    "topic": "To-be verb",
+    "level": "A1",
+    "student_input": "Is you happy?",
+    "correct_answer": "Are you happy?",
+    "explanation": "Hãy nhìn vào chủ ngữ 'you'. Động từ to-be 'is' thường đi với He/She/It. Vậy với 'you', mình dùng 'is', 'am' hay 'are' để đặt câu hỏi em nhỉ?"
+  },
+  {
+    "topic": "To-be verb",
+    "level": "A1",
+    "student_input": "Do you are a teacher?",
+    "correct_answer": "Are you a teacher?",
+    "explanation": "Chào em, có một quy tắc quan trọng: Khi trong câu đã có động từ to-be (am/is/are), chúng ta không dùng trợ động từ 'do' hay 'does' để đặt câu hỏi. Vậy em hãy thử bỏ 'do' và đảo động từ to-be lên đầu câu xem sao?"
+  },
+  {
+    "topic": "To-be verb",
+    "level": "A1",
+    "student_input": "Where you are?",
+    "correct_answer": "Where are you?",
+    "explanation": "Trong câu hỏi với từ 'Where', em vẫn cần thực hiện quy tắc đảo ngữ. Em hãy thử đổi vị trí của 'you' và 'are' xem câu sẽ như thế nào nhé."
+  },
+  {
+    "topic": "To-be verb",
+    "level": "A1",
+    "student_input": "Who are he?",
+    "correct_answer": "Who is he?",
+    "explanation": "Hãy quan sát chủ ngữ 'he'. Đây là số ít, vậy động từ to-be 'are' đã chính xác chưa, hay mình cần dùng 'is'?"
+  },
+  {
+    "topic": "To-be verb",
+    "level": "A1",
+    "student_input": "Does she is beautiful?",
+    "correct_answer": "Is she beautiful?",
+    "explanation": "Chào em, tương tự như câu trước, chúng ta không dùng 'does' khi câu đã có động từ to-be 'is'. Em hãy thử bỏ 'does' và bắt đầu câu hỏi bằng động từ to-be xem sao."
+  },
+  {
+    "topic": "To-be verb",
+    "level": "A1",
+    "student_input": "Am they your friends?",
+    "correct_answer": "Are they your friends?",
+    "explanation": "Hãy nhìn chủ ngữ 'they' (số nhiều). Động từ to-be 'am' chỉ dành riêng cho 'I' thôi. Vậy với 'they', mình dùng từ nào để đặt câu hỏi nhỉ?"
+  },
+  {
+    "topic": "To-be verb",
+    "level": "A1",
+    "student_input": "Why you are sad?",
+    "correct_answer": "Why are you sad?",
+    "explanation": "Trong câu hỏi 'Why', em hình như quên đảo động từ to-be lên trước chủ ngữ rồi. Em hãy thử thay đổi vị trí của 'you' và 'are' xem sao."
+  },
+  {
+    "topic": "To-be verb",
+    "level": "A1",
+    "student_input": "Is the books old?",
+    "correct_answer": "Are the books old?",
+    "explanation": "Hãy nhìn vào 'the books' (số nhiều). Vì chủ ngữ là số nhiều, nên động từ to-be đứng đầu câu hỏi phải là 'is' hay 'are' em nhỉ?"
+  },
+  {
+    "topic": "To-be verb",
+    "level": "A1",
+    "student_input": "Do it is cold today?",
+    "correct_answer": "Is it cold today?",
+    "explanation": "Chào em, một lần nữa, mình không dùng 'do' khi đã có 'is' trong câu. Em hãy thử bỏ 'do' đi và đưa 'is' lên đầu câu để tạo thành câu hỏi nhé."
+  },
+  {
+    "topic": "To-be verb",
+    "level": "A1",
+    "student_input": "Are he a doctor?",
+    "correct_answer": "Is he a doctor?",
+    "explanation": "Hãy xem lại chủ ngữ 'he'. Đây là số ít, vậy động từ 'are' có phù hợp không, hay mình nên dùng 'is'?"
+  },
+  {
+    "topic": "To-be verb",
+    "level": "A1",
+    "student_input": "What you are?",
+    "correct_answer": "What are you?",
+    "explanation": "Chào em, trong câu hỏi Wh- (What, Where, Who...), em cần đảo động từ to-be lên trước chủ ngữ. Em hãy thử đổi chỗ 'you' và 'are' nhé."
+  },
+  {
+    "topic": "To-be verb",
+    "level": "A1",
+    "student_input": "Are I late?",
+    "correct_answer": "Am I late?",
+    "explanation": "Hãy nhìn chủ ngữ 'I'. Động từ to-be nào luôn đi kèm với 'I' dù là trong câu khẳng định hay câu hỏi em nhỉ?"
+  },
+  {
+    "topic": "To-be verb",
+    "level": "A1",
+    "student_input": "Is we in the classroom?",
+    "correct_answer": "Are we in the classroom?",
+    "explanation": "Hãy nhìn chủ ngữ 'we' (số nhiều). Động từ to-be 'is' dùng cho số ít, vậy với 'we' mình dùng từ nào mới chính xác?"
+  },
+  {
+    "topic": "To-be verb",
+    "level": "A1",
+    "student_input": "Do she is from Vietnam?",
+    "correct_answer": "Is she from Vietnam?",
+    "explanation": "Em hãy nhớ lại quy tắc: không dùng 'do/does' với động từ to-be. Em hãy thử bỏ 'do' và bắt đầu câu bằng 'Is' xem sao."
+  },
+  {
+    "topic": "To-be verb",
+    "level": "A1",
+    "student_input": "Where is they?",
+    "correct_answer": "Where are they?",
+    "explanation": "Chào em, hãy nhìn chủ ngữ 'they' (số nhiều). Động từ to-be 'is' có phù hợp với số nhiều không em? Em hãy chọn lại giữa 'is' và 'are' nhé."
+  },
+  {
+    "topic": "To-be verb",
+    "level": "A1",
+    "student_input": "Are your father a pilot?",
+    "correct_answer": "Is your father a pilot?",
+    "explanation": " Hãy quan sát 'your father' (bố của bạn). Đây là một người (số ít), tương đương với 'He'. Vậy mình dùng 'are' hay 'is' để đặt câu hỏi?"
+  },
+  {
+    "topic": "To-be verb",
+    "level": "A1",
+    "student_input": "How you are?",
+    "correct_answer": "How are you?",
+    "explanation": "Đây là câu chào hỏi phổ biến. Em hãy nhớ quy tắc đảo ngữ: động từ to-be 'are' phải đứng trước chủ ngữ 'you'. Em thử sửa lại xem sao."
+  },
+  {
+    "topic": "To-be verb",
+    "level": "A1",
+    "student_input": "Is the children happy?",
+    "correct_answer": "Are the children happy?",
+    "explanation": "Hãy chú ý từ 'children' (số nhiều). Vì là số nhiều, em hãy chọn lại động từ to-be đứng đầu câu là 'is' hay 'are'?"
+  },
+  {
+    "topic": "To-be verb",
+    "level": "A1",
+    "student_input": "Does it is hot today?",
+    "correct_answer": "Is it hot today?",
+    "explanation": "Chào em, một lần nữa, đừng dùng 'does' khi đã có 'is'. Em hãy thử bỏ 'does' và đảo 'is' lên đầu câu nhé."
+  },
+  {
+    "topic": "To-be verb",
+    "level": "A1",
+    "student_input": "Am you a student?",
+    "correct_answer": "Are you a student?",
+    "explanation": "Hãy nhìn chủ ngữ 'you'. 'Am' chỉ đi với 'I' thôi. Vậy với 'you', mình dùng động từ to-be nào để đặt câu hỏi?"
+  },
+  {
+    "topic": "To-be verb",
+    "level": "A1",
+    "student_input": "Who is you?",
+    "correct_answer": "Who are you?",
+    "explanation": "Hãy kiểm tra lại sự hòa hợp giữa động từ to-be và chủ ngữ 'you'. Mình dùng 'is' hay 'are' em nhỉ?"
+  },
+  {
+    "topic": "To-be verb",
+    "level": "A1",
+    "student_input": "You are from London?",
+    "correct_answer": "Are you from London?",
+    "explanation": "Câu này em đang nói như một câu khẳng định. Để biến nó thành câu hỏi đúng ngữ pháp, em hãy thử đảo 'are' lên trước 'you' xem sao."
+  },
+  {
+    "topic": "To-be verb",
+    "level": "A1",
+    "student_input": "Do they are tired?",
+    "correct_answer": "Are they tired?",
+    "explanation": "Chào em, em hãy nhớ quy tắc: To-be không đi cùng 'do'. Em hãy bỏ 'do' đi và bắt đầu câu hỏi bằng 'Are' cho chủ ngữ 'they' nhé."
+  },
+  {
+    "topic": "To-be verb",
+    "level": "A1",
+    "student_input": "Is he and she friends?",
+    "correct_answer": "Are he and she friends?",
+    "explanation": "Hãy nhìn chủ ngữ 'he and she'. Tổng cộng là hai người (số nhiều). Vậy động từ to-be 'is' có phù hợp không, hay mình cần dùng 'are'?"
+  },
+  {
+    "topic": "To-be verb",
+    "level": "A1",
+    "student_input": "Where is the keys?",
+    "correct_answer": "Where are the keys?",
+    "explanation": "Hãy quan sát 'the keys' (số nhiều). Với chủ ngữ số nhiều, mình dùng 'is' hay 'are' trong câu hỏi em nhỉ?"
+  },
+  {
+    "topic": "To-be verb",
+    "level": "A1",
+    "student_input": "Are your mom a doctor?",
+    "correct_answer": "Is your mom a doctor?",
+    "explanation": "Chào em, 'your mom' là một người (số ít). Em hãy chọn lại động từ to-be phù hợp: 'is' hay 'are'?"
+  },
+  {
+    "topic": "To-be verb",
+    "level": "A1",
+    "student_input": "What is they doing?",
+    "correct_answer": "What are they doing?",
+    "explanation": "Hãy nhìn chủ ngữ 'they'. Trong câu hỏi này, động từ to-be 'is' đã chính xác cho số nhiều chưa em?"
+  },
+  {
+    "topic": "To-be verb",
+    "level": "A1",
+    "student_input": "Do she is your sister?",
+    "correct_answer": "Is she your sister?",
+    "explanation": "Một lần nữa, em hãy bỏ trợ động từ 'do' đi vì câu đã có động từ to-be 'is'. Em hãy thử bắt đầu câu bằng 'Is' xem sao."
+  },
+  {
+    "topic": "To-be verb",
+    "level": "A1",
+    "student_input": "Is it a sunny day?",
+    "correct_answer": "Is it a sunny day?",
+    "explanation": "Câu này hoàn toàn chính xác! Em đã đảo đúng động từ to-be 'Is' lên đầu câu cho chủ ngữ 'it'. Rất tốt!"
+  },
+  {
+    "topic": "To-be verb",
+    "level": "A1",
+    "student_input": "Are you a student? Yes, I",
+    "correct_answer": "Are you a student? Yes, I am",
+    "explanation": "Chào em, phần câu hỏi em làm rất tốt. Nhưng trong câu trả lời ngắn (Short Answer), chúng ta không thể dừng lại ở 'Yes, I'. Em cần thêm động từ to-be tương ứng với 'I' vào cuối câu. Đó là từ gì nhỉ?"
+  },
+  {
+    "topic": "To-be verb",
+    "level": "A1",
+    "student_input": "Is he a doctor? No, he not",
+    "correct_answer": "Is he a doctor? No, he isn't / No, he is not",
+    "explanation": "Em trả lời 'No' là đúng rồi. Tuy nhiên, câu trả lời ngắn phủ định cần có 'to-be + not'. Với chủ ngữ 'he', em sẽ dùng từ to-be nào kết hợp với 'not'?"
+  },
+  {
+    "topic": "To-be verb",
+    "level": "A1",
+    "student_input": "Are they happy? Yes, they",
+    "correct_answer": "Are they happy? Yes, they are",
+    "explanation": "Hãy nhìn vào câu trả lời. Em đã thiếu động từ to-be để hoàn thành câu trả lời ngắn. Với 'they' (số nhiều), mình dùng 'am', 'is' hay 'are' ở cuối câu nhỉ?"
+  },
+  {
+    "topic": "To-be verb",
+    "level": "A1",
+    "student_input": "You are a teacher, are you?",
+    "correct_answer": "You are a teacher, aren't you?",
+    "explanation": "Chào em, đây là câu hỏi đuôi. Quy tắc là: nếu vế đầu là khẳng định ('You are'), thì phần đuôi phải là phủ định. Em hãy thử chuyển 'are you' thành dạng phủ định xem sao."
+  },
+  {
+    "topic": "To-be verb",
+    "level": "A1",
+    "student_input": "She is beautiful, isn't she?",
+    "correct_answer": "She is beautiful, isn't she?",
+    "explanation": "Câu này hoàn toàn chính xác! Em đã dùng đúng quy tắc: vế đầu khẳng định, vế đuôi phủ định và hòa hợp với chủ ngữ 'she'. Tuyệt vời!"
+  },
+  {
+    "topic": "To-be verb",
+    "level": "A1",
+    "student_input": "I am sad and she am happy",
+    "correct_answer": "I am sad and she is happy",
+    "explanation": "Vế đầu 'I am' em làm đúng rồi. Nhưng hãy nhìn vế thứ hai 'she am'. 'Am' chỉ đi với 'I' thôi, vậy với 'she', em phải dùng động từ to-be nào?"
+  },
+  {
+    "topic": "To-be verb",
+    "level": "A1",
+    "student_input": "Is your cat black? No, it not",
+    "correct_answer": "Is your cat black? No, it isn't / No, it is not",
+    "explanation": "Hãy nhớ lại cấu trúc câu trả lời ngắn phủ định: 'No, + chủ ngữ + to-be + not'. Với 'it', em sẽ dùng từ to-be nào?"
+  },
+  {
+    "topic": "To-be verb",
+    "level": "A1",
+    "student_input": "Where you are from?",
+    "correct_answer": "Where are you from?",
+    "explanation": "Chào em, trong câu hỏi Wh-, em cần đảo động từ to-be lên trước chủ ngữ. Em hãy thử đổi vị trí của 'you' và 'are' nhé."
+  },
+  {
+    "topic": "To-be verb",
+    "level": "A1",
+    "student_input": "Are we ready? Yes, we",
+    "correct_answer": "Are we ready? Yes, we are",
+    "explanation": "Câu trả lời ngắn của em đang bị thiếu động từ to-be. Với chủ ngữ 'we' (số nhiều), em hãy thêm từ to-be phù hợp vào cuối câu nhé."
+  },
+  {
+    "topic": "To-be verb",
+    "level": "A1",
+    "student_input": "It is a sunny day, is it?",
+    "correct_answer": "It is a sunny day, isn't it?",
+    "explanation": "Hãy nhớ lại quy tắc câu hỏi đuôi: vế trước khẳng định ('It is'), vế sau phải phủ định. Em hãy thử chuyển 'is it' thành dạng phủ định xem sao."
+  },
+  {
+    "topic": "To-be verb",
+    "level": "A1",
+    "student_input": "I is a boy and my friend are a girl",
+    "correct_answer": "I am a boy and my friend is a girl",
+    "explanation": "Câu này có hai lỗi về to-be. Một là đi với 'I', hai là đi với 'my friend' (số ít). Em hãy kiểm tra và sửa lại cả hai động từ to-be nhé."
+  },
+  {
+    "topic": "To-be verb",
+    "level": "A1",
+    "student_input": "Is she your sister? Yes, she is",
+    "correct_answer": "Is she your sister? Yes, she is",
+    "explanation": "Tuyệt vời! Em đã đặt câu hỏi đúng và trả lời ngắn chính xác. Chúc mừng em!"
+  },
+  {
+    "topic": "To-be verb",
+    "level": "A1",
+    "student_input": "They are from Canada, are they?",
+    "correct_answer": "They are from Canada, aren't they?",
+    "explanation": "Chào em, hãy nhớ lại quy tắc câu hỏi đuôi: vế đầu khẳng định thì vế sau phải phủ định. Em hãy chuyển 'are they' thành dạng phủ định nhé."
+  },
+  {
+    "topic": "To-be verb",
+    "level": "A1",
+    "student_input": "What is your name? My name are Nam",
+    "correct_answer": "What is your name? My name is Nam",
+    "explanation": "Câu hỏi rất tốt. Nhưng ở câu trả lời, hãy nhìn chủ ngữ 'My name' (tên của tôi - số ít). Mình dùng 'are' hay 'is' cho đúng em nhỉ?"
+  },
+  {
+    "topic": "To-be verb",
+    "level": "A1",
+    "student_input": "Are the books interesting? No, they not",
+    "correct_answer": "Are the books interesting? No, they aren't / No, they are not",
+    "explanation": "Em hãy nhớ cấu trúc trả lời ngắn phủ định: 'No, + chủ ngữ + to-be + not'. Với 'they', em dùng to-be nào?"
+  },
+  {
+    "topic": "To-be verb",
+    "level": "A1",
+    "student_input": "He is a teacher, isn't he?",
+    "correct_answer": "He is a teacher, isn't he?",
+    "explanation": "Câu này hoàn toàn chính xác! Em đã nắm vững quy tắc câu hỏi đuôi cho ngôi thứ 3 số ít. Rất tốt!"
+  },
+  {
+    "topic": "To-be verb",
+    "level": "A1",
+    "student_input": "I am a student. He am a student too",
+    "correct_answer": "I am a student. He is a student too",
+    "explanation": "Vế đầu chính xác. Nhưng ở vế sau, em lại dùng 'am' cho 'He'. Em hãy nhớ lại xem He/She/It đi với động từ to-be nào?"
+  },
+  {
+    "topic": "To-be verb",
+    "level": "A1",
+    "student_input": "Am I in the right place? Yes, you",
+    "correct_answer": "Am I in the right place? Yes, you are",
+    "explanation": "Chào em, câu hỏi rất đúng. Nhưng ở câu trả lời, khi ai đó hỏi 'Am I...?' (Tôi có... không?), mình sẽ trả lời là 'Yes, you...' kèm theo động từ to-be. Với 'you', mình dùng từ gì nhỉ?"
+  },
+  {
+    "topic": "To-be verb",
+    "level": "A1",
+    "student_input": "They is not at home, are they?",
+    "correct_answer": "They are not at home, are they?",
+    "explanation": "Câu này có hai điểm cần xem: Một là động từ to-be đi với 'They' ở vế đầu. Hai là vế đầu phủ định thì vế đuôi phải khẳng định (phần này em làm đúng rồi). Em hãy sửa lại vế đầu nhé."
+  },
+  {
+    "topic": "To-be verb",
+    "level": "A1",
+    "student_input": "Who are that man?",
+    "correct_answer": "Who is that man?",
+    "explanation": "Hãy nhìn vào 'that man' (người đàn ông kia). Đây là số ít. Vậy động từ to-be 'are' đã chính xác chưa, hay mình cần dùng 'is'?"
+  },
+  {
+    "topic": "To-be verb",
+    "level": "A1",
+    "student_input": "Is it a rainy day? No, it is",
+    "correct_answer": "Is it a rainy day? No, it isn't / No, it is not",
+    "explanation": "Chào em, em bắt đầu bằng 'No' (Không), nhưng vế sau em lại dùng 'it is' (khẳng định). Để phù hợp với 'No', em cần chuyển 'it is' sang dạng phủ định như thế nào?"
+  },
+  {
+    "topic": "To-be verb",
+    "level": "A1",
+    "student_input": "We are students, are we?",
+    "correct_answer": "We are students, aren't we?",
+    "explanation": "Hãy nhớ quy tắc câu hỏi đuôi: Vế đầu khẳng định ('We are') $\rightarrow$ Vế sau phủ định. Em hãy sửa 'are we' thành dạng phủ định nhé."
+  },
+  {
+    "topic": "To-be verb",
+    "level": "A1",
+    "student_input": "How old are you? I have 10 years old",
+    "correct_answer": "How old are you? I am 10 years old",
+    "explanation": "Đây là lỗi rất phổ biến! Trong tiếng Anh, khi nói về tuổi, chúng ta không dùng 'have' (có) mà dùng động từ to-be (thì, là). Vậy với 'I', em dùng từ to-be nào?"
+  },
+  {
+    "topic": "To-be verb",
+    "level": "A1",
+    "student_input": "Is she from Korea? Yes, she is",
+    "correct_answer": "Is she from Korea? Yes, she is",
+    "explanation": "Câu này hoàn toàn chính xác! Cả câu hỏi và câu trả lời ngắn đều đúng ngữ pháp. Tuyệt vời!"
+  },
+  {
+    "topic": "To-be verb",
+    "level": "A1",
+    "student_input": "Where are my books? They is on the table",
+    "correct_answer": "Where are my books? They are on the table",
+    "explanation": "Câu hỏi rất tốt. Nhưng ở câu trả lời, hãy nhìn chủ ngữ 'They' (số nhiều). Mình dùng 'is' hay 'are' cho đúng em nhỉ?"
+  },
+  {
+    "topic": "To-be verb",
+    "level": "A1",
+    "student_input": "Are you tired? No, I am not",
+    "correct_answer": "Are you tired? No, I am not",
+    "explanation": "Câu này hoàn toàn chính xác! Em đã biết cách chuyển đổi chủ ngữ từ 'you' trong câu hỏi sang 'I' trong câu trả lời và dùng đúng to-be. Rất tốt!"
+  },
+  {
+    "topic": "To-be verb",
+    "level": "A1",
+    "student_input": "The weather is hot, is it?",
+    "correct_answer": "The weather is hot, isn't it?",
+    "explanation": "Chào em, hãy nhớ lại quy tắc câu hỏi đuôi: Vế đầu khẳng định ('is') $\rightarrow$ Vế sau phủ định. Em hãy sửa 'is it' thành dạng phủ định nhé."
+  },
+  {
+    "topic": "To-be verb",
+    "level": "A1",
+    "student_input": "Is he and she friends? Yes, they is",
+    "correct_answer": "Are he and she friends? Yes, they are",
+    "explanation": "Câu này có hai lỗi to-be. Một là 'he and she' là số nhiều nên câu hỏi phải bắt đầu bằng từ gì? Hai là câu trả lời cho 'they' phải dùng to-be nào?"
+  },
+  {
+    "topic": "To-be verb",
+    "level": "A1",
+    "student_input": "What is they? They is cats",
+    "correct_answer": "What are they? They are cats",
+    "explanation": "Hãy nhìn chủ ngữ 'they'. Ở cả câu hỏi và câu trả lời, em đều dùng 'is'. Em hãy nhớ lại xem 'they' đi với động từ to-be nào cho chính xác?"
+  },
+  {
+    "topic": "To-be verb",
+    "level": "A1",
+    "student_input": "Am I your friend? Yes, you are",
+    "correct_answer": "Am I your friend? Yes, you are",
+    "explanation": "Câu này hoàn toàn chính xác! Em đã biết cách phản hồi đúng chủ ngữ và to-be tương ứng. Chúc mừng em!"
+  },
+  {
+    "topic": "To-be verb",
+    "level": "A1",
+    "student_input": "Is the dogs small? No, they not",
+    "correct_answer": "Are the dogs small? No, they aren't",
+    "explanation": "Câu này có hai lỗi: Một là 'the dogs' là số nhiều nên câu hỏi phải bắt đầu bằng từ gì? Hai là câu trả lời ngắn phủ định cho 'they' phải như thế nào?"
+  },
+  {
+    "topic": "To-be verb",
+    "level": "A1",
+    "student_input": "It is a big city, isn't it?",
+    "correct_answer": "It is a big city, isn't it?",
+    "explanation": "Tuyệt vời! Em đã sử dụng đúng cấu trúc câu hỏi đuôi cho chủ ngữ 'it'. Rất tốt!"
+  },
+  {
+    "topic": "To-be verb",
+    "level": "A1",
+    "student_input": "Who are she? She is my sister",
+    "correct_answer": "Who is she? She is my sister",
+    "explanation": "Chào em, câu trả lời rất đúng. Nhưng ở câu hỏi, 'she' là số ít, vậy em dùng 'are' hay 'is' mới chính xác?"
+  },
+  {
+    "topic": "To-be verb",
+    "level": "A1",
+    "student_input": "Are you at home? No, I am",
+    "correct_answer": "Are you at home? No, I am not",
+    "explanation": "Hãy nhìn vào câu trả lời. Em bắt đầu bằng 'No' (Không), nhưng vế sau em lại dùng 'I am' (khẳng định). Em cần thêm từ gì vào sau 'am' để câu trả lời đúng nghĩa phủ định?"
+  },
+  {
+    "topic": "To-be verb",
+    "level": "A1",
+    "student_input": "They is from Italy, aren't they?",
+    "correct_answer": "They are from Italy, aren't they?",
+    "explanation": "Chào em, vế câu hỏi đuôi 'aren't they' em làm rất tốt. Nhưng hãy nhìn lại vế đầu 'They is'. Chủ ngữ 'They' đi với động từ to-be nào em nhỉ?"
+  },
+  {
+    "topic": "To-be verb",
+    "level": "A1",
+    "student_input": "Is the water cold? Yes, it is",
+    "correct_answer": "Is the water cold? Yes, it is",
+    "explanation": "Câu này hoàn toàn chính xác! 'The water' (không đếm được - số ít) đi với 'is' là rất chuẩn. Chúc mừng em!"
+  },
+  {
+    "topic": "To-be verb",
+    "level": "A1",
+    "student_input": "Am I late? No, you am not",
+    "correct_answer": "Am I late? No, you are not",
+    "explanation": "Chào em, vế trả lời 'No' là đúng. Nhưng hãy nhìn 'you am not'. Động từ 'am' chỉ dành cho 'I' thôi. Với 'you', mình dùng to-be nào?"
+  },
+  {
+    "topic": "To-be verb",
+    "level": "A1",
+    "student_input": "They are happy, are they?",
+    "correct_answer": "They are happy, aren't they?",
+    "explanation": "Hãy nhớ lại quy tắc câu hỏi đuôi: vế đầu khẳng định ('They are') $\rightarrow$ vế sau phủ định. Em hãy sửa lại nhé."
+  },
+  {
+    "topic": "To-be verb",
+    "level": "A1",
+    "student_input": "Where is the keys? They is in the bag",
+    "correct_answer": "Where are the keys? They are in the bag",
+    "explanation": "Câu này có hai lỗi. Cả 'the keys' và 'They' đều là số nhiều. Em hãy thay thế 'is' bằng động từ to-be phù hợp cho số nhiều nhé."
+  },
+  {
+    "topic": "To-be verb",
+    "level": "A1",
+    "student_input": "Is the movie good? Yes, it is",
+    "correct_answer": "Is the movie good? Yes, it is",
+    "explanation": "Hoàn toàn chính xác! Em đã đặt câu hỏi và trả lời ngắn rất chuẩn. Rất tốt!"
+  },
+  {
+    "topic": "To-be verb",
+    "level": "A1",
+    "student_input": "We is in the park, aren't we?",
+    "correct_answer": "We are in the park, aren't we?",
+    "explanation": "Chào em, vế đuôi 'aren't we' rất đúng. Nhưng hãy nhìn lại vế đầu 'We is'. Chủ ngữ 'We' đi với to-be nào em nhỉ?"
+  },
+  {
+    "topic": "To-be verb",
+    "level": "A1",
+    "student_input": "Are you 10 years old? Yes, I am",
+    "correct_answer": "Are you 10 years old? Yes, I am",
+    "explanation": "Tuyệt vời! Em đã dùng đúng to-be cho cả câu hỏi 'Are you' và câu trả lời 'I am'. Chúc mừng em!"
+  }
+]

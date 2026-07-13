@@ -1,0 +1,231 @@
+PRESENT SIMPLE VS PRESENT CONTINUOUS
+
+CHAPTER 1: PRESENT SIMPLE TENSE
+
+1.1 Form and Structure
+
+The Present Simple tense is one of the most fundamental tenses in English. It follows a straightforward structure:
+
+Affirmative: Subject + base verb (+ s/es for third person singular)
+- I/You/We/They work every day.
+- He/She/It works every day.
+
+Negative: Subject + do/does + not + base verb
+- I do not (don't) like coffee.
+- She does not (doesn't) like coffee.
+
+Question: Do/Does + subject + base verb?
+- Do you speak English?
+- Does he speak English?
+
+Important spelling rules for third person singular (he/she/it):
+- Most verbs: add -s (work → works, play → plays, read → reads)
+- Verbs ending in -s, -sh, -ch, -x, -z, -o: add -es (watch → watches, go → goes, wash → washes)
+- Verbs ending in consonant + y: change y to i and add -es (study → studies, carry → carries)
+- Irregular: have → has
+
+1.2 Usage
+
+The Present Simple is used in the following situations:
+
+a) Habits and routines:
+- I wake up at 7 o'clock every morning.
+- She drinks coffee before work.
+- They go to the gym three times a week.
+
+b) General truths and facts:
+- Water boils at 100 degrees Celsius.
+- The Earth revolves around the Sun.
+- Cats are mammals.
+
+c) Permanent situations:
+- He lives in London.
+- I work at a bank.
+- She speaks three languages.
+
+d) Scheduled events and timetables:
+- The train departs at 9:15 AM.
+- The movie starts at 8 PM tonight.
+- School begins on September 1st.
+
+e) Instructions and directions:
+- You turn left at the traffic light, then go straight.
+- First, you mix the flour and sugar together.
+
+1.3 Signal Words
+
+Common time expressions used with Present Simple: always, usually, often, sometimes, rarely, never, every day, every week, every month, every year, on Mondays, twice a week, once a month, in the morning, at night.
+
+
+CHAPTER 2: PRESENT CONTINUOUS TENSE
+
+2.1 Form and Structure
+
+The Present Continuous (also called Present Progressive) uses the following structure:
+
+Affirmative: Subject + am/is/are + verb-ing
+- I am working right now.
+- He/She/It is working right now.
+- You/We/They are working right now.
+
+Negative: Subject + am/is/are + not + verb-ing
+- I am not (I'm not) sleeping.
+- He is not (isn't) sleeping.
+- They are not (aren't) sleeping.
+
+Question: Am/Is/Are + subject + verb-ing?
+- Are you listening to me?
+- Is she coming to the party?
+
+Spelling rules for adding -ing:
+- Most verbs: add -ing (work → working, play → playing, read → reading)
+- Verbs ending in -e: drop -e and add -ing (make → making, write → writing, come → coming)
+- Short verbs ending in consonant-vowel-consonant: double the last consonant (run → running, sit → sitting, stop → stopping)
+- Verbs ending in -ie: change -ie to -y and add -ing (die → dying, lie → lying, tie → tying)
+
+2.2 Usage
+
+The Present Continuous is used in the following situations:
+
+a) Actions happening right now, at the moment of speaking:
+- I am reading a book right now.
+- She is talking on the phone at the moment.
+- Look! The children are playing in the garden.
+
+b) Temporary situations:
+- I am staying with my friend this week.
+- He is working at a café until he finds a better job.
+- We are living in a small apartment for now.
+
+c) Changing or developing situations:
+- The weather is getting colder.
+- Technology is changing rapidly.
+- My English is improving.
+
+d) Future arrangements (with a definite time or plan):
+- I am meeting John tomorrow at 3 PM.
+- We are flying to Paris next Monday.
+- She is starting a new job next week.
+
+e) Repeated annoying actions (with always):
+- He is always leaving his clothes on the floor!
+- She is always interrupting me when I speak!
+- You are always forgetting your keys!
+
+2.3 Signal Words
+
+Common time expressions used with Present Continuous: now, right now, at the moment, currently, at present, today, this week, this month, these days, tonight, Look!, Listen!
+
+
+CHAPTER 3: KEY DIFFERENCES
+
+Understanding when to use each tense is crucial for clear communication in English.
+
+3.1 Permanent vs Temporary
+
+Present Simple (permanent): I live in New York. (This is my home.)
+Present Continuous (temporary): I am living in New York this summer. (Only for a short time.)
+
+Present Simple (permanent): She works at a hospital. (Her regular job.)
+Present Continuous (temporary): She is working at a hospital this month. (Temporary assignment.)
+
+3.2 Habits vs Current Actions
+
+Present Simple (habit): I drink tea every morning. (Regular habit.)
+Present Continuous (now): I am drinking tea right now. (At this exact moment.)
+
+Present Simple (routine): He reads before bed. (Every night.)
+Present Continuous (now): He is reading a novel. (Currently, in progress.)
+
+3.3 Facts vs Changing Situations
+
+Present Simple (fact): The population of the world is about 8 billion.
+Present Continuous (change): The population of the world is increasing.
+
+3.4 Stative Verbs
+
+Some verbs are typically NOT used in the continuous form because they describe states, not actions. These are called stative verbs:
+
+Mental states: know, believe, understand, remember, forget, think (opinion), suppose, realize
+Emotions: love, hate, like, dislike, prefer, want, need, wish
+Senses: see, hear, smell, taste, feel (when describing a state)
+Possession: have (possession), own, belong, possess
+Other: be, seem, appear, contain, consist, cost, mean, matter
+
+Incorrect: I am knowing the answer.
+Correct: I know the answer.
+
+Incorrect: She is loving chocolate.
+Correct: She loves chocolate.
+
+Note: Some stative verbs can be used in continuous form when they describe an action, not a state:
+- I think you are right. (opinion — state)
+- I am thinking about my vacation. (mental activity — action)
+- He has a car. (possession — state)
+- He is having lunch. (eating — action)
+
+
+CHAPTER 4: COMMON MISTAKES
+
+Mistake 1: Using Present Continuous for habits
+Incorrect: I am going to school every day.
+Correct: I go to school every day.
+
+Mistake 2: Using Present Simple for current actions
+Incorrect: Look! She runs in the park.
+Correct: Look! She is running in the park.
+
+Mistake 3: Forgetting the -s for third person singular
+Incorrect: He work at a bank.
+Correct: He works at a bank.
+
+Mistake 4: Forgetting the auxiliary verb in Present Continuous
+Incorrect: She working right now.
+Correct: She is working right now.
+
+Mistake 5: Using continuous with stative verbs
+Incorrect: I am understanding the lesson now.
+Correct: I understand the lesson now.
+
+Mistake 6: Confusing permanent and temporary situations
+Incorrect: I live in a hotel this week. (sounds permanent)
+Correct: I am living in a hotel this week. (temporary)
+
+Mistake 7: Wrong negative form
+Incorrect: He doesn't works here.
+Correct: He doesn't work here.
+
+
+CHAPTER 5: PRACTICE SENTENCES
+
+Fill in the blank with the correct form (Present Simple or Present Continuous):
+
+1. She usually _____ (wake up) at 6 AM, but today she _____ (sleep) late.
+   Answer: wakes up / is sleeping
+
+2. Water _____ (freeze) at 0 degrees Celsius.
+   Answer: freezes
+
+3. Listen! Someone _____ (knock) on the door.
+   Answer: is knocking
+
+4. My father _____ (work) in an office. He _____ (not work) on weekends.
+   Answer: works / doesn't work
+
+5. Right now, we _____ (study) English grammar.
+   Answer: are studying
+
+6. The sun _____ (rise) in the east and _____ (set) in the west.
+   Answer: rises / sets
+
+7. Be quiet! The baby _____ (sleep).
+   Answer: is sleeping
+
+8. He _____ (always / complain) about the weather!
+   Answer: is always complaining
+
+9. I _____ (not understand) this question. Can you help me?
+   Answer: don't understand
+
+10. She _____ (fly) to Tokyo next Friday. Her tickets are already booked.
+    Answer: is flying

@@ -1,0 +1,709 @@
+[
+  {
+    "topic": "Present Continuous",
+    "level": "A1",
+    "student_input": "I eating an apple now",
+    "correct_answer": "I am eating an apple now",
+    "explanation": "Chào em, trong thì hiện tại tiếp diễn, động từ chính thêm '-ing' là đúng rồi, nhưng em hình như đang thiếu một trợ động từ 'to-be' đứng trước nó. Với chủ ngữ 'I', mình dùng 'am', 'is' hay 'are' nhỉ?"
+  },
+  {
+    "topic": "Present Continuous",
+    "level": "A1",
+    "student_input": "She is read a book",
+    "correct_answer": "She is reading a book",
+    "explanation": "Em đã có động từ to-be 'is' rồi, rất tốt! Tuy nhiên, để diễn tả một hành động đang xảy ra, động từ 'read' cần phải thêm đuôi gì ở phía sau em nhỉ?"
+  },
+  {
+    "topic": "Present Continuous",
+    "level": "A1",
+    "student_input": "They is playing soccer",
+    "correct_answer": "They are playing soccer",
+    "explanation": "Hãy nhìn vào chủ ngữ 'They'. Đây là chủ ngữ số nhiều, vậy chúng ta nên dùng 'is' hay 'are' cho đúng ngữ pháp?"
+  },
+  {
+    "topic": "Present Continuous",
+    "level": "A1",
+    "student_input": "You are study English?",
+    "correct_answer": "Are you studying English?",
+    "explanation": "Câu này của em có hai điểm cần lưu ý: Một là đây là câu hỏi nên động từ to-be phải đứng ở đâu? Hai là động từ 'study' cần thêm đuôi gì để thể hiện sự tiếp diễn?"
+  },
+  {
+    "topic": "Present Continuous",
+    "level": "A1",
+    "student_input": "He playing guitar",
+    "correct_answer": "He is playing guitar",
+    "explanation": "Em đã chia đuôi '-ing' cho động từ 'play' rồi. Nhưng em hãy nhớ công thức của thì hiện tại tiếp diễn: To-be + V-ing. Vậy với 'He', em thiếu từ to-be nào?"
+  },
+  {
+    "topic": "Present Continuous",
+    "level": "A1",
+    "student_input": "We is watching TV",
+    "correct_answer": "We are watching TV",
+    "explanation": "Hãy kiểm tra lại chủ ngữ 'We'. 'We' là số nhiều, vậy em hãy chọn lại giữa 'is' và 'are' xem từ nào phù hợp hơn nhé."
+  },
+  {
+    "topic": "Present Continuous",
+    "level": "A1",
+    "student_input": "I am play tennis",
+    "correct_answer": "I am playing tennis",
+    "explanation": "Em đã dùng 'am' chính xác cho chủ ngữ 'I'. Bây giờ, em hãy nhớ lại xem động từ 'play' cần thêm đuôi gì để tạo thành thì tiếp diễn nhỉ?"
+  },
+  {
+    "topic": "Present Continuous",
+    "level": "A1",
+    "student_input": "It are raining",
+    "correct_answer": "It is raining",
+    "explanation": "Hãy nhìn chủ ngữ 'It'. Đây là ngôi thứ 3 số ít, vậy mình dùng 'is' hay 'are' em nhỉ?"
+  },
+  {
+    "topic": "Present Continuous",
+    "level": "A1",
+    "student_input": "You is sleeping",
+    "correct_answer": "You are sleeping",
+    "explanation": "Em hãy xem lại động từ to-be đi với chủ ngữ 'You'. Mình dùng 'is' hay 'are' cho đúng?"
+  },
+  {
+    "topic": "Present Continuous",
+    "level": "A1",
+    "student_input": "She not is cooking",
+    "correct_answer": "She is not cooking",
+    "explanation": "Trong câu phủ định với động từ to-be, từ 'not' sẽ đứng trước hay đứng sau 'is' em nhỉ? Em hãy thử sắp xếp lại nhé."
+  },
+  {
+    "topic": "Present Continuous",
+    "level": "A1",
+    "student_input": "The cat is sleep",
+    "correct_answer": "The cat is sleeping",
+    "explanation": " 'The cat' đi với 'is' là chính xác rồi. Nhưng để nói chú mèo 'đang' ngủ, em cần thêm đuôi gì vào sau từ 'sleep'?"
+  },
+  {
+    "topic": "Present Continuous",
+    "level": "A1",
+    "student_input": "Are you listen to me?",
+    "correct_answer": "Are you listening to me?",
+    "explanation": "Câu hỏi bắt đầu bằng 'Are you' là rất tốt. Nhưng em hãy nhìn lại động từ 'listen', nó có thiếu đuôi đặc trưng của thì tiếp diễn không?"
+  },
+  {
+    "topic": "Present Continuous",
+    "level": "A1",
+    "student_input": "I not am working",
+    "correct_answer": "I am not working",
+    "explanation": "Hãy nhìn lại vị trí của 'not' và 'am'. Trong tiếng Anh, khi phủ định với to-be, mình nói 'am not' hay 'not am' em nhỉ?"
+  },
+  {
+    "topic": "Present Continuous",
+    "level": "A1",
+    "student_input": "My friends is dancing",
+    "correct_answer": "My friends are dancing",
+    "explanation": "Em hãy chú ý từ 'friends' có chữ 's' ở cuối, tức là số nhiều. Vậy động từ to-be 'is' đã chính xác chưa?"
+  },
+  {
+    "topic": "Present Continuous",
+    "level": "A1",
+    "student_input": "Is he play football?",
+    "correct_answer": "Is he playing football?",
+    "explanation": "Chào em, cấu trúc câu hỏi là Is/Are + S + V-ing. Em đã có 'Is he', vậy động từ 'play' cần thay đổi thế nào?"
+  },
+  {
+    "topic": "Present Continuous",
+    "level": "A1",
+    "student_input": "The dogs is barking",
+    "correct_answer": "The dogs are barking",
+    "explanation": " 'The dogs' là số nhiều, vậy em hãy chọn lại động từ to-be phù hợp giữa 'is' và 'are' nhé."
+  },
+  {
+    "topic": "Present Continuous",
+    "level": "A1",
+    "student_input": "We am learning English",
+    "correct_answer": "We are learning English",
+    "explanation": "Hãy kiểm tra lại chủ ngữ 'We'. 'Am' chỉ đi với 'I' thôi, vậy với 'We' mình phải dùng từ gì nhỉ?"
+  },
+  {
+    "topic": "Present Continuous",
+    "level": "A1",
+    "student_input": "She is makeing a cake",
+    "correct_answer": "She is making a cake",
+    "explanation": "Em chia '-ing' rất tốt! Nhưng hãy nhìn lại từ 'makeing'. Khi một động từ kết thúc bằng chữ 'e', mình có cần giữ lại chữ 'e' đó trước khi thêm '-ing' không em?"
+  },
+  {
+    "topic": "Present Continuous",
+    "level": "A1",
+    "student_input": "They playing games now",
+    "correct_answer": "They are playing games now",
+    "explanation": "Câu này đang thiếu một mảnh ghép quan trọng trước từ 'playing'. Với chủ ngữ 'They', em hãy thêm động từ to-be phù hợp vào nhé."
+  },
+  {
+    "topic": "Present Continuous",
+    "level": "A1",
+    "student_input": "Are she singing?",
+    "correct_answer": "Is she singing?",
+    "explanation": "Hãy nhìn chủ ngữ 'she'. Trong câu hỏi, mình dùng 'Are' hay 'Is' cho ngôi thứ 3 số ít em nhỉ?"
+  },
+  {
+    "topic": "Present Continuous",
+    "level": "A1",
+    "student_input": "I am runing in the park",
+    "correct_answer": "I am running in the park",
+    "explanation": "Em hãy nhìn kỹ từ 'runing'. Với những động từ ngắn có cấu trúc Phụ âm - Nguyên âm - Phụ âm như 'run', mình có cần gấp đôi phụ âm cuối trước khi thêm '-ing' không?"
+  },
+  {
+    "topic": "Present Continuous",
+    "level": "A1",
+    "student_input": "What you are doing?",
+    "correct_answer": "What are you doing?",
+    "explanation": "Trong câu hỏi, vị trí của 'are' và 'you' nên như thế nào nhỉ? Em hãy thử đảo vị trí của chúng xem sao."
+  },
+  {
+    "topic": "Present Continuous",
+    "level": "A1",
+    "student_input": "The baby is cry",
+    "correct_answer": "The baby is crying",
+    "explanation": "Em đã có 'is' rồi. Bây giờ hãy thêm đuôi cho động từ 'cry' để cho biết em bé 'đang' khóc nhé."
+  },
+  {
+    "topic": "Present Continuous",
+    "level": "A1",
+    "student_input": "You is not listening",
+    "correct_answer": "You are not listening",
+    "explanation": "Hãy xem lại động từ to-be đi với 'You'. Em dùng 'is' đã chính xác chưa?"
+  },
+  {
+    "topic": "Present Continuous",
+    "level": "A1",
+    "student_input": "He is swiming",
+    "correct_answer": "He is swimming",
+    "explanation": "Hãy nhìn lại từ 'swiming'. Tương tự như từ 'running', động từ 'swim' có cần gấp đôi chữ 'm' trước khi thêm '-ing' không em?"
+  },
+  {
+    "topic": "Present Continuous",
+    "level": "A1",
+    "student_input": "Is they talking?",
+    "correct_answer": "Are they talking?",
+    "explanation": "Hãy kiểm tra lại chủ ngữ 'they'. Đây là số nhiều, vậy mình bắt đầu câu hỏi bằng 'Is' hay 'Are'?"
+  },
+  {
+    "topic": "Present Continuous",
+    "level": "A1",
+    "student_input": "I am not read",
+    "correct_answer": "I am not reading",
+    "explanation": "Em đã làm đúng phần phủ định 'I am not'. Nhưng động từ 'read' ở cuối câu cần thêm đuôi gì để đúng cấu trúc thì tiếp diễn nhỉ?"
+  },
+  {
+    "topic": "Present Continuous",
+    "level": "A1",
+    "student_input": "She is danceing",
+    "correct_answer": "She is dancing",
+    "explanation": "Hãy nhìn từ 'danceing'. Khi động từ kết thúc bằng đuôi 'e', em nhớ mình phải làm gì với chữ 'e' đó trước khi thêm '-ing' không?"
+  },
+  {
+    "topic": "Present Continuous",
+    "level": "A1",
+    "student_input": "We is having lunch",
+    "correct_answer": "We are having lunch",
+    "explanation": "Hãy nhìn chủ ngữ 'We'. Em hãy chọn lại giữa 'is' và 'are' để phù hợp với số nhiều nhé."
+  },
+  {
+    "topic": "Present Continuous",
+    "level": "A1",
+    "student_input": "Who is sing?",
+    "correct_answer": "Who is singing?",
+    "explanation": "Câu hỏi 'Who is...' dùng để hỏi ai đang làm gì. Vậy động từ 'sing' cần thêm đuôi gì để hoàn thiện câu này?"
+  },
+  {
+    "topic": "Present Continuous",
+    "level": "A1",
+    "student_input": "I am liking this movie very much",
+    "correct_answer": "I like this movie very much",
+    "explanation": "Chào em, từ 'like' diễn tả một cảm xúc/trạng thái chứ không phải một hành động đang diễn ra. Em có nhớ những động từ chỉ cảm xúc như 'like', 'love', 'hate' có được dùng với đuôi '-ing' không nhỉ?"
+  },
+  {
+    "topic": "Present Continuous",
+    "level": "A1",
+    "student_input": "She is going to the gym every morning",
+    "correct_answer": "She goes to the gym every morning",
+    "explanation": "Em hãy nhìn cụm từ 'every morning' (mỗi buổi sáng). Đây là một thói quen lặp đi lặp lại hay là một hành động chỉ đang xảy ra ngay lúc này? Vì vậy, mình nên dùng thì hiện tại tiếp diễn hay hiện tại đơn em nhỉ?"
+  },
+  {
+    "topic": "Present Continuous",
+    "level": "A1",
+    "student_input": "My brother and I is studying together",
+    "correct_answer": "My brother and I are studying together",
+    "explanation": "Hãy nhìn vào chủ ngữ 'My brother and I'. Tổng cộng là hai người (chúng tôi - We). Vậy động từ to-be 'is' đã chính xác cho chủ ngữ số nhiều này chưa em?"
+  },
+  {
+    "topic": "Present Continuous",
+    "level": "A1",
+    "student_input": "I eat dinner right now",
+    "correct_answer": "I am eating dinner right now",
+    "explanation": "Em có thấy cụm từ 'right now' không? Nó cho biết hành động này đang diễn ra ngay lúc này. Vậy em cần thêm 'to-be' và đuôi gì vào động từ 'eat' để thể hiện sự tiếp diễn nhỉ?"
+  },
+  {
+    "topic": "Present Continuous",
+    "level": "A1",
+    "student_input": "Are you want some water?",
+    "correct_answer": "Do you want some water?",
+    "explanation": "Từ 'want' (muốn) là một động từ chỉ trạng thái/mong muốn, không phải hành động. Em hãy nhớ lại xem với những động từ này, mình dùng 'Are you...-ing' hay dùng trợ động từ 'Do you...?'"
+  },
+  {
+    "topic": "Present Continuous",
+    "level": "A1",
+    "student_input": "They are play soccer at the moment",
+    "correct_answer": "They are playing soccer at the moment",
+    "explanation": "Cụm từ 'at the moment' là dấu hiệu của thì hiện tại tiếp diễn. Em đã có 'are' rồi, nhưng động từ 'play' còn thiếu điều gì để hoàn tất công thức V-ing nhỉ?"
+  },
+  {
+    "topic": "Present Continuous",
+    "level": "A1",
+    "student_input": "I am not know where he is",
+    "correct_answer": "I don't know where he is",
+    "explanation": "Chào em, động từ 'know' (biết) là một động từ trạng thái. Những động từ như 'know', 'understand', 'believe' có bao giờ được chia ở dạng '-ing' không em nhỉ?"
+  },
+  {
+    "topic": "Present Continuous",
+    "level": "A1",
+    "student_input": "What is you doing now?",
+    "correct_answer": "What are you doing now?",
+    "explanation": "Hãy kiểm tra lại động từ to-be đi với chủ ngữ 'you'. Mình dùng 'is' hay 'are' cho đúng em nhỉ?"
+  },
+  {
+    "topic": "Present Continuous",
+    "level": "A1",
+    "student_input": "The students is listening to the teacher",
+    "correct_answer": "The students are listening to the teacher",
+    "explanation": "Em hãy nhìn từ 'students' (số nhiều). Vậy động từ to-be 'is' có phù hợp không, hay mình nên dùng 'are'?"
+  },
+  {
+    "topic": "Present Continuous",
+    "level": "A1",
+    "student_input": "She am wearing a red dress",
+    "correct_answer": "She is wearing a red dress",
+    "explanation": "Hãy xem lại chủ ngữ 'She'. 'Am' chỉ đi với 'I' thôi, vậy với 'She' mình phải dùng từ to-be nào?"
+  },
+  {
+    "topic": "Present Continuous",
+    "level": "A1",
+    "student_input": "I am wanting a new phone",
+    "correct_answer": "I want a new phone",
+    "explanation": "Tương tự như từ 'like', từ 'want' diễn tả một mong muốn (trạng thái). Em hãy thử suy nghĩ xem mình có nên dùng đuôi '-ing' cho những động từ chỉ mong muốn không?"
+  },
+  {
+    "topic": "Present Continuous",
+    "level": "A1",
+    "student_input": "Is your father work now?",
+    "correct_answer": "Is your father working now?",
+    "explanation": "Câu hỏi bắt đầu bằng 'Is your father' là đúng rồi. Nhưng để nói ông ấy 'đang' làm việc, động từ 'work' cần thêm đuôi gì nhỉ?"
+  },
+  {
+    "topic": "Present Continuous",
+    "level": "A1",
+    "student_input": "We are not play today",
+    "correct_answer": "We are not playing today",
+    "explanation": "Em đã làm đúng phần phủ định 'are not'. Nhưng để đúng cấu trúc thì tiếp diễn, động từ 'play' ở cuối câu không thể đứng một mình. Em cần thêm gì vào sau nó?"
+  },
+  {
+    "topic": "Present Continuous",
+    "level": "A1",
+    "student_input": "The birds is flying in the sky",
+    "correct_answer": "The birds are flying in the sky",
+    "explanation": "Hãy nhìn chủ ngữ 'The birds' (những con chim - số nhiều). Vậy mình dùng 'is' hay 'are' cho chính xác?"
+  },
+  {
+    "topic": "Present Continuous",
+    "level": "A1",
+    "student_input": "You are make a mistake",
+    "correct_answer": "You are making a mistake",
+    "explanation": "Em đã dùng 'are' chính xác. Nhưng hãy nhìn lại động từ 'make'. Em nhớ quy tắc khi thêm '-ing' vào động từ kết thúc bằng chữ 'e' không?"
+  },
+  {
+    "topic": "Present Continuous",
+    "level": "A1",
+    "student_input": "I am have lunch right now",
+    "correct_answer": "I am having lunch right now",
+    "explanation": "Em đã có 'am' và 'right now'. Bây giờ hãy chia động từ 'have' sang dạng tiếp diễn nhé. Em nhớ lưu ý bỏ chữ 'e' trước khi thêm '-ing' không?"
+  },
+  {
+    "topic": "Present Continuous",
+    "level": "A1",
+    "student_input": "Where is they going?",
+    "correct_answer": "Where are they going?",
+    "explanation": "Hãy nhìn chủ ngữ 'they' (số nhiều). Trợ động từ 'is' ở đây đã phù hợp chưa, hay mình cần dùng 'are'?"
+  },
+  {
+    "topic": "Present Continuous",
+    "level": "A1",
+    "student_input": "She is cook dinner every day",
+    "correct_answer": "She cooks dinner every day",
+    "explanation": "Chào em, hãy nhìn cụm từ 'every day'. Đây là một thói quen hằng ngày. Vậy mình nên dùng thì tiếp diễn 'is cooking' hay thì hiện tại đơn 'cooks' cho đúng ngữ cảnh này?"
+  },
+  {
+    "topic": "Present Continuous",
+    "level": "A1",
+    "student_input": "They are not study at the moment",
+    "correct_answer": "They are not studying at the moment",
+    "explanation": "Em đã dùng 'are not' rất tốt. Tuy nhiên, với dấu hiệu 'at the moment', động từ 'study' cần phải thêm đuôi gì để thể hiện hành động đang xảy ra?"
+  },
+  {
+    "topic": "Present Continuous",
+    "level": "A1",
+    "student_input": "Is the dog barking?",
+    "correct_answer": "Is the dog barking?",
+    "explanation": "Câu này hoàn toàn chính xác! Em đã dùng đúng to-be 'Is' cho chủ ngữ số ít và thêm '-ing' cho động từ. Rất tốt!"
+  },
+  {
+    "topic": "Present Continuous",
+    "level": "A1",
+    "student_input": "I am listen to music now",
+    "correct_answer": "I am listening to music now",
+    "explanation": "Em đã có 'am' và 'now'. Động từ 'listen' đang bị thiếu đuôi đặc trưng của thì tiếp diễn rồi. Em hãy thêm nó vào nhé."
+  },
+  {
+    "topic": "Present Continuous",
+    "level": "A1",
+    "student_input": "Who are you calling?",
+    "correct_answer": "Who are you calling?",
+    "explanation": "Tuyệt vời! Câu hỏi này hoàn toàn chính xác về cả cấu trúc và cách dùng to-be. Chúc mừng em!"
+  },
+  {
+    "topic": "Present Continuous",
+    "level": "A1",
+    "student_input": "My mom is make a cake now",
+    "correct_answer": "My mom is making a cake now",
+    "explanation": "Chào em, em đã có 'is' và 'now'. Hãy nhìn lại động từ 'make'. Em nhớ quy tắc bỏ chữ 'e' rồi mới thêm '-ing' không?"
+  },
+  {
+    "topic": "Present Continuous",
+    "level": "A1",
+    "student_input": "We am having a party",
+    "correct_answer": "We are having a party",
+    "explanation": "Hãy kiểm tra lại động từ to-be đi với chủ ngữ 'We'. Mình dùng 'am', 'is' hay 'are' cho số nhiều nhỉ?"
+  },
+  {
+    "topic": "Present Continuous",
+    "level": "A1",
+    "student_input": "He is not sleep now",
+    "correct_answer": "He is not sleeping now",
+    "explanation": "Em đã làm đúng phần phủ định 'is not'. Nhưng động từ 'sleep' cần thêm đuôi gì để đúng cấu trúc 'đang không làm gì đó' nhỉ?"
+  },
+  {
+    "topic": "Present Continuous",
+    "level": "A1",
+    "student_input": "Are she talking on the phone?",
+    "correct_answer": "Is she talking on the phone?",
+    "explanation": "Hãy nhìn chủ ngữ 'she'. Trong câu hỏi, mình bắt đầu bằng 'Are' hay 'Is' cho ngôi thứ 3 số ít em nhỉ?"
+  },
+  {
+    "topic": "Present Continuous",
+    "level": "A1",
+    "student_input": "I am read a comic book",
+    "correct_answer": "I am reading a comic book",
+    "explanation": "Em đã dùng 'am' chính xác. Bây giờ em hãy thêm đuôi cho động từ 'read' để cho biết em 'đang' đọc truyện nhé."
+  },
+  {
+    "topic": "Present Continuous",
+    "level": "A1",
+    "student_input": "The rain is stop",
+    "correct_answer": "The rain is stopping",
+    "explanation": "Để nói cơn mưa 'đang' tạnh, động từ 'stop' cần thêm đuôi '-ing'. Nhưng em hãy nhớ lại xem, với từ 'stop', mình có cần gấp đôi phụ âm 'p' trước khi thêm '-ing' không?"
+  },
+  {
+    "topic": "Present Continuous",
+    "level": "A1",
+    "student_input": "You are not listen to me",
+    "correct_answer": "You are not listening to me",
+    "explanation": "Em đã dùng 'are not' đúng rồi. Tuy nhiên, động từ 'listen' đang thiếu đuôi '-ing' để tạo thành thì tiếp diễn. Em hãy bổ sung nhé."
+  },
+  {
+    "topic": "Present Continuous",
+    "level": "A1",
+    "student_input": "I am think about you",
+    "correct_answer": "I am thinking about you",
+    "explanation": "Em đã dùng 'am' chính xác. Bây giờ em hãy thêm đuôi '-ing' vào sau động từ 'think' để câu hoàn chỉnh nhé."
+  },
+  {
+    "topic": "Present Continuous",
+    "level": "A1",
+    "student_input": "What you are eating for lunch?",
+    "correct_answer": "What are you eating for lunch?",
+    "explanation": "Chào em, đây là một câu hỏi Wh-. Em hãy nhớ lại quy tắc: trong câu hỏi, động từ to-be 'are' nên đứng trước hay đứng sau chủ ngữ 'you' nhỉ?"
+  },
+  {
+    "topic": "Present Continuous",
+    "level": "A1",
+    "student_input": "He is lieing on the sofa",
+    "correct_answer": "He is lying on the sofa",
+    "explanation": "Em chia '-ing' cho động từ 'lie' rồi, nhưng có một quy tắc chính tả đặc biệt: khi động từ kết thúc bằng 'ie', mình phải đổi 'ie' thành chữ cái gì trước khi thêm '-ing' em nhỉ?"
+  },
+  {
+    "topic": "Present Continuous",
+    "level": "A1",
+    "student_input": "The children is playing in the garden",
+    "correct_answer": "The children are playing in the garden",
+    "explanation": "Hãy nhìn vào chủ ngữ 'The children'. Đây là dạng số nhiều của 'child', vậy mình nên dùng 'is' hay 'are' cho phù hợp?"
+  },
+  {
+    "topic": "Present Continuous",
+    "level": "A1",
+    "student_input": "Nam playing football now",
+    "correct_answer": "Nam is playing football now",
+    "explanation": "Chào em, câu này có dấu hiệu 'now' nên dùng thì tiếp diễn là đúng rồi. Nhưng em hình như đang thiếu động từ to-be đi kèm với 'Nam'. Nam là số ít, vậy mình dùng 'am', 'is' hay 'are'?"
+  },
+  {
+    "topic": "Present Continuous",
+    "level": "A1",
+    "student_input": "I am studying and my sister is play",
+    "correct_answer": "I am studying and my sister is playing",
+    "explanation": "Vế đầu 'I am studying' em làm rất tốt! Nhưng hãy nhìn vế thứ hai 'my sister is play', động từ 'play' có thiếu đuôi đặc trưng của thì tiếp diễn không em?"
+  },
+  {
+    "topic": "Present Continuous",
+    "level": "A1",
+    "student_input": "She is tieing her shoes",
+    "correct_answer": "She is tying her shoes",
+    "explanation": "Tương tự như từ 'lie', động từ 'tie' kết thúc bằng 'ie'. Em nhớ mình phải chuyển 'ie' thành chữ gì trước khi thêm '-ing' không?"
+  },
+  {
+    "topic": "Present Continuous",
+    "level": "A1",
+    "student_input": "I am believing you",
+    "correct_answer": "I believe you",
+    "explanation": "Chào em, 'believe' (tin tưởng) là một động từ chỉ trạng thái/niềm tin. Những động từ như thế này có thường được dùng với đuôi '-ing' để diễn tả hành động đang xảy ra không nhỉ?"
+  },
+  {
+    "topic": "Present Continuous",
+    "level": "A1",
+    "student_input": "They are hate this song",
+    "correct_answer": "They hate this song",
+    "explanation": "Từ 'hate' (ghét) diễn tả một cảm xúc. Em hãy nhớ lại xem các động từ chỉ cảm xúc (like, love, hate) có chia ở thì tiếp diễn '-ing' không em?"
+  },
+  {
+    "topic": "Present Continuous",
+    "level": "A1",
+    "student_input": "Look! The bus come",
+    "correct_answer": "Look! The bus is coming",
+    "explanation": "Từ 'Look!' (Nhìn kìa!) báo hiệu một hành động đang xảy ra ngay lúc nói. Vậy mình nên dùng thì hiện tại đơn hay hiện tại tiếp diễn cho động từ 'come' nhỉ?"
+  },
+  {
+    "topic": "Present Continuous",
+    "level": "A1",
+    "student_input": "I am read a book right now",
+    "correct_answer": "I am reading a book right now",
+    "explanation": "Em đã có 'am' và 'right now' rất chính xác. Bây giờ em hãy chia động từ 'read' sang dạng tiếp diễn nhé."
+  },
+  {
+    "topic": "Present Continuous",
+    "level": "A1",
+    "student_input": "Where are the students go?",
+    "correct_answer": "Where are the students going?",
+    "explanation": "Câu hỏi này đã có 'are' và chủ ngữ 'the students'. Để hoàn thành cấu trúc thì tiếp diễn, động từ 'go' cần thêm đuôi gì em nhỉ?"
+  },
+  {
+    "topic": "Present Continuous",
+    "level": "A1",
+    "student_input": "Why is you crying?",
+    "correct_answer": "Why are you crying?",
+    "explanation": "Hãy kiểm tra lại động từ to-be đi với chủ ngữ 'you'. Mình dùng 'is' hay 'are' cho đúng em nhỉ?"
+  },
+  {
+    "topic": "Present Continuous",
+    "level": "A1",
+    "student_input": "My cat is sleep on the table",
+    "correct_answer": "My cat is sleeping on the table",
+    "explanation": " 'My cat is' là chính xác rồi. Nhưng để nói chú mèo 'đang' ngủ, động từ 'sleep' cần thêm gì ở phía sau?"
+  },
+  {
+    "topic": "Present Continuous",
+    "level": "A1",
+    "student_input": "We are not work today",
+    "correct_answer": "We are not working today",
+    "explanation": "Em dùng 'are not' cho số nhiều là đúng rồi. Tuy nhiên, động từ 'work' đang bị thiếu đuôi '-ing'. Em bổ sung vào nhé."
+  },
+  {
+    "topic": "Present Continuous",
+    "level": "A1",
+    "student_input": "Is the baby cry now?",
+    "correct_answer": "Is the baby crying now?",
+    "explanation": "Chào em, cấu trúc câu hỏi là Is/Are + S + V-ing. Em đã có 'Is the baby', vậy động từ 'cry' cần thay đổi thế nào?"
+  },
+  {
+    "topic": "Present Continuous",
+    "level": "A1",
+    "student_input": "I am not know the answer",
+    "correct_answer": "I don't know the answer",
+    "explanation": "Hãy nhớ lại: động từ 'know' (biết) là động từ trạng thái. Chúng ta dùng 'am not knowing' hay dùng 'don't know' cho đúng em nhỉ?"
+  },
+  {
+    "topic": "Present Continuous",
+    "level": "A1",
+    "student_input": "They is having dinner",
+    "correct_answer": "They are having dinner",
+    "explanation": "Hãy nhìn chủ ngữ 'They' (số nhiều). Động từ to-be 'is' đã chính xác chưa, hay mình cần dùng 'are'?"
+  },
+  {
+    "topic": "Present Continuous",
+    "level": "A1",
+    "student_input": "She is makeing a phone call",
+    "correct_answer": "She is making a phone call",
+    "explanation": "Em chia '-ing' rất tốt, nhưng hãy nhìn lại từ 'makeing'. Em nhớ quy tắc khi động từ kết thúc bằng 'e' thì mình làm gì trước khi thêm '-ing' không?"
+  },
+  {
+    "topic": "Present Continuous",
+    "level": "A1",
+    "student_input": "Are they watch TV?",
+    "correct_answer": "Are they watching TV?",
+    "explanation": "Câu hỏi bắt đầu bằng 'Are they' là đúng rồi. Nhưng động từ 'watch' đang thiếu đuôi đặc trưng của thì tiếp diễn. Em thêm vào nhé."
+  },
+  {
+    "topic": "Present Continuous",
+    "level": "A1",
+    "student_input": "I am runing to the bus stop",
+    "correct_answer": "I am running to the bus stop",
+    "explanation": "Hãy nhìn kỹ từ 'runing'. Với những động từ ngắn như 'run', mình có cần gấp đôi phụ âm cuối trước khi thêm '-ing' không em?"
+  },
+  {
+    "topic": "Present Continuous",
+    "level": "A1",
+    "student_input": "What is she cook?",
+    "correct_answer": "What is she cooking?",
+    "explanation": "Chào em, đây là câu hỏi về một hành động đang xảy ra. Em đã có 'is she', vậy động từ 'cook' cần thêm đuôi gì?"
+  },
+  {
+    "topic": "Present Continuous",
+    "level": "A1",
+    "student_input": "The birds is singing",
+    "correct_answer": "The birds are singing",
+    "explanation": "Hãy nhìn chủ ngữ 'The birds' (số nhiều). Vậy mình dùng 'is' hay 'are' cho chính xác?"
+  },
+  {
+    "topic": "Present Continuous",
+    "level": "A1",
+    "student_input": "You is not studying",
+    "correct_answer": "You are not studying",
+    "explanation": "Hãy kiểm tra lại động từ to-be đi với 'You'. Em dùng 'is' đã chính xác chưa?"
+  },
+  {
+    "topic": "Present Continuous",
+    "level": "A1",
+    "student_input": "Is he swiming in the pool?",
+    "correct_answer": "Is he swimming in the pool?",
+    "explanation": "Hãy nhìn lại từ 'swiming'. Tương tự như 'running', động từ 'swim' có cần gấp đôi phụ âm cuối trước khi thêm '-ing' không?"
+  },
+  {
+    "topic": "Present Continuous",
+    "level": "A1",
+    "student_input": "I am not read a book now",
+    "correct_answer": "I am not reading a book now",
+    "explanation": "Em đã làm đúng phần phủ định 'I am not'. Nhưng động từ 'read' ở cuối câu cần thêm đuôi gì để đúng cấu trúc thì tiếp diễn nhỉ?"
+  },
+  {
+    "topic": "Present Continuous",
+    "level": "A1",
+    "student_input": "She is danceing beautifully",
+    "correct_answer": "She is dancing beautifully",
+    "explanation": "Hãy nhìn từ 'danceing'. Khi động từ kết thúc bằng 'e', em nhớ mình phải làm gì với chữ 'e' đó trước khi thêm '-ing' không?"
+  },
+  {
+    "topic": "Present Continuous",
+    "level": "A1",
+    "student_input": "We is having a meeting",
+    "correct_answer": "We are having a meeting",
+    "explanation": "Hãy nhìn chủ ngữ 'We'. Em hãy chọn lại giữa 'is' và 'are' để phù hợp với số nhiều nhé."
+  },
+  {
+    "topic": "Present Continuous",
+    "level": "A1",
+    "student_input": "Who are singing?",
+    "correct_answer": "Who is singing?",
+    "explanation": "Khi hỏi 'Ai đang làm gì' với 'Who' đóng vai trò chủ ngữ số ít, mình thường dùng 'is' hay 'are' nhỉ?"
+  },
+  {
+    "topic": "Present Continuous",
+    "level": "A1",
+    "student_input": "I am not use the computer",
+    "correct_answer": "I am not using the computer",
+    "explanation": "Em đã dùng 'am not' đúng rồi. Tuy nhiên, động từ 'use' cần thêm đuôi '-ing' để tạo thành thì tiếp diễn. Em bổ sung nhé."
+  },
+  {
+    "topic": "Present Continuous",
+    "level": "A1",
+    "student_input": "The dog is bark loudly",
+    "correct_answer": "The dog is barking loudly",
+    "explanation": " 'The dog is' là chính xác. Nhưng để nói chú chó 'đang' sủa, động từ 'bark' cần thêm đuôi gì em nhỉ?"
+  },
+  {
+    "topic": "Present Continuous",
+    "level": "A1",
+    "student_input": "Are you listen to the radio?",
+    "correct_answer": "Are you listening to the radio?",
+    "explanation": "Câu hỏi bắt đầu bằng 'Are you' là rất tốt. Nhưng em hãy nhìn lại động từ 'listen', nó có thiếu đuôi đặc trưng của thì tiếp diễn không?"
+  },
+  {
+    "topic": "Present Continuous",
+    "level": "A1",
+    "student_input": "He is not work today",
+    "correct_answer": "He is not working today",
+    "explanation": "Em đã dùng 'is not' đúng cho số ít. Tuy nhiên, động từ 'work' cần thêm đuôi '-ing' để đúng cấu trúc 'đang không làm gì đó' nhỉ?"
+  },
+  {
+    "topic": "Present Continuous",
+    "level": "A1",
+    "student_input": "Is she play the piano?",
+    "correct_answer": "Is she playing the piano?",
+    "explanation": "Chào em, cấu trúc câu hỏi là Is/Are + S + V-ing. Em đã có 'Is she', vậy động từ 'play' cần thay đổi thế nào?"
+  },
+  {
+    "topic": "Present Continuous",
+    "level": "A1",
+    "student_input": "They are speak English now",
+    "correct_answer": "They are speaking English now",
+    "explanation": "Em đã có 'are' và 'now'. Bây giờ hãy chia động từ 'speak' sang dạng tiếp diễn nhé."
+  },
+  {
+    "topic": "Present Continuous",
+    "level": "A1",
+    "student_input": "I am not study now",
+    "correct_answer": "I am not studying now",
+    "explanation": "Em làm đúng phần phủ định 'I am not'. Nhưng động từ 'study' cần thêm đuôi gì để đúng cấu trúc thì tiếp diễn nhỉ?"
+  },
+  {
+    "topic": "Present Continuous",
+    "level": "A1",
+    "student_input": "Where are you go?",
+    "correct_answer": "Where are you going?",
+    "explanation": "Câu hỏi đã có 'are you'. Để hoàn thành cấu trúc 'đang đi đâu', động từ 'go' cần thêm đuôi gì em nhỉ?"
+  },
+  {
+    "topic": "Present Continuous",
+    "level": "A1",
+    "student_input": "The sun is shine",
+    "correct_answer": "The sun is shining",
+    "explanation": " 'The sun is' là chính xác. Bây giờ em hãy chia động từ 'shine' sang dạng tiếp diễn. Nhớ lưu ý chữ 'e' ở cuối nhé!"
+  },
+  {
+    "topic": "Present Continuous",
+    "level": "A1",
+    "student_input": "You is laughing",
+    "correct_answer": "You are laughing",
+    "explanation": "Hãy xem lại động từ to-be đi với 'You'. Mình dùng 'is' hay 'are' cho đúng?"
+  },
+  {
+    "topic": "Present Continuous",
+    "level": "A1",
+    "student_input": "Is the cat jump?",
+    "correct_answer": "Is the cat jumping?",
+    "explanation": "Câu hỏi bắt đầu bằng 'Is the cat' là đúng rồi. Nhưng để nói con mèo 'đang' nhảy, động từ 'jump' cần thêm đuôi gì?"
+  },
+  {
+    "topic": "Present Continuous",
+    "level": "A1",
+    "student_input": "I am not feeling well",
+    "correct_answer": "I am not feeling well",
+    "explanation": "Câu này hoàn toàn chính xác! Em đã dùng đúng 'am not' và thêm '-ing' cho động từ 'feel'. Rất tốt!"
+  },
+  {
+    "topic": "Present Continuous",
+    "level": "A1",
+    "student_input": "She is singing a song",
+    "correct_answer": "She is singing a song",
+    "explanation": "Tuyệt vời! Câu này hoàn toàn đúng cấu trúc thì hiện tại tiếp diễn. Chúc mừng em!"
+  }
+]

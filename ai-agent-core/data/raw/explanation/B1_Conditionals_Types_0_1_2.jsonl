@@ -1,0 +1,317 @@
+[
+  {
+    "topic": "Conditionals Type 0 & 1",
+    "level": "B1",
+    "student_input": "If it will rain tomorrow, I will stay at home.",
+    "correct_answer": "If it rains tomorrow, I will stay at home.",
+    "explanation": "Hãy nhìn vào mệnh đề chứa 'If'. Có một quy tắc rất quan trọng trong tiếng Anh: Chúng ta không dùng 'will' ngay sau 'If' để nói về tương lai. Thay vào đó, em nên dùng thì nào cho mệnh đề này nhỉ?"
+  },
+  {
+    "topic": "Conditionals Type 0 & 1",
+    "level": "B1",
+    "student_input": "If you heat ice, it will melt.",
+    "correct_answer": "If you heat ice, it melts.",
+    "explanation": "Câu của em không sai về ngữ pháp, nhưng hãy suy nghĩ: Việc 'băng tan khi bị đun nóng' là một tình huống có thể xảy ra hoặc là một sự thật hiển nhiên/quy luật khoa học? Với sự thật hiển nhiên (Type 0), chúng ta dùng 'will melt' hay chỉ cần hiện tại đơn 'melts'?"
+  },
+  {
+    "topic": "Conditionals Type 0 & 1",
+    "level": "B1",
+    "student_input": "If I study hard, I pass the exam next month.",
+    "correct_answer": "If I study hard, I will pass the exam next month.",
+    "explanation": "Hãy nhìn vào cụm 'next month' (tháng tới). Đây là một kết quả sẽ xảy ra trong tương lai nếu điều kiện 'học chăm' được đáp ứng. Vậy ở vế kết quả, em nên dùng hiện tại đơn hay dùng cấu trúc 'will + V'?"
+  },
+  {
+    "topic": "Conditionals Type 0 & 1",
+    "level": "B1",
+    "student_input": "If she doesn't hurry, she miss the bus.",
+    "correct_answer": "If she doesn't hurry, she will miss the bus.",
+    "explanation": "Hãy phân tích: Việc 'lỡ chuyến xe bus' là kết quả sẽ xảy ra trong tương lai nếu cô ấy không khẩn trương. Em hãy thêm trợ động từ nào vào trước 'miss' để biến nó thành một dự đoán cho tương lai?"
+  },
+  {
+    "topic": "Conditionals Type 0 & 1",
+    "level": "B1",
+    "student_input": "If you mix red and blue, you will get purple.",
+    "correct_answer": "If you mix red and blue, you get purple.",
+    "explanation": "Việc pha màu đỏ và xanh ra màu tím là một sự thật hiển nhiên, đúng trong mọi trường hợp. Với những quy luật như thế này (Type 0), em hãy thử bỏ 'will' và dùng hiện tại đơn cho vế kết quả xem câu có tự nhiên hơn không?"
+  },
+  {
+    "topic": "Conditionals Type 0 & 1",
+    "level": "B1",
+    "student_input": "If he will arrive late, the teacher will be angry.",
+    "correct_answer": "If he arrives late, the teacher will be angry.",
+    "explanation": "Lại là lỗi dùng 'will' sau 'If' rồi! Em hãy nhớ: Mệnh đề 'If' luôn dùng hiện tại đơn để chỉ tương lai. Em hãy sửa 'will arrive' thành dạng đúng của hiện tại đơn với chủ ngữ 'he' nhé."
+  },
+  {
+    "topic": "Conditionals Type 0 & 1",
+    "level": "B1",
+    "student_input": "If you touch fire, you get burned.",
+    "correct_answer": "If you touch fire, you get burned.",
+    "explanation": "Hoàn hảo! Em đã nhận diện đúng đây là sự thật hiển nhiên (Type 0) và dùng hiện tại đơn cho cả hai vế. Rất chính xác!"
+  },
+  {
+    "topic": "Conditionals Type 0 & 1",
+    "level": "B1",
+    "student_input": "I will be late if the traffic will be heavy.",
+    "correct_answer": "I will be late if the traffic is heavy.",
+    "explanation": "Hãy nhìn vào vế sau chữ 'if'. Tương tự như trước, chúng ta không dùng 'will' trong mệnh đề điều kiện. Em hãy chuyển 'will be' thành dạng hiện tại đơn của động từ to-be phù hợp với 'the traffic' nhé."
+  },
+  {
+    "topic": "Conditionals Type 0 & 1",
+    "level": "B1",
+    "student_input": "If my father has free time, he help me with my homework.",
+    "correct_answer": "If my father has free time, he will help me with my homework.",
+    "explanation": "Việc bố giúp em làm bài là một khả năng sẽ xảy ra trong tương lai nếu bố có thời gian. Em hãy thêm 'will' vào vế kết quả để câu đúng cấu trúc Type 1 nhé."
+  },
+  {
+    "topic": "Conditionals Type 0 & 1",
+    "level": "B1",
+    "student_input": "If you don't water plants, they die.",
+    "correct_answer": "If you don't water plants, they die.",
+    "explanation": "Chính xác! Đây là một quy luật sinh học (Sự thật hiển nhiên), nên dùng hiện tại đơn cho cả hai vế là hoàn toàn đúng. Rất tốt!"
+  },
+  {
+    "topic": "Conditionals Type 0 & 1",
+    "level": "B1",
+    "student_input": "If she study hard, she will pass the exam.",
+    "correct_answer": "If she studies hard, she will pass the exam.",
+    "explanation": "Vế kết quả 'will pass' của em rất chuẩn. Tuy nhiên, hãy nhìn lại động từ 'study' ở mệnh đề If. Với chủ ngữ 'she' ở hiện tại đơn, động từ này cần được chia như thế nào em nhỉ?"
+  },
+  {
+    "topic": "Conditionals Type 0 & 1",
+    "level": "B1",
+    "student_input": "If we will leave now, we will arrive on time.",
+    "correct_answer": "If we leave now, we will arrive on time.",
+    "explanation": "Một lần nữa, hãy nhớ quy tắc: Không dùng 'will' sau 'If'. Em hãy bỏ 'will' ở vế đầu và giữ nguyên động từ 'leave' nhé."
+  },
+  {
+    "topic": "Conditionals Type 0 & 1",
+    "level": "B1",
+    "student_input": "When you freeze water, it becomes ice.",
+    "correct_answer": "When you freeze water, it becomes ice.",
+    "explanation": "Hoàn hảo! Em đã biết dùng 'When' thay cho 'If' để nói về một sự thật hiển nhiên. Cả hai vế đều chia hiện tại đơn là rất chính xác."
+  },
+  {
+    "topic": "Conditionals Type 0 & 1",
+    "level": "B1",
+    "student_input": "If it rains, I stay at home.",
+    "correct_answer": "If it rains, I will stay at home.",
+    "explanation": "Hãy phân tích: 'Nếu trời mưa, tôi ở nhà'. Đây là một thói quen luôn luôn xảy ra (Type 0) hay là một dự định cho tình huống cụ thể sắp tới (Type 1)? Nếu là dự định tương lai, em nên thêm từ gì vào trước 'stay'?"
+  },
+  {
+    "topic": "Conditionals Type 0 & 1",
+    "level": "B1",
+    "student_input": "If you will not eat, you get hungry.",
+    "correct_answer": "If you don't eat, you get hungry.",
+    "explanation": "Câu này có hai điểm cần sửa: 1. Không dùng 'will' trong mệnh đề If $\rightarrow$ dùng 'don't eat'. 2. Việc 'đói khi không ăn' là sự thật hiển nhiên $\rightarrow$ dùng 'get hungry'. Em thử sửa lại cả hai vế nhé."
+  },
+  {
+    "topic": "Conditionals Type 2",
+    "level": "B1",
+    "student_input": "If I have a million dollars, I would buy a big house.",
+    "correct_answer": "If I had a million dollars, I would buy a big house.",
+    "explanation": "Hãy thành thật nhé: Hiện tại em có một triệu đô la không? Vì đây là một điều tưởng tượng, không có thật ở hiện tại, nên chúng ta cần 'lùi thì' ở mệnh đề If. Em hãy chuyển 'have' sang dạng quá khứ xem sao."
+  },
+  {
+    "topic": "Conditionals Type 2",
+    "level": "B1",
+    "student_input": "If I were you, I will study harder for the exam.",
+    "correct_answer": "If I were you, I would study harder for the exam.",
+    "explanation": "Em dùng 'If I were you' rất chuẩn để đưa ra lời khuyên! Tuy nhiên, vì em không thể thực sự trở thành người khác (điều không có thật), nên ở vế kết quả, chúng ta không dùng 'will' (chắc chắn). Em hãy thay 'will' bằng từ nào để thể hiện sự giả định nhỉ?"
+  },
+  {
+    "topic": "Conditionals Type 2",
+    "level": "B1",
+    "student_input": "If she lived in Paris, she will speak French every day.",
+    "correct_answer": "If she lived in Paris, she would speak French every day.",
+    "explanation": "Hãy nhìn vào 'lived'. Em đã lùi thì cho mệnh đề If $\rightarrow$ Rất tốt! Nhưng vế sau em dùng 'will' (dùng cho điều có thể xảy ra). Vì thực tế cô ấy không sống ở Paris, em hãy chuyển 'will' sang dạng quá khứ của nó để đồng nhất với sự giả định nhé."
+  },
+  {
+    "topic": "Conditionals Type 2",
+    "level": "B1",
+    "student_input": "If I can fly, I would travel around the world.",
+    "correct_answer": "If I could fly, I would travel around the world.",
+    "explanation": "Con người có thể bay được không em? Vì đây là điều không tưởng, em cần lùi thì của động từ 'can'. Em có nhớ dạng quá khứ của 'can' là gì không?"
+  },
+  {
+    "topic": "Conditionals Type 2",
+    "level": "B1",
+    "student_input": "If he studied more, he will pass the test.",
+    "correct_answer": "If he studied more, he would pass the test.",
+    "explanation": "Hãy phân tích: Việc 'studied more' cho thấy em đang giả định một thực tế khác (hiện tại anh ấy không học nhiều). Vậy vế kết quả 'will pass' nên được chuyển thành từ nào để phù hợp với một giả định không có thật?"
+  },
+  {
+    "topic": "Conditionals Type 2",
+    "level": "B1",
+    "student_input": "If I was a bird, I would fly to the ocean.",
+    "correct_answer": "If I were a bird, I would fly to the ocean.",
+    "explanation": "Về ngữ pháp giao tiếp, 'was' có thể chấp nhận được. Nhưng trong tiếng Anh chuẩn (formal), khi giả định một điều hoàn toàn không thể (như con người thành chim), chúng ta dùng 'were' cho tất cả các ngôi. Em hãy thử thay 'was' bằng 'were' xem câu có 'sang' hơn không?"
+  },
+  {
+    "topic": "Conditionals Type 2",
+    "level": "B1",
+    "student_input": "If they had more time, they will visit us.",
+    "correct_answer": "If they had more time, they would visit us.",
+    "explanation": "Hãy nhìn vào 'had'. Em đang giả định là họ không có nhiều thời gian. Vậy ở vế sau, em nên dùng 'will' (có khả năng xảy ra) hay 'would' (giả định)?"
+  },
+  {
+    "topic": "Conditionals Type 2",
+    "level": "B1",
+    "student_input": "I would be very happy if I win the lottery.",
+    "correct_answer": "I would be very happy if I won the lottery.",
+    "explanation": "Em dùng 'would be' ở vế kết quả là rất chuẩn cho một giấc mơ. Nhưng hãy nhìn mệnh đề If: 'win' đang ở hiện tại đơn. Để đúng cấu trúc Type 2, em hãy lùi 'win' về thì quá khứ nhé."
+  },
+  {
+    "topic": "Conditionals Type 2",
+    "level": "B1",
+    "student_input": "If we would live in a big city, we would go to the cinema often.",
+    "correct_answer": "If we lived in a big city, we would go to the cinema often.",
+    "explanation": "Có một lỗi rất phổ biến ở đây: Em đang dùng 'would' trong cả hai vế. Hãy nhớ quy tắc: 'Would' chỉ đứng ở vế kết quả, còn mệnh đề 'If' phải dùng thì quá khứ đơn. Em hãy bỏ 'would' ở vế đầu và chia lại động từ 'live' nhé."
+  },
+  {
+    "topic": "Conditionals Type 2",
+    "level": "B1",
+    "student_input": "If she were taller, she will be a model.",
+    "correct_answer": "If she were taller, she would be a model.",
+    "explanation": "Em dùng 'she were' cực kỳ chính xác cho câu giả định! Tuy nhiên, vế sau 'will be' lại là của Type 1. Em hãy chuyển 'will' thành 'would' để hoàn tất câu điều kiện loại 2 này nhé."
+  },
+  {
+    "topic": "Conditionals Type 2",
+    "level": "B1",
+    "student_input": "If I had a car, I would drive to work.",
+    "correct_answer": "If I had a car, I would drive to work.",
+    "explanation": "Hoàn hảo! Em đã vận dụng đúng: 'had' (giả định không có xe) và 'would drive' (kết quả tưởng tượng). Rất tốt!"
+  },
+  {
+    "topic": "Conditionals Type 2",
+    "level": "B1",
+    "student_input": "I would travel more if I don't have to work.",
+    "correct_answer": "I would travel more if I didn't have to work.",
+    "explanation": "Hãy nhìn vế 'I would travel' $\rightarrow$ đây là giả định. Vậy mệnh đề 'If' cũng phải lùi thì. Em hãy chuyển 'don't have' (hiện tại) sang dạng phủ định của thì quá khứ đơn nhé."
+  },
+  {
+    "topic": "Conditionals Type 2",
+    "level": "B1",
+    "student_input": "If he’s richer, he would buy a private jet.",
+    "correct_answer": "If he were richer, he would buy a private jet.",
+    "explanation": "Hãy chú ý 'he’s' (he is). Đây là hiện tại đơn, nhưng chúng ta đang giả định anh ấy không giàu. Em hãy lùi 'is' về quá khứ. Và đừng quên dùng 'were' để câu văn chuẩn chỉnh hơn nhé."
+  },
+  {
+    "topic": "Conditionals Type 2",
+    "level": "B1",
+    "student_input": "If I were you, I wouldn't buy that expensive phone.",
+    "correct_answer": "If I were you, I wouldn't buy that expensive phone.",
+    "explanation": "Tuyệt vời! Em đã dùng đúng 'were' cho lời khuyên và 'wouldn't' cho kết quả giả định. Rất chính xác!"
+  },
+  {
+    "topic": "Conditionals Type 2",
+    "level": "B1",
+    "student_input": "If we know the answer, we would tell you.",
+    "correct_answer": "If we knew the answer, we would tell you.",
+    "explanation": "Hãy phân tích: 'We would tell you' cho thấy hiện tại chúng ta không biết câu trả lời. Vậy động từ 'know' ở mệnh đề If cần được lùi về thì nào để thể hiện điều này?"
+  },
+  {
+    "topic": "Conditionals Mixed",
+    "level": "B1",
+    "student_input": "If it rains tomorrow, I would stay at home.",
+    "correct_answer": "If it rains tomorrow, I will stay at home.",
+    "explanation": "Hãy phân tích tình huống: 'Trời mưa vào ngày mai' là một điều hoàn toàn có thể xảy ra trong thực tế. Khi một điều kiện có khả năng thành hiện thực, chúng ta dùng 'would' (giả định) hay 'will' (thực tế) ở vế kết quả em nhỉ?"
+  },
+  {
+    "topic": "Conditionals Mixed",
+    "level": "B1",
+    "student_input": "If I could fly, I will travel around the world.",
+    "correct_answer": "If I could fly, I would travel around the world.",
+    "explanation": "Hãy tự hỏi bản thân: 'Liệu con người có thể bay được không?'. Vì đây là một điều không tưởng/giả định, em đã dùng 'could' (lùi thì) rất đúng. Vậy ở vế kết quả, em nên dùng 'will' (có thể xảy ra) hay 'would' (tưởng tượng) cho đồng nhất?"
+  },
+  {
+    "topic": "Conditionals Mixed",
+    "level": "B1",
+    "student_input": "If I have a billion dollars, I would quit my job immediately.",
+    "correct_answer": "If I had a billion dollars, I would quit my job immediately.",
+    "explanation": "Hiện tại em có một tỷ đô la không? Vì đây là một giấc mơ, không phải thực tế, nên mệnh đề 'If' cần được lùi thì. Em hãy chuyển 'have' sang dạng quá khứ xem sao."
+  },
+  {
+    "topic": "Conditionals Mixed",
+    "level": "B1",
+    "student_input": "If I am you, I will apologize to her.",
+    "correct_answer": "If I were you, I would apologize to her.",
+    "explanation": "Hãy suy nghĩ: Em có thể thực sự trở thành người khác được không? Vì đây là tình huống giả định hoàn toàn (không có thật), em nên lùi thì cho cả hai vế. Em hãy thử thay 'am' bằng 'were' và 'will' bằng 'would' nhé."
+  },
+  {
+    "topic": "Conditionals Mixed",
+    "level": "B1",
+    "student_input": "If she studies hard, she would pass the exam.",
+    "correct_answer": "If she studies hard, she will pass the exam.",
+    "explanation": "Việc 'học chăm' là một lựa chọn thực tế và có thể xảy ra. Khi điều kiện là thực tế, chúng ta dùng 'would' (giả định) hay 'will' (có khả năng) ở vế kết quả em nhỉ?"
+  },
+  {
+    "topic": "Conditionals Mixed",
+    "level": "B1",
+    "student_input": "If I am a cat, I will sleep all day.",
+    "correct_answer": "If I were a cat, I would sleep all day.",
+    "explanation": "Em có phải là một chú mèo không? Vì đây là một giả định trái ngược với thực tế hiện tại, em cần lùi thì cho cả hai vế. Em hãy thử dùng 'were' cho vế đầu và 'would' cho vế sau xem sao."
+  },
+  {
+    "topic": "Conditionals Mixed",
+    "level": "B1",
+    "student_input": "If I had more time, I will learn a new language.",
+    "correct_answer": "If I had more time, I would learn a new language.",
+    "explanation": "Em dùng 'had' cho thấy hiện tại em đang không có nhiều thời gian (giả định). Vậy vế kết quả 'will learn' (có khả năng) có phù hợp với một giả định không có thật không? Em hãy thử thay 'will' bằng 'would' nhé."
+  },
+  {
+    "topic": "Conditionals Mixed",
+    "level": "B1",
+    "student_input": "If he comes to the party, he would be very happy.",
+    "correct_answer": "If he comes to the party, he will be very happy.",
+    "explanation": "Việc 'anh ấy đến bữa tiệc' là một khả năng thực tế có thể xảy ra. Vì vậy, chúng ta nên dùng 'would' (giả định) hay 'will' (thực tế) cho vế kết quả?"
+  },
+  {
+    "topic": "Conditionals Mixed",
+    "level": "B1",
+    "student_input": "If I can speak every language in the world, I will be a great translator.",
+    "correct_answer": "If I could speak every language in the world, I would be a great translator.",
+    "explanation": "Hãy cân nhắc: 'Nói được tất cả ngôn ngữ trên thế giới' là điều khả thi hay là một điều không tưởng? Vì đây là giả định không có thật, em hãy lùi thì cho cả 'can' và 'will' nhé."
+  },
+  {
+    "topic": "Conditionals Mixed",
+    "level": "B1",
+    "student_input": "If I’ll work harder, I’ll get a promotion.",
+    "correct_answer": "If I work harder, I’ll get a promotion.",
+    "explanation": "Một lần nữa, hãy nhớ quy tắc 'vàng': Không bao giờ dùng 'will' ngay trong mệnh đề 'If'. Em hãy bỏ 'll' ở vế đầu và giữ nguyên động từ 'work' nhé."
+  },
+  {
+    "topic": "Conditionals Mixed",
+    "level": "B1",
+    "student_input": "I would be very surprised if he calls me tomorrow.",
+    "correct_answer": "I would be very surprised if he called me tomorrow.",
+    "explanation": "Em dùng 'would be' cho thấy em cảm thấy việc anh ấy gọi là rất ít khả năng xảy ra (giả định). Để đồng nhất, mệnh đề 'If' cũng phải được lùi thì. Em hãy chuyển 'calls' sang dạng quá khứ nhé."
+  },
+  {
+    "topic": "Conditionals Mixed",
+    "level": "B1",
+    "student_input": "If I won the lottery, I will buy a yacht.",
+    "correct_answer": "If I won the lottery, I would buy a yacht.",
+    "explanation": "Em dùng 'won' (quá khứ) $\rightarrow$ chứng tỏ em đang mơ về một điều không dễ xảy ra. Vậy ở vế kết quả, em dùng 'will' hay 'would' để phù hợp với một giấc mơ?"
+  },
+  {
+    "topic": "Conditionals Mixed",
+    "level": "B1",
+    "student_input": "If we go to the beach, we would have a picnic.",
+    "correct_answer": "If we go to the beach, we will have a picnic.",
+    "explanation": "Hãy xem xét: 'Đi ra biển' là một kế hoạch có thể thực hiện được. Khi điều kiện là thực tế, em hãy dùng 'will' thay cho 'would' nhé."
+  },
+  {
+    "topic": "Conditionals Mixed",
+    "level": "B1",
+    "student_input": "I will buy a new car if I were rich.",
+    "correct_answer": "I would buy a new car if I were rich.",
+    "explanation": "Em dùng 'were rich' $\rightarrow$ nghĩa là hiện tại em không giàu (giả định). Vậy vế kết quả 'I will buy' (có thể xảy ra) có khớp với giả định này không? Em hãy chuyển 'will' thành 'would' nhé."
+  },
+  {
+    "topic": "Conditionals Mixed",
+    "level": "B1",
+    "student_input": "If you don't hurry, you'll miss the train.",
+    "correct_answer": "If you don't hurry, you'll miss the train.",
+    "explanation": "Hoàn hảo! Em đã nhận diện đúng đây là tình huống thực tế (Type 1) và dùng đúng cấu trúc: Hiện tại đơn $\rightarrow$ Will + V. Rất chính xác!"
+  }
+]

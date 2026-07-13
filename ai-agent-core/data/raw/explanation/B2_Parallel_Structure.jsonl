@@ -1,0 +1,563 @@
+[
+  {
+    "topic": "Parallel Structure",
+    "level": "B2",
+    "student_input": "In my free time, I enjoy reading books, listening to music, and to go for a walk.",
+    "correct_answer": "In my free time, I enjoy reading books, listening to music, and going for a walk.",
+    "explanation": "Hãy nhìn vào danh sách các hoạt động bạn yêu thích: 'reading', 'listening' và 'to go'. Hai hoạt động đầu tiên đều ở dạng V-ing. Để câu văn có sự cân bằng và nhịp điệu (song hành), hoạt động cuối cùng nên được chuyển sang dạng nào cho đồng nhất?"
+  },
+  {
+    "topic": "Parallel Structure",
+    "level": "B2",
+    "student_input": "The new employee is professional, punctual, and has a great attitude.",
+    "correct_answer": "The new employee is professional, punctual, and positive in attitude.",
+    "explanation": "Bạn đang mô tả nhân viên mới bằng một danh sách các đặc điểm. 'Professional' và 'punctual' là các tính từ. Tuy nhiên, 'has a great attitude' lại là một cụm động từ. Để tạo sự song hành, bạn có thể tìm một tính từ nào đó để thay thế cho cụm 'has a great attitude' không?"
+  },
+  {
+    "topic": "Parallel Structure",
+    "level": "B2",
+    "student_input": "To succeed in this industry, you need to be hardworking, creative, and having strong networking skills.",
+    "correct_answer": "To succeed in this industry, you need to be hardworking, creative, and networked.",
+    "explanation": "Hãy phân tích cấu trúc sau 'need to be'. Bạn có hai tính từ là 'hardworking' và 'creative'. Nhưng sau đó bạn lại dùng 'having strong networking skills' (một cụm V-ing). Để câu văn mượt mà hơn, bạn nên chuyển cụm cuối cùng này thành một tính từ để khớp với hai từ trước đó. Bạn sẽ dùng từ nào?"
+  },
+  {
+    "topic": "Parallel Structure",
+    "level": "B2",
+    "student_input": "The job involves preparing reports, attending meetings, and to coordinate with other departments.",
+    "correct_answer": "The job involves preparing reports, attending meetings, and coordinating with other departments.",
+    "explanation": "Hãy nhìn vào các nhiệm vụ trong công việc: 'preparing', 'attending'. Cả hai đều là danh động từ (gerund). Vậy hành động cuối cùng 'to coordinate' có đang đi đúng 'nhịp' với hai hành động trước không? Bạn nên điều chỉnh nó như thế nào?"
+  },
+  {
+    "topic": "Parallel Structure",
+    "level": "B2",
+    "student_input": "She is not only a talented singer but also writes beautiful lyrics.",
+    "correct_answer": "She is not only a talented singer but also a talented songwriter.",
+    "explanation": "Hãy xem xét cấu trúc 'not only... but also'. Sau 'not only' là một cụm danh từ ('a talented singer'). Nhưng sau 'but also' lại là một mệnh đề ('writes beautiful lyrics'). Để tạo sự song hành, bạn nên biến vế thứ hai thành một cụm danh từ để tương xứng với vế thứ nhất. Bạn sẽ viết lại như thế nào?"
+  },
+  {
+    "topic": "Parallel Structure",
+    "level": "B2",
+    "student_input": "The course provides students with the opportunity to improve their speaking, their listening, and how they write.",
+    "correct_answer": "The course provides students with the opportunity to improve their speaking, their listening, and their writing.",
+    "explanation": "Bạn đang liệt kê ba kỹ năng: 'their speaking' (danh từ), 'their listening' (danh từ) và 'how they write' (mệnh đề). Để câu văn cân đối, bạn nên chuyển 'how they write' về dạng danh từ tương ứng với hai kỹ năng trước. Đó là từ gì?"
+  },
+  {
+    "topic": "Parallel Structure",
+    "level": "B2",
+    "student_input": "The ideal candidate should be experienced, flexible, and possess strong leadership skills.",
+    "correct_answer": "The ideal candidate should be experienced, flexible, and possess strong leadership skills.",
+    "explanation": "Câu này có một sự mất cân đối nhẹ. 'Experienced' và 'flexible' là tính từ đi sau 'be'. Nhưng 'possess' lại là một động từ. Để tạo cấu trúc song hành tuyệt đối, bạn có thể chuyển 'possess strong leadership skills' thành một tính từ (ví dụ: 'authoritative' hoặc 'leadership-oriented') hoặc cấu trúc lại câu. Bạn thử xem phương án nào tự nhiên hơn?"
+  },
+  {
+    "topic": "Parallel Structure",
+    "level": "B2",
+    "student_input": "I prefer exercising in the morning rather than to sleep in.",
+    "correct_answer": "I prefer exercising in the morning rather than sleeping in.",
+    "explanation": "Khi bạn so sánh hai sở thích bằng 'rather than', hai vế phải có cùng hình thái. Bạn đang dùng 'exercising' (V-ing) ở vế đầu. Vậy vế sau 'to sleep in' có song hành với vế đầu không? Bạn nên sửa nó như thế nào?"
+  },
+  {
+    "topic": "Parallel Structure",
+    "level": "B2",
+    "student_input": "The seminar was informative, engaging, and it was well-organized.",
+    "correct_answer": "The seminar was informative, engaging, and well-organized.",
+    "explanation": "Hãy nhìn vào ba đặc điểm của buổi hội thảo: 'informative' (tính từ), 'engaging' (tính từ) và 'it was well-organized' (một mệnh đề). Bạn có thể lược bỏ thành phần nào trong cụm cuối cùng để nó trở thành một tính từ đơn thuần và khớp với hai từ trước không?"
+  },
+  {
+    "topic": "Parallel Structure",
+    "level": "B2",
+    "student_input": "He spent his vacation visiting museums, exploring the city, and he went shopping.",
+    "correct_answer": "He spent his vacation visiting museums, exploring the city, and shopping.",
+    "explanation": "Hãy theo dõi chuỗi hành động: 'visiting', 'exploring'. Cả hai đều là V-ing. Nhưng hành động cuối 'he went shopping' lại là một mệnh đề quá khứ đơn. Để duy trì sự song hành, bạn nên chuyển 'he went shopping' về dạng nào?"
+  },
+  {
+    "topic": "Parallel Structure",
+    "level": "B2",
+    "student_input": "The project requires a high level of patience, dedication, and being organized.",
+    "correct_answer": "The project requires a high level of patience, dedication, and organization.",
+    "explanation": "Bạn đang liệt kê ba phẩm chất: 'patience' (danh từ), 'dedication' (danh từ) và 'being organized' (cụm V-ing). Để câu văn cân xứng, bạn hãy tìm một danh từ tương ứng với 'being organized'. Từ đó là gì?"
+  },
+  {
+    "topic": "Parallel Structure",
+    "level": "B2",
+    "student_input": "The company aims to increase sales, to expand the market, and improving customer service.",
+    "correct_answer": "The company aims to increase sales, to expand the market, and to improve customer service.",
+    "explanation": "Hãy nhìn vào các mục tiêu của công ty: 'to increase', 'to expand'. Cả hai đều là To-V. Vậy 'improving' ở cuối câu có đang đi đúng cấu trúc song hành không? Bạn nên sửa nó thành dạng nào?"
+  },
+  {
+    "topic": "Parallel Structure",
+    "level": "B2",
+    "student_input": "The hotel was praised for its cleanliness, its luxury, and that the staff were friendly.",
+    "correct_answer": "The hotel was praised for its cleanliness, its luxury, and the friendliness of its staff.",
+    "explanation": "Hãy đối chiếu: 'its cleanliness' (cụm danh từ), 'its luxury' (cụm danh từ). Nhưng vế cuối 'that the staff were friendly' lại là một mệnh đề. Bạn hãy thử biến mệnh đề này thành một cụm danh từ (ví dụ: sự thân thiện của nhân viên) để khớp với hai vế trước xem sao."
+  },
+  {
+    "topic": "Parallel Structure",
+    "level": "B2",
+    "student_input": "I would rather stay at home and read a book than going to the party.",
+    "correct_answer": "I would rather stay at home and read a book than go to the party.",
+    "explanation": "Trong cấu trúc 'would rather... than...', hai hành động được so sánh phải có cùng dạng. Bạn đang dùng 'stay' và 'read' (V-bare). Vậy 'going' ở vế sau có song hành không? Bạn nên chuyển nó về dạng nào?"
+  },
+  {
+    "topic": "Parallel Structure",
+    "level": "B2",
+    "student_input": "The new app is fast, intuitive, and it has a sleek design.",
+    "correct_answer": "The new app is fast, intuitive, and sleekly designed.",
+    "explanation": "Hãy phân tích: 'fast' (tính từ), 'intuitive' (tính từ). Nhưng 'it has a sleek design' là một mệnh đề. Để tạo sự song hành, bạn hãy thử biến cụm 'sleek design' thành một tính từ hoặc cụm tính từ để khớp với hai từ đầu tiên."
+  },
+  {
+    "topic": "Parallel Structure",
+    "level": "B2",
+    "student_input": "She loves traveling to new places, cooking exotic dishes, and to swim in the ocean.",
+    "correct_answer": "She loves traveling to new places, cooking exotic dishes, and swimming in the ocean.",
+    "explanation": "Hãy nhìn vào chuỗi sở thích: 'traveling', 'cooking'. Cả hai đều là danh động từ (V-ing). Để câu văn có sự cân đối và mượt mà, hành động cuối cùng 'to swim' nên được chuyển sang dạng nào cho đồng nhất?"
+  },
+  {
+    "topic": "Parallel Structure",
+    "level": "B2",
+    "student_input": "The manager is looking for someone who is efficient, reliable, and has experience in the field.",
+    "correct_answer": "The manager is looking for someone who is efficient, reliable, and experienced in the field.",
+    "explanation": "Bạn đang dùng một danh sách tính từ để mô tả ứng viên: 'efficient' và 'reliable'. Tuy nhiên, 'has experience' lại là một cụm động từ. Để tạo sự song hành, bạn có thể tìm một tính từ nào đó để thay thế cho cụm 'has experience' không?"
+  },
+  {
+    "topic": "Parallel Structure",
+    "level": "B2",
+    "student_input": "My goals for the upcoming year are to save money, buy a new house, and getting a promotion.",
+    "correct_answer": "My goals for the upcoming year are to save money, buy a new house, and get a promotion.",
+    "explanation": "Hãy phân tích các mục tiêu: 'to save' và 'buy' (cùng dạng nguyên mẫu). Nhưng mục tiêu cuối cùng lại là 'getting' (V-ing). Để duy trì sự song hành, bạn nên điều chỉnh 'getting' về dạng nào cho khớp với hai mục tiêu trước?"
+  },
+  {
+    "topic": "Parallel Structure",
+    "level": "B2",
+    "student_input": "He is a man of integrity, courage, and he is very honest.",
+    "correct_answer": "He is a man of integrity, courage, and honesty.",
+    "explanation": "Bạn đang liệt kê các phẩm chất của một con người: 'integrity' (danh từ), 'courage' (danh từ). Nhưng vế cuối 'he is very honest' lại là một mệnh đề. Để câu văn cân xứng, bạn hãy chuyển 'honest' thành một danh từ tương ứng."
+  },
+  {
+    "topic": "Parallel Structure",
+    "level": "B2",
+    "student_input": "I enjoy the sound of the ocean, the smell of the salt, and feeling the sand between my toes.",
+    "correct_answer": "I enjoy the sound of the ocean, the smell of the salt, and the feel of the sand between my toes.",
+    "explanation": "Hãy đối chiếu ba điều bạn tận hưởng: 'the sound' (cụm danh từ), 'the smell' (cụm danh từ). Còn 'feeling the sand' lại là một cụm V-ing. Bạn hãy thử biến 'feeling' thành một danh từ để tạo sự song hành tuyệt đối xem sao."
+  },
+  {
+    "topic": "Parallel Structure",
+    "level": "B2",
+    "student_input": "To be a successful CEO, one must be visionary, decisive, and should be able to communicate well.",
+    "correct_answer": "To be a successful CEO, one must be visionary, decisive, and communicative.",
+    "explanation": "Hãy nhìn vào chuỗi tính từ: 'visionary', 'decisive'. Cả hai đều đứng sau 'must be'. Nhưng vế sau 'should be able to communicate well' lại quá dài và làm gãy nhịp câu. Bạn có biết tính từ nào mang nghĩa 'có khả năng giao tiếp tốt' để thay thế cho cụm này không?"
+  },
+  {
+    "topic": "Parallel Structure",
+    "level": "B2",
+    "student_input": "The task involves analyzing data, drafting reports, and to present the findings to the board.",
+    "correct_answer": "The task involves analyzing data, drafting reports, and presenting the findings to the board.",
+    "explanation": "Hãy theo dõi các hoạt động: 'analyzing', 'drafting'. Cả hai đều là V-ing. Vậy 'to present' có đang đi đúng 'nhịp' với hai hành động trước không? Bạn nên sửa nó thành dạng nào?"
+  },
+  {
+    "topic": "Parallel Structure",
+    "level": "B2",
+    "student_input": "She spent the afternoon cleaning the house, doing the laundry, and she cooked dinner.",
+    "correct_answer": "She spent the afternoon cleaning the house, doing the laundry, and cooking dinner.",
+    "explanation": "Hãy nhìn vào các hành động trong buổi chiều: 'cleaning', 'doing'. Nhưng hành động cuối 'she cooked dinner' lại là một mệnh đề. Để duy trì sự song hành, bạn nên chuyển vế cuối về dạng V-ing."
+  },
+  {
+    "topic": "Parallel Structure",
+    "level": "B2",
+    "student_input": "The apartment is spacious, bright, and it has a great view.",
+    "correct_answer": "The apartment is spacious, bright, and scenic.",
+    "explanation": "Bạn đang dùng tính từ 'spacious' và 'bright'. Nhưng 'it has a great view' lại là một mệnh đề. Để tạo sự song hành, bạn hãy tìm một tính từ mô tả vẻ đẹp của khung cảnh (ví dụ: scenic hoặc panoramic) để thay thế cho cả cụm đó."
+  },
+  {
+    "topic": "Parallel Structure",
+    "level": "B2",
+    "student_input": "He is not only skilled in coding but also knows how to manage teams.",
+    "correct_answer": "He is not only skilled in coding but also skilled in team management.",
+    "explanation": "Hãy xem xét cấu trúc 'not only... but also'. Sau 'not only' là 'skilled in coding' (tính từ + cụm giới từ). Nhưng sau 'but also' lại là một mệnh đề 'knows how to...'. Bạn hãy thử biến vế thứ hai thành một cụm tương tự 'skilled in...' để tạo sự cân đối."
+  },
+  {
+    "topic": "Parallel Structure",
+    "level": "B2",
+    "student_input": "The program helps students improve their grammar, their vocabulary, and how they pronounce words.",
+    "correct_answer": "The program helps students improve their grammar, their vocabulary, and their pronunciation.",
+    "explanation": "Bạn đang liệt kê ba điều cần cải thiện: 'their grammar' (danh từ), 'their vocabulary' (danh từ). Còn 'how they pronounce words' lại là một mệnh đề. Bạn hãy chuyển mệnh đề này về dạng danh từ tương ứng."
+  },
+  {
+    "topic": "Parallel Structure",
+    "level": "B2",
+    "student_input": "I’m interested in learning a new language, visiting different countries, and to meet new people.",
+    "correct_answer": "I’m interested in learning a new language, visiting different countries, and meeting new people.",
+    "explanation": "Hãy nhìn vào các sở thích: 'learning', 'visiting'. Cả hai đều là V-ing. Vậy 'to meet' có song hành với hai từ trước không? Bạn hãy điều chỉnh nó cho đồng nhất."
+  },
+  {
+    "topic": "Parallel Structure",
+    "level": "B2",
+    "student_input": "The company's values include honesty, transparency, and being accountable.",
+    "correct_answer": "The company's values include honesty, transparency, and accountability.",
+    "explanation": "Hãy phân tích danh sách giá trị: 'honesty' (danh từ), 'transparency' (danh từ). Còn 'being accountable' là một cụm V-ing. Để câu văn cân xứng, bạn hãy tìm một danh từ tương ứng với 'accountable'. Từ đó là gì?"
+  },
+  {
+    "topic": "Parallel Structure",
+    "level": "B2",
+    "student_input": "The book is interesting, detailed, and it provides a lot of insight.",
+    "correct_answer": "The book is interesting, detailed, and insightful.",
+    "explanation": "Hãy nhìn vào ba đặc điểm của cuốn sách: 'interesting' (tính từ), 'detailed' (tính từ). Nhưng 'it provides a lot of insight' lại là một mệnh đề. Bạn có thể thay thế toàn bộ mệnh đề này bằng một tính từ tương ứng không? (Gợi ý: insightful)."
+  },
+  {
+    "topic": "Parallel Structure",
+    "level": "B2",
+    "student_input": "He prefers working from home rather than to commute to the city every day.",
+    "correct_answer": "He prefers working from home rather than commuting to the city every day.",
+    "explanation": "Trong cấu trúc so sánh 'prefer... rather than...', hai hành động được so sánh phải có cùng hình thái. Bạn đang dùng 'working' (V-ing) ở vế đầu. Vậy 'to commute' ở vế sau có song hành không? Bạn nên chuyển nó về dạng nào?"
+  },
+  {
+    "topic": "Parallel Structure",
+    "level": "B2",
+    "student_input": "The manager praised the team for their hard work, their creativity, and because they were very disciplined.",
+    "correct_answer": "The manager praised the team for their hard work, their creativity, and their discipline.",
+    "explanation": "Hãy nhìn vào ba điều mà quản lý khen ngợi: 'their hard work' (cụm danh từ), 'their creativity' (cụm danh từ). Nhưng vế cuối 'because they were very disciplined' lại là một mệnh đề nguyên nhân. Để câu văn cân đối và chuyên nghiệp, bạn nên chuyển mệnh đề này thành một cụm danh từ tương ứng. Bạn sẽ dùng danh từ nào cho 'disciplined'?"
+  },
+  {
+    "topic": "Parallel Structure",
+    "level": "B2",
+    "student_input": "He entered the room, turned on the lights, and is seeing the mess on the floor.",
+    "correct_answer": "He entered the room, turned on the lights, and saw the mess on the floor.",
+    "explanation": "Hãy theo dõi chuỗi hành động của nhân vật: 'entered' (Quá khứ đơn), 'turned on' (Quá khứ đơn). Nhưng hành động cuối cùng 'is seeing' lại ở thì Hiện tại tiếp diễn. Để duy trì sự nhất quán về thời gian (tense consistency), bạn nên chuyển động từ cuối cùng về thì nào?"
+  },
+  {
+    "topic": "Parallel Structure",
+    "level": "B2",
+    "student_input": "The report highlights that costs are increasing, a drop in quality, and that the deadline is unrealistic.",
+    "correct_answer": "The report highlights that costs are increasing, that quality is dropping, and that the deadline is unrealistic.",
+    "explanation": "Hãy phân tích các điểm mà báo cáo nhấn mạnh: 'that costs are increasing' (mệnh đề), 'a drop in quality' (cụm danh từ), 'that the deadline is unrealistic' (mệnh đề). Bạn thấy sự 'lệch pha' ở đâu không? Bạn nên biến cụm danh từ ở giữa thành một mệnh đề bắt đầu bằng 'that' như hai vế còn lại, hoặc chuyển tất cả thành cụm danh từ. Bạn chọn cách nào?"
+  },
+  {
+    "topic": "Parallel Structure",
+    "level": "B2",
+    "student_input": "The company values honesty, that employees are punctual, and a strong commitment to quality.",
+    "correct_answer": "The company values honesty, punctuality, and a strong commitment to quality.",
+    "explanation": "Bạn đang liệt kê những giá trị của công ty: 'honesty' (danh từ), 'that employees are punctual' (mệnh đề), 'a strong commitment' (cụm danh từ). Để tạo sự song hành, bạn hãy thử biến mệnh đề ở giữa thành một danh từ đơn giản mô tả việc 'đến đúng giờ'. Đó là từ gì?"
+  },
+  {
+    "topic": "Parallel Structure",
+    "level": "B2",
+    "student_input": "The goal of the project is not only to increase revenue but that the brand becomes more famous.",
+    "correct_answer": "The goal of the project is not only to increase revenue but also to make the brand more famous.",
+    "explanation": "Hãy xem xét cấu trúc 'not only... but also'. Sau 'not only' là 'to increase revenue' (To-V). Nhưng sau 'but' lại là một mệnh đề 'that the brand becomes...'. Để đạt được sự song hành, bạn nên chuyển vế thứ hai về dạng To-V để tương xứng với vế thứ nhất. Bạn sẽ viết lại như thế nào?"
+  },
+  {
+    "topic": "Parallel Structure",
+    "level": "B2",
+    "student_input": "She spent the morning responding to emails, scheduling meetings, and she wrote a few reports.",
+    "correct_answer": "She spent the morning responding to emails, scheduling meetings, and writing a few reports.",
+    "explanation": "Hãy nhìn vào các hoạt động trong buổi sáng: 'responding' và 'scheduling' (V-ing). Hành động cuối 'she wrote a few reports' lại là một mệnh đề quá khứ. Bạn hãy thử lược bỏ chủ ngữ và chuyển động từ về dạng V-ing để khớp với nhịp điệu của câu."
+  },
+  {
+    "topic": "Parallel Structure",
+    "level": "B2",
+    "student_input": "The new system is more efficient than the old one was slow.",
+    "correct_answer": "The new system is more efficient than the old one.",
+    "explanation": "Hãy nhìn vào phép so sánh: 'The new system is more efficient' (đặc điểm) vs 'the old one was slow' (một mệnh đề). Khi so sánh hai đối tượng, chúng ta thường so sánh hai đặc điểm tương đương. Bạn có cần phải nói 'was slow' không, hay chỉ cần 'the old one' là đủ để người nghe hiểu bạn đang so sánh về hiệu quả?"
+  },
+  {
+    "topic": "Parallel Structure",
+    "level": "B2",
+    "student_input": "The professor's lecture was not only informative but also it was delivered with great passion.",
+    "correct_answer": "The professor's lecture was not only informative but also delivered with great passion.",
+    "explanation": "Hãy phân tích sau 'not only' là 'informative' (tính từ). Nhưng sau 'but also' lại là một mệnh đề 'it was delivered...'. Để tạo sự song hành, bạn hãy thử lược bỏ 'it was' để biến vế sau thành một cụm tính từ/phân từ. Câu văn sẽ gọn và chuyên nghiệp hơn nhiều."
+  },
+  {
+    "topic": "Parallel Structure",
+    "level": "B2",
+    "student_input": "He announced the winners, handed out the prizes, and then he is thanking the sponsors.",
+    "correct_answer": "He announced the winners, handed out the prizes, and then thanked the sponsors.",
+    "explanation": "Hãy chú ý chuỗi hành động: 'announced' (V2), 'handed out' (V2). Bạn đang dùng 'is thanking' (Hiện tại tiếp diễn) cho hành động cuối cùng. Liệu điều này có làm gãy mốc thời gian của câu chuyện không? Bạn nên sửa nó về thì nào?"
+  },
+  {
+    "topic": "Parallel Structure",
+    "level": "B2",
+    "student_input": "The ideal candidate should be a good communicator, a strategic thinker, and know how to lead a team.",
+    "correct_answer": "The ideal candidate should be a good communicator, a strategic thinker, and an effective team leader.",
+    "explanation": "Bạn đang liệt kê các vai trò/đặc điểm của ứng viên: 'a good communicator' (cụm danh từ), 'a strategic thinker' (cụm danh từ). Nhưng vế cuối 'know how to lead a team' lại là một cụm động từ. Bạn hãy thử biến vế cuối thành một cụm danh từ (ví dụ: một người lãnh đạo nhóm hiệu quả) để khớp với hai vế trước."
+  },
+  {
+    "topic": "Parallel Structure",
+    "level": "B2",
+    "student_input": "I like that the hotel is cheap, the location is central, and the staff are friendly.",
+    "correct_answer": "I like the hotel's cheap price, its central location, and its friendly staff.",
+    "explanation": "Bạn đang liệt kê những điều bạn thích. Hiện tại bạn đang dùng ba mệnh đề ('that...'). Điều này không sai, nhưng để câu văn súc tích và mang tính 'song hành' cao hơn ở trình độ B2, bạn hãy thử chuyển cả ba thành các cụm danh từ. Bạn sẽ bắt đầu bằng 'I like...' như thế nào?"
+  },
+  {
+    "topic": "Parallel Structure",
+    "level": "B2",
+    "student_input": "To be successful, you must be willing to work hard, to take risks, and being patient.",
+    "correct_answer": "To be successful, you must be willing to work hard, to take risks, and to be patient.",
+    "explanation": "Hãy nhìn vào các yêu cầu: 'to work hard' và 'to take risks' (To-V). Hành động cuối cùng 'being patient' lại dùng V-ing. Để duy trì sự nhất quán, bạn nên chuyển 'being' về dạng nào cho khớp với hai vế trước?"
+  },
+  {
+    "topic": "Parallel Structure",
+    "level": "B2",
+    "student_input": "The internship provides experience in market research, data analysis, and how to manage clients.",
+    "correct_answer": "The internship provides experience in market research, data analysis, and client management.",
+    "explanation": "Hãy đối chiếu: 'market research' (cụm danh từ), 'data analysis' (cụm danh từ). Còn 'how to manage clients' lại là một cụm từ nghi vấn. Bạn hãy thử chuyển vế cuối này thành một cụm danh từ (ví dụ: quản trị khách hàng) để tạo sự cân xứng."
+  },
+  {
+    "topic": "Parallel Structure",
+    "level": "B2",
+    "student_input": "Neither the budget was approved, nor the timeline was finalized by the board.",
+    "correct_answer": "Neither was the budget approved, nor was the timeline finalized by the board.",
+    "explanation": "Khi dùng 'Neither... nor' ở đầu mệnh đề để nhấn mạnh, chúng ta thường áp dụng quy tắc đảo ngữ (Inversion) cho cả hai vế. Bạn hãy thử đưa trợ động từ 'was' lên trước chủ ngữ 'the budget' và 'the timeline' xem câu văn có mang sắc thái trang trọng hơn không?"
+  },
+  {
+    "topic": "Parallel Structure",
+    "level": "B2",
+    "student_input": "The new law is designed to protect the environment, to reduce pollution, and that crime is decreased.",
+    "correct_answer": "The new law is designed to protect the environment, to reduce pollution, and to decrease crime.",
+    "explanation": "Hãy nhìn vào mục đích của luật: 'to protect' và 'to reduce' (To-V). Vế cuối 'that crime is decreased' lại là một mệnh đề. Bạn hãy thử biến mệnh đề này thành một cấu trúc To-V để tạo sự song hành tuyệt đối."
+  },
+  {
+    "topic": "Parallel Structure",
+    "level": "B2",
+    "student_input": "He is not only experienced in finance but also he is a great leader.",
+    "correct_answer": "He is not only experienced in finance but also a great leader.",
+    "explanation": "Hãy phân tích sau 'not only' là 'experienced in finance' (cụm tính từ). Nhưng sau 'but also' lại là một mệnh đề 'he is a great leader'. Để câu văn gọn gàng và song hành, bạn hãy lược bỏ 'he is' để biến vế sau thành một cụm danh từ/tính từ. Bạn sẽ viết lại như thế nào?"
+  },
+  {
+    "topic": "Parallel Structure",
+    "level": "B2",
+    "student_input": "The CEO emphasized the need for innovation, the importance of teamwork, and that everyone should stay focused.",
+    "correct_answer": "The CEO emphasized the need for innovation, the importance of teamwork, and the necessity of staying focused.",
+    "explanation": "Hãy đối chiếu: 'the need for...' (cụm danh từ), 'the importance of...' (cụm danh từ). Vế cuối 'that everyone should...' lại là một mệnh đề. Bạn hãy thử chuyển mệnh đề này thành một cụm danh từ tương ứng để tạo sự cân đối cho câu."
+  },
+  {
+    "topic": "Parallel Structure",
+    "level": "B2",
+    "student_input": "I would rather be traveling in Asia than to stay in a boring office.",
+    "correct_answer": "I would rather be traveling in Asia than stay in a boring office.",
+    "explanation": "Hãy nhìn vào cấu trúc 'would rather... than...'. Bạn đang dùng 'be traveling' (V-ing) ở vế đầu. Vậy 'to stay' ở vế sau có song hành không? Bạn hãy thử bỏ 'to' và điều chỉnh động từ 'stay' cho khớp với nhịp điệu của vế trước."
+  },
+  {
+    "topic": "Parallel Structure",
+    "level": "B2",
+    "student_input": "The presentation was not only too long but also it was very confusing.",
+    "correct_answer": "The presentation was not only too long but also very confusing.",
+    "explanation": "Hãy phân tích sau 'not only' là 'too long' (cụm tính từ). Vế sau 'but also it was very confusing' lại là một mệnh đề. Để tạo sự song hành, bạn hãy lược bỏ 'it was' để biến vế sau thành một cụm tính từ tương ứng."
+  },
+  {
+    "topic": "Parallel Structure",
+    "level": "B2",
+    "student_input": "He spent his weekend cleaning the garage, painting the fence, and he visited his parents.",
+    "correct_answer": "He spent his weekend cleaning the garage, painting the fence, and visiting his parents.",
+    "explanation": "Hãy theo dõi chuỗi hành động: 'cleaning', 'painting'. Bạn đang dùng 'he visited' (mệnh đề quá khứ). Bạn hãy thử lược bỏ chủ ngữ và chuyển động từ 'visited' về dạng V-ing để duy trì sự song hành."
+  },
+  {
+    "topic": "Parallel Structure",
+    "level": "B2",
+    "student_input": "The government aims to reduce poverty, to improve healthcare, and that education is enhanced.",
+    "correct_answer": "The government aims to reduce poverty, to improve healthcare, and to enhance education.",
+    "explanation": "Hãy nhìn vào các mục tiêu: 'to reduce', 'to improve'. Vế cuối 'that education is enhanced' là một mệnh đề. Bạn hãy thử biến nó thành một cấu trúc To-V để khớp với hai mục tiêu trước đó."
+  },
+  {
+    "topic": "Prallel Structure",
+    "level": "B2",
+    "student_input": "I like that the city is vibrant, the weather is pleasant, and the people are friendly.",
+    "correct_answer": "I like the city's vibrancy, the weather's pleasantness, la la l's friendliness.",
+    "correct_answer": "I like the city's vibrancy, the weather's pleasantness, and the people's friendliness.",
+    "explanation": "Bạn đang dùng ba mệnh đề 'that...'. Điều này không la sai, nhưng ở trình độ B2, để câu văn súc tích và chuyên mượt mượt hơn, bạn hãy thử chuyển cả ba thành các cụm danh từ. Bạn sẽ viết lại như thế nào?"
+  },
+  {
+  "topic": "Parallel Structure",
+    "level": "B2",
+    "student_input": "The internship la’s provide experience in market research, data analysis, la la la l's client management.",
+    "correct_answer": "The internship provides experience in market research, data analysis, and client management.",
+    "explanation": "Hãy chú ý đến các thành phần trong danh sách: 'market research' (danh từ), 'data analysis' (danh từ). Vế cuối 'la la la l's client management' bị lỗi đánh máy và thiếu liên từ 'and'. Bạn hãy thử sửa lại thành một cụm danh từ chuẩn để tạo sự song hành."
+  },
+  {
+    "topic": "Parallel Structure",
+    "level": "B2",
+    "student_input": "Either the manager will decide the budget, or the director will decide it.",
+    "correct_answer": "Either the manager or the director will decide the budget.",
+    "//comment": "Đây là một lỗi về sự tinh gọn (conciseness) đi kèm với song hành. Khi hai chủ ngữ cùng thực hiện một hành động, bạn không cần lặp lại mệnh đề. Bạn hãy thử gộp gộp hai chủ ngữ lại sau 'Either... or' xem sao."
+  },
+  {
+    "topic": "Parallel Structure",
+    "L": "B2",
+    "student_input": "The report highlighted that the sales had dropped, that the costs had risen, and a decrease in productivity.",
+    "correct_answer": "The report highlighted that the sales had dropped, that the costs had risen, and that productivity had decreased.",
+    "explanation": "Hãy phân tích ba điểm được nhấn mạnh: 'that the sales had dropped' (mệnh đề), 'that the costs had risen' (mệnh đề). Vế cuối 'a decrease in productivity' lại là một cụm danh từ. Bạn hãy thử biến cụm danh từ này thành một mệnh đề bắt đầu bằng 'that' để tạo sự song hành tuyệt đối."
+  },
+  {
+    "topic": "Parallel Structure",
+    "level": "B2",
+    "student_input": "Not only the company expanded its market, but also increasing its workforce.",
+    "correct_answer": "Not only did the company expand its market, but it also increased its workforce.",
+    "explanation": "Hãy nhìn vào hai vế của 'not only... but also'. Vế đầu là một mệnh đề (chủ ngữ + động từ). Nhưng vế sau lại là một cụm V-ing ('increasing'). Để tạo sự song hành, bạn nên biến vế thứ hai thành một mệnh đề tương ứng. Ngoài ra, hãy kiểm tra xem vế đầu đã được đảo ngữ đúng chuẩn 'Not only' đứng đầu câu chưa?"
+  },
+  {
+    "topic": "Parallel Structure",
+    "level": "B2",
+    "student_input": "Either you have to finish the report by tonight, or to face the consequences tomorrow.",
+    "correct_answer": "Either you have to finish the report by tonight, or you have to face the consequences tomorrow.",
+    "explanation": "Hãy phân tích hai lựa chọn sau 'Either... or'. Lựa chọn thứ nhất là một mệnh đề ('you have to finish...'). Lựa chọn thứ hai lại là một cụm To-V ('to face...'). Bạn hãy thử viết lại vế thứ hai thành một mệnh đề đầy đủ để tạo sự cân bằng cho câu văn."
+  },
+  {
+    "topic": "Parallel Structure",
+    "level": "B2",
+    "student_input": "The new strategy focuses on optimizing the workflow, to reduce waste, and increasing the output.",
+    "correct_answer": "The new strategy focuses on optimizing the workflow, reducing waste, and increasing the output.",
+    "explanation": "Hãy theo dõi ba mục tiêu của chiến lược: 'optimizing' (V-ing) và 'increasing' (V-ing). Nhưng ở giữa lại là 'to reduce' (To-V). Để duy trì nhịp điệu song hành, bạn nên chuyển 'to reduce' về dạng nào cho đồng nhất với hai từ còn lại?"
+  },
+  {
+    "topic": "Parallel Structure",
+    "level": "B2",
+    "student_input": "He is known for his ability to speak five languages, his deep knowledge of history, and that he is very disciplined.",
+    "correct_answer": "He is known for his ability to speak five languages, his deep knowledge of history, and his great discipline.",
+    "explanation": "Bạn đang liệt kê ba điểm mạnh: 'his ability' (cụm danh từ), 'his deep knowledge' (cụm danh từ). Nhưng vế cuối lại là một mệnh đề 'that he is...'. Để câu văn chuyên nghiệp và súc tích hơn, bạn hãy thử chuyển mệnh đề này thành một cụm danh từ tương ứng với 'his + danh từ'."
+  },
+  {
+    "topic": "Parallel Structure",
+    "level": "B2",
+    "student_input": "Neither does she possess the necessary qualifications, nor she has the required experience.",
+    "correct_answer": "Neither does she possess the necessary qualifications, nor does she have the required experience.",
+    "explanation": "Hãy nhìn vào cấu trúc 'Neither... nor'. Vế đầu bạn đã đảo ngữ rất chính xác ('does she possess'). Tuy nhiên, vế sau 'nor she has' lại viết theo dạng khẳng định bình thường. Để tạo sự song hành tuyệt đối, vế sau 'nor' cũng cần được đảo ngữ. Bạn hãy thử đưa trợ động từ lên trước chủ ngữ xem sao."
+  },
+  {
+    "topic": "Parallel Structure",
+    "level": "B2",
+    "student_input": "Whether you decide to accept the offer or accepting the counter-proposal, you must notify us by noon.",
+    "correct_answer": "Whether you decide to accept the offer or to accept the counter-proposal, you must notify us by noon.",
+    "explanation": "Hãy đối chiếu hai lựa chọn sau 'Whether... or'. Lựa chọn một là 'decide to accept' (động từ chia thì). Lựa chọn hai là 'accepting' (V-ing). Bạn hãy thử điều chỉnh vế thứ hai sao cho nó song hành với hành động 'decide' hoặc 'accept' ở vế đầu."
+  },
+  {
+    "topic": "Parallel Structure",
+    "level": "B2",
+    "student_input": "The ideal candidate should not only be proficient in Python but also have a degree in Computer Science.",
+    "correct_answer": "The ideal candidate should not only be proficient in Python but also possess a degree in Computer Science.",
+    "explanation": "Hãy nhìn vào 'not only be proficient' (be + adj). Vế sau 'but also have a degree' (have + noun). Mặc dù câu này có thể chấp nhận được trong văn nói, nhưng để đạt chuẩn B2, bạn nên cân nhắc: Nếu vế đầu là 'be' (trạng thái), vế sau cũng nên là một trạng từ/tính từ, hoặc cả hai đều là động từ hành động. Bạn hãy thử chuyển 'be proficient' thành một động từ hành động như 'possess skills' xem câu văn có cân đối hơn không?"
+  },
+  {
+    "topic": "Parallel Structure",
+    "level": "B2",
+    "student_input": "Her goals are to improve the company's image, increasing the market share, and to reduce operational costs.",
+    "correct_answer": "Her goals are to improve the company's image, to increase the market share, and to reduce operational costs.",
+    "explanation": "Hãy nhìn vào ba mục tiêu: 'to improve' (To-V) và 'to reduce' (To-V). Mục tiêu ở giữa 'increasing' lại dùng V-ing. Bạn hãy thử đưa tất cả về cùng một dạng 'To-V' để tạo sự đồng nhất."
+  },
+  {
+    "topic": "Parallel Structure",
+    "level": "B2",
+    "student_input": "The manager is interested in hiring someone who is energetic, creative, and has a positive mindset.",
+    "correct_answer": "The manager is interested in hiring someone who is energetic, creative, and positive.",
+    "explanation": "Bạn đang liệt kê các tính từ: 'energetic' và 'creative'. Nhưng vế cuối 'has a positive mindset' lại là một cụm động từ. Để câu văn mượt mà hơn, bạn có thể thay toàn bộ cụm 'has a positive mindset' bằng một tính từ tương ứng là gì?"
+  },
+  {
+    "topic": "Parallel Structure",
+    "level": "B2",
+    "student_input": "The project was criticized for being over budget, for its lack of transparency, and that it was delivered late.",
+    "correct_answer": "The project was criticized for being over budget, for its lack of transparency, and for its late delivery.",
+    "explanation": "Hãy phân tích ba lý do bị chỉ trích: 'for being' (giới từ + V-ing), 'for its lack' (giới từ + danh từ). Vế cuối 'that it was delivered late' lại là một mệnh đề. Bạn hãy thử biến mệnh đề này thành một cụm danh từ bắt đầu bằng 'for' để khớp với hai vế trước."
+  },
+  {
+    "topic": "Parallel Structure",
+    "level": "B2",
+    "student_input": "He is both an expert in international law and knows how to negotiate complex treaties.",
+    "correct_answer": "He is both an expert in international law and a skilled negotiator of complex treaties.",
+    "explanation": "Hãy nhìn vào cấu trúc 'both... and'. Sau 'both' là 'an expert' (cụm danh từ). Nhưng sau 'and' lại là một mệnh đề 'knows how to...'. Bạn hãy thử biến vế thứ hai thành một cụm danh từ tương ứng để tạo sự song hành."
+  },
+  {
+    "topic": "Parallel Structure",
+    "level": "B2",
+    "student_input": "To be successful in the long run, one must stay focused, be disciplined, and working consistently.",
+    "correct_answer": "To be successful in the long run, one must stay focused, be disciplined, and work consistently.",
+    "explanation": "Hãy theo dõi chuỗi yêu cầu: 'stay focused' (V-bare) và 'be disciplined' (V-bare). Vậy 'working consistently' có đang đi đúng nhịp không? Bạn nên chuyển 'working' về dạng nào?"
+  },
+  {
+    "topic": "Parallel Structure",
+    "level": "B2",
+    "student_input": "The report concludes that the sales have dropped, that the costs have risen, and a decrease in productivity.",
+    "correct_answer": "The report concludes that the sales have dropped, that the costs have risen, and that productivity has decreased.",
+    "explanation": "Bạn đang liệt kê ba kết luận: 'that the sales...' (mệnh đề) và 'that the costs...' (mệnh đề). Vế cuối 'a decrease in productivity' lại là một cụm danh từ. Bạn hãy thử biến cụm danh từ này thành một mệnh đề bắt đầu bằng 'that' để tạo sự song hành tuyệt đối."
+  },
+  {
+    "topic": "Parallel Structure",
+    "level": "B2",
+    "student_input": "The new law is designed to protect the environment, to reduce pollution, and that crime is decreased.",
+    "correct_answer": "The new law is designed to protect the environment, to reduce pollution, and to decrease crime.",
+    "explanation": "Hãy nhìn vào mục đích của luật: 'to protect' và 'to reduce' (To-V). Vế cuối 'that crime is decreased' lại là một mệnh đề. Bạn hãy thử biến mệnh đề này thành một cấu trúc To-V để khớp với hai mục tiêu trước đó."
+  },
+  {
+    "topic": "Parallel Structure",
+    "level": "B2",
+    "student_input": "He is not only experienced in finance but also he is a great leader.",
+    "correct_answer": "He is not only experienced in finance but also a great leader.",
+    "explanation": "Hãy phân tích sau 'not only' là 'experienced in finance' (cụm tính từ). Nhưng sau 'but also' lại là một mệnh đề 'he is a great leader'. Để câu văn gọn gàng và song hành, bạn hãy lược bỏ 'he is' để biến vế sau thành một cụm danh từ/tính từ tương ứng."
+  },
+  {
+    "topic": "Parallel Structure",
+    "level": "B2",
+    "student_input": "The CEO emphasized the need for innovation, the importance of teamwork, and that everyone should stay focused.",
+    "correct_answer": "The CEO emphasized the need for innovation, the importance of teamwork, and the necessity of staying focused.",
+    "explanation": "Hãy đối chiếu: 'the need for...' (cụm danh từ), 'the importance of...' (cụm danh từ). Vế cuối 'that everyone should...' lại là một mệnh đề. Bạn hãy thử chuyển mệnh đề này thành một cụm danh từ tương ứng (ví dụ: the necessity of...) để tạo sự cân đối cho câu."
+  },
+  {
+    "topic": "Parallel Structure",
+    "level": "B2",
+    "student_input": "I would rather be traveling in Asia than to stay in a boring office.",
+    "correct_answer": "I would rather be traveling in Asia than stay in a boring office.",
+    "explanation": "Hãy nhìn vào cấu trúc 'would rather... than...'. Bạn đang dùng 'be traveling' (dạng tiếp diễn không to) ở vế đầu. Vậy 'to stay' ở vế sau có song hành không? Bạn hãy thử bỏ 'to' và điều chỉnh động từ 'stay' cho khớp với vế trước."
+  },
+  {
+    "topic": "Parallel Structure",
+    "level": "B2",
+    "student_input": "The presentation was not only too long but also it was very confusing.",
+    "correct_answer": "The presentation was not only too long but also very confusing.",
+    "explanation": "Hãy phân tích sau 'not only' là 'too long' (cụm tính từ). Vế sau 'but also it was very confusing' lại là một mệnh đề. Để tạo sự song hành, bạn hãy lược bỏ 'it was' để biến vế sau thành một cụm tính từ tương ứng."
+  },
+  {
+    "topic": "Parallel Structure",
+    "level": "B2",
+    "student_input": "He spent his weekend cleaning the garage, painting the fence, and he visited his parents.",
+    "correct_answer": "He spent his weekend cleaning the garage, painting the fence, and visiting his parents.",
+    "explanation": "Hãy theo dõi chuỗi hành động: 'cleaning', 'painting'. Bạn đang dùng 'he visited' (mệnh đề quá khứ). Bạn hãy thử lược bỏ chủ ngữ và chuyển động từ 'visited' về dạng V-ing để duy trì sự song hành."
+  },
+  {
+    "topic": "Parallel Structure",
+    "level": "B2",
+    "student_input": "The government aims to reduce poverty, to improve healthcare, and that education is enhanced.",
+    "correct_answer": "The government aims to reduce poverty, to improve healthcare, and to enhance education.",
+    "explanation": "Hãy nhìn vào các mục tiêu: 'to reduce', 'to improve'. Vế cuối 'that education is enhanced' là một mệnh đề. Bạn hãy thử biến nó thành một cấu trúc To-V để khớp với hai mục tiêu trước đó."
+  },
+  {
+    "topic": "Parallel Structure",
+    "level": "B2",
+    "student_input": "I like that the city is vibrant, the weather is pleasant, and the people are friendly.",
+    "correct_answer": "I like the city's vibrancy, the weather's pleasantness, and the people's friendliness.",
+    "explanation": "Bạn đang dùng ba mệnh đề 'that...'. Điều này không sai, nhưng ở trình độ B2, để câu văn súc tích và mượt mà hơn, bạn hãy thử chuyển cả ba thành các cụm danh từ (sử dụng sở hữu cách). Bạn sẽ viết lại như thế nào?"
+  },
+  {
+    "topic": "Parallel Structure",
+    "level": "B2",
+    "student_input": "The internship provides experience in market research, data analysis, and how to manage clients.",
+    "correct_answer": "The internship provides experience in market research, data analysis, and client management.",
+    "explanation": "Hãy chú ý đến các thành phần trong danh sách: 'market research' (danh từ), 'data analysis' (danh từ). Vế cuối 'how to manage clients' lại là một cụm từ nghi vấn. Bạn hãy thử chuyển vế cuối này thành một cụm danh từ chuẩn để tạo sự song hành."
+  },
+  {
+    "topic": "Parallel Structure",
+    "level": "B2",
+    "student_input": "Either the manager will decide the budget, or the director will decide it.",
+    "correct_answer": "Either the manager or the director will decide the budget.",
+    "explanation": "Đây là một lỗi về sự tinh gọn (conciseness) đi kèm với song hành. Khi hai chủ ngữ cùng thực hiện một hành động, bạn không cần lặp lại mệnh đề. Bạn hãy thử gộp hai chủ ngữ lại sau 'Either... or' xem sao."
+  },
+  {
+    "topic": "Parallel Structure",
+    "level": "B2",
+    "student_input": "The report highlighted that the sales had dropped, that the costs had risen, and a decrease in productivity.",
+    "correct_answer": "The report highlighted that the sales had dropped, that the costs had risen, and that productivity had decreased.",
+    "explanation": "Hãy phân tích ba điểm được nhấn mạnh: 'that the sales had dropped' (mệnh đề), 'that the costs had risen' (mệnh đề). Vế cuối 'a decrease in productivity' lại là một cụm danh từ. Bạn hãy thử biến cụm danh từ này thành một mệnh đề bắt đầu bằng 'that' để tạo sự song hành tuyệt đối."
+  },
+  {
+    "topic": "Parallel Structure",
+    "level": "B2",
+    "student_input": "Whether you choose to study law or pursuing a career in arts, you should follow your passion.",
+    "correct_answer": "Whether you choose to study law or to pursue a career in arts, you should follow your passion.",
+    "explanation": "Hãy nhìn vào hai lựa chọn sau 'Whether... or'. Lựa chọn một là 'choose to study' (To-V). Lựa chọn hai là 'pursuing' (V-ing). Bạn hãy điều chỉnh vế thứ hai sao cho nó song hành với cấu trúc 'to-V' ở vế đầu."
+  }
+]

@@ -1,0 +1,11 @@
+{
+  "topic": "Present Simple",
+  "difficulty": -1.2,
+  "context": "Daily routines of a student",
+  "output": {
+    "question": "She ___ to the gym every day.",
+    "options": ["go", "goes", "going", "gone"],
+    "correct_answer": "goes",
+    "explanation": "Vì chủ ngữ là 'She' nên động từ 'go' thêm 'es'."
+  }
+}

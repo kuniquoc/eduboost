@@ -1,0 +1,569 @@
+[
+  {
+    "topic": "Prepositions of Place",
+    "level": "A1",
+    "student_input": "The book is in the table",
+    "correct_answer": "The book is on the table",
+    "explanation": "Chào em, hãy tưởng tượng xem: cuốn sách nằm ở 'trong' lòng cái bàn (như trong một cái hộp) hay nằm 'trên' bề mặt của cái bàn? Với bề mặt phẳng, mình dùng 'in' hay 'on' nhỉ?"
+  },
+  {
+    "topic": "Prepositions of Place",
+    "level": "A1",
+    "student_input": "I live at Vietnam",
+    "correct_answer": "I live in Vietnam",
+    "explanation": "Hãy nhìn vào từ 'Vietnam'. Đây là một quốc gia (một vùng địa lý lớn). Đối với thành phố hoặc quốc gia, mình dùng giới từ 'at' hay 'in' để chỉ vị trí em nhỉ?"
+  },
+  {
+    "topic": "Prepositions of Place",
+    "level": "A1",
+    "student_input": "She is on the room",
+    "correct_answer": "She is in the room",
+    "explanation": "Chào em, 'on' nghĩa là ở trên bề mặt. Vậy cô ấy đang đứng trên nóc căn phòng hay đang ở 'trong' không gian của căn phòng đó? Em hãy chọn lại giới từ nhé."
+  },
+  {
+    "topic": "Prepositions of Place",
+    "level": "A1",
+    "student_input": "Wait for me in the bus stop",
+    "correct_answer": "Wait for me at the bus stop",
+    "explanation": "Điểm dừng xe buýt (bus stop) được coi là một 'điểm dừng' cụ thể trên bản đồ chứ không phải là một không gian kín để chui vào trong. Vậy mình dùng 'in' hay 'at' cho các điểm dừng cụ thể em nhỉ?"
+  },
+  {
+    "topic": "Prepositions of Place",
+    "level": "A1",
+    "student_input": "The picture is at the wall",
+    "correct_answer": "The picture is on the wall",
+    "explanation": "Hãy quan sát bức tranh. Bức tranh được treo 'dính' vào bề mặt của bức tường. Đối với bề mặt, mình dùng giới từ 'at' hay 'on' cho chính xác?"
+  },
+  {
+    "topic": "Prepositions of Place",
+    "level": "A1",
+    "student_input": "He is on Hanoi",
+    "correct_answer": "He is in Hanoi",
+    "explanation": "Chào em, 'Hanoi' là một thành phố lớn. Khi nói về việc ở trong một thành phố, mình dùng 'on' (trên bề mặt) hay 'in' (trong một vùng) nhỉ?"
+  },
+  {
+    "topic": "Prepositions of Place",
+    "level": "A1",
+    "student_input": "The pen is at the box",
+    "correct_answer": "The pen is in the box",
+    "explanation": "Hãy nhìn vào cái hộp. Chiếc bút nằm 'bên trong' cái hộp hay nằm 'tại một điểm' cạnh cái hộp? Nếu ở bên trong không gian kín, mình dùng giới từ nào em nhỉ?"
+  },
+  {
+    "topic": "Prepositions of Place",
+    "level": "A1",
+    "student_input": "I am on the cinema",
+    "correct_answer": "I am at the cinema / I am in the cinema",
+    "explanation": "Khi em muốn nói em đang ở rạp chiếu phim (như một điểm đến), mình thường dùng 'at'. Còn 'on' là ở trên bề mặt (ví dụ trên mái rạp). Vậy em nên dùng từ nào để mọi người hiểu em đang đi xem phim?"
+  },
+  {
+    "topic": "Prepositions of Place",
+    "level": "A1",
+    "student_input": "The cat is at the chair",
+    "correct_answer": "The cat is on the chair",
+    "explanation": "Chào em, chú mèo đang nằm trên bề mặt của chiếc ghế. Với bề mặt, mình dùng 'at' hay 'on' em nhỉ?"
+  },
+  {
+    "topic": "Prepositions of Place",
+    "level": "A1",
+    "student_input": "She is in the airport",
+    "correct_answer": "She is at the airport",
+    "explanation": "Câu này không hoàn toàn sai, nhưng khi nói về một địa điểm công cộng như một 'điểm đến' trên hành trình, người bản xứ thường dùng 'at'. Em có muốn thử thay 'in' bằng 'at' xem câu có tự nhiên hơn không?"
+  },
+  {
+    "topic": "Prepositions of Place",
+    "level": "A1",
+    "student_input": "The keys are at the table",
+    "correct_answer": "The keys are on the table",
+    "explanation": "Hãy nhìn những chiếc chìa khóa. Chúng nằm trên mặt bàn. Em nhớ quy tắc dùng 'on' cho bề mặt phẳng chứ? Thử sửa lại xem sao."
+  },
+  {
+    "topic": "Prepositions of Place",
+    "level": "A1",
+    "student_input": "My father is on work",
+    "correct_answer": "My father is at work",
+    "explanation": "Chào em, 'work' (nơi làm việc) ở đây được coi là một địa điểm/vị trí cụ thể. Chúng ta dùng cụm từ 'on work' hay 'at work' em nhỉ?"
+  },
+  {
+    "topic": "Prepositions of Place",
+    "level": "A1",
+    "student_input": "The milk is at the fridge",
+    "correct_answer": "The milk is in the fridge",
+    "explanation": "Hãy suy nghĩ xem: sữa nằm 'trong' tủ lạnh hay nằm 'tại' tủ lạnh? Vì tủ lạnh là không gian kín, mình nên dùng giới từ nào?"
+  },
+  {
+    "topic": "Prepositions of Place",
+    "level": "A1",
+    "student_input": "I wait for you in the entrance",
+    "correct_answer": "I wait for you at the entrance",
+    "explanation": " 'The entrance' (lối vào) là một điểm cụ thể, không phải một căn phòng. Với các điểm mốc cụ thể, mình dùng 'in' hay 'at'?"
+  },
+  {
+    "topic": "Prepositions of Place",
+    "level": "A1",
+    "student_input": "The apple is on the bag",
+    "correct_answer": "The apple is in the bag",
+    "explanation": "Chào em, quả táo thường được để 'trong' túi xách. Nếu em dùng 'on', nghĩa là quả táo đang nằm trên bề mặt cái túi. Em hãy chọn lại giới từ cho phù hợp nhé."
+  },
+  {
+    "topic": "Prepositions of Place",
+    "level": "A1",
+    "student_input": "He lives on a small village",
+    "correct_answer": "He lives in a small village",
+    "explanation": "Một ngôi làng (village) là một vùng không gian. Mình dùng 'on' (trên bề mặt) hay 'in' (trong một vùng) để nói về nơi ở em nhỉ?"
+  },
+  {
+    "topic": "Prepositions of Place",
+    "level": "A1",
+    "student_input": "The cup is at the shelf",
+    "correct_answer": "The cup is on the shelf",
+    "explanation": "Chiếc cốc đặt trên bề mặt của cái kệ. Em hãy nhớ lại quy tắc dùng 'on' cho các bề mặt phẳng nhé."
+  },
+  {
+    "topic": "Prepositions of Place",
+    "level": "A1",
+    "student_input": "I am on the school",
+    "correct_answer": "I am at school / I am in the school",
+    "explanation": "Chào em, 'on the school' nghĩa là em đang đứng trên mái trường. Để nói em đang ở trường (đi học), mình dùng 'at school' hay 'on the school'?"
+  },
+  {
+    "topic": "Prepositions of Place",
+    "level": "A1",
+    "student_input": "The children are at the park",
+    "correct_answer": "The children are in the park / The children are at the park",
+    "explanation": "Câu này chính xác rồi! 'At the park' chỉ vị trí chung, còn 'in the park' nhấn mạnh việc ở trong khuôn viên công viên. Em làm tốt lắm!"
+  },
+  {
+    "topic": "Prepositions of Place",
+    "level": "A1",
+    "student_input": "The phone is in the floor",
+    "correct_answer": "The phone is on the floor",
+    "explanation": "Hãy nhìn cái sàn nhà. Điện thoại nằm 'trên' bề mặt sàn hay nằm 'trong' (xuyên qua) sàn nhà? Em hãy chọn lại giới từ nhé."
+  },
+  {
+    "topic": "Prepositions of Place",
+    "level": "A1",
+    "student_input": "She is at New York",
+    "correct_answer": "She is in New York",
+    "explanation": " New York là một thành phố lớn. Tương tự như Vietnam hay Hanoi, mình dùng 'at' hay 'in' cho các thành phố em nhỉ?"
+  },
+  {
+    "topic": "Prepositions of Place",
+    "level": "A1",
+    "student_input": "The coin is at the pocket",
+    "correct_answer": "The coin is in the pocket",
+    "explanation": "Chào em, túi quần/áo là một không gian kín. Đồng xu nằm 'trong' hay 'tại' cái túi? Em hãy chọn giới từ phù hợp nhé."
+  },
+  {
+    "topic": "Prepositions of Place",
+    "level": "A1",
+    "student_input": "I stay on the hotel",
+    "correct_answer": "I stay at the hotel / I stay in the hotel",
+    "explanation": " 'On the hotel' nghĩa là em đang ở trên nóc khách sạn. Để nói em lưu trú tại khách sạn, mình dùng 'at' hay 'in' em nhỉ?"
+  },
+  {
+    "topic": "Prepositions of Place",
+    "level": "A1",
+    "student_input": "The clock is in the wall",
+    "correct_answer": "The clock is on the wall",
+    "explanation": "Hãy quan sát chiếc đồng hồ. Nó treo trên bề mặt bức tường. Em nhớ quy tắc dùng 'on' cho bề mặt phẳng chứ?"
+  },
+  {
+    "topic": "Prepositions of Place",
+    "level": "A1",
+    "student_input": "Wait for me in the door",
+    "correct_answer": "Wait for me at the door",
+    "explanation": "Cánh cửa (the door) được coi là một điểm mốc cụ thể để gặp nhau. Với các điểm mốc, mình dùng 'in' hay 'at'?"
+  },
+  {
+    "topic": "Prepositions of Place",
+    "level": "A1",
+    "student_input": "The fish are on the water",
+    "correct_answer": "The fish are in the water",
+    "explanation": "Chào em, con cá bơi 'trong' lòng nước hay bơi 'trên' bề mặt nước? Nếu ở trong môi trường nước, mình dùng giới từ nào?"
+  },
+  {
+    "topic": "Prepositions of Place",
+    "level": "A1",
+    "student_input": "I am at the kitchen",
+    "correct_answer": "I am in the kitchen",
+    "explanation": "Nhà bếp là một căn phòng (không gian kín). Để nói em đang ở trong một căn phòng, mình dùng 'at' hay 'in' cho chính xác?"
+  },
+  {
+    "topic": "Prepositions of Place",
+    "level": "A1",
+    "student_input": "The cat is in the roof",
+    "correct_answer": "The cat is on the roof",
+    "explanation": "Hãy tưởng tượng: con mèo đang nằm trên bề mặt mái nhà hay chui vào trong vật liệu của mái nhà? Em hãy chọn lại giới từ nhé."
+  },
+  {
+    "topic": "Prepositions of Place",
+    "level": "A1",
+    "student_input": "She lives on London",
+    "correct_answer": "She lives in London",
+    "explanation": "Chào em, London là một thành phố. Mình dùng 'on' (trên bề mặt) hay 'in' (trong một vùng) để nói về nơi sống em nhỉ?"
+  },
+  {
+    "topic": "Prepositions of Place",
+    "level": "A1",
+    "student_input": "The keys are at my bag",
+    "correct_answer": "The keys are in my bag",
+    "explanation": "Hãy nhìn cái túi. Chìa khóa nằm 'trong' túi hay nằm 'tại' túi? Vì túi là không gian kín, em nên dùng giới từ nào?"
+  },
+  {
+    "topic": "Prepositions of Place",
+    "level": "A1",
+    "student_input": "I meet you on the station",
+    "correct_answer": "I meet you at the station",
+    "explanation": "Nhà ga (the station) là một điểm hẹn cụ thể. Với các điểm hẹn mốc, mình dùng 'on' hay 'at'?"
+  },
+  {
+    "topic": "Prepositions of Place",
+    "level": "A1",
+    "student_input": "The lamp is in the table",
+    "correct_answer": "The lamp is on the table",
+    "explanation": "Chào em, cái đèn đặt trên mặt bàn. Em hãy nhớ lại quy tắc dùng 'on' cho bề mặt phẳng nhé."
+  },
+  {
+    "topic": "Prepositions of Place",
+    "level": "A1",
+    "student_input": "The children are at the box",
+    "correct_answer": "The children are in the box",
+    "explanation": "Nếu các em nhỏ đang chơi trò trốn tìm và chui vào trong cái hộp, mình dùng 'at' hay 'in' cho không gian kín nhỉ?"
+  },
+  {
+    "topic": "Prepositions of Place",
+    "level": "A1",
+    "student_input": "He is on the library",
+    "correct_answer": "He is at the library / He is in the library",
+    "explanation": " 'On the library' nghĩa là anh ấy đang đứng trên mái thư viện. Để nói anh ấy đang ở thư viện để đọc sách, em dùng 'at' hay 'in'?"
+  },
+  {
+    "topic": "Prepositions of Place",
+    "level": "A1",
+    "student_input": "The laptop is at the desk",
+    "correct_answer": "The laptop is on the desk",
+    "explanation": "Chiếc laptop đặt trên mặt bàn làm việc. Với bề mặt, mình dùng 'at' hay 'on' em nhỉ?"
+  },
+  {
+    "topic": "Prepositions of Place",
+    "level": "A1",
+    "student_input": "I am in the bus stop",
+    "correct_answer": "I am at the bus stop",
+    "explanation": "Chào em, hãy nhớ lại: điểm dừng xe buýt là một điểm mốc cụ thể. Mình dùng 'in' hay 'at' cho các điểm mốc?"
+  },
+  {
+    "topic": "Prepositions of Place",
+    "level": "A1",
+    "student_input": "The dog is in the sofa",
+    "correct_answer": "The dog is on the sofa",
+    "explanation": "Hãy nhìn chú chó. Chú chó nằm trên bề mặt ghế sofa hay chui vào trong đệm ghế? Em hãy chọn lại giới từ nhé."
+  },
+  {
+    "topic": "Prepositions of Place",
+    "level": "A1",
+    "student_input": "She is at France",
+    "correct_answer": "She is in France",
+    "explanation": " France là một quốc gia. Tương tự như Vietnam, mình dùng 'at' hay 'in' cho các nước em nhỉ?"
+  },
+  {
+    "topic": "Prepositions of Place",
+    "level": "A1",
+    "student_input": "The plate is in the table",
+    "correct_answer": "The plate is on the table",
+    "explanation": "Chào em, cái đĩa nằm trên mặt bàn. Em hãy nhớ lại quy tắc dùng 'on' cho bề mặt nhé."
+  },
+  {
+    "topic": "Prepositions of Place",
+    "level": "A1",
+    "student_input": "I am on the park",
+    "correct_answer": "I am in the park / I am at the park",
+    "explanation": " 'On the park' nghĩa là em đang ở trên bề mặt toàn bộ công viên (như một con chim). Để nói em đang ở trong công viên, mình dùng 'in' hay 'at'?"
+  },
+  {
+    "topic": "Prepositions of Place",
+    "level": "A1",
+    "student_input": "The cat is on the table, but the dog is on the table",
+    "correct_answer": "The cat is on the table, but the dog is under the table",
+    "explanation": "Chào em, trong câu này em dùng 'on' cho cả hai. Nhưng hãy nhìn hình vẽ (hoặc ngữ cảnh): con mèo ở trên mặt bàn, còn chú chó đang nấp ở phía dưới gầm bàn. Vậy mình dùng 'on' hay 'under' cho chú chó nhỉ?"
+  },
+  {
+    "topic": "Prepositions of Place",
+    "level": "A1",
+    "student_input": "The chair is next the table",
+    "correct_answer": "The chair is next to the table",
+    "explanation": "Em dùng 'next' để chỉ vị trí kế bên là đúng rồi. Tuy nhiên, cụm từ này luôn cần một từ nhỏ đi kèm phía sau để hoàn chỉnh. Em có nhớ sau 'next' phải là từ gì không?"
+  },
+  {
+    "topic": "Prepositions of Place",
+    "level": "A1",
+    "student_input": "The pen is between the book",
+    "correct_answer": "The pen is between the book and the pencil",
+    "explanation": "Chào em, 'between' nghĩa là 'ở giữa'. Để ở giữa được, mình cần ít nhất hai vật hoặc hai người. Vậy cây bút nằm giữa cuốn sách và cái gì nữa em nhỉ?"
+  },
+  {
+    "topic": "Prepositions of Place",
+    "level": "A1",
+    "student_input": "The teacher is behind the students",
+    "correct_answer": "The teacher is in front of the students",
+    "explanation": "Hãy tưởng tượng trong lớp học: Giáo viên thường đứng ở phía trước hay phía sau học sinh để giảng bài nhỉ? Em hãy chọn lại giới từ cho phù hợp nhé."
+  },
+  {
+    "topic": "Prepositions of Place",
+    "level": "A1",
+    "student_input": "The car is in front the house",
+    "correct_answer": "The car is in front of the house",
+    "explanation": "Em dùng 'in front' để chỉ phía trước là đúng rồi. Nhưng cụm từ này cần một giới từ nhỏ ở cuối để kết nối với danh từ. Em nhớ cụm từ đầy đủ là 'in front ...' cái gì không?"
+  },
+  {
+    "topic": "Prepositions of Place",
+    "level": "A1",
+    "student_input": "My house is behind to the park",
+    "correct_answer": "My house is behind the park",
+    "explanation": "Chào em, 'behind' nghĩa là 'phía sau'. Khác với 'next to', từ 'behind' không cần thêm từ 'to' ở phía sau. Em thử bỏ từ 'to' đi xem câu có tự nhiên hơn không?"
+  },
+  {
+    "topic": "Prepositions of Place",
+    "level": "A1",
+    "student_input": "The ball is under the chair",
+    "correct_answer": "The ball is under the chair",
+    "explanation": "Câu này hoàn toàn chính xác! Em đã dùng đúng 'under' để chỉ vật ở phía dưới. Rất tốt!"
+  },
+  {
+    "topic": "Prepositions of Place",
+    "level": "A1",
+    "student_input": "I sit between my mother",
+    "correct_answer": "I sit between my mother and my father",
+    "explanation": "Tương tự như câu trước, 'between' yêu cầu hai đối tượng. Em đang ngồi giữa mẹ và ai nữa? Hãy thêm đối tượng thứ hai vào nhé."
+  },
+  {
+    "topic": "Prepositions of Place",
+    "level": "A1",
+    "student_input": "The apple is next the orange",
+    "correct_answer": "The apple is next to the orange",
+    "explanation": "Hãy kiểm tra lại cụm từ 'next'. Em có quên một từ nhỏ đi kèm để tạo thành 'kế bên' không nhỉ?"
+  },
+  {
+    "topic": "Prepositions of Place",
+    "level": "A1",
+    "student_input": "The shoes are behind of the door",
+    "correct_answer": "The shoes are behind the door",
+    "explanation": "Chào em, 'behind' (phía sau) không cần đi kèm với từ 'of'. Em hãy thử bỏ 'of' đi để câu đúng ngữ pháp hơn nhé."
+  },
+  {
+    "topic": "Prepositions of Place",
+    "level": "A1",
+    "student_input": "The bag is in front the desk",
+    "correct_answer": "The bag is in front of the desk",
+    "explanation": "Em hãy nhớ lại cụm từ chỉ 'phía trước'. Nó gồm 3 từ: 'in', 'front' và một từ nữa. Từ cuối cùng là gì em nhỉ?"
+  },
+  {
+    "topic": "Prepositions of Place",
+    "level": "A1",
+    "student_input": "The lamp is under the table",
+    "correct_answer": "The lamp is on the table",
+    "explanation": "Hãy suy nghĩ xem: cái đèn thường được đặt 'ở dưới' gầm bàn hay 'ở trên' mặt bàn để chiếu sáng? Em hãy chọn lại giới từ nhé."
+  },
+  {
+    "topic": "Prepositions of Place",
+    "level": "A1",
+    "student_input": "My bed is between the wall",
+    "correct_answer": "My bed is between the wall and the window",
+    "explanation": "Chào em, khi dùng 'between', em hãy nhớ nhắc đến hai vật mà cái giường nằm ở giữa nhé. Ngoài bức tường ra thì còn cái gì nữa nhỉ?"
+  },
+  {
+    "topic": "Prepositions of Place",
+    "level": "A1",
+    "student_input": "The dog is next the cat",
+    "correct_answer": "The dog is next to the cat",
+    "explanation": "Em lại quên một từ nhỏ sau 'next' rồi. Em có nhớ đó là từ gì không?"
+  },
+  {
+    "topic": "Prepositions of Place",
+    "level": "A1",
+    "student_input": "The trash can is in front the desk",
+    "correct_answer": "The trash can is in front of the desk",
+    "explanation": "Hãy nhớ lại cụm từ đầy đủ cho 'phía trước'. Em còn thiếu một từ nhỏ ở giữa 'front' và 'the desk'. Đó là từ gì nhỉ?"
+  },
+  {
+    "topic": "Prepositions of Place",
+    "level": "A1",
+    "student_input": "The book is behind to the laptop",
+    "correct_answer": "The book is behind the laptop",
+    "explanation": "Chào em, 'behind' không đi với 'to'. Em hãy thử bỏ từ 'to' đi để câu ngắn gọn và chính xác hơn nhé."
+  },
+  {
+    "topic": "Prepositions of Place",
+    "level": "A1",
+    "student_input": "I am between you and him",
+    "correct_answer": "I am between you and him",
+    "explanation": "Câu này hoàn toàn chính xác! Em đã dùng 'between' với hai đối tượng là 'you' và 'him'. Tuyệt vời!"
+  },
+  {
+    "topic": "Prepositions of Place",
+    "level": "A1",
+    "student_input": "The mirror is on the wall",
+    "correct_answer": "The mirror is on the wall",
+    "explanation": "Chính xác! Gương treo trên bề mặt tường nên dùng 'on' là rất đúng. Chúc mừng em!"
+  },
+  {
+    "topic": "Prepositions of Place",
+    "level": "A1",
+    "student_input": "The cat is under the sofa",
+    "correct_answer": "The cat is under the sofa",
+    "explanation": "Câu này hoàn toàn chính xác! Em đã dùng 'under' để chỉ vị trí ở dưới gầm sofa. Rất tốt!"
+  },
+  {
+    "topic": "Prepositions of Place",
+    "level": "A1",
+    "student_input": "The bank is next the supermarket",
+    "correct_answer": "The bank is next to the supermarket",
+    "explanation": "Hãy kiểm tra lại cụm từ 'next'. Em thiếu một từ nối nhỏ rồi. Em nhớ là từ gì không?"
+  },
+  {
+    "topic": "Prepositions of Place",
+    "level": "A1",
+    "student_input": "The park is between the street",
+    "correct_answer": "The park is between the street and the river",
+    "explanation": "Chào em, 'between' cần hai mốc vị trí. Công viên nằm giữa con đường và cái gì nữa? Em hãy bổ sung nhé."
+  },
+  {
+    "topic": "Prepositions of Place",
+    "level": "A1",
+    "student_input": "The cinema is behind of the mall",
+    "correct_answer": "The cinema is behind the mall",
+    "explanation": " Em hãy nhớ là 'behind' không đi kèm với 'of'. Hãy thử bỏ 'of' đi xem câu có đúng hơn không?"
+  },
+  {
+    "topic": "Prepositions of Place",
+    "level": "A1",
+    "student_input": "I stand in front the line",
+    "correct_answer": "I stand in front of the line",
+    "explanation": "Hãy nhớ cụm từ 'phía trước' gồm 3 từ. Em đang thiếu từ thứ 3 rồi. Đó là từ gì nhỉ?"
+  },
+  {
+    "topic": "Prepositions of Place",
+    "level": "A1",
+    "student_input": "The pillow is on the bed",
+    "correct_answer": "The pillow is on the bed",
+    "explanation": "Câu này chính xác! Gối nằm trên bề mặt giường nên dùng 'on' là đúng rồi."
+  },
+  {
+    "topic": "Prepositions of Place",
+    "level": "A1",
+    "student_input": "The ball is under a chair",
+    "correct_answer": "The ball is under the chair",
+    "explanation": "Về giới từ 'under' là đúng rồi. Nhưng vì chúng ta đang nói về một chiếc ghế cụ thể trong phòng, mình nên dùng 'a' hay 'the' cho chính xác em nhỉ?"
+  },
+  {
+    "topic": "Prepositions of Place",
+    "level": "A1",
+    "student_input": "The computer is next the lamp",
+    "correct_answer": "The computer is next to the lamp",
+    "explanation": "Em lại quên từ 'to' sau 'next' rồi. Hãy thêm nó vào để câu hoàn chỉnh nhé."
+  },
+  {
+    "topic": "Prepositions of Place",
+    "level": "A1",
+    "student_input": "The table is between the two chairs",
+    "correct_answer": "The table is between the two chairs",
+    "explanation": "Câu này hoàn toàn chính xác! 'Between' dùng với 'two chairs' (hai cái ghế) là rất đúng. Tuyệt vời!"
+  },
+  {
+    "topic": "Prepositions of Place",
+    "level": "A1",
+    "student_input": "The car is behind the tree",
+    "correct_answer": "The car is behind the tree",
+    "explanation": "Chính xác! Chiếc xe nằm ở phía sau cái cây nên dùng 'behind' là đúng rồi."
+  },
+  {
+    "topic": "Prepositions of Place",
+    "level": "A1",
+    "student_input": "I am in front the TV",
+    "correct_answer": "I am in front of the TV",
+    "explanation": "Hãy nhớ lại cụm từ đầy đủ để nói 'phía trước'. Em còn thiếu một từ nhỏ ở giữa 'front' và 'the TV' rồi."
+  },
+  {
+    "topic": "Prepositions of Place",
+    "level": "A1",
+    "student_input": "The keys are under to the newspaper",
+    "correct_answer": "The keys are under the newspaper",
+    "explanation": "Chào em, 'under' (ở dưới) không đi cùng với 'to'. Em hãy thử bỏ từ 'to' đi xem sao."
+  },
+  {
+    "topic": "Prepositions of Place",
+    "level": "A1",
+    "student_input": "The shop is next the bakery",
+    "correct_answer": "The shop is next to the bakery",
+    "explanation": "Em hãy nhớ cụm từ 'next to' luôn đi cùng nhau để chỉ vị trí kế bên. Đừng quên từ 'to' nhé!"
+  },
+  {
+    "topic": "Prepositions of Place",
+    "level": "A1",
+    "student_input": "The boy is between the two trees",
+    "correct_answer": "The boy is between the two trees",
+    "explanation": "Câu này hoàn toàn chính xác! Em đã dùng 'between' cho hai cái cây rất tốt."
+  },
+  {
+    "topic": "Prepositions of Place",
+    "level": "A1",
+    "student_input": "The dog is behind to the door",
+    "correct_answer": "The dog is behind the door",
+    "explanation": " 'Behind' không cần từ 'to' đi kèm. Em hãy thử bỏ nó đi để câu đúng ngữ pháp nhé."
+  },
+  {
+    "topic": "Prepositions of Place",
+    "level": "A1",
+    "student_input": "The clock is in front the wall",
+    "correct_answer": "The clock is on the wall",
+    "explanation": "Chào em, cái đồng hồ thường treo 'trên' mặt tường chứ không đứng 'phía trước' bức tường như một người. Vậy mình nên dùng 'in front of' hay 'on' nhỉ?"
+  },
+  {
+    "topic": "Prepositions of Place",
+    "level": "A1",
+    "student_input": "I am next the window",
+    "correct_answer": "I am next to the window",
+    "explanation": "Em hãy nhớ lại cụm từ 'kế bên'. Đừng quên từ 'to' sau 'next' nhé."
+  },
+  {
+    "topic": "Prepositions of Place",
+    "level": "A1",
+    "student_input": "The pen is under the book",
+    "correct_answer": "The pen is under the book",
+    "explanation": "Câu này hoàn toàn chính xác! Cây bút ở dưới cuốn sách nên dùng 'under' là đúng rồi."
+  },
+  {
+    "topic": "Prepositions of Place",
+    "level": "A1",
+    "student_input": "The cat is between the bed",
+    "correct_answer": "The cat is between the bed and the wall",
+    "explanation": " Hãy nhớ rằng 'between' cần hai đối tượng. Con mèo nằm giữa cái giường và cái gì nữa em nhỉ?"
+  },
+  {
+    "topic": "Prepositions of Place",
+    "level": "A1",
+    "student_input": "The car is in front the garage",
+    "correct_answer": "The car is in front of the garage",
+    "explanation": "Em hãy nhớ cụm từ 'in front of'. Em đang thiếu từ 'of' rồi, hãy thêm nó vào nhé."
+  },
+  {
+    "topic": "Prepositions of Place",
+    "level": "A1",
+    "student_input": "The book is behind the laptop",
+    "correct_answer": "The book is behind the laptop",
+    "explanation": "Chính xác! Cuốn sách ở phía sau máy tính nên dùng 'behind' là đúng."
+  },
+  {
+    "topic": "Prepositions of Place",
+    "level": "A1",
+    "student_input": "The baby is next the mother",
+    "correct_answer": "The baby is next to the mother",
+    "explanation": "Một lần nữa, em hãy nhớ cụm từ 'next to' luôn đi cùng nhau nhé."
+  },
+  {
+    "topic": "Prepositions of Place",
+    "level": "A1",
+    "student_input": "The box is between the chair and the table",
+    "correct_answer": "The box is between the chair and the table",
+    "explanation": "Tuyệt vời! Em đã dùng 'between' với hai đối tượng rất chính xác. Chúc mừng em!"
+  }
+]

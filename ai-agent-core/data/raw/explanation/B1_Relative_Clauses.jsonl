@@ -1,0 +1,387 @@
+[
+  {
+    "topic": "Relative Clauses",
+    "level": "B1",
+    "student_input": "The man which lives next door is a famous doctor.",
+    "correct_answer": "The man who lives next door is a famous doctor.",
+    "explanation": "Hãy nhìn vào danh từ 'The man'. Đây là một con người hay một đồ vật? Trong tiếng Anh, chúng ta dùng 'which' cho vật, vậy đối với người, em nên dùng đại từ quan hệ nào nhỉ?"
+  },
+  {
+    "topic": "Relative Clauses",
+    "level": "B1",
+    "student_input": "I lost the book who my teacher lent me last week.",
+    "correct_answer": "I lost the book which/that my teacher lent me last week.",
+    "explanation": "Hãy chú ý từ 'the book'. Cuốn sách là vật, nên chúng ta không thể dùng 'who'. Em hãy thử thay 'who' bằng một từ khác dùng cho đồ vật xem sao."
+  },
+  {
+    "topic": "Relative Clauses",
+    "level": "B1",
+    "student_input": "The girl who I saw her at the party is very shy.",
+    "correct_answer": "The girl who I saw at the party is very shy.",
+    "explanation": "Câu này em dùng 'who' rất chính xác để chỉ 'the girl'. Tuy nhiên, 'who' ở đây đã đóng vai trò là tân ngữ thay thế cho cô gái rồi, nên chúng ta không cần dùng thêm từ 'her' ở phía sau nữa. Em hãy thử bỏ 'her' đi xem câu có gọn hơn không?"
+  },
+  {
+    "topic": "Relative Clauses",
+    "level": "B1",
+    "student_input": "The car who my father bought is very expensive.",
+    "correct_answer": "The car which/that my father bought is very expensive.",
+    "explanation": "Hãy nhìn vào 'The car'. Đây là một đồ vật, vậy dùng 'who' có phù hợp không? Em hãy dùng đại từ quan hệ dành cho vật để sửa lại câu này nhé."
+  },
+  {
+    "topic": "Relative Clauses",
+    "level": "B1",
+    "student_input": "The students which study hard usually get high marks.",
+    "correct_answer": "The students who study hard usually get high marks.",
+    "explanation": " 'The students' (các học sinh) là người, vì vậy dùng 'which' là chưa chính xác. Em hãy thay thế 'which' bằng đại từ quan hệ dành cho người nhé."
+  },
+  {
+    "topic": "Relative Clauses",
+    "level": "B1",
+    "student_input": "This is the house who my grandfather built fifty years ago.",
+    "correct_answer": "This is the house which/that my grandfather built fifty years ago.",
+    "explanation": "Ngôi nhà (the house) là vật, nên chúng ta không dùng 'who'. Em hãy thử dùng 'which' hoặc 'that' để nối câu này xem sao."
+  },
+  {
+    "topic": "Relative Clauses",
+    "level": "B1",
+    "student_input": "The boy who I gave him the candy is crying.",
+    "correct_answer": "The boy who I gave the candy to is crying.",
+    "explanation": "Một lỗi lặp đại từ nữa rồi! 'Who' đã đại diện cho 'the boy', nên em không cần dùng 'him' ở vế sau. Ngoài ra, khi 'cho ai đó cái gì', em nhớ thêm giới từ 'to' ở cuối mệnh đề nhé. Em thử sửa lại xem?"
+  },
+  {
+    "topic": "Relative Clauses",
+    "level": "B1",
+    "student_input": "The cake is delicious which my mother made.",
+    "correct_answer": "The cake which my mother made is delicious.",
+    "explanation": "Mệnh đề quan hệ 'which my mother made' dùng để bổ nghĩa cho 'The cake'. Vì vậy, nó phải đứng ngay sau danh từ mà nó mô tả. Em hãy thử di chuyển cả cụm này lên trước từ 'is' xem sao."
+  },
+  {
+    "topic": "Relative Clauses",
+    "level": "B1",
+    "student_input": "I have a friend who his father is a pilot.",
+    "correct_answer": "I have a friend whose father is a pilot.",
+    "explanation": "Em đang muốn nói về 'cha của người bạn' (sự sở hữu). Trong trường hợp này, chúng ta không dùng 'who + tính từ sở hữu (his)', mà dùng một từ đặc biệt là 'whose'. Em hãy thử thay 'who his' bằng 'whose' nhé."
+  },
+  {
+    "topic": "Relative Clauses",
+    "level": "B1",
+    "student_input": "The movie who I watched last night was very boring.",
+    "correct_answer": "The movie which/that I watched last night was very boring.",
+    "explanation": "Hãy nhìn vào 'The movie'. Bộ phim là vật, nên 'who' không thể dùng được. Em hãy dùng 'which' hoặc 'that' để sửa lại nhé."
+  },
+  {
+    "topic": "Relative Clauses",
+    "level": "B1",
+    "student_input": "The woman that lives next door is a nurse.",
+    "correct_answer": "The woman who/that lives next door is a nurse.",
+    "explanation": "Câu này hoàn toàn chính xác! Em đã dùng 'that' để thay thế cho người một cách linh hoạt. Rất tốt!"
+  },
+  {
+    "topic": "Relative Clauses",
+    "level": "B1",
+    "student_input": "The dress which she wore it at the party was red.",
+    "correct_answer": "The dress which she wore at the party was red.",
+    "explanation": "Hãy chú ý cụm 'wore it'. Vì 'which' đã thay thế cho 'The dress' rồi, nên từ 'it' ở đây trở nên dư thừa. Em hãy bỏ 'it' đi để câu đúng chuẩn ngữ pháp B1 nhé."
+  },
+  {
+    "topic": "Relative Clauses",
+    "level": "B1",
+    "student_input": "The man who he is talking to Mary is my uncle.",
+    "correct_answer": "The man who is talking to Mary is my uncle.",
+    "explanation": "Trong mệnh đề quan hệ, 'who' đã đóng vai trò là chủ ngữ thay cho 'The man' rồi. Vì thế, em không cần dùng thêm 'he' nữa. Em hãy bỏ 'he' đi nhé."
+  },
+  {
+    "topic": "Relative Clauses",
+    "level": "B1",
+    "student_input": "The city which I was born there is very beautiful.",
+    "correct_answer": "The city which I was born in is very beautiful. / The city where I was born is very beautiful.",
+    "explanation": "Em dùng 'which' cho thành phố là đúng. Nhưng khi dùng 'which', em không được dùng từ 'there' để lặp lại nơi chốn. Em hãy bỏ 'there' và thêm giới từ 'in' vào cuối mệnh đề, hoặc dùng từ 'where' thay cho 'which' nhé."
+  },
+  {
+    "topic": "Relative Clauses",
+    "level": "B1",
+    "student_input": "The dogs who are barking are very noisy.",
+    "correct_answer": "The dogs which/that are barking are very noisy.",
+    "explanation": "Hãy suy nghĩ: 'Dogs' là người hay vật? Mặc dù chúng ta yêu quý thú cưng, nhưng trong ngữ pháp, động vật thường đi với đại từ quan hệ nào nhỉ?"
+  },
+  {
+    "topic": "Relative Clauses",
+    "level": "B1",
+    "student_input": "I have a friend who his father is a famous actor.",
+    "correct_answer": "I have a friend whose father is a famous actor.",
+    "explanation": "Hãy nhìn vào cụm 'who his father'. Em đang muốn nói về 'cha của người bạn' (mối quan hệ sở hữu). Trong tiếng Anh, thay vì dùng 'who + tính từ sở hữu', chúng ta có một từ duy nhất để chỉ sự sở hữu cho cả người và vật. Em có nhớ đó là từ gì không?"
+  },
+  {
+    "topic": "Relative Clauses",
+    "level": "B1",
+    "student_input": "The girl who her hair is blonde is my cousin.",
+    "correct_answer": "The girl whose hair is blonde is my cousin.",
+    "explanation": "Em đang mô tả 'mái tóc của cô gái'. Khi muốn nói về đặc điểm thuộc sở hữu của một người trong mệnh đề quan hệ, em nên dùng 'who her' hay dùng từ 'whose'?"
+  },
+  {
+    "topic": "Relative Clauses",
+    "level": "B1",
+    "student_input": "The company who its products are expensive is very successful.",
+    "correct_answer": "The company whose products are expensive is very successful.",
+    "explanation": "Hãy chú ý: 'Whose' không chỉ dùng cho người mà còn dùng cho cả vật/tổ chức để chỉ sở hữu. Ở đây là 'sản phẩm của công ty'. Em hãy thử thay 'who its' bằng 'whose' xem câu có chuyên nghiệp hơn không."
+  },
+  {
+    "topic": "Relative Clauses",
+    "level": "B1",
+    "student_input": "The man whom I saw him yesterday is my new boss.",
+    "correct_answer": "The man whom I saw yesterday is my new boss.",
+    "explanation": "Em dùng 'whom' để chỉ tân ngữ là rất chính xác (vì em là người nhìn, ông ấy là người bị nhìn). Tuy nhiên, 'whom' đã thay thế cho 'the man' rồi, nên từ 'him' ở phía sau trở nên dư thừa. Em hãy bỏ 'him' đi nhé."
+  },
+  {
+    "topic": "Relative Clauses",
+    "level": "B1",
+    "student_input": "The woman who I spoke to her on the phone was very helpful.",
+    "correct_answer": "The woman whom I spoke to on the phone was very helpful.",
+    "explanation": "Trong câu này, người phụ nữ là đối tượng nhận hành động 'nói chuyện'. Để câu văn trang trọng và đúng chuẩn B1, thay vì dùng 'who' và lặp lại 'her', em hãy dùng đại từ quan hệ dành riêng cho tân ngữ là từ gì nhỉ?"
+  },
+  {
+    "topic": "Relative Clauses",
+    "level": "B1",
+    "student_input": "The boy whose live in the red house is my friend.",
+    "correct_answer": "The boy who lives in the red house is my friend.",
+    "explanation": "Hãy cẩn thận! 'Whose' dùng để chỉ sở hữu (ví dụ: whose house). Nhưng ở đây em đang nói về hành động 'sống' (live) của cậu bé. Vậy đây là mệnh đề chỉ sở hữu hay mệnh đề chỉ chủ thể hành động? Em nên dùng 'whose' hay 'who'?"
+  },
+  {
+    "topic": "Relative Clauses",
+    "level": "B1",
+    "student_input": "The student who I gave him the book is very smart.",
+    "correct_answer": "The student to whom I gave the book is very smart. / The student whom I gave the book to is very smart.",
+    "explanation": "Em đang dùng 'who' cho tân ngữ và lại lặp lại 'him'. Để nâng cấp câu này lên trình độ B1, em hãy thử dùng 'whom'. Ngoài ra, hãy nhớ động từ 'give' thường đi với giới từ 'to'. Em hãy thử đặt 'to whom' ở đầu mệnh đề xem sao."
+  },
+  {
+    "topic": "Relative Clauses",
+    "level": "B1",
+    "student_input": "That is the artist who his paintings are exhibited in the gallery.",
+    "correct_answer": "That is the artist whose paintings are exhibited in the gallery.",
+    "explanation": "Hãy phân tích: 'Những bức tranh của người họa sĩ'. Đây là mối quan hệ sở hữu. Em hãy thay cụm 'who his' bằng đại từ quan hệ chỉ sở hữu nhé."
+  },
+  {
+    "topic": "Relative Clauses",
+    "level": "B1",
+    "student_input": "The people who we invited them to the party didn't come.",
+    "correct_answer": "The people whom we invited to the party didn't come.",
+    "explanation": "Lại là lỗi lặp đại từ 'them'! 'Who/Whom' đã đại diện cho 'The people' rồi. Hơn nữa, vì 'The people' là tân ngữ của hành động 'invite', em hãy thử thay 'who' bằng 'whom' để câu trang trọng hơn."
+  },
+  {
+    "topic": "Relative Clauses",
+    "level": "B1",
+    "student_input": "I know a girl who her voice is like an angel.",
+    "correct_answer": "I know a girl whose voice is like an angel.",
+    "explanation": " 'Giọng nói của cô gái' $\rightarrow$ Sở hữu. Em hãy thay 'who her' bằng từ 'whose' để nối hai vế câu một cách mượt mà hơn nhé."
+  },
+  {
+    "topic": "Relative Clauses",
+    "level": "B1",
+    "student_input": "The doctor to who I sent the email has not replied.",
+    "correct_answer": "The doctor to whom I sent the email has not replied.",
+    "explanation": "Khi có giới từ (to, with, for) đứng ngay trước đại từ quan hệ chỉ người, chúng ta bắt buộc phải dùng 'whom' chứ không dùng 'who'. Em hãy sửa 'to who' thành 'to whom' nhé."
+  },
+  {
+    "topic": "Relative Clauses",
+    "level": "B1",
+    "student_input": "The woman whose I met yesterday is a famous writer.",
+    "correct_answer": "The woman whom I met yesterday is a famous writer.",
+    "explanation": "Hãy dừng lại một chút: 'Whose' dùng cho sở hữu, còn ở đây em đang 'gặp gỡ' người phụ nữ (hành động tác động lên đối tượng). Vậy đây là sở hữu hay là tân ngữ? Em nên dùng 'whose' hay 'whom'?"
+  },
+  {
+    "topic": "Relative Clauses",
+    "level": "B1",
+    "student_input": "The dog who its tail is short is very cute.",
+    "correct_answer": "The dog whose tail is short is very cute.",
+    "explanation": " 'Cái đuôi của con chó' $\rightarrow$ Sở hữu. Em hãy dùng 'whose' thay cho 'who its' nhé. Nhớ rằng 'whose' dùng được cho cả động vật!"
+  },
+  {
+    "topic": "Relative Clauses",
+    "level": "B1",
+    "student_input": "The man with who I work is very kind.",
+    "correct_answer": "The man with whom I work is very kind.",
+    "explanation": "Tương tự như lỗi 'to who', khi đi sau giới từ 'with', em phải dùng 'whom' thay vì 'who'. Em hãy sửa lại nhé."
+  },
+  {
+    "topic": "Relative Clauses",
+    "level": "B1",
+    "student_input": "I'm looking for a secretary whose can speak Japanese.",
+    "correct_answer": "I'm looking for a secretary who can speak Japanese.",
+    "explanation": "Hãy phân tích: 'Người thư ký có thể nói tiếng Nhật'. Đây là khả năng của người đó, không phải sự sở hữu của ai. Vậy em nên dùng 'whose' (sở hữu) hay 'who' (chủ thể hành động)?"
+  },
+  {
+    "topic": "Relative Clauses",
+    "level": "B1",
+    "student_input": "The boy whom he stole my pen is in that class.",
+    "correct_answer": "The boy who stole my pen is in that class.",
+    "explanation": "Hãy nhìn kỹ: Cậu bé là người 'thực hiện' hành động ăn trộm (chủ ngữ), không phải là người 'bị' ăn trộm. Vậy em phải dùng 'whom' (tân ngữ) hay 'who' (chủ ngữ)? Và hãy bỏ từ 'he' dư thừa đi nhé."
+  },
+  {
+    "topic": "Relative Clauses",
+    "level": "B1",
+    "student_input": "The car whose I bought last week is broken.",
+    "correct_answer": "The car which/that I bought last week is broken.",
+    "explanation": "Em đang dùng 'whose', nhưng 'whose' chỉ dùng cho sở hữu (ví dụ: chiếc xe có cái lốp bị xẹp). Ở đây em chỉ muốn nói 'chiếc xe mà tôi đã mua'. Em hãy dùng đại từ quan hệ chỉ vật nhé."
+  },
+  {
+    "topic": "Relative Clauses",
+    "level": "B1",
+    "student_input": "The professor to whom I am referring is not here.",
+    "correct_answer": "The professor to whom I am referring is not here.",
+    "explanation": "Hoàn hảo! Em đã dùng 'to whom' một cách chính xác và trang trọng. Rất tuyệt vời!"
+  },
+  {
+    "topic": "Relative Clauses",
+    "level": "B1",
+    "student_input": "The children who their parents are teachers are very disciplined.",
+    "correct_answer": "The children whose parents are teachers are very disciplined.",
+    "explanation": " 'Cha mẹ của những đứa trẻ' $\rightarrow$ Sở hữu. Em hãy thay cụm 'who their' bằng 'whose' để câu văn mạch lạc hơn nhé."
+  },
+  {
+    "topic": "Relative Clauses",
+    "level": "B1",
+    "student_input": "The person whom I trust him the most is my mother.",
+    "correct_answer": "The person whom I trust the most is my mother.",
+    "explanation": "Em dùng 'whom' rất chuẩn vì mẹ là đối tượng được tin tưởng. Nhưng hãy bỏ từ 'him' dư thừa đi vì 'whom' đã thay thế cho đối tượng đó rồi."
+  },
+  {
+    "topic": "Relative Clauses",
+    "level": "B1",
+    "student_input": "I have a neighbor whose house is always messy.",
+    "correct_answer": "I have a neighbor whose house is always messy.",
+    "explanation": "Chính xác! Em đã dùng 'whose' để chỉ sở hữu (ngôi nhà của người hàng xóm) một cách hoàn hảo."
+  },
+  {
+    "topic": "Relative Clauses",
+    "level": "B1",
+    "student_input": "The manager whom spoke to me was very professional.",
+    "correct_answer": "The manager who spoke to me was very professional.",
+    "explanation": "Hãy suy nghĩ: 'The manager' là người 'thực hiện' hành động nói (chủ ngữ). Khi đại từ quan hệ làm chủ ngữ, chúng ta dùng 'who' hay 'whom' nhỉ?"
+  },
+  {
+    "topic": "Relative Clauses",
+    "level": "B1",
+    "student_input": "My father, who is a doctor, lives in Hanoi.",
+    "correct_answer": "My father, who is a doctor, lives in Hanoi.",
+    "explanation": "Hoàn hảo! Em dùng dấu phẩy chính xác vì 'My father' là một đối tượng xác định (ai cũng biết bố em là ai), nên thông tin 'là bác sĩ' chỉ là phần bổ sung. Rất tốt!"
+  },
+  {
+    "topic": "Relative Clauses",
+    "level": "B1",
+    "student_input": "My father who is a doctor lives in Hanoi.",
+    "correct_answer": "My father, who is a doctor, lives in Hanoi.",
+    "explanation": "Hãy suy nghĩ: Em có nhiều hơn một người bố không? Vì 'My father' là đối tượng duy nhất và xác định, thông tin 'is a doctor' chỉ là phần cung cấp thêm. Trong trường hợp này, em cần dùng dấu câu gì để ngăn cách phần thông tin bổ sung này nhỉ?"
+  },
+  {
+    "topic": "Relative Clauses",
+    "level": "B1",
+    "student_input": "London, that is the capital of the UK, is a huge city.",
+    "correct_answer": "London, which is the capital of the UK, is a huge city.",
+    "explanation": "Em dùng dấu phẩy cho 'London' là rất chính xác vì London là tên riêng (đã xác định). Tuy nhiên, có một quy tắc 'vàng' trong mệnh đề không xác định (có dấu phẩy): Chúng ta tuyệt đối không dùng đại từ quan hệ nào? Em hãy thay 'that' bằng 'which' nhé."
+  },
+  {
+    "topic": "Relative Clauses",
+    "level": "B1",
+    "student_input": "The man, who stole my bag, was caught by the police.",
+    "correct_answer": "The man who stole my bag was caught by the police.",
+    "explanation": "Hãy phân tích: Nếu em bỏ cụm 'who stole my bag', người nghe có biết 'The man' là ông nào không? Vì thông tin này là thiết yếu để định danh đối tượng, nên đây là mệnh đề xác định. Em hãy thử bỏ hai dấu phẩy đi xem sao."
+  },
+  {
+    "topic": "Relative Clauses",
+    "level": "B1",
+    "student_input": "My sister who lives in New York is a lawyer.",
+    "correct_answer": "My sister, who lives in New York, is a lawyer. (Nếu chỉ có 1 chị gái) / My sister who lives in New York is a lawyer. (Nếu có nhiều chị gái)",
+    "explanation": "Câu này tùy thuộc vào thực tế: Nếu em chỉ có một người chị gái, thông tin 'lives in New York' là bổ sung $\rightarrow$ cần dấu phẩy. Nhưng nếu em có 3 người chị và muốn chỉ đích danh người ở NY, thì không dùng dấu phẩy. Em đang muốn nói theo trường hợp nào nhỉ?"
+  },
+  {
+    "topic": "Relative Clauses",
+    "level": "B1",
+    "student_input": "Mr. Bean, who is a funny man, is from the UK.",
+    "correct_answer": "Mr. Bean, who is a funny man, is from the UK.",
+    "explanation": "Chính xác! 'Mr. Bean' là tên riêng, nên thông tin theo sau phải được đặt trong hai dấu phẩy. Rất tốt!"
+  },
+  {
+    "topic": "Relative Clauses",
+    "level": "B1",
+    "student_input": "The book, that I bought yesterday, is very interesting.",
+    "correct_answer": "The book that I bought yesterday is very interesting. / The book, which I bought yesterday, is very interesting.",
+    "explanation": "Em đang dùng dấu phẩy, tức là em coi đây là thông tin bổ sung. Nhưng nếu dùng dấu phẩy, em không được dùng 'that'. Em hãy chọn: hoặc là bỏ dấu phẩy để dùng 'that', hoặc thay 'that' bằng 'which' và giữ dấu phẩy nhé."
+  },
+  {
+    "topic": "Relative Clauses",
+    "level": "B1",
+    "student_input": "My car which is blue was stolen last night.",
+    "correct_answer": "My car, which is blue, was stolen last night.",
+    "explanation": "Hãy suy nghĩ: 'My car' đã xác định là xe của em rồi. Việc nó màu xanh là thông tin thêm vào cho sinh động. Vậy em nên dùng dấu câu gì để bao quanh cụm 'which is blue' nhỉ?"
+  },
+  {
+    "topic": "Relative Clauses",
+    "level": "B1",
+    "student_input": "The students who are lazy will fail the exam.",
+    "correct_answer": "The students who are lazy will fail the exam.",
+    "explanation": "Hoàn hảo! Em không dùng dấu phẩy vì em chỉ đang nói về một nhóm học sinh cụ thể (những em lười), chứ không phải tất cả học sinh. Rất chính xác!"
+  },
+  {
+    "topic": "Relative Clauses",
+    "level": "B1",
+    "student_input": "Paris, that is the city of love, is very romantic.",
+    "correct_answer": "Paris, which is the city of love, is very romantic.",
+    "explanation": "Lại là lỗi 'that' trong mệnh đề có dấu phẩy rồi! Em hãy nhớ: 'That' chỉ dùng cho mệnh đề xác định (không dấu phẩy). Với Paris (tên riêng), em hãy dùng 'which' nhé."
+  },
+  {
+    "topic": "Relative Clauses",
+    "level": "B1",
+    "student_input": "The hotel, which we stayed at, was very expensive.",
+    "correct_answer": "The hotel which we stayed at was very expensive.",
+    "explanation": "Hãy phân tích: Nếu em bỏ 'which we stayed at', người nghe có biết em đang nói về khách sạn nào không? Vì đây là thông tin dùng để xác định khách sạn, em hãy bỏ hai dấu phẩy đi nhé."
+  },
+  {
+    "topic": "Relative Clauses",
+    "level": "B1",
+    "student_input": "My mother, who loves cooking, makes great cakes.",
+    "correct_answer": "My mother, who loves cooking, makes great cakes.",
+    "explanation": "Chính xác! 'My mother' là đối tượng xác định, thông tin 'yêu nấu ăn' là bổ sung. Em dùng dấu phẩy rất chuẩn!"
+  },
+  {
+    "topic": "Relative Clauses",
+    "level": "B1",
+    "student_input": "The movie, that I watched last night, was boring.",
+    "correct_answer": "The movie that I watched last night was boring.",
+    "explanation": "Em đang dùng dấu phẩy cho một thông tin thiết yếu (để biết là bộ phim nào). Vì vậy, em hãy bỏ dấu phẩy đi. Khi đó, việc dùng 'that' sẽ trở nên hoàn toàn chính xác."
+  },
+  {
+    "topic": "Relative Clauses",
+    "level": "B1",
+    "student_input": "Mount Everest, which is the highest mountain, is in Nepal.",
+    "correct_answer": "Mount Everest, which is the highest mountain, is in Nepal.",
+    "explanation": "Hoàn hảo! Tên riêng 'Mount Everest' đi kèm với dấu phẩy và 'which'. Rất chuyên nghiệp!"
+  },
+  {
+    "topic": "Relative Clauses",
+    "level": "B1",
+    "student_input": "The person, who called you, didn't leave a name.",
+    "correct_answer": "The person who called you didn't leave a name.",
+    "explanation": "Hãy suy nghĩ: Nếu em bỏ cụm 'who called you', câu sẽ trở thành 'The person didn't leave a name'. Người nghe sẽ hỏi 'Người nào?'. Vì vậy, cụm này là thiết yếu để xác định đối tượng. Em hãy bỏ dấu phẩy nhé."
+  },
+  {
+    "topic": "Relative Clauses",
+    "level": "B1",
+    "student_input": "My dog, that is a golden retriever, is very friendly.",
+    "correct_answer": "My dog, which is a golden retriever, is very friendly.",
+    "explanation": "Em dùng dấu phẩy đúng cho 'My dog', nhưng lại dùng 'that'. Hãy nhớ lại quy tắc: Trong mệnh đề có dấu phẩy, chúng ta dùng 'which' cho vật/động vật thay vì 'that'. Em sửa lại nhé."
+  },
+  {
+    "topic": "Relative Clauses",
+    "level": "B1",
+    "student_input": "The house which has a red door is mine.",
+    "correct_answer": "The house which has a red door is mine.",
+    "explanation": "Chính xác! 'Chiếc nhà có cánh cửa đỏ' là thông tin xác định ngôi nhà đó giữa nhiều ngôi nhà khác, nên không dùng dấu phẩy. Rất tốt!"
+  },
+  {
+    "topic": "Relative Clauses",
+    "level": "B1",
+    "student_input": "My best friend, who I've known for 10 years, is moving to Japan.",
+    "correct_answer": "My best friend, who I've known for 10 years, is moving to Japan.",
+    "explanation": "Tuyệt vời! Em đã nhận ra 'My best friend' là đối tượng xác định và dùng dấu phẩy để thêm thông tin về thời gian quen biết. Rất chuẩn!"
+  }
+]

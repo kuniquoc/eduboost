@@ -1,0 +1,317 @@
+[
+  {
+    "topic": "Countable/Uncountable",
+    "level": "A2",
+    "student_input": "I have many money in my wallet.",
+    "correct_answer": "I have much money in my wallet. / I have a lot of money in my wallet.",
+    "explanation": "Hãy nhìn vào từ 'money'. Em có thể đếm '1 tiền, 2 tiền, 3 tiền' được không? Vì 'money' là danh từ không đếm được, em nên dùng 'many' hay 'much' nhỉ?"
+  },
+  {
+    "topic": "Countable/Uncountable",
+    "level": "A2",
+    "student_input": "There are much people in the park today.",
+    "correct_answer": "There are many people in the park today.",
+    "explanation": "Hãy chú ý từ 'people' (mọi người). Đây là danh từ số nhiều của 'person', chúng ta có thể đếm được từng người một. Vậy em nên dùng 'much' hay 'many' cho danh từ đếm được?"
+  },
+  {
+    "topic": "Countable/Uncountable",
+    "level": "A2",
+    "student_input": "How many milk do you want in your coffee?",
+    "correct_answer": "How much milk do you want in your coffee?",
+    "explanation": "Hãy nghĩ về 'milk' (sữa). Sữa là chất lỏng, chúng ta không thể đếm '1 sữa, 2 sữa'. Với các chất lỏng, chúng ta dùng 'how many' hay 'how much' để hỏi về lượng?"
+  },
+  {
+    "topic": "Countable/Uncountable",
+    "level": "A2",
+    "student_input": "I don't have many time to finish this test.",
+    "correct_answer": "I don't have much time to finish this test.",
+    "explanation": "Trong tiếng Anh, khi nói về 'thời gian' nói chung (time), chúng ta coi đó là danh từ không đếm được. Em hãy thử thay 'many' bằng từ phù hợp hơn cho danh từ không đếm được nhé."
+  },
+  {
+    "topic": "Countable/Uncountable",
+    "level": "A2",
+    "student_input": "He has much friends at school.",
+    "correct_answer": "He has many friends at school.",
+    "explanation": "Hãy nhìn vào từ 'friends'. Em thấy có đuôi '-s' ở cuối, chứng tỏ đây là danh từ đếm được số nhiều. Vậy chúng ta nên dùng 'much' hay 'many'?"
+  },
+  {
+    "topic": "Countable/Uncountable",
+    "level": "A2",
+    "student_input": "How much apples are there in the fridge?",
+    "correct_answer": "How many apples are there in the fridge?",
+    "explanation": "Em có thể đếm '1 quả táo, 2 quả táo' được đúng không? Vì 'apples' là danh từ đếm được, em hãy dùng từ hỏi về lượng chính xác cho loại danh từ này nhé."
+  },
+  {
+    "topic": "Countable/Uncountable",
+    "level": "A2",
+    "student_input": "She gave me many advices for my project.",
+    "correct_answer": "She gave me much advice for my project. / She gave me a lot of advice.",
+    "explanation": "Đây là một từ rất đặc biệt! Trong tiếng Anh, 'advice' (lời khuyên) là danh từ KHÔNG đếm được (không bao giờ có 'advices'). Vì vậy, em không thể dùng 'many'. Em hãy thay bằng từ nào nhỉ?"
+  },
+  {
+    "topic": "Countable/Uncountable",
+    "level": "A2",
+    "student_input": "There isn't many water in the bottle.",
+    "correct_answer": "There isn't much water in the bottle.",
+    "explanation": "Hãy nhìn vào 'water'. Tương tự như sữa, nước là chất lỏng không đếm được. Em nên dùng 'many' hay 'much' cho trường hợp này?"
+  },
+  {
+    "topic": "Countable/Uncountable",
+    "level": "A2",
+    "student_input": "I have too much books in my room.",
+    "correct_answer": "I have too many books in my room.",
+    "explanation": "Hãy kiểm tra từ 'books'. Em có thể đếm từng cuốn sách được, đúng không? Vậy 'books' là danh từ đếm được hay không đếm được? Em hãy chọn 'much' hay 'many' cho đúng nhé."
+  },
+  {
+    "topic": "Countable/Uncountable",
+    "level": "A2",
+    "student_input": "How many information do you have about the trip?",
+    "correct_answer": "How much information do you have about the trip?",
+    "explanation": "Một từ 'bẫy' nữa đây! 'Information' (thông tin) trong tiếng Anh luôn là danh từ không đếm được. Vì vậy, em không thể dùng 'how many'. Em hãy sửa lại xem sao."
+  },
+  {
+    "topic": "Countable/Uncountable",
+    "level": "A2",
+    "student_input": "There are too many sugar in my tea.",
+    "correct_answer": "There is too much sugar in my tea.",
+    "explanation": "Hãy chú ý hai điểm: 1. 'Sugar' (đường) là các hạt li ti không đếm được $\rightarrow$ dùng 'much'. 2. Vì 'sugar' không đếm được, em phải dùng 'There is' thay vì 'There are'. Em thử sửa cả hai nhé!"
+  },
+  {
+    "topic": "Countable/Uncountable",
+    "level": "A2",
+    "student_input": "I don't have many luggage for this trip.",
+    "correct_answer": "I don't have much luggage for this trip.",
+    "explanation": "Từ 'luggage' (hành lý) được coi là một danh từ tập hợp không đếm được trong tiếng Anh. Em hãy dùng 'much' thay vì 'many' nhé."
+  },
+  {
+    "topic": "Countable/Uncountable",
+    "level": "A2",
+    "student_input": "How much students are there in your class?",
+    "correct_answer": "How many students are there in your class?",
+    "explanation": "Hãy nhìn vào 'students'. Em có thể đếm 1, 2, 3 học sinh. Vậy em nên dùng 'how much' hay 'how many'?"
+  },
+  {
+    "topic": "Countable/Uncountable",
+    "level": "A2",
+    "student_input": "He doesn't have many patience with children.",
+    "correct_answer": "He doesn't have much patience with children.",
+    "explanation": "'Patience' (sự kiên nhẫn) là một danh từ trừu tượng, chúng ta không thể đếm được. Em hãy thay 'many' bằng từ phù hợp cho danh từ không đếm được nhé."
+  },
+  {
+    "topic": "Countable/Uncountable",
+    "level": "A2",
+    "student_input": "We have many salt in the soup.",
+    "correct_answer": "We have much salt in the soup. / We have a lot of salt in the soup.",
+    "explanation": "Muối (salt) là một loại gia vị dạng hạt mịn, không đếm được. Em nên dùng 'many' hay 'much' cho trường hợp này?"
+  },
+  {
+    "topic": "Countable/Uncountable",
+    "level": "A2",
+    "student_input": "I don't have some money left.",
+    "correct_answer": "I don't have any money left.",
+    "explanation": "Hãy nhìn vào câu này, đây là một câu phủ định (có 'don't'). Trong câu phủ định, để nói 'không có chút nào', chúng ta dùng 'some' hay 'any' em nhỉ?"
+  },
+  {
+    "topic": "Countable/Uncountable",
+    "level": "A2",
+    "student_input": "Do you have some pens I can borrow?",
+    "correct_answer": "Do you have any pens I can borrow?",
+    "explanation": "Đây là một câu hỏi. Thông thường, trong câu nghi vấn, chúng ta dùng 'any' thay vì 'some'. Em hãy thử thay đổi xem câu có tự nhiên hơn không?"
+  },
+  {
+    "topic": "Countable/Uncountable",
+    "level": "A2",
+    "student_input": "There are any books on the table.",
+    "correct_answer": "There are some books on the table.",
+    "explanation": "Câu này là một câu khẳng định (không có 'not' hay dấu hỏi). Trong câu khẳng định, để nói 'có một vài', chúng ta dùng 'any' hay 'some'?"
+  },
+  {
+    "topic": "Countable/Uncountable",
+    "level": "A2",
+    "student_input": "I didn't buy some apples yesterday.",
+    "correct_answer": "I didn't buy any apples yesterday.",
+    "explanation": "Hãy chú ý 'didn't' (phủ định). Em hãy nhớ lại quy tắc: 'Some' dùng cho câu khẳng định, còn câu phủ định thì dùng từ gì nhỉ?"
+  },
+  {
+    "topic": "Countable/Uncountable",
+    "level": "A2",
+    "student_input": "Would you like any coffee?",
+    "correct_answer": "Would you like some coffee?",
+    "explanation": "Câu này là một câu hỏi, nhưng nó là một 'lời mời' (Would you like...?). Trong trường hợp mời mọc hoặc yêu cầu một cách lịch sự, chúng ta dùng 'any' hay 'some' để thể hiện sự mong đợi câu trả lời 'Yes'?"
+  },
+  {
+    "topic": "Countable/Uncountable",
+    "level": "A2",
+    "student_input": "Can I have any water, please?",
+    "correct_answer": "Can I have some water, please?",
+    "explanation": "Đây là một lời yêu cầu (request) lịch sự. Tương tự như lời mời, khi em yêu cầu điều gì đó, em nên dùng 'any' hay 'some' để câu nói tự nhiên hơn?"
+  },
+  {
+    "topic": "Countable/Uncountable",
+    "level": "A2",
+    "student_input": "She has any friends in this city.",
+    "correct_answer": "She has some friends in this city.",
+    "explanation": "Hãy nhìn vào loại câu này. Đây là câu khẳng định. Vậy chúng ta dùng 'any' hay 'some' để chỉ một vài người bạn?"
+  },
+  {
+    "topic": "Countable/Uncountable",
+    "level": "A2",
+    "student_input": "Is there some milk in the fridge?",
+    "correct_answer": "Is there any milk in the fridge?",
+    "explanation": "Đây là một câu hỏi thông thường để kiểm tra xem có sữa hay không. Trong câu nghi vấn, em nên dùng 'some' hay 'any'?"
+  },
+  {
+    "topic": "Countable/Uncountable",
+    "level": "A2",
+    "student_input": "I don't have some time to talk right now.",
+    "correct_answer": "I don't have any time to talk right now.",
+    "explanation": "Hãy chú ý từ 'don't' (phủ định). Em hãy nhớ lại xem 'some' và 'any', từ nào là 'cặp bài trùng' với câu phủ định nhỉ?"
+  },
+  {
+    "topic": "Countable/Uncountable",
+    "level": "A2",
+    "student_input": "There is any sugar in the jar.",
+    "correct_answer": "There is some sugar in the jar.",
+    "explanation": "Câu này là câu khẳng định. Em hãy thay 'any' bằng từ phù hợp để nói 'có một ít đường' nhé."
+  },
+  {
+    "topic": "Countable/Uncountable",
+    "level": "A2",
+    "student_input": "Do you have some news for me?",
+    "correct_answer": "Do you have any news for me?",
+    "explanation": "Đây là một câu hỏi thông thường. Em hãy thử thay 'some' bằng 'any' để câu đúng ngữ pháp hơn xem sao."
+  },
+  {
+    "topic": "Countable/Uncountable",
+    "level": "A2",
+    "student_input": "I'm sorry, I don't have some information about that.",
+    "correct_answer": "I'm sorry, I don't have any information about that.",
+    "explanation": "Hãy nhìn vào 'don't have'. Trong câu phủ định, chúng ta không dùng 'some'. Em hãy dùng từ nào thay thế nhỉ?"
+  },
+  {
+    "topic": "Countable/Uncountable",
+    "level": "A2",
+    "student_input": "Would you like some cake?",
+    "correct_answer": "Would you like some cake?",
+    "explanation": "Hoàn hảo! Em đã dùng 'some' trong một lời mời (offer) một cách chính xác. Rất tốt!"
+  },
+  {
+    "topic": "Countable/Uncountable",
+    "level": "A2",
+    "student_input": "Are there some students in the classroom?",
+    "correct_answer": "Are there any students in the classroom?",
+    "explanation": "Đây là câu hỏi nghi vấn. Em hãy thay 'some' bằng 'any' để câu đúng chuẩn ngữ pháp nhé."
+  },
+  {
+    "topic": "Countable/Uncountable",
+    "level": "A2",
+    "student_input": "I have any ideas for the party.",
+    "correct_answer": "I have some ideas for the party.",
+    "explanation": "Hãy nhìn vào loại câu. Đây là câu khẳng định, không phải phủ định hay câu hỏi. Vậy em nên dùng 'any' hay 'some'?"
+  },
+  {
+    "topic": "Countable/Uncountable",
+    "level": "A2",
+    "student_input": "I have much friends in my city.",
+    "correct_answer": "I have a lot of friends in my city. / I have many friends in my city.",
+    "explanation": "Về ngữ pháp, 'friends' là danh từ đếm được nên dùng 'many' là đúng. Tuy nhiên, trong câu khẳng định, dùng 'much' nghe rất không tự nhiên. Em có biết cụm từ nào có 3 chữ, dùng được cho cả đếm được và không đếm được để câu nói tự nhiên hơn không?"
+  },
+  {
+    "topic": "Countable/Uncountable",
+    "level": "A2",
+    "student_input": "I have a lot of homeworks for tomorrow.",
+    "correct_answer": "I have a lot of homework for tomorrow.",
+    "explanation": "Em dùng 'a lot of' rất chuẩn! Nhưng hãy nhìn vào từ 'homeworks'. Trong tiếng Anh, 'homework' (bài tập về nhà) là một danh từ không đếm được, nên nó không bao giờ có đuôi '-s'. Em hãy sửa lại nhé."
+  },
+  {
+    "topic": "Countable/Uncountable",
+    "level": "A2",
+    "student_input": "There are many furnitures in the living room.",
+    "correct_answer": "There is a lot of furniture in the living room. / There is much furniture in the living room.",
+    "explanation": "Hãy cẩn thận với từ 'furniture' (đồ nội thất). Đây là một danh từ không đếm được, vì vậy nó không có dạng số nhiều 'furnitures' và không đi với 'many'. Em hãy thử dùng 'a lot of' và sửa lại động từ 'are' cho phù hợp nhé."
+  },
+  {
+    "topic": "Countable/Uncountable",
+    "level": "A2",
+    "student_input": "Do you have many luck in the game?",
+    "correct_answer": "Do you have much luck in the game? / Do you have a lot of luck in the game?",
+    "explanation": "'Luck' (sự may mắn) là một danh từ trừu tượng, chúng ta không thể đếm 1 may mắn, 2 may mắn. Vậy em nên dùng 'many' hay 'much' cho danh từ không đếm được này?"
+  },
+  {
+    "topic": "Countable/Uncountable",
+    "level": "A2",
+    "student_input": "I don't have some money, but I have any coins.",
+    "correct_answer": "I don't have any money, but I have some coins.",
+    "explanation": "Câu này bị ngược hoàn toàn rồi! Vế đầu là phủ định ('don't'), vế sau là khẳng định. Em hãy nhớ lại: 'Some' đi với câu nào và 'Any' đi với câu nào nhỉ?"
+  },
+  {
+    "topic": "Countable/Uncountable",
+    "level": "A2",
+    "student_input": "How many bread do we have left?",
+    "correct_answer": "How much bread do we have left?",
+    "explanation": "Hãy nghĩ về 'bread' (bánh mì). Trong tiếng Anh, bánh mì được coi là một khối không đếm được (trừ khi em nói 'loaves of bread'). Vậy em nên dùng 'how many' hay 'how much'?"
+  },
+  {
+    "topic": "Countable/Uncountable",
+    "level": "A2",
+    "student_input": "There is any milk in the bottle, but there isn't some water.",
+    "correct_answer": "There is some milk in the bottle, but there isn't any water.",
+    "explanation": "Lại là một lỗi đảo ngược! Vế đầu là khẳng định $\rightarrow$ dùng 'some'. Vế sau là phủ định ('isn't') $\rightarrow$ dùng 'any'. Em hãy thử sửa lại cả hai vế nhé."
+  },
+  {
+    "topic": "Countable/Uncountable",
+    "level": "A2",
+    "student_input": "I have a lot of money, but I don't have many time.",
+    "correct_answer": "I have a lot of money, but I don't have much time.",
+    "explanation": "Vế đầu 'a lot of money' rất tuyệt! Nhưng ở vế sau, 'time' (thời gian) là danh từ không đếm được. Em hãy thay 'many' bằng từ phù hợp hơn nhé."
+  },
+  {
+    "topic": "Countable/Uncountable",
+    "level": "A2",
+    "student_input": "How much luggage do you have? I have many luggages.",
+    "correct_answer": "How much luggage do you have? I have a lot of luggage. / I have much luggage.",
+    "explanation": "Câu hỏi 'How much luggage' của em rất chuẩn. Nhưng trong câu trả lời, em lại dùng 'many luggages'. Hãy nhớ 'luggage' là danh từ không đếm được, nên không có '-s' và không đi với 'many'. Em sửa lại nhé."
+  },
+  {
+    "topic": "Countable/Uncountable",
+    "level": "A2",
+    "student_input": "Are there much children in the playground?",
+    "correct_answer": "Are there many children in the playground?",
+    "explanation": "'Children' là số nhiều của 'child', chúng ta đếm được từng đứa trẻ. Vậy em nên dùng 'much' hay 'many' cho câu hỏi này?"
+  },
+  {
+    "topic": "Countable/Uncountable",
+    "level": "A2",
+    "student_input": "I want some any pieces of cake.",
+    "correct_answer": "I want some pieces of cake.",
+    "explanation": "Em đang dùng cả 'some' và 'any' cùng một lúc. Đây là câu khẳng định, vậy em chỉ cần dùng một từ thôi. Từ nào là đúng cho câu khẳng định nhỉ?"
+  },
+  {
+    "topic": "Countable/Uncountable",
+    "level": "A2",
+    "student_input": "There are a lot of salt in the soup.",
+    "correct_answer": "There is a lot of salt in the soup.",
+    "explanation": "Em dùng 'a lot of' cho muối (salt) là hoàn toàn chính xác. Tuy nhiên, vì 'salt' không đếm được, nên động từ to-be phải chia ở số ít. Em hãy sửa 'are' thành từ gì nhỉ?"
+  },
+  {
+    "topic": "Countable/Uncountable",
+    "level": "A2",
+    "student_input": "Do you have some information about the hotel? (Asking a stranger)",
+    "correct_answer": "Do you have any information about the hotel?",
+    "explanation": "Đây là một câu hỏi thông thường để tìm thông tin. Trong trường hợp này, dùng 'any' sẽ tự nhiên hơn 'some'. Em hãy thử thay đổi xem sao."
+  },
+  {
+    "topic": "Countable/Uncountable",
+    "level": "A2",
+    "student_input": "I have many energy today!",
+    "correct_answer": "I have a lot of energy today! / I have much energy today!",
+    "explanation": "'Energy' (năng lượng) là một danh từ không đếm được. Em không thể dùng 'many'. Hãy thử dùng 'a lot of' để câu nói tự nhiên hơn nhé."
+  },
+  {
+    "topic": "Countable/Uncountable",
+    "level": "A2",
+    "student_input": "Would you like any cookies?",
+    "correct_answer": "Would you like some cookies?",
+    "explanation": "Hãy chú ý: Đây là một lời mời (offer) lịch sự. Khi mời ai đó ăn gì, chúng ta dùng 'any' hay 'some' để thể hiện sự thân thiện và mong đợi câu trả lời 'Yes'?"
+  }
+]

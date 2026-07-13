@@ -1,0 +1,702 @@
+[
+  {
+    "topic": "Inversion (Đảo ngữ)",
+    "level": "B2",
+    "student_input": "Never I have seen such a breathtaking view in my entire life.",
+    "correct_answer": "Never have I seen such a breathtaking view in my entire life.",
+    "explanation": "Khi bạn đưa một trạng từ phủ định như 'Never' lên đầu câu để nhấn mạnh, thứ tự của chủ ngữ và động từ có còn giữ nguyên như câu khẳng định không? Hãy thử nhìn vào cấu trúc của một câu hỏi, bạn thấy có sự tương đồng nào ở đây không?"
+  },
+  {
+    "topic": "Inversion (Đảo ngữ)",
+    "level": "B2",
+    "student_input": "Seldom he goes to the gym these days because of his hectic schedule.",
+    "correct_answer": "Seldom does he go to the gym these days because of his hectic schedule.",
+    "explanation": "Bạn đang dùng 'Seldom' ở đầu câu để nhấn mạnh sự hiếm hoi. Trong tiếng Anh, khi một từ phủ định đứng đầu, chúng ta cần một trợ động từ đứng trước chủ ngữ. Vì câu này ở thì Hiện tại đơn với chủ ngữ là 'he', bạn nên mượn trợ động từ nào?"
+  },
+  {
+    "topic": "Inversion (Đảo ngữ)",
+    "level": "B2",
+    "student_input": "Rarely we visit our hometown since we moved to the city.",
+    "correct_answer": "Rarely do we visit our hometown since we moved to the city.",
+    "explanation": "Hãy chú ý từ 'Rarely' ở đầu câu. Khi từ này xuất hiện, câu văn không còn là một câu kể bình thường mà trở thành câu nhấn mạnh. Bạn hãy thử đảo vị trí của chủ ngữ 'we' và thêm một trợ động từ phù hợp với thì Hiện tại đơn xem sao."
+  },
+  {
+    "topic": "Inversion (Đảo ngữ)",
+    "level": "B2",
+    "student_input": "Hardly I had entered the house when the phone started ringing.",
+    "correct_answer": "Hardly had I entered the house when the phone started ringing.",
+    "explanation": "Cấu trúc 'Hardly... when' dùng để diễn tả hai hành động xảy ra nối tiếp nhau gần như tức thì. Khi 'Hardly' đứng đầu câu, bạn cần áp dụng quy tắc đảo ngữ. Bạn hãy thử đưa trợ động từ 'had' lên trước chủ ngữ 'I' xem câu văn sẽ thay đổi thế nào?"
+  },
+  {
+    "topic": "Inversion (Đảo ngữ)",
+    "level": "B2",
+    "student_input": "Little she knew that her life was about to change forever.",
+    "correct_answer": "Little did she know that her life was about to change forever.",
+    "explanation": "Từ 'Little' ở đây không mang nghĩa 'ít' về số lượng, mà mang nghĩa phủ định (không hề biết). Khi 'Little' đứng đầu câu để nhấn mạnh, bạn cần mượn trợ động từ nào để đảo lên trước chủ ngữ 'she' trong thì Quá khứ đơn?"
+  },
+  {
+    "topic": "Inversion (Đảo ngữ)",
+    "level": "B2",
+    "student_input": "Not only he is a talented musician, but he is also a brilliant mathematician.",
+    "correct_answer": "Not only is he a talented musician, but he is also a brilliant mathematician.",
+    "explanation": "Bạn đang dùng cấu trúc 'Not only... but also'. Khi cụm 'Not only' đứng đầu câu, mệnh đề đầu tiên phải được đảo ngữ. Trong câu này, động từ chính là 'is' (động từ to be), vậy bạn sẽ đảo nó lên trước chủ ngữ 'he' như thế nào?"
+  },
+  {
+    "topic": "Inversion (Đảo ngữ)",
+    "level": "B2",
+    "student_input": "Scarcely they had finished their dinner when the guests arrived.",
+    "correct_answer": "Scarcely had they finished their dinner when the guests arrived.",
+    "explanation": "Tương tự như với 'Hardly', 'Scarcely' khi đứng đầu câu yêu cầu một cấu trúc đảo ngữ. Bạn hãy thử di chuyển trợ động từ 'had' lên trước chủ ngữ 'they' để tạo sự nhấn mạnh."
+  },
+  {
+    "topic": "Inversion (Đảo ngữ)",
+    "level": "B2",
+    "student_input": "Never before I have felt so humiliated in front of my peers.",
+    "correct_answer": "Never before have I felt so humiliated in front of my peers.",
+    "explanation": "Hãy nhìn vào cụm 'Never before'. Đây là một trạng từ phủ định mạnh. Khi nó đứng đầu câu, bạn cần thay đổi trật tự của 'I have'. Bạn hãy thử đặt trợ động từ 'have' lên trước chủ ngữ xem sao."
+  },
+  {
+    "topic": "Inversion (Đảo ngữ)",
+    "level": "B2",
+    "student_input": "Seldom the company provides such generous bonuses to its employees.",
+    "correct_answer": "Seldom does the company provide such generous bonuses to its employees.",
+    "explanation": "Bạn đang dùng 'Seldom' để nhấn mạnh. Vì 'the company' là chủ ngữ số ít và câu ở thì Hiện tại đơn, bạn cần mượn trợ động từ nào để thực hiện việc đảo ngữ ở đầu câu?"
+  },
+  {
+    "topic": "Inversion (Đảo ngữ)",
+    "level": "B2",
+    "student_input": "Rarely she admits her mistakes, even when the evidence is overwhelming.",
+    "correct_answer": "Rarely does she admit her mistakes, even when the evidence is overwhelming.",
+    "explanation": "Hãy chú ý từ 'Rarely'. Để biến câu này thành một câu nhấn mạnh đúng chuẩn B2, bạn cần đảo trợ động từ lên trước chủ ngữ 'she'. Bạn sẽ dùng trợ động từ nào cho thì Hiện tại đơn?"
+  },
+  {
+    "topic": "Inversion (Đảo ngữ)",
+    "level": "B2",
+    "student_input": "Not only she speaks four languages, but she also has a PhD in Linguistics.",
+    "correct_answer": "Not only does she speak four languages, but she also has a PhD in Linguistics.",
+    "explanation": "Bạn đang dùng 'Not only' ở đầu câu. Hãy nhớ rằng mệnh đề đi ngay sau 'Not only' phải được đảo ngữ. Với động từ 'speaks' ở thì Hiện tại đơn, bạn cần mượn trợ động từ nào để đưa lên trước chủ ngữ?"
+  },
+  {
+    "topic": "Inversion (Đảo ngữ)",
+    "level": "B2",
+    "student_input": "Little I suspected that he was actually a secret agent.",
+    "correct_answer": "Little did I suspect that he was actually a secret agent.",
+    "explanation": "Khi 'Little' đứng đầu câu với nghĩa 'không hề', bạn cần đảo trợ động từ lên trước chủ ngữ. Vì 'suspected' là thì Quá khứ đơn, bạn hãy dùng trợ động từ nào và đưa động từ 'suspect' về dạng nguyên mẫu?"
+  },
+  {
+    "topic": "Inversion (Đảo ngữ)",
+    "level": "B2",
+    "student_input": "Hardly the sun had risen when the hikers started their journey.",
+    "correct_answer": "Hardly had the sun risen when the hikers started their journey.",
+    "explanation": "Hãy nhìn vào 'Hardly'. Khi nó mở đầu câu, trật tự của 'the sun had risen' cần được thay đổi. Bạn hãy thử đưa 'had' lên trước chủ ngữ 'the sun' xem sao."
+  },
+  {
+    "topic": "Inversion (Đảo ngữ)",
+    "level": "B2",
+    "student_input": "Never has such a complex problem been solved so quickly.",
+    "correct_answer": "Never has such a complex problem been solved so quickly.",
+    "explanation": "Câu này hoàn toàn chính xác. Bạn đã đảo 'has' lên trước chủ ngữ 'such a complex problem'. Thử thách: Nếu bạn muốn nói 'Hiếm khi vấn đề này được giải quyết nhanh như vậy', bạn sẽ thay 'Never' bằng từ nào mà vẫn giữ nguyên cấu trúc đảo ngữ?"
+  },
+  {
+    "topic": "Inversion (Đảo ngữ)",
+    "level": "B2",
+    "student_input": "Seldom I have encountered such a stubborn person in my life.",
+    "correct_answer": "Seldom have I encountered such a stubborn person in my life.",
+    "explanation": "Hãy chú ý từ 'Seldom'. Khi nó đứng đầu câu, bạn cần đảo trợ động từ 'have' lên trước chủ ngữ 'I'. Bạn hãy thử điều chỉnh lại trật tự này để tạo sự nhấn mạnh."
+  },
+  {
+    "topic": "Inversion (Đảo ngữ)",
+    "level": "B2",
+    "student_input": "No sooner the rain had stopped than the sun came out.",
+    "correct_answer": "No sooner had the rain stopped than the sun came out.",
+    "explanation": "Bạn đang dùng cấu trúc 'No sooner... than' để nói về hai sự việc xảy ra liên tiếp. Khi 'No sooner' đứng đầu câu, bạn cần áp dụng quy tắc đảo ngữ cho mệnh đề đầu tiên. Bạn hãy thử di chuyển trợ động từ 'had' lên trước chủ ngữ 'the rain' xem sao."
+  },
+  {
+    "topic": "Inversion (Đảo ngữ)",
+    "level": "B2",
+    "student_input": "Under no circumstances I will accept this offer without a written contract.",
+    "correct_answer": "Under no circumstances will I accept this offer without a written contract.",
+    "explanation": "Cụm 'Under no circumstances' mang nghĩa phủ định tuyệt đối (không trong bất kỳ trường hợp nào). Khi cụm này đứng đầu câu, câu văn phải được đảo ngữ. Bạn hãy thử đưa động từ khuyết thiếu 'will' lên trước chủ ngữ 'I' để tăng tính nhấn mạnh và trang trọng."
+  },
+  {
+    "topic": "Inversion (Đảo ngữ)",
+    "level": "B2",
+    "student_input": "On no account you should open this door during the experiment.",
+    "correct_answer": "On no account should you open this door during the experiment.",
+    "explanation": "Tương tự như 'Under no circumstances', cụm 'On no account' yêu cầu một cấu trúc đảo ngữ khi đứng ở đầu câu. Bạn hãy thử thay đổi vị trí của 'should' và 'you' để câu văn đúng chuẩn phong cách B2."
+  },
+  {
+    "topic": "Inversion (Đảo ngữ)",
+    "level": "B2",
+    "student_input": "Little he realized how much his decision would affect the company's future.",
+    "correct_answer": "Little did he realize how much his decision would affect the company's future.",
+    "explanation": "Từ 'Little' ở đầu câu mang nghĩa phủ định (không hề). Vì 'realized' ở thì Quá khứ đơn, bạn cần mượn trợ động từ nào để đảo lên trước chủ ngữ 'he', và động từ 'realize' lúc này sẽ ở dạng nào?"
+  },
+  {
+    "topic": "Inversion (Đảo ngữ)",
+    "level": "B2",
+    "student_input": "Not only the team lost the match, but they also lost their best player to injury.",
+    "correct_answer": "Not only did the team lose the match, but they also lost their best player to injury.",
+    "explanation": "Bạn đang dùng 'Not only' để nhấn mạnh hai sự kiện tiêu cực. Mệnh đề đầu tiên sau 'Not only' bắt buộc phải đảo ngữ. Với thì Quá khứ đơn, bạn cần dùng trợ động từ nào và đưa động từ 'lose' về dạng nguyên mẫu?"
+  },
+  {
+    "topic": "Inversion (Đảo ngữ)",
+    "level": "B2",
+    "student_input": "Rarely a company of this size makes such a fundamental mistake in its branding.",
+    "correct_answer": "Rarely does a company of this size make such a fundamental mistake in its branding.",
+    "explanation": "Hãy chú ý chủ ngữ là 'a company of this size' (một công ty với quy mô này). Vì đây là chủ ngữ số ít và câu ở thì Hiện tại đơn, bạn cần mượn trợ động từ nào để đảo lên đầu câu sau 'Rarely'?"
+  },
+  {
+    "topic": "Inversion (Đảo ngữ)",
+    "level": "B2",
+    "student_input": "In no way he can be held responsible for the accident.",
+    "correct_answer": "In no way can he be held responsible for the accident.",
+    "explanation": "Cụm 'In no way' (không đời nào/không cách nào) yêu cầu đảo ngữ. Bạn hãy thử đưa động từ khuyết thiếu 'can' lên trước chủ ngữ 'he' để tạo sự nhấn mạnh tuyệt đối."
+  },
+  {
+    "topic": "Inversion (Đảo ngữ)",
+    "level": "B2",
+    "student_input": "Hardly I had finished my presentation when the power went out.",
+    "correct_answer": "Hardly had I finished my presentation when the power went out.",
+    "explanation": "Khi 'Hardly' đứng đầu câu, chúng ta không dùng trật tự câu kể. Bạn hãy thử đưa trợ động từ 'had' lên trước chủ ngữ 'I' để tạo thành cấu trúc đảo ngữ chuẩn."
+  },
+  {
+    "topic": "Inversion (Đảo ngữ)",
+    "level": "B2",
+    "student_input": "Not only she is incredibly talented, but she is also very humble.",
+    "correct_answer": "Not only is she incredibly talented, but she is also very humble.",
+    "explanation": "Bạn đang dùng 'Not only' với động từ 'to be'. Trong trường hợp này, bạn không cần mượn trợ động từ 'do/does' mà chỉ cần đảo trực tiếp 'is' lên trước chủ ngữ. Bạn hãy thử làm điều đó xem sao."
+  },
+  {
+    "topic": "Inversion (Đảo ngữ)",
+    "level": "B2",
+    "student_input": "Seldom we have seen such a level of commitment from a new employee.",
+    "correct_answer": "Seldom have we seen such a level of commitment from a new employee.",
+    "explanation": "Hãy nhìn vào 'Seldom'. Khi nó đứng đầu câu, trợ động từ 'have' trong thì Hiện tại hoàn thành cần được di chuyển đến vị trí nào so với chủ ngữ 'we'?"
+  },
+  {
+    "topic": "Inversion (Đảo ngữ)",
+    "level": "B2",
+    "student_input": "Never before the world had witnessed such a global pandemic.",
+    "correct_answer": "Never before had the world witnessed such a global pandemic.",
+    "explanation": "Cụm 'Never before' nhấn mạnh một sự việc chưa từng xảy ra cho đến thời điểm đó. Bạn hãy áp dụng quy tắc đảo ngữ bằng cách đưa 'had' lên trước 'the world'."
+  },
+  {
+    "topic": "Inversion (Đảo ngữ)",
+    "level": "B2",
+    "student_input": "Scarcely the meeting had begun when it was interrupted by an emergency call.",
+    "correct_answer": "Scarcely had the meeting begun when it was interrupted by an emergency call.",
+    "explanation": "Hãy chú ý từ 'Scarcely'. Tương tự như 'Hardly', khi đứng đầu câu, nó yêu cầu đảo trợ động từ 'had' lên trước chủ ngữ 'the meeting'. Bạn hãy thử điều chỉnh lại xem."
+  },
+  {
+    "topic": "Inversion (Đảo ngữ)",
+    "level": "B2",
+    "student_input": "Little the public knew about the secret negotiations between the two countries.",
+    "correct_answer": "Little did the public know about the secret negotiations between the two countries.",
+    "explanation": "Bạn đang dùng 'Little' với nghĩa 'không hề biết'. Vì 'knew' là thì Quá khứ đơn, bạn hãy mượn trợ động từ 'did' và đưa động từ 'know' về dạng nguyên mẫu ở sau chủ ngữ."
+  },
+  {
+    "topic": "Inversion (Đảo ngữ)",
+    "level": "B2",
+    "student_input": "Not only he speaks fluent French, but he can also write poetry in that language.",
+    "correct_answer": "Not only does he speak fluent French, but he can also write poetry in that language.",
+    "explanation": "Khi 'Not only' mở đầu câu, mệnh đề đầu tiên phải đảo ngữ. Với động từ 'speaks' (Hiện tại đơn), bạn cần mượn trợ động từ nào để đưa lên trước chủ ngữ 'he'?"
+  },
+  {
+    "topic": "Inversion (Đảo ngữ)",
+    "level": "B2",
+    "student_input": "No sooner I had closed my eyes than the alarm clock went off.",
+    "correct_answer": "No sooner had I closed my eyes than the alarm clock went off.",
+    "explanation": "Hãy nhìn vào 'No sooner'. Quy tắc đảo ngữ yêu cầu trợ động từ 'had' phải đứng trước chủ ngữ 'I'. Bạn hãy thử thay đổi trật tự này để câu văn mang sắc thái nhấn mạnh hơn."
+  },
+  {
+    "topic": "Inversion (Đảo ngữ)",
+    "level": "B2",
+    "student_input": "Rarely such a beautiful piece of art can be found in a local gallery.",
+    "correct_answer": "Rarely can such a beautiful piece of art be found in a local gallery.",
+    "explanation": "Hãy chú ý chủ ngữ là 'such a beautiful piece of art' (một tác phẩm nghệ thuật đẹp như thế này). Bạn có một động từ khuyết thiếu 'can' trong câu. Hãy thử đưa 'can' lên trước toàn bộ cụm chủ ngữ này."
+  },
+  {
+    "topic": "Inversion (Đảo ngữ)",
+    "level": "B2",
+    "student_input": "Under no circumstances you should share your password with anyone.",
+    "correct_answer": "Under no circumstances should you share your password with anyone.",
+    "explanation": "Khi 'Under no circumstances' đứng đầu, câu phải đảo ngữ. Bạn hãy đưa 'should' lên trước chủ ngữ 'you' để tạo thành một lời cảnh báo mạnh mẽ và trang trọng."
+  },
+  {
+    "topic": "Inversion (Đảo ngữ)",
+    "level": "B2",
+    "student_input": "Not only the weather was terrible, but the hotel was also dirty.",
+    "correct_answer": "Not only was the weather terrible, but the hotel was also dirty.",
+    "explanation": "Bạn đang dùng 'Not only' với động từ 'to be' (was). Hãy đảo 'was' lên trước 'the weather' để thực hiện đúng quy tắc đảo ngữ."
+  },
+  {
+    "topic": "Inversion (Đảo ngữ)",
+    "level": "B2",
+    "student_input": "Seldom an opportunity like this comes along in a professional career.",
+    "correct_answer": "Seldom does an opportunity like this come along in a professional career.",
+    "explanation": "Hãy nhìn vào chủ ngữ 'an opportunity like this'. Vì câu ở thì Hiện tại đơn, bạn cần mượn trợ động từ 'does' và đưa nó lên trước chủ ngữ. Đừng quên đưa động từ 'comes' về dạng nguyên mẫu."
+  },
+  {
+    "topic": "Inversion (Đảo ngữ)",
+    "level": "B2",
+    "student_input": "Hardly the concert had started when the lead singer lost his voice.",
+    "correct_answer": "Hardly had the concert started when the lead singer lost his voice.",
+    "explanation": "Hãy chú ý từ 'Hardly' ở đầu câu. Bạn hãy thử đảo trợ động từ 'had' lên trước chủ ngữ 'the concert' để tạo thành cấu trúc đảo ngữ đúng."
+  },
+  {
+    "topic": "Inversion (Đảo ngữ)",
+    "level": "B2",
+    "student_input": "In no way should the company I have ignored the employees' concerns.",
+    "correct_answer": "In no way should the company have ignored the employees' concerns.",
+    "explanation": "Câu này có lỗi về vị trí chủ ngữ. Cấu trúc đảo ngữ là: Cụm phủ định $\rightarrow$ Trợ động từ $\rightarrow$ Chủ ngữ $\rightarrow$ Động từ. Bạn hãy thử sắp xếp lại: 'In no way' $\rightarrow$ 'should' $\rightarrow$ 'the company' $\rightarrow$ 'have ignored'."
+  },
+  {
+    "topic": "Inversion (Đảo ngữ)",
+    "level": "B2",
+    "student_input": "Not only he possesses great technical skills, but he also has excellent leadership qualities.",
+    "correct_answer": "Not only does he possess great technical skills, but he also has excellent leadership qualities.",
+    "explanation": "Mệnh đề sau 'Not only' cần được đảo ngữ. Với động từ 'possesses' ở thì Hiện tại đơn, bạn cần mượn trợ động từ 'does' đưa lên trước 'he' và chuyển động từ về dạng nguyên mẫu."
+  },
+  {
+    "topic": "Inversion (Đảo ngữ)",
+    "level": "B2",
+    "student_input": "Rarely I have encountered such a complex legal case.",
+    "correct_answer": "Rarely have I encountered such a complex legal case.",
+    "explanation": "Khi 'Rarely' đứng đầu, trợ động từ 'have' trong thì Hiện tại hoàn thành cần được đảo lên trước chủ ngữ 'I'. Bạn hãy thử điều chỉnh lại."
+  },
+  {
+    "topic": "Inversion (Đảo ngữ)",
+    "level": "B2",
+    "student_input": "No sooner the movie had ended than the audience started cheering.",
+    "correct_answer": "No sooner had the movie ended than the audience started cheering.",
+    "explanation": "Hãy nhớ quy tắc: 'No sooner' $\rightarrow$ 'Đảo ngữ (had + S + V3)' $\rightarrow$ 'than'. Bạn hãy thử đưa 'had' lên trước 'the movie' xem sao."
+  },
+  {
+    "topic": "Inversion (Đảo ngữ)",
+    "level": "B2",
+    "student_input": "Little did I knew that the surprise party was for me.",
+    "correct_answer": "Little did I know that the surprise party was for me.",
+    "explanation": "Bạn đã đảo ngữ đúng với 'did I'. Tuy nhiên, có một quy tắc quan trọng: Sau trợ động từ 'do/does/did', động từ chính phải ở dạng nào? Bạn hãy kiểm tra lại từ 'knew'."
+  },
+  {
+    "topic": "Inversion (Đảo ngữ)",
+    "level": "B2",
+    "student_input": "Only when I arrived home, I realized that I had lost my wallet.",
+    "correct_answer": "Only when I arrived home did I realize that I had lost my wallet.",
+    "explanation": "Hãy phân tích câu này thành hai phần: 1. Điều kiện ('Khi tôi về đến nhà') và 2. Kết quả ('Tôi nhận ra mình mất ví'). Với cấu trúc 'Only when', sự nhấn mạnh nằm ở kết quả. Vậy bạn nên thực hiện đảo ngữ ở phần 'điều kiện' hay phần 'kết quả'? Bạn hãy thử đưa một trợ động từ lên trước chủ ngữ 'I' ở vế thứ hai xem sao."
+  },
+  {
+    "topic": "Inversion (Đảo ngữ)",
+    "level": "B2",
+    "student_input": "Only after did he finish the report, he could leave the office.",
+    "correct_answer": "Only after he finished the report could he leave the office.",
+    "explanation": "Hãy nhìn vào vế đầu: 'Only after did he finish'. Bạn đang đảo ngữ ngay trong mệnh đề chứa 'Only after'. Tuy nhiên, quy tắc của cấu trúc này là: mệnh đề 'Only' là mệnh đề phụ (điều kiện), còn đảo ngữ phải xảy ra ở mệnh đề chính (kết quả). Bạn hãy thử đưa vế đầu về dạng khẳng định và chuyển phần đảo ngữ sang vế 'he could leave' xem sao."
+  },
+  {
+    "topic": "Inversion (Đảo ngữ)",
+    "level": "B2",
+    "student_input": "Not until the sun had set, the temperature began to drop.",
+    "correct_answer": "Not until the sun had set did the temperature begin to drop.",
+    "explanation": "Cấu trúc 'Not until' tương tự như 'Only when'. Nó tạo ra một điều kiện về thời gian. Việc 'nhiệt độ giảm' là kết quả xảy ra sau đó. Vậy bạn cần thực hiện đảo ngữ ở vế nào? Vì 'began' ở thì Quá khứ đơn, bạn hãy mượn trợ động từ nào để đưa lên trước 'the temperature'?"
+  },
+  {
+    "topic": "Inversion (Đảo ngữ)",
+    "level": "B2",
+    "student_input": "Only if you study harder, you will pass the final exam.",
+    "correct_answer": "Only if you study harder will you pass the final exam.",
+    "explanation": "Hãy xem xét sự logic: 'Nếu bạn học chăm hơn' là điều kiện, 'bạn sẽ đỗ' là kết quả. Khi 'Only if' đứng đầu câu, sự nhấn mạnh dồn vào kết quả. Bạn hãy thử đảo động từ khuyết thiếu 'will' lên trước chủ ngữ 'you' ở vế thứ hai để tạo sự nhấn mạnh."
+  },
+  {
+    "topic": "Inversion (Đảo ngữ)",
+    "level": "B2",
+    "student_input": "Only when the manager spoke, the employees understood the gravity of the situation.",
+    "correct_answer": "Only when the manager spoke did the employees understand the gravity of the situation.",
+    "explanation": "Bạn đã viết đúng vế điều kiện 'Only when the manager spoke'. Bây giờ, hãy nhìn vào vế kết quả 'the employees understood'. Để đúng chuẩn đảo ngữ B2, bạn cần đưa trợ động từ nào lên trước 'the employees' và chuyển 'understood' về dạng nguyên mẫu?"
+  },
+  {
+    "topic": "Inversion (Đảo ngữ)",
+    "level": "B2",
+    "student_input": "Not until I saw her face, I recognized who she was.",
+    "correct_answer": "Not until I saw her face did I recognize who she was.",
+    "explanation": "Hãy nhớ lại quy tắc: Với 'Not until', chúng ta không đảo ngữ ở mệnh đề chứa 'until'. Việc đảo ngữ phải nằm ở mệnh đề chính. Bạn hãy thử thay đổi trật tự của 'I recognized' bằng cách thêm trợ động từ 'did' lên trước chủ ngữ xem sao."
+  },
+  {
+    "topic": "Inversion (Đảo ngữ)",
+    "level": "B2",
+    "student_input": "Only after she had apologized, I forgave her.",
+    "correct_answer": "Only after she had apologized did I forgive her.",
+    "explanation": "Bạn đang dùng 'Only after' để chỉ trình tự thời gian. Hành động 'tha thứ' (forgave) là kết quả xảy ra sau. Bạn hãy thực hiện đảo ngữ ở vế kết quả này bằng cách mượn trợ động từ phù hợp với thì Quá khứ đơn."
+  },
+  {
+    "topic": "Inversion (Đảo ngữ)",
+    "level": "B2",
+    "student_input": "Only if the weather is favorable, we will organize the outdoor event.",
+    "correct_answer": "Only if the weather is favorable will we organize the outdoor event.",
+    "explanation": "Hãy phân tích: 'Thời tiết thuận lợi' $\rightarrow$ Điều kiện. 'Tổ chức sự kiện' $\rightarrow$ Kết quả. Trong cấu trúc 'Only if', bạn hãy thử đảo trợ động từ 'will' lên trước chủ ngữ 'we' ở vế kết quả."
+  },
+  {
+    "topic": "Inversion (Đảo ngữ)",
+    "level": "B2",
+    "student_input": "Not until the end of the movie, did I understand the plot twist.",
+    "correct_answer": "Not until the end of the movie did I understand the plot twist.",
+    "explanation": "Câu này về cơ bản là đúng cấu trúc đảo ngữ. Tuy nhiên, hãy lưu ý về dấu phẩy. Trong tiếng Anh, khi dùng 'Not until' dẫn dắt một cụm danh từ, chúng ta thường không đặt dấu phẩy ngăn cách với mệnh đề chính. Bạn hãy thử bỏ dấu phẩy để câu văn mượt mà hơn."
+  },
+  {
+    "topic": "Inversion (Đảo ngữ)",
+    "level": "B2",
+    "student_input": "Only when did the bell ring, the students stood up.",
+    "correct_answer": "Only when the bell rang did the students stand up.",
+    "explanation": "Bạn lại mắc lỗi đảo ngữ sai mệnh đề. 'Only when' là mệnh đề phụ, không được đảo ngữ. Sự đảo ngữ phải nằm ở vế 'the students stood up'. Bạn hãy sửa vế đầu thành câu khẳng định và đảo ngữ vế sau bằng trợ động từ 'did'."
+  },
+  {
+    "topic": "Inversion (Đảo ngữ)",
+    "level": "B2",
+    "student_input": "Only after he had checked the data twice, he submitted the report.",
+    "correct_answer": "Only after he had checked the data twice did he submit the report.",
+    "explanation": "Hãy nhìn vào vế kết quả 'he submitted the report'. Vì 'Only after' đứng đầu câu, vế này bắt buộc phải đảo ngữ. Bạn hãy thử đưa trợ động từ 'did' lên trước 'he' và đưa 'submitted' về dạng nguyên mẫu."
+  },
+  {
+    "topic": "Inversion (Đảo ngữ)",
+    "level": "B2",
+    "student_input": "Not until the rain stopped, did we go outside.",
+    "correct_answer": "Not until the rain stopped did we go outside.",
+    "explanation": "Bạn đã thực hiện đảo ngữ chính xác ở vế sau ('did we go'). Tuy nhiên, giống như câu trước, hãy xem xét lại việc sử dụng dấu phẩy. Trong cấu trúc này, dấu phẩy thường bị coi là không cần thiết và làm ngắt quãng mạch câu."
+  },
+  {
+    "topic": "Inversion (Đảo ngữ)",
+    "level": "B2",
+    "student_input": "Only if you provide the receipt, you can get a refund.",
+    "correct_answer": "Only if you provide the receipt can you get a refund.",
+    "explanation": "Hãy phân tích: Điều kiện là 'cung cấp hóa đơn', kết quả là 'nhận tiền hoàn'. Bạn hãy thử đảo động từ khuyết thiếu 'can' lên trước chủ ngữ 'you' ở vế kết quả."
+  },
+  {
+    "topic": "Inversion (Đảo ngữ)",
+    "level": "B2",
+    "student_input": "Only when he saw the score, he realized he had won.",
+    "correct_answer": "Only when he saw the score did he realize he had won.",
+    "explanation": "Hãy chú ý vế 'he realized'. Vì câu bắt đầu bằng 'Only when', vế này phải được đảo ngữ. Bạn sẽ mượn trợ động từ nào cho thì Quá khứ đơn để đặt trước chủ ngữ 'he'?"
+  },
+  {
+    "topic": "Inversion (Đảo ngữ)",
+    "level": "B2",
+    "student_input": "Not until the sun rose, did the fog disappear.",
+    "correct_answer": "Not until the sun rose did the fog disappear.",
+    "explanation": "Bạn đã đảo ngữ đúng vế sau. Thử thách cho bạn: Hãy viết lại câu này bằng cách dùng 'Only after' thay cho 'Not until'. Cấu trúc đảo ngữ sẽ thay đổi như thế nào?"
+  },
+  {
+    "topic": "Inversion (Đảo ngữ)",
+    "level": "B2",
+    "student_input": "Only after did I read the instructions, I understood how to assemble the shelf.",
+    "correct_answer": "Only after I read the instructions did I understand how to assemble the shelf.",
+    "explanation": "Hãy nhìn lại vế 'Only after did I read'. Bạn đang đảo ngữ ở mệnh đề phụ. Hãy nhớ: 'Only after' + [Mệnh đề khẳng định] $\rightarrow$ [Mệnh đề đảo ngữ]. Bạn hãy điều chỉnh lại vị trí của 'did' sang vế thứ hai."
+  },
+  {
+    "topic": "Inversion (Đảo ngữ)",
+    "level": "B2",
+    "student_input": "Only when the children have fallen asleep, the parents can relax.",
+    "correct_answer": "Only when the children have fallen asleep can the parents relax.",
+    "explanation": "Hãy phân tích vế kết quả 'the parents can relax'. Khi có 'Only when' đứng đầu, bạn hãy thử đưa 'can' lên trước 'the parents' để tạo sự nhấn mạnh."
+  },
+  {
+    "topic": "Inversion (Đảo ngữ)",
+    "level": "B2",
+    "student_input": "Not until the deadline approached, did he start working seriously.",
+    "correct_answer": "Not until the deadline approached did he start working seriously.",
+    "explanation": "Bạn đã đảo ngữ đúng vế sau. Hãy thử thách bản thân: Chuyển câu này sang dạng không đảo ngữ (bắt đầu bằng 'He didn't start...'). Bạn sẽ dùng từ nối nào thay cho 'Not until'?"
+  },
+  {
+    "topic": "Inversion (Đảo ngữ)",
+    "level": "B2",
+    "student_input": "Only if the budget is approved, the project will proceed.",
+    "correct_answer": "Only if the budget is approved will the project proceed.",
+    "explanation": "Hãy nhìn vào vế 'the project will proceed'. Vì có 'Only if' ở đầu, vế này cần được đảo ngữ. Bạn hãy thử đưa 'will' lên trước 'the project'."
+  },
+  {
+    "topic": "Inversion (Đảo ngữ)",
+    "level": "B2",
+    "student_input": "Only when you experience it, you can understand the pain.",
+    "correct_answer": "Only when you experience it can you understand the pain.",
+    "explanation": "Hãy phân tích vế kết quả 'you can understand'. Bạn hãy thử đảo 'can' lên trước 'you' để nhấn mạnh rằng đây là cách duy nhất để hiểu nỗi đau."
+  },
+  {
+    "topic": "Inversion (Đảo ngữ)",
+    "level": "B2",
+    "student_input": "Not until he had finished his degree, he could find a high-paying job.",
+    "correct_answer": "Not until he had finished his degree could he find a high-paying job.",
+    "explanation": "Hãy nhìn vào 'he could find'. 'Not until' yêu cầu đảo ngữ ở mệnh đề chính. Bạn hãy thử đưa 'could' lên trước chủ ngữ 'he' xem sao."
+  },
+  {
+    "topic": "Inversion (Đảo ngữ)",
+    "level": "B2",
+    "student_input": "Only after the police arrived, the crowd started to disperse.",
+    "correct_answer": "Only after the police arrived did the crowd start to disperse.",
+    "explanation": "Hãy nhìn vế kết quả 'the crowd started'. Vì 'Only after' đứng đầu, bạn hãy mượn trợ động từ 'did' và đặt trước 'the crowd'. Đừng quên đưa 'started' về dạng nguyên mẫu."
+  },
+  {
+    "topic": "Inversion (Đảo ngữ)",
+    "level": "B2",
+    "student_input": "Only when did the train arrive, the passengers stood up.",
+    "correct_answer": "Only when the train arrived did the passengers stand up.",
+    "explanation": "Bạn lại đảo ngữ ở vế đầu ('did the train arrive'). Hãy nhớ quy tắc: Vế chứa 'Only when' là vế điều kiện $\rightarrow$ KHÔNG đảo. Vế sau là vế kết quả $\rightarrow$ ĐẢO. Bạn hãy sửa lại theo quy tắc này."
+  },
+  {
+    "topic": "Inversion (Đảo ngữ)",
+    "level": "B2",
+    "student_input": "Not until the clock struck midnight, did the fireworks start.",
+    "correct_answer": "Not until the clock struck midnight did the fireworks start.",
+    "explanation": "Bạn đã đảo ngữ đúng vế sau. Một lần nữa, hãy chú ý bỏ dấu phẩy để câu văn chuyên nghiệp hơn theo phong cách văn viết B2/C1."
+  },
+  {
+    "topic": "Inversion (Đảo ngữ)",
+    "level": "B2",
+    "student_input": "Only if you agree to the terms, we will sign the contract.",
+    "correct_answer": "Only if you agree to the terms will we sign the contract.",
+    "explanation": "Hãy nhìn vế kết quả 'we will sign'. Bạn hãy thử đưa 'will' lên trước 'we' để tạo sự nhấn mạnh tuyệt đối cho điều kiện này."
+  },
+  {
+    "topic": "Inversion (Đảo ngữ)",
+    "level": "B2",
+    "student_input": "Only after they had discussed the issue for hours, they reached a consensus.",
+    "correct_answer": "Only after they had discussed the issue for hours did they reach a consensus.",
+    "explanation": "Hãy nhìn vào 'they reached a consensus'. 'Only after' ở đầu câu yêu cầu vế này phải đảo ngữ. Bạn hãy mượn trợ động từ 'did' cho thì Quá khứ đơn."
+  },
+  {
+    "topic": "Inversion (Đảo ngữ)",
+    "level": "B2",
+    "student_input": "Not until the results were announced, did she believe she had won.",
+    "correct_answer": "Not until the results were announced did she believe she had won.",
+    "explanation": "Bạn đã đảo ngữ đúng vế sau. Hãy thử thay 'Not until' bằng 'Only after'. Câu văn sẽ thay đổi như thế nào?"
+  },
+  {
+    "topic": "Inversion (Đảo ngữ)",
+    "level": "B2",
+    "student_input": "Only when he had read the letter, he began to cry.",
+    "correct_answer": "Only when he had read the letter did he begin to cry.",
+    "explanation": "Hãy nhìn vào vế kết quả 'he began to cry'. 'Only when' ở đầu câu đòi hỏi vế này phải đảo ngữ. Bạn hãy dùng trợ động từ 'did' đặt trước 'he'."
+  },
+  {
+    "topic": "Inversion (Đảo ngữ)",
+    "level": "B2",
+    "student_input": "Only if the temperature drops below zero, the lake will freeze.",
+    "correct_answer": "Only if the temperature drops below zero will the lake freeze.",
+    "explanation": "Hãy nhìn vào 'the lake will freeze'. Hãy thử đưa 'will' lên trước 'the lake' để nhấn mạnh điều kiện duy nhất khiến hồ đóng băng."
+  },
+  {
+    "topic": "Inversion (Đảo ngữ)",
+    "level": "B2",
+    "student_input": "Not until the end of the year, did the company announce its profits.",
+    "correct_answer": "Not until the end of the year did the company announce its profits.",
+    "explanation": "Bạn đã đảo ngữ chính xác ('did the company announce'). Lần cuối, hãy chú ý loại bỏ dấu phẩy để câu văn đúng phong cách trang trọng."
+  },
+  {
+    "topic": "Inversion (Đảo ngữ)",
+    "level": "B2",
+    "student_input": "Should you had any further questions, please do not hesitate to contact me.",
+    "correct_answer": "Should you have any further questions, please do not hesitate to contact me.",
+    "explanation": "Bạn đang sử dụng 'Should' để thay thế cho 'If' trong câu điều kiện loại 1 để tăng tính trang trọng. Tuy nhiên, hãy nhìn vào 'Should you had'. Sau một động từ khuyết thiếu (modal verb) như 'Should', động từ chính phải ở dạng nào?"
+  },
+  {
+    "topic": "Inversion (Đảo ngữ)",
+    "level": "B2",
+    "student_input": "Were I was you, I would think twice before signing that contract.",
+    "correct_answer": "Were I you, I would think twice before signing that contract.",
+    "explanation": "Bạn đang dùng 'Were' để thay thế cho 'If I were' (loại 2). Trong cấu trúc đảo ngữ này, 'Were' đã đóng vai trò là động từ chính. Vậy việc thêm 'was' vào sau chủ ngữ 'I' có khiến câu bị thừa động từ không? Bạn hãy thử lược bỏ 'was' xem sao."
+  },
+  {
+    "topic": "Inversion (Đảo ngữ)",
+    "level": "B2",
+    "student_input": "Had I know about the traffic jam, I would have taken the subway.",
+    "correct_answer": "Had I known about the traffic jam, I would have taken the subway.",
+    "explanation": "Bạn đã thực hiện đảo ngữ 'Had I' (thay cho 'If I had') rất tốt. Tuy nhiên, hãy nhìn vào động từ 'know'. Cấu trúc 'Had + Subject + ____' yêu cầu động từ chính phải ở dạng phân từ hai (V3). Dạng V3 của 'know' là gì?"
+  },
+  {
+    "topic": "Inversion (Đảo ngữ)",
+    "level": "B2",
+    "student_input": "So beautiful the scenery was that we spent hours just staring at it.",
+    "correct_answer": "So beautiful was the scenery that we spent hours just staring at it.",
+    "explanation": "Bạn đang dùng cấu trúc 'So + Adj + ... that' để nhấn mạnh. Khi đưa 'So + Adj' lên đầu câu, trật tự của chủ ngữ 'the scenery' và động từ 'was' cần phải thay đổi như thế nào để tạo thành câu đảo ngữ?"
+  },
+  {
+    "topic": "Inversion (Đảo ngữ)",
+    "level": "B2",
+    "student_input": "Such powerful the storm was that many trees were uprooted.",
+    "correct_answer": "Such was the power of the storm that many trees were uprooted.",
+    "explanation": "Hãy cẩn thận với cấu trúc 'Such'. Khác với 'So' (đi với tính từ), 'Such' thường đi với một cụm danh từ hoặc cấu trúc 'Such was/were + danh từ'. Bạn hãy thử thay đổi 'Such powerful the storm was' thành 'Such was the power of the storm' xem câu văn có tự nhiên hơn không?"
+  },
+  {
+    "topic": "Inversion (Đảo ngữ)",
+    "level": "B2",
+    "student_input": "I don't like spicy food, and nor do I like sour food.",
+    "correct_answer": "I don't like spicy food, and neither do I like sour food.",
+    "explanation": "Câu này về cơ bản là đúng. Tuy nhiên, khi bắt đầu một mệnh đề đồng tình phủ định, 'Neither' thường được dùng phổ biến hơn 'Nor' trong giao tiếp B2. Bạn hãy thử thay 'nor' bằng 'neither' và kiểm tra xem trật tự đảo ngữ 'do I' đã chính xác chưa."
+  },
+  {
+    "topic": "Inversion (Đảo ngữ)",
+    "level": "B2",
+    "student_input": "Had the company invested more in technology, they wouldn't have failed.",
+    "correct_answer": "Had the company invested more in technology, they wouldn't have failed.",
+    "explanation": "Câu này chính xác. Bạn đã đảo 'Had' lên đầu để thay cho 'If'. Thử thách: Nếu bạn muốn chuyển câu này về dạng dùng 'If', bạn sẽ viết như thế nào? Đừng quên chia đúng thì cho mệnh đề 'if'."
+  },
+  {
+    "topic": "Inversion (Đảo ngữ)",
+    "level": "B2",
+    "student_input": "Were the government to increase taxes, there would be widespread protests.",
+    "correct_answer": "Were the government to increase taxes, there would be widespread protests.",
+    "explanation": "Câu này chính xác. Bạn đang dùng cấu trúc 'Were + S + to-V' để nói về một giả định ít có khả năng xảy ra ở hiện tại/tương lai. Bạn có biết cách viết lại câu này bằng 'If' mà vẫn giữ nguyên mức độ trang trọng không?"
+  },
+  {
+    "topic": "Inversion (Đảo ngữ)",
+    "level": "B2",
+    "student_input": "Should it rains tomorrow, the match will be postponed.",
+    "correct_answer": "Should it rain tomorrow, the match will be postponed.",
+    "explanation": "Hãy nhìn vào 'Should it rains'. Khi dùng 'Should' làm trợ động từ đảo ngữ, động từ chính theo sau chủ ngữ phải ở dạng nào (có chia 's/es' hay ở dạng nguyên mẫu)?"
+  },
+  {
+    "topic": "Inversion (Đảo ngữ)",
+    "level": "B2",
+    "student_input": "Had I been more careful, I would not have make that mistake.",
+    "correct_answer": "Had I been more careful, I would not have made that mistake.",
+    "explanation": "Phần đảo ngữ 'Had I been' rất chính xác. Tuy nhiên, hãy nhìn vào vế kết quả: 'would not have make'. Sau 'have' trong cấu trúc câu điều kiện loại 3, động từ 'make' phải chia ở dạng nào?"
+  },
+  {
+    "topic": "Inversion (Đảo ngữ)",
+    "level": "B2",
+    "student_input": "So exhausted the marathon runners were that they collapsed at the finish line.",
+    "correct_answer": "So exhausted were the marathon runners that they collapsed at the finish line.",
+    "explanation": "Khi đưa 'So exhausted' lên đầu câu, bạn cần thực hiện đảo ngữ giữa chủ ngữ 'the marathon runners' và động từ 'were'. Bạn hãy thử thay đổi vị trí của chúng xem sao."
+  },
+  {
+    "topic": "Inversion (Đảo ngữ)",
+    "level": "B2",
+    "student_input": "Nor I have ever seen such a disorganized event.",
+    "correct_answer": "Nor have I ever seen such a disorganized event.",
+    "explanation": "Khi dùng 'Nor' hoặc 'Neither' để bắt đầu một câu đồng tình phủ định, bạn cần áp dụng quy tắc đảo ngữ. Bạn hãy thử đưa trợ động từ 'have' lên trước chủ ngữ 'I' để câu văn đúng cấu trúc."
+  },
+  {
+    "topic": "Inversion (Đảo ngữ)",
+    "level": "B2",
+    "student_input": "Down the hill rolled the giant boulder.",
+    "correct_answer": "Down the hill rolled the giant boulder.",
+    "explanation": "Câu này chính xác. Đây là đảo ngữ vị trí (Directional Inversion). Trong trường hợp này, chúng ta đảo toàn bộ động từ 'rolled' lên trước chủ ngữ mà không cần trợ động từ. Thử thách: Nếu bạn thay 'rolled' bằng 'was rolling', trật tự câu sẽ thay đổi như thế nào?"
+  },
+  {
+    "topic": "Inversion (Đảo ngữ)",
+    "level": "B2",
+    "student_input": "At the end of the street stands a small bookstore.",
+    "correct_answer": "At the end of the street stands a small bookstore.",
+    "explanation": "Câu này đúng. Bạn đã đảo động từ 'stands' lên trước chủ ngữ 'a small bookstore'. Thử thách: Nếu chủ ngữ là số nhiều 'two small bookstores', bạn sẽ chia động từ 'stands' như thế nào?"
+  },
+  {
+    "topic": "Inversion (Đảo ngữ)",
+    "level": "B2",
+    "student_input": "Were I knows the answer, I would tell you.",
+    "correct_answer": "Were I to know the answer, I would tell you.",
+    "explanation": "Bạn đang dùng 'Were' để thay cho 'If I knew'. Trong cấu trúc đảo ngữ loại 2 với các động từ thường (không phải to be), chúng ta không dùng 'Were I + V-past'. Bạn hãy thử dùng cấu trúc 'Were I to + V-bare' xem câu văn có chính xác hơn không?"
+  },
+  {
+    "topic": "Inversion (Đảo ngữ)",
+    "level": "B2",
+    "student_input": "Had the alarm gone off, I would have’t overslept.",
+    "correct_answer": "Had the alarm gone off, I wouldn't have overslept.",
+    "explanation": "Phần đảo ngữ 'Had the alarm gone off' rất tốt. Tuy nhiên, hãy nhìn vào 'would have't'. Để phủ định mệnh đề kết quả, từ 'not' nên đứng ở vị trí nào? Hãy thử dùng 'wouldn't have' xem sao."
+  },
+  {
+    "topic": "Inversion (Đảo ngữ)",
+    "level": "B2",
+    "student_input": "So stressful the job was that he decided to quit after only a month.",
+    "correct_answer": "So stressful was the job that he decided to quit after only a month.",
+    "explanation": "Khi 'So stressful' đứng đầu câu, bạn cần đảo động từ 'was' lên trước chủ ngữ 'the job'. Bạn hãy thử thực hiện thay đổi này."
+  },
+  {
+    "topic": "Inversion (Đảo ngữ)",
+    "level": "B2",
+    "student_input": "Had he not been so arrogant, he might have been more successful.",
+    "correct_answer": "Had he not been so arrogant, he might have been more successful.",
+    "explanation": "Câu này chính xác. Bạn đã dùng đảo ngữ phủ định với 'Had'. Thử thách: Bạn có thể viết lại câu này bằng 'If' mà vẫn giữ nguyên ý nghĩa không?"
+  },
+  {
+    "topic": "Inversion (Đảo ngữ)",
+    "level": "B2",
+    "student_input": "Neither she likes coffee, nor does she like tea.",
+    "correct_answer": "Neither does she like coffee, nor does she like tea.",
+    "explanation": "Hãy nhìn vào vế đầu: 'Neither she likes coffee'. Khi 'Neither' đứng đầu câu, bạn bắt buộc phải đảo ngữ. Vì đây là thì Hiện tại đơn, bạn hãy mượn trợ động từ 'does' và đưa nó lên trước chủ ngữ 'she'."
+  },
+  {
+    "topic": "Inversion (Đảo ngữ)",
+    "level": "B2",
+    "student_input": "Should you need any help, please let me know.",
+    "correct_answer": "Should you need any help, please let me know.",
+    "explanation": "Câu này hoàn toàn chính xác. Đây là cách viết trang trọng cho 'If you need'. Thử thách: Nếu bạn muốn chuyển câu này sang đảo ngữ loại 2 (giả định điều khó xảy ra hơn), bạn sẽ dùng 'Were' như thế nào?"
+  },
+  {
+    "topic": "Inversion (Đảo ngữ)",
+    "level": "B2",
+    "student_input": "Had I seen the warning sign, I would have avoided the danger.",
+    "correct_answer": "Had I seen the warning sign, I would have avoided the danger.",
+    "explanation": "Câu này chính xác. 'Had I seen' $\rightarrow$ 'If I had seen'. Thử thách: Hãy viết lại câu này nhưng sử dụng 'Were' (loại 2) để giả định rằng nếu tôi là một người cẩn thận hơn, tôi sẽ tránh được nguy hiểm."
+  },
+  {
+    "topic": "Inversion (Đảo ngữ)",
+    "level": "B2",
+    "student_input": "So fast did he run that he broke the world record.",
+    "correct_answer": "So fast did he run that he broke the world record.",
+    "explanation": "Câu này đúng. Bạn đã đảo 'did he run' rất chính xác. Thử thách: Nếu bạn thay 'So fast' bằng 'Such a fast runner', bạn sẽ viết lại vế đảo ngữ như thế nào? (Gợi ý: Such was...)"
+  },
+  {
+    "topic": "Inversion (Đảo ngữ)",
+    "level": "B2",
+    "student_input": "Were I to win the lottery, I would travel the world.",
+    "correct_answer": "Were I to win the lottery, I would travel the world.",
+    "explanation": "Câu này chính xác. Đây là cấu trúc đảo ngữ loại 2 trang trọng. Bạn có thể thử chuyển nó về dạng 'If I won...' để so sánh sự khác biệt về phong cách không?"
+  },
+  {
+    "topic": "Inversion (Đảo ngữ)",
+    "level": "B2",
+    "student_input": "Had the weather been better, we would have gone for a picnic.",
+    "correct_answer": "Had the weather been better, we would have gone for a picnic.",
+    "explanation": "Câu này đúng. 'Had the weather been' $\rightarrow$ 'If the weather had been'. Thử thách: Bạn hãy thử viết lại câu này nhưng dùng 'Should' (loại 1) để dự đoán về ngày mai."
+  },
+  {
+    "topic": "Inversion (Đảo ngữ)",
+    "level": "B2",
+    "student_input": "So cold the winter was that the pipes froze.",
+    "correct_answer": "So cold was the winter that the pipes froze.",
+    "explanation": "Hãy nhìn vào 'So cold the winter was'. Đừng quên đảo động từ 'was' lên trước chủ ngữ 'the winter' để tạo thành cấu trúc nhấn mạnh."
+  },
+  {
+    "topic": "Inversion (Đảo ngữ)",
+    "level": "B2",
+    "student_input": "Neither did he answer the phone, nor did he reply to my text.",
+    "correct_answer": "Neither did he answer the phone, nor did he reply to my text.",
+    "explanation": "Câu này chính xác. Bạn đã sử dụng cặp 'Neither... nor...' với đảo ngữ rất mượt mà. Thử thách: Bạn có thể thay 'Neither' bằng 'Not only' để tạo một câu nhấn mạnh khác không?"
+  },
+  {
+    "topic": "Inversion (Đảo ngữ)",
+    "level": "B2",
+    "student_input": "Had she been more experienced, she could have handled the situation better.",
+    "correct_answer": "Had she been more experienced, she could have handled the situation better.",
+    "explanation": "Câu này hoàn toàn đúng. Bạn đã kết hợp đảo ngữ loại 3 với modal verb 'could have'. Thử thách: Chuyển câu này về dạng dùng 'If' xem sao."
+  },
+  {
+    "topic": "Inversion (Đảo ngữ)",
+    "level": "B2",
+    "student_input": "Such an amazing performance it was that the audience stood up and cheered.",
+    "correct_answer": "Such an amazing performance was it that the audience stood up and cheered.",
+    "explanation": "Khi bắt đầu bằng 'Such + cụm danh từ', bạn cần đảo động từ 'was' lên trước chủ ngữ 'it'. Bạn hãy thử điều chỉnh lại trật tự này."
+  },
+  {
+    "topic": "Inversion (Đảo ngữ)",
+    "level": "B2",
+    "student_input": "Under the tree sat an old man reading a book.",
+    "correct_answer": "Under the tree sat an old man reading a book.",
+    "explanation": "Câu này đúng. Đây là đảo ngữ vị trí (Place Inversion) với động từ 'sat'. Thử thách: Nếu bạn thay 'sat' bằng 'was sitting', trật tự câu sẽ thay đổi như thế nào?"
+  },
+  {
+    "topic": "Inversion (Đảo ngữ)",
+    "level": "B2",
+    "student_input": "Should you have any questions, please let me know.",
+    "correct_answer": "Should you have any questions, please let me know.",
+    "explanation": "Câu này hoàn toàn chính xác. 'Should you have' $\rightarrow$ 'If you have'. Bạn đã nắm vững cấu trúc đảo ngữ loại 1. Hãy thử thách mình bằng cách viết một câu đảo ngữ loại 3 với 'Had' cho cùng tình huống này (ví dụ: Nếu bạn đã có câu hỏi, bạn đã hỏi tôi rồi)."
+  }
+]

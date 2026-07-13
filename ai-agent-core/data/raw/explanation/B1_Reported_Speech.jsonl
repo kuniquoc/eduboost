@@ -1,0 +1,506 @@
+[
+  {
+    "topic": "Reported Speech",
+    "level": "B1",
+    "student_input": "He said that he is a student.",
+    "correct_answer": "He said that he was a student.",
+    "explanation": "Hãy nhìn vào động từ dẫn 'said'. Nó đang ở thì quá khứ. Khi lời nói được kể lại trong quá khứ, động từ 'is' ở mệnh đề sau có nên giữ nguyên ở hiện tại không, hay cần lùi một bước về quá khứ em nhỉ?"
+  },
+  {
+    "topic": "Reported Speech",
+    "level": "B1",
+    "student_input": "She told me that she is working on a new project.",
+    "correct_answer": "She told me that she was working on a new project.",
+    "explanation": "Em dùng 'told me' rất chuẩn. Tuy nhiên, hãy xem xét 'is working' (hiện tại tiếp diễn). Khi lùi thì, 'is working' sẽ chuyển thành dạng tiếp diễn ở quá khứ là gì nhỉ?"
+  },
+  {
+    "topic": "Reported Speech",
+    "level": "B1",
+    "student_input": "They said they visited Paris last year.",
+    "correct_answer": "They said they had visited Paris last year.",
+    "explanation": "Hãy phân tích trình tự: Việc họ 'đi Paris' xảy ra trước khi họ 'kể lại' với em. Khi một hành động trong quá khứ đơn (visited) cần lùi thêm một bước nữa, chúng ta sẽ dùng thì nào (thì 'quá khứ của quá khứ') em nhỉ?"
+  },
+  {
+    "topic": "Reported Speech",
+    "level": "B1",
+    "student_input": "He said that he has finished the report.",
+    "correct_answer": "He said that he had finished the report.",
+    "explanation": "Hãy nhìn vào 'has finished' (hiện tại hoàn thành). Theo quy tắc lùi thì, hiện tại hoàn thành sẽ chuyển thành quá khứ hoàn thành. Em hãy thay trợ động từ 'has' bằng từ nào cho đúng?"
+  },
+  {
+    "topic": "Reported Speech",
+    "level": "B1",
+    "student_input": "She said she will call me tomorrow.",
+    "correct_answer": "She said she would call me tomorrow.",
+    "explanation": "Trong câu gián tiếp, khi động từ dẫn là 'said', từ 'will' (chỉ tương lai) không thể giữ nguyên. Em có nhớ 'will' khi lùi thì sẽ biến thành từ gì không?"
+  },
+  {
+    "topic": "Reported Speech",
+    "level": "B1",
+    "student_input": "He told me that he can speak Japanese.",
+    "correct_answer": "He told me that he could speak Japanese.",
+    "explanation": "Tương tự như 'will', động từ khuyết thiếu 'can' cũng cần được lùi thì khi kể lại. Dạng quá khứ của 'can' là gì em nhỉ?"
+  },
+  {
+    "topic": "Reported Speech",
+    "level": "B1",
+    "student_input": "They said that they are playing football now.",
+    "correct_answer": "They said that they were playing football then.",
+    "explanation": "Có hai điểm cần sửa ở đây: 1. 'are playing' cần lùi về quá khứ tiếp diễn. 2. Từ 'now' (bây giờ) khi kể lại trong quá khứ sẽ chuyển thành từ gì nhỉ? Em hãy thử sửa cả hai nhé."
+  },
+  {
+    "topic": "Reported Speech",
+    "level": "B1",
+    "student_input": "She said she didn't like the movie.",
+    "correct_answer": "She said she hadn't liked the movie.",
+    "explanation": "Hãy chú ý 'didn't like' (quá khứ đơn). Khi lùi thì từ quá khứ đơn, chúng ta phải chuyển sang quá khứ hoàn thành (had + V3). Em hãy sửa 'didn't' thành dạng phủ định của quá khứ hoàn thành nhé."
+  },
+  {
+    "topic": "Reported Speech",
+    "level": "B1",
+    "student_input": "He said that he has been to London twice.",
+    "correct_answer": "He said that he had been to London twice.",
+    "explanation": "Một lần nữa, hiện tại hoàn thành 'has been' cần lùi một bước về quá khứ. Em hãy thay đổi trợ động từ 'has' cho phù hợp với quy tắc lùi thì nhé."
+  },
+  {
+    "topic": "Reported Speech",
+    "level": "B1",
+    "student_input": "My mom told me that she is cooking dinner.",
+    "correct_answer": "My mom told me that she was cooking dinner.",
+    "explanation": "Hãy nhìn vào 'is cooking'. Vì mẹ nói điều này trong quá khứ ('told'), nên hành động 'đang nấu ăn' cũng phải được lùi về quá khứ tiếp diễn. Em hãy sửa lại nhé."
+  },
+  {
+    "topic": "Reported Speech",
+    "level": "B1",
+    "student_input": "He told that he was tired.",
+    "correct_answer": "He said that he was tired. / He told me that he was tired.",
+    "explanation": "Hãy chú ý động từ 'told'. Trong tiếng Anh, 'told' bắt buộc phải có một tân ngữ (nói với AI, nói với tôi, nói với cô ấy...). Nếu em không muốn thêm tân ngữ, em nên dùng động từ 'said'. Em chọn cách sửa nào?"
+  },
+  {
+    "topic": "Reported Speech",
+    "level": "B1",
+    "student_input": "She said she will help me with the project.",
+    "correct_answer": "She said she would help me with the project.",
+    "explanation": "Hãy nhớ lại quy tắc lùi thì: 'will' $\rightarrow$ 'would'. Em hãy thay 'will' bằng 'would' để câu kể lại này đúng ngữ pháp nhé."
+  },
+  {
+    "topic": "Reported Speech",
+    "level": "B1",
+    "student_input": "They said they were happy with the result.",
+    "correct_answer": "They said they had been happy with the result.",
+    "explanation": "Đây là một trường hợp khó! 'were happy' là quá khứ đơn. Khi lùi thì, quá khứ đơn sẽ trở thành quá khứ hoàn thành (had been). Em hãy thử sửa lại xem sao."
+  },
+  {
+    "topic": "Reported Speech",
+    "level": "B1",
+    "student_input": "He told me that he can't come to the party.",
+    "correct_answer": "He told me that he couldn't come to the party.",
+    "explanation": "Hãy nhìn vào 'can't'. Khi kể lại lời nói trong quá khứ, 'can't' phải lùi thành dạng quá khứ của nó. Đó là từ gì em nhỉ?"
+  },
+  {
+    "topic": "Reported Speech",
+    "level": "B1",
+    "student_input": "She said that she has already read the book.",
+    "correct_answer": "She said that she had already read the book.",
+    "explanation": "Hiện tại hoàn thành 'has already read' cần được lùi về quá khứ hoàn thành. Em hãy thay 'has' bằng trợ động từ phù hợp cho thì này nhé."
+  },
+  {
+    "topic": "Reported Speech",
+    "level": "B1",
+    "student_input": "I said I am tired.",
+    "correct_answer": "I said I was tired.",
+    "explanation": "Kể cả khi chủ ngữ là 'I', nếu động từ dẫn là 'said' (quá khứ), em vẫn phải lùi thì cho động từ 'am'. Em hãy chuyển nó sang quá khứ nhé."
+  },
+  {
+    "topic": "Reported Speech",
+    "level": "B1",
+    "student_input": "He told me that he will buy a new car next year.",
+    "correct_answer": "He told me that he would buy a new car the following year.",
+    "explanation": "Có hai điểm cần sửa: 1. 'will' cần lùi thành 'would'. 2. 'next year' (năm tới) khi kể lại trong quá khứ sẽ chuyển thành cụm từ nào? (Gợi ý: 'the following...')."
+  },
+  {
+    "topic": "Reported Speech",
+    "level": "B1",
+    "student_input": "She said she doesn't like spicy food.",
+    "correct_answer": "She said she didn't like spicy food.",
+    "explanation": "Hiện tại đơn 'doesn't like' cần lùi một bước về quá khứ. Em hãy chuyển 'doesn't' thành trợ động từ phủ định của thì quá khứ đơn nhé."
+  },
+  {
+    "topic": "Reported Speech",
+    "level": "B1",
+    "student_input": "They told us that they were playing tennis.",
+    "correct_answer": "They told us that they had been playing tennis.",
+    "explanation": "Nếu 'were playing' là quá khứ tiếp diễn, khi lùi thì nó sẽ trở thành quá khứ hoàn thành tiếp diễn (had been V-ing). Em hãy thử sửa lại để nhấn mạnh hành động đã diễn ra trước đó nhé."
+  },
+  {
+    "topic": "Reported Speech",
+    "level": "B1",
+    "student_input": "He said he can't swim.",
+    "correct_answer": "He said he couldn't swim.",
+    "explanation": "Hãy nhớ quy tắc: can $\rightarrow$ could. Em hãy sửa 'can't' thành dạng quá khứ của nó nhé."
+  },
+  {
+    "topic": "Reported Speech",
+    "level": "B1",
+    "student_input": "She said she is coming back soon.",
+    "correct_answer": "She said she was coming back soon.",
+    "explanation": "Hãy nhìn vào 'is coming'. Khi lùi thì, 'is' (hiện tại) phải chuyển sang 'was' (quá khứ). Em hãy sửa lại nhé."
+  },
+  {
+    "topic": "Reported Speech",
+    "level": "B1",
+    "student_input": "My boss told that I was late.",
+    "correct_answer": "My boss told me that I was late. / My boss said that I was late.",
+    "explanation": "Lại là lỗi với từ 'told'! Em hãy nhớ 'told' luôn cần một tân ngữ (told someone). Em hãy thêm 'me' vào sau 'told' hoặc thay 'told' bằng 'said' nhé."
+  },
+  {
+    "topic": "Reported Speech",
+    "level": "B1",
+    "student_input": "They said they have lived here for ten years.",
+    "correct_answer": "They said they had lived there for ten years.",
+    "explanation": "Câu này có hai lỗi: 1. 'have lived' (hiện tại hoàn thành) cần lùi về quá khứ hoàn thành. 2. 'here' (ở đây) khi kể lại phải chuyển thành 'there' (ở đó). Em hãy sửa cả hai nhé."
+  },
+  {
+    "topic": "Reported Speech",
+    "level": "B1",
+    "student_input": "He said that he would be late.",
+    "correct_answer": "He said that he would be late.",
+    "explanation": "Hoàn hảo! 'Would' là dạng lùi thì của 'will'. Em đã vận dụng đúng quy tắc cho câu này. Rất tốt!"
+  },
+  {
+    "topic": "Reported Speech",
+    "level": "B1",
+    "student_input": "She told me she has lost her keys.",
+    "correct_answer": "She told me she had lost her keys.",
+    "explanation": "Hãy nhìn vào 'has lost'. Đây là thì hiện tại hoàn thành. Khi kể lại trong quá khứ, em hãy lùi nó về quá khứ hoàn thành nhé."
+  },
+  {
+    "topic": "Reported Speech",
+    "level": "B1",
+    "student_input": "He said that I am very busy.",
+    "correct_answer": "He said that he was very busy.",
+    "explanation": "Hãy nhìn vào đại từ 'I'. Trong câu trực tiếp, 'I' là anh ấy. Nhưng bây giờ em đang kể lại lời của anh ấy, vậy em không thể dùng 'I' (tôi) được nữa. Em nên thay 'I' bằng đại từ nào để chỉ anh ấy nhỉ?"
+  },
+  {
+    "topic": "Reported Speech",
+    "level": "B1",
+    "student_input": "She told me that she would call me tomorrow.",
+    "correct_answer": "She told me that she would call me the next day.",
+    "explanation": "Về ngữ pháp, câu này gần đúng. Tuy nhiên, hãy suy nghĩ về thời gian: 'tomorrow' là ngày mai tính từ lúc cô ấy nói. Nhưng khi em kể lại câu này vào một ngày khác, 'tomorrow' không còn chính xác nữa. Em nên dùng cụm từ nào để thay thế cho 'tomorrow' trong câu gián tiếp?"
+  },
+  {
+    "topic": "Reported Speech",
+    "level": "B1",
+    "student_input": "They said that they were happy to be here.",
+    "correct_answer": "They said that they were happy to be there.",
+    "explanation": "Hãy chú ý từ 'here' (ở đây). 'Here' chỉ vị trí gần người nói. Nhưng khi em kể lại câu chuyện này ở một nơi khác hoặc thời điểm khác, vị trí đó trở thành 'ở đó'. Em hãy thay 'here' bằng từ nào cho phù hợp?"
+  },
+  {
+    "topic": "Reported Speech",
+    "level": "B1",
+    "student_input": "He said that my car was broken.",
+    "correct_answer": "He said that his car was broken.",
+    "explanation": "Hãy phân tích: Anh ấy nói về chiếc xe của chính anh ấy. Vậy khi em kể lại, 'my car' (xe của tôi) sẽ khiến người nghe hiểu lầm là xe của em. Em nên dùng tính từ sở hữu nào để chỉ chiếc xe của anh ấy?"
+  },
+  {
+    "topic": "Reported Speech",
+    "level": "B1",
+    "student_input": "She told me that she had seen the movie yesterday.",
+    "correct_answer": "She told me that she had seen the movie the day before.",
+    "explanation": "Hãy nhìn vào từ 'yesterday'. Khi kể lại lời nói, 'ngày hôm qua' của người nói không còn là 'ngày hôm qua' của người kể. Em hãy dùng cụm 'the day before' hoặc 'the previous day' để thay thế nhé."
+  },
+  {
+    "topic": "Reported Speech",
+    "level": "B1",
+    "student_input": "They said that we would arrive soon.",
+    "correct_answer": "They said that they would arrive soon.",
+    "explanation": "Hãy xác định lại chủ ngữ: Ai là người sẽ đến? Họ (They) nói rằng họ sẽ đến, vậy tại sao em lại dùng 'we' (chúng tôi)? Em hãy sửa lại đại từ cho khớp với người nói nhé."
+  },
+  {
+    "topic": "Reported Speech",
+    "level": "B1",
+    "student_input": "He told me that he is working now.",
+    "correct_answer": "He told me that he was working then.",
+    "explanation": "Câu này có hai điểm cần sửa: 1. 'is working' cần lùi thì thành 'was working'. 2. Từ 'now' (bây giờ) trong câu gián tiếp phải chuyển thành từ gì để chỉ thời điểm lúc đó? Em hãy thử sửa cả hai nhé."
+  },
+  {
+    "topic": "Reported Speech",
+    "level": "B1",
+    "student_input": "She said that she had finished the work two days ago.",
+    "correct_answer": "She said that she had finished the work two days before.",
+    "explanation": "Hãy chú ý từ 'ago'. Trong câu gián tiếp, khi nói về một khoảng thời gian trước đó, chúng ta không dùng 'ago' mà dùng từ gì nhỉ? (Gợi ý: bắt đầu bằng chữ 'b')."
+  },
+  {
+    "topic": "Reported Speech",
+    "level": "B1",
+    "student_input": "My boss said that I have to finish the report today.",
+    "correct_answer": "My boss said that I had to finish the report that day.",
+    "explanation": "Hãy nhìn vào từ 'today'. Khi kể lại lời sếp, 'hôm nay' của sếp lúc đó giờ đã trở thành 'ngày hôm đó'. Em hãy thay 'today' bằng cụm từ 'that day' nhé."
+  },
+  {
+    "topic": "Reported Speech",
+    "level": "B1",
+    "student_input": "They told us that they will meet us next week.",
+    "correct_answer": "They told us that they would meet us the following week.",
+    "explanation": "Có hai lỗi ở đây: 1. 'will' $\rightarrow$ 'would'. 2. 'next week' (tuần tới) khi kể lại phải chuyển thành 'the following week' hoặc 'the next week'. Em hãy sửa lại cả hai nhé."
+  },
+  {
+    "topic": "Reported Speech",
+    "level": "B1",
+    "student_input": "She said that her parents were visiting her here.",
+    "correct_answer": "She said that her parents were visiting her there.",
+    "explanation": "Hãy nhìn vào từ 'here'. Khi em kể lại lời cô ấy, vị trí đó không còn là 'ở đây' đối với em nữa. Em hãy thay bằng 'there' để câu chính xác hơn về góc nhìn."
+  },
+  {
+    "topic": "Reported Speech",
+    "level": "B1",
+    "student_input": "He told me that he would give me his book tomorrow.",
+    "correct_answer": "He told me that he would give me his book the next day.",
+    "explanation": "Hãy chú ý 'tomorrow'. Em hãy nhớ lại quy tắc chuyển đổi trạng từ chỉ thời gian trong câu gián tiếp. 'Tomorrow' sẽ biến thành cụm từ nào nhỉ?"
+  },
+  {
+    "topic": "Reported Speech",
+    "level": "B1",
+    "student_input": "The teacher said that we should study hard for the test today.",
+    "correct_answer": "The teacher said that we should study hard for the test that day.",
+    "explanation": "Hãy phân tích mốc thời gian. 'Today' trong lời nói của giáo viên giờ đã trở thành quá khứ đối với em. Em hãy dùng 'that day' để thay thế nhé."
+  },
+  {
+    "topic": "Reported Speech",
+    "level": "B1",
+    "student_input": "She said that I was her best friend.",
+    "correct_answer": "She said that she was her best friend. / She said that [Name] was her best friend.",
+    "explanation": "Hãy cẩn thận với đại từ! Nếu cô ấy nói 'You are my best friend' với một người khác, và em kể lại, thì em không thể dùng 'I' trừ khi người đó chính là em. Em hãy kiểm tra lại xem ai là người bạn thân nhất trong câu này?"
+  },
+  {
+    "topic": "Reported Speech",
+    "level": "B1",
+    "student_input": "He told me that he had been living there since 2010.",
+    "correct_answer": "He told me that he had been living there since 2010.",
+    "explanation": "Hoàn hảo! Em đã thay 'here' thành 'there' và lùi thì chính xác. Các mốc năm cụ thể (như 2010) không cần thay đổi. Rất tốt!"
+  },
+  {
+    "topic": "Reported Speech",
+    "level": "B1",
+    "student_input": "They said that they would arrive here at 5 PM.",
+    "correct_answer": "They said that they would arrive there at 5 PM.",
+    "explanation": "Một lần nữa, hãy nhìn vào từ 'here'. Trong câu gián tiếp, em hãy chuyển 'here' thành 'there' để phù hợp với góc nhìn của người kể chuyện."
+  },
+  {
+    "topic": "Reported Speech",
+    "level": "B1",
+    "student_input": "She told me that she had forgotten her keys yesterday.",
+    "correct_answer": "She told me that she had forgotten her keys the previous day.",
+    "explanation": "Hãy nhìn vào từ 'yesterday'. Trong câu gián tiếp, em có hai lựa chọn để thay thế từ này: 'the day before' hoặc 'the previous day'. Em hãy thử chọn một cụm từ nhé."
+  },
+  {
+    "topic": "Reported Speech",
+    "level": "B1",
+    "student_input": "He said that he is coming to the party tonight.",
+    "correct_answer": "He said that he was coming to the party that night.",
+    "explanation": "Câu này có hai điểm cần sửa: 1. 'is coming' lùi thành 'was coming'. 2. 'tonight' (tối nay) lùi thành 'that night' (tối hôm đó). Em hãy sửa lại cả hai nhé."
+  },
+  {
+    "topic": "Reported Speech",
+    "level": "B1",
+    "student_input": "They said they would call us the following day.",
+    "correct_answer": "They said they would call us the following day.",
+    "explanation": "Tuyệt vời! Em đã dùng 'the following day' thay cho 'tomorrow' một cách chính xác. Rất chuyên nghiệp!"
+  },
+  {
+    "topic": "Reported Speech",
+    "level": "B1",
+    "student_input": "She said that her father will visit her tomorrow.",
+    "correct_answer": "She said that her father would visit her the next day.",
+    "explanation": "Hãy kiểm tra hai chỗ: 1. 'will' $\rightarrow$ 'would'. 2. 'tomorrow' $\rightarrow$ 'the next day'. Em hãy sửa lại cho đúng quy tắc câu gián tiếp nhé."
+  },
+  {
+    "topic": "Reported Speech",
+    "level": "B1",
+    "student_input": "He told me that he had finished the work two hours ago.",
+    "correct_answer": "He told me that he had finished the work two hours before.",
+    "explanation": "Hãy nhìn vào từ 'ago'. Trong câu gián tiếp, chúng ta không dùng 'ago' mà thay bằng từ gì để chỉ thời gian trước đó nhỉ? Em hãy sửa lại nhé."
+  },
+  {
+    "topic": "Reported Speech",
+    "level": "B1",
+    "student_input": "She said that she was happy with her new job now.",
+    "correct_answer": "She said that she was happy with her new job then.",
+    "explanation": "Hãy chú ý từ 'now'. Trong lời nói trực tiếp, 'now' là bây giờ. Nhưng khi kể lại, nó phải chuyển thành 'then' (lúc đó). Em hãy thay đổi nhé."
+  },
+  {
+    "topic": "Reported Speech",
+    "level": "B1",
+    "student_input": "He asked me if do I like coffee.",
+    "correct_answer": "He asked me if I liked coffee.",
+    "explanation": "Hãy nhìn vào cụm 'if do I like'. Khi chúng ta dùng 'if' để kể lại một câu hỏi, câu đó không còn là câu hỏi trực tiếp nữa mà trở thành một câu kể. Vậy em có cần dùng trợ động từ 'do' ở đây không? Và đừng quên lùi thì cho động từ 'like' nhé!"
+  },
+  {
+    "topic": "Reported Speech",
+    "level": "B1",
+    "student_input": "She asked me where did I live.",
+    "correct_answer": "She asked me where I lived.",
+    "explanation": "Trong câu gián tiếp, sau từ để hỏi (where, what, why...), chúng ta không dùng đảo ngữ (không dùng 'did I'). Em hãy đưa chủ ngữ 'I' lên trước và chia động từ 'live' ở thì quá khứ nhé."
+  },
+  {
+    "topic": "Reported Speech",
+    "level": "B1",
+    "student_input": "My boss asked me why was I late.",
+    "correct_answer": "My boss asked me why I was late.",
+    "explanation": "Hãy chú ý trật tự từ: 'why was I'. Vì đây là câu kể lại, em hãy chuyển nó về trật tự của một câu bình thường (Chủ ngữ + Động từ). Em hãy đảo vị trí của 'was' và 'I' xem sao."
+  },
+  {
+    "topic": "Reported Speech",
+    "level": "B1",
+    "student_input": "He asked me if I am a student.",
+    "correct_answer": "He asked me if I was a student.",
+    "explanation": "Về trật tự từ em làm rất tốt (không dùng đảo ngữ). Tuy nhiên, hãy nhìn lại động từ 'am'. Vì động từ dẫn là 'asked' (quá khứ), em cần lùi thì cho 'am' thành từ gì nhỉ?"
+  },
+  {
+    "topic": "Reported Speech",
+    "level": "B1",
+    "student_input": "She asked me whether I can swim.",
+    "correct_answer": "She asked me whether I could swim.",
+    "explanation": "Em dùng 'whether' rất chuẩn! Tuy nhiên, hãy kiểm tra lại từ 'can'. Trong câu gián tiếp, 'can' phải lùi về dạng quá khứ là gì em nhỉ?"
+  },
+  {
+    "topic": "Reported Speech",
+    "level": "B1",
+    "student_input": "He asked me what is my name.",
+    "correct_answer": "He asked me what my name was.",
+    "explanation": "Hãy nhớ quy tắc: 'Từ để hỏi + Chủ ngữ + Động từ'. Em hãy đưa 'my name' lên trước và lùi thì cho 'is' nhé."
+  },
+  {
+    "topic": "Reported Speech",
+    "level": "B1",
+    "student_input": "The teacher asked if we have done the homework.",
+    "correct_answer": "The teacher asked if we had done the homework.",
+    "explanation": "Câu này thiếu một bước lùi thì. 'Have done' (hiện tại hoàn thành) khi kể lại phải chuyển thành quá khứ hoàn thành. Em hãy thay 'have' bằng trợ động từ nào?"
+  },
+  {
+    "topic": "Reported Speech",
+    "level": "B1",
+    "student_input": "She asked me how was the weather in London.",
+    "correct_answer": "She asked me how the weather in London was.",
+    "explanation": "Lại là lỗi đảo ngữ rồi! Hãy nhớ: Trong câu gián tiếp, động từ luôn đứng SAU chủ ngữ. Em hãy di chuyển 'was' xuống cuối mệnh đề nhé."
+  },
+  {
+    "topic": "Reported Speech",
+    "level": "B1",
+    "student_input": "He asked me if I will come to the party.",
+    "correct_answer": "He asked me if I would come to the party.",
+    "explanation": "Hãy nhìn vào từ 'will'. Khi kể lại một câu hỏi trong quá khứ, 'will' phải lùi thành từ gì em nhỉ?"
+  },
+  {
+    "topic": "Reported Speech",
+    "level": "B1",
+    "student_input": "The doctor asked me where do I feel pain.",
+    "correct_answer": "The doctor asked me where I felt pain.",
+    "explanation": "Hãy bỏ trợ động từ 'do' đi vì đây không còn là câu hỏi trực tiếp. Sau đó, em hãy chia động từ 'feel' ở thì quá khứ nhé."
+  },
+  {
+    "topic": "Reported Speech",
+    "level": "B1",
+    "student_input": "My mom told me close the window.",
+    "correct_answer": "My mom told me to close the window.",
+    "explanation": "Khi kể lại một mệnh lệnh, chúng ta không dùng một mệnh đề đầy đủ mà dùng cấu trúc: 'told + someone + To-V'. Em hãy thêm 'chiếc cầu nối' To vào trước động từ 'close' nhé."
+  },
+  {
+    "topic": "Reported Speech",
+    "level": "B1",
+    "student_input": "The teacher asked us not smoke in class.",
+    "correct_answer": "The teacher asked us not to smoke in class.",
+    "explanation": "Để kể lại một lời yêu cầu 'đừng làm gì', chúng ta dùng cấu trúc 'not + To-V'. Em hãy thêm từ 'to' vào sau 'not' nhé."
+  },
+  {
+    "topic": "Reported Speech",
+    "level": "B1",
+    "student_input": "He told me that I should go home.",
+    "correct_answer": "He told me to go home.",
+    "explanation": "Câu của em không sai, nhưng dùng 'that I should' làm câu bị dài dòng. Với câu mệnh lệnh, cách dùng 'told me to go' sẽ tự nhiên và đúng chất B1 hơn. Em thử sửa lại nhé."
+  },
+  {
+    "topic": "Reported Speech",
+    "level": "B1",
+    "student_input": "My dad told me don't stay up late.",
+    "correct_answer": "My dad told me not to stay up late.",
+    "explanation": "Hãy cẩn thận! 'Don't' chỉ dùng trong câu mệnh lệnh trực tiếp. Khi kể lại gián tiếp, 'don't' phải chuyển thành 'not to'. Em hãy sửa lại nhé."
+  },
+  {
+    "topic": "Reported Speech",
+    "level": "B1",
+    "student_input": "She asked me to please help her.",
+    "correct_answer": "She asked me to help her.",
+    "explanation": "Trong câu gián tiếp, từ 'please' không còn cần thiết vì bản thân từ 'asked' đã thể hiện sự lịch sự rồi. Em hãy bỏ 'please' đi để câu gọn gàng hơn."
+  },
+  {
+    "topic": "Reported Speech",
+    "level": "B1",
+    "student_input": "The policeman told the man stop the car.",
+    "correct_answer": "The policeman told the man to stop the car.",
+    "explanation": "Lại thiếu 'chiếc cầu nối' rồi! Em hãy nhớ cấu trúc 'told + object + To-V'. Em hãy thêm 'to' vào trước 'stop' nhé."
+  },
+  {
+    "topic": "Reported Speech",
+    "level": "B1",
+    "student_input": "She told me to not be late.",
+    "correct_answer": "She told me not to be late.",
+    "explanation": "Hãy chú ý vị trí của 'not'. Trong cấu trúc mệnh lệnh gián tiếp, 'not' phải đứng TRƯỚC 'to'. Em hãy đảo vị trí của 'to' và 'not' nhé."
+  },
+  {
+    "topic": "Reported Speech",
+    "level": "B1",
+    "student_input": "He asked me if I could help him, and I said yes.",
+    "correct_answer": "He asked me if I could help him, and I said yes.",
+    "explanation": "Hoàn hảo! Em đã dùng 'if' cho câu hỏi Yes/No, lùi thì 'could' và không dùng đảo ngữ. Rất chính xác!"
+  },
+  {
+    "topic": "Reported Speech",
+    "level": "B1",
+    "student_input": "My friend asked me what was I doing at that time.",
+    "correct_answer": "My friend asked me what I was doing at that time.",
+    "explanation": "Hãy nhìn vào 'what was I'. Lại là lỗi đảo ngữ! Em hãy đưa chủ ngữ 'I' lên trước động từ 'was' để biến nó thành một câu kể nhé."
+  },
+  {
+    "topic": "Reported Speech",
+    "level": "B1",
+    "student_input": "The boss told us to work harder.",
+    "correct_answer": "The boss told us to work harder.",
+    "explanation": "Chính xác! Cấu trúc 'told + us + to-V' được dùng hoàn toàn đúng cho một câu mệnh lệnh. Rất tốt!"
+  },
+  {
+    "topic": "Reported Speech",
+    "level": "B1",
+    "student_input": "She asked me if I have a pen.",
+    "correct_answer": "She asked me if I had a pen.",
+    "explanation": "Em dùng 'if' rất chuẩn. Tuy nhiên, đừng quên lùi thì cho động từ 'have' vì đây là câu kể lại trong quá khứ. Em hãy chuyển 'have' sang 'had' nhé."
+  },
+  {
+    "topic": "Reported Speech",
+    "level": "B1",
+    "student_input": "He asked me where did I go on holiday.",
+    "correct_answer": "He asked me where I had gone on holiday.",
+    "explanation": "Câu này có hai lỗi: 1. Bỏ 'did' vì không đảo ngữ. 2. Vì 'đi nghỉ' xảy ra trước khi 'hỏi', nên em hãy lùi thì 'go' về Quá khứ hoàn thành (had gone) nhé."
+  },
+  {
+    "topic": "Reported Speech",
+    "level": "B1",
+    "student_input": "The nurse told me not to smoke.",
+    "correct_answer": "The nurse told me not to smoke.",
+    "explanation": "Hoàn hảo! Cấu trúc phủ định 'not to-V' được dùng chính xác cho một lời khuyên/mệnh lệnh. Rất tốt!"
+  },
+  {
+    "topic": "Reported Speech",
+    "level": "B1",
+    "student_input": "She asked me if I was coming to her party.",
+    "correct_answer": "She asked me if I was coming to her party.",
+    "explanation": "Tuyệt vời! Không đảo ngữ, lùi thì chính xác, dùng 'if' cho câu hỏi Yes/No. Rất chuẩn!"
+  },
+  {
+    "topic": "Reported Speech",
+    "level": "B1",
+    "student_input": "He asked me why do I like this book.",
+    "correct_answer": "He asked me why I liked this book.",
+    "explanation": "Hãy bỏ 'do' và lùi thì cho 'like'. Nhớ rằng câu gián tiếp là một câu kể, không phải câu hỏi trực tiếp. Em thử sửa lại nhé."
+  }
+]

@@ -1,0 +1,422 @@
+[
+  {
+    "topic": "Word Order",
+    "level": "A1",
+    "student_input": "I have a car red",
+    "correct_answer": "I have a red car",
+    "explanation": "Chào em, hãy nhìn vào cụm 'car red'. Trong tiếng Anh, từ chỉ màu sắc (tính từ) dùng để mô tả cho chiếc xe, vậy nó nên đứng TRƯỚC hay đứng SAU danh từ 'car' nhỉ?"
+  },
+  {
+    "topic": "Word Order",
+    "level": "A1",
+    "student_input": "You are where?",
+    "correct_answer": "Where are you?",
+    "explanation": "Em đang đặt câu hỏi với từ 'Where' (Ở đâu). Trong tiếng Anh, từ để hỏi (Wh-words) luôn phải đứng ở vị trí nào trong câu em nhỉ?"
+  },
+  {
+    "topic": "Word Order",
+    "level": "A1",
+    "student_input": "I go always to school",
+    "correct_answer": "I always go to school",
+    "explanation": "Hãy quan sát từ 'always' (luôn luôn). Đây là trạng từ chỉ tần suất. Em có nhớ quy tắc: trạng từ chỉ tần suất thường đứng trước hay đứng sau động từ thường không?"
+  },
+  {
+    "topic": "Word Order",
+    "level": "A1",
+    "student_input": "I like very much English",
+    "correct_answer": "I like English very much",
+    "explanation": "Chào em, trong tiếng Anh, chúng ta thường đặt tân ngữ (thứ mà em thích - English) ngay sau động từ 'like'. Vậy cụm 'very much' nên được chuyển ra vị trí nào thì câu sẽ tự nhiên hơn?"
+  },
+  {
+    "topic": "Word Order",
+    "level": "A1",
+    "student_input": "She is a girl beautiful",
+    "correct_answer": "She is a beautiful girl",
+    "explanation": "Hãy nhìn vào cụm 'girl beautiful'. Tương tự như màu sắc, từ 'beautiful' (đẹp) là một tính từ. Vậy nó nên đứng trước hay sau danh từ 'girl' em nhỉ?"
+  },
+  {
+    "topic": "Word Order",
+    "level": "A1",
+    "student_input": "What you are doing?",
+    "correct_answer": "What are you doing?",
+    "explanation": "Trong câu hỏi, sau từ để hỏi 'What', chúng ta cần thực hiện đảo ngữ với động từ to-be. Em hãy thử đổi vị trí của 'you' và 'are' xem sao."
+  },
+  {
+    "topic": "Word Order",
+    "level": "A1",
+    "student_input": "I drink often milk",
+    "correct_answer": "I often drink milk",
+    "explanation": "Chào em, hãy xem lại vị trí của từ 'often'. Trạng từ chỉ tần suất thường đứng trước động từ thường hay đứng sau động từ thường nhỉ?"
+  },
+  {
+    "topic": "Word Order",
+    "level": "A1",
+    "student_input": "The house big is white",
+    "correct_answer": "The big house is white",
+    "explanation": "Hãy nhìn cụm 'The house big'. Từ 'big' (to) là tính từ mô tả cho ngôi nhà. Em hãy nhớ lại xem tính từ trong tiếng Anh đứng ở đâu so với danh từ?"
+  },
+  {
+    "topic": "Word Order",
+    "level": "A1",
+    "student_input": "He is a man tall",
+    "correct_answer": "He is a tall man",
+    "explanation": "Tương tự như câu trước, từ 'tall' (cao) là tính từ. Em hãy thử đưa tính từ này lên trước danh từ 'man' xem câu có đúng hơn không?"
+  },
+  {
+    "topic": "Word Order",
+    "level": "A1",
+    "student_input": "You like do pizza?",
+    "correct_answer": "Do you like pizza?",
+    "explanation": "Chào em, trong câu hỏi dùng trợ động từ 'do', từ 'do' phải đứng ở vị trí nào trong câu nhỉ? Em hãy thử đưa nó lên đầu câu xem sao."
+  },
+  {
+    "topic": "Word Order",
+    "level": "A1",
+    "student_input": "I read usually books",
+    "correct_answer": "I usually read books",
+    "explanation": "Hãy quan sát từ 'usually'. Trạng từ chỉ tần suất này nên đứng trước hay đứng sau động từ chính 'read' em nhỉ?"
+  },
+  {
+    "topic": "Word Order",
+    "level": "A1",
+    "student_input": "A dog black is under the table",
+    "correct_answer": "A black dog is under the table",
+    "explanation": "Hãy nhìn cụm 'A dog black'. Màu sắc là tính từ, vậy em hãy thử chuyển vị trí của 'black' lên trước 'dog' xem sao."
+  },
+  {
+    "topic": "Word Order",
+    "level": "A1",
+    "student_input": "My father is a doctor good",
+    "correct_answer": "My father is a good doctor",
+    "explanation": "Chào em, từ 'good' (giỏi) là tính từ. Trong tiếng Anh, tính từ đứng trước hay đứng sau danh từ 'doctor' nhỉ?"
+  },
+  {
+    "topic": "Word Order",
+    "level": "A1",
+    "student_input": "Where live you?",
+    "correct_answer": "Where do you live?",
+    "explanation": "Trong câu hỏi với động từ thường 'live', ngoài từ để hỏi 'Where', em còn thiếu một trợ động từ (do/does) đứng trước chủ ngữ. Em hãy thêm nó vào nhé."
+  },
+  {
+    "topic": "Word Order",
+    "level": "A1",
+    "student_input": "I play always soccer",
+    "correct_answer": "I always play soccer",
+    "explanation": "Hãy nhìn từ 'always'. Em có nhớ quy tắc vị trí của trạng từ chỉ tần suất so với động từ 'play' không?"
+  },
+  {
+    "topic": "Word Order",
+    "level": "A1",
+    "student_input": "Is a cat small on the chair?",
+    "correct_answer": "Is a small cat on the chair?",
+    "explanation": "Chào em, em đang muốn nói 'một con mèo nhỏ'. Hãy xem lại vị trí của tính từ 'small' so với danh từ 'cat' nhé."
+  },
+  {
+    "topic": "Word Order",
+    "level": "A1",
+    "student_input": "She speaks very well English",
+    "correct_answer": "She speaks English very well",
+    "explanation": "Trong tiếng Anh, chúng ta nói 'nói cái gì đó' (speaks English) trước, sau đó mới đến 'như thế nào' (very well). Em hãy thử sắp xếp lại xem sao."
+  },
+  {
+    "topic": "Word Order",
+    "level": "A1",
+    "student_input": "I have a book interesting",
+    "correct_answer": "I have an interesting book",
+    "explanation": "Hãy nhìn cụm 'book interesting'. Tính từ 'interesting' nên đứng trước hay sau danh từ 'book' em nhỉ? (Lưu ý nhỏ: khi chuyển vị trí, em hãy kiểm tra lại mạo từ 'a' xem có cần đổi thành 'an' không nhé)."
+  },
+  {
+    "topic": "Word Order",
+    "level": "A1",
+    "student_input": "Name your is what?",
+    "correct_answer": "What is your name?",
+    "explanation": "Chào em, đây là một câu hỏi. Từ để hỏi 'What' phải luôn đứng ở vị trí nào trong câu nhỉ? Em hãy thử sắp xếp lại toàn bộ câu này xem."
+  },
+  {
+    "topic": "Word Order",
+    "level": "A1",
+    "student_input": "I am usually late not",
+    "correct_answer": "I am not usually late",
+    "explanation": "Hãy nhìn từ 'not'. Trong câu phủ định với to-be, 'not' phải đứng ngay sau 'am/is/are'. Em hãy thử đưa 'not' lên trước 'usually' xem sao."
+  },
+  {
+    "topic": "Word Order",
+    "level": "A1",
+    "student_input": "He eats slow very",
+    "correct_answer": "He eats very slowly",
+    "explanation": "Chào em, 'very' là từ dùng để nhấn mạnh cho 'slow'. Vậy 'very' phải đứng trước hay đứng sau từ mà nó bổ nghĩa nhỉ?"
+  },
+  {
+    "topic": "Word Order",
+    "level": "A1",
+    "student_input": "Is a house big?",
+    "correct_answer": "Is the house big?",
+    "explanation": "Về trật tự từ thì câu này ổn. Nhưng khi hỏi về một ngôi nhà cụ thể nào đó, mình nên dùng mạo từ 'a' hay 'the' cho chính xác em nhỉ?"
+  },
+  {
+    "topic": "Word Order",
+    "level": "A1",
+    "student_input": "They are students good",
+    "correct_answer": "They are good students",
+    "explanation": "Hãy nhìn cụm 'students good'. Em hãy nhớ lại quy tắc vị trí của tính từ 'good' so với danh từ 'students' nhé."
+  },
+  {
+    "topic": "Word Order",
+    "level": "A1",
+    "student_input": "Do like you apples?",
+    "correct_answer": "Do you like apples?",
+    "explanation": "Trong câu hỏi, trật tự đúng phải là: Trợ động từ $\rightarrow$ Chủ ngữ $\rightarrow$ Động từ chính. Em hãy thử sắp xếp lại 'like' và 'you' xem sao."
+  },
+  {
+    "topic": "Word Order",
+    "level": "A1",
+    "student_input": "I drink sometimes tea",
+    "correct_answer": "I sometimes drink tea",
+    "explanation": "Chào em, hãy xem lại vị trí của trạng từ 'sometimes'. Nó nên đứng trước hay đứng sau động từ 'drink'?"
+  },
+  {
+    "topic": "Word Order",
+    "level": "A1",
+    "student_input": "A girl small is running",
+    "correct_answer": "A small girl is running",
+    "explanation": "Hãy nhìn cụm 'A girl small'. Em hãy nhớ lại quy tắc vị trí tính từ trong tiếng Anh và sửa lại cụm này nhé."
+  },
+  {
+    "topic": "Word Order",
+    "level": "A1",
+    "student_input": "You are from where?",
+    "correct_answer": "Where are you from?",
+    "explanation": "Trong câu hỏi 'Em từ đâu đến', từ để hỏi 'Where' phải đứng ở vị trí nào em nhỉ? Em hãy thử đưa nó lên đầu câu nhé."
+  },
+  {
+    "topic": "Word Order",
+    "level": "A1",
+    "student_input": "I study often English",
+    "correct_answer": "I often study English",
+    "explanation": "Chào em, hãy nhìn từ 'often'. Trạng từ chỉ tần suất nên đứng ở đâu so với động từ 'study'?"
+  },
+  {
+    "topic": "Word Order",
+    "level": "A1",
+    "student_input": "Is it a day sunny?",
+    "correct_answer": "Is it a sunny day?",
+    "explanation": "Hãy nhìn cụm 'day sunny'. Tính từ 'sunny' dùng để tả cho 'day', vậy em hãy chuyển vị trí của nó lên trước danh từ nhé."
+  },
+  {
+    "topic": "Word Order",
+    "level": "A1",
+    "student_input": "I am a student a good",
+    "correct_answer": "I am a good student",
+    "explanation": "Hãy nhìn cụm 'student a good'. Em hãy nhớ lại: Mạo từ $\rightarrow$ Tính từ $\rightarrow$ Danh từ. Em thử sắp xếp lại ba từ này xem sao."
+  },
+  {
+    "topic": "Word Order",
+    "level": "A1",
+    "student_input": "I have a red big ball",
+    "correct_answer": "I have a big red ball",
+    "explanation": "Chào em, em có hai tính từ là 'red' (màu sắc) và 'big' (kích thước). Trong tiếng Anh, khi dùng nhiều tính từ, em có nhớ từ chỉ kích thước thường đứng trước hay đứng sau từ chỉ màu sắc không?"
+  },
+  {
+    "topic": "Word Order",
+    "level": "A1",
+    "student_input": "I go every day to the gym",
+    "correct_answer": "I go to the gym every day",
+    "explanation": "Hãy nhìn cụm 'every day' (mỗi ngày). Đây là trạng từ chỉ thời gian. Thông thường, cụm từ chỉ thời gian nên đứng ở cuối câu hay đứng giữa động từ và địa điểm em nhỉ?"
+  },
+  {
+    "topic": "Word Order",
+    "level": "A1",
+    "student_input": "She not always is happy",
+    "correct_answer": "She is not always happy",
+    "explanation": "Chào em, hãy xem lại vị trí của từ 'not'. Trong câu có động từ to-be, 'not' phải đứng ngay sau to-be hay đứng trước to-be nhỉ?"
+  },
+  {
+    "topic": "Word Order",
+    "level": "A1",
+    "student_input": "Why you always are late?",
+    "correct_answer": "Why are you always late?",
+    "explanation": "Trong câu hỏi với 'Why', em cần thực hiện đảo ngữ với động từ to-be. Em hãy thử đưa 'are' lên trước 'you' xem câu sẽ như thế nào nhé."
+  },
+  {
+    "topic": "Word Order",
+    "level": "A1",
+    "student_input": "He has a small blue bag",
+    "correct_answer": "He has a small blue bag",
+    "explanation": "Câu này hoàn toàn chính xác! Em đã đặt tính từ chỉ kích thước 'small' trước tính từ chỉ màu sắc 'blue'. Rất tốt!"
+  },
+  {
+    "topic": "Word Order",
+    "level": "A1",
+    "student_input": "I read books often in the evening",
+    "correct_answer": "I often read books in the evening",
+    "explanation": "Hãy nhìn từ 'often'. Đây là trạng từ chỉ tần suất. Em có nhớ nó thường đứng trước hay đứng sau động từ chính 'read' không?"
+  },
+  {
+    "topic": "Word Order",
+    "level": "A1",
+    "student_input": "The small white cat is cute",
+    "correct_answer": "The small white cat is cute",
+    "explanation": "Câu này chính xác rồi! Kích thước (small) đứng trước màu sắc (white). Chúc mừng em!"
+  },
+  {
+    "topic": "Word Order",
+    "level": "A1",
+    "student_input": "I play every Sunday tennis",
+    "correct_answer": "I play tennis every Sunday",
+    "explanation": "Chào em, em hãy nhìn cụm 'every Sunday'. Tương tự như 'every day', cụm từ chỉ thời gian này nên được đặt ở cuối câu hay chen vào giữa động từ và tân ngữ?"
+  },
+  {
+    "topic": "Word Order",
+    "level": "A1",
+    "student_input": "You not do usually homework",
+    "correct_answer": "You don't usually do homework",
+    "explanation": "Câu này có hai điểm cần sửa: Một là cách dùng 'not' cho động từ thường (cần trợ động từ 'do'), hai là vị trí của 'usually'. Em hãy thử sắp xếp lại theo thứ tự: Chủ ngữ $\rightarrow$ don't $\rightarrow$ trạng từ $\rightarrow$ động từ xem sao."
+  },
+  {
+    "topic": "Word Order",
+    "level": "A1",
+    "student_input": "Where you often go on weekends?",
+    "correct_answer": "Where do you often go on weekends?",
+    "explanation": "Trong câu hỏi với động từ thường 'go', em đang thiếu một trợ động từ đứng trước chủ ngữ 'you'. Em hãy thêm 'do' hoặc 'does' vào vị trí đúng nhé."
+  },
+  {
+    "topic": "Word Order",
+    "level": "A1",
+    "student_input": "I have a yellow small flower",
+    "correct_answer": "I have a small yellow flower",
+    "explanation": "Hãy nhìn hai tính từ 'yellow' và 'small'. Em nhớ quy tắc: kích thước đứng trước, màu sắc đứng sau. Em hãy thử đổi chỗ hai từ này xem."
+  },
+  {
+    "topic": "Word Order",
+    "level": "A1",
+    "student_input": "She speaks English always",
+    "correct_answer": "She always speaks English",
+    "explanation": "Chào em, hãy nhìn từ 'always'. Trạng từ chỉ tần suất nên đứng ở đâu so với động từ 'speaks' nhỉ?"
+  },
+  {
+    "topic": "Word Order",
+    "level": "A1",
+    "student_input": "My brother is a tall young man",
+    "correct_answer": "My brother is a tall young man",
+    "explanation": "Câu này chính xác! Kích thước (tall) đứng trước tuổi tác (young). Rất tốt!"
+  },
+  {
+    "topic": "Word Order",
+    "level": "A1",
+    "student_input": "I am not late often",
+    "correct_answer": "I am not often late",
+    "explanation": "Hãy quan sát từ 'often'. Với động từ to-be, trạng từ chỉ tần suất nên đứng trước hay đứng sau to-be và 'not' em nhỉ?"
+  },
+  {
+    "topic": "Word Order",
+    "level": "A1",
+    "student_input": "Does often she study?",
+    "correct_answer": "Does she often study?",
+    "explanation": "Trong câu hỏi, trật tự đúng là: Trợ động từ $\rightarrow$ Chủ ngữ $\rightarrow$ Trạng từ $\rightarrow$ Động từ. Em hãy thử sắp xếp lại 'often' và 'she' nhé."
+  },
+  {
+    "topic": "Word Order",
+    "level": "A1",
+    "student_input": "The old big tree is green",
+    "correct_answer": "The big old tree is green",
+    "explanation": "Chào em, khi dùng nhiều tính từ, kích thước (big) thường đứng trước tuổi tác (old). Em hãy thử đổi chỗ hai từ này xem sao."
+  },
+  {
+    "topic": "Word Order",
+    "level": "A1",
+    "student_input": "I go to school always",
+    "correct_answer": "I always go to school",
+    "explanation": "Hãy nhìn từ 'always'. Em hãy nhớ lại vị trí của trạng từ chỉ tần suất so với động từ 'go' nhé."
+  },
+  {
+    "topic": "Word Order",
+    "level": "A1",
+    "student_input": "What always do you eat?",
+    "correct_answer": "What do you always eat?",
+    "explanation": "Trong câu hỏi, trạng từ 'always' thường đứng sau chủ ngữ và trước động từ chính. Em hãy thử di chuyển 'always' ra sau 'you' xem sao."
+  },
+  {
+    "topic,": "Word Order",
+    "level": "A1",
+    "student_input": "I am a student a good",
+    "correct_answer": "I am a good student",
+    "explanation": "Chào em, hãy nhớ lại trật tự: Mạo từ (a) $\rightarrow$ Tính từ (good) $\rightarrow$ Danh từ (student). Em hãy sắp xếp lại cụm này nhé."
+  },
+  {
+    "topic": "Word Order",
+    "level": "A1",
+    "student_input": "The car blue fast is",
+    "correct_answer": "The fast blue car is...",
+    "explanation": "Câu này hơi lộn xộn một chút. Em hãy nhớ: tính từ (fast, blue) phải đứng trước danh từ (car). Em thử sắp xếp lại xem."
+  },
+  {
+    "topic": "Word Order",
+    "level": "A1",
+    "student_input": "I read in the evening books",
+    "correct_answer": "I read books in the evening",
+    "explanation": "Hãy nhìn cụm 'in the evening' (vào buổi tối). Đây là trạng từ chỉ thời gian. Nó nên đứng ở đâu so với tân ngữ 'books' em nhỉ?"
+  },
+  {
+    "topic": "Word Order",
+    "level": "A1",
+    "student_input": "She is not always late",
+    "correct_answer": "She is not always late",
+    "explanation": "Câu này hoàn toàn chính xác! Trật tự: To-be $\rightarrow$ not $\rightarrow$ trạng từ $\rightarrow$ tính từ. Tuyệt vời!"
+  },
+  {
+    "topic": "Word Order",
+    "level": "A1",
+    "student_input": "You litte a boy are",
+    "correct_answer": "You are a little boy",
+    "explanation": "Chào em, câu này bị sai trật tự hoàn toàn. Em hãy sắp xếp theo đúng cấu trúc: Chủ ngữ $\rightarrow$ To-be $\rightarrow$ Mạo từ $\rightarrow$ Tính từ $\rightarrow$ Danh từ nhé."
+  },
+  {
+    "topic": "Word Order",
+    "level": "A1",
+    "student_input": "I sometimes play soccer on Sundays",
+    "correct_answer": "I sometimes play soccer on Sundays",
+    "explanation": "Câu này hoàn toàn chính xác! Trạng từ 'sometimes' đứng trước động từ 'play'. Rất tốt!"
+  },
+  {
+    "topic": "Word Order",
+    "level": "A1",
+    "student_input": "He is a man old and tall",
+    "correct_answer": "He is a tall old man",
+    "explanation": "Hãy nhìn cụm 'man old and tall'. Các tính từ (tall, old) phải đứng trước danh từ (man). Em hãy thử sắp xếp lại xem."
+  },
+  {
+    "topic": "Word Order",
+    "level": "A1",
+    "student_input": "Where you are go?",
+    "correct_answer": "Where are you going?",
+    "explanation": "Chào em, đây là câu hỏi về hành động đang xảy ra. Em hãy nhớ trật tự: Từ để hỏi $\rightarrow$ To-be $\rightarrow$ Chủ ngữ $\rightarrow$ V-ing. Em thử sửa lại nhé."
+  },
+  {
+    "topic": "Word Order",
+    "level": "A1",
+    "student_input": "The books are on the table small",
+    "correct_answer": "The small books are on the table",
+    "explanation": "Hãy nhìn từ 'small'. Nó là tính từ mô tả cho 'books', vậy em hãy đưa nó lên trước danh từ 'books' xem sao."
+  },
+  {
+    "topic": "Word Order",
+    "level": "A1",
+    "student_input": "I not often am tired",
+    "correct_answer": "I am not often tired",
+    "explanation": "Hãy xem lại vị trí của 'not' và 'often'. Với động từ to-be, trật tự đúng phải là: to-be $\rightarrow$ not $\rightarrow$ trạng từ. Em hãy thử sắp xếp lại."
+  },
+  {
+    "topic": "Word Order",
+    "level": "A1",
+    "student_input": "What do always you drink?",
+    "correct_answer": "What do you always drink?",
+    "explanation": "Chào em, trong câu hỏi, trạng từ 'always' nên đứng sau chủ ngữ 'you' và trước động từ chính 'drink'. Em hãy thử di chuyển nó nhé."
+  },
+  {
+    "topic": "Word Order",
+    "level": "A1",
+    "student_input": "I have a big red house",
+    "correct_answer": "I have a big red house",
+    "explanation": "Câu này hoàn toàn chính xác! Kích thước (big) đứng trước màu sắc (red). Chúc mừng em!"
+  }
+]

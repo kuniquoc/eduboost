@@ -1,0 +1,849 @@
+[
+  {
+    "topic": "Advanced Passive/Causative",
+    "level": "B2",
+    "student_input": "I had my car repair yesterday because the engine was making a strange noise.",
+    "correct_answer": "I had my car repaired yesterday because the engine was making a strange noise.",
+    "explanation": "Hãy nhìn vào cụm 'had my car repair'. Trong cấu trúc sai khiến 'Have something done', vật (my car) không tự thực hiện hành động 'repair'. Vậy động từ 'repair' cần được chia ở dạng nào để thể hiện nó là đối tượng nhận tác động?"
+  },
+  {
+    "topic": "Advanced Passive/Causative",
+    "level": "B2",
+    "student_input": "She got her house paint last week to prepare for the open house.",
+    "correct_answer": "She got her house painted last week to prepare for the open house.",
+    "explanation": "Bạn đang dùng cấu trúc 'get something done'. Hãy tự hỏi: Ngôi nhà tự sơn hay được người khác sơn? Khi vật đứng sau 'got' và đứng trước động từ, động từ đó phải ở dạng nào (V1, V2 hay V3)?"
+  },
+  {
+    "topic": "Advanced Passive/Causative",
+    "level": "B2",
+    "student_input": "I had the technician to install the new software on all office computers.",
+    "correct_answer": "I had the technician install the new software on all office computers.",
+    "explanation": "Hãy chú ý sự khác biệt giữa 'have' và 'get' khi có người thực hiện hành động. Với cấu trúc 'Have someone do something', chúng ta dùng động từ nguyên mẫu có 'to' hay nguyên mẫu không 'to' (bare infinitive)?"
+  },
+  {
+    "topic": "Advanced Passive/Causative",
+    "level": "B2",
+    "student_input": "I got the manager fix the error in the contract immediately.",
+    "correct_answer": "I got the manager to fix the error in the contract immediately.",
+    "explanation": "Bạn đang dùng 'got' với một người thực hiện hành động (the manager). Hãy so sánh với cấu trúc 'have'. Khi dùng 'get someone', chúng ta cần thêm từ gì trước động từ chính để chỉ sự thuyết phục hoặc yêu cầu?"
+  },
+  {
+    "topic": "Advanced Passive/Causative",
+    "level": "B2",
+    "student_input": "He had cut his hair yesterday at that fancy salon downtown.",
+    "correct_answer": "He had his hair cut yesterday at that fancy salon downtown.",
+    "explanation": "Câu 'He had cut his hair' có nghĩa là anh ấy tự cầm kéo cắt tóc mình. Nhưng ngữ cảnh 'at that fancy salon' cho thấy anh ấy thuê thợ. Để diễn đạt việc 'thuê/nhờ ai đó làm gì', bạn cần sắp xếp lại vị trí của 'hair' và 'cut' như thế nào?"
+  },
+  {
+    "topic": "Advanced Passive/Causative",
+    "level": "B2",
+    "student_input": "We are having the office renovate next month to create more open space.",
+    "correct_answer": "We are having the office renovated next month to create more open space.",
+    "explanation": "Hãy nhìn vào 'having the office renovate'. Văn phòng không thể tự thực hiện hành động 'renovate'. Trong cấu trúc 'Have something done', bạn cần chuyển động từ 'renovate' sang dạng nào?"
+  },
+  {
+    "topic": "Advanced Passive/Causative",
+    "level": "B2",
+    "student_input": "I'll get my passport renew before the trip to Japan.",
+    "correct_answer": "I'll get my passport renewed before the trip to Japan.",
+    "explanation": "Bạn đang dùng 'get' để nói về một dịch vụ (gia hạn hộ chiếu). Khi vật (passport) đứng trước động từ trong cấu trúc này, bạn hãy kiểm tra lại dạng của động từ 'renew' xem đã đúng là quá khứ phân từ (V3) chưa?"
+  },
+  {
+    "topic": "Advanced Passive/Causative",
+    "level": "B2",
+    "student_input": "The company had the consultants to analyze the market trends for three months.",
+    "correct_answer": "The company had the consultants analyze the market trends for three months.",
+    "explanation": "Hãy nhìn vào 'had the consultants to analyze'. Khi dùng 'have' với đối tượng là người thực hiện, chúng ta có dùng 'to' trước động từ không? Hãy thử so sánh với cấu trúc 'get someone to do'."
+  },
+  {
+    "topic": "Advanced Passive/Causative",
+    "level": "B2",
+    "student_input": "I had my laptop screen replace after I accidentally dropped it.",
+    "correct_answer": "I had my laptop screen replaced after I accidentally dropped it.",
+    "explanation": "Hãy phân tích: Bạn tự thay màn hình hay mang ra tiệm? Khi dùng 'had' + 'vật', động từ theo sau phải ở dạng nào để chỉ hành động được thực hiện bởi một chuyên gia?"
+  },
+  {
+    "topic": "Advanced Passive/Causative",
+    "level": "B2",
+    "student_input": "She got her nails do at the spa every two weeks.",
+    "correct_answer": "She got her nails done at the spa every two weeks.",
+    "explanation": "Hãy kiểm tra lại động từ 'do'. Trong cấu trúc 'get something done', động từ chính phải ở dạng V3. Dạng V3 của 'do' là gì?"
+  },
+  {
+    "topic": "Advanced Passive/Causative",
+    "level": "B2",
+    "student_input": "I will have the gardener to trim the hedges this weekend.",
+    "correct_answer": "I will have the gardener trim the hedges this weekend.",
+    "explanation": "Bạn đang dùng 'have' để giao việc cho ai đó. Hãy nhớ lại quy tắc: 'Have someone ____' (V-bare hay To-V)? Bạn hãy thử điều chỉnh lại cụm 'to trim'."
+  },
+  {
+    "topic": "Advanced Passive/Causative",
+    "level": "B2",
+    "student_input": "They had the documents translate into five different languages.",
+    "correct_answer": "They had the documents translated into five different languages.",
+    "explanation": "Hãy nhìn vào 'had the documents translate'. Tài liệu không thể tự dịch. Khi dùng cấu trúc sai khiến với vật, bạn cần chia động từ 'translate' ở dạng nào?"
+  },
+  {
+    "topic": "Advanced Passive/Causative",
+    "level": "B2",
+    "student_input": "I got my brother help me with the heavy lifting.",
+    "correct_answer": "I got my brother to help me with the heavy lifting.",
+    "explanation": "Hãy chú ý động từ 'got'. Khi bạn thuyết phục hoặc nhờ ai đó làm gì, cấu trúc 'get someone' đòi hỏi động từ theo sau phải có thêm từ gì ở phía trước?"
+  },
+  {
+    "topic": "Advanced Passive/Causative",
+    "level": "B2",
+    "student_input": "We should have the air conditioner service before the summer hits.",
+    "correct_answer": "We should have the air conditioner serviced before the summer hits.",
+    "explanation": "Bạn đang nói về việc bảo trì điều hòa. Điều hòa là vật nhận tác động, vậy trong cấu trúc 'have something done', động từ 'service' cần được chuyển sang dạng nào?"
+  },
+  {
+    "topic": "Advanced Passive/Causative",
+    "level": "B2",
+    "student_input": "He had his teeth white by a professional dentist.",
+    "correct_answer": "He had his teeth whitened by a professional dentist.",
+    "explanation": "Hãy nhìn vào cụm 'had his teeth white'. 'White' là tính từ, nhưng ở đây chúng ta cần một hành động (làm trắng). Bạn hãy chuyển từ 'white' thành động từ và chia nó ở dạng V3 để phù hợp với cấu trúc sai khiến."
+  },
+  {
+    "topic": "Advanced Passive/Causative",
+    "level": "B2",
+    "student_input": "I should get my eyes check because I've been having headaches lately.",
+    "correct_answer": "I should get my eyes checked because I've been having headaches lately.",
+    "explanation": "Hãy nhìn vào cụm 'get my eyes check'. Bạn đang nói về một dịch vụ y tế mà bác sĩ sẽ thực hiện cho bạn. Trong cấu trúc 'get something done', động từ 'check' cần ở dạng nào để chỉ việc mắt bạn được kiểm tra?"
+  },
+  {
+    "topic": "Advanced Passive/Causative",
+    "level": "B2",
+    "student_input": "The CEO had the annual report rewrite by the finance team to ensure accuracy.",
+    "correct_answer": "The CEO had the annual report rewritten by the finance team to ensure accuracy.",
+    "explanation": "Hãy phân tích đối tượng 'the annual report'. Bản báo cáo không thể tự 'rewrite' chính nó. Để diễn đạt việc bản báo cáo ĐƯỢC viết lại, bạn cần chia động từ 'rewrite' ở dạng nào?"
+  },
+  {
+    "topic": "Advanced Passive/Causative",
+    "level": "B2",
+    "student_input": "We are having the old bridge demolish to make way for a modern highway.",
+    "correct_answer": "We are having the old bridge demolished to make way for a modern highway.",
+    "explanation": "Hãy xem xét hành động 'demolish' (phá dỡ). Cây cầu là đối tượng nhận tác động của hành động này. Bạn hãy kiểm tra lại dạng của động từ trong cấu trúc 'have something done' xem đã đúng là quá khứ phân từ (V3) chưa?"
+  },
+  {
+    "topic": "Advanced Passive/Causative",
+    "level": "B2",
+    "student_input": "I finally got my colleague finish the slide deck for the presentation.",
+    "correct_answer": "I finally got my colleague to finish the slide deck for the presentation.",
+    "explanation": "Bạn đang dùng 'got' với một người thực hiện hành động (my colleague). Hãy nhớ lại sự khác biệt giữa 'have someone do' và 'get someone...'. Khi dùng 'get', bạn cần thêm từ gì trước động từ chính để thể hiện sự thuyết phục?"
+  },
+  {
+    "topic": "Advanced Passive/Causative",
+    "level": "B2",
+    "student_input": "I'll have my assistant to call you to schedule the appointment.",
+    "correct_answer": "I'll have my assistant call you to schedule the appointment.",
+    "explanation": "Hãy chú ý cụm 'have my assistant to call'. Khi bạn giao việc cho cấp dưới bằng cấu trúc 'have someone', chúng ta dùng động từ nguyên mẫu có 'to' hay không 'to'?"
+  },
+  {
+    "topic": "Advanced Passive/Causative",
+    "level": "B2",
+    "student_input": "I don't like having my time waste by unnecessary meetings.",
+    "correct_answer": "I don't like having my time wasted by unnecessary meetings.",
+    "explanation": "Hãy nhìn vào 'having my time waste'. Thời gian của bạn bị làm lãng phí bởi người khác. Đây là một dạng bị động của cấu trúc sai khiến. Động từ 'waste' cần được chia ở dạng nào?"
+  },
+  {
+    "topic": "Advanced Passive/Causative",
+    "level": "B2",
+    "student_input": "I've just painted my house last week, so it looks brand new now.",
+    "correct_answer": "I've just had my house painted last week, so it looks brand new now.",
+    "explanation": "Câu 'I've just painted my house' có nghĩa là bạn tự tay cầm cọ sơn. Tuy nhiên, với những ngôi nhà lớn, người ta thường thuê thợ. Nếu bạn muốn nói mình đã THUÊ người sơn, bạn nên dùng cấu trúc 'have something done'. Bạn sẽ viết lại câu này như thế nào?"
+  },
+  {
+    "topic": "Advanced Passive/Causative",
+    "level": "B2",
+    "student_input": "He had his expensive suit dry clean before the gala dinner.",
+    "correct_answer": "He had his expensive suit dry cleaned before the gala dinner.",
+    "explanation": "Hãy phân tích cụm 'had his expensive suit dry clean'. Bộ vest không tự làm sạch được. Bạn hãy chia động từ 'dry clean' về dạng V3 để hoàn thiện cấu trúc sai khiến."
+  },
+  {
+    "topic": "Advanced Passive/Causative",
+    "level": "B2",
+    "student_input": "I will get the leak fix in the bathroom as soon as possible.",
+    "correct_answer": "I will get the leak fixed in the bathroom as soon as possible.",
+    "explanation": "Bạn đang dùng 'get' để nói về việc sửa chữa một sự cố (the leak). Vì 'the leak' là vật nhận tác động, động từ 'fix' cần được chia ở dạng nào?"
+  },
+  {
+    "topic": "Advanced Passive/Causative",
+    "level": "B2",
+    "student_input": "The manager had the staff to work overtime to meet the deadline.",
+    "correct_answer": "The manager had the staff work overtime to meet the deadline.",
+    "explanation": "Hãy nhìn vào 'had the staff to work'. Khi dùng 'have' để ra lệnh hoặc yêu cầu ai đó làm gì, chúng ta có dùng 'to' trước động từ không? Hãy so sánh với 'get the staff to work'."
+  },
+  {
+    "topic": "Advanced Passive/Causative",
+    "level": "B2",
+    "student_input": "She's getting her architectural plans review by a senior architect.",
+    "correct_answer": "She's getting her architectural plans reviewed by a senior architect.",
+    "explanation": "Hãy chú ý cụm 'getting her architectural plans review'. Bản vẽ kiến trúc là vật được xem xét. Bạn hãy chia động từ 'review' sang dạng phân từ hai (V3) để phù hợp với cấu trúc 'get something done'."
+  },
+  {
+    "topic": "Advanced Passive/Causative",
+    "level": "B2",
+    "student_input": "We had the legal framework refine to avoid any potential loopholes.",
+    "correct_answer": "We had the legal framework refined to avoid any potential loopholes.",
+    "explanation": "Hãy phân tích đối tượng 'the legal framework'. Nó được tinh chỉnh bởi các chuyên gia luật. Trong cấu trúc 'have something done', động từ 'refine' phải ở dạng nào?"
+  },
+  {
+    "topic": "Advanced Passive/Causative",
+    "level": "B2",
+    "student_input": "I can't get the computer work, so I'll have to call the IT department.",
+    "correct_answer": "I can't get the computer to work, so I'll have to call the IT department.",
+    "explanation": "Ở đây, 'get' không mang nghĩa thuê mướn mà mang nghĩa 'làm cho cái gì đó hoạt động'. Với cấu trúc 'get something to do', bạn còn thiếu từ gì trước động từ 'work'?"
+  },
+  {
+    "topic": "Advanced Passive/Causative",
+    "level": "B2",
+    "student_input": "He'll have his luggage deliver to the hotel directly from the airport.",
+    "correct_answer": "He'll have his luggage delivered to the hotel directly from the airport.",
+    "explanation": "Hãy nhìn vào 'have his luggage deliver'. Hành lý không thể tự vận chuyển. Bạn hãy chuyển động từ 'deliver' sang dạng V3 để thể hiện đây là một dịch vụ được cung cấp."
+  },
+  {
+    "topic": "Advanced Passive/Causative",
+    "level": "B2",
+    "student_input": "I got the tailor shorten my trousers by two centimeters.",
+    "correct_answer": "I got the tailor to shorten my trousers by two centimeters.",
+    "explanation": "Bạn đang dùng 'got' với một người (the tailor). Hãy nhớ lại: 'Get someone ____' (V-bare hay To-V)? Bạn hãy điều chỉnh lại cụm 'shorten'."
+  },
+  {
+    "topic": "Advanced Passive/Causative",
+    "level": "B2",
+    "student_input": "They are having their wedding venue decorate with white lilies.",
+    "correct_answer": "They are having their wedding venue decorated with white lilies.",
+    "explanation": "Hãy phân tích: Địa điểm tổ chức đám cưới (venue) được trang trí bởi một đơn vị sự kiện. Trong cấu trúc 'have something done', động từ 'decorate' cần được chia ở dạng nào?"
+  },
+  {
+    "topic": "Advanced Passive/Causative",
+    "level": "B2",
+    "student_input": "I had the accountant to double-check the tax returns.",
+    "correct_answer": "I had the accountant double-check the tax returns.",
+    "explanation": "Hãy chú ý 'had the accountant to double-check'. Khi dùng 'have' để yêu cầu một chuyên gia làm việc, chúng ta dùng 'to-V' hay 'V-bare'?"
+  },
+  {
+    "topic": "Advanced Passive/Causative",
+    "level": "B2",
+    "student_input": "We will get the budget proposal approve by the board next Tuesday.",
+    "correct_answer": "We will get the budget proposal approved by the board next Tuesday.",
+    "explanation": "Hãy nhìn vào 'get the budget proposal approve'. Đề xuất ngân sách là vật nhận tác động của việc 'phê duyệt'. Bạn hãy chia động từ 'approve' về dạng V3."
+  },
+  {
+    "topic": "Advanced Passive/Causative",
+    "level": "B2",
+    "student_input": "She has had her wisdom teeth remove, so she can't eat solid food.",
+    "correct_answer": "She has had her wisdom teeth removed, so she can't eat solid food.",
+    "explanation": "Bạn đang dùng thì Hiện tại hoàn thành 'has had'. Tuy nhiên, hãy nhìn vào cụm 'wisdom teeth remove'. Răng khôn được bác sĩ nhổ bỏ, vậy 'remove' phải ở dạng nào trong cấu trúc sai khiến?"
+  },
+  {
+    "topic": "Advanced Passive/Causative",
+    "level": "B2",
+    "student_input": "I got the plumber fix the leak, but it's still dripping.",
+    "correct_answer": "I got the plumber to fix the leak, but it's still dripping.",
+    "explanation": "Hãy chú ý động từ 'got' đi với người thực hiện 'the plumber'. Bạn hãy nhớ lại cấu trúc: 'Get someone ____' (V-bare hay To-V)?"
+  },
+  {
+    "topic": "Advanced Passive/Causative",
+    "level": "B2",
+    "student_input": "The company had the website redesign to attract more young customers.",
+    "correct_answer": "The company had the website redesigned to attract more young customers.",
+    "explanation": "Hãy phân tích: 'the website' là vật, 'redesign' là hành động. Để diễn đạt việc website được thiết kế lại bởi một team designer, bạn cần chia 'redesign' ở dạng nào?"
+  },
+  {
+    "topic": "Advanced Passive/Causative",
+    "level": "B2",
+    "student_input": "I'll have the courier to send the package via express mail.",
+    "correct_answer": "I'll have the courier send the package via express mail.",
+    "explanation": "Hãy nhìn vào 'have the courier to send'. Bạn đang dùng 'have' để giao việc. Bạn hãy thử so sánh với cấu trúc 'get the courier to send' và cho biết 'have' có cần 'to' không?"
+  },
+  {
+    "topic": "Advanced Passive/Causative",
+    "level": "B2",
+    "student_input": "She got her wedding dress alter to fit her perfectly.",
+    "correct_answer": "She got her wedding dress altered to fit her perfectly.",
+    "explanation": "Chiếc váy cưới được chỉnh sửa bởi thợ may. Trong cấu trúc 'get something done', động từ 'alter' (chỉnh sửa) cần được chia ở dạng nào?"
+  },
+  {
+    "topic": "Advanced Passive/Causative",
+    "level": "B2",
+    "student_input": "I'm having my house value by a professional appraiser.",
+    "correct_answer": "I'm having my house valued by a professional appraiser.",
+    "explanation": "Hãy chú ý cụm 'having my house value'. Việc 'định giá' (value) nhà được thực hiện bởi người khác. Bạn hãy chia động từ này về dạng V3."
+  },
+  {
+    "topic": "Advanced Passive/Causative",
+    "level": "B2",
+    "student_input": "He got his assistant organize the entire conference.",
+    "correct_answer": "He got his assistant to organize the entire conference.",
+    "explanation": "Bạn đang dùng 'got' với một người (assistant). Hãy nhớ lại quy tắc: 'Get someone ____' (V-bare hay To-V)?"
+  },
+  {
+    "topic": "Advanced Passive/Causative",
+    "level": "B2",
+    "student_input": "It said that the new CEO is very strict with deadlines.",
+    "correct_answer": "It is said that the new CEO is very strict with deadlines.",
+    "explanation": "Hãy nhìn vào cụm 'It said'. Trong câu bị động, chúng ta không thể thiếu trợ động từ 'to be'. Nếu bạn muốn nói 'Người ta nói rằng...', bạn cần thêm 'is' hay 'was' vào sau 'It' để tạo thành cấu trúc bị động?"
+  },
+  {
+    "topic": "Advanced Passive/Causative",
+    "level": "B2",
+    "student_input": "The suspect is believed steal the jewelry from the museum last night.",
+    "correct_answer": "The suspect is believed to have stolen the jewelry from the museum last night.",
+    "explanation": "Bạn đang dùng cấu trúc 'is believed'. Sau động từ tường thuật bị động, chúng ta cần một 'to-infinitive' để nối với hành động chính. Tuy nhiên, hãy nhìn mốc thời gian 'last night'. Để diễn tả một hành động đã hoàn tất trong quá khứ khi dùng cấu trúc này, bạn phải dùng 'to steal' hay 'to have stolen'?"
+  },
+  {
+    "topic": "Advanced Passive/Causative",
+    "level": "B2",
+    "student_input": "The ancient city is thought to be destroyed by a massive earthquake centuries ago.",
+    "correct_answer": "The ancient city is thought to have been destroyed by a massive earthquake centuries ago.",
+    "explanation": "Hãy phân tích hai mốc thời gian. Việc 'nghĩ' (is thought) là ở hiện tại, nhưng việc 'bị phá hủy' (destroyed) diễn ra 'centuries ago'. Khi hành động xảy ra trước thời điểm tường thuật, bạn nên dùng 'to be' hay 'to have been'?"
+  },
+  {
+    "topic": "Advanced Passive/Causative",
+    "level": "B2",
+    "student_input": "It is believed that the company will expand its operations to Asia next year.",
+    "correct_answer": "It is believed that the company will expand its operations to Asia next year.",
+    "explanation": "Câu này hoàn toàn chính xác. Bây giờ, hãy thử thách bản thân: Bạn có thể chuyển câu này sang dạng 'Personal Passive' (bắt đầu bằng 'The company is believed...') không? Hãy lưu ý dạng của động từ 'expand' khi chuyển sang cấu trúc này."
+  },
+  {
+    "topic": "Advanced Passive/Causative",
+    "level": "B2",
+    "student_input": "The painting is rumored be a fake, although it was sold for millions.",
+    "correct_answer": "The painting is rumored to be a fake, although it was sold for millions.",
+    "explanation": "Hãy nhìn vào cụm 'is rumored be'. Trong cấu trúc bị động tường thuật, sau động từ 'rumored', chúng ta cần một thành phần nào để kết nối với động từ 'be'?"
+  },
+  {
+    "topic": "Advanced Passive/Causative",
+    "level": "B2",
+    "student_input": "He is said to be a billionaire, but he lives in a very small house.",
+    "correct_answer": "He is said to be a billionaire, but he lives in a very small house.",
+    "explanation": "Câu này đúng. Bạn đang nói về một trạng thái ở hiện tại. Nếu tôi muốn nói 'Người ta nói rằng anh ấy ĐÃ TỪNG là tỷ phú (nhưng giờ thì không)', bạn sẽ thay 'to be' bằng cấu trúc nào để chỉ thời gian trong quá khứ?"
+  },
+  {
+    "topic": "Advanced Passive/Causative",
+    "level": "B2",
+    "student_input": "The missing hikers are thought to die in the avalanche yesterday.",
+    "correct_answer": "The missing hikers are thought to have died in the avalanche yesterday.",
+    "explanation": "Hãy đối chiếu: Việc 'nghĩ' (are thought) là hiện tại, nhưng cái chết (die) xảy ra 'yesterday'. Để diễn tả một sự việc đã xảy ra và kết thúc trước hiện tại trong cấu trúc này, bạn cần dùng 'to die' hay 'to have died'?"
+  },
+  {
+    "topic": "Advanced Passive/Causative",
+    "level": "B2",
+    "student_input": "It thought that the economy will recover by the end of the quarter.",
+    "correct_answer": "It is thought that the economy will recover by the end of the quarter.",
+    "explanation": "Bạn đang thiếu một thành phần quan trọng trong cấu trúc bị động 'It is thought that...'. Hãy kiểm tra xem bạn đã có trợ động từ 'to be' để chia thì cho câu chưa?"
+  },
+  {
+    "topic": "Advanced Passive/Causative",
+    "level": "B2",
+    "student_input": "The pyramid is believed to build by thousands of laborers.",
+    "correct_answer": "The pyramid is believed to have been built by thousands of laborers.",
+    "explanation": "Câu này có hai lỗi. Thứ nhất: Việc xây kim tự tháp diễn ra trong quá khứ $\rightarrow$ cần dùng Perfect Infinitive. Thứ hai: Kim tự tháp không tự xây mà được xây $\rightarrow$ cần dạng bị động. Bạn hãy kết hợp 'to have' + 'been' + 'V3' để sửa câu này."
+  },
+  {
+    "topic": "Advanced Passive/Causative",
+    "level": "B2",
+    "student_input": "She is reported to be winning the award last month.",
+    "correct_answer": "She is reported to have won the award last month.",
+    "explanation": "Hãy nhìn vào 'to be winning' và mốc 'last month'. 'To be winning' diễn tả một hành động đang diễn ra. Nhưng 'last month' chỉ một sự kiện đã xảy ra. Bạn nên dùng dạng nào của động từ 'win' để chỉ một hành động đã hoàn tất trong quá khứ?"
+  },
+  {
+    "topic": "Advanced Passive/Causative",
+    "level": "B2",
+    "student_input": "It was believed that the virus would disappear quickly.",
+    "correct_answer": "It was believed that the virus would disappear quickly.",
+    "explanation": "Câu này đúng. Đây là dạng 'Impersonal Passive' ở thì quá khứ. Thử thách: Bạn hãy chuyển câu này sang dạng 'The virus was believed...' và chú ý dạng của động từ 'disappear' (vì nó xảy ra sau thời điểm 'believed')."
+  },
+  {
+    "topic": "Advanced Passive/Causative",
+    "level": "B2",
+    "student_input": "The suspect is alleged to have commit the crime alone.",
+    "correct_answer": "The suspect is alleged to have committed the crime alone.",
+    "explanation": "Bạn đã dùng đúng 'to have' để chỉ quá khứ. Tuy nhiên, hãy kiểm tra lại động từ 'commit'. Sau 'have' trong cấu trúc Perfect Infinitive, động từ phải ở dạng nào (V1, V2 hay V3)?"
+  },
+  {
+    "topic": "Advanced Passive/Causative",
+    "level": "B2",
+    "student_input": "It is claimed that the new drug to be effective against the virus.",
+    "correct_answer": "It is claimed that the new drug is effective against the virus.",
+    "explanation": "Hãy nhìn vào mệnh đề sau 'that'. Trong một mệnh đề (clause), chúng ta cần một động từ chính được chia thì. Cụm 'to be effective' không phải là một động từ được chia. Bạn nên thay 'to be' bằng từ nào để câu trở thành một mệnh đề hoàn chỉnh?"
+  },
+  {
+    "topic": "Advanced Passive/Causative",
+    "level": "B2",
+    "student_input": "The company is said to have been founded in 1920.",
+    "correct_answer": "The company is said to have been founded in 1920.",
+    "explanation": "Câu này chính xác. 'Is said' (hiện tại) $\rightarrow$ 'to have been founded' (quá khứ + bị động). Nếu tôi muốn nói 'Vào năm 1920, người ta nói rằng công ty này sẽ phát triển', bạn sẽ thay 'is said' thành thì nào?"
+  },
+  {
+    "topic": "Advanced Passive/Causative",
+    "level": "B2",
+    "student_input": "The witness is reported to see the accident yesterday.",
+    "correct_answer": "The witness is reported to have seen the accident yesterday.",
+    "explanation": "Hãy phân tích: Việc 'báo cáo' (is reported) diễn ra bây giờ, nhưng việc 'nhìn thấy' (see) diễn ra 'yesterday'. Bạn cần dùng cấu trúc 'to-V' đơn giản hay 'to have V3' để thể hiện sự chênh lệch thời gian này?"
+  },
+  {
+    "topic": "Advanced Passive/Causative",
+    "level": "B2",
+    "student_input": "It is suspected that the documents were stolen by an insider.",
+    "correct_answer": "It is suspected that the documents were stolen by an insider.",
+    "explanation": "Câu này hoàn toàn đúng. Bây giờ hãy thử chuyển sang dạng 'The documents are suspected...'. Bạn hãy suy nghĩ xem động từ 'steal' sẽ được chia như thế nào để vừa chỉ quá khứ, vừa chỉ bị động."
+  },
+  {
+    "topic": "Advanced Passive/Causative",
+    "level": "B2",
+    "student_input": "The actor is thought to be living in seclusion for years.",
+    "correct_answer": "The actor is thought to have been living in seclusion for years.",
+    "explanation": "Hãy chú ý cụm 'for years' (trong nhiều năm). Điều này ám chỉ một hành động bắt đầu từ quá khứ và kéo dài đến nay. 'To be living' chỉ nói về hiện tại. Bạn nên dùng dạng nào của Perfect Continuous Infinitive để thể hiện quá trình này?"
+  },
+  {
+    "topic": "Advanced Passive/Causative",
+    "level": "B2",
+    "student_input": "It is rumored that the couple to get married in June.",
+    "correct_answer": "It is rumored that the couple will get married in June.",
+    "explanation": "Hãy nhìn vào mệnh đề sau 'that'. Bạn đang dùng 'to get married', nhưng đây là một mệnh đề, không phải một cụm động từ. Để nói về một dự định trong tương lai (June), bạn nên dùng trợ động từ nào thay cho 'to'?"
+  },
+  {
+    "topic": "Advanced Passive/Causative",
+    "level": "B2",
+    "student_input": "The candidate is believed to have be the best choice for the position.",
+    "correct_answer": "The candidate is believed to be the best choice for the position.",
+    "explanation": "Hãy xem xét ý nghĩa. Việc là 'lựa chọn tốt nhất' là một trạng thái ở hiện tại. Tại sao bạn lại dùng 'to have be' (một dạng sai của Perfect Infinitive)? Bạn chỉ cần dùng 'to-V' đơn giản nếu sự việc đang ở hiện tại, đúng không?"
+  },
+  {
+    "topic": "Advanced Passive/Causative",
+    "level": "B2",
+    "student_input": "The castle is said to be built by a mysterious architect in the 15th century.",
+    "correct_answer": "The castle is said to have been built by a mysterious architect in the 15th century.",
+    "explanation": "Hãy nhìn mốc '15th century'. Việc xây lâu đài đã kết thúc trong quá khứ. Cấu trúc 'to be built' chỉ dùng cho hiện tại hoặc tương lai. Bạn hãy kết hợp 'to have' + 'been' + 'V3' để đưa hành động này về quá khứ."
+  },
+  {
+    "topic": "Advanced Passive/Causative",
+    "level": "B2",
+    "student_input": "The prime minister is thought to be negotiating a new deal with the EU right now.",
+    "correct_answer": "The prime minister is thought to be negotiating a new deal with the EU right now.",
+    "explanation": "Câu này hoàn toàn chính xác. Bạn đã dùng 'to be negotiating' để chỉ một hành động đang diễn ra ngay lúc này. Thử thách: Nếu cuộc đàm phán này ĐÃ KẾT THÚC vào tuần trước, bạn sẽ thay 'to be negotiating' thành cấu trúc nào?"
+  },
+  {
+    "topic": "Advanced Passive/Causative",
+    "level": "B2",
+    "student_input": "It was believed that the treasure to be hidden in the cave.",
+    "correct_answer": "It was believed that the treasure was hidden in the cave.",
+    "explanation": "Hãy nhìn vào mệnh đề sau 'that'. Bạn đang dùng 'to be hidden', nhưng đây là một mệnh đề (clause) cần một động từ được chia thì. Vì vế đầu là 'was believed' (quá khứ), bạn nên chia động từ 'be' ở thì nào để phù hợp?"
+  },
+  {
+    "topic": "Advanced Passive/Causative",
+    "level": "B2",
+    "student_input": "The stolen documents are alleged to have been find by the police.",
+    "correct_answer": "The stolen documents are alleged to have been found by the police.",
+    "explanation": "Bạn đã dùng đúng cấu trúc 'to have been' để chỉ một sự việc trong quá khứ và ở dạng bị động. Tuy nhiên, hãy kiểm tra lại động từ 'find'. Sau 'been' trong câu bị động, động từ phải ở dạng nào (V1, V2 hay V3)?"
+  },
+  {
+    "topic": "Advanced Passive/Causative",
+    "level": "B2",
+    "student_input": "The new employee is expected arrive at 9 AM tomorrow.",
+    "correct_answer": "The new employee is expected to arrive at 9 AM tomorrow.",
+    "explanation": "Hãy nhìn vào cụm 'is expected arrive'. Sau các động từ tường thuật/dự đoán như 'expect', 'believe', 'say', chúng ta cần một thành phần nào để kết nối với động từ chính 'arrive'?"
+  },
+  {
+    "topic": "Advanced Passive/Causative",
+    "level": "B2",
+    "student_input": "It is presumed that the hikers had lost their way before the storm hit.",
+    "correct_answer": "It is presumed that the hikers had lost their way before the storm hit.",
+    "explanation": "Câu này chính xác. 'Is presumed' (hiện tại) $\rightarrow$ 'had lost' (quá khứ hoàn thành - xảy ra trước một sự kiện quá khứ khác). Hãy thử thách: Chuyển câu này sang dạng 'The hikers are presumed...' và chú ý dạng của động từ 'lose'."
+  },
+  {
+    "topic": "Advanced Passive/Causative",
+    "level": "B2",
+    "student_input": "The CEO was rumored to be resigning after the scandal broke.",
+    "correct_answer": "The CEO was rumored to be resigning after the scandal broke.",
+    "explanation": "Câu này đúng. 'Was rumored' (quá khứ) $\rightarrow$ 'to be resigning' (đang diễn ra tại thời điểm đó). Nếu bạn muốn nói rằng vị CEO đó ĐÃ từ chức xong xuôi trước khi tin đồn lan ra, bạn sẽ thay 'to be resigning' bằng dạng nào?"
+  },
+  {
+    "topic": "Advanced Passive/Causative",
+    "level": "B2",
+    "student_input": "The ancient manuscripts are said to have wrote in a lost language.",
+    "correct_answer": "The ancient manuscripts are said to have been written in a lost language.",
+    "explanation": "Hãy phân tích: Bản thảo (manuscripts) không thể tự 'viết' (wrote). Bạn cần một cấu trúc bị động trong quá khứ. Bạn hãy kết hợp 'to have' + 'been' + 'V3' của động từ 'write'."
+  },
+  {
+    "topic": "Advanced Passive/Causative",
+    "level": "B2",
+    "student_input": "It is claimed that the suspect to have fled the country.",
+    "correct_answer": "It is claimed that the suspect has fled the country.",
+    "explanation": "Hãy nhìn vào mệnh đề sau 'that'. Bạn lại dùng 'to have fled', nhưng đây là một mệnh đề cần động từ chia thì. Bạn hãy thay 'to have' bằng trợ động từ phù hợp để tạo thành thì Hiện tại hoàn thành."
+  },
+  {
+    "topic": "Advanced Passive/Causative",
+    "level": "B2",
+    "student_input": "The bridge is thought to have been collapse due to poor materials.",
+    "correct_answer": "The bridge is thought to have collapsed due to poor materials.",
+    "explanation": "Hãy xem xét động từ 'collapse' (sụp đổ). Đây là một nội động từ (intransitive verb) - cây cầu tự sụp đổ chứ không phải 'bị' ai đó làm sụp đổ. Vậy bạn có cần dùng 'been' trong cấu trúc 'to have been collapse' không?"
+  },
+  {
+    "topic": "Advanced Passive/Causative",
+    "level": "B2",
+    "student_input": "The missing painting is believed be hidden in a private collection.",
+    "correct_answer": "The missing painting is believed to be hidden in a private collection.",
+    "explanation": "Hãy nhìn vào cụm 'is believed be'. Bạn đang thiếu một từ nối quan trọng giữa động từ tường thuật 'believed' và động từ trạng thái 'be'. Đó là từ gì?"
+  },
+  {
+    "topic": "Advanced Passive/Causative",
+    "level": "B2",
+    "student_input": "It reported that the stock market will crash soon.",
+    "correct_answer": "It is reported that the stock market will crash soon.",
+    "explanation": "Bạn đang thiếu trợ động từ 'to be' để tạo thành câu bị động. 'Người ta báo cáo rằng...' $\rightarrow$ bạn cần thêm 'is' vào sau 'It' để chia thì cho câu."
+  },
+  {
+    "topic": "Advanced Passive/Causative",
+    "level": "B2",
+    "student_input": "The politician is alleged to have lie under oath during the trial.",
+    "correct_answer": "The politician is alleged to have lied under oath during the trial.",
+    "explanation": "Bạn dùng đúng 'to have' để chỉ hành động trong quá khứ. Tuy nhiên, hãy kiểm tra lại động từ 'lie'. Dạng V3 của 'lie' (nói dối) là gì?"
+  },
+  {
+    "topic": "Advanced Passive/Causative",
+    "level": "B2",
+    "student_input": "He was thought to have been a spy for several years.",
+    "correct_answer": "He was thought to have been a spy for several years.",
+    "explanation": "Câu này chính xác. 'Was thought' (quá khứ) $\rightarrow$ 'to have been' (trạng thái kéo dài trước đó). Nếu tôi thay 'was thought' thành 'is thought', ý nghĩa của câu thay đổi như thế nào?"
+  },
+  {
+    "topic": "Advanced Passive/Causative",
+    "level": "B2",
+    "student_input": "The new law is said to be implemented next month.",
+    "correct_answer": "The new law is said to be implemented next month.",
+    "explanation": "Câu này đúng (bị động của tương lai). Thử thách: Chuyển câu này sang dạng 'It is said that...' và chú ý cách chia động từ 'implement' cho vế sau."
+  },
+  {
+    "topic": "Advanced Passive/Causative",
+    "level": "B2",
+    "student_input": "The suspect is believed to have been arrest in another city.",
+    "correct_answer": "The suspect is believed to have been arrested in another city.",
+    "explanation": "Hãy nhìn vào cụm 'to have been arrest'. Bạn đã dùng đúng cấu trúc bị động trong quá khứ. Tuy nhiên, hãy kiểm tra lại dạng của động từ 'arrest'. Sau 'been', chúng ta cần V-bare hay V3?"
+  },
+  {
+    "topic": "Advanced Passive/Causative",
+    "level": "B2",
+    "student_input": "It is assumed that the meeting to be postponed until Friday.",
+    "correct_answer": "It is assumed that the meeting has been postponed until Friday.",
+    "explanation": "Hãy nhìn vào mệnh đề sau 'that'. Bạn đang dùng 'to be postponed', nhưng đây là một mệnh đề cần động từ chia thì. Để nói về một việc vừa mới xảy ra và có kết quả ở hiện tại, bạn nên dùng thì nào?"
+  },
+  {
+    "topic": "Advanced Passive/Causative",
+    "level": "B2",
+    "student_input": "The athlete is reported to have been breaking the world record yesterday.",
+    "correct_answer": "The athlete is reported to have broken the world record yesterday.",
+    "explanation": "Hãy nhìn vào 'to have been breaking' và mốc 'yesterday'. 'To have been breaking' diễn tả một hành động kéo dài. Nhưng việc 'phá kỷ lục' thường là một khoảnh khắc tức thời. Bạn nên dùng 'to have broken' hay 'to have been breaking'?"
+  },
+  {
+    "topic": "Advanced Passive/Causative",
+    "level": "B2",
+    "student_input": "The temple is thought to be build during the Ming Dynasty.",
+    "correct_answer": "The temple is thought to have been built during the Ming Dynasty.",
+    "explanation": "Có hai vấn đề ở đây: 1. 'Ming Dynasty' là quá khứ $\rightarrow$ cần Perfect Infinitive. 2. Ngôi đền được xây (bị động) $\rightarrow$ cần 'been'. Bạn hãy kết hợp chúng lại thành 'to have been built'."
+  },
+  {
+    "topic": "Advanced Passive/Causative",
+    "level": "B2",
+    "student_input": "He is rumored to have been knowing the secret for a long time.",
+    "correct_answer": "He is rumored to have known the secret for a long time.",
+    "explanation": "Hãy chú ý động từ 'know'. Đây là một 'stative verb' (động từ trạng thái), thường không dùng ở dạng tiếp diễn (-ing). Vì vậy, thay vì 'to have been knowing', bạn nên dùng dạng nào của Perfect Infinitive?"
+  },
+  {
+    "topic": "Advanced Passive/Causative",
+    "level": "B2",
+    "student_input": "It is believed that the painting was steal from the gallery in 1990.",
+    "correct_answer": "It is believed that the painting was stolen from the gallery in 1990.",
+    "explanation": "Hãy nhìn vào vế 'the painting was steal'. Đây là một câu bị động ở thì Quá khứ đơn. Bạn hãy kiểm tra lại dạng của động từ 'steal' xem đã đúng là quá khứ phân từ (V3) chưa?"
+  },
+  {
+    "topic": "Advanced Passive/Causative",
+    "level": "B2",
+    "student_input": "I can't stand be ignored during team meetings.",
+    "correct_answer": "I can't stand being ignored during team meetings.",
+    "explanation": "Hãy nhìn vào cụm 'can't stand'. Sau động từ này, chúng ta cần một Danh động từ (V-ing). Nhưng ở đây, bạn là người 'bị' phớt lờ chứ không phải người 'đi' phớt lờ. Vậy dạng bị động của V-ing sẽ là gì?"
+  },
+  {
+    "topic": "Advanced Passive/Causative",
+    "level": "B2",
+    "student_input": "The manager wants the final report to complete by tomorrow morning.",
+    "correct_answer": "The manager wants the final report to be completed by tomorrow morning.",
+    "explanation": "Hãy phân tích đối tượng 'the final report'. Bản báo cáo có thể tự 'complete' (hoàn thành) chính nó không? Để diễn đạt một mong muốn về một vật ĐƯỢC hoàn thành, bạn cần thêm từ gì vào trước động từ 'complete' trong cấu trúc 'to-V'?"
+  },
+  {
+    "topic": "Advanced Passive/Causative",
+    "level": "B2",
+    "student_input": "He was got fired because he leaked confidential information.",
+    "correct_answer": "He got fired because he leaked confidential information.",
+    "explanation": "Bạn đang sử dụng 'Get-Passive' để nói về một sự kiện tiêu cực (bị đuổi việc). Cấu trúc của Get-Passive rất đơn giản: 'Get + V3'. Vậy việc thêm 'was' vào trước 'got' có cần thiết không, hay nó làm câu bị thừa trợ động từ?"
+  },
+  {
+    "topic": "Advanced Passive/Causative",
+    "level": "B2",
+    "student_input": "The missing documents must have stolen by someone in the office.",
+    "correct_answer": "The missing documents must have been stolen by someone in the office.",
+    "explanation": "Bạn đang đưa ra một suy luận chắc chắn về quá khứ (must have V3). Tuy nhiên, tài liệu không thể tự 'steal' (ăn trộm). Để biến suy luận này thành dạng bị động, bạn cần thêm từ nào vào giữa 'have' và 'stolen'?"
+  },
+  {
+    "topic": "Advanced Passive/Causative",
+    "level": "B2",
+    "student_input": "I avoid to be criticized in front of my colleagues.",
+    "correct_answer": "I avoid being criticized in front of my colleagues.",
+    "explanation": "Hãy kiểm tra lại động từ 'avoid'. Sau 'avoid', chúng ta dùng 'to-V' hay 'V-ing'? Khi đã xác định được dạng đúng, bạn hãy chuyển nó sang thể bị động để thể hiện việc bạn 'bị' chỉ trích."
+  },
+  {
+    "topic": "Advanced Passive/Causative",
+    "level": "B2",
+    "student_input": "She deserves to promote after all her hard work this year.",
+    "correct_answer": "She deserves to be promoted after all her hard work this year.",
+    "explanation": "Hãy nhìn vào cụm 'deserves to promote'. 'Promote' là thăng chức cho ai đó. Ở đây, cô ấy là người nhận được sự thăng chức. Vậy bạn cần điều chỉnh cụm 'to promote' như thế nào để nó mang nghĩa bị động?"
+  },
+  {
+    "topic": "Advanced Passive/Causative",
+    "level": "B2",
+    "student_input": "I remember being tell that the company was going bankrupt.",
+    "correct_answer": "I remember being told that the company was going bankrupt.",
+    "explanation": "Bạn đã dùng đúng 'being' để tạo thể bị động của V-ing. Tuy nhiên, hãy kiểm tra lại động từ 'tell'. Sau 'being', động từ chính phải ở dạng nào (V1, V2 hay V3)?"
+  },
+  {
+    "topic": "Advanced Passive/Causative",
+    "level": "B2",
+    "student_input": "The old building needs to renovate urgently.",
+    "correct_answer": "The old building needs to be renovated urgently.",
+    "explanation": "Tòa nhà không thể tự 'renovate' (cải tạo). Khi dùng 'need + to-V' cho vật, chúng ta phải chuyển sang dạng bị động. Bạn hãy thêm thành phần nào để 'to renovate' trở thành 'được cải tạo'?"
+  },
+  {
+    "topic": "Advanced Passive/Causative",
+    "level": "B2",
+    "student_input": "I don't like to be treat like a child by my boss.",
+    "correct_answer": "I don't like to be treated like a child by my boss.",
+    "explanation": "Hãy nhìn vào cụm 'to be treat'. Bạn đang dùng cấu trúc bị động của động từ nguyên mẫu. Trong cấu trúc 'be + V', động từ chính phải ở dạng nào để thể hiện sự bị động?"
+  },
+  {
+    "topic": "Advanced Passive/Causative",
+    "level": "B2",
+    "student_input": "He got caught to steal the exam papers.",
+    "correct_answer": "He got caught stealing the exam papers.",
+    "explanation": "Hãy chú ý cấu trúc 'Get caught'. Sau 'caught', để mô tả hành động đang diễn ra tại thời điểm bị bắt, chúng ta thường dùng dạng V-ing hay to-V? Bạn hãy thử thay 'to steal' bằng dạng V-ing xem sao."
+  },
+  {
+    "topic": "Advanced Passive/Causative",
+    "level": "B2",
+    "student_input": "The painting could have stolen if the alarm hadn't worked.",
+    "correct_answer": "The painting could have been stolen if the alarm hadn't worked.",
+    "explanation": "Đây là một câu điều kiện loại 3 với modal verb. Bức tranh không thể tự 'stolen'. Bạn hãy kiểm tra xem trong cụm 'could have stolen' đang thiếu thành phần nào để biến nó thành thể bị động?"
+  },
+  {
+    "topic": "Advanced Passive/Causative",
+    "level": "B2",
+    "student_input": "I hate being make the fool of in public.",
+    "correct_answer": "I hate being made a fool of in public.",
+    "explanation": "Bạn đã dùng 'being' chính xác. Tuy nhiên, hãy nhìn vào động từ 'make'. Trong cấu trúc bị động 'being + V3', dạng phân từ hai của 'make' là gì?"
+  },
+  {
+    "topic": "Advanced Passive/Causative",
+    "level": "B2",
+    "student_input": "The project is expected finish by the end of the month.",
+    "correct_answer": "The project is expected to be finished by the end of the month.",
+    "explanation": "Hãy nhìn vào 'is expected finish'. Sau 'expected', chúng ta cần một 'to-infinitive'. Đồng thời, vì dự án không tự hoàn thành, bạn cần biến 'to finish' thành dạng bị động. Bạn sẽ viết lại cụm này như thế nào?"
+  },
+  {
+    "topic": "Advanced Passive/Causative",
+    "level": "B2",
+    "student_input": "I got promoted last month, which was a huge surprise.",
+    "correct_answer": "I got promoted last month, which was a huge surprise.",
+    "explanation": "Câu này chính xác. Bạn đã dùng 'get-passive' để nói về một sự kiện bất ngờ. Thử thách: Nếu đây là một bài luận học thuật cực kỳ trang trọng, bạn nên thay 'got promoted' bằng cấu trúc 'be-passive' nào để phù hợp hơn?"
+  },
+  {
+    "topic": "Advanced Passive/Causative",
+    "level": "B2",
+    "student_input": "The suspect might have be arrested if the police had acted faster.",
+    "correct_answer": "The suspect might have been arrested if the police had acted faster.",
+    "explanation": "Hãy phân tích cụm 'might have be'. Bạn đang dùng modal perfect cho một sự việc bị động trong quá khứ. Trợ động từ 'be' trong cấu trúc 'have + be + V3' phải được chia ở dạng phân từ hai là gì?"
+  },
+  {
+    "topic": "Advanced Passive/Causative",
+    "level": "B2",
+    "student_input": "I really enjoy being treat as an equal by my supervisors.",
+    "correct_answer": "I really enjoy being treated as an equal by my supervisors.",
+    "explanation": "Hãy nhìn vào cụm 'being treat'. Bạn đang dùng thể bị động của Danh động từ sau động từ 'enjoy'. Động từ 'treat' cần được chia ở dạng nào để hoàn tất cấu trúc 'being + V3'?"
+  },
+  {
+    "topic": "Advanced Passive/Causative",
+    "level": "B2",
+    "student_input": "The documents need to sign by the director before 5 PM.",
+    "correct_answer": "The documents need to be signed by the director before 5 PM.",
+    "explanation": "Hãy xem xét 'the documents'. Tài liệu không thể tự 'sign'. Để diễn đạt việc tài liệu cần ĐƯỢC ký, bạn cần điều chỉnh 'to sign' thành dạng bị động như thế nào?"
+  },
+  {
+    "topic": "Advanced Passive/Causative",
+    "level": "B2",
+    "student_input": "I got stuck in traffic for two hours this morning.",
+    "correct_answer": "I got stuck in traffic for two hours this morning.",
+    "explanation": "Câu này đúng. Bạn đã dùng 'get-passive' cho một tình huống khó chịu bất ngờ. Nếu tôi thay 'got stuck' bằng 'was stuck', sắc thái của câu sẽ thay đổi như thế nào? (Gợi ý: Một bên nhấn mạnh vào quá trình xảy ra, một bên nhấn mạnh vào trạng thái)."
+  },
+  {
+    "topic": "Advanced Passive/Causative",
+    "level": "B2",
+    "student_input": "The crime must have committed by someone with a key to the building.",
+    "correct_answer": "The crime must have been committed by someone with a key to the building.",
+    "explanation": "Hãy phân tích: 'The crime' (vụ tội phạm) không thể tự 'commit' (phạm tội). Bạn đang dùng suy luận quá khứ 'must have V3'. Bạn cần thêm thành phần nào để biến câu này thành thể bị động?"
+  },
+  {
+    "topic": "Advanced Passive/Causative",
+    "level": "B2",
+    "student_input": "She hates to be tell what to do all the time.",
+    "correct_answer": "She hates being told what to do all the time.",
+    "explanation": "Hai điểm cần lưu ý: 1. Sau 'hate', dùng 'being V3' thường tự nhiên hơn 'to be V3' khi nói về một sự khó chịu kéo dài. 2. Động từ 'tell' trong thể bị động phải ở dạng nào? Bạn hãy điều chỉnh lại cả hai điểm này."
+  },
+  {
+    "topic": "Advanced Passive/Causative",
+    "level": "B2",
+    "student_input": "The new software is expected to install automatically.",
+    "correct_answer": "The new software is expected to be installed automatically.",
+    "explanation": "Phần mềm không tự cài đặt chính nó mà được hệ thống cài đặt. Bạn hãy chuyển cụm 'to install' sang dạng bị động để phản ánh đúng thực tế này."
+  },
+  {
+    "topic": "Advanced Passive/Causative",
+    "level": "B2",
+    "student_input": "I don't like getting lied to by my partners.",
+    "correct_answer": "I don't like getting lied to by my partners.",
+    "explanation": "Câu này chính xác. Bạn đã dùng 'get-passive' kết hợp với V-ing. Thử thách: Hãy chuyển 'getting lied to' thành 'being lied to'. Sắc thái của câu sẽ trở nên trang trọng hơn hay thân mật hơn?"
+  },
+  {
+    "topic": "Advanced Passive/Causative",
+    "level": "B2",
+    "student_input": "The old house deserves to renovate to preserve its historical value.",
+    "correct_answer": "The old house deserves to be renovated to preserve its historical value.",
+    "explanation": "Hãy nhìn vào 'deserves to renovate'. Ngôi nhà là đối tượng nhận hành động cải tạo. Bạn cần thêm từ gì vào trước 'renovate' để biến nó thành thể bị động?"
+  },
+  {
+    "topic": "Advanced Passive/Causative",
+    "level": "B2",
+    "student_input": "I remember to be take to the zoo when I was five.",
+    "correct_answer": "I remember being taken to the zoo when I was five.",
+    "explanation": "Hãy xem xét động từ 'remember'. Khi nhớ về một kỷ niệm trong quá khứ, chúng ta dùng 'remember + V-ing'. Vì bạn 'được' dẫn đi, bạn hãy chuyển V-ing đó sang thể bị động như thế nào?"
+  },
+  {
+    "topic": "Advanced Passive/Causative",
+    "level": "B2",
+    "student_input": "The package should have deliver by now.",
+    "correct_answer": "The package should have been delivered by now.",
+    "explanation": "Hãy phân tích cụm 'should have deliver'. Gói hàng không tự giao. Bạn đang dùng modal perfect (should have V3) để nói về một kỳ vọng trong quá khứ. Bạn thiếu thành phần nào để tạo thành thể bị động?"
+  },
+  {
+    "topic": "Advanced Passive/Causative",
+    "level": "B2",
+    "student_input": "She avoids being treat like a novice by the senior staff.",
+    "correct_answer": "She avoids being treated like a novice by the senior staff.",
+    "explanation": "Bạn dùng 'being' chính xác cho thể bị động của V-ing. Tuy nhiên, hãy kiểm tra lại động từ 'treat'. Trong cấu trúc 'being + V3', bạn cần dạng phân từ hai của động từ này."
+  },
+  {
+    "topic": "Advanced Passive/Causative",
+    "level": "B2",
+    "student_input": "I expect to promote to senior manager next year.",
+    "correct_answer": "I expect to be promoted to senior manager next year.",
+    "explanation": "Hãy nhìn vào 'expect to promote'. 'Promote' là hành động của công ty dành cho bạn. Bạn là người được thăng chức. Vậy bạn hãy điều chỉnh 'to promote' sang dạng bị động."
+  },
+  {
+    "topic": "Advanced Passive/Causative",
+    "level": "B2",
+    "student_input": "I got burnt by the steam while cooking.",
+    "correct_answer": "I got burnt by the steam while cooking.",
+    "explanation": "Câu này đúng. Bạn dùng 'got' cho một tai nạn bất ngờ. Thử thách: Nếu bạn viết 'I was burnt', câu văn sẽ mang sắc thái gì? Liệu nó có nhấn mạnh vào sự bất ngờ như 'got burnt' không?"
+  },
+  {
+    "topic": "Advanced Passive/Causative",
+    "level": "B2",
+    "student_input": "The mistake could have avoid if we had double-checked.",
+    "correct_answer": "The mistake could have been avoided if we had double-checked.",
+    "explanation": "Hãy phân tích 'The mistake'. Sai lầm không thể tự 'avoid' (tránh). Bạn đang dùng modal perfect cho một giả định quá khứ. Bạn thiếu thành phần nào để biến nó thành bị động?"
+  },
+  {
+    "topic": "Advanced Passive/Causative",
+    "level": "B2",
+    "student_input": "I hate being made to wait for hours in the clinic.",
+    "correct_answer": "I hate being made to wait for hours in the clinic.",
+    "explanation": "Câu này chính xác. 'Being made' là bị động của 'make someone do something'. Thử thách: Nếu bạn chuyển 'hate' thành 'avoid', câu này sẽ thay đổi ý nghĩa như thế nào về mặt thái độ?"
+  },
+  {
+    "topic": "Advanced Passive/Causative",
+    "level": "B2",
+    "student_input": "This issue needs to solve as soon as possible.",
+    "correct_answer": "This issue needs to be solved as soon as possible.",
+    "explanation": "Vấn đề (issue) không tự giải quyết chính nó. Hãy áp dụng quy tắc bị động với 'need to-V' cho vật. Bạn cần thêm từ gì vào trước 'solve'?"
+  },
+  {
+    "topic": "Advanced Passive/Causative",
+    "level": "B2",
+    "student_input": "I enjoy being take for granted by my friends.",
+    "correct_answer": "I enjoy being taken for granted by my friends.",
+    "explanation": "Hãy kiểm tra lại động từ 'take' trong cụm 'being take'. Trong cấu trúc bị động 'being + V3', bạn cần dạng phân từ hai của 'take' là gì?"
+  },
+  {
+    "topic": "Advanced Passive/Causative",
+    "level": "B2",
+    "student_input": "He got arrested for driving under the influence.",
+    "correct_answer": "He got arrested for driving under the influence.",
+    "explanation": "Câu này đúng. 'Got arrested' là một cách nói phổ biến cho sự kiện bất ngờ/tiêu cực. Thử thách: Hãy chuyển câu này sang dùng 'was arrested'. Sắc thái nào mang tính 'kể chuyện' hơn và sắc thái nào mang tính 'báo cáo' hơn?"
+  },
+  {
+    "topic": "Advanced Passive/Causative",
+    "level": "B2",
+    "student_input": "The results might have been announce yesterday, but I didn't see them.",
+    "correct_answer": "The results might have been announced yesterday, but I didn't see them.",
+    "explanation": "Bạn dùng 'might have been' chính xác cho suy luận bị động quá khứ. Tuy nhiên, hãy nhìn vào động từ 'announce'. Bạn đã chia nó ở dạng V3 chưa?"
+  },
+  {
+    "topic": "Advanced Passive/Causative",
+    "level": "B2",
+    "student_input": "I can't imagine to be treat this way by a professional.",
+    "correct_answer": "I can't imagine being treated this way by a professional.",
+    "explanation": "Hai lỗi cần sửa: 1. Sau 'imagine', chúng ta dùng V-ing chứ không dùng to-V. 2. Vì bạn là người nhận hành động 'treat', bạn hãy chuyển V-ing đó sang dạng bị động."
+  },
+  {
+    "topic": "Advanced Passive/Causative",
+    "level": "B2",
+    "student_input": "She hopes to be accept into the prestigious university.",
+    "correct_answer": "She hopes to be accepted into the prestigious university.",
+    "explanation": "Hãy nhìn vào 'to be accept'. Bạn đang dùng cấu trúc bị động của To-V. Động từ 'accept' cần được chia ở dạng nào để hoàn tất cấu trúc 'be + V3'?"
+  },
+  {
+    "topic": "Advanced Passive/Causative",
+    "level": "B2",
+    "student_input": "I got the car to wash before the date.",
+    "correct_answer": "I got the car washed before the date.",
+    "explanation": "Bạn đang nhầm lẫn giữa 'Get someone to do' và 'Get something done'. Ở đây 'the car' là vật. Vậy động từ 'wash' phải ở dạng nào để chỉ việc xe ĐƯỢC rửa?"
+  },
+  {
+    "topic": "Advanced Passive/Causative",
+    "level": "B2",
+    "student_input": "The painting must have been paint by a master of the Renaissance.",
+    "correct_answer": "The painting must have been painted by a master of the Renaissance.",
+    "explanation": "Bạn dùng 'must have been' chính xác. Nhưng hãy kiểm tra lại động từ 'paint'. Bạn đã chia nó ở dạng V3 chưa?"
+  },
+  {
+    "topic": "Advanced Passive/Causative",
+    "level": "B2",
+    "student_input": "I hate being make wait for so long.",
+    "correct_answer": "I hate being made to wait for so long.",
+    "explanation": "Câu này có hai vấn đề: 1. Động từ 'make' cần ở dạng V3 sau 'being'. 2. Khi dùng 'make' ở dạng bị động, động từ theo sau (wait) phải có thêm từ gì ở phía trước? (Hãy nhớ lại cấu trúc: 'be made to do something')."
+  },
+  {
+    "topic": "Advanced Passive/Causative",
+    "level": "B2",
+    "student_input": "The children should be teach how to handle conflict early on.",
+    "correct_answer": "The children should be taught how to handle conflict early on.",
+    "explanation": "Hãy nhìn vào cụm 'should be teach'. Đây là cấu trúc bị động với Modal Verb. Động từ 'teach' cần được chia ở dạng V3 là gì?"
+  },
+  {
+    "topic": "Advanced Passive/Causative",
+    "level": "B2",
+    "student_input": "I can't imagine being tell that I failed the exam.",
+    "correct_answer": "I can't imagine being told that I failed the exam.",
+    "explanation": "Bạn dùng 'being' chính xác cho bị động của V-ing. Tuy nhiên, hãy kiểm tra lại động từ 'tell'. Dạng phân từ hai (V3) của 'tell' là gì?"
+  }
+]

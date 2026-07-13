@@ -69,7 +69,7 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
             .HasOne(c => c.Teacher)
             .WithMany(u => u.TaughtClasses)
             .HasForeignKey(c => c.TeacherId)
-            .OnDelete(DeleteBehavior.Restrict);
+            .OnDelete(DeleteBehavior.Cascade);
 
         modelBuilder.Entity<Class>()
             .HasOne(c => c.ActiveEntryTest)
@@ -108,13 +108,13 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
             .HasOne(d => d.Owner)
             .WithMany(u => u.Documents)
             .HasForeignKey(d => d.OwnerId)
-            .OnDelete(DeleteBehavior.Restrict);
+            .OnDelete(DeleteBehavior.Cascade);
 
         modelBuilder.Entity<Document>()
             .HasOne(d => d.Class)
             .WithMany(c => c.Documents)
             .HasForeignKey(d => d.ClassId)
-            .OnDelete(DeleteBehavior.SetNull);
+            .OnDelete(DeleteBehavior.Cascade);
 
         modelBuilder.Entity<Document>()
             .HasOne(d => d.Topic)
@@ -132,7 +132,7 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
             .HasOne(q => q.Class)
             .WithMany(c => c.Quizzes)
             .HasForeignKey(q => q.ClassId)
-            .OnDelete(DeleteBehavior.SetNull);
+            .OnDelete(DeleteBehavior.Cascade);
 
         modelBuilder.Entity<Quiz>()
             .HasOne(q => q.Topic)
@@ -169,7 +169,7 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
             .HasOne(s => s.Student)
             .WithMany(u => u.QuizSubmissions)
             .HasForeignKey(s => s.StudentId)
-            .OnDelete(DeleteBehavior.Restrict);
+            .OnDelete(DeleteBehavior.Cascade);
 
         modelBuilder.Entity<QuizSubmission>()
             .HasOne(s => s.Quiz)

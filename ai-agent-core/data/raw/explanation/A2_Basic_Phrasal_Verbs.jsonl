@@ -1,0 +1,317 @@
+[
+  {
+    "topic": "Basic Phrasal Verbs",
+    "level": "A2",
+    "student_input": "I wake on at 6 AM every morning.",
+    "correct_answer": "I wake up at 6 AM every morning.",
+    "explanation": "Chào em, hãy nhìn vào cụm 'wake on'. Để nói về việc tỉnh giấc, chúng ta không dùng 'on'. Em hãy thử thay 'on' bằng một giới từ khác bắt đầu bằng chữ 'u' xem sao?"
+  },
+  {
+    "topic": "Basic Phrasal Verbs",
+    "level": "A2",
+    "student_input": "I get in at 6:15 AM to start my day.",
+    "correct_answer": "I get up at 6:15 AM to start my day.",
+    "explanation": "Em dùng 'get in' (đi vào). Nhưng ở đây em muốn nói về việc 'rời khỏi giường' để bắt đầu ngày mới. Em hãy thử dùng cụm 'get' kết hợp với một giới từ chỉ hướng đi lên xem nào?"
+  },
+  {
+    "topic": "Basic Phrasal Verbs",
+    "level": "A2",
+    "student_input": "It is cold, so I put in my coat.",
+    "correct_answer": "It is cold, so I put on my coat.",
+    "explanation": "Hãy chú ý cụm 'put in' (đặt vào trong). Khi em muốn nói về việc 'mặc quần áo' vào người, em nên dùng giới từ 'in' hay giới từ 'on' nhỉ?"
+  },
+  {
+    "topic": "Basic Phrasal Verbs",
+    "level": "A2",
+    "student_input": "Please take away your shoes before entering.",
+    "correct_answer": "Please take off your shoes before entering.",
+    "explanation": "Em dùng 'take away' (mang đi nơi khác). Nhưng để nói về việc 'cởi' giày dép hoặc quần áo, chúng ta dùng cụm 'take' đi với giới từ nào để chỉ sự tách rời ra khỏi cơ thể nhỉ?"
+  },
+  {
+    "topic": "Basic Phrasal Verbs",
+    "level": "A2",
+    "student_input": "Can you turn up the light? It's too dark here.",
+    "correct_answer": "Can you turn on the light? It's too dark here.",
+    "explanation": "Hãy phân tích: 'turn up' thường dùng để tăng âm lượng hoặc nhiệt độ. Ở đây em muốn 'bật' đèn lên từ trạng thái tắt. Vậy em nên dùng 'turn up' hay 'turn on'?"
+  },
+  {
+    "topic": "Basic Phrasal Verbs",
+    "level": "A2",
+    "student_input": "Don't forget to turn down the TV before you go to bed.",
+    "correct_answer": "Don't forget to turn off the TV before you go to bed.",
+    "explanation": " 'Turn down' là vặn nhỏ âm lượng. Nhưng nếu em muốn nói là 'tắt hẳn' TV đi, em nên dùng cụm từ đối lập với 'turn on' là gì nhỉ?"
+  },
+  {
+    "topic": "Basic Phrasal Verbs",
+    "level": "A2",
+    "student_input": "I put off my hat when I go inside.",
+    "correct_answer": "I take off my hat when I go inside.",
+    "explanation": "Hãy cẩn thận! 'Put off' có nghĩa là trì hoãn một việc gì đó. Để nói về việc 'cởi' mũ ra, em hãy dùng động từ 'take' kết hợp với giới từ 'off' nhé."
+  },
+  {
+    "topic": "Basic Phrasal Verbs",
+    "level": "A2",
+    "student_input": "She wakes up, and then she gets off the bed.",
+    "correct_answer": "She wakes up, and then she gets up from the bed.",
+    "explanation": "Em dùng 'get off' thường cho xe bus hoặc tàu hỏa. Khi nói về việc bước ra khỏi giường để bắt đầu ngày mới, em hãy dùng cụm 'get up' nhé."
+  },
+  {
+    "topic": "Basic Phrasal Verbs",
+    "level": "A2",
+    "student_input": "I turn off my alarm clock, but I stay in bed.",
+    "correct_answer": "I turn off my alarm clock, but I stay in bed.",
+    "explanation": "Câu này hoàn toàn chính xác! Em đã dùng đúng 'turn off' cho thiết bị điện tử. Rất tốt!"
+  },
+  {
+    "topic": "Basic Phrasal Verbs",
+    "level": "A2",
+    "student_input": "He put on his glasses to read the book.",
+    "correct_answer": "He put on his glasses to read the book.",
+    "explanation": "Chính xác! Em đã dùng 'put on' đúng cho việc đeo kính. Tiếp tục phát huy nhé!"
+  },
+  {
+    "topic": "Basic Phrasal Verbs",
+    "level": "A2",
+    "student_input": "Please turn on the radio, I want to hear the news.",
+    "correct_answer": "Please turn on the radio, I want to hear the news.",
+    "explanation": "Hoàn hảo! 'Turn on' được dùng chính xác để bật một thiết bị điện tử."
+  },
+  {
+    "topic": "Basic Phrasal Verbs",
+    "level": "A2",
+    "student_input": "I wake up at 7, but I get off at 7:30.",
+    "correct_answer": "I wake up at 7, but I get up at 7:30.",
+    "explanation": "Hãy nhìn lại cụm 'get off'. Như thầy/cô đã nói, 'get off' dùng cho phương tiện giao thông. Để nói về việc rời khỏi giường, em hãy dùng cụm 'get up' nhé."
+  },
+  {
+    "topic": "Basic Phrasal Verbs",
+    "level": "A2",
+    "student_input": "She puts out her coat because it's raining.",
+    "correct_answer": "She puts on her coat because it's raining.",
+    "explanation": " 'Put out' thường dùng để dập lửa. Để nói về việc mặc áo khoác vào, em hãy dùng giới từ 'on'. Em thử sửa lại xem?"
+  },
+  {
+    "topic": "Basic Phrasal Verbs",
+    "level": "A2",
+    "student_input": "Can you turn off the air conditioner? It's too cold.",
+    "correct_answer": "Can you turn off the air conditioner? It's too cold.",
+    "explanation": "Chính xác! Em đã dùng 'turn off' đúng để yêu cầu tắt một thiết bị."
+  },
+  {
+    "topic": "Basic Phrasal Verbs",
+    "level": "A2",
+    "student_input": "I take on my pajamas before I sleep.",
+    "correct_answer": "I put on my pajamas before I sleep.",
+    "explanation": "Hãy phân tích: Em đang muốn 'mặc' đồ ngủ vào. 'Take on' không có nghĩa là mặc quần áo. Em hãy dùng cụm 'put' kết hợp với giới từ 'on' nhé."
+  },
+  {
+    "topic": "Basic Phrasal Verbs",
+    "level": "A2",
+    "student_input": "I am looking at my keys. Have you seen them?",
+    "correct_answer": "I am looking for my keys. Have you seen them?",
+    "explanation": "Hãy chú ý: 'looking at' nghĩa là em đang nhìn vào vật đó. Nhưng ở đây em chưa thấy chìa khóa và đang 'tìm kiếm' chúng. Để nói về việc tìm kiếm, em nên dùng 'look for' hay 'look at'?"
+  },
+  {
+    "topic": "Basic Phrasal Verbs",
+    "level": "A2",
+    "student_input": "I have to look for my little brother tonight.",
+    "correct_answer": "I have to look after my little brother tonight.",
+    "explanation": "Em dùng 'look for' (tìm kiếm), vậy câu này nghĩa là em đang đi tìm em trai mình. Nhưng nếu em muốn nói là 'chăm sóc' em trai, em nên dùng giới từ nào thay cho 'for' nhỉ? (Gợi ý: bắt đầu bằng chữ 'a')."
+  },
+  {
+    "topic": "Basic Phrasal Verbs",
+    "level": "A2",
+    "student_input": "Please fill up this application form.",
+    "correct_answer": "Please fill in this application form. / Please fill out this application form.",
+    "explanation": "Hãy phân biệt nhé: 'fill up' thường dùng cho chất lỏng (đổ đầy bình xăng). Còn khi viết thông tin vào một tờ đơn, chúng ta dùng 'fill in' hoặc 'fill out'. Em hãy sửa lại giới từ nhé."
+  },
+  {
+    "topic": "Basic Phrasal Verbs",
+    "level": "A2",
+    "student_input": "I want to go off with my friends tonight.",
+    "correct_answer": "I want to go out with my friends tonight.",
+    "explanation": " 'Go off' thường dùng cho tiếng chuông báo thức hoặc bom nổ. Để nói về việc 'đi chơi', đi ra ngoài giải trí, em hãy dùng cụm 'go out' nhé."
+  },
+  {
+    "topic": "Basic Phrasal Verbs",
+    "level": "A2",
+    "student_input": "Don't give away! You can pass the exam.",
+    "correct_answer": "Don't give up! You can pass the exam.",
+    "explanation": " 'Give away' nghĩa là cho đi hoặc tặng miễn phí. Để khuyên ai đó 'đừng bỏ cuộc', em hãy dùng cụm 'give up'. Em thử sửa lại xem sao?"
+  },
+  {
+    "topic": "Basic Phrasal Verbs",
+    "level": "A2",
+    "student_input": "I grow up in a small village in the countryside.",
+    "correct_answer": "I grew up in a small village in the countryside.",
+    "explanation": "Em dùng đúng cụm 'grow up' (lớn lên), rất tốt! Tuy nhiên, việc em lớn lên đã xảy ra trong quá khứ rồi. Em hãy chia lại động từ 'grow' sang dạng V2 nhé."
+  },
+  {
+    "topic": "Basic Phrasal Verbs",
+    "level": "A2",
+    "student_input": "We run off of milk. Can you buy some?",
+    "correct_answer": "We ran out of milk. Can you buy some?",
+    "explanation": "Để nói về việc 'hết sạch' cái gì đó, chúng ta dùng cụm 'run out of'. Em hãy sửa 'run off of' thành 'run out of' và chia động từ ở thì quá khứ nhé."
+  },
+  {
+    "topic": "Basic Phrasal Verbs",
+    "level": "A2",
+    "student_input": "I'll come back to you in ten minutes.",
+    "correct_answer": "I'll come back to you in ten minutes.",
+    "explanation": "Hoàn hảo! 'Come back' (quay trở lại) được dùng chính xác trong ngữ cảnh này. Rất tốt!"
+  },
+  {
+    "topic": "Basic Phrasal Verbs",
+    "level": "A2",
+    "student_input": "Can you look after the dog? I'm searching for it.",
+    "correct_answer": "Can you look after the dog? I'm searching for it.",
+    "explanation": "Câu này rất thú vị và chính xác! Em đã dùng 'look after' (chăm sóc) và 'searching for' (tìm kiếm) đúng ngữ cảnh. Tuyệt vời!"
+  },
+  {
+    "topic": "Basic Phrasal Verbs",
+    "level": "A2",
+    "student_input": "I have to fill in the bottle with water.",
+    "correct_answer": "I have to fill up the bottle with water.",
+    "explanation": "Hãy nhớ lại: 'fill in' dùng cho giấy tờ. Khi em muốn 'đổ đầy' một vật chứa bằng chất lỏng, em nên dùng giới từ 'up' hay 'in'?"
+  },
+  {
+    "topic": "Basic Phrasal Verbs",
+    "level": "A2",
+    "student_input": "She gave up her old clothes to the poor.",
+    "correct_answer": "She gave away her old clothes to the poor.",
+    "explanation": " 'Give up' là bỏ cuộc hoặc từ bỏ thói quen. Ở đây em đang nói về việc 'tặng/cho' quần áo cũ cho người nghèo. Em hãy dùng cụm 'give away' nhé."
+  },
+  {
+    "topic": "Basic Phrasal Verbs",
+    "level": "A2",
+    "student_input": "Please look for the picture on the wall.",
+    "correct_answer": "Please look at the picture on the wall.",
+    "explanation": " 'Look for' là tìm kiếm một thứ bị mất. Nhưng ở đây bức tranh đang ở ngay trên tường, em chỉ muốn người khác 'nhìn vào' nó. Em hãy dùng 'look at' nhé."
+  },
+  {
+    "topic": "Basic Phrasal Verbs",
+    "level": "A2",
+    "student_input": "I grow up to be a doctor one day.",
+    "correct_answer": "I want to grow up to be a doctor one day.",
+    "explanation": "Em dùng 'grow up' (lớn lên) là đúng, nhưng câu này thiếu một động từ chỉ mong muốn (như 'want to'). Em hãy thêm 'want to' vào trước 'grow up' để câu hoàn chỉnh nhé."
+  },
+  {
+    "topic": "Basic Phrasal Verbs",
+    "level": "A2",
+    "student_input": "The alarm clock went out at 6 AM.",
+    "correct_answer": "The alarm clock went off at 6 AM.",
+    "explanation": "Khi nói về chuông báo thức hoặc chuông điện thoại vang lên, chúng ta dùng cụm 'go off' chứ không phải 'go out' (đi chơi). Em hãy sửa lại giới từ nhé."
+  },
+  {
+    "topic": "Basic Phrasal Verbs",
+    "level": "A2",
+    "student_input": "I'll look for you after school.",
+    "correct_answer": "I'll look for you after school.",
+    "explanation": "Nếu ý của em là 'Tôi sẽ đi tìm bạn' (vì bạn đang trốn hoặc bị lạc), thì câu này đúng. Nhưng nếu em muốn nói 'Tôi sẽ chăm sóc bạn', em hãy dùng 'look after' nhé. Em đang muốn nói ý nào?"
+  },
+  {
+    "topic": "Basic Phrasal Verbs",
+    "level": "A2",
+    "student_input": "I get in the bus at 8 AM every day.",
+    "correct_answer": "I get on the bus at 8 AM every day.",
+    "explanation": "Hãy chú ý phương tiện 'bus'. Với những phương tiện lớn mà em có thể đứng lên và đi lại bên trong (bus, train, plane), chúng ta dùng 'get in' hay 'get on' nhỉ?"
+  },
+  {
+    "topic": "Basic Phrasal Verbs",
+    "level": "A2",
+    "student_input": "I get off the car at the supermarket.",
+    "correct_answer": "I get out of the car at the supermarket.",
+    "explanation": "Em dùng 'get off' cho xe bus, nhưng với xe hơi (car) hoặc taxi (những xe nhỏ mà em phải cúi người để vào), chúng ta dùng cụm 'get' đi với giới từ nào để nói về việc bước ra ngoài nhỉ?"
+  },
+  {
+    "topic": "Basic Phrasal Verbs",
+    "level": "A2",
+    "student_input": "Please get out of the train at the next station.",
+    "correct_answer": "Please get off the train at the next station.",
+    "explanation": "Hãy nhớ quy tắc phương tiện lớn (train, bus, plane). Chúng ta không dùng 'get out of' mà dùng cụm 'get' đi với giới từ nào để chỉ việc xuống xe nhỉ?"
+  },
+  {
+    "topic": "Basic Phrasal Verbs",
+    "level": "A2",
+    "student_input": "He got on the taxi and left quickly.",
+    "correct_answer": "He got in the taxi and left quickly.",
+    "explanation": "Taxi là phương tiện nhỏ, em không 'leo lên' (on) như xe bus mà là 'bước vào trong' (in). Em hãy sửa 'got on' thành 'got in' nhé."
+  },
+  {
+    "topic": "Basic Phrasal Verbs",
+    "level": "A2",
+    "student_input": "I'm going to go in with my friends tonight.",
+    "correct_answer": "I'm going to go out with my friends tonight.",
+    "explanation": "Em muốn nói về việc đi chơi, đi dạo hay gặp gỡ bạn bè ở bên ngoài. Vậy em nên dùng 'go in' (đi vào trong) hay 'go out' (đi ra ngoài chơi)?"
+  },
+  {
+    "topic": "Basic Phrasal Verbs",
+    "level": "A2",
+    "student_input": "The plane takes on at 10 PM.",
+    "correct_answer": "The plane takes off at 10 PM.",
+    "explanation": "Để nói về việc máy bay 'cất cánh', chúng ta dùng cụm 'take off' chứ không phải 'take on'. Em hãy sửa lại giới từ nhé."
+  },
+  {
+    "topic": "Basic Phrasal Verbs",
+    "level": "A2",
+    "student_input": "We get in the plane and fly to London.",
+    "correct_answer": "We get on the plane and fly to London.",
+    "explanation": "Máy bay là phương tiện lớn, em hãy áp dụng quy tắc 'Get on/off' cho trường hợp này nhé. Em sửa 'get in' thành gì nhỉ?"
+  },
+  {
+    "topic": "Basic Phrasal Verbs",
+    "level": "A2",
+    "student_input": "Can you come back home early today?",
+    "correct_answer": "Can you come back home early today?",
+    "explanation": "Hoàn hảo! 'Come back' (quay về) được dùng chính xác trong câu hỏi này. Rất tốt!"
+  },
+  {
+    "topic": "Basic Phrasal Verbs",
+    "level": "A2",
+    "student_input": "I get out of the bus and walk to school.",
+    "correct_answer": "I get off the bus and walk to school.",
+    "explanation": "Một lần nữa, hãy nhớ lại quy tắc phương tiện lớn (bus). Em dùng 'get out of' cho xe hơi, còn với xe bus em phải dùng cụm từ nào?"
+  },
+  {
+    "topic": "Basic Phrasal Verbs",
+    "level": "A2",
+    "student_input": "We got in the boat to cross the river.",
+    "correct_answer": "We got in the boat to cross the river.",
+    "explanation": "Chính xác! Với thuyền nhỏ (boat), chúng ta dùng 'get in' là hoàn toàn đúng. Em làm rất tốt!"
+  },
+  {
+    "topic": "Basic Phrasal Verbs",
+    "level": "A2",
+    "student_input": "I want to go out of the cinema, the movie is boring.",
+    "correct_answer": "I want to leave the cinema / I want to go out of the cinema.",
+    "explanation": "Câu này về cơ bản là đúng, nhưng trong tiếng Anh, khi muốn nói 'rời khỏi' một địa điểm, dùng động từ 'leave' sẽ tự nhiên hơn 'go out of'. Em thử thay thế xem sao?"
+  },
+  {
+    "topic": "Basic Phrasal Verbs",
+    "level": "A2",
+    "student_input": "He gets off a taxi at the airport.",
+    "correct_answer": "He gets out of a taxi at the airport.",
+    "explanation": "Taxi là phương tiện nhỏ. Em hãy nhớ: Get on/off (Lớn) $\leftrightarrow$ Get in/out (Nhỏ). Vậy em phải sửa 'gets off' thành gì cho đúng?"
+  },
+  {
+    "topic": "Basic Phrasal Verbs",
+    "level": "A2",
+    "student_input": "Wait for me! I'm coming back.",
+    "correct_answer": "Wait for me! I'm coming back.",
+    "explanation": "Hoàn hảo! 'Coming back' dùng để nói về hành động quay trở lại. Rất chính xác!"
+  },
+  {
+    "topic": "Basic Phrasal Verbs",
+    "level": "A2",
+    "student_input": "I get on the car at 7 AM.",
+    "correct_answer": "I get in the car at 7 AM.",
+    "explanation": "Xe hơi (car) là phương tiện nhỏ. Em hãy áp dụng quy tắc Get in/out thay vì Get on/off nhé. Em sửa lại 'get on' thành gì nhỉ?"
+  },
+  {
+    "topic": "Basic Phrasal Verbs",
+    "level": "A2",
+    "student_input": "The train takes off from the station.",
+    "correct_answer": "The train leaves the station.",
+    "explanation": "Hãy cẩn thận! 'Take off' chỉ dùng cho máy bay (cất cánh). Với tàu hỏa, chúng ta đơn giản là dùng 'leave' (rời đi) hoặc 'depart'. Em hãy sửa lại nhé."
+  }
+]

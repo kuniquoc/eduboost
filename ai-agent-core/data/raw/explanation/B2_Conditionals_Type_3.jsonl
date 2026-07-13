@@ -1,0 +1,1031 @@
+[
+  {
+    "topic": "Conditionals Type 3 & Mixed",
+    "level": "B2",
+    "student_input": "If I had known you were coming, I would have prepare a better meal.",
+    "correct_answer": "If I had known you were coming, I would have prepared a better meal.",
+    "explanation": "Hãy nhìn vào mệnh đề kết quả (result clause). Trong câu điều kiện loại 3, chúng ta đang nói về một sự việc trái ngược với thực tế trong quá khứ. Cấu trúc 'would have' cần đi kèm với dạng động từ nào để diễn tả một hành động đã hoàn tất trong quá khứ?"
+  },
+  {
+    "topic": "Conditionals Type 3 & Mixed",
+    "level": "B2",
+    "student_input": "If he studied harder last semester, he would have passed the final exam.",
+    "correct_answer": "If he had studied harder last semester, he would have passed the final exam.",
+    "explanation": "Hãy chú ý đến mốc thời gian 'last semester'. Đây là một giả định về một sự việc đã xảy ra (hoặc không xảy ra) trong quá khứ. Liệu thì Quá khứ đơn (Past Simple) trong mệnh đề 'if' đã đủ để thể hiện sự 'giả định' cho một thời điểm trước cả thời điểm kết quả chưa? Bạn nên dùng thì nào để nhấn mạnh hành động xảy ra trước?"
+  },
+  {
+    "topic": "Conditionals Type 3 & Mixed",
+    "level": "B2",
+    "student_input": "If we hadn't missed the train, we wouldn't have be late for the interview.",
+    "correct_answer": "If we hadn't missed the train, we wouldn't have been late for the interview.",
+    "explanation": "Bạn đang sử dụng cấu trúc 'wouldn't have' cho mệnh đề kết quả. Hãy kiểm tra lại dạng của động từ 'be' theo sau nó. Trong cấu trúc Perfect Conditional, động từ chính phải ở dạng nào (V1, V2 hay V3)?"
+  },
+  {
+    "topic": "Conditionals Type 3 & Mixed",
+    "level": "B2",
+    "student_input": "If I would have seen the red light, I would have stopped the car.",
+    "correct_answer": "If I had seen the red light, I would have stopped the car.",
+    "explanation": "Có một quy tắc quan trọng trong câu điều kiện: Chúng ta có bao giờ dùng 'would' ngay trong mệnh đề 'if' không? Hãy thử xem xét lại sự phân chia giữa mệnh đề giả định (điều kiện) và mệnh đề kết quả."
+  },
+  {
+    "topic": "Conditionals Type 3 & Mixed",
+    "level": "B2",
+    "student_input": "Had I known the truth, I will have reacted differently.",
+    "correct_answer": "Had I known the truth, I would have reacted differently.",
+    "explanation": "Bạn đang sử dụng cấu trúc đảo ngữ 'Had I known' (một cách viết trang trọng của 'If I had known'), điều này rất tốt cho trình độ B2. Tuy nhiên, hãy nhìn vào mệnh đề kết quả. Nếu giả thiết nằm ở quá khứ, liệu 'will' có phù hợp về mặt thời gian không? Bạn nên dùng modal verb nào ở dạng quá khứ?"
+  },
+  {
+    "topic": "Conditionals Type 3 & Mixed",
+    "level": "B2",
+    "student_input": "If she hadn't been so arrogant, she could have make more friends at the party.",
+    "correct_answer": "If she hadn't been so arrogant, she could have made more friends at the party.",
+    "explanation": "Hãy phân tích cụm 'could have make'. Khi dùng 'could have' để nói về một khả năng trong quá khứ, động từ theo sau phải tuân thủ quy tắc nào về hình thái?"
+  },
+  {
+    "topic": "Conditionals Type 3 & Mixed",
+    "level": "B2",
+    "student_input": "If they had invested more in R&D, they might have became the market leader.",
+    "correct_answer": "If they had invested more in R&D, they might have become the market leader.",
+    "explanation": "Hãy kiểm tra lại bảng động từ bất quy tắc của từ 'become'. Trong cấu trúc 'might have + V3', dạng quá khứ phân từ của 'become' là gì?"
+  },
+  {
+    "topic": "Conditionals Type 3 & Mixed",
+    "level": "B2",
+    "student_input": "If I had took the shortcut, I would have arrived on time.",
+    "correct_answer": "If I had taken the shortcut, I would have arrived on time.",
+    "explanation": "Hãy nhìn vào mệnh đề 'if'. Bạn đang dùng thì Quá khứ hoàn thành (Past Perfect). Bạn hãy kiểm tra lại xem dạng V3 của động từ 'take' là gì?"
+  },
+  {
+    "topic": "Conditionals Type 3 & Mixed",
+    "level": "B2",
+    "student_input": "If the company had accepted the offer, they wouldn't had lost so much money.",
+    "correct_answer": "If the company had accepted the offer, they wouldn't have lost so much money.",
+    "explanation": "Hãy nhìn vào mệnh đề kết quả: 'wouldn't had lost'. Sau modal verb 'would', chúng ta sử dụng động từ ở dạng nguyên mẫu (bare infinitive) hay chia theo thì? Bạn hãy thử điều chỉnh lại trợ động từ 'had' thành dạng nguyên mẫu xem sao."
+  },
+  {
+    "topic": "Conditionals Type 3 & Mixed",
+    "level": "B2",
+    "student_input": "I would have passed the test if I studied more.",
+    "correct_answer": "I would have passed the test if I had studied more.",
+    "explanation": "Câu này có sự mất cân đối về thời gian. Mệnh đề kết quả là 'would have passed' (quá khứ), nhưng mệnh đề 'if' lại dùng 'studied' (Quá khứ đơn). Để diễn tả một giả định trái ngược với thực tế trong quá khứ, mệnh đề 'if' cần dùng thì nào để thể hiện sự việc xảy ra trước?"
+  },
+  {
+    "topic": "Conditionals Type 3 & Mixed",
+    "level": "B2",
+    "student_input": "If it hadn't rained, we would have go for a walk.",
+    "correct_answer": "If it hadn't rained, we would have gone for a walk.",
+    "explanation": "Bạn đã chia đúng mệnh đề 'if', nhưng hãy xem lại mệnh đề kết quả. Sau 'would have', chúng ta cần một động từ ở dạng nào để hoàn tất cấu trúc câu điều kiện loại 3?"
+  },
+  {
+    "topic": "Conditionals Type 3 & Mixed",
+    "level": "B2",
+    "student_input": "Were I known about the meeting, I would have attended it.",
+    "correct_answer": "Had I known about the meeting, I would have attended it.",
+    "explanation": "Bạn đang cố gắng sử dụng cấu trúc đảo ngữ để câu văn trang trọng hơn. Tuy nhiên, 'Were' thường được dùng cho câu điều kiện loại 2 (hiện tại). Với một sự việc đã xảy ra trong quá khứ (loại 3), trợ động từ nào nên được đưa lên đầu câu để thay thế cho 'If'?"
+  },
+  {
+    "topic": "Conditionals Type 3 & Mixed",
+    "level": "B2",
+    "student_input": "If you had told me earlier, I could help you.",
+    "correct_answer": "If you had told me earlier, I could have helped you.",
+    "explanation": "Hãy xem xét sự logic về thời gian. Việc 'kể cho tôi' đã xảy ra trong quá khứ (had told). Vậy việc 'giúp đỡ' cũng phải là một khả năng trong quá khứ. Liệu từ 'could' (hiện tại/tương lai) có khớp với mốc thời gian này không? Bạn cần thêm gì sau 'could' để đưa nó về quá khứ?"
+  },
+  {
+    "topic": "Conditionals Type 3 & Mixed",
+    "level": "B2",
+    "student_input": "If I had been more careful, I wouldn't have make that mistake.",
+    "correct_answer": "If I had been more careful, I wouldn't have made that mistake.",
+    "explanation": "Hãy tập trung vào cụm 'wouldn't have make'. Tương tự như các câu trước, hãy tự hỏi mình: 'Sau would have là V1, V2 hay V3?'"
+  },
+  {
+    "topic": "Conditionals Type 3 & Mixed",
+    "level": "B2",
+    "student_input": "If he hadn't forgot the map, we wouldn't have got lost.",
+    "correct_answer": "If he hadn't forgotten the map, we wouldn't have got lost.",
+    "explanation": "Hãy kiểm tra lại động từ 'forgot'. Trong mệnh đề 'if' của câu điều kiện loại 3, chúng ta dùng thì Quá khứ hoàn thành. Vậy động từ 'forget' phải được chia ở dạng phân từ hai (V3) là gì?"
+  },
+  {
+    "topic": "Conditionals Type 3 & Mixed",
+    "level": "B2",
+    "student_input": "If the manager had been more flexible, the employees wouldn't have resigned.",
+    "correct_answer": "If the manager had been more flexible, the employees wouldn't have resigned.",
+    "explanation": "Câu này hiện tại đang đúng về ngữ pháp. Tuy nhiên, nếu bạn muốn nhấn mạnh rằng sự linh hoạt này là một 'khả năng' có thể xảy ra nhưng đã không xảy ra, bạn có thể thay 'wouldn't have' bằng modal verb nào khác để giảm nhẹ mức độ khẳng định?"
+  },
+  {
+    "topic": "Conditionals Type 3 & Mixed",
+    "level": "B2",
+    "student_input": "If I had known about the traffic jam, I would take a different route.",
+    "correct_answer": "If I had known about the traffic jam, I would have taken a different route.",
+    "explanation": "Hãy nhìn vào sự tương xứng về thời gian. Việc 'biết về tắc đường' diễn ra trong quá khứ (had known). Vậy việc 'chọn lộ trình khác' cũng phải là một giả định trong quá khứ. Liệu 'would take' (loại 2) có phù hợp với một sự việc đã kết thúc hay không?"
+  },
+  {
+    "topic": "Conditionals Type 3 & Mixed",
+    "level": "B2",
+    "student_input": "Had you told me the truth, I wouldn't had been so disappointed.",
+    "correct_answer": "Had you told me the truth, I wouldn't have been so disappointed.",
+    "explanation": "Bạn đã sử dụng đảo ngữ 'Had you told' rất chính xác. Tuy nhiên, hãy nhìn vào cụm 'wouldn't had been'. Sau một modal verb như 'would', chúng ta dùng trợ động từ 'have' ở dạng nguyên mẫu hay chia theo thì?"
+  },
+  {
+    "topic": "Conditionals Type 3 & Mixed",
+    "level": "B2",
+    "student_input": "If the government had acted sooner, the crisis could be avoided.",
+    "correct_answer": "If the government had acted sooner, the crisis could have been avoided.",
+    "explanation": "Câu này đang ở dạng bị động (passive voice) trong câu điều kiện loại 3. Bạn đã dùng 'could be avoided' (hiện tại/tương lai). Để đưa hành động 'tránh khỏi cuộc khủng hoảng' về quá khứ, cấu trúc 'could' cần đi kèm với cụm từ nào?"
+  },
+  {
+    "topic": "Conditionals Type 3 & Mixed",
+    "level": "B2",
+    "student_input": "If I hadn't spent all my savings, I would have buy that apartment last year.",
+    "correct_answer": "If I hadn't spent all my savings, I would have bought that apartment last year.",
+    "explanation": "Hãy kiểm tra lại động từ 'buy' trong mệnh đề kết quả. Trong cấu trúc 'would have + V3', dạng phân từ hai của 'buy' là gì?"
+  },
+  {
+    "topic": "Conditionals Type 3 & Mixed",
+    "level": "B2",
+    "student_input": "If we had had more time, we would have finish the report perfectly.",
+    "correct_answer": "If we had had more time, we would have finished the report perfectly.",
+    "explanation": "Bạn đã chia 'had had' rất chính xác cho mệnh đề 'if'. Bây giờ, hãy nhìn sang mệnh đề kết quả. Động từ 'finish' cần được chia ở dạng nào để phù hợp với cấu trúc điều kiện loại 3?"
+  },
+  {
+    "topic": "Conditionals Type 3 & Mixed",
+    "level": "B2",
+    "student_input": "If she had read the contract carefully, she wouldn't have sign it.",
+    "correct_answer": "If she had read the contract carefully, she wouldn't have signed it.",
+    "explanation": "Hãy tập trung vào cụm 'wouldn't have sign'. Theo quy tắc của câu điều kiện loại 3, động từ chính sau 'have' phải ở dạng nào?"
+  },
+  {
+    "topic": "Conditionals Type 3 & Mixed",
+    "level": "B2",
+    "student_input": "I would have contacted you if I had know your phone number.",
+    "correct_answer": "I would have contacted you if I had known your phone number.",
+    "explanation": "Hãy nhìn vào mệnh đề 'if'. Bạn đang dùng thì Quá khứ hoàn thành (Past Perfect). Động từ 'know' cần được chia ở dạng V3 là gì?"
+  },
+  {
+    "topic": "Conditionals Type 3 & Mixed",
+    "level": "B2",
+    "student_input": "If they hadn't underestimated the opponent, they might win the match.",
+    "correct_answer": "If they hadn't underestimated the opponent, they might have won the match.",
+    "explanation": "Hãy xem xét tính logic. Việc 'đánh giá thấp đối thủ' xảy ra trong quá khứ. Việc 'thắng trận đấu' cũng là một kết quả trong quá khứ. Liệu 'might win' đã đủ để diễn tả một khả năng trong quá khứ chưa?"
+  },
+  {
+    "topic": "Conditionals Type 3 & Mixed",
+    "level": "B2",
+    "student_input": "Had I not been so distracted, I would have noticed the error.",
+    "correct_answer": "Had I not been so distracted, I would have noticed the error.",
+    "explanation": "Câu này hoàn toàn chính xác về ngữ pháp và phong cách trang trọng. Để tăng thêm sắc thái 'hối tiếc' (regret), bạn có thể thay thế 'would have' bằng modal verb nào khác để chỉ một việc 'nên' làm nhưng đã không làm?"
+  },
+  {
+    "topic": "Conditionals Type 3 & Mixed",
+    "level": "B2",
+    "student_input": "If you hadn't reminded me, I would have forget the anniversary.",
+    "correct_answer": "If you hadn't reminded me, I would have forgotten the anniversary.",
+    "explanation": "Hãy kiểm tra lại động từ 'forget'. Bạn đang dùng cấu trúc 'would have + V3'. Vậy dạng V3 của 'forget' là gì?"
+  },
+  {
+    "topic": "Conditionals Type 3 & Mixed",
+    "level": "B2",
+    "student_input": "If I had gone to university, I would be a doctor now.",
+    "correct_answer": "If I had gone to university, I would be a doctor now.",
+    "explanation": "Câu này là một câu điều kiện hỗn hợp (Mixed Conditional). Mệnh đề 'if' ở quá khứ, nhưng kết quả 'now' ở hiện tại. Bạn đã chia đúng cấu trúc. Vậy hãy thử đặt câu hỏi: Nếu kết quả cũng nằm trong quá khứ (ví dụ: 'tôi đã là bác sĩ vào năm ngoái'), bạn sẽ thay đổi 'would be' thành gì?"
+  },
+  {
+    "topic": "Conditionals Type 3 & Mixed",
+    "level": "B2",
+    "student_input": "If the weather had been better, we would have went to the beach.",
+    "correct_answer": "If the weather had been better, we would have gone to the beach.",
+    "explanation": "Hãy nhìn vào cụm 'would have went'. Bạn hãy nhớ lại bảng động từ bất quy tắc: V2 là 'went', vậy V3 (quá khứ phân từ) của 'go' là gì?"
+  },
+  {
+    "topic": "Conditionals Type 3 & Mixed",
+    "level": "B2",
+    "student_input": "If he hadn't lied to us, we would have trust him.",
+    "correct_answer": "If he hadn't lied to us, we would have trusted him.",
+    "explanation": "Hãy phân tích mệnh đề kết quả 'would have trust'. Động từ 'trust' cần được chia ở dạng nào để hoàn thiện cấu trúc câu điều kiện loại 3?"
+  },
+  {
+    "topic": "Conditionals Type 3 & Mixed",
+    "level": "B2",
+    "student_input": "If I had took the job, I would have moved to New York.",
+    "correct_answer": "If I had taken the job, I would have moved to New York.",
+    "explanation": "Hãy kiểm tra lại mệnh đề 'if'. Bạn đang dùng 'had took'. Hãy nhớ lại: 'took' là V2, vậy V3 của 'take' là gì?"
+  },
+  {
+    "topic": "Conditionals Type 3 & Mixed",
+    "level": "B2",
+    "student_input": "If the alarm hadn't gone off, I would have slept through the meeting.",
+    "correct_answer": "If the alarm hadn't gone off, I would have slept through the meeting.",
+    "explanation": "Câu này chính xác. Tuy nhiên, để nhấn mạnh rằng việc 'ngủ quên' là một khả năng thấp nhưng có thể xảy ra, bạn có thể thay 'would have' bằng modal verb nào khác?"
+  },
+  {
+    "topic": "Conditionals Type 3 & Mixed",
+    "level": "B2",
+    "student_input": "Had we known the risks, we wouldn't have invest in that startup.",
+    "correct_answer": "Had we known the risks, we wouldn't have invested in that startup.",
+    "explanation": "Bạn dùng đảo ngữ 'Had we known' rất tốt. Nhưng hãy nhìn vào 'wouldn't have invest'. Động từ 'invest' cần được chia ở dạng nào sau 'have'?"
+  },
+  {
+    "topic": "Conditionals Type 3 & Mixed",
+    "level": "B2",
+    "student_input": "If you hadn't been so rude, she would have accept your apology.",
+    "correct_answer": "If you hadn't been so rude, she would have accepted your apology.",
+    "explanation": "Hãy nhìn vào cụm 'would have accept'. Để diễn tả một sự việc trái ngược thực tế trong quá khứ, động từ 'accept' phải ở dạng nào?"
+  },
+  {
+    "topic": "Conditionals Type 3 & Mixed",
+    "level": "B2",
+    "student_input": "If I had had a map, I wouldn't have got lost.",
+    "correct_answer": "If I had had a map, I wouldn't have got lost.",
+    "explanation": "Câu này đúng. Bạn đã sử dụng 'had had' một cách chính xác. Bạn có biết cách viết lại câu này bằng cấu trúc đảo ngữ (bỏ 'if') để làm câu văn trang trọng hơn không?"
+  },
+  {
+    "topic": "Conditionals Type 3 & Mixed",
+    "level": "B2",
+    "student_input": "If she had studied more, she will have passed the exam.",
+    "correct_answer": "If she had studied more, she would have passed the exam.",
+    "explanation": "Hãy nhìn vào mệnh đề kết quả 'will have passed'. 'Will' được dùng cho tương lai, nhưng đây là câu điều kiện loại 3 (giả định quá khứ). Bạn nên thay 'will' bằng modal verb nào để thể hiện sự giả định trong quá khứ?"
+  },
+  {
+    "topic": "Conditionals Type 3 & Mixed",
+    "level": "B2",
+    "student_input": "If I hadn't forgotten my umbrella, I wouldn't have got wet.",
+    "correct_answer": "If I hadn't forgotten my umbrella, I wouldn't have got wet.",
+    "explanation": "Câu này chính xác. Bây giờ, hãy thử thay đổi 'wouldn't have got' thành 'might not have got'. Sắc thái nghĩa của câu sẽ thay đổi như thế nào?"
+  },
+  {
+    "topic": "Conditionals Type 3 & Mixed",
+    "level": "B2",
+    "student_input": "If he had asked for help, he could solve the problem faster.",
+    "correct_answer": "If he had asked for help, he could have solved the problem faster.",
+    "explanation": "Hãy so sánh hai mệnh đề. 'had asked' (quá khứ) và 'could solve' (hiện tại/tương lai). Để hành động 'giải quyết vấn đề' cũng xảy ra trong quá khứ, bạn cần bổ sung gì sau 'could'?"
+  },
+  {
+    "topic": "Conditionals Type 3 & Mixed",
+    "level": "B2",
+    "student_input": "If they had played better, they would have win the championship.",
+    "correct_answer": "If they had played better, they would have won the championship.",
+    "explanation": "Hãy kiểm tra lại động từ 'win'. Bạn đang dùng 'would have win'. Dạng phân từ hai (V3) của 'win' là gì?"
+  },
+  {
+    "topic": "Conditionals Type 3 & Mixed",
+    "level": "B2",
+    "student_input": "Had she not been ill, she would have attend the conference.",
+    "correct_answer": "Had she not been ill, she would have attended the conference.",
+    "explanation": "Hãy nhìn vào cụm 'would have attend'. Tương tự như các câu trước, động từ sau 'have' trong câu điều kiện loại 3 phải được chia ở dạng nào?"
+  },
+  {
+    "topic": "Conditionals Type 3 & Mixed",
+    "level": "B2",
+    "student_input": "If I had seen the sign, I wouldn't have park here.",
+    "correct_answer": "If I had seen the sign, I wouldn't have parked here.",
+    "explanation": "Hãy phân tích cụm 'wouldn't have park'. Động từ 'park' cần được chuyển sang dạng V3 là gì?"
+  },
+  {
+    "topic": "Conditionals Type 3 & Mixed",
+    "level": "B2",
+    "student_input": "If we hadn't arrived late, we wouldn't have missed the opening speech.",
+    "correct_answer": "If we hadn't arrived late, we wouldn't have missed the opening speech.",
+    "explanation": "Câu này đúng. Thử thách cho bạn: Hãy chuyển câu này sang dạng đảo ngữ (Inversion) để tăng tính trang trọng."
+  },
+  {
+    "topic": "Conditionals Type 3 & Mixed",
+    "level": "B2",
+    "student_input": "If he had been more careful, he wouldn't have broke the vase.",
+    "correct_answer": "If he had been more careful, he wouldn't have broken the vase.",
+    "explanation": "Hãy kiểm tra lại động từ 'broke'. 'Broke' là dạng V2. Trong cấu trúc 'would have + V3', bạn phải dùng dạng phân từ hai của 'break' là gì?"
+  },
+  {
+    "topic": "Conditionals Type 3 & Mixed",
+    "level": "B2",
+    "student_input": "If I had known it was your birthday, I would have bring a gift.",
+    "correct_answer": "If I had known it was your birthday, I would have brought a gift.",
+    "explanation": "Hãy nhìn vào động từ 'bring'. Bạn đang dùng 'would have bring'. Hãy tìm dạng V3 của 'bring' để hoàn thiện câu này."
+  },
+  {
+    "topic": "Conditionals Type 3 & Mixed",
+    "level": "B2",
+    "student_input": "If the taxi had arrived on time, I wouldn't have be late.",
+    "correct_answer": "If the taxi had arrived on time, I wouldn't have been late.",
+    "explanation": "Hãy nhìn vào cụm 'wouldn't have be'. Động từ 'be' cần được chia ở dạng V3 là gì?"
+  },
+  {
+    "topic": "Conditionals Type 3 & Mixed",
+    "level": "B2",
+    "student_input": "If you had told me, I could have helped you.",
+    "correct_answer": "If you had told me, I could have helped you.",
+    "explanation": "Câu này chính xác. Nếu bạn thay 'could have helped' bằng 'should have helped', ý nghĩa của câu sẽ thay đổi như thế nào? (Gợi ý: Một bên là khả năng, một bên là bổn phận/lời khuyên)."
+  },
+  {
+    "topic": "Conditionals Type 3 & Mixed",
+    "level": "B2",
+    "student_input": "Had I not been so tired, I would have go to the gym.",
+    "correct_answer": "Had I not been so tired, I would have gone to the gym.",
+    "explanation": "Hãy kiểm tra lại động từ 'go'. Sau 'would have', chúng ta cần dạng V3. 'Go' $\rightarrow$ 'Went' $\rightarrow$ ...?"
+  },
+  {
+    "topic": "Conditionals Type 3 & Mixed",
+    "level": "B2",
+    "student_input": "If we had booked the flights earlier, they would have be cheaper.",
+    "correct_answer": "If we had booked the flights earlier, they would have been cheaper.",
+    "explanation": "Hãy nhìn vào cụm 'would have be'. Bạn hãy chia động từ 'be' về dạng phân từ hai (V3) để phù hợp với cấu trúc loại 3."
+  },
+  {
+    "topic": "Conditionals Type 3 & Mixed",
+    "level": "B2",
+    "student_input": "If he hadn't smoked for so long, his health would have been better.",
+    "correct_answer": "If he hadn't smoked for so long, his health would have been better.",
+    "explanation": "Câu này đúng. Bây giờ, hãy thử suy nghĩ: Nếu sức khỏe của anh ấy *vẫn còn* tệ ở hiện tại, bạn sẽ thay đổi 'would have been better' thành cấu trúc nào để tạo thành câu điều kiện hỗn hợp?"
+  },
+  {
+    "topic": "Conditionals Type 3 & Mixed",
+    "level": "B2",
+    "student_input": "If I would have known, I wouldn't have said that.",
+    "correct_answer": "If I had known, I wouldn't have said that.",
+    "explanation": "Hãy nhớ lại quy tắc vàng của câu điều kiện: Chúng ta có dùng 'would' trong mệnh đề chứa 'if' không? Bạn nên dùng thì nào ở mệnh đề 'if' để diễn tả một giả định trong quá khứ?"
+  },
+  {
+    "topic": "Conditionals Type 3 & Mixed",
+    "level": "B2",
+    "student_input": "If they had listened to the warnings, the accident would have avoided.",
+    "correct_answer": "If they had listened to the warnings, the accident would have been avoided.",
+    "explanation": "Hãy nhìn vào mệnh đề kết quả: 'the accident would have avoided'. Vụ tai nạn tự 'tránh' hay 'được tránh'? Bạn cần thêm thành phần nào để chuyển câu này sang dạng bị động?"
+  },
+  {
+    "topic": "Conditionals Type 3 & Mixed",
+    "level": "B2",
+    "student_input": "If I had won the lottery last year, I would have been rich now.",
+    "correct_answer": "If I had won the lottery last year, I would be rich now.",
+    "explanation": "Hãy nhìn vào mốc thời gian ở hai vế. Vế 'if' xảy ra vào 'last year' (quá khứ), nhưng kết quả lại là 'now' (hiện tại). Khi kết quả kéo dài đến hiện tại, chúng ta nên dùng cấu trúc của loại 3 cho vế 'if' và cấu trúc của loại mấy cho vế kết quả?"
+  },
+  {
+    "topic": "Conditionals Type 3 & Mixed",
+    "level": "B2",
+    "student_input": "If I were you, I would have accepted that job offer last month.",
+    "correct_answer": "If I were you, I would have accepted that job offer last month.",
+    "explanation": "Câu này đúng về mặt ngữ pháp. Bạn đang giả định một bản chất (tôi không phải là bạn - sự thật hiển nhiên) dẫn đến một hành động trong quá khứ (last month). Nếu bạn đổi 'If I were you' thành 'If I had been you', sắc thái của câu sẽ thay đổi như thế nào? Liệu 'việc là bạn' có phải là một sự kiện nhất thời trong quá khứ không?"
+  },
+  {
+    "topic": "Conditionals Type 3 & Mixed",
+    "level": "B2",
+    "student_input": "If she had taken the map, she wouldn't have been lost now.",
+    "correct_answer": "If she had taken the map, she wouldn't be lost now.",
+    "explanation": "Hãy phân tích sự logic: Hành động 'lấy bản đồ' diễn ra trong quá khứ, nhưng trạng thái 'bị lạc' đang xảy ra 'now'. Liệu 'wouldn't have been' (loại 3 - kết thúc trong quá khứ) có phù hợp để mô tả trạng thái hiện tại không?"
+  },
+  {
+    "topic": "Conditionals Type 3 & Mixed",
+    "level": "B2",
+    "student_input": "If I had spoken French, I would have helped the tourists yesterday.",
+    "correct_answer": "If I spoke French, I would have helped the tourists yesterday.",
+    "explanation": "Hãy xem xét khả năng 'nói tiếng Pháp'. Đây là một kỹ năng/bản chất của một người, không phải là một hành động xảy ra nhất thời tại một thời điểm trong quá khứ. Khi điều kiện là một sự thật hiển nhiên ở hiện tại nhưng kết quả nằm ở quá khứ (yesterday), vế 'if' nên dùng thì nào?"
+  },
+  {
+    "topic": "Conditionals Type 3 & Mixed",
+    "level": "B2",
+    "student_input": "If he hadn't missed the flight, he would have been here today.",
+    "correct_answer": "If he hadn't missed the flight, he would be here today.",
+    "explanation": "Bạn đã chia đúng vế 'if' cho một sự việc trong quá khứ. Tuy nhiên, hãy nhìn vào từ 'today'. Để diễn tả một kết quả ở hiện tại, bạn nên dùng 'would have been' hay 'would be'?"
+  },
+  {
+    "topic": "Conditionals Type 3 & Mixed",
+    "level": "B2",
+    "student_input": "If I had been more careful with my money, I wouldn't have been broke now.",
+    "correct_answer": "If I had been more careful with my money, I wouldn't be broke now.",
+    "explanation": "Hãy đối chiếu hai mốc thời gian: 'cẩn thận với tiền' (quá khứ) và 'hết tiền' (now). Khi kết quả là một trạng thái hiện tại, cấu trúc 'would have + V3' có còn chính xác không?"
+  },
+  {
+    "topic": "Conditionals Type 3 & Mixed",
+    "level": "B2",
+    "student_input": "If she were not so shy, she would have spoken to him at the party last night.",
+    "correct_answer": "If she were not so shy, she would have spoken to him at the party last night.",
+    "explanation": "Câu này chính xác. 'Shy' là đặc điểm tính cách (hiện tại) $\rightarrow$ kết quả là hành động trong quá khứ (last night). Thử thách: Nếu bạn muốn nói rằng cô ấy 'đã không nhút nhát vào đúng thời điểm bữa tiệc đó', bạn sẽ thay đổi vế 'if' như thế nào?"
+  },
+  {
+    "topic": "Conditionals Type 3 & Mixed",
+    "level": "B2",
+    "student_input": "If they had invested in Bitcoin in 2010, they would have been millionaires now.",
+    "correct_answer": "If they had invested in Bitcoin in 2010, they would be millionaires now.",
+    "explanation": "Việc đầu tư diễn ra năm 2010 (quá khứ), nhưng trạng thái 'triệu phú' là ở hiện tại (now). Bạn hãy suy nghĩ xem vế kết quả nên dùng thì của loại 3 hay loại 2 để phù hợp với mốc 'now'?"
+  },
+  {
+    "topic": "Conditionals Type 3 & Mixed",
+    "level": "B2",
+    "student_input": "If I had known how to swim, I would have saved the dog yesterday.",
+    "correct_answer": "If I knew how to swim, I would have saved the dog yesterday.",
+    "explanation": "Hãy phân tích cụm 'biết bơi'. Đây là một khả năng/kỹ năng lâu dài của một người. Việc bạn không biết bơi là một sự thật ở hiện tại và quá khứ. Khi điều kiện là một sự thật hiển nhiên, vế 'if' nên dùng Quá khứ đơn hay Quá khứ hoàn thành?"
+  },
+  {
+    "topic": "Conditionals Type 3 & Mixed",
+    "level": "B2",
+    "student_input": "If we had studied harder in college, we would have had better jobs now.",
+    "correct_answer": "If we had studied harder in college, we would have better jobs now.",
+    "explanation": "Hãy nhìn vào cụm 'would have had better jobs now'. Bạn đang dùng cấu trúc loại 3 cho kết quả, nhưng lại có từ 'now'. Bạn có thể lược bỏ từ nào để đưa vế kết quả về hiện tại mà vẫn giữ nguyên ý nghĩa?"
+  },
+  {
+    "topic": "Conditionals Type 3 & Mixed",
+    "level": "B2",
+    "student_input": "Had I known you were in town, I would be visiting you yesterday.",
+    "correct_answer": "Had I known you were in town, I would have visited you yesterday.",
+    "explanation": "Bạn dùng đảo ngữ 'Had I known' (loại 3) rất tốt cho điều kiện quá khứ. Nhưng hãy nhìn vế kết quả: 'yesterday'. Việc thăm bạn đã diễn ra và kết thúc trong quá khứ, vậy 'would be visiting' (hiện tại tiếp diễn) có phù hợp không?"
+  },
+  {
+    "topic": "Conditionals Type 3 & Mixed",
+    "level": "B2",
+    "student_input": "If he weren't so lazy, he would have finished the project on time last week.",
+    "correct_answer": "If he weren't so lazy, he would have finished the project on time last week.",
+    "explanation": "Câu này đúng. Bạn đang kết nối một đặc điểm tính cách (lazy) với một kết quả trong quá khứ. Nếu tôi thay 'lazy' bằng một hành động cụ thể như 'ngủ quên sáng nay', bạn sẽ phải thay đổi vế 'if' sang thì nào?"
+  },
+  {
+    "topic": "Conditionals Type 3 & Mixed",
+    "level": "B2",
+    "student_input": "If I had’t eaten so much for lunch, I wouldn't have felt sleepy now.",
+    "correct_answer": "If I hadn't eaten so much for lunch, I wouldn't feel sleepy now.",
+    "explanation": "Hành động 'ăn quá nhiều' đã xảy ra, nhưng cảm giác 'buồn ngủ' là ở hiện tại (now). Hãy kiểm tra lại vế kết quả: 'wouldn't have felt' diễn tả điều gì, và nó có khớp với 'now' không?"
+  },
+  {
+    "topic": "Conditionals Type 3 & Mixed",
+    "level": "B2",
+    "student_input": "If she had been born in the US, she would have spoken English fluently now.",
+    "correct_answer": "If she had been born in the US, she would speak English fluently now.",
+    "explanation": "Việc 'sinh ra ở Mỹ' là một sự kiện trong quá khứ. Việc 'nói tiếng Anh lưu loát' là một khả năng ở hiện tại. Bạn hãy điều chỉnh vế kết quả để nó không còn là một sự việc đã kết thúc trong quá khứ nữa."
+  },
+  {
+    "topic": "Conditionals Type 3 & Mixed",
+    "level": "B2",
+    "student_input": "If I had more experience, I would have been promoted last year.",
+    "correct_answer": "If I had more experience, I would have been promoted last year.",
+    "explanation": "Câu này đúng. 'Có nhiều kinh nghiệm' là một trạng thái hiện tại $\rightarrow$ kết quả là 'được thăng chức' trong quá khứ. Thử thách: Nếu bạn muốn nói 'Vì tôi đã không học chứng chỉ đó năm ngoái nên giờ tôi không được thăng chức', bạn sẽ viết như thế nào?"
+  },
+  {
+    "topic": "Conditionals Type 3 & Mixed",
+    "level": "B2",
+    "student_input": "If he hadn't lied to me, I would have trusted him today.",
+    "correct_answer": "If he hadn't lied to me, I would trust him today.",
+    "explanation": "Hãy nhìn vào sự mâu thuẫn: 'would have trusted' (quá khứ) và 'today' (hiện tại). Bạn cần thay đổi vế kết quả như thế nào để nó khớp với mốc thời gian 'today'?"
+  },
+  {
+    "topic": "Conditionals Type 3 & Mixed",
+    "level": "B2",
+    "student_input": "If I hadn't forgotten my password, I would have accessed the account now.",
+    "correct_answer": "If I hadn't forgotten my password, I would access the account now.",
+    "explanation": "Việc 'quên mật khẩu' xảy ra trước đó, nhưng việc 'truy cập tài khoản' là mục tiêu hiện tại (now). Hãy xem lại cấu trúc 'would have accessed' và tự hỏi: 'Tôi đang nói về quá khứ hay hiện tại?'"
+  },
+  {
+    "topic": "Conditionals Type 3 & Mixed",
+    "level": "B2",
+    "student_input": "If they had not been so careless, the accident would not have happened yesterday.",
+    "correct_answer": "If they had not been so careless, the accident would not have happened yesterday.",
+    "explanation": "Câu này là loại 3 thuần túy (Quá khứ $\rightarrow$ Quá khứ). Bây giờ, hãy thử biến nó thành câu Mixed: Nếu sự 'cẩu thả' là bản tính cố hữu của họ, bạn sẽ thay 'had not been' thành thì nào?"
+  },
+  {
+    "topic": "Conditionals Type 3 & Mixed",
+    "level": "B2",
+    "student_input": "If I spoke Spanish, I would have understood the guide in Mexico last summer.",
+    "correct_answer": "If I spoke Spanish, I would have understood the guide in Mexico last summer.",
+    "explanation": "Câu này chính xác. Một khả năng hiện tại (biết tiếng Tây Ban Nha) dẫn đến một kết quả trong quá khứ. Bạn có nhận ra tại sao ở đây không dùng 'If I had spoken Spanish' không?"
+  },
+  {
+    "topic": "Conditionals Type 3 & Mixed",
+    "level": "B2",
+    "student_input": "If you had told me about the party, I would be there now.",
+    "correct_answer": "If you had told me about the party, I would be there now.",
+    "explanation": "Câu này hoàn toàn đúng. Đây là ví dụ điển hình của Mixed Conditional (Quá khứ $\rightarrow$ Hiện tại). Bạn hãy thử chuyển nó thành loại 3 thuần túy (kết quả cũng ở quá khứ, ví dụ: 'tôi đã có mặt ở đó tối qua') xem sao."
+  },
+  {
+    "topic": "Conditionals Type 3 & Mixed",
+    "level": "B2",
+    "student_input": "If I had not wasted so much time, I would have finished the book already.",
+    "correct_answer": "If I had not wasted so much time, I would have finished the book already.",
+    "explanation": "Câu này đúng (loại 3). Tuy nhiên, nếu bạn muốn nhấn mạnh rằng 'vì đã lãng phí thời gian nên BÂY GIỜ tôi vẫn chưa đọc xong', bạn sẽ thay 'would have finished' thành cấu trúc nào?"
+  },
+  {
+    "topic": "Conditionals Type 3 & Mixed",
+    "level": "B2",
+    "student_input": "If he had been more athletic, he would have joined the team last year.",
+    "correct_answer": "If he were more athletic, he would have joined the team last year.",
+    "explanation": "Hãy xem xét 'athletic' (có năng khiếu thể thao). Đây là một đặc điểm cơ thể/bản chất, không phải hành động nhất thời. Với một đặc điểm bản chất, vế 'if' nên dùng Quá khứ đơn hay Quá khứ hoàn thành?"
+  },
+  {
+    "topic": "Conditionals Type 3 & Mixed",
+    "level": "B2",
+    "student_input": "If I had known it would rain, I would have stayed at home now.",
+    "correct_answer": "If I had known it would rain, I would stay at home now.",
+    "explanation": "Hãy phân tích: 'biết trời mưa' (quá khứ) $\rightarrow$ 'ở nhà' (now). Bạn hãy điều chỉnh vế kết quả để nó phản ánh đúng trạng thái hiện tại thay vì một sự việc đã kết thúc."
+  },
+  {
+    "topic": "Conditionals Type 3 & Mixed",
+    "level": "B2",
+    "student_input": "If we had not spent all our money, we would have travelled to Japan this week.",
+    "correct_answer": "If we had not spent all our money, we would travel to Japan this week.",
+    "explanation": "Hãy chú ý cụm 'this week'. Đây là mốc thời gian hiện tại/gần hiện tại. Liệu 'would have travelled' (đã du lịch xong trong quá khứ) có khớp với 'this week' không?"
+  },
+  {
+    "topic": "Conditionals Type 3 & Mixed",
+    "level": "B2",
+    "student_input": "If I weren't so tired today, I would have gone to the party last night.",
+    "correct_answer": "If I hadn't been so tired last night, I would have gone to the party last night.",
+    "explanation": "Hãy nhìn kỹ: Việc 'mệt' dẫn đến việc 'không đi tiệc tối qua'. Vậy việc mệt phải xảy ra KHI NÀO thì mới gây ra kết quả đó? Liệu 'weren't so tired today' (mệt hôm nay) có thể là nguyên nhân cho một việc của 'last night' không?"
+  },
+  {
+    "topic": "Conditionals Type 3 & Mixed",
+    "level": "B2",
+    "student_input": "If I had not failed the exam, I would be in university now.",
+    "correct_answer": "If I had not failed the exam, I would be in university now.",
+    "explanation": "Câu này chính xác. Bạn đã kết nối một sự kiện quá khứ với một trạng thái hiện tại. Bạn có thể viết lại câu này bằng cách dùng 'But for' hoặc 'Without' để làm câu văn chuyên nghiệp hơn không?"
+  },
+  {
+    "topic": "Conditionals Type 3 & Mixed",
+    "level": "B2",
+    "student_input": "If he had been a better leader, the company wouldn't have gone bankrupt years ago.",
+    "correct_answer": "If he were a better leader, the company wouldn't have gone bankrupt years ago.",
+    "explanation": "Hãy suy nghĩ về 'a better leader'. Đây là năng lực quản lý (bản chất con người). Khi điều kiện là một năng lực/đặc điểm chung của một người, chúng ta nên dùng thì nào trong mệnh đề 'if' để diễn tả sự thật trái ngược?"
+  },
+  {
+    "topic": "Conditionals Type 3 & Mixed",
+    "level": "B2",
+    "student_input": "If they had practiced more, they would be more confident now.",
+    "correct_answer": "If they had practiced more, they would be more confident now.",
+    "explanation": "Câu này chính xác. Sự luyện tập (quá khứ) $\rightarrow$ sự tự tin (hiện tại). Nếu bạn muốn nói rằng 'Họ vốn dĩ không tự tin (bản chất), nên họ đã không dám thi', bạn sẽ thay đổi vế 'if' như thế nào?"
+  },
+  {
+    "topic": "Conditionals Type 3 & Mixed",
+    "level": "B2",
+    "student_input": "If I had not lost my passport, I would have been on the plane now.",
+    "correct_answer": "If I had not lost my passport, I would be on the plane now.",
+    "explanation": "Hãy nhìn vào từ 'now'. Bạn đang dùng 'would have been' (loại 3). Hãy tự hỏi: 'Tôi đang nói về một hành động đã kết thúc hay một trạng thái đang diễn ra?'"
+  },
+  {
+    "topic": "Conditionals Type 3 & Mixed",
+    "level": "B2",
+    "student_input": "If she hadn't forgotten the meeting, she would have been there now.",
+    "correct_answer": "If she hadn't forgotten the meeting, she would be there now.",
+    "explanation": "Tương tự như câu trên, hãy tập trung vào 'now'. Vế kết quả cần được đưa về thì nào để phù hợp với mốc thời gian hiện tại?"
+  },
+  {
+    "topic": "Conditionals Type 3 & Mixed",
+    "level": "B2",
+    "student_input": "If I had more time last week, I would have finished the project.",
+    "correct_answer": "If I had had more time last week, I would have finished the project.",
+    "explanation": "Hãy nhìn vế 'if'. Bạn dùng 'had more time'. Nhưng mốc thời gian là 'last week'. Đây là một câu điều kiện loại 3 thuần túy. Bạn cần dùng thì nào để diễn tả một điều kiện trái ngược trong quá khứ?"
+  },
+  {
+    "topic": "Conditionals Type 3 & Mixed",
+    "level": "B2",
+    "student_input": "If he spoke English, he would have been hired by the international company last year.",
+    "correct_answer": "If he spoke English, he would have been hired by the international company last year.",
+    "explanation": "Câu này chính xác. Bạn đã phân biệt được 'biết tiếng Anh' là một trạng thái/khả năng $\rightarrow$ dẫn đến kết quả trong quá khứ. Nếu bạn dùng 'If he had spoken English', nghĩa của câu sẽ thay đổi như thế nào?"
+  },
+  {
+    "topic": "Conditionals Type 3 & Mixed",
+    "level": "B2",
+    "student_input": "If I hadn't missed the bus, I would have arrived at the office 10 minutes ago.",
+    "correct_answer": "If I hadn't missed the bus, I would have arrived at the office 10 minutes ago.",
+    "explanation": "Câu này đúng (loại 3). Thử thách: Hãy biến nó thành câu Mixed với kết quả là 'bây giờ tôi đang ngồi trong văn phòng' (now)."
+  },
+  {
+    "topic": "Conditionals Type 3 & Mixed",
+    "level": "B2",
+    "student_input": "If they weren't so stubborn, they would have listened to our advice yesterday.",
+    "correct_answer": "If they weren't so stubborn, they would have listened to our advice yesterday.",
+    "explanation": "Câu này chính xác. 'Stubborn' là tính cách $\rightarrow$ kết quả trong quá khứ. Bạn hãy thử thay đổi thành: 'Vì họ đã quá cứng đầu trong cuộc họp hôm qua nên giờ họ đang gặp rắc rối'. Bạn sẽ chia thì như thế nào?"
+  },
+  {
+    "topic": "Conditionals Type 3 & Mixed",
+    "level": "B2",
+    "student_input": "If I had had a better camera, the photos would have been clearer now.",
+    "correct_answer": "If I had had a better camera, the photos would be clearer now.",
+    "explanation": "Hãy nhìn vào vế kết quả. Việc 'có ảnh rõ hơn' là trạng thái của những bức ảnh ở hiện tại (now). Bạn nên dùng 'would have been' hay 'would be'?"
+  },
+  {
+    "topic": "Conditionals Type 3 & Mixed",
+    "level": "B2",
+    "student_input": "If she hadn't spent so much time on social media, she would have been more productive today.",
+    "correct_answer": "If she hadn't spent so much time on social media, she would be more productive today.",
+    "explanation": "Hành động 'dùng mạng xã hội' (quá khứ) $\rightarrow$ kết quả 'năng suất' (today). Bạn hãy điều chỉnh vế kết quả để nó khớp với mốc 'today'."
+  },
+  {
+    "topic": "Conditionals Type 3 & Mixed",
+    "level": "B2",
+    "student_input": "If I were an expert in AI, I would have solved this bug in five minutes yesterday.",
+    "correct_answer": "If I were an expert in AI, I would have solved this bug in five minutes yesterday.",
+    "explanation": "Câu này chính xác. Một danh phận/trạng thái hiện tại $\rightarrow$ kết quả quá khứ. Bạn có biết cách viết lại vế 'If I were an expert' bằng cấu trúc 'Were I...' không?"
+  },
+  {
+    "topic": "Conditionals Type 3 & Mixed",
+    "level": "B2",
+    "student_input": "If he hadn't been so careless, he would have been a manager now.",
+    "correct_answer": "If he hadn't been so careless, he would be a manager now.",
+    "explanation": "Hãy phân tích: 'cẩu thả' (quá khứ) $\rightarrow$ 'làm quản lý' (now). Vế kết quả cần được chia theo loại 3 hay loại 2 để phù hợp với 'now'?"
+  },
+  {
+    "topic": "Conditionals Type 3 & Mixed",
+    "level": "B2",
+    "student_input": "If I had known the answer, I would be embarrassed now.",
+    "correct_answer": "If I had known the answer, I would be embarrassed now.",
+    "explanation": "Câu này đúng. 'Biết câu trả lời' (quá khứ - giả định là không biết) $\rightarrow$ 'xấu hổ' (hiện tại). Nếu bạn muốn nói 'Tôi đã xấu hổ vào lúc đó' (quá khứ), bạn sẽ thay 'would be' thành gì?"
+  },
+  {
+    "topic": "Conditionals Type 3 & Mixed",
+    "level": "B2",
+    "student_input": "If they had’t been so arrogant, they would have won the contract last month.",
+    "correct_answer": "If they weren't so arrogant, they would have won the contract last month.",
+    "explanation": "Hãy suy nghĩ: 'Arrogant' (kiêu ngạo) là một nét tính cách. Khi điều kiện là một đặc điểm tính cách lâu dài, vế 'if' nên dùng thì nào để diễn tả sự trái ngược với thực tế?"
+  },
+  {
+    "topic": "Conditionals Type 3 & Mixed",
+    "level": "B2",
+    "student_input": "If I hadn't lost my keys, I wouldn't have been waiting here now.",
+    "correct_answer": "If I hadn't lost my keys, I wouldn't be waiting here now.",
+    "explanation": "Hãy nhìn vào 'waiting here now'. Đây là một hành động đang diễn ra ở hiện tại. Liệu 'wouldn't have been waiting' (quá khứ hoàn thành tiếp diễn) có phù hợp với 'now' không?"
+  },
+  {
+    "topic": "Conditionals Type 3 & Mixed",
+    "level": "B2",
+    "student_input": "If she spoke more clearly, the audience would have understood her better during the speech.",
+    "correct_answer": "If she spoke more clearly, the audience would have understood her better during the speech.",
+    "explanation": "Câu này chính xác. Việc 'nói rõ ràng' là một kỹ năng (hiện tại) $\rightarrow$ kết quả trong quá khứ. Nếu bạn dùng 'If she had spoken more clearly', ý nghĩa sẽ thay đổi như thế nào?"
+  },
+  {
+    "topic": "Conditionals Type 3 & Mixed",
+    "level": "B2",
+    "student_input": "If I had’t eaten that seafood, I wouldn't have been sick today.",
+    "correct_answer": "If I hadn't eaten that seafood, I wouldn't be sick today.",
+    "explanation": "Hành động 'ăn hải sản' (quá khứ) $\rightarrow$ trạng thái 'bị ốm' (today). Hãy điều chỉnh vế kết quả để nó phản ánh đúng thời điểm hiện tại."
+  },
+  {
+    "topic": "Conditionals Type 3 & Mixed",
+    "level": "B2",
+    "student_input": "If he were not so lazy, he would have passed the exam last semester.",
+    "correct_answer": "If he were not so lazy, he would have passed the exam last semester.",
+    "explanation": "Câu này chính xác. Bạn hãy thử thách bản thân bằng cách chuyển câu này sang dạng đảo ngữ (bỏ 'If') cho vế 'If he were not so lazy'."
+  },
+  {
+    "topic": "Conditionals Type 3 & Mixed",
+    "level": "B2",
+    "student_input": "If I hadn't studied law, I wouldn't have been a lawyer now.",
+    "correct_answer": "If I hadn't studied law, I wouldn't be a lawyer now.",
+    "explanation": "Hãy phân tích mốc thời gian: 'học luật' (quá khứ) $\rightarrow$ 'là luật sư' (now). Bạn hãy điều chỉnh vế kết quả để nó khớp với mốc 'now'."
+  },
+  {
+    "topic": "Conditionals Type 3 & Mixed",
+    "level": "B2",
+    "student_input": "If they had’t been so rude, they would have had more friends now.",
+    "correct_answer": "If they weren't so rude, they would have more friends now.",
+    "explanation": "Hãy xem xét 'rude' (thô lỗ). Nếu đây là bản tính của họ, vế 'if' nên dùng thì nào? Và với kết quả 'now', vế sau nên dùng 'would have had' hay 'would have'?"
+  },
+  {
+    "topic": "Conditionals Type 3 & Mixed",
+    "level": "B2",
+    "student_input": "If I had’t forgotten my umbrella, I wouldn't have been wet now.",
+    "correct_answer": "If I hadn't forgotten my umbrella, I wouldn't be wet now.",
+    "explanation": "Hành động 'quên ô' (quá khứ) $\rightarrow$ trạng thái 'bị ướt' (now). Hãy điều chỉnh vế kết quả để nó phù hợp với hiện tại."
+  },
+  {
+    "topic": "Conditionals Type 3 & Mixed",
+    "level": "B2",
+    "student_input": "Had the company implemented the strategy sooner, the current deficit would have been avoided.",
+    "correct_answer": "Had the company implemented the strategy sooner, the current deficit would be avoided.",
+    "explanation": "Bạn đã dùng đảo ngữ 'Had the company implemented' rất chuyên nghiệp. Tuy nhiên, hãy nhìn vào cụm 'current deficit' (thâm hụt hiện tại). Vì kết quả là một trạng thái đang tồn tại ở hiện tại, liệu 'would have been avoided' (đã được tránh trong quá khứ) có khớp với từ 'current' không?"
+  },
+  {
+    "topic": "Conditionals Type 3 & Mixed",
+    "level": "B2",
+    "student_input": "If the researchers had used a larger sample size, the findings would have been more reliable today.",
+    "correct_answer": "If the researchers had used a larger sample size, the findings would be more reliable today.",
+    "explanation": "Hãy phân tích mốc thời gian: Việc 'sử dụng mẫu' diễn ra trong quá khứ (had used), nhưng giá trị 'độ tin cậy' của kết quả là ở hiện tại (today). Bạn nên điều chỉnh vế kết quả như thế nào để phản ánh trạng thái hiện tại thay vì một sự việc đã kết thúc?"
+  },
+  {
+    "topic": "Conditionals Type 3 & Mixed",
+    "level": "B2",
+    "student_input": "Had he not been so inadvertently rude, he would have been more respected by the board now.",
+    "correct_answer": "Had he not been so inadvertently rude, he would be more respected by the board now.",
+    "explanation": "Bạn đã sử dụng trạng từ 'inadvertently' (vô ý) rất hay. Nhưng hãy xem xét vế kết quả với từ 'now'. Khi muốn nói về một vị thế/trạng thái hiện tại, chúng ta dùng 'would have been' hay 'would be'?"
+  },
+  {
+    "topic": "Conditionals Type 3 & Mixed",
+    "level": "B2",
+    "student_input": "If I were more proficient in data analysis, I would have completed the report by last Friday.",
+    "correct_answer": "If I were more proficient in data analysis, I would have completed the report by last Friday.",
+    "explanation": "Câu này chính xác. Bạn đang giả định một năng lực hiện tại (proficient) để giải thích cho một kết quả trong quá khứ (last Friday). Thử thách: Nếu bạn muốn nói 'Vì tôi đã không học khóa phân tích dữ liệu năm ngoái nên giờ tôi không thể hoàn thành báo cáo', bạn sẽ thay đổi vế 'if' thành thì nào?"
+  },
+  {
+    "topic": "Conditionals Type 3 & Mixed",
+    "level": "B2",
+    "student_input": "If the government had mitigated the risks earlier, the economy would have not suffered so much today.",
+    "correct_answer": "If the government had mitigated the risks earlier, the economy would not suffer so much today.",
+    "explanation": "Hãy chú ý từ 'today'. Việc 'giảm thiểu rủi ro' (mitigate) đã diễn ra (hoặc không diễn ra) trong quá khứ, nhưng hậu quả là 'today'. Bạn có thể lược bỏ thành phần nào trong 'would have not suffered' để đưa câu về hiện tại?"
+  },
+  {
+    "topic": "Conditionals Type 3 & Mixed",
+    "level": "B2",
+    "student_input": "Had we not overlooked the discrepancy in the budget, we would have not been in this financial mess now.",
+    "correct_answer": "Had we not overlooked the discrepancy in the budget, we would not be in this financial mess now.",
+    "explanation": "Cấu trúc đảo ngữ 'Had we not overlooked' rất tốt. Tuy nhiên, 'this financial mess now' là một tình trạng hiện tại. Liệu 'would have not been' có phù hợp để mô tả một trạng thái đang diễn ra không?"
+  },
+  {
+    "topic": "Conditionals Type 3 & Mixed",
+    "level": "B2",
+    "student_input": "If she had been more decisive in the meeting, the project might have been more successful now.",
+    "correct_answer": "If she had been more decisive in the meeting, the project might be more successful now.",
+    "explanation": "Bạn dùng 'might' để thể hiện một khả năng (nuance), điều này rất đúng với trình độ B2. Tuy nhiên, hãy nhìn mốc 'now'. Bạn nên dùng 'might have been' (quá khứ) hay 'might be' (hiện tại)?"
+  },
+  {
+    "topic": "Conditionals Type 3 & Mixed",
+    "level": "B2",
+    "student_input": "If I hadn't wasted my youth, I would have a better career now.",
+    "correct_answer": "If I hadn't wasted my youth, I would have a better career now.",
+    "explanation": "Câu này đúng (Mixed Conditional). Bây giờ, hãy thử thay 'would have' bằng 'might have'. Ý nghĩa về mức độ chắc chắn của câu sẽ thay đổi như thế nào?"
+  },
+  {
+    "topic": "Conditionals Type 3 & Mixed",
+    "level": "B2",
+    "student_input": "Were I more experienced in negotiation, I would have closed the deal last month.",
+    "correct_answer": "Were I more experienced in negotiation, I would have closed the deal last month.",
+    "explanation": "Câu này chính xác. Bạn đã dùng đảo ngữ loại 2 (Were I...) để nói về một bản chất hiện tại dẫn đến kết quả quá khứ. Nếu bạn thay 'Were I' bằng 'Had I been', câu này sẽ ám chỉ điều gì về kinh nghiệm của bạn tại thời điểm chốt deal?"
+  },
+  {
+    "topic": "Conditionals Type 3 & Mixed",
+    "level": "B2",
+    "student_input": "If they had invested in sustainable energy a decade ago, they would have been market leaders today.",
+    "correct_answer": "If they had invested in sustainable energy a decade ago, they would be market leaders today.",
+    "explanation": "Hãy đối chiếu 'a decade ago' và 'today'. Khi kết quả là một vị thế ở hiện tại, cấu trúc 'would have been' có còn phù hợp không?"
+  },
+  {
+    "topic": "Conditionals Type 3 & Mixed",
+    "level": "B2",
+    "student_input": "Had the CEO not resigned, the company would have not faced such instability currently.",
+    "correct_answer": "Had the CEO not resigned, the company would not face such instability currently.",
+    "explanation": "Hãy nhìn vào trạng từ 'currently'. Nó yêu cầu vế kết quả phải ở thì nào? Bạn hãy điều chỉnh 'would have not faced' để nó khớp với thời điểm hiện tại."
+  },
+  {
+    "topic": "Conditionals Type 3 & Mixed",
+    "level": "B2",
+    "student_input": "If I had known about the policy change, I would have acted differently yesterday.",
+    "correct_answer": "If I had known about the policy change, I would have acted differently yesterday.",
+    "explanation": "Câu này đúng (Type 3). Bây giờ, hãy thử biến nó thành câu Mixed: 'Vì tôi biết về chính sách này (hiện tại), nên hôm qua tôi đã hành động khác'. Bạn sẽ chia vế 'if' như thế nào?"
+  },
+  {
+    "topic": "Conditionals Type 3 & Mixed",
+    "level": "B2",
+    "student_input": "If we were more attentive to the details, the error would have been spotted during the audit last week.",
+    "correct_answer": "If we were more attentive to the details, the error would have been spotted during the audit last week.",
+    "explanation": "Câu này chính xác (Mixed). 'Attentive' ở đây được coi là một phẩm chất/thói quen. Nếu bạn muốn nói 'Chúng tôi đã không chú ý vào đúng thời điểm cuộc kiểm tra đó', bạn sẽ thay 'were' bằng thì nào?"
+  },
+  {
+    "topic": "Conditionals Type 3 & Mixed",
+    "level": "B2",
+    "student_input": "Had I not been so preoccupied with the merger, I would have noticed the drop in sales last quarter.",
+    "correct_answer": "Had I not been so preoccupied with the merger, I would have noticed the drop in sales last quarter.",
+    "explanation": "Câu này đúng (Type 3). Thử thách: Hãy chuyển nó thành câu Mixed với kết quả là 'bây giờ tôi sẽ không lo lắng về doanh số' (now)."
+  },
+  {
+    "topic": "Conditionals Type 3 & Mixed",
+    "level": "B2",
+    "student_input": "If you had taken my advice, you would not be in this predicament now.",
+    "correct_answer": "If you had taken my advice, you would not be in this predicament now.",
+    "explanation": "Câu này chính xác. 'Predicament' (tình huống khó khăn) là trạng thái hiện tại. Bạn có biết từ đồng nghĩa nào trang trọng hơn cho 'predicament' để dùng trong văn viết B2/C1 không?"
+  },
+  {
+    "topic": "Conditionals Type 3 & Mixed",
+    "level": "B2",
+    "student_input": "If the software had been tested more rigorously, it would not have crashed during the presentation today.",
+    "correct_answer": "If the software had been tested more rigorously, it would not crash during the presentation today.",
+    "explanation": "Hãy nhìn vào 'the presentation today'. Nếu buổi thuyết trình đang diễn ra hoặc sắp diễn ra, và bạn đang nói về một kết quả ở hiện tại, liệu 'would not have crashed' (đã không bị sập - quá khứ) có phù hợp không?"
+  },
+  {
+    "topic": "Conditionals Type 3 & Mixed",
+    "level": "B2",
+    "student_input": "Had they not been so complacent, they would have not lost their competitive edge now.",
+    "correct_answer": "Had they not been so complacent, they would not have lost their competitive edge now.",
+    "explanation": "Hãy phân tích từ 'complacent' (tự mãn). Nếu sự tự mãn là một đặc điểm tính cách lâu dài của họ, bạn nên dùng 'Had they not been' hay 'Were they not' để nhấn mạnh bản chất?"
+  },
+  {
+    "topic": "Conditionals Type 3 & Mixed",
+    "level": "B2",
+    "student_input": "If I had studied the market trends, I would have made a better investment last year.",
+    "correct_answer": "If I had studied the market trends, I would have made a better investment last year.",
+    "explanation": "Câu này đúng. Bây giờ, hãy thử thay 'would have' bằng 'could have'. Sắc thái về 'khả năng' sẽ thay đổi như thế nào so với 'sự chắc chắn'?"
+  },
+  {
+    "topic": "Conditionals Type 3 & Mixed",
+    "level": "B2",
+    "student_input": "If I were a more patient person, I would have not reacted so emotionally during the conflict.",
+    "correct_answer": "If I were a more patient person, I would not have reacted so emotionally during the conflict.",
+    "explanation": "Câu này chính xác. 'Patient' (kiên nhẫn) là bản chất $\rightarrow$ kết quả quá khứ. Thử thách: Hãy viết lại câu này bằng cách sử dụng cấu trúc 'Were I...' ở đầu câu."
+  },
+  {
+    "topic": "Conditionals Type 3 & Mixed",
+    "level": "B2",
+    "student_input": "Had the witness not been intimidated, the truth would have been revealed during the trial last month.",
+    "correct_answer": "Had the witness not been intimidated, the truth would have been revealed during the trial last month.",
+    "explanation": "Câu này đúng. Đây là một câu điều kiện loại 3 ở dạng bị động (passive). Bạn hãy thử chuyển nó sang dạng Mixed với kết quả là 'Sự thật sẽ được mọi người biết đến bây giờ' (now)."
+  },
+  {
+    "topic": "Conditionals Type 3 & Mixed",
+    "level": "B2",
+    "student_input": "If you had not been so stubborn, you would have been more successful today.",
+    "correct_answer": "If you weren't so stubborn, you would be more successful today.",
+    "explanation": "Hãy suy nghĩ về 'stubborn' (cố chấp). Nếu đây là một nét tính cách đặc trưng của bạn, bạn nên dùng thì Quá khứ hoàn thành (had not been) hay Quá khứ đơn (weren't) để diễn tả sự trái ngược với thực tế hiện tại?"
+  },
+  {
+    "topic": "Conditionals Type 3 & Mixed",
+    "level": "B2",
+    "student_input": "If I had not missed that opportunity, I would have been living in London now.",
+    "correct_answer": "If I had not missed that opportunity, I would be living in London now.",
+    "explanation": "Hãy nhìn vào 'living in London now'. Đây là một hành động đang tiếp diễn ở hiện tại. Liệu 'would have been living' (loại 3) có phù hợp với 'now' không? Bạn nên dùng 'would be living' hay 'would have been living'?"
+  },
+  {
+    "topic": "Conditionals Type 3 & Mixed",
+    "level": "B2",
+    "student_input": "Had I been more mindful of the deadline, I would not have stayed up all night yesterday.",
+    "correct_answer": "Had I been more mindful of the deadline, I would not have stayed up all night yesterday.",
+    "explanation": "Câu này chính xác. 'Mindful' (lưu tâm) trong trường hợp này là một trạng thái tại một thời điểm cụ thể. Nếu bạn muốn nói 'Tôi vốn dĩ là người không cẩn thận (bản chất), nên tôi đã thức trắng đêm', bạn sẽ thay 'Had I been' bằng gì?"
+  },
+  {
+    "topic": "Conditionals Type 3 & Mixed",
+    "level": "B2",
+    "student_input": "If the legal team had intervened, the lawsuit would have been settled by now.",
+    "correct_answer": "If the legal team had intervened, the lawsuit would be settled by now.",
+    "explanation": "Hãy chú ý cụm 'by now' (tính đến thời điểm này). Nó chỉ một trạng thái ở hiện tại. Bạn hãy điều chỉnh 'would have been settled' để nó phản ánh đúng trạng thái hiện tại."
+  },
+  {
+    "topic": "Conditionals Type 3 & Mixed",
+    "level": "B2",
+    "student_input": "If the inflation had not risen so sharply, consumers would have more purchasing power today.",
+    "correct_answer": "If the inflation had not risen so sharply, consumers would have more purchasing power today.",
+    "explanation": "Câu này đúng (Mixed). 'Sức mua' (purchasing power) là một trạng thái hiện tại. Nếu bạn thay 'would have' bằng 'might have', câu văn sẽ trở nên thận trọng hơn hay khẳng định hơn?"
+  },
+  {
+    "topic": "Conditionals Type 3 & Mixed",
+    "level": "B2",
+    "student_input": "Had he known the consequences, he might not have made such a reckless decision.",
+    "correct_answer": "Had he known the consequences, he might not have made such a reckless decision.",
+    "explanation": "Câu này chính xác. 'Reckless' (liều lĩnh) là một tính từ mạnh phù hợp với B2. Thử thách: Hãy chuyển câu này sang dạng Mixed nếu kết quả là 'bây giờ anh ấy đang phải hối hận' (now)."
+  },
+  {
+    "topic": "Conditionals Type 3 & Mixed",
+    "level": "B2",
+    "student_input": "If we had’t invested in the new software, our efficiency would have been lower currently.",
+    "correct_answer": "If we had’t invested in the new software, our efficiency would be lower currently.",
+    "explanation": "Hãy nhìn vào từ 'currently'. Bạn đang dùng 'would have been' (loại 3). Hãy tự hỏi: 'Tôi đang nói về một hiệu suất trong quá khứ hay hiệu suất ở thời điểm này?'"
+  },
+  {
+    "topic": "Conditionals Type 3 & Mixed",
+    "level": "B2",
+    "student_input": "If I were a better public speaker, I would have not been so nervous during the presentation last week.",
+    "correct_answer": "If I were a better public speaker, I would not have been so nervous during the presentation last week.",
+    "explanation": "Câu này chính xác (Mixed). Bạn giả định một kỹ năng hiện tại để giải thích cho cảm xúc trong quá khứ. Bạn có thể viết lại vế 'If I were' bằng cách dùng 'Were I' không?"
+  },
+  {
+    "topic": "Conditionals Type 3 & Mixed",
+    "level": "B2",
+    "student_input": "Had I not been so focused on the short-term gains, I would have a more sustainable business model now.",
+    "correct_answer": "Had I not been so focused on the short-term gains, I would have a more sustainable business model now.",
+    "explanation": "Câu này đúng (Mixed). Việc 'tập trung vào ngắn hạn' là sai lầm quá khứ $\rightarrow$ kết quả 'mô hình bền vững' ở hiện tại. Nếu bạn thay 'would have' bằng 'could have', ý nghĩa về 'khả năng' sẽ thay đổi thế nào?"
+  },
+  {
+    "topic": "Conditionals Type 3 & Mixed",
+    "level": "B2",
+    "student_input": "If the company had’t ignored the customer feedback, they would have not lost their market share last year.",
+    "correct_answer": "If the company had’t ignored the customer feedback, they would not have lost their market share last year.",
+    "explanation": "Câu này đúng (Type 3). Thử thách: Hãy biến nó thành câu Mixed với kết quả là 'bây giờ họ vẫn sẽ giữ vững vị thế dẫn đầu' (now)."
+  },
+  {
+    "topic": "Conditionals Type 3 & Mixed",
+    "level": "B2",
+    "student_input": "If the climate had not changed so rapidly, many species would have not been extinct today.",
+    "correct_answer": "If the climate had not changed so rapidly, many species would not be extinct today.",
+    "explanation": "Hãy phân tích: 'biến đổi khí hậu' (quá trình quá khứ) $\rightarrow$ 'tuyệt chủng' (trạng thái hiện tại - today). Bạn hãy điều chỉnh 'would have not been' để nó khớp với mốc 'today'."
+  },
+  {
+    "topic": "Conditionals Type 3 & Mixed",
+    "level": "B2",
+    "student_input": "Had the athlete not suffered an injury, he would have won the gold medal in the Olympics last year.",
+    "correct_answer": "Had the athlete not suffered an injury, he would have won the gold medal in the Olympics last year.",
+    "explanation": "Câu này chính xác. Bây giờ, hãy thử biến nó thành câu Mixed: 'Vì anh ấy vốn là một vận động viên tài năng (hiện tại), nên anh ấy đã thắng huy chương vàng năm ngoái'. Bạn sẽ chia vế 'if' như thế nào?"
+  },
+  {
+    "topic": "Conditionals Type 3 & Mixed",
+    "level": "B2",
+    "student_input": "If I had not been so overwhelmed with work, I would have had time to visit you last weekend.",
+    "correct_answer": "If I had not been so overwhelmed with work, I would have had time to visit you last weekend.",
+    "explanation": "Câu này đúng. 'Overwhelmed' (bị choáng ngợp) là trạng thái trong quá khứ. Thử thách: Hãy viết lại câu này sử dụng 'But for' thay cho 'If I had not been...'"
+  },
+  {
+    "topic": "Conditionals Type 3 & Mixed",
+    "level": "B2",
+    "student_input": "If we were more sustainable in our production, we would have reduced the waste last year.",
+    "correct_answer": "If we were more sustainable in our production, we would have reduced the waste last year.",
+    "explanation": "Câu này chính xác. Bạn đang nói về một triết lý sản xuất (hiện tại) dẫn đến kết quả trong quá khứ. Nếu bạn dùng 'If we had been more sustainable', ý nghĩa sẽ thay đổi như thế nào về mặt thời gian?"
+  },
+  {
+    "topic": "Conditionals Type 3 & Mixed",
+    "level": "B2",
+    "student_input": "Had the project been managed more efficiently, the costs would have been lower now.",
+    "correct_answer": "Had the project been managed more efficiently, the costs would be lower now.",
+    "explanation": "Hãy nhìn vào 'costs would have been lower now'. 'Now' yêu cầu vế kết quả ở thì nào? Bạn hãy điều chỉnh để nó không còn là một sự việc đã kết thúc trong quá khứ."
+  },
+  {
+    "topic": "Conditionals Type 3 & Mixed",
+    "level": "B2",
+    "student_input": "If the team had’t been so fragmented, they would have achieved the goal last month.",
+    "correct_answer": "If the team had’t been so fragmented, they would have achieved the goal last month.",
+    "explanation": "Câu này đúng (Type 3). 'Fragmented' (bị chia rẽ) là trạng thái trong quá khứ. Hãy thử thách bằng cách chuyển thành câu Mixed: 'Vì đội ngũ hiện nay không đoàn kết, nên tháng trước họ đã thất bại'."
+  },
+  {
+    "topic": "Conditionals Type 3 & Mixed",
+    "level": "B2",
+    "student_input": "If I had a better understanding of the culture, I would have avoided that faux pas last night.",
+    "correct_answer": "If I had a better understanding of the culture, I would have avoided that faux pas last night.",
+    "explanation": "Câu này chính xác (Mixed). 'Faux pas' (lỗi ứng xử) là một từ vựng B2/C1 rất tốt. Bạn có thể dùng đảo ngữ 'Were I...' cho vế đầu để tăng tính trang trọng không?"
+  },
+  {
+    "topic": "Conditionals Type 3 & Mixed",
+    "level": "B2",
+    "student_input": "Had the investors not pulled out, the startup would have been a unicorn now.",
+    "correct_answer": "Had the investors not pulled out, the startup would be a unicorn now.",
+    "explanation": "Hãy phân tích: 'nhà đầu tư rút vốn' (quá khứ) $\rightarrow$ 'là một unicorn' (hiện tại - now). Bạn nên dùng 'would have been' hay 'would be'?"
+  },
+  {
+    "topic": "Conditionals Type 3 & Mixed",
+    "level": "B2",
+    "student_input": "If she had not been so meticulous, the error would have not been found so quickly.",
+    "correct_answer": "If she had not been so meticulous, the error would not have been found so quickly.",
+    "explanation": "Câu này đúng (Type 3). 'Meticulous' (tỉ mỉ) là một từ vựng nâng cao. Nếu bạn muốn nói 'Vì cô ấy vốn là người tỉ mỉ (bản chất), nên lỗi này đã được tìm thấy nhanh chóng', bạn sẽ thay vế 'if' thành thì nào?"
+  },
+  {
+    "topic": "Conditionals Type 3 & Mixed",
+    "level": "B2",
+    "student_input": "If I had’t been so naive, I would not have trusted his promises last year.",
+    "correct_answer": "If I weren't so naive, I would not have trusted his promises last year.",
+    "explanation": "Hãy suy nghĩ: 'Naive' (ngây thơ) thường được coi là một đặc điểm tính cách. Khi giả định về một đặc điểm tính cách dẫn đến một hành động trong quá khứ, vế 'if' nên dùng thì nào?"
+  },
+  {
+    "topic": "Conditionals Type 3 & Mixed",
+    "level": "B2",
+    "student_input": "Had the agreement been signed, the partnership would have been official today.",
+    "correct_answer": "Had the agreement been signed, the partnership would be official today.",
+    "explanation": "Hãy nhìn mốc 'today'. Vế kết quả 'would have been official' diễn tả điều gì, và nó có khớp với 'today' không?"
+  },
+  {
+    "topic": "Conditionals Type 3 & Mixed",
+    "level": "B2",
+    "student_input": "If they had not compromised on quality, the product would have been more expensive now.",
+    "correct_answer": "If they had not compromised on quality, the product would be more expensive now.",
+    "explanation": "Hành động 'thỏa hiệp' (compromise) xảy ra trong quá khứ, nhưng giá thành sản phẩm là ở hiện tại (now). Bạn hãy điều chỉnh vế kết quả cho phù hợp."
+  },
+  {
+    "topic": "Conditionals Type 3 & Mixed",
+    "level": "B2",
+    "student_input": "If I were more courageous, I would have spoken up against the injustice last year.",
+    "correct_answer": "If I were more courageous, I would have spoken up against the injustice last year.",
+    "explanation": "Câu này chính xác (Mixed). Bạn giả định một đức tính (courageous) để giải thích cho một hành động quá khứ. Thử thách: Hãy dùng cấu trúc 'Were I...' để viết lại câu này."
+  },
+  {
+    "topic": "Conditionals Type 3 & Mixed",
+    "level": "B2",
+    "student_input": "Had we not been so cautious, we would have taken more risks last year.",
+    "correct_answer": "Had we not been so cautious, we would have taken more risks last year.",
+    "explanation": "Câu này đúng. Hãy thử biến nó thành Mixed với kết quả là 'bây giờ chúng tôi sẽ có nhiều cơ hội hơn' (now)."
+  },
+  {
+    "topic": "Conditionals Type 3 & Mixed",
+    "level": "B2",
+    "student_input": "If the system had not crashed, the data would have been saved now.",
+    "correct_answer": "If the system had not crashed, the data would be saved now.",
+    "explanation": "Hãy phân tích: 'hệ thống sập' (quá khứ) $\rightarrow$ 'dữ liệu được lưu' (hiện tại - now). Bạn hãy điều chỉnh 'would have been saved' thành thì nào?"
+  },
+  {
+    "topic": "Conditionals Type 3 & Mixed",
+    "level": "B2",
+    "student_input": "If I had’t spent so much time procrastinating, I would have finished the thesis today.",
+    "correct_answer": "If I had’t spent so much time procrastinating, I would finish the thesis today.",
+    "explanation": "Hãy nhìn vào từ 'today'. Việc 'trì hoãn' (procrastinating) là quá khứ, nhưng việc 'hoàn thành' là mục tiêu của hôm nay. Bạn hãy điều chỉnh vế kết quả."
+  },
+  {
+    "topic": "Conditionals Type 3 & Mixed",
+    "level": "B2",
+    "student_input": "Had she not been so ambivalent about the offer, she would have accepted it last week.",
+    "correct_answer": "Had she not been so ambivalent about the offer, she would have accepted it last week.",
+    "explanation": "Câu này chính xác. 'Ambivalent' (mâu thuẫn trong tư tưởng) là một từ vựng C1 rất tốt. Thử thách: Nếu sự mâu thuẫn này là bản tính của cô ấy (hiện tại), bạn sẽ thay 'Had she not been' bằng gì?"
+  },
+  {
+    "topic": "Conditionals Type 3 & Mixed",
+    "level": "B2",
+    "student_input": "If I had more autonomy at work, I would have handled the crisis better last month.",
+    "correct_answer": "If I had more autonomy at work, I would have handled the crisis better last month.",
+    "explanation": "Câu này chính xác (Mixed). 'Autonomy' (sự tự chủ) là một trạng thái hiện tại $\rightarrow$ kết quả quá khứ. Hãy thử dùng 'Were I to have more autonomy...' để nhấn mạnh sự giả định."
+  },
+  {
+    "topic": "Conditionals Type 3 & Mixed",
+    "level": "B2",
+    "student_input": "If the budget had’t been slashed, the project would have been completed by now.",
+    "correct_answer": "If the budget had’t been slashed, the project would be completed by now.",
+    "explanation": "Hãy chú ý cụm 'by now'. Nó chỉ một trạng thái hiện tại. Bạn hãy điều chỉnh 'would have been completed' để nó phản ánh đúng thời điểm này."
+  },
+  {
+    "topic": "Conditionals Type 3 & Mixed",
+    "level": "B2",
+    "student_input": "Had we not been so optimistic, we would have not invested so much in that volatile market.",
+    "correct_answer": "Had we not been so optimistic, we would not have invested so much in that volatile market.",
+    "explanation": "Câu này đúng (Type 3). Hãy thử thách bằng cách chuyển thành câu Mixed: 'Vì chúng tôi vốn là những người lạc quan (hiện tại), nên chúng tôi đã đầu tư vào thị trường biến động đó'."
+  }
+]

@@ -1,0 +1,702 @@
+[
+  {
+    "topic": "Articles",
+    "level": "A1",
+    "student_input": "I have a apple",
+    "correct_answer": "I have an apple",
+    "explanation": "Chào em, hãy nhìn vào từ 'apple'. Từ này bắt đầu bằng một nguyên âm (a). Em có nhớ trong tiếng Anh, trước những từ bắt đầu bằng một nguyên âm, mình dùng 'a' hay 'an' không?"
+  },
+  {
+    "topic": "Articles",
+    "level": "A1",
+    "student_input": "She is an teacher",
+    "correct_answer": "She is a teacher",
+    "explanation": "Hãy quan sát từ 'teacher'. Từ này bắt đầu bằng một phụ âm (t). Vậy theo quy tắc, mình nên dùng 'a' hay 'an' đứng trước nó em nhỉ?"
+  },
+  {
+    "topic": "Articles",
+    "level": "A1",
+    "student_input": "I am student",
+    "correct_answer": "I am a student",
+    "explanation": "Trong tiếng Anh, khi nói về nghề nghiệp hoặc vai trò của một người (số ít), chúng ta không thể để danh từ đứng một mình. Em hãy nhớ lại xem mình cần thêm mạo từ gì vào trước từ 'student' nhé."
+  },
+  {
+    "topic": "Articles",
+    "level": "A1",
+    "student_input": "He has a oranges",
+    "correct_answer": "He has oranges / He has some oranges",
+    "explanation": "Chào em, hãy nhìn vào từ 'oranges'. Đây là danh từ số nhiều (có 's' ở cuối). Em có nhớ mạo từ 'a/an' chỉ được dùng cho danh từ số ít hay số nhiều nhỉ? Vậy mình có nên dùng 'a' ở đây không?"
+  },
+  {
+    "topic": "Articles",
+    "level": "A1",
+    "student_input": "I saw an big dog",
+    "correct_answer": "I saw a big dog",
+    "explanation": "Em hãy nhìn vào từ ngay sau mạo từ là 'big'. Từ này bắt đầu bằng phụ âm (b). Vậy mình dùng 'a' hay 'an' cho đúng quy tắc em nhỉ?"
+  },
+  {
+    "topic": "Articles",
+    "level": "A1",
+    "student_input": "It is an university",
+    "correct_answer": "It is a university",
+    "explanation": "Đây là một trường hợp đặc biệt! Tuy 'university' bắt đầu bằng chữ 'u', nhưng khi phát âm, nó bắt đầu bằng âm /j/ (giống như chữ 'y'). Với âm này, mình dùng 'a' hay 'an' em nhỉ?"
+  },
+  {
+    "topic": "Articles",
+    "level": "A1",
+    "student_input": "I want an banana",
+    "correct_answer": "I want a banana",
+    "explanation": "Hãy nhìn vào từ 'banana'. Nó bắt đầu bằng phụ âm (b). Em hãy nhớ lại xem trước phụ âm mình dùng 'a' hay 'an' nhé."
+  },
+  {
+    "topic": "Articles",
+    "level": "A1",
+    "student_input": "She is a engineer",
+    "correct_answer": "She is an engineer",
+    "explanation": "Chào em, hãy nhìn từ 'engineer'. Từ này bắt đầu bằng một nguyên âm (e). Vậy mình nên dùng 'a' hay 'an' đứng trước nó cho chính xác?"
+  },
+  {
+    "topic": "Articles",
+    "level": "A1",
+    "student_input": "There is an cat on the table",
+    "correct_answer": "There is a cat on the table",
+    "explanation": "Hãy quan sát từ 'cat'. Nó bắt đầu bằng phụ âm (c). Em hãy nhớ lại quy tắc chọn mạo từ 'a' hay 'an' cho trường hợp này nhé."
+  },
+  {
+    "topic": "Articles",
+    "level": "A1",
+    "student_input": "I have a umbrella",
+    "correct_answer": "I have an umbrella",
+    "explanation": "Hãy nhìn vào từ 'umbrella'. Từ này bắt đầu bằng âm nguyên âm /ʌ/. Em có nhớ mình dùng 'a' hay 'an' trước những từ có âm nguyên âm không?"
+  },
+  {
+    "topic": "Articles",
+    "level": "A1",
+    "student_input": "He is an boy",
+    "correct_answer": "He is a boy",
+    "explanation": "Hãy xem từ 'boy'. Nó bắt đầu bằng phụ âm (b). Vậy em hãy chọn lại giữa 'a' và 'an' xem từ nào phù hợp hơn."
+  },
+  {
+    "topic": "Articles",
+    "level": "A1",
+    "student_input": "I read a interesting book",
+    "correct_answer": "I read an interesting book",
+    "explanation": "Chào em, hãy nhìn từ 'interesting'. Từ này bắt đầu bằng nguyên âm (i). Vậy mình nên dùng mạo từ 'a' hay 'an' đứng trước nó?"
+  },
+  {
+    "topic": "Articles",
+    "level": "A1",
+    "student_input": "She has an small bag",
+    "correct_answer": "She has a small bag",
+    "explanation": "Em hãy chú ý từ đứng ngay sau mạo từ là 'small'. Vì 'small' bắt đầu bằng phụ âm (s), em dùng 'a' hay 'an' cho đúng nhỉ?"
+  },
+  {
+    "topic": "Articles",
+    "level": "A1",
+    "student_input": "I am an doctor",
+    "correct_answer": "I am a doctor",
+    "explanation": "Hãy nhìn từ 'doctor'. Từ này bắt đầu bằng phụ âm (d). Em hãy nhớ lại xem mình dùng 'a' hay 'an' đứng trước phụ âm nhé."
+  },
+  {
+    "topic": "Articles",
+    "level": "A1",
+    "student_input": "He is a honest man",
+    "correct_answer": "He is an honest man",
+    "explanation": "Đây là một bẫy nhỏ! Từ 'honest' bắt đầu bằng chữ 'h', nhưng chữ 'h' này bị câm, nên âm đầu tiên chúng ta nghe được là nguyên âm /ɒ/. Với âm nguyên âm, mình dùng 'a' hay 'an' em nhỉ?"
+  },
+  {
+    "topic": "Articles",
+    "level": "A1",
+    "student_input": "I see an bird",
+    "correct_answer": "I see a bird",
+    "explanation": "Hãy nhìn từ 'bird'. Nó bắt đầu bằng phụ âm (b). Vậy em nên dùng 'a' hay 'an' đứng trước từ này?"
+  },
+  {
+    "topic": "Articles",
+    "level": "A1",
+    "student_input": "She has a egg",
+    "correct_answer": "She has an egg",
+    "explanation": "Chào em, từ 'egg' bắt đầu bằng nguyên âm (e). Em có nhớ quy tắc dùng 'a' hay 'an' trước một nguyên âm không?"
+  },
+  {
+    "topic": "Articles",
+    "level": "A1",
+    "student_input": "It is an happy day",
+    "correct_answer": "It is a happy day",
+    "explanation": "Hãy nhìn từ 'happy'. Từ này bắt đầu bằng phụ âm (h) và âm 'h' ở đây được phát âm rõ. Vậy mình dùng 'a' hay 'an' cho đúng em nhỉ?"
+  },
+  {
+    "topic": "Articles",
+    "level": "A1",
+    "student_input": "I have an car",
+    "correct_answer": "I have a car",
+    "explanation": "Hãy quan sát từ 'car'. Nó bắt đầu bằng phụ âm (c). Em hãy nhớ lại xem trước phụ âm mình dùng 'a' hay 'an' nhé."
+  },
+  {
+    "topic": "Articles",
+    "level": "A1",
+    "student_input": "She is an nurse",
+    "correct_answer": "She is a nurse",
+    "explanation": "Chào em, hãy nhìn từ 'nurse'. Nó bắt đầu bằng phụ âm (n). Vậy em nên dùng mạo từ 'a' hay 'an' đứng trước từ này?"
+  },
+  {
+    "topic": "Articles",
+    "level": "A1",
+    "student_input": "I want a ice cream",
+    "correct_answer": "I want an ice cream",
+    "explanation": "Hãy nhìn vào từ 'ice cream'. Từ này bắt đầu bằng nguyên âm (i). Em có nhớ mình dùng 'a' hay 'an' trước nguyên âm không?"
+  },
+  {
+    "topic": "Articles",
+    "level": "A1",
+    "student_input": "He is an pilot",
+    "correct_answer": "He is a pilot",
+    "explanation": "Hãy xem từ 'pilot'. Nó bắt đầu bằng phụ âm (p). Vậy em chọn 'a' hay 'an' cho đúng quy tắc nhỉ?"
+  },
+  {
+    "topic": "Articles",
+    "level": "A1",
+    "student_input": "I have a old phone",
+    "correct_answer": "I have an old phone",
+    "explanation": "Hãy nhìn vào từ 'old'. Từ này bắt đầu bằng nguyên âm (o). Em hãy nhớ lại xem trước nguyên âm mình dùng mạo từ gì nhé."
+  },
+  {
+    "topic": "Articles",
+    "level": "A1",
+    "student_input": "She is an girl",
+    "correct_answer": "She is a girl",
+    "explanation": "Hãy quan sát từ 'girl'. Nó bắt đầu bằng phụ âm (g). Vậy mình dùng 'a' hay 'an' em nhỉ?"
+  },
+  {
+    "topic": "Articles",
+    "level": "A1",
+    "student_input": "I eat a orange",
+    "correct_answer": "I eat an orange",
+    "explanation": "Chào em, hãy nhìn từ 'orange'. Từ này bắt đầu bằng nguyên âm (o). Em hãy chọn lại mạo từ 'a' hay 'an' cho chính xác nhé."
+  },
+  {
+    "topic": "Articles",
+    "level": "A1",
+    "student_input": "There is an book on the table",
+    "correct_answer": "There is a book on the table",
+    "explanation": "Hãy nhìn từ 'book'. Nó bắt đầu bằng phụ âm (b). Vậy em hãy dùng mạo từ 'a' hay 'an' cho đúng quy tắc?"
+  },
+  {
+    "topic": "Articles",
+    "level": "A1",
+    "student_input": "He is a artist",
+    "correct_answer": "He is an artist",
+    "explanation": "Hãy xem từ 'artist'. Từ này bắt đầu bằng nguyên âm (a). Em hãy nhớ lại quy tắc dùng 'a' hay 'an' trước nguyên âm nhé."
+  },
+  {
+    "topic": "Articles",
+    "level": "A1",
+    "student_input": "I have an pencil",
+    "correct_answer": "I have a pencil",
+    "explanation": "Hãy nhìn từ 'pencil'. Nó bắt đầu bằng phụ âm (p). Vậy em nên dùng 'a' hay 'an' đứng trước nó?"
+  },
+  {
+    "topic": "Articles",
+    "level": "A1",
+    "student_input": "She is a actress",
+    "correct_answer": "She is an actress",
+    "explanation": "Chào em, hãy nhìn từ 'actress'. Từ này bắt đầu bằng nguyên âm (a). Em hãy chọn lại mạo từ 'a' hay 'an' cho đúng nhé."
+  },
+  {
+    "topic": "Articles",
+    "level": "A1",
+    "student_input": "I am a student",
+    "correct_answer": "I am a student",
+    "explanation": "Câu này hoàn toàn chính xác! Em đã dùng mạo từ 'a' cho danh từ số ít 'student' bắt đầu bằng phụ âm. Rất tốt!"
+  },
+  {
+    "topic": "Articles",
+    "level": "A1",
+    "student_input": "I have a dog. A dog is very cute",
+    "correct_answer": "I have a dog. The dog is very cute",
+    "explanation": "Chào em, ở câu thứ nhất, em dùng 'a dog' để giới thiệu về chú chó là chính xác. Nhưng ở câu thứ hai, chúng ta đã biết em đang nói về chú chó nào rồi (chú chó em vừa nhắc đến). Vậy mình nên dùng 'a' hay 'the' cho những vật đã được xác định nhỉ?"
+  },
+  {
+    "topic": "Articles",
+    "level": "A1",
+    "student_input": "A sun is very hot",
+    "correct_answer": "The sun is very hot",
+    "explanation": "Hãy suy nghĩ một chút nhé: Trên thế giới này chúng ta có nhiều mặt trời hay chỉ có một mặt trời duy nhất thôi? Với những vật duy nhất, mình dùng 'a' hay 'the' em nhỉ?"
+  },
+  {
+    "topic": "Articles",
+    "level": "A1",
+    "student_input": "Can you give me a book on the table?",
+    "correct_answer": "Can you give me the book on the table?",
+    "explanation": "Chào em, nếu em chỉ nói 'give me a book', nghĩa là 'cho tôi bất kỳ cuốn sách nào'. Nhưng ở đây em nói rõ là 'cuốn sách ở trên bàn'. Vì cuốn sách này đã được xác định vị trí cụ thể, mình nên dùng 'a' hay 'the'?"
+  },
+  {
+    "topic": "Articles",
+    "level": "A1",
+    "student_input": "I see a cat. The cat is black. A cat is sleeping",
+    "correct_answer": "I see a cat. The cat is black. The cat is sleeping",
+    "explanation": "Em làm hai câu đầu rất tốt! Nhưng đến câu thứ ba, em lại dùng 'a cat'. Hãy nhớ lại xem, vì con mèo này đã được nhắc đến ở hai câu trước, nó đã trở thành 'vật quen thuộc' rồi, vậy mình dùng mạo từ nào nhỉ?"
+  },
+  {
+    "topic": "Articles",
+    "level": "A1",
+    "student_input": "The moon is a white",
+    "correct_answer": "The moon is white",
+    "explanation": "Có hai điểm cần lưu ý: Một là 'The moon' dùng rất chính xác vì mặt trăng là duy nhất. Hai là 'white' là tính từ (màu trắng), mà mạo từ 'a/an' chỉ đi với danh từ. Vậy mình có cần 'a' trước 'white' không em?"
+  },
+  {
+    "topic": "Articles",
+    "level": "A1",
+    "student_input": "I want a blue pen, not the red one",
+    "correct_answer": "I want the blue pen, not the red one",
+    "explanation": "Hãy nhìn vế sau 'not the red one'. Em đang so sánh giữa hai cây bút cụ thể (cây xanh và cây đỏ). Khi chúng ta nói về những vật cụ thể mà cả người nói và người nghe đều biết, mình dùng 'a' hay 'the'?"
+  },
+  {
+    "topic": "Articles",
+    "level": "A1",
+    "student_input": "She lives in a Earth",
+    "correct_answer": "She lives on the Earth",
+    "explanation": "Chào em, trái đất (Earth) là nơi duy nhất chúng ta đang sống. Với những thứ duy nhất như vậy, mình dùng 'a' hay 'the' cho đúng em nhỉ?"
+  },
+  {
+    "topic": "Articles",
+    "level": "A1",
+    "student_input": "I saw a movie yesterday. A movie was boring",
+    "correct_answer": "I saw a movie yesterday. The movie was boring",
+    "explanation": "Hãy nhìn câu thứ hai. Bộ phim này không còn là 'một bộ phim bất kỳ' nữa, mà là chính bộ phim em đã xem hôm qua. Vậy mạo từ 'a' nên được thay bằng từ gì?"
+  },
+  {
+    "topic": "Articles",
+    "level": "A1",
+    "student_input": "The sky is a blue",
+    "correct_answer": "The sky is blue",
+    "explanation": " 'The sky' dùng rất đúng vì bầu trời là duy nhất. Nhưng tương tự như câu màu sắc, 'blue' là tính từ, em có nhớ mạo từ 'a/an' có đi cùng với tính từ đứng một mình không?"
+  },
+  {
+    "topic": "Articles",
+    "level": "A1",
+    "student_input": "Give me a key to your house",
+    "correct_answer": "Give me the key to your house",
+    "explanation": "Chào em, 'a key' là bất kỳ chiếc chìa khóa nào. Nhưng đây là chìa khóa 'của ngôi nhà bạn' (xác định cụ thể). Khi vật đã được xác định rõ ràng như vậy, mình dùng 'a' hay 'the' nhỉ?"
+  },
+  {
+    "topic": "Articles",
+    "level": "A1",
+    "student_input": "I bought a dress. The dress is red",
+    "correct_answer": "I bought a dress. The dress is red",
+    "explanation": "Câu này hoàn toàn chính xác! Em đã dùng 'a' để giới thiệu chiếc váy và 'the' để nhắc lại nó. Rất tốt!"
+  },
+  {
+    "topic": "Articles",
+    "level": "A1",
+    "student_input": "The apple is a fruit",
+    "correct_answer": "An apple is a fruit / Apples are fruit",
+    "explanation": "Khi em muốn nói một sự thật chung chung (táo là một loại quả), mình không dùng 'the' (vì 'the' là chỉ một quả táo cụ thể). Em hãy thử dùng mạo từ bất định 'an' hoặc dùng số nhiều xem sao?"
+  },
+  {
+    "topic": "Articles",
+    "level": "A1",
+    "student_input": "He is a best student in class",
+    "correct_answer": "He is the best student in class",
+    "explanation": "Chào em, hãy nhìn từ 'best' (tốt nhất). Đây là dạng so sánh nhất. Trong một lớp chỉ có một người 'tốt nhất', nghĩa là người đó là duy nhất. Vậy mình dùng 'a' hay 'the' trước các từ so sánh nhất em nhỉ?"
+  },
+  {
+    "topic": "Articles",
+    "level": "A1",
+    "student_input": "I like a music",
+    "correct_answer": "I like music",
+    "explanation": " 'Music' (âm nhạc) là danh từ không đếm được. Khi nói về sở thích chung chung với danh từ không đếm được, mình có dùng mạo từ 'a/an' không em?"
+  },
+  {
+    "topic": "Articles",
+    "level": "A1",
+    "student_input": "Open a door, please",
+    "correct_answer": "Open the door, please",
+    "explanation": "Hãy tưởng tượng em đang ở trong một căn phòng và bảo ai đó mở cửa. Cánh cửa đó là cánh cửa duy nhất trong phòng mà cả hai cùng thấy. Vậy mình nên dùng 'a' (một cánh cửa bất kỳ) hay 'the' (cánh cửa đó)?"
+  },
+  {
+    "topic": "Articles",
+    "level": "A1",
+    "student_input": "I saw a bird. A bird was blue",
+    "correct_answer": "I saw a bird. The bird was blue",
+    "explanation": "Chào em, em đã giới thiệu 'a bird' ở câu đầu. Đến câu thứ hai, con chim này đã được xác định rồi. Em hãy nhớ lại quy tắc chọn mạo từ cho vật được nhắc đến lần thứ hai nhé."
+  },
+  {
+    "topic": "Articles",
+    "level": "A1",
+    "student_input": "A world is round",
+    "correct_answer": "The world is round",
+    "explanation": "Hãy suy nghĩ xem, chúng ta có nhiều thế giới hay chỉ có một thế giới (Earth) duy nhất? Với vật duy nhất, em dùng mạo từ nào?"
+  },
+  {
+    "topic": "Articles",
+    "level": "A1",
+    "student_input": "Can I have a water?",
+    "correct_answer": "Can I have some water? / Can I have a glass of water?",
+    "explanation": " 'Water' là danh từ không đếm được, nên mình không thể dùng 'a' (một). Em có nhớ mình nên dùng từ gì để chỉ một lượng nước không, hoặc em muốn xin 'một ly nước' thì nói thế nào nhỉ?"
+  },
+  {
+    "topic": "Articles",
+    "level": "A1",
+    "student_input": "She is a tallest girl in the group",
+    "correct_answer": "She is the tallest girl in the group",
+    "explanation": "Chào em, hãy nhìn từ 'tallest' (cao nhất). Tương tự như 'best', đây là so sánh nhất. Với người cao nhất (duy nhất), mình dùng 'a' hay 'the'?"
+  },
+  {
+    "topic": "Articles",
+    "level": "A1",
+    "student_input": "I have a pen. The pen is blue",
+    "correct_answer": "I have a pen. The pen is blue",
+    "explanation": "Câu này hoàn toàn chính xác! Em đã phân biệt đúng giữa việc giới thiệu vật mới (a) và nhắc lại vật đó (the). Tuyệt vời!"
+  },
+  {
+    "topic": "Articles",
+    "level": "A1",
+    "student_input": "I like the cats",
+    "correct_answer": "I like cats",
+    "explanation": "Khi em nói em thích mèo nói chung (tất cả loài mèo), em không dùng 'the'. 'The cats' chỉ dùng khi em nói về một nhóm mèo cụ thể nào đó. Vậy để nói sở thích chung, em nên bỏ 'the' hay giữ lại?"
+  },
+  {
+    "topic": "Articles",
+    "level": "A1",
+    "student_input": "Look at a moon!",
+    "correct_answer": "Look at the moon!",
+    "explanation": "Hãy nhìn lên trời nào! Chúng ta chỉ có một mặt trăng duy nhất thôi đúng không? Vậy mình dùng 'a' hay 'the' cho mặt trăng em nhỉ?"
+  },
+  {
+    "topic": "Articles",
+    "level": "A1",
+    "student_input": "I read a book you gave me",
+    "correct_answer": "I read the book you gave me",
+    "explanation": "Chào em, 'a book' là một cuốn sách bất kỳ. Nhưng ở đây em nói rõ là 'cuốn sách mà bạn đã cho tôi'. Vì cuốn sách đã được xác định cụ thể, mình dùng mạo từ nào cho đúng?"
+  },
+  {
+    "topic": "Articles",
+    "level": "A1",
+    "student_input": "The children are playing with a ball. A ball is red",
+    "correct_answer": "The children are playing with a ball. The ball is red",
+    "explanation": "Hãy nhìn câu thứ hai. Quả bóng này đã được nhắc đến ở câu đầu rồi. Em hãy nhớ lại quy tắc mạo từ cho lần nhắc thứ hai nhé."
+  },
+  {
+    "topic": "Articles",
+    "level": "A1",
+    "student_input": "He is a only child",
+    "correct_answer": "He is the only child",
+    "explanation": "Từ 'only' (duy nhất) cho thấy người này là một và chỉ một. Với những thứ duy nhất, mình dùng 'a' hay 'the' em nhỉ?"
+  },
+  {
+    "topic": "Articles",
+    "level": "A1",
+    "student_input": "I want the apple, not a banana",
+    "correct_answer": "I want an apple, not a banana",
+    "explanation": "Nếu em không chỉ vào một quả táo cụ thể mà chỉ muốn 'một quả táo bất kỳ', em nên dùng 'the' hay dùng 'an' cho quả táo nhỉ?"
+  },
+  {
+    "topic": "Articles",
+    "level": "A1",
+    "student_input": "A weather is nice today",
+    "correct_answer": "The weather is nice today",
+    "explanation": "Thời tiết hôm nay là một điều mà cả em và người nghe đều đang cùng cảm nhận (xác định). Với những khái niệm chung nhưng được xác định trong ngữ cảnh, mình dùng 'a' hay 'the'?"
+  },
+  {
+    "topic": "Articles",
+    "level": "A1",
+    "student_input": "She has a red car. A car is fast",
+    "correct_answer": "She has a red car. The car is fast",
+    "explanation": "Chào em, chiếc xe đã được giới thiệu ở câu trước là 'a red car'. Vậy ở câu sau, khi khen chiếc xe đó nhanh, mình dùng 'a' hay 'the'?"
+  },
+  {
+    "topic": "Articles",
+    "level": "A1",
+    "student_input": "I live in a small house. The house is old",
+    "correct_answer": "I live in a small house. The house is old",
+    "explanation": "Câu này hoàn toàn chính xác! Em đã dùng mạo từ bất định cho lần đầu và mạo từ xác định cho lần thứ hai. Chúc mừng em!"
+  },
+  {
+    "topic": "Articles",
+    "level": "A1",
+    "student_input": "The sun rises in a East",
+    "correct_answer": "The sun rises in the East",
+    "explanation": "Em dùng 'The sun' rất đúng. Nhưng hãy nhìn 'a East' (phương Đông). Các hướng (Đông, Tây, Nam, Bắc) là những khái niệm duy nhất và cố định. Vậy mình dùng 'a' hay 'the'?"
+  },
+  {
+    "topic": "Articles",
+    "level": "A1",
+    "student_input": "The dogs are friendly",
+    "correct_answer": "Dogs are friendly",
+    "explanation": "Chào em, nếu em đang nói về loài chó nói chung (tất cả các con chó trên đời đều thân thiện), thì mình có cần dùng 'the' không? Em hãy nhớ lại quy tắc dùng mạo từ cho danh từ số nhiều khi nói chung chung nhé."
+  },
+  {
+    "topic": "Articles",
+    "level": "A1",
+    "student_input": "I love the music",
+    "correct_answer": "I love music",
+    "explanation": "Em đang nói về sở thích âm nhạc nói chung, đúng không nào? Với danh từ không đếm được khi nói về một sở thích chung, mình dùng 'the' hay không dùng mạo từ nào cả em nhỉ?"
+  },
+  {
+    "topic": "Articles",
+    "level": "A1",
+    "student_input": "She lives in the Hanoi",
+    "correct_answer": "She lives in Hanoi",
+    "explanation": "Hãy nhìn vào tên thành phố 'Hanoi'. Em có nhớ chúng ta có dùng mạo từ 'the' trước tên các thành phố hay tên các quốc gia (đa số) không?"
+  },
+  {
+    "topic": "Articles",
+    "level": "A1",
+    "student_input": "I have a breakfast at 7 AM",
+    "correct_answer": "I have breakfast at 7 AM",
+    "explanation": "Chào em, khi nói về các bữa ăn trong ngày như breakfast, lunch, dinner, mình có dùng mạo từ 'a/an' trước chúng không nhỉ? Em thử kiểm tra lại xem."
+  },
+  {
+    "topic": "Articles",
+    "level": "A1",
+    "student_input": "He plays the soccer very well",
+    "correct_answer": "He plays soccer very well",
+    "explanation": "Em dùng 'very well' rất tốt. Tuy nhiên, đối với các môn thể thao như soccer, tennis, basketball, mình có dùng 'the' đứng trước không em?"
+  },
+  {
+    "topic": "Articles",
+    "level": "A1",
+    "student_input": "The water is important for life",
+    "correct_answer": "Water is important for life",
+    "explanation": "Ở đây em đang nói về 'nước' nói chung (tất cả mọi loại nước trên đời). Với danh từ không đếm được khi nói chung chung, mình dùng 'the' hay bỏ mạo từ đi em nhỉ?"
+  },
+  {
+    "topic": "Articles",
+    "level": "A1",
+    "student_input": "I am from the Vietnam",
+    "correct_answer": "I am from Vietnam",
+    "explanation": "Hãy nhìn vào tên quốc gia 'Vietnam'. Tương tự như tên thành phố, mình có dùng 'the' trước tên các nước không em?"
+  },
+  {
+    "topic": "Articles",
+    "level": "A1",
+    "student_input": "The apples are healthy",
+    "correct_answer": "Apples are healthy",
+    "explanation": "Chào em, em đang muốn nói 'Táo (nói chung) rất tốt cho sức khỏe'. Khi dùng danh từ số nhiều để nói về một sự thật chung, mình có dùng 'the' không nhỉ?"
+  },
+  {
+    "topic": "Articles",
+    "level": "A1",
+    "student_input": "I play the piano every day",
+    "correct_answer": "I play the piano every day",
+    "explanation": "Câu này hoàn toàn chính xác! Đối với nhạc cụ, chúng ta dùng 'the' trước tên nhạc cụ. Rất tốt!"
+  },
+  {
+    "topic": "Articles",
+    "level": "A1",
+    "student_input": "She likes the chocolate",
+    "correct_answer": "She likes chocolate",
+    "explanation": " 'Chocolate' là danh từ không đếm được. Khi nói về một sở thích chung chung, mình dùng 'the' hay không dùng mạo từ nào cả em nhỉ?"
+  },
+  {
+    "topic": "Articles",
+    "level": "A1",
+    "student_input": "We have a dinner together",
+    "correct_answer": "We have dinner together",
+    "explanation": "Hãy nhớ lại quy tắc về các bữa ăn trong ngày (breakfast, lunch, dinner). Mình có dùng mạo từ 'a' trước những từ này không em?"
+  },
+  {
+    "topic": "Articles",
+    "level": "A1",
+    "student_input": "The gold is expensive",
+    "correct_answer": "Gold is expensive",
+    "explanation": "Chào em, 'gold' (vàng) là một chất liệu. Khi nói về giá trị của một chất liệu nói chung, mình dùng 'the' hay bỏ mạo từ đi cho đúng?"
+  },
+  {
+    "topic": "Articles",
+    "level": "A1",
+    "student_input": "I go to the school by bus",
+    "correct_answer": "I go to school by bus",
+    "explanation": "Một lưu ý nhỏ: Khi nói về việc đi học (đến trường để học), chúng ta thường nói 'go to school' mà không có 'the'. Em có nhớ trường hợp này không?"
+  },
+  {
+    "topic": "Articles",
+    "level": "A1",
+    "student_input": "He is in the France",
+    "correct_answer": "He is in France",
+    "explanation": "Hãy nhìn vào tên quốc gia 'France'. Mình có dùng mạo từ 'the' trước tên các nước không em?"
+  },
+  {
+    "topic": "Articles",
+    "level": "A1",
+    "student_input": "The children love a candy",
+    "correct_answer": "The children love candy",
+    "explanation": "Chào em, 'candy' ở đây được hiểu là kẹo nói chung. Với danh từ không đếm được chỉ sở thích chung, mình dùng 'a' hay không dùng mạo từ nào cả?"
+  },
+  {
+    "topic": "Articles",
+    "level": "A1",
+    "student_input": "I watch the TV every night",
+    "correct_answer": "I watch TV every night",
+    "explanation": "Khi nói về hoạt động xem truyền hình, chúng ta dùng cụm từ 'watch TV' hay 'watch the TV' em nhỉ?"
+  },
+  {
+    "topic": "Articles",
+    "level": "A1",
+    "student_input": "The books are a best friend",
+    "correct_answer": "Books are the best friend / Books are best friends",
+    "explanation": "Câu này có hai chỗ cần sửa: Một là 'The books' (đang nói về sách nói chung), hai là 'a best friend' (so sánh nhất). Em hãy thử sửa lại cả hai nhé."
+  },
+  {
+    "topic": "Articles",
+    "level": "A1",
+    "student_input": "I have the lunch at 12",
+    "correct_answer": "I have lunch at 12",
+    "explanation": " Hãy nhớ lại quy tắc mạo từ đi với các bữa ăn trong ngày. Mình dùng 'the' hay không dùng mạo từ nào trước 'lunch' nhỉ?"
+  },
+  {
+    "topic": "Articles",
+    "level": "A1",
+    "student_input": "The English is difficult",
+    "correct_answer": "English is difficult",
+    "explanation": "Chào em, khi nói về tên các ngôn ngữ (English, Vietnamese, French...), mình có dùng mạo từ 'the' đứng trước không em?"
+  },
+  {
+    "topic": "Articles",
+    "level": "A1",
+    "student_input": "She is a student and a teacher",
+    "correct_answer": "She is a student and a teacher",
+    "explanation": "Câu này hoàn toàn chính xác! Em đã dùng 'a' cho hai nghề nghiệp số ít. Rất tốt!"
+  },
+  {
+    "topic": "Articles",
+    "level": "A1",
+    "student_input": "The cats hate the water",
+    "correct_answer": "Cats hate water",
+    "explanation": "Câu này nói về một sự thật chung: 'Mèo ghét nước'. Cả 'cats' và 'water' đều là nói chung, vậy mình có cần dùng 'the' cho cả hai từ này không?"
+  },
+  {
+    "topic": "Articles",
+    "level": "A1",
+    "student_input": "I like a coffee in the morning",
+    "correct_answer": "I like coffee in the morning",
+    "explanation": " 'Coffee' là danh từ không đếm được. Khi nói về sở thích uống cà phê nói chung, mình có dùng 'a' trước nó không em?"
+  },
+  {
+    "topic": "Articles",
+    "level": "A1",
+    "student_input": "He is from the Japan",
+    "correct_answer": "He is from Japan",
+    "explanation": "Hãy nhìn vào tên quốc gia 'Japan'. Tương tự như Vietnam và France, mình dùng 'the' hay bỏ mạo từ đi cho đúng?"
+  },
+  {
+    "topic": "Articles",
+    "level": "A1",
+    "student_input": "The milk is good for health",
+    "correct_answer": "Milk is good for health",
+    "explanation": "Chào em, 'milk' là danh từ không đếm được. Khi nói về lợi ích của sữa nói chung, mình dùng 'the' hay không dùng mạo từ nhỉ?"
+  },
+  {
+    "topic": "Articles",
+    "level": "A1",
+    "student_input": "I play the basketball",
+    "correct_answer": "I play basketball",
+    "explanation": "Hãy nhớ lại quy tắc với các môn thể thao. Mình dùng 'the' trước 'basketball' hay bỏ mạo từ đi em nhỉ?"
+  },
+  {
+    "topic": "Articles",
+    "level": "A1",
+    "student_input": "She has a breakfast",
+    "correct_answer": "She has breakfast",
+    "explanation": " Em hãy xem lại quy tắc về mạo từ đi với các bữa ăn trong ngày nhé. 'a breakfast' có chính xác không?"
+  },
+  {
+    "topic": "Articles",
+    "level": "A1",
+    "student_input": "The sugar is sweet",
+    "correct_answer": "Sugar is sweet",
+    "explanation": "Chào em, 'sugar' là một chất liệu/thực phẩm không đếm được. Khi nói về đặc điểm chung của đường, mình dùng 'the' hay không dùng mạo từ?"
+  },
+  {
+    "topic": "Articles",
+    "level": "A1",
+    "student_input": "The London is a big city",
+    "correct_answer": "London is a big city",
+    "explanation": " Hãy nhìn tên thành phố 'London'. Mình có dùng 'the' trước tên các thành phố không em?"
+  },
+  {
+    "topic": "Articles",
+    "level": "A1",
+    "student_input": "The birds can fly",
+    "correct_answer": "Birds can fly",
+    "explanation": "Câu này đang nói về khả năng của loài chim nói chung. Khi dùng danh từ số nhiều để chỉ chung một loài, mình có dùng 'the' không em?"
+  },
+  {
+    "topic": "Articles",
+    "level": "A1",
+    "student_input": "I have a apple and a banana",
+    "correct_answer": "I have an apple and a banana",
+    "explanation": "Chào em, hãy nhìn lại từ 'apple'. Nó bắt đầu bằng nguyên âm (a). Em dùng mạo từ 'a' hay 'an' cho từ này mới đúng quy tắc?"
+  },
+  {
+    "topic": "Articles",
+    "level": "A1",
+    "student_input": "The air is fresh",
+    "correct_answer": "Air is fresh",
+    "explanation": " 'Air' (không khí) là danh từ không đếm được. Khi nói về không khí nói chung, mình dùng 'the' hay bỏ mạo từ đi cho tự nhiên?"
+  },
+  {
+    "topic": "Articles",
+    "level": "A1",
+    "student_input": "He speaks the English",
+    "correct_answer": "He speaks English",
+    "explanation": "Hãy nhớ lại quy tắc mạo từ đi với tên các ngôn ngữ. Mình dùng 'the English' hay chỉ dùng 'English' thôi em nhỉ?"
+  },
+  {
+    "topic": "Articles",
+    "level": "A1",
+    "student_input": "I have a dinner with my family",
+    "correct_answer": "I have dinner with my family",
+    "explanation": "Hãy kiểm tra lại mạo từ 'a' trước từ 'dinner'. Quy tắc về các bữa ăn trong ngày như thế nào em nhỉ?"
+  },
+  {
+    "topic": "Articles",
+    "level": "A1",
+    "student_input": "The love is beautiful",
+    "correct_answer": "Love is beautiful",
+    "explanation": " 'Love' (tình yêu) là một khái niệm trừu tượng, không đếm được. Khi nói chung về tình yêu, mình dùng 'the' hay bỏ mạo từ đi cho đúng?"
+  },
+  {
+    "topic": "Articles",
+    "level": "A1",
+    "student_input": "I play the tennis on Sundays",
+    "correct_answer": "I play tennis on Sundays",
+    "explanation": "Chào em, hãy nhớ lại quy tắc mạo từ đi với các môn thể thao. 'the tennis' có chính xác không em?"
+  },
+  {
+    "topic": "Articles",
+    "level": "A1",
+    "student_input": "A sun is in the sky",
+    "correct_answer": "The sun is in the sky",
+    "explanation": "Hãy suy nghĩ xem chúng ta có nhiều mặt trời hay chỉ một mặt trời duy nhất? Vậy mình dùng 'a' hay 'the'?"
+  },
+  {
+    "topic": "Articles",
+    "level": "A1",
+    "student_input": "I am in the Vietnam",
+    "correct_answer": "I am in Vietnam",
+    "explanation": " Hãy xem lại tên quốc gia 'Vietnam'. Mình có dùng mạo từ 'the' trước tên nước không em?"
+  },
+  {
+    "topic": "Articles",
+    "level": "A1",
+    "student_input": "The children like the ice cream",
+    "correct_answer": "Children like ice cream / The children like ice cream",
+    "explanation": "Có hai trường hợp ở đây: Nếu em nói trẻ em nói chung thích kem nói chung, mình bỏ hết 'the'. Còn nếu là một nhóm trẻ em cụ thể, em giữ 'the children'. Nhưng 'ice cream' nói chung thì có dùng 'the' không em?"
+  },
+  {
+    "topic": "Articles",
+    "level": "A1",
+    "student_input": "She reads a book",
+    "correct_answer": "She reads a book",
+    "explanation": "Câu này hoàn toàn chính xác! Em đã dùng mạo từ 'a' cho một cuốn sách bất kỳ. Rất tốt!"
+  },
+  {
+    "topic": "Articles",
+    "level": "A1",
+    "student_input": "He is a honest man",
+    "correct_answer": "He is an honest man",
+    "explanation": "Hãy nhớ lại bẫy âm 'h câm' trong từ 'honest'. Vì âm đầu tiên là nguyên âm, nên mình dùng 'a' hay 'an' em nhỉ?"
+  }
+]

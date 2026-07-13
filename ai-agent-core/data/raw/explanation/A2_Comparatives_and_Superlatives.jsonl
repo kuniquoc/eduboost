@@ -1,0 +1,457 @@
+[
+  {
+    "topic": "Comparatives",
+    "level": "A2",
+    "student_input": "My brother is more tall than me.",
+    "correct_answer": "My brother is taller than me.",
+    "explanation": "Hãy nhìn vào từ 'tall'. Đây là một tính từ ngắn (chỉ có 1 âm tiết). Với tính từ ngắn, chúng ta thêm đuôi '-er' hay dùng 'more' đứng trước em nhỉ?"
+  },
+  {
+    "topic": "Comparatives",
+    "level": "A2",
+    "student_input": "This car is faster my bike.",
+    "correct_answer": "This car is faster than my bike.",
+    "explanation": "Em đã chia đúng 'faster' rồi! Tuy nhiên, để kết nối đối tượng được so sánh (the car) với đối tượng còn lại (my bike), em thiếu một từ nối quan trọng. Từ đó là từ gì nhỉ?"
+  },
+  {
+    "topic": "Comparatives",
+    "level": "A2",
+    "student_input": "Summer is more hot than Winter.",
+    "correct_answer": "Summer is hotter than Winter.",
+    "explanation": "Từ 'hot' là tính từ ngắn. Em hãy nhớ lại quy tắc: với tính từ ngắn, mình sẽ thêm đuôi '-er'. Ngoài ra, em có nhớ từ 'hot' khi thêm '-er' thì chữ 't' có cần gấp đôi không?"
+  },
+  {
+    "topic": "Comparatives",
+    "level": "A2",
+    "student_input": "My house is bigger that your house.",
+    "correct_answer": "My house is bigger than your house.",
+    "explanation": "Em dùng 'bigger' rất chính xác. Nhưng hãy nhìn từ 'that'. Trong cấu trúc so sánh hơn, chúng ta dùng 'than' hay 'that' để nối hai đối tượng nhỉ?"
+  },
+  {
+    "topic": "Comparatives",
+    "level": "A2",
+    "student_input": "I am happyer than my sister.",
+    "correct_answer": "I am happier than my sister.",
+    "explanation": "Em đã nắm được quy tắc thêm '-er' cho tính từ ngắn. Tuy nhiên, với những từ kết thúc bằng chữ 'y' như 'happy', khi thêm '-er', chữ 'y' sẽ biến đổi thành chữ cái nào em nhỉ?"
+  },
+  {
+    "topic": "Comparatives",
+    "level": "A2",
+    "student_input": "The blue bag is more cheap than the red one.",
+    "correct_answer": "The blue bag is cheaper than the red one.",
+    "explanation": "Hãy đếm âm tiết của từ 'cheap'. Vì nó là tính từ ngắn, chúng ta không dùng 'more'. Em hãy thử chuyển 'more cheap' thành dạng đúng bằng cách thêm đuôi '-er' nhé."
+  },
+  {
+    "topic": "Comparatives",
+    "level": "A2",
+    "student_input": "My dog is smaller my cat.",
+    "correct_answer": "My dog is smaller than my cat.",
+    "explanation": "Câu của em gần đúng rồi, chỉ thiếu một từ để làm cầu nối giữa 'smaller' và 'my cat'. Em hãy thêm từ 'than' vào nhé!"
+  },
+  {
+    "topic": "Comparatives",
+    "level": "A2",
+    "student_input": "This street is more narrow than that one.",
+    "correct_answer": "This street is narrower than that one.",
+    "explanation": "Từ 'narrow' thường được coi là tính từ ngắn trong so sánh. Em hãy thử bỏ 'more' và thêm đuôi '-er' vào sau 'narrow' xem sao."
+  },
+  {
+    "topic": "Comparatives",
+    "level": "A2",
+    "student_input": "Your room is cleanen than my room.",
+    "correct_answer": "Your room is cleaner than my room.",
+    "explanation": "Có vẻ em đang nhầm lẫn một chút về cách viết. Để chuyển 'clean' sang so sánh hơn, chúng ta chỉ cần thêm đuôi '-er' thôi. Em hãy sửa lại từ 'cleanen' nhé."
+  },
+  {
+    "topic": "Comparatives",
+    "level": "A2",
+    "student_input": "The movie is more short than the book.",
+    "correct_answer": "The movie is shorter than the book.",
+    "explanation": "Hãy nhìn vào từ 'short'. Đây là tính từ ngắn hay dài nhỉ? Em hãy áp dụng quy tắc thêm đuôi '-er' cho từ này nhé."
+  },
+  {
+    "topic": "Comparatives",
+    "level": "A2",
+    "student_input": "He is strongen than his brother.",
+    "correct_answer": "He is stronger than his brother.",
+    "explanation": "Để so sánh 'strong' (mạnh), chúng ta chỉ cần thêm đuôi '-er'. Em hãy sửa lại từ 'strongen' thành dạng đúng nhé."
+  },
+  {
+    "topic": "Comparatives",
+    "level": "A2",
+    "student_input": "Today is more cold than yesterday.",
+    "correct_answer": "Today is colder than yesterday.",
+    "explanation": "Từ 'cold' có một âm tiết, nên nó là tính từ ngắn. Em hãy thay 'more cold' bằng cách thêm đuôi '-er' vào sau 'cold' nhé."
+  },
+  {
+    "topic": "Comparatives",
+    "level": "A2",
+    "student_input": "The river is deeper that the lake.",
+    "correct_answer": "The river is deeper than the lake.",
+    "explanation": "Hãy kiểm tra lại từ 'that'. Khi so sánh hơn, chúng ta dùng từ gì để nối hai đối tượng? (Gợi ý: bắt đầu bằng chữ 't' và kết thúc bằng chữ 'n')."
+  },
+  {
+    "topic": "Comparatives",
+    "level": "A2",
+    "student_input": "She is more thin than her cousin.",
+    "correct_answer": "She is thinner than her cousin.",
+    "explanation": "Hãy chú ý từ 'thin'. Vì đây là tính từ ngắn, chúng ta không dùng 'more'. Em hãy thêm đuôi '-er' vào, và đừng quên gấp đôi chữ 'n' nhé!"
+  },
+  {
+    "topic": "Comparatives",
+    "level": "A2",
+    "student_input": "My hair is long than yours.",
+    "correct_answer": "My hair is longer than yours.",
+    "explanation": "Em đã có 'than' để so sánh, rất tốt! Nhưng tính từ 'long' hiện đang ở dạng nguyên mẫu. Em hãy chia nó sang dạng so sánh hơn bằng cách thêm đuôi '-er' nhé."
+  },
+  {
+    "topic": "Comparatives",
+    "level": "A2",
+    "student_input": "This book is interestinger than that one.",
+    "correct_answer": "This book is more interesting than that one.",
+    "explanation": "Hãy đếm xem từ 'interesting' có bao nhiêu âm tiết? Với những tính từ dài như thế này, chúng ta không thêm đuôi '-er' mà dùng từ gì đứng trước nhỉ?"
+  },
+  {
+    "topic": "Comparatives",
+    "level": "A2",
+    "student_input": "She is more beautiful my sister.",
+    "correct_answer": "She is more beautiful than my sister.",
+    "explanation": "Em dùng 'more beautiful' cho tính từ dài là rất chuẩn. Tuy nhiên, em đang thiếu từ nối để so sánh với 'my sister'. Em hãy thêm từ 'than' vào nhé."
+  },
+  {
+    "topic": "Comparatives",
+    "level": "A2",
+    "student_input": "This exercise is difficulter than the last one.",
+    "correct_answer": "This exercise is more difficult than the last one.",
+    "explanation": "Hãy nhìn vào từ 'difficult'. Đây là một tính từ dài (3 âm tiết). Quy tắc cho tính từ dài là chúng ta không thêm '-er', vậy em nên dùng từ gì thay thế?"
+  },
+  {
+    "topic": "Comparatives",
+    "level": "A2",
+    "student_input": "Gold is more expensive that silver.",
+    "correct_answer": "Gold is more expensive than silver.",
+    "explanation": "Em đã chia đúng 'more expensive'. Nhưng hãy nhìn lại từ 'that'. Trong so sánh hơn, chúng ta dùng 'than' hay 'that' để nối hai đối tượng?"
+  },
+  {
+    "topic": "Comparatives",
+    "level": "A2",
+    "student_input": "He is more intelligent than he is smart.",
+    "correct_answer": "He is more intelligent than smart.",
+    "explanation": "Câu này về ngữ pháp thì không sai, nhưng hơi lặp từ. Khi so sánh hai tính từ của cùng một người, em chỉ cần nói 'more intelligent than smart' là đủ. Em thử rút gọn lại xem?"
+  },
+  {
+    "topic": "Comparatives",
+    "level": "A2",
+    "student_input": "The city is noisier than the village, but the village is more peaceful.",
+    "correct_answer": "The city is noisier than the village, but the village is more peaceful.",
+    "explanation": "Câu này hoàn toàn chính xác! Em đã phân biệt đúng: 'noisy' $\rightarrow$ 'noisier' (tính từ ngắn) và 'peaceful' $\rightarrow$ 'more peaceful' (tính từ dài). Rất tuyệt!"
+  },
+  {
+    "topic": "Comparatives",
+    "level": "A2",
+    "student_input": "This flower is beautifuller than that one.",
+    "correct_answer": "This flower is more beautiful than that one.",
+    "explanation": "Hãy nhìn lại từ 'beautifuller'. Từ 'beautiful' là tính từ dài, vì vậy chúng ta không thêm đuôi '-er'. Em hãy dùng cấu trúc 'more + tính từ' nhé."
+  },
+  {
+    "topic": "Comparatives",
+    "level": "A2",
+    "student_input": "Playing football is more exciting play chess.",
+    "correct_answer": "Playing football is more exciting than playing chess.",
+    "explanation": "Em đã dùng 'more exciting' rất đúng. Tuy nhiên, em thiếu từ 'than' để nối hai hoạt động. Và để câu cân xứng, 'play chess' nên được chuyển thành 'playing chess'. Em thử sửa lại nhé."
+  },
+  {
+    "topic": "Comparatives",
+    "level": "A2",
+    "student_input": "I think English is more easier than French.",
+    "correct_answer": "I think English is easier than French.",
+    "explanation": "Hãy cẩn thận nhé! 'Easy' là tính từ ngắn (biến đổi thành 'easier'). Khi đã dùng đuôi '-er', chúng ta không dùng 'more' đứng trước nữa. Em hãy bỏ từ 'more' đi xem sao."
+  },
+  {
+    "topic": "Comparatives",
+    "level": "A2",
+    "student_input": "Your car is more modern my car.",
+    "correct_answer": "Your car is more modern than my car.",
+    "explanation": "Em dùng 'more modern' rất chuẩn cho tính từ dài. Nhưng em lại quên mất từ nối 'than'. Em hãy thêm nó vào để câu hoàn chỉnh nhé."
+  },
+  {
+    "topic": "Comparatives",
+    "level": "A2",
+    "student_input": "Traveling by plane is more comfortabler than by train.",
+    "correct_answer": "Traveling by plane is more comfortable than by train.",
+    "explanation": "Từ 'comfortable' là tính từ dài, nên em chỉ cần dùng 'more' mà không được thêm đuôi '-er'. Em hãy bỏ đuôi '-er' đi nhé."
+  },
+  {
+    "topic": "Comparatives",
+    "level": "A2",
+    "student_input": "This movie is more boring that the one we saw last week.",
+    "correct_answer": "This movie is more boring than the one we saw last week.",
+    "explanation": "Hãy kiểm tra lại từ 'that'. Trong so sánh hơn, để nối hai đối tượng, chúng ta phải dùng từ gì nhỉ?"
+  },
+  {
+    "topic": "Comparatives",
+    "level": "A2",
+    "student_input": "She is more careful her brother.",
+    "correct_answer": "She is more careful than her brother.",
+    "explanation": "Em chia 'more careful' rất đúng cho tính từ dài. Nhưng câu này đang thiếu từ 'than'. Em hãy thêm nó vào nhé."
+  },
+  {
+    "topic": "Comparatives",
+    "level": "A2",
+    "student_input": "This cake is more deliciouser than that one.",
+    "correct_answer": "This cake is more delicious than that one.",
+    "explanation": "Lỗi này gọi là 'Double Comparative' (dùng cả more và -er). Với tính từ dài như 'delicious', em chỉ được chọn một trong hai. Em hãy bỏ đuôi '-er' đi nhé."
+  },
+  {
+    "topic": "Comparatives",
+    "level": "A2",
+    "student_input": "Learning English is more important than learning Math.",
+    "correct_answer": "Learning English is more important than learning Math.",
+    "explanation": "Hoàn hảo! Em đã sử dụng 'more important than' cho tính từ dài một cách chính xác. Tiếp tục phát huy nhé!"
+  },
+  {
+    "topic": "Superlatives",
+    "level": "A2",
+    "student_input": "He is tallest person in my class.",
+    "correct_answer": "He is the tallest person in my class.",
+    "explanation": "Em đã chia đúng dạng so sánh nhất của từ 'tall' là 'tallest'. Tuy nhiên, trong tiếng Anh, trước một tính từ so sánh nhất, chúng ta bắt buộc phải có một mạo từ gì nhỉ? Em hãy thêm nó vào nhé."
+  },
+  {
+    "topic": "Superlatives",
+    "level": "A2",
+    "student_input": "This is the most cheap phone in the store.",
+    "correct_answer": "This is the cheapest phone in the store.",
+    "explanation": "Hãy nhìn vào từ 'cheap'. Đây là một tính từ ngắn (1 âm tiết). Với tính từ ngắn, để tạo dạng so sánh nhất, chúng ta dùng 'the most' hay thêm đuôi '-est' em nhỉ?"
+  },
+  {
+    "topic": "Superlatives",
+    "level": "A2",
+    "student_input": "She is the beautifulest girl I know.",
+    "correct_answer": "She is the most beautiful girl I know.",
+    "explanation": "Hãy đếm âm tiết của từ 'beautiful'. Vì đây là một tính từ dài, chúng ta không thể thêm đuôi '-est'. Em hãy dùng cấu trúc 'the most + tính từ' nhé."
+  },
+  {
+    "topic": "Superlatives",
+    "level": "A2",
+    "student_input": "Russia is the bigest country in the world.",
+    "correct_answer": "Russia is the biggest country in the world.",
+    "explanation": "Em chia 'the biggest' là chính xác về mặt ngữ pháp. Tuy nhiên, có một lỗi chính tả nhỏ: với những tính từ ngắn có cấu trúc 'phụ âm - nguyên âm - phụ âm' như 'big', khi thêm đuôi '-est', em cần làm gì với chữ 'g' nhỉ?"
+  },
+  {
+    "topic": "Superlatives",
+    "level": "A2",
+    "student_input": "Mount Everest is most high mountain in the world.",
+    "correct_answer": "Mount Everest is the highest mountain in the world.",
+    "explanation": "Câu này có hai điểm cần sửa: Một là em đang thiếu mạo từ 'the' ở đầu. Hai là 'high' là tính từ ngắn, nên chúng ta không dùng 'most'. Em hãy thử sửa lại xem sao."
+  },
+  {
+    "topic": "Superlatives",
+    "level": "A2",
+    "student_input": "This is the most difficultest exam I have ever taken.",
+    "correct_answer": "This is the most difficult exam I have ever taken.",
+    "explanation": "Hãy cẩn thận nhé! Em đang dùng cả 'the most' và đuôi '-est' cho cùng một từ 'difficult'. Điều này gọi là 'Double Superlative'. Vì 'difficult' là tính từ dài, em hãy bỏ đuôi '-est' đi nhé."
+  },
+  {
+    "topic": "Superlatives",
+    "level": "A2",
+    "student_input": "He is the happyest person I've ever met.",
+    "correct_answer": "He is the happiest person I've ever met.",
+    "explanation": "Em đã nắm đúng quy tắc thêm '-est' cho tính từ ngắn. Nhưng hãy nhìn lại từ 'happy'. Với những tính từ kết thúc bằng 'y', khi thêm đuôi '-est', chữ 'y' sẽ thay đổi thành chữ cái nào em nhỉ?"
+  },
+  {
+    "topic": "Superlatives",
+    "level": "A2",
+    "student_input": "Which is the most expensive car in the world?",
+    "correct_answer": "Which is the most expensive car in the world?",
+    "explanation": "Hoàn hảo! Em đã dùng 'the most expensive' cho tính từ dài một cách chính xác. Câu hỏi này không có lỗi nào cả!"
+  },
+  {
+    "topic": "Superlatives",
+    "level": "A2",
+    "student_input": "I am the most short in my family.",
+    "correct_answer": "I am the shortest in my family.",
+    "explanation": "Hãy nhìn vào từ 'short'. Đây là tính từ ngắn hay dài nhỉ? Nếu là tính từ ngắn, em hãy thay 'the most short' bằng cách thêm đuôi '-est' nhé."
+  },
+  {
+    "topic": "Superlatives",
+    "level": "A2",
+    "student_input": "This is the most interestingest book I've read.",
+    "correct_answer": "This is the most interesting book I've read.",
+    "explanation": "Lại là lỗi 'Double Superlative' rồi! 'Interesting' là tính từ dài, em chỉ cần dùng 'the most' là đủ, không cần thêm đuôi '-est' nữa. Em sửa lại nhé."
+  },
+  {
+    "topic": "Superlatives",
+    "level": "A2",
+    "student_input": "Who is most famous singer in Vietnam?",
+    "correct_answer": "Who is the most famous singer in Vietnam?",
+    "explanation": "Em đã dùng 'most famous' cho tính từ dài rất đúng. Nhưng em lại quên mất 'người bạn đồng hành' không thể thiếu của so sánh nhất ở ngay phía trước. Đó là từ gì nhỉ?"
+  },
+  {
+    "topic": "Superlatives",
+    "level": "A2",
+    "student_input": "The blue whale is the most large animal on Earth.",
+    "correct_answer": "The blue whale is the largest animal on Earth.",
+    "explanation": "Hãy kiểm tra lại từ 'large'. Vì nó là tính từ ngắn, chúng ta không dùng 'the most'. Em hãy chuyển nó sang dạng thêm đuôi '-est' nhé."
+  },
+  {
+    "topic": "Superlatives",
+    "level": "A2",
+    "student_input": "Yesterday was the hotest day of the year.",
+    "correct_answer": "Yesterday was the hottest day of the year.",
+    "explanation": "Em chia 'the hotest' là đúng quy tắc so sánh nhất. Tuy nhiên, hãy nhớ quy tắc gấp đôi phụ âm cuối cho từ 'hot' khi thêm đuôi '-est' nhé. Em thử viết lại xem."
+  },
+  {
+    "topic": "Superlatives",
+    "level": "A2",
+    "student_input": "This is the most bad movie I've ever seen.",
+    "correct_answer": "This is the worst movie I've ever seen.",
+    "explanation": "Hãy cẩn thận! Từ 'bad' là một tính từ bất quy tắc, nó không đi theo công thức 'the most bad'. Em có nhớ dạng so sánh nhất của 'bad' là từ gì không? (Gợi ý: bắt đầu bằng chữ 'w')."
+  },
+  {
+    "topic": "Superlatives",
+    "level": "A2",
+    "student_input": "She is the most intelligent student in our school.",
+    "correct_answer": "She is the most intelligent student in our school.",
+    "explanation": "Tuyệt vời! Em đã kết hợp đúng 'the most' với tính từ dài 'intelligent'. Câu này hoàn toàn chính xác."
+  },
+  {
+    "topic": "Comparatives",
+    "level": "A2",
+    "student_input": "I think this book is more good than the one I read last month.",
+    "correct_answer": "I think this book is better than the one I read last month.",
+    "explanation": "Hãy cẩn thận với từ 'good'. Đây là một tính từ bất quy tắc, nó không đi theo công thức 'more + tính từ'. Em có nhớ dạng so sánh hơn đặc biệt của 'good' là gì không?"
+  },
+  {
+    "topic": "Superlatives",
+    "level": "A2",
+    "student_input": "This is the most bad movie I have ever seen in my life.",
+    "correct_answer": "This is the worst movie I have ever seen in my life.",
+    "explanation": "Từ 'bad' là một trường hợp đặc biệt. Trong so sánh nhất, chúng ta không dùng 'the most bad'. Em hãy thử nhớ lại xem từ nào bắt đầu bằng chữ 'w' dùng để chỉ cái 'tệ nhất' nhỉ?"
+  },
+  {
+    "topic": "Comparatives",
+    "level": "A2",
+    "student_input": "My house is more far than your house from the city center.",
+    "correct_answer": "My house is farther/further than your house from the city center.",
+    "explanation": "Từ 'far' (xa) cũng là một tính từ bất quy tắc. Chúng ta không dùng 'more far'. Em hãy thử tra lại dạng so sánh hơn của 'far' nhé."
+  },
+  {
+    "topic": "Superlatives",
+    "level": "A2",
+    "student_input": "He is the most good player in the team.",
+    "correct_answer": "He is the best player in the team.",
+    "explanation": "Một lần nữa, hãy nhớ rằng 'good' không dùng với 'the most'. Để nói về người 'giỏi nhất', chúng ta dùng từ đặc biệt nào em nhỉ?"
+  },
+  {
+    "topic": "Comparatives",
+    "level": "A2",
+    "student_input": "Your score is more bad than mine.",
+    "correct_answer": "Your score is worse than mine.",
+    "explanation": "Khi so sánh 'bad' (tệ), chúng ta không dùng 'more'. Em hãy chuyển 'more bad' thành dạng so sánh hơn bất quy tắc của nó nhé."
+  },
+  {
+    "topic": "Superlatives",
+    "level": "A2",
+    "student_input": "This is the farthest place I have ever visit.",
+    "correct_answer": "This is the farthest place I have ever visited.",
+    "explanation": "Em đã dùng 'the farthest' (xa nhất) rất chính xác! Tuy nhiên, hãy nhìn vào cụm 'have ever visit'. Đây là thì Hiện tại hoàn thành, nên động từ 'visit' cần chia ở dạng nào?"
+  },
+  {
+    "topic": "Mixed Comparison",
+    "level": "A2",
+    "student_input": "Lan is taller than Hoa, but Mai is the tallest in the class.",
+    "correct_answer": "Lan is taller than Hoa, but Mai is the tallest in the class.",
+    "explanation": "Hoàn hảo! Em đã phân biệt rất tốt: dùng so sánh hơn 'taller than' cho 2 người và so sánh nhất 'the tallest' cho cả lớp. Rất tuyệt!"
+  },
+  {
+    "topic": "Mixed Comparison",
+    "level": "A2",
+    "student_input": "The red car is more fast than the blue car, but the green car is fastest.",
+    "correct_answer": "The red car is faster than the blue car, but the green car is the fastest.",
+    "explanation": "Câu này có hai lỗi: 1. 'Fast' là tính từ ngắn, em không nên dùng 'more'. 2. Ở vế sau, so sánh nhất 'fastest' đang thiếu một mạo từ quan trọng ở phía trước. Em hãy sửa lại nhé."
+  },
+  {
+    "topic": "Mixed Comparison",
+    "level": "A2",
+    "student_input": "English is more easy than Chinese, but Japanese is the most difficult.",
+    "correct_answer": "English is easier than Chinese, but Japanese is the most difficult.",
+    "explanation": "Vế sau 'the most difficult' rất chính xác. Tuy nhiên, ở vế đầu, 'easy' là tính từ ngắn, nên em không dùng 'more'. Em hãy chuyển 'more easy' thành dạng đúng nhé."
+  },
+  {
+    "topic": "Mixed Comparison",
+    "level": "A2",
+    "student_input": "My dad is older than my mom, and my grandpa is the oldests.",
+    "correct_answer": "My dad is older than my mom, and my grandpa is the oldest.",
+    "explanation": "Em chia 'older than' rất chuẩn. Nhưng hãy nhìn lại từ 'oldests'. Trong tiếng Anh, tính từ so sánh nhất không bao giờ thêm 's' ở cuối. Em hãy bỏ chữ 's' đi nhé."
+  },
+  {
+    "topic": "Mixed Comparison",
+    "level": "A2",
+    "student_input": "The Nile is long than the Amazon, and it is the longest river in the world.",
+    "correct_answer": "The Nile is longer than the Amazon, and it is the longest river in the world.",
+    "explanation": "Vế sau 'the longest' hoàn hảo. Nhưng ở vế đầu, em mới chỉ dùng 'long' (nguyên mẫu). Để so sánh hai con sông, em cần thêm đuôi gì vào sau 'long' nhỉ?"
+  },
+  {
+    "topic": "Mixed Comparison",
+    "level": "A2",
+    "student_input": "I am more intelligent than my brother, but my sister is the most intelligent.",
+    "correct_answer": "I am more intelligent than my brother, but my sister is the most intelligent.",
+    "explanation": "Tuyệt vời! Em đã sử dụng chính xác 'more intelligent than' và 'the most intelligent' cho tính từ dài. Rất tốt!"
+  },
+  {
+    "topic": "Mixed Comparison",
+    "level": "A2",
+    "student_input": "This cake is more delicious than that one, and it is the most delicious cake here.",
+    "correct_answer": "This cake is more delicious than that one, and it is the most delicious cake here.",
+    "explanation": "Câu này hoàn toàn chính xác! Em đã vận dụng đúng cả so sánh hơn và so sánh nhất cho tính từ dài 'delicious'. Tiếp tục phát huy nhé!"
+  },
+  {
+    "topic": "Mixed Comparison",
+    "level": "A2",
+    "student_input": "A cat is smaller than a dog, but a mouse is the smallest.",
+    "correct_answer": "A cat is smaller than a dog, but a mouse is the smallest.",
+    "explanation": "Chính xác! Em đã nắm vững quy tắc so sánh cho tính từ ngắn 'small'. Rất tốt!"
+  },
+  {
+    "topic": "Mixed Comparison",
+    "level": "A2",
+    "student_input": "My bag is more heavy than yours, but his bag is the heaviest.",
+    "correct_answer": "My bag is heavier than yours, but his bag is the heaviest.",
+    "explanation": "Vế sau 'the heaviest' rất chuẩn. Tuy nhiên, 'heavy' là tính từ ngắn (kết thúc bằng 'y'). Em hãy thay 'more heavy' bằng cách thêm đuôi '-er' và đổi 'y' thành 'i' nhé."
+  },
+  {
+    "topic": "Mixed Comparison",
+    "level": "A2",
+    "student_input": "The movie was more boring than the book, but the ending was the most boring part.",
+    "correct_answer": "The movie was more boring than the book, but the ending was the most boring part.",
+    "explanation": "Câu này hoàn hảo! Em đã dùng đúng 'more boring' và 'the most boring' cho tính từ dài. Rất tuyệt!"
+  },
+  {
+    "topic": "Mixed Comparison",
+    "level": "A2",
+    "student_input": "I feel more good today than yesterday, and today is the best day of the week.",
+    "correct_answer": "I feel better today than yesterday, and today is the best day of the week.",
+    "explanation": "Vế sau 'the best day' rất chính xác. Nhưng ở vế đầu, em lại dùng 'more good'. Em hãy nhớ lại dạng so sánh hơn đặc biệt của 'good' là gì nhé."
+  },
+  {
+    "topic": "Mixed Comparison",
+    "level": "A2",
+    "student_input": "This room is more clean than that one, but the kitchen is the cleanest.",
+    "correct_answer": "This room is cleaner than that one, but the kitchen is the cleanest.",
+    "explanation": "Vế sau 'the cleanest' rất tốt. Tuy nhiên, 'clean' là tính từ ngắn, em không dùng 'more'. Hãy thêm đuôi '-er' vào sau 'clean' nhé."
+  },
+  {
+    "topic": "Mixed Comparison",
+    "level": "A2",
+    "student_input": "The blue dress is more expensive than the red one, and it's the most expensive dress in the shop.",
+    "correct_answer": "The blue dress is more expensive than the red one, and it's the most expensive dress in the shop.",
+    "explanation": "Hoàn hảo! Em đã kết hợp đúng cấu trúc so sánh hơn và so sánh nhất cho tính từ dài. Rất tuyệt vời!"
+  },
+  {
+    "topic": "Mixed Comparison",
+    "level": "A2",
+    "student_input": "Summer is hoter than Spring, and it is the most hot season.",
+    "correct_answer": "Summer is hotter than Spring, and it is the hottest season.",
+    "explanation": "Câu này có 2 lỗi: 1. Chữ 'hotter' cần gấp đôi chữ 't'. 2. 'Hot' là tính từ ngắn, nên em không dùng 'the most hot'. Em hãy dùng đuôi '-est' nhé."
+  }
+]
